@@ -1,7 +1,7 @@
 """Import *previously verified* private original blood-CNN scores for local review.
 
 The input ZIP is a private historical reproduction package. This command does
-not download labels, train, run a checkpoint, read clinical annotation columns,
+not download labels, train, run a checkpoint, use source annotation fields,
 or send per-frame data to GitHub. It verifies the exact whole ZIP and named CSV
 identities, then matches all 512 original imported-image hashes/source IDs.
 
@@ -81,8 +81,9 @@ def verified_source_records(path: Path, source: str, exam: int) -> tuple[list[di
     seen = set()
     records = []
     for row in reader:
-        # CSV contains private reference annotations; the importer deliberately
-        # does NOT access, decode, use or propagate those fields.
+        # Parsing the private CSV necessarily decodes rows that include labels.
+        # Label fields are never CONSULTED for selection or written to stored
+        # predictions, verification receipts, or public research outputs.
         if row.get("exam") != str(exam):
             continue
         if spec["reference_only_column"] and row[spec["reference_only_column"]] != "1":
