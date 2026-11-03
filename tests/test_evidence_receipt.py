@@ -18,6 +18,8 @@ from PIL import Image
 from capsule_review.evidence_receipt import (
     account_review_evidence,
     audit_review_export_zip,
+    _uniform_at_equal_workload,
+    _position_coverage,
 )
 from capsule_review.importer import import_sources
 from capsule_review.interval_evidence import read_review_export
@@ -79,6 +81,10 @@ def test_real_app_export_and_history_reconstruction(
     assert receipt["images_both_saved_and_interval_boundary"] == 0
     assert receipt["images_only_selected_as_interval_boundary"] == 2
     assert receipt["selected_export_fraction_of_imported"] == pytest.approx(4 / 12, abs=1e-8)
+    assert receipt["selected_position_coverage"]["mean_nearest_selected_imported_positions"] == pytest.approx(10 / 12, abs=1e-8)
+    assert receipt["uniform_reference_position_coverage_at_exact_same_workload"]["mean_nearest_selected_imported_positions"] == pytest.approx(8 / 12, abs=1e-8)
+    assert receipt["selected_position_coverage"]["maximum_nearest_selected_imported_positions"] == 2
+    assert receipt["uniform_reference_position_coverage_at_exact_same_workload"]["maximum_nearest_selected_imported_positions"] == 1
     assert receipt["imported_images_not_selected_for_export"] == 8
     assert receipt["marked_image_intervals"] == 1
     assert receipt["unique_imported_positions_in_marked_spans"] == 9
@@ -195,3 +201,21 @@ def test_documented_cli_is_executable(app, client, headers, tmp_path):
         text=True, capture_output=True, check=False,
     )
     assert again.returncode != 0
+
+
+
+def test_equal_workload_uniform_is_exact_and_ordinal_only():
+    for n in (1, 2, 3, 10, 17, 512):
+        for k in (1, (n + 1) // 2, n):
+            points = _uniform_at_equal_workload(n, k)
+            assert len(points) == k
+            assert min(points) >= 0 and max(points) < n
+            score = _position_coverage(n, points)
+            assert score["maximum_nearest_selected_imported_positions"] >= 0
+            if k == n:
+                assert score["mean_nearest_selected_imported_positions"] == 0
+                assert score["maximum_nearest_selected_imported_positions"] == 0
+    with pytest.raises(ValueError):
+        _uniform_at_equal_workload(12, 0)
+    with pytest.raises(ValueError):
+        _position_coverage(12, set())
