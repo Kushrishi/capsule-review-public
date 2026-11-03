@@ -170,7 +170,7 @@ with sync_playwright() as p:
     checks.append('Marked intervals persist across reopening and can be removed')
     page.locator('#jumpInput').fill('2')
     page.locator('#jumpInput').press('Tab')
-    wait_for_js(page, "document.getElementById('jumpInput').value === '2'")
+    wait_for_js(page, "document.getElementById('frameCounter').textContent.startsWith('Frame 2 /') && !document.getElementById('nextBtn').disabled")
     page.locator('#reviewNote').focus();before=page.locator('#jumpInput').input_value()
     page.keyboard.press('ArrowRight');assert page.locator('#jumpInput').input_value()==before
     checks.append('Frame shortcuts do not override text editing')
