@@ -149,6 +149,13 @@ with sync_playwright() as p:
     export_summary = page.locator('#exportEvidenceSummary').inner_text()
     assert '3 of 24 imported images' in export_summary
     assert '1 marked-interval interior image is not selected' in export_summary
+    page.get_by_role('button', name='Verify evidence', exact=True).click()
+    wait_for_js(page, "document.getElementById('auditReport').textContent.includes('Export evidence verified locally: 3 of 24')")
+    audit_summary = page.locator('#auditReport').inner_text()
+    assert '1 imported image strictly inside marked intervals was NOT exported' in audit_summary
+    assert 'not pathology detection' in audit_summary
+    assert 'uniform' in audit_summary
+    checks.append('Browser verifies real local ZIP/image hashes and shows honest omitted-interval evidence')
     with page.expect_download() as interval_export:
         page.get_by_role('button', name='Export review').click()
     interval_zip=out/'sample-interval-review.zip'
@@ -167,6 +174,7 @@ with sync_playwright() as p:
     page.get_by_role('button', name='Remove interval 2 to 4').click()
     wait_for_js(page, "document.getElementById('intervalCount').textContent === '0'")
     assert '2 of 24 imported images' in page.locator('#exportEvidenceSummary').inner_text()
+    assert page.locator('#auditReport').is_hidden()
     checks.append('Marked intervals persist across reopening and can be removed')
     page.locator('#jumpInput').fill('2')
     page.locator('#jumpInput').press('Tab')

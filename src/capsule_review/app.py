@@ -19,6 +19,8 @@ from fastapi.staticfiles import StaticFiles
 
 from . import __version__
 from .exporter import export_review
+from .evidence_receipt import account_review_evidence
+from .interval_evidence import read_review_export
 from .importer import MAX_FILE_BYTES, create_demo, import_sources, natural_key, now, validate_filename
 from .models import ImportMeta, IntervalCreate, LocalPredictionRequest, PositionUpdate, PredictionImport, ReviewUpdate
 from .store import Store
@@ -354,6 +356,31 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
             raise HTTPException(422, str(exc)) from exc
         finally:
             inference_lock.release()
+
+    @app.get('/api/studies/{study_id}/evidence-audit')
+    async def evidence_audit(study_id: str):
+        """Reconstruct and verify the exact locally exportable selection.
+
+        The original ZIP (including note content and PNG bytes) is transient,
+        and the response is aggregate-only, with no per-frame source details.
+        """
+        require_study(study_id)
+
+        def compute():
+            # Use the same application exporter that creates the user's ZIP,
+            # then independently reopen its bytes using the offline auditor.
+            with tempfile.TemporaryDirectory(prefix='.evidence-audit-', dir=store.root) as folder:
+                archive = Path(folder) / 'review.zip'
+                archive.write_bytes(export_review(store, study_id))
+                verified_review = read_review_export(archive)
+            return account_review_evidence(verified_review, manifest(study_id))
+
+        try:
+            return await run_in_threadpool(compute)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+        except OSError as exc:
+            raise HTTPException(422, 'The local selected images could not be verified.') from exc
 
     @app.get('/api/studies/{study_id}/export')
     async def export(study_id: str):
