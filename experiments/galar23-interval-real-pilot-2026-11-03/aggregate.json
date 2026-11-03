@@ -1,0 +1,38 @@
+{
+  "study": "Capsule Review original-Galar23 image import, simulated bookmark/interval, and export provenance pilot",
+  "date_utc": "2026-11-03",
+  "status": "Completed partial real-image engineering replay. Full-source annotation-run endpoint NOT evaluated: official corrected-source ZIP unavailable locally.",
+  "source": "Previously inspected Galar fitting examination 23; 512 label-blind reference images from existing independently verified original-PNG source archive. Historical training/evaluation case, not independent.",
+  "selections": "SIMULATED, predetermined and source-label-blind: 51 uniform bookmarked imported positions and 16 fixed marked spans; no human reviewer.",
+  "observations": {
+    "verified_original_reference_pngs_imported": 512,
+    "blood_positive_reference_image_labels_from_prior_verified_manifest": 4,
+    "simulated_explicit_bookmarks": 51,
+    "simulated_interval_spans": 16,
+    "unique_exported_boundary_or_bookmarked_images": 79,
+    "exported_directly_source_blood_positive_images": 0,
+    "source_blood_positive_reference_images_in_strict_interval_interiors_not_exported": 2,
+    "source_blood_positive_reference_images_outside_all_marked_spans": 2,
+    "original_source_annotation_positive_runs": null,
+    "direct_selected_positive_annotation_runs": null,
+    "numeric_span_overlapped_positive_annotation_runs": null
+  },
+  "verification": {
+    "original_source_png_bytes_verified_against_private_SHA256_manifest": 512,
+    "complete_imported_source_frame_identity_rechecked": 512,
+    "exported_display_PNG_SHA256_and_ZIP_CRC_replayed_independently": 79,
+    "viewer_reopen_persisted_bookmarks_and_intervals": true,
+    "local_exporter_exact_current_Git_blob": "c7eedd3e9515c7f01df2438f9e86779dbb4fdf78",
+    "local_interval_store_exact_current_Git_blob": "9c5004961086c52219988c36f7b525a11a6112f6",
+    "limitation": "Archived importer/app adapted to current interval endpoints; not a byte-identical checkout of the complete current public main."
+  },
+  "source_run_evaluation_gate": {
+    "official_Galar_corrected_archive_SHA256_required": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "completed": false,
+    "why": "Full original corrected-label ZIP was not available in the private execution workspace. Sparse 512-image labels cannot substitute for original source run segmentation.",
+    "protected_exams_11_through_20_and_61_through_80_unopened": true
+  },
+  "interpretation": "Counted image-level source annotation labels, NOT clinical lesion sensitivity, reviewer recognition, diagnostic accuracy, full original-video coverage, independent patient outcomes, or verified time savings.",
+  "private_artifacts_location": "Capsule Review Library / Interval Evidence Evaluation 2026-11-02 / Private Galar23 Real-Image Replay",
+  "privacy": "No original images, private per-frame identifiers, original frame-label rows, unselected images, model predictions, reviewer notes, study manifest or private source archives in this public aggregate."
+}
