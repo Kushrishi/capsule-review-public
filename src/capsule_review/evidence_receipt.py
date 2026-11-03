@@ -112,6 +112,41 @@ def _longest_run(positions: set[int]) -> int:
     return maximum
 
 
+
+def _position_coverage(total: int, selected_positions: set[int]) -> dict:
+    """Nearest selected *imported positions*, not patient time/pathology."""
+    if not selected_positions or min(selected_positions) < 0 or max(selected_positions) >= total:
+        raise ValueError("Invalid selected positions for coverage analysis.")
+    chosen = sorted(selected_positions)
+    nearest = []
+    cursor = 0
+    for index in range(total):
+        while cursor + 1 < len(chosen) and abs(chosen[cursor + 1] - index) < abs(chosen[cursor] - index):
+            cursor += 1
+        nearest.append(abs(chosen[cursor] - index))
+    ordered = sorted(nearest)
+    rank = (total - 1) * 0.95
+    low = int(rank)
+    p95 = ordered[low] + (rank - low) * (ordered[min(low + 1, total - 1)] - ordered[low])
+    return {
+        "mean_nearest_selected_imported_positions": round(sum(nearest) / total, 8),
+        "percentile95_nearest_selected_imported_positions": round(p95, 8),
+        "maximum_nearest_selected_imported_positions": max(nearest),
+        "fraction_within_1_imported_position": round(sum(x <= 1 for x in nearest) / total, 8),
+        "fraction_within_5_imported_positions": round(sum(x <= 5 for x in nearest) / total, 8),
+    }
+
+
+def _uniform_at_equal_workload(total: int, count: int) -> set[int]:
+    """Deterministic label-blind midpoint selection, exactly count positions."""
+    if not 1 <= count <= total:
+        raise ValueError("Uniform reference must match the selected-image workload.")
+    points = {(2 * i + 1) * total // (2 * count) for i in range(count)}
+    if len(points) != count:
+        raise ValueError("Unexpected duplicate uniform comparison position.")
+    return points
+
+
 def account_review_evidence(review: dict, manifest: dict) -> dict:
     """Validate imported identity + reviewer history and return aggregate-only counts.
 
@@ -160,6 +195,10 @@ def account_review_evidence(review: dict, manifest: dict) -> dict:
         "imported_images": imported_count,
         "selected_export_images": len(selected),
         "selected_export_fraction_of_imported": round(len(selected) / imported_count, 8),
+        "selected_position_coverage": _position_coverage(imported_count, selected),
+        "uniform_reference_position_coverage_at_exact_same_workload": _position_coverage(
+            imported_count, _uniform_at_equal_workload(imported_count, len(selected))
+        ),
         "imported_images_not_selected_for_export": imported_count - len(selected),
         "explicitly_saved_images": len(saved),
         "interval_boundary_images": len(endpoints),
@@ -181,7 +220,9 @@ def account_review_evidence(review: dict, manifest: dict) -> dict:
             "Only exact exported images are directly preserved in this package; "
             "marked interval interiors are NOT automatically exported. "
             "Neither selected images nor spans prove human inspection, pathology, "
-            "diagnosis or full-video coverage. Source IDs are not timestamps. "
+            "diagnosis or full-video coverage. The uniform reference compares only ordinal "
+            "imported-image distance at the exact same selected-image count; it has no "
+            "pathology labels and does not estimate clinical sensitivity. Source IDs are not timestamps. "
             "This audit checks export integrity against the supplied private study "
             "manifest and its original importer digest, not independently acquired "
             "source pixels or external clinical labels."
