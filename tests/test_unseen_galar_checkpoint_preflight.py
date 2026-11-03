@@ -91,7 +91,9 @@ def test_provenance_read_only_three_explicit_members(tmp_path, monkeypatch):
 
 def test_any_changed_model_zip_fails_closed(tmp_path):
     package, spec = _synthetic_archive(tmp_path)
-    package.write_bytes(package.read_bytes() + b"tamper")
+    changed = bytearray(package.read_bytes())
+    changed[-1] ^= 1  # Keep exact size; force the SHA-256 check to detect mutation.
+    package.write_bytes(changed)
     with pytest.raises(ValueError, match="checksum"):
         gate.audit_package(package, spec)
 
