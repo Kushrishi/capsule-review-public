@@ -83,6 +83,7 @@ def audit_package(archive: Path, spec: dict) -> dict:
     if (metadata.get("model_weights_sha256") != model["weights_sha256"]
         or metadata.get("source_git_commit") != model["source_commit"]
         or metadata.get("architecture") != model["architecture"]
+        or metadata.get("input") != model["preprocessing"]
         or metadata.get("selected_epoch") != model["checkpoint_epoch"]
         or metadata.get("classes") != ["blood label absent", "blood label present"]
         or metrics.get("weights_sha256") != model["weights_sha256"]
