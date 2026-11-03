@@ -235,6 +235,7 @@ async function loadSaved() {
   renderExportEvidence();
   $('savedCount').textContent = saved.length;
   $('exportBtn').disabled = saved.length === 0 && state.intervals.length === 0;
+  syncControls();
   $('savedFrames').replaceChildren();
   if (!saved.length) {$('savedFrames').append(textElement('p', 'Bookmarks and notes will appear here.', 'muted')); return;}
   for (const item of saved) {
@@ -258,6 +259,7 @@ async function loadIntervals() {
   $('intervalCount').textContent = state.intervals.length;
   renderExportEvidence();
   $('exportBtn').disabled = state.savedFrameCount === 0 && state.intervals.length === 0;
+  syncControls();
   $('intervals').replaceChildren();
   if (!state.intervals.length) {
     $('intervals').append(textElement('p', 'No image intervals marked.', 'muted'));
@@ -381,10 +383,11 @@ $('auditBtn').addEventListener('click', async () => {
     if (!report.audit_passed || state.study?.id !== studyId) throw new Error('Local evidence verification did not complete.');
     const chosen = report.selected_position_coverage;
     const uniform = report.uniform_reference_position_coverage_at_exact_same_workload;
+    const omitted = report.interval_interior_images_not_exported;
     $('auditReport').textContent =
       `Export evidence verified locally: ${report.selected_export_images.toLocaleString()} of ${report.imported_images.toLocaleString()} imported images selected; ` +
       `${report.explicitly_saved_images.toLocaleString()} explicitly saved, ${report.interval_boundary_images.toLocaleString()} interval boundaries. ` +
-      `${report.interval_interior_images_not_exported.toLocaleString()} imported images strictly inside marked intervals are NOT exported. ` +
+      `${omitted.toLocaleString()} imported ${omitted === 1 ? 'image' : 'images'} strictly inside marked intervals ${omitted === 1 ? 'was' : 'were'} NOT exported. ` +
       `At identical selected-image workload, maximum distance to a selected imported position: ${chosen.maximum_nearest_selected_imported_positions} ` +
       `versus uniform ${uniform.maximum_nearest_selected_imported_positions}. ` +
       'These are ordinal imported-position distances, not pathology detection, verified recording time or medical review completeness.';
