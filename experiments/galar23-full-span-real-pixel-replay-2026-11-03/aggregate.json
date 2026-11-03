@@ -38,11 +38,27 @@
     "direct_retained_source_positive_annotation_runs": null,
     "clinical_lesions": null
   },
-  "interpretation": "In this previously inspected scripted, label-blind replay, including all imported interval interiors preserved two additional explicitly blood=1 annotated reference images compared with the 79-image boundary-only export. This compares different numbers of retained images (295 versus 79), NOT equal review workload, NOT AI model detection, and NOT an estimate of clinician viewing, sensitivity, unique clinical lesions, original-video coverage or improved AI prioritization. Official corrected full-original-source label archive unavailable in this private session; do not infer annotation-run results.",
+  "interpretation": "In this previously inspected scripted, label-blind replay, including all imported interval interiors preserved two additional explicitly blood=1 annotated reference images compared with the 79-image boundary-only export. This compares different numbers of retained images (295 versus 79), NOT equal review workload, NOT AI model detection, and NOT an estimate of clinician viewing, sensitivity, unique clinical lesions, original-video coverage or improved AI prioritization. Official corrected full-original-source label archive unavailable in this private session; do not infer annotation-run results. At equal imported-image workload K=295, deterministic label-blind uniform sampling also retains 2/4; no superiority demonstrated.",
   "frozen_scientific_gate": {
     "exact_official_corrected_galar_label_zip_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
     "official_corrected_source_verified_in_this_session": false,
     "protected_exams_11_through_20_and_61_through_80_unopened": true,
     "model_promoted": false
+  },
+  "exact_workload_uniform_reference_comparison": {
+    "definition": "Production deterministic label-blind midpoint-uniform comparator at exactly K selected imported positions. Previously inspected case; image-label hits not source-run sensitivity.",
+    "at_79_images": {
+      "scripted_boundary_only_selected_images": 79,
+      "scripted_boundary_only_blood_positive_reference_images": 0,
+      "uniform_selected_images": 79,
+      "uniform_blood_positive_reference_images": 1
+    },
+    "at_295_images": {
+      "scripted_full_span_selected_images": 295,
+      "scripted_full_span_blood_positive_reference_images": 2,
+      "uniform_selected_images": 295,
+      "uniform_blood_positive_reference_images": 2
+    },
+    "conclusion": "Scripted full-span evidence preservation matches uniform at equal K=295 on four known positive reference images; no demonstrated advantage over an equal-budget uniform comparator. Boundary-only at K=79 retained fewer known positives than equal-K uniform. This single pre-inspected study is not independent or powered for statistical significance."
   }
 }
