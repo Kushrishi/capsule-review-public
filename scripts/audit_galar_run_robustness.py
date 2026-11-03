@@ -104,6 +104,8 @@ def audit(source: dict) -> dict:
                 hits = count(m.get("source_annotation_runs_hit"), "distinct source runs", reachable)
                 image_hits = count(m.get("blood_positive_reference_images_found"), "positive reference images", min(k, positives))
                 count(m.get("blood_annotation_negative_images_selected"), "nonpositive selected images", k)
+                if hits > image_hits or (hits == 0) != (image_hits == 0):
+                    raise ValueError("Positive images and source annotation runs contradict each other.")
                 if image_hits + m["blood_annotation_negative_images_selected"] != k:
                     raise ValueError("Selected image hit counts do not sum to fixed workload.")
                 # Ranked top-K prefixes are nested. Midpoint-uniform picks are
