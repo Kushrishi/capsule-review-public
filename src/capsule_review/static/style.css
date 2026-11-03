@@ -19,3 +19,5 @@
 .interval-entry p{font-size:11px;line-height:1.65;white-space:pre-wrap;margin:8px 0}
 .interval-entry-actions{margin-bottom:0}
 .interval-entry-actions button{font-size:10px;padding:4px 5px}
+/* Verified export evidence is a factual audit, not a model recommendation. */
+.evidence-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}.evidence-audit{font-size:11px;line-height:1.65;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0 14px;overflow-wrap:anywhere}.evidence-audit[hidden]{display:none}@media(max-width:740px){.exam-heading{align-items:flex-start;flex-direction:column}.evidence-actions{justify-content:flex-start}}
