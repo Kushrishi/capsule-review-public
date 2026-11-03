@@ -106,8 +106,11 @@ def audit(source: dict) -> dict:
                 count(m.get("blood_annotation_negative_images_selected"), "nonpositive selected images", k)
                 if image_hits + m["blood_annotation_negative_images_selected"] != k:
                     raise ValueError("Selected image hit counts do not sum to fixed workload.")
-                if hits < previous_hits[method]:
-                    raise ValueError("Adding images cannot lose already selected source runs.")
+                # Ranked top-K prefixes are nested. Midpoint-uniform picks are
+                # independently re-spaced at each K and need NOT be nested:
+                # a small source run can disappear at a larger uniform budget.
+                if method != "uniform" and hits < previous_hits[method]:
+                    raise ValueError("A ranked top-K prefix lost an already reached source run.")
                 previous_hits[method] = hits
                 length_results = m.get("by_run_length_category")
                 if not isinstance(length_results, dict) or set(length_results) != set(STRATA):
