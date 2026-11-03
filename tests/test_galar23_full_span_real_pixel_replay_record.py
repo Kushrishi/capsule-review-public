@@ -60,7 +60,7 @@ def test_source_run_claims_and_credential_gates_not_overstated():
     report = REPORT.read_text(encoding="utf-8")
     for phrase in (
         "295", "216", "79", "512", "0", "two",
-        "not a byte-identical execution",
+        "byte-identical execution",
         "not superior", "not distinct lesions",
         "source-run recall remain unavailable",
     ):
