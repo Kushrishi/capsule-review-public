@@ -2,7 +2,8 @@
 const $ = (id) => document.getElementById(id);
 const state = {token: '', studies: [], study: null, frame: null, dirty: false, busy: false,
   saving: false, switching: false, modelBusy: false, auditBusy: false, models: [], playing: false, timer: null, files: [], thumbsStart: -1, thumbsData: [], sourceCoverage: null,
-  intervals: [], intervalStart: null, savedFrameCount: 0, savedPositions: []};
+  intervals: [], intervalStart: null, savedFrameCount: 0, savedPositions: [],
+  prioritySources: [], priorityQuery: null, priorityData: null, priorityBusy: false};
 let toastTimer;
 
 function syncControls() {
@@ -23,6 +24,11 @@ function syncControls() {
   $('intervalNote').disabled = running || state.intervalStart === null;
   $('auditBtn').disabled = running || !state.study || (state.savedFrameCount === 0 && state.intervals.length === 0);
   $('fullSpanBtn').disabled = running || !state.study || state.intervals.length === 0;
+  const priorityBlocked = running || state.priorityBusy || !state.prioritySources.length;
+  for (const id of ['prioritySource', 'priorityCount', 'priorityMethod', 'priorityBuild']) $(id).disabled = priorityBlocked;
+  $('priorityPrev').disabled = priorityBlocked || !state.priorityData || state.priorityData.offset === 0;
+  $('priorityNext').disabled = priorityBlocked || !state.priorityData ||
+    state.priorityData.offset + state.priorityData.items.length >= state.priorityData.selected_images;
 }
 
 function announce(message) { $('toast').textContent = message; $('toast').hidden = false;
@@ -110,6 +116,7 @@ async function selectStudy(id) {
   stopPlayback(); if (state.dirty && !(await saveReview())) return;
   clearError(); clearEvidenceAudit(); state.study = await api(`/api/studies/${id}`); state.frame = null; state.thumbsStart = -1;
   state.intervalStart = null; state.intervals = []; state.savedFrameCount = 0; state.savedPositions = [];
+  state.prioritySources = []; state.priorityQuery = null; state.priorityData = null; resetPriorityDisplay();
   $('intervalNote').value = ''; renderIntervalDraft();
   state.thumbsData = []; state.sourceCoverage = await api(`${base()}/source-coverage`);
   renderSourceContinuity();
@@ -119,7 +126,7 @@ async function selectStudy(id) {
   $('scrubber').max = state.study.frame_count - 1; $('jumpInput').max = state.study.frame_count;
   $('predictionImportBtn').disabled = false; $('referencePanel').open = false;
   for (const id of ['bookmark', 'reviewLabel', 'reviewNote']) $(id).disabled = false;
-  await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadIntervals(); await refreshModels();
+  await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadIntervals(); await refreshModels(); await loadPriorityRuns();
   } finally { state.switching = false; syncControls(); }
 }
 function markDirty() { if (!state.frame) return; clearEvidenceAudit(); state.dirty = true;
@@ -433,7 +440,7 @@ $('predictionFile').addEventListener('change', async () => {
   try {if (file.size > 20 * 1024 * 1024) throw new Error('Prediction JSON must be at most 20 MiB.');
     if (!(await saveReview())) return;
     const payload = JSON.parse(await file.text()); await api(`${base()}/predictions`, {method:'POST', body:JSON.stringify(payload)});
-    state.study = await api(base()); await navigate(state.frame.position, true); announce('Model output imported; reviewer notes are unchanged.');
+    state.study = await api(base()); await navigate(state.frame.position, true); await loadPriorityRuns(); announce('Model output imported; reviewer notes are unchanged.');
   } catch (e) {fail(e);} finally {$('predictionFile').value = '';}
 });
 
@@ -460,7 +467,7 @@ $('runModelBtn').addEventListener('click', async () => {
   } catch (error) {fail(error);}
   finally {state.modelBusy = false; $('runModelBtn').textContent = 'Run local model'; syncControls();}
   if (completed && state.study?.id === studyId) {
-    try {state.study = await api(base()); await navigate(state.frame.position, true); announce('Local model finished. Reviewer notes are unchanged.');}
+    try {state.study = await api(base()); await navigate(state.frame.position, true); await loadPriorityRuns(); announce('Local model finished. Reviewer notes are unchanged.');}
     catch (error) {fail(error);}
   }
 });
