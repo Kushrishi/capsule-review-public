@@ -29,7 +29,7 @@ from .models import ImportMeta, IntervalCreate, LocalPredictionRequest, Position
 from .store import Store
 from .source_coverage import summarize_source_spacing
 from .prediction_service import DuplicateRunError, save_predictions
-from .priority import list_prioritizable_runs, priority_queue
+from .priority import compare_priority_methods, list_prioritizable_runs, priority_queue
 from .baseline_data import read_json
 
 STATIC = Path(__file__).parent / 'static'
@@ -336,6 +336,19 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
         try:
             return priority_queue(store, study_id, run, label, selected_count,
                                   method, offset=offset, page_size=page_size)
+        except LookupError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+
+    @app.get('/api/studies/{study_id}/priority-comparison')
+    def priority_comparison(study_id: str, run: int = Query(..., ge=1),
+                            label: str = Query(..., min_length=1, max_length=120),
+                            selected_count: int = Query(..., ge=1, le=200_000)):
+        """Read-only equal-K comparison and inspectable omitted imported span."""
+        require_study(study_id)
+        try:
+            return compare_priority_methods(store, study_id, run, label, selected_count)
         except LookupError as exc:
             raise HTTPException(404, str(exc)) from exc
         except ValueError as exc:

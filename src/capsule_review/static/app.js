@@ -450,6 +450,7 @@ function resetPriorityDisplay() {
   $('prioritySelected').textContent = 'No queue';
   $('priorityItems').replaceChildren();
   $('priorityPage').textContent = '';
+  $('priorityComparison').textContent = 'Build a queue to inspect omitted imported spans across all four policies.';
   $('prioritySummary').textContent = state.prioritySources.length
     ? 'Choose an exact image count and build a research-only, label-blind queue.'
     : 'Import a model prediction label with a score for every imported image.';
@@ -477,6 +478,70 @@ async function loadPriorityRuns() {
   $('priorityCount').value = String(state.study.frame_count);
   resetPriorityDisplay();
 }
+function renderPriorityComparison(report, expectedStudyId) {
+  if (state.study?.id !== expectedStudyId) return;
+  const names = {
+    score: 'Highest model scores',
+    score_diverse: 'Score + ordinal separation',
+    score_bin: 'Top score per chronology bin',
+    uniform: 'Uniform baseline',
+  };
+  const holder = $('priorityComparison');
+  holder.replaceChildren();
+  const table = document.createElement('table');
+  table.className = 'priority-comparison-table';
+  const caption = textElement('caption',
+    'Each policy reviews exactly ' + report.selected_images_per_method.toLocaleString() +
+    ' of ' + report.imported_images.toLocaleString() + ' imported images.');
+  table.append(caption);
+  const head = document.createElement('thead');
+  const heading = document.createElement('tr');
+  for (const title of ['Policy', 'Worst nearest-position gap', 'Longest omitted span', 'Inspect']) {
+    const cell = textElement('th', title);
+    cell.scope = 'col';
+    heading.append(cell);
+  }
+  head.append(heading);
+  table.append(head);
+  const body = document.createElement('tbody');
+  for (const policy of report.methods) {
+    const row = document.createElement('tr');
+    if (policy.method === $('priorityMethod').value) row.className = 'comparison-active';
+    const name = textElement('th', names[policy.method] || policy.method);
+    name.scope = 'row';
+    row.append(name);
+    row.append(textElement('td',
+      String(policy.selected_ordinal_coverage.maximum_nearest_selected_imported_positions)));
+    const gap = policy.largest_unselected_span;
+    row.append(textElement('td', gap
+      ? gap.imported_images_not_in_queue.toLocaleString() + ' imported images'
+      : 'No skipped images'));
+    const control = document.createElement('td');
+    if (gap) {
+      const button = textElement('button', 'Inspect gap', 'quiet compact');
+      button.type = 'button';
+      button.setAttribute('aria-label', 'Inspect largest omitted span for ' + name.textContent);
+      button.addEventListener('click', () => {
+        if (state.study?.id !== expectedStudyId) return;
+        stopPlayback();
+        navigate(gap.inspect_position).catch(fail);
+      });
+      control.append(button);
+    } else {
+      control.textContent = '—';
+    }
+    row.append(control);
+    body.append(row);
+  }
+  table.append(body);
+  holder.append(table);
+  if (report.scores_constant) {
+    holder.append(textElement('p',
+      'All model scores are identical; ranking differences here are not learned evidence.',
+      'panel-hint'));
+  }
+}
+
 async function loadPriorityPage(offset = 0) {
   if (!state.study || state.priorityBusy || !state.prioritySources.length) return;
   const studyId = state.study.id;
@@ -532,6 +597,22 @@ async function loadPriorityPage(offset = 0) {
     const showing = result.items.length ? (result.offset + 1).toLocaleString() + '–' +
       (result.offset + result.items.length).toLocaleString() : '0';
     $('priorityPage').textContent = showing + ' of ' + result.selected_images.toLocaleString();
+    if (offset === 0) {
+      $('priorityComparison').textContent = 'Comparing all four policies at equal workload…';
+      try {
+        const cmpParams = new URLSearchParams({
+          run: query.run, label: query.label, selected_count: query.selected_count,
+        });
+        const comparison = await api('/api/studies/' + studyId +
+          '/priority-comparison?' + cmpParams);
+        renderPriorityComparison(comparison, studyId);
+      } catch (comparisonError) {
+        if (state.study?.id === studyId) {
+          $('priorityComparison').textContent =
+            'Policy comparison unavailable. The selected queue remains usable.';
+        }
+      }
+    }
   } catch (error) {
     if (state.study?.id === studyId) {
       $('prioritySummary').textContent = 'Review queue could not be verified or built.';

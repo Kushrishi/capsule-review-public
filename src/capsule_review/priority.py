@@ -80,6 +80,35 @@ def select_positions(scores: list[float], selected_count: int, method: str) -> l
     return chosen
 
 
+def largest_unselected_span(length: int, selected: list[int]) -> dict | None:
+    """Largest consecutive skipped span in imported ordinal positions, not video time.
+
+    Returns a navigable *omission*, not evidence of pathology or original
+    source-frame continuity. Ties choose the earliest skipped interval.
+    """
+    if (type(length) is not int or length < 1 or not selected
+        or len(set(selected)) != len(selected)
+        or any(type(position) is not int or position < 0 or position >= length
+               for position in selected)):
+        raise ValueError("Invalid review selection for omission inspection.")
+    positions = [-1, *sorted(selected), length]
+    best_length = 0
+    best_start = 0
+    best_end = -1
+    for left, right in zip(positions, positions[1:]):
+        count = right - left - 1
+        if count > best_length:
+            best_length, best_start, best_end = count, left + 1, right - 1
+    if not best_length:
+        return None
+    return {
+        "start_position": best_start,
+        "end_position": best_end,
+        "imported_images_not_in_queue": best_length,
+        "inspect_position": best_start + (best_length - 1) // 2,
+    }
+
+
 def ordinal_coverage(length: int, selected: list[int]) -> dict:
     """Technical imported-position spacing; NOT source video elapsed time."""
     if (length < 1 or not selected or len(set(selected)) != len(selected)
@@ -176,6 +205,7 @@ def priority_queue(store: Store, study_id: str, run: int, label: str,
         "items": [{"rank": rank + 1, "position": p, "score": scores[p]}
                   for rank, p in enumerate(chosen[offset:offset + page_size], start=offset)],
         "selected_ordinal_coverage": ordinal_coverage(n, chosen),
+        "largest_unselected_span": largest_unselected_span(n, chosen),
         "uniform_ordinal_coverage_at_equal_workload": ordinal_coverage(n, uniform),
         "scores_constant": min(scores) == max(scores),
         "no_reference_labels_read": True,
@@ -187,5 +217,47 @@ def priority_queue(store: Store, study_id: str, run: int, label: str,
             "Chronological distance is imported-image order, not elapsed capture time. "
             "No source annotations, patient outcomes or original-video completeness "
             "are evaluated. All frames remain available; no review is saved automatically."
+        ),
+    }
+
+def compare_priority_methods(store: Store, study_id: str, run: int,
+                             label: str, selected_count: int) -> dict:
+    """Same input/run/workload, four label-blind policies, no review writes.
+
+    Deliberately reuses the public queue path so its validation, image-count
+    requirements and coverage computations cannot diverge from the product.
+    Only aggregate gaps and an optional navigable skipped ordinal span are
+    returned; no patient labels, predictions, annotations or saved reviews.
+    """
+    reports = {
+        method: priority_queue(
+            store, study_id, run, label, selected_count, method,
+            offset=0, page_size=1
+        )
+        for method in METHODS
+    }
+    baseline = reports["uniform"]
+    return {
+        "schema_version": 1, "run": run, "label": label,
+        "model_name": baseline["model_name"],
+        "selected_images_per_method": selected_count,
+        "imported_images": baseline["imported_images"],
+        "methods": [
+            {
+                "method": method,
+                "selected_ordinal_coverage": reports[method]["selected_ordinal_coverage"],
+                "largest_unselected_span": reports[method]["largest_unselected_span"],
+            }
+            for method in METHODS
+        ],
+        "scores_constant": baseline["scores_constant"],
+        "no_reference_labels_read": True,
+        "not_diagnostic": True,
+        "reviewer_notes_and_selection_unchanged": True,
+        "interpretation": (
+            "Technical omission analysis at equal imported-image workload. "
+            "Distances and skipped spans refer ONLY to imported ordinal "
+            "positions; not continuous-video time, pathology sensitivity or "
+            "clinical risk. A skipped frame remains accessible for review."
         ),
     }
