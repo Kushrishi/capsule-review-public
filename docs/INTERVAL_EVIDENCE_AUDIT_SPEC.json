@@ -1,0 +1,60 @@
+{
+  "study": "Capsule Review — exported reviewer interval evidence audit against original corrected Galar annotations",
+  "version": "1.0",
+  "date": "2026-11-02",
+  "state": "Method frozen before implementing this new evaluator; prior Galar cases, model outcomes and run coverage were already inspected. Software-method and synthetic demonstration only; not independent evaluation.",
+  "question": "Can a private exported reviewer interval record be joined to independently source-verified original Galar corrected labels, separating images with directly visible blood labels from source-positive annotation runs merely lying in an interval's indexed span?",
+  "scope": {
+    "allowed_fitting_exams": [
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "excluded": "Historical 9–10 and original 1–8 require separate provenance adapters. Future 11–20 and authors' 61–80 remain unopened. Fail closed on every non-allowlisted exam.",
+    "label_source": "Corrected Galar v2 2025-12-15, publisher Figshare file 60383963, SHA-256 2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "original_annotation_stride": 5,
+    "run": "Maximal consecutive original corrected rows explicitly blood=1 and numeric source frame IDs spaced exactly +5. Empty/unknown or blood=0 rows and source gaps end runs.",
+    "run_strata": [
+      "1–5 positive annotated rows",
+      "6–25 positive annotated rows",
+      "26 or more positive annotated rows"
+    ],
+    "caveat": "Annotation runs are not adjudicated lesions, patients or full continuously recorded events. Frames are sparse; device times unverified."
+  },
+  "inputs": {
+    "export": "Locally generated Capsule Review ZIP containing review.json, selected images, saved frames and newly marked intervals; no public upload",
+    "study_manifest": "Complete local /api/studies/<study_id>/manifest metadata, with study manifest SHA-256 and every imported source image/frame position",
+    "verified_source_manifest": "Previously original-source verified private manifest of individual Galar source PNG hashes, exam, original source frame, blood annotation and selection roles",
+    "corrected_labels": "Exact official corrected Galar ZIP SHA-256; read only one named exam.csv after whole-file checksum; NEVER testzip() entire official archive",
+    "role_gate": "Require all imported source images to be from the unchanged label-blind reference set (reference_uniform=1). Reject intentionally enriched-only images."
+  },
+  "locked_metrics": {
+    "source_annotation_positive_runs": "All source-positive runs in this permitted examination, not lesions.",
+    "imported_representable_runs": "Source-positive runs with an explicit blood=1 original image among the entire imported verified reference manifest.",
+    "direct_exported_positive_images": "Blood-positive labelled source frames whose exact original PNG hashes match selected images in review.json; counts distinct exported images, not detected lesions.",
+    "direct_exported_positive_runs": "Distinct source-positive runs with at least one exact selected blood-positive original image. No interpolated span-interior hits.",
+    "explicit_frame_saved_runs": "Distinct source-positive runs with >=1 exact image explicitly bookmarked or noted/labelled in its review record; separate from interval-boundary-only selection.",
+    "interval_endpoint_positive_runs": "Distinct runs with exact positive image selected as start or end boundary of a reviewer-marked interval.",
+    "proposed_span_overlapped_runs": "Distinct source-positive runs having >=1 exact corrected positive annotation source index numerically inside a reviewer-marked interval's start/end source IDs; NOT an observed/reviewed image or lesion sensitivity.",
+    "span_overlap_without_direct_evidence": "Overlapped source runs with no directly selected positive source image.",
+    "source_run_length_strata": "All denominators and per-stratum represented/direct/overlapped run counts, incl short/medium/long.",
+    "negative_exams": "Undefined positive-run fraction (null) when zero positive source annotation runs; selected workload still counted.",
+    "workload": "Count unique selected/exported images relative to verified imported references. Never infer clinician reading time, seconds, or complete-video compression.",
+    "no_grouping_advantage_claim": "A reviewer-marked interval may contain positive source row indices even if only negative boundary images are selected. Overlap is opportunity, not evidence; do not combine numerators."
+  },
+  "privacy": {
+    "mode": "Local offline command, no cloud API/service; synthetic-only public unit tests.",
+    "identity_check": "Every full study-manifest source image SHA must match a separately source-verified private acquisition manifest entry and corrected label; every exported PNG display SHA must match the complete local study manifest; interval boundaries must match imported positions and source IDs.",
+    "output": "Only aggregate counts and explicitly scoped caveats in JSON. No raw medical images, private source frame indices, per-image hashes, individual prediction scores, private report notes, original manifests or checkpoints in Git or stdout.",
+    "data_retention": "Private inputs/outputs reside outside public GitHub. No public GitHub Actions downloads of original Galar source data.",
+    "forbidden": "Never evaluate reserved cases 11–20 or 61–80, tune model thresholds, promote clinical model, claim annotation-run == clinical lesion."
+  },
+  "evaluation_stage": "First implementation and synthetic end-to-end tests. Any original-source pilot is post-hoc exploratory, must be explicitly labelled and recorded separately, with no clinical extrapolation."
+}

@@ -169,7 +169,11 @@ with sync_playwright() as p:
     page.locator('#reviewNote').focus();before=page.locator('#jumpInput').input_value()
     page.keyboard.press('ArrowRight');assert page.locator('#jumpInput').input_value()==before
     checks.append('Frame shortcuts do not override text editing')
-    page.locator('#frameCounter').click();page.keyboard.press('ArrowRight')
+    # Explicitly focus the keyboard-navigable main panel. Clicking a non-focusable
+    # text span does not reliably move focus away from an input across browsers.
+    page.locator('#viewer').focus()
+    wait_for_js(page, "document.getElementById('jumpInput').value === '2' && !document.getElementById('nextBtn').disabled")
+    page.keyboard.press('ArrowRight')
     wait_for_js(page, "document.getElementById('jumpInput').value === '3'")
     checks.append('Keyboard frame navigation works')
     page.locator('#jumpInput').fill('24');page.locator('#jumpInput').press('Tab')
