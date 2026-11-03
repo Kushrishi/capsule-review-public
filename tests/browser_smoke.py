@@ -303,7 +303,7 @@ with sync_playwright() as p:
         page.locator('#priorityMethod').select_option('uniform')
         page.get_by_role('button', name='Build review queue', exact=True).click()
         wait_for_js(page, "document.getElementById('prioritySelected').textContent === '3 selected'")
-        assert '0 versus 0' not in page.locator('#prioritySummary').inner_text() or heldout['frame_count'] <= 3
+        assert 'No pathology labels were consulted' in page.locator('#prioritySummary').inner_text()
         checks.append('Browser offers independent equal-budget uniform comparator without changing notes')
         page.set_viewport_size({'width':1440,'height':1050})
         page.locator('#toast').wait_for(state='hidden')
