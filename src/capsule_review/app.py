@@ -29,6 +29,7 @@ from .models import ImportMeta, IntervalCreate, LocalPredictionRequest, Position
 from .store import Store
 from .source_coverage import summarize_source_spacing
 from .prediction_service import DuplicateRunError, save_predictions
+from .priority import list_prioritizable_runs, priority_queue
 from .baseline_data import read_json
 
 STATIC = Path(__file__).parent / 'static'
@@ -314,6 +315,29 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
             return save_predictions(store, study_id, payload)
         except DuplicateRunError as exc:
             raise HTTPException(409, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+
+    @app.get('/api/studies/{study_id}/priority-runs')
+    def priority_runs(study_id: str):
+        """List per-label prediction runs; show incomplete runs as unusable."""
+        require_study(study_id)
+        return list_prioritizable_runs(store, study_id)
+
+    @app.get('/api/studies/{study_id}/priority')
+    def priority(study_id: str, run: int = Query(..., ge=1),
+                 label: str = Query(..., min_length=1, max_length=120),
+                 selected_count: int = Query(..., ge=1, le=200_000),
+                 method: str = Query('score_diverse'),
+                 offset: int = Query(0, ge=0),
+                 page_size: int = Query(20, ge=1, le=50)):
+        """Read-only exact-workload model/chronology queue, no source labels."""
+        require_study(study_id)
+        try:
+            return priority_queue(store, study_id, run, label, selected_count,
+                                  method, offset=offset, page_size=page_size)
+        except LookupError as exc:
+            raise HTTPException(404, str(exc)) from exc
         except ValueError as exc:
             raise HTTPException(422, str(exc)) from exc
 
