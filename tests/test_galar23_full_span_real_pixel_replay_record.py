@@ -37,6 +37,20 @@ def test_real_image_retention_counts_are_consistent_with_frozen_selection():
     assert labels["blood_positive_reference_images_in_standard_boundary_export"] == 0
     assert labels["blood_positive_reference_images_in_full_span_export"] == 2
     assert labels["blood_positive_reference_images_outside_full_span_export"] == 2
+    k = d["exact_workload_uniform_reference_comparison"]
+    assert k["at_79_images"] == {
+        "scripted_boundary_only_selected_images": 79,
+        "scripted_boundary_only_blood_positive_reference_images": 0,
+        "uniform_selected_images": 79,
+        "uniform_blood_positive_reference_images": 1,
+    }
+    assert k["at_295_images"] == {
+        "scripted_full_span_selected_images": 295,
+        "scripted_full_span_blood_positive_reference_images": 2,
+        "uniform_selected_images": 295,
+        "uniform_blood_positive_reference_images": 2,
+    }
+    assert "no demonstrated advantage" in k["conclusion"].lower()
 
 
 def test_source_run_claims_and_credential_gates_not_overstated():
