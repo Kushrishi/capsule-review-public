@@ -74,6 +74,11 @@
         </select>
         <button id="priorityBuild" class="outline full" disabled>Build review queue</button>
         <p id="prioritySummary" class="panel-hint" role="status" aria-live="polite">Import complete frame-level model predictions to enable ranking.</p>
+        <section class="priority-comparison" aria-label="Same-workload omitted image comparison">
+          <h3>Where would each policy leave gaps?</h3>
+          <p class="panel-hint">All four methods are compared at the same image count. These are gaps in imported positions—not original video time, missing medical evidence, or clinical risk estimates.</p>
+          <div id="priorityComparison" role="status" aria-live="polite">Build a queue to compare which imported image spans would be skipped.</div>
+        </section>
         <div id="priorityItems" class="priority-items"></div>
         <div class="priority-pager"><button id="priorityPrev" class="quiet compact" disabled>Previous</button><span id="priorityPage"></span><button id="priorityNext" class="quiet compact" disabled>Next</button></div>
         <p class="panel-hint">Rankings use imported-image positions, not video timestamps or pathology ground truth. All frames stay accessible; opening queue items never automatically bookmarks or labels them.</p>
