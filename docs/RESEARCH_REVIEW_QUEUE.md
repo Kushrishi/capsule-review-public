@@ -6,6 +6,8 @@
 
 Before this feature, Capsule Review could store and display model suggestions on one image at a time, but could not turn a full image-sequence score stream into an inspectable **review queue**. A user can now open an imported examination, import predictions or run an installed local model, then build a navigable list of proposed images. The queue uses the **selected model run and a single score label**—no reference labels, reviewer notes or model comparisons are secretly mixed into the ranking.
 
+**Complete local anatomy score vectors:** the previous local model stored only the single winning anatomy label on each imported frame. It now stores **one explicit softmax score for every supported anatomy class on every image**, allowing a class-specific queue without treating an unreported label as negative. Earlier local prediction runs remain unchanged; re-run the installed local model if an older run lacks a complete class stream. All scores remain uncalibrated, and the model is still **anatomy classification, not pathology detection**.
+
 This is a *navigation aid* for research. The local application still does not ship a trained pathology detector. Installed anatomy models produce research region-classification suggestions, **not lesion detection**. Imported research blood-classification scores from experimental checkpoints are **uncalibrated**, not lesion probabilities, and cannot be presented as verified medical findings. All original imported frames stay accessible through normal navigation.
 
 ## Exact-K methods and user control
