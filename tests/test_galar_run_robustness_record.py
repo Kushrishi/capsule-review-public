@@ -52,6 +52,16 @@ def test_exact_source_provenance_and_checked_output_is_reproducible(tmp_path):
     assert subprocess.run(command, capture_output=True, check=False).returncode != 0
 
 
+def test_uniform_midpoint_reselection_is_not_a_nested_prefix():
+    input_data = _source()
+    # Original public baseline is demonstrably nonmonotonic as K changes:
+    # each K midpoint-uniform sample is re-spaced, not a prefix of a ranking.
+    exam21 = input_data["examinations"]["21"]["budgets"]
+    assert exam21["10"]["methods"]["uniform"]["source_annotation_runs_hit"] == 1
+    assert exam21["25"]["methods"]["uniform"]["source_annotation_runs_hit"] == 0
+    assert audit(input_data) == json.loads(REPORT.read_text(encoding="utf-8"))
+
+
 def test_every_budget_equal_k_and_alternative_macro_micro_readouts():
     d = json.loads(REPORT.read_text(encoding="utf-8"))
     assert d["scientific_design"]["fixed_review_workload_each_exam"] == BUDGET_IMAGES
