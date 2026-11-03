@@ -58,6 +58,26 @@
       <p class="panel-hint">Saved locally. Navigation saves your draft first.</p>
       <section class="predictions"><div class="section-title small"><h2>Model suggestions</h2><button id="predictionImportBtn" class="quiet compact" disabled>Import</button></div><div id="localModelControls" hidden><label class="field-label" for="localModel">Local anatomy model</label><select id="localModel"></select><button id="runModelBtn" class="outline full" disabled>Run local model</button><p class="panel-hint">Region classification only—not lesion detection.</p></div><div id="predictions"><p class="muted">No model connected. No predictions are being generated.</p></div></section>
       <details id="referencePanel"><summary>Dataset reference labels</summary><p class="panel-hint">Source annotations, not model predictions. Hidden until you open this section.</p><div id="referenceLabels">No frame selected.</div></details>
+      <section class="priority-section" aria-label="Model-assisted research review queue">
+        <div class="section-title small"><h2>Research review queue</h2><span id="prioritySelected">No queue</span></div>
+        <p class="panel-hint">Choose a complete model score stream and any review workload, up to every imported image. These are model suggestions, never clinical findings.</p>
+        <label class="field-label" for="prioritySource">Model run · score label</label>
+        <select id="prioritySource" disabled></select>
+        <label class="field-label" for="priorityCount">Images to review (1–all imported images)</label>
+        <input id="priorityCount" type="number" min="1" step="1" value="1" disabled>
+        <label class="field-label" for="priorityMethod">Selection policy</label>
+        <select id="priorityMethod" disabled>
+          <option value="score_diverse">Model score + ordinal separation</option>
+          <option value="score">Highest model scores</option>
+          <option value="score_bin">Top score in each chronology bin</option>
+          <option value="uniform">Uniform baseline (no scores used)</option>
+        </select>
+        <button id="priorityBuild" class="outline full" disabled>Build review queue</button>
+        <p id="prioritySummary" class="panel-hint" role="status" aria-live="polite">Import complete frame-level model predictions to enable ranking.</p>
+        <div id="priorityItems" class="priority-items"></div>
+        <div class="priority-pager"><button id="priorityPrev" class="quiet compact" disabled>Previous</button><span id="priorityPage"></span><button id="priorityNext" class="quiet compact" disabled>Next</button></div>
+        <p class="panel-hint">Rankings use imported-image positions, not video timestamps or pathology ground truth. All frames stay accessible; opening queue items never automatically bookmarks or labels them.</p>
+      </section>
       <section class="saved-section"><div class="section-title small"><h2>Saved frames</h2><span id="savedCount">0</span></div><div id="savedFrames"><p class="muted">Bookmarks and notes will appear here.</p></div></section>
       <section class="interval-section" aria-label="Reviewer image intervals">
         <div class="section-title small"><h2>Marked image intervals</h2><span id="intervalCount">0</span></div>
