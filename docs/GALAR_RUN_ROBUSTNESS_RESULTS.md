@@ -14,6 +14,8 @@ The original model was historically developed or selected using previously exami
 
 Eight examined Galar cases: **9, 10, 21, 23, 25, 27, 29, 30**. Exam **9** has zero explicitly blood-positive annotations and is **excluded only from run-recall denominators**, not erased from the equal-workload review accounting. The other **seven positive-source cases** each contribute one equally weighted examination-level recall proportion.
 
+The midpoint-uniform comparator is **re-spaced independently at every K** (not a nested prefix): it may lose a short-run hit when the selection count increases. CNN and redness top-K rankings, by contrast, form nested prefixes. Consequently these results are separate, equal-K comparisons; do not interpret uniform performance as a cumulative discovery curve.
+
 At each of six unchanged review budgets, compare the *same exact number of imported 512-reference images* selected by **original CNN**, **simple red-excess ranking**, and **label-blind midpoint uniform**. The original continued-model arms appear on only a subset of examinations and are **not** misleadingly pooled across the eight-case audit.
 
 The principal descriptive metric is the mean over seven positive-source cases of:
