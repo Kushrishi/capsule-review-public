@@ -1,0 +1,28 @@
+{
+  "status": "source and model computation independently replayed; no clinical validation",
+  "frozen_training_protocol_git_blob": "ac042de43b22d33a2860df06fbac03e80a1cb331",
+  "old_fitting_images_verified": 4096,
+  "new_train_only_images_verified": 3000,
+  "old_plus_expanded_training_image_count": 7096,
+  "new_eval_source_exam": 29,
+  "new_eval_source_images_sha256_verified": 1009,
+  "label_blind_evaluation_images": 512,
+  "source_cross_examination_exact_pixel_duplicates": 0,
+  "new_model_training_checkpoint_files_byte_identical_on_independent_rerun": true,
+  "original_only_checkpoint_sha256": "ae88ccfedc53d8f419b3da8c0c01ca6b61361ef29858b6a536e25408ba99eefb",
+  "expanded_checkpoint_sha256": "2534d3b7982ee8c557cadc5ad3fcc4c7c4c557f899fa013e881d8655eab97111",
+  "training_aggregate_sha256": "708ecc40aeed6d1ba285c4bfd0b7db5fa844d3336ff97a3b228ee7dd1c79bfec",
+  "new_exam29_private_predictions_byte_identical_on_independent_rerun": true,
+  "new_exam29_private_predictions_sha256": "f27a410a75cdf51bc726b181083fee3f89e9f71f0bed567c04223c1aebf51e79",
+  "new_exam29_aggregate_byte_identical_on_independent_rerun": true,
+  "new_exam29_aggregate_sha256": "b4fbcbf6c2546b8bb79169489920a3e6ff51c4bdb50466c1d166f5ac22f27b0e",
+  "independent_sklearn_metrics_match": true,
+  "medical_images_and_scores_committed_to_git": false,
+  "patient_independent_clinical_validation": false,
+  "allowed_exam_roles": {
+    "fit": "1-8,21,23,30",
+    "evaluation": "29 (fitting-cohort only; labels previously audited)",
+    "unopened": "11-20 and 61-80"
+  },
+  "limitation": "One evaluation examination selected with training-pool annotation knowledge cannot support broad generalization or clinical claims."
+}

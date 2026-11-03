@@ -1,0 +1,39 @@
+{
+  "study": "Capsule Review — source-annotation coverage versus label-blind candidate density",
+  "version": "1.0",
+  "date": "2026-11-02",
+  "research_status": "Exploratory post-hoc methods audit on previously inspected fitting-pool exams; not independent/blinded validation",
+  "question": "How many separate corrected-source blood-positive annotation runs are represented when the number of label-blind candidate source positions increases, keeping the absolute human review image budget fixed?",
+  "source": {
+    "publisher": "Le Floch et al., Galar corrected v2, CC BY 4.0",
+    "official_corrected_labels_file_id": 60383963,
+    "zip_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "allowed_exam_ids": [21,22,23,24,25,26,27,28,29,30],
+    "prohibited_evaluation": "Do not open 11-20 or 61-80, or read other CSV members; never testzip entire source ZIP",
+    "already_used_for_development": true
+  },
+  "population": "All explicitly blood-labelled 0/1 source positions in each allowed corrected exam CSV, in ascending source index. Empty labels are unknown and excluded as candidates but break annotation runs. Do not infer unannotated intervening video frames.",
+  "run_definition": "Maximal consecutive original annotation rows with blood=1 and source frame index difference exactly 5; break on 0, missing/unknown or source-index gap. These are annotation runs, not lesion identities.",
+  "stride_check": "For each allowed examination, strictly increasing frame IDs and a modal frame index difference of 5 with >=95% occurrence, no tied modal value; fail otherwise",
+  "candidate_positions_per_exam": [512,1024,2048,4096,8192,"all"],
+  "label_blind_candidate_selection": "For exactly m eligible rows choose midpoint positions floor((2*j+1)*N/(2*m)) for j=0..m-1 from N eligible rows; for m='all', use all eligible rows. Clamp numeric m to N when N < m. No labels or ranking scores enter candidate selection.",
+  "fixed_reviewer_frames_per_exam": [51,128,256,512],
+  "review_methods": {
+    "uniform": "Choose K of the candidate rows by the same deterministic midpoint spacing rule, with no labels, score, or model. K never changes when candidate size changes.",
+    "label_privileged_oracle": "For a given candidate pool, maximum number of distinct positive annotation runs reachable when selecting K images is min(K, positive annotation runs represented in candidate pool). This is a reference upper bound only, impossible as an unsupervised ranking method."
+  },
+  "analysis": {
+    "primary": "Positive original annotation runs represented in each candidate set, stratified by 1-5, 6-25, 26+ original positive annotation rows; report by exam and aggregate. Missing runs remain unrecoverable by any candidate-only model.",
+    "secondary": "Uniform review actual positive annotation runs and positive frame count at each fixed K; source-negative-labelled examination forced workload K. Macro run coverage across positive examinations and descriptive pooled counts, no pseudo-patient uncertainty.",
+    "zero_positive_exams": "Run recall undefined (null), not 0 or 100; include forced K selected blood-negative-labelled images.",
+    "sampling_baseline": "Match the frozen 512-reference baseline counts for all ten 21-30 exams and the known run-represented counts for six positive exams; fail closed on mismatch.",
+    "no_model": true,
+    "no_new_pixels": true,
+    "no_clinical_claims": true
+  },
+  "expected_512_reference_positive_counts": {"21":1,"22":0,"23":4,"24":0,"25":14,"26":0,"27":26,"28":0,"29":122,"30":120},
+  "expected_512_reference_positive_runs": {"21":1,"22":0,"23":4,"24":0,"25":3,"26":0,"27":4,"28":0,"29":47,"30":20},
+  "integrity": "Verify official source ZIP SHA-256, read and CRC-check only exact ten allowed CSVs, enforce unique/sorted numeric frames and blood field validity, recheck complete 512 baseline before producing any result. Never emit frame IDs/labels into Git or logs.",
+  "output": "Non-identifying per-exam/per-candidate aggregate JSON only; no raw source annotation rows, individual frame identities, image pixels, model scores or trained weights. Record source hash and frozen spec Git blob hash.",
+  "decision": "Quantify how much the 512-reference input bottleneck can improve with denser source access; do not claim actual pixel-backed model performance or select a winning policy based on already examined cases. Use this only to plan the separately source-verified dense-image experiment."
+}

@@ -1,0 +1,795 @@
+{
+  "clinical_validity": false,
+  "experiment_protocol_git_blob_sha1": "2440eae552535e62e1824cff6fd6437d2641e565",
+  "folds": [
+    {
+      "actual_iterations": 168,
+      "convergence_warnings": [],
+      "feature_dim": 576,
+      "fold": "A",
+      "heldout_exams": [
+        1,
+        3,
+        21,
+        27,
+        29
+      ],
+      "max_iter": 300,
+      "scaler_fitted_on_training_only": true,
+      "train_blood_positive": 983,
+      "train_exams": [
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        23,
+        25,
+        30
+      ],
+      "train_image_count": 6092
+    },
+    {
+      "actual_iterations": 166,
+      "convergence_warnings": [],
+      "feature_dim": 576,
+      "fold": "B",
+      "heldout_exams": [
+        2,
+        5,
+        23,
+        25,
+        30
+      ],
+      "max_iter": 300,
+      "scaler_fitted_on_training_only": true,
+      "train_blood_positive": 896,
+      "train_exams": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        21,
+        27,
+        29
+      ],
+      "train_image_count": 6079
+    },
+    {
+      "actual_iterations": 196,
+      "convergence_warnings": [],
+      "feature_dim": 576,
+      "fold": "C",
+      "heldout_exams": [
+        4,
+        6,
+        7,
+        8
+      ],
+      "max_iter": 300,
+      "scaler_fitted_on_training_only": true,
+      "train_blood_positive": 1447,
+      "train_exams": [
+        1,
+        2,
+        3,
+        5,
+        21,
+        23,
+        25,
+        27,
+        29,
+        30
+      ],
+      "train_image_count": 8075
+    }
+  ],
+  "independent_patient_ids_verified": false,
+  "linear_probe": {
+    "C": 0.1,
+    "class_weight": "balanced",
+    "max_iter": 300,
+    "solver": "lbfgs",
+    "tol": 1e-06,
+    "train_fold_only_standardization": true
+  },
+  "per_exam": {
+    "1": {
+      "average_precision": 0.06712308823187786,
+      "blood_negative_labelled": 490,
+      "blood_positive": 22,
+      "n": 512,
+      "roc_auc": 0.6246753246753247,
+      "score_95th_percentile": 0.9803820453030486,
+      "score_max": 0.9994626250098781,
+      "score_mean": 0.3397981350888136,
+      "score_min": 1.843966019280041e-06,
+      "top_k_blood_positive": {
+        "128": 6,
+        "256": 16,
+        "51": 4,
+        "512": 22
+      },
+      "uniform_reference_blood_positive": {
+        "128": 6,
+        "256": 10,
+        "51": 1,
+        "512": 22
+      }
+    },
+    "2": {
+      "average_precision": 0.002570694087403599,
+      "blood_negative_labelled": 511,
+      "blood_positive": 1,
+      "n": 512,
+      "roc_auc": 0.24070450097847362,
+      "score_95th_percentile": 0.8086575307378485,
+      "score_max": 0.9997681458497002,
+      "score_mean": 0.12384712924279967,
+      "score_min": 1.710857194290305e-08,
+      "top_k_blood_positive": {
+        "128": 0,
+        "256": 0,
+        "51": 0,
+        "512": 1
+      },
+      "uniform_reference_blood_positive": {
+        "128": 1,
+        "256": 0,
+        "51": 0,
+        "512": 1
+      }
+    },
+    "21": {
+      "average_precision": 0.003003003003003003,
+      "blood_negative_labelled": 511,
+      "blood_positive": 1,
+      "n": 512,
+      "roc_auc": 0.35029354207436403,
+      "score_95th_percentile": 0.4720814446790766,
+      "score_max": 0.9996573646418256,
+      "score_mean": 0.08132596410205083,
+      "score_min": 3.4859728541615897e-07,
+      "top_k_blood_positive": {
+        "128": 0,
+        "256": 0,
+        "51": 0,
+        "512": 1
+      },
+      "uniform_reference_blood_positive": {
+        "128": 0,
+        "256": 1,
+        "51": 1,
+        "512": 1
+      }
+    },
+    "23": {
+      "average_precision": 0.05772551444820353,
+      "blood_negative_labelled": 508,
+      "blood_positive": 4,
+      "n": 512,
+      "roc_auc": 0.6756889763779528,
+      "score_95th_percentile": 0.5632801823013028,
+      "score_max": 0.9644095515207206,
+      "score_mean": 0.08136037985948878,
+      "score_min": 8.680128858342609e-07,
+      "top_k_blood_positive": {
+        "128": 2,
+        "256": 3,
+        "51": 2,
+        "512": 4
+      },
+      "uniform_reference_blood_positive": {
+        "128": 1,
+        "256": 1,
+        "51": 0,
+        "512": 4
+      }
+    },
+    "25": {
+      "average_precision": 0.16930229813439887,
+      "blood_negative_labelled": 498,
+      "blood_positive": 14,
+      "n": 512,
+      "roc_auc": 0.5352839931153185,
+      "score_95th_percentile": 0.9453218462085853,
+      "score_max": 0.9999014953026637,
+      "score_mean": 0.16929855870372396,
+      "score_min": 9.54959444206131e-10,
+      "top_k_blood_positive": {
+        "128": 6,
+        "256": 8,
+        "51": 5,
+        "512": 14
+      },
+      "uniform_reference_blood_positive": {
+        "128": 4,
+        "256": 6,
+        "51": 1,
+        "512": 14
+      }
+    },
+    "27": {
+      "average_precision": 0.09687248721461397,
+      "blood_negative_labelled": 486,
+      "blood_positive": 26,
+      "n": 512,
+      "roc_auc": 0.6028015194681862,
+      "score_95th_percentile": 0.41658224707882674,
+      "score_max": 0.9934334451013014,
+      "score_mean": 0.06330181777576493,
+      "score_min": 3.885318814669309e-08,
+      "top_k_blood_positive": {
+        "128": 11,
+        "256": 16,
+        "51": 7,
+        "512": 26
+      },
+      "uniform_reference_blood_positive": {
+        "128": 7,
+        "256": 14,
+        "51": 2,
+        "512": 26
+      }
+    },
+    "29": {
+      "average_precision": 0.4434196161370041,
+      "blood_negative_labelled": 390,
+      "blood_positive": 122,
+      "n": 512,
+      "roc_auc": 0.6800126103404791,
+      "score_95th_percentile": 0.4567280018202322,
+      "score_max": 0.9926130067011204,
+      "score_mean": 0.0697134958752572,
+      "score_min": 4.035748182738325e-07,
+      "top_k_blood_positive": {
+        "128": 55,
+        "256": 80,
+        "51": 35,
+        "512": 122
+      },
+      "uniform_reference_blood_positive": {
+        "128": 29,
+        "256": 63,
+        "51": 10,
+        "512": 122
+      }
+    },
+    "3": {
+      "average_precision": null,
+      "blood_negative_labelled": 512,
+      "blood_positive": 0,
+      "n": 512,
+      "roc_auc": null,
+      "score_95th_percentile": 0.9384500618430519,
+      "score_max": 0.9997568984311755,
+      "score_mean": 0.19638410054947603,
+      "score_min": 1.1519209927524232e-07,
+      "top_k_blood_positive": {
+        "128": 0,
+        "256": 0,
+        "51": 0,
+        "512": 0
+      },
+      "uniform_reference_blood_positive": {
+        "128": 0,
+        "256": 0,
+        "51": 0,
+        "512": 0
+      }
+    },
+    "30": {
+      "average_precision": 0.5414875310533986,
+      "blood_negative_labelled": 392,
+      "blood_positive": 120,
+      "n": 512,
+      "roc_auc": 0.733078231292517,
+      "score_95th_percentile": 0.5148482334801747,
+      "score_max": 0.9983378574153979,
+      "score_mean": 0.06898990311659016,
+      "score_min": 1.4613288891148657e-08,
+      "top_k_blood_positive": {
+        "128": 59,
+        "256": 89,
+        "51": 36,
+        "512": 120
+      },
+      "uniform_reference_blood_positive": {
+        "128": 28,
+        "256": 62,
+        "51": 13,
+        "512": 120
+      }
+    },
+    "4": {
+      "average_precision": 0.02717391304347826,
+      "blood_negative_labelled": 510,
+      "blood_positive": 2,
+      "n": 512,
+      "roc_auc": 0.7999999999999999,
+      "score_95th_percentile": 0.4423088460596932,
+      "score_max": 0.8920127594051731,
+      "score_mean": 0.08950126923458396,
+      "score_min": 1.9600516597355366e-05,
+      "top_k_blood_positive": {
+        "128": 1,
+        "256": 2,
+        "51": 1,
+        "512": 2
+      },
+      "uniform_reference_blood_positive": {
+        "128": 1,
+        "256": 1,
+        "51": 0,
+        "512": 2
+      }
+    },
+    "5": {
+      "average_precision": null,
+      "blood_negative_labelled": 512,
+      "blood_positive": 0,
+      "n": 512,
+      "roc_auc": null,
+      "score_95th_percentile": 0.6382024264290539,
+      "score_max": 0.9987156356887137,
+      "score_mean": 0.10747560729106459,
+      "score_min": 2.4938929169193895e-08,
+      "top_k_blood_positive": {
+        "128": 0,
+        "256": 0,
+        "51": 0,
+        "512": 0
+      },
+      "uniform_reference_blood_positive": {
+        "128": 0,
+        "256": 0,
+        "51": 0,
+        "512": 0
+      }
+    },
+    "6": {
+      "average_precision": 0.025250321772466482,
+      "blood_negative_labelled": 506,
+      "blood_positive": 6,
+      "n": 512,
+      "roc_auc": 0.7262845849802372,
+      "score_95th_percentile": 0.5775445892266802,
+      "score_max": 0.9375259315449915,
+      "score_mean": 0.11363625597953195,
+      "score_min": 9.724623564891722e-06,
+      "top_k_blood_positive": {
+        "128": 4,
+        "256": 5,
+        "51": 0,
+        "512": 6
+      },
+      "uniform_reference_blood_positive": {
+        "128": 2,
+        "256": 3,
+        "51": 1,
+        "512": 6
+      }
+    },
+    "7": {
+      "average_precision": 0.47147579514741944,
+      "blood_negative_labelled": 304,
+      "blood_positive": 208,
+      "n": 512,
+      "roc_auc": 0.516336664979757,
+      "score_95th_percentile": 0.9727232876213896,
+      "score_max": 0.999909932911532,
+      "score_mean": 0.3997102926425692,
+      "score_min": 0.0006896397492628658,
+      "top_k_blood_positive": {
+        "128": 57,
+        "256": 102,
+        "51": 25,
+        "512": 208
+      },
+      "uniform_reference_blood_positive": {
+        "128": 51,
+        "256": 104,
+        "51": 21,
+        "512": 208
+      }
+    },
+    "8": {
+      "average_precision": null,
+      "blood_negative_labelled": 512,
+      "blood_positive": 0,
+      "n": 512,
+      "roc_auc": null,
+      "score_95th_percentile": 0.9377268997511146,
+      "score_max": 0.9977041742746,
+      "score_mean": 0.26870204828471833,
+      "score_min": 2.7009332058166694e-05,
+      "top_k_blood_positive": {
+        "128": 0,
+        "256": 0,
+        "51": 0,
+        "512": 0
+      },
+      "uniform_reference_blood_positive": {
+        "128": 0,
+        "256": 0,
+        "51": 0,
+        "512": 0
+      }
+    }
+  },
+  "previous_frozen_compact_cnn": {
+    "per_exam": {
+      "1": {
+        "average_precision": 0.0696288575659123,
+        "blood_negative_labelled": 490,
+        "blood_positive": 22,
+        "n": 512,
+        "roc_auc": 0.6354359925788498,
+        "score_max": 0.9121659994125366,
+        "score_mean": 0.392140753014246,
+        "score_min": 0.12718155980110168,
+        "top_k_blood_positive": {
+          "128": 11,
+          "256": 16,
+          "51": 3,
+          "512": 22
+        },
+        "uniform_reference_blood_positive": {
+          "128": 6,
+          "256": 10,
+          "51": 1,
+          "512": 22
+        }
+      },
+      "2": {
+        "average_precision": 0.002304147465437788,
+        "blood_negative_labelled": 511,
+        "blood_positive": 1,
+        "n": 512,
+        "roc_auc": 0.15264187866927592,
+        "score_max": 0.8670608401298523,
+        "score_mean": 0.1979015231336234,
+        "score_min": 0.03179580345749855,
+        "top_k_blood_positive": {
+          "128": 0,
+          "256": 0,
+          "51": 0,
+          "512": 1
+        },
+        "uniform_reference_blood_positive": {
+          "128": 1,
+          "256": 0,
+          "51": 0,
+          "512": 1
+        }
+      },
+      "21": {
+        "average_precision": 0.034482758620689655,
+        "blood_negative_labelled": 511,
+        "blood_positive": 1,
+        "n": 512,
+        "roc_auc": 0.9452054794520548,
+        "score_max": 0.8733372092247009,
+        "score_mean": 0.3754542946771835,
+        "score_min": 0.05883994698524475,
+        "top_k_blood_positive": {
+          "128": 1,
+          "256": 1,
+          "51": 1,
+          "512": 1
+        },
+        "uniform_reference_blood_positive": {
+          "128": 0,
+          "256": 1,
+          "51": 1,
+          "512": 1
+        }
+      },
+      "23": {
+        "average_precision": 0.007939145025369066,
+        "blood_negative_labelled": 508,
+        "blood_positive": 4,
+        "n": 512,
+        "roc_auc": 0.41732283464566927,
+        "score_max": 0.863905131816864,
+        "score_mean": 0.20716226394142723,
+        "score_min": 0.03537891060113907,
+        "top_k_blood_positive": {
+          "128": 0,
+          "256": 2,
+          "51": 0,
+          "512": 4
+        },
+        "uniform_reference_blood_positive": {
+          "128": 1,
+          "256": 1,
+          "51": 0,
+          "512": 4
+        }
+      },
+      "25": {
+        "average_precision": 0.01693877904507433,
+        "blood_negative_labelled": 498,
+        "blood_positive": 14,
+        "n": 512,
+        "roc_auc": 0.1660929432013769,
+        "score_max": 0.9571995735168457,
+        "score_mean": 0.25800659621017985,
+        "score_min": 0.03651062026619911,
+        "top_k_blood_positive": {
+          "128": 1,
+          "256": 2,
+          "51": 0,
+          "512": 14
+        },
+        "uniform_reference_blood_positive": {
+          "128": 4,
+          "256": 6,
+          "51": 1,
+          "512": 14
+        }
+      },
+      "27": {
+        "average_precision": 0.8596595240346372,
+        "blood_negative_labelled": 486,
+        "blood_positive": 26,
+        "n": 512,
+        "roc_auc": 0.9808483697372585,
+        "score_max": 0.9273163080215454,
+        "score_mean": 0.5177113824756816,
+        "score_min": 0.12560589611530304,
+        "top_k_blood_positive": {
+          "128": 25,
+          "256": 26,
+          "51": 24,
+          "512": 26
+        },
+        "uniform_reference_blood_positive": {
+          "128": 7,
+          "256": 14,
+          "51": 2,
+          "512": 26
+        }
+      },
+      "29": {
+        "average_precision": 0.6170473720557598,
+        "blood_negative_labelled": 390,
+        "blood_positive": 122,
+        "n": 512,
+        "roc_auc": 0.7676334594367381,
+        "score_max": 0.9174294471740723,
+        "score_mean": 0.4275050125288544,
+        "score_min": 0.06262189894914627,
+        "top_k_blood_positive": {
+          "128": 69,
+          "256": 94,
+          "51": 40,
+          "512": 122
+        },
+        "uniform_reference_blood_positive": {
+          "128": 29,
+          "256": 63,
+          "51": 10,
+          "512": 122
+        }
+      },
+      "3": {
+        "average_precision": null,
+        "blood_negative_labelled": 512,
+        "blood_positive": 0,
+        "n": 512,
+        "roc_auc": null,
+        "score_max": 0.925661027431488,
+        "score_mean": 0.5059406175278127,
+        "score_min": 0.10696234554052353,
+        "top_k_blood_positive": {
+          "128": 0,
+          "256": 0,
+          "51": 0,
+          "512": 0
+        },
+        "uniform_reference_blood_positive": {
+          "128": 0,
+          "256": 0,
+          "51": 0,
+          "512": 0
+        }
+      },
+      "30": {
+        "average_precision": 0.5251618350479892,
+        "blood_negative_labelled": 392,
+        "blood_positive": 120,
+        "n": 512,
+        "roc_auc": 0.7421343537414966,
+        "score_max": 0.9333943128585815,
+        "score_mean": 0.27033328539982904,
+        "score_min": 0.03367646411061287,
+        "top_k_blood_positive": {
+          "128": 66,
+          "256": 89,
+          "51": 35,
+          "512": 120
+        },
+        "uniform_reference_blood_positive": {
+          "128": 28,
+          "256": 62,
+          "51": 13,
+          "512": 120
+        }
+      },
+      "4": {
+        "average_precision": 0.015386343216531895,
+        "blood_negative_labelled": 510,
+        "blood_positive": 2,
+        "n": 512,
+        "roc_auc": 0.8166666666666668,
+        "score_max": 0.6138442754745483,
+        "score_mean": 0.2378461154148681,
+        "score_min": 0.08371040970087051,
+        "top_k_blood_positive": {
+          "128": 2,
+          "256": 2,
+          "51": 0,
+          "512": 2
+        },
+        "uniform_reference_blood_positive": {
+          "128": 1,
+          "256": 1,
+          "51": 0,
+          "512": 2
+        }
+      },
+      "5": {
+        "average_precision": null,
+        "blood_negative_labelled": 512,
+        "blood_positive": 0,
+        "n": 512,
+        "roc_auc": null,
+        "score_max": 0.755911648273468,
+        "score_mean": 0.19400155274342978,
+        "score_min": 0.03429707512259483,
+        "top_k_blood_positive": {
+          "128": 0,
+          "256": 0,
+          "51": 0,
+          "512": 0
+        },
+        "uniform_reference_blood_positive": {
+          "128": 0,
+          "256": 0,
+          "51": 0,
+          "512": 0
+        }
+      },
+      "6": {
+        "average_precision": 0.013250724024234786,
+        "blood_negative_labelled": 506,
+        "blood_positive": 6,
+        "n": 512,
+        "roc_auc": 0.514163372859025,
+        "score_max": 0.704868733882904,
+        "score_mean": 0.20991238862916362,
+        "score_min": 0.08655756711959839,
+        "top_k_blood_positive": {
+          "128": 1,
+          "256": 3,
+          "51": 0,
+          "512": 6
+        },
+        "uniform_reference_blood_positive": {
+          "128": 2,
+          "256": 3,
+          "51": 1,
+          "512": 6
+        }
+      },
+      "7": {
+        "average_precision": 0.8104187721803648,
+        "blood_negative_labelled": 304,
+        "blood_positive": 208,
+        "n": 512,
+        "roc_auc": 0.8271444838056681,
+        "score_max": 0.9257944822311401,
+        "score_mean": 0.711488347966224,
+        "score_min": 0.14728376269340515,
+        "top_k_blood_positive": {
+          "128": 110,
+          "256": 163,
+          "51": 48,
+          "512": 208
+        },
+        "uniform_reference_blood_positive": {
+          "128": 51,
+          "256": 104,
+          "51": 21,
+          "512": 208
+        }
+      },
+      "8": {
+        "average_precision": null,
+        "blood_negative_labelled": 512,
+        "blood_positive": 0,
+        "n": 512,
+        "roc_auc": null,
+        "score_max": 0.9032629132270813,
+        "score_mean": 0.5098090265237261,
+        "score_min": 0.12967288494110107,
+        "top_k_blood_positive": {
+          "128": 0,
+          "256": 0,
+          "51": 0,
+          "512": 0
+        },
+        "uniform_reference_blood_positive": {
+          "128": 0,
+          "256": 0,
+          "51": 0,
+          "512": 0
+        }
+      }
+    },
+    "summary": {
+      "blood_negative_exams": 3,
+      "high_support_positive_exams": 6,
+      "macro_ap_all_positive": 0.27020165984381833,
+      "macro_auc_all_positive": 0.6332081667994618,
+      "macro_auc_positive_at_least_10": 0.6865482670835646,
+      "mean_score_negative_exams": 0.4032503989316562,
+      "positive_exams": 11,
+      "total_positive_image_hits_at_k": {
+        "128": 286,
+        "256": 398,
+        "51": 151,
+        "512": 526
+      },
+      "total_uniform_hits_at_k": {
+        "128": 130,
+        "256": 265,
+        "51": 50,
+        "512": 526
+      }
+    }
+  },
+  "representation": {
+    "all_original_png_hashes_verified": true,
+    "frozen": true,
+    "name": "MobileNetV3_small_ImageNet_V1_fullfield_160_576D"
+  },
+  "role": "Previously examined Galar fitting studies, three exam-disjoint folds; not blinded or clinically validated",
+  "sources": {
+    "backbone_imageNet_v1_weights_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+    "explicit_blood_positive_annotations": 1663,
+    "feature_bank_sha256": "611ac32ca3b0ada15bba65c5aba564fd2a92bdac4d60d9376af89e429181c9ae",
+    "label_blind_holdout_images": 7168,
+    "original_images_source_verified": 10123,
+    "prior_compact_cnn_aggregate_sha256": "1c06c72f97bf67c5d51f24d32c93213743b1fec484a01441a5ba107c7653608f",
+    "prior_cv_source_meta_sha256": "78fc3b0d9711b675f3ffe802554d28232a58f01abb36acda60849c96c32fa4c2"
+  },
+  "status": "complete exploratory, no model promotion",
+  "study": "Frozen full-field ImageNet MobileNetV3 576-D features + train-only logistic vs previous compact CNN",
+  "summary": {
+    "blood_negative_exams": 3,
+    "high_support_positive_exams": 6,
+    "macro_ap_all_positive": 0.17321856929756982,
+    "macro_auc_all_positive": 0.5895599952984191,
+    "macro_auc_positive_at_least_10": 0.6153647239785971,
+    "mean_score_negative_exams": 0.19085391870841964,
+    "positive_exams": 11,
+    "total_positive_image_hits_at_k": {
+      "128": 201,
+      "256": 321,
+      "51": 115,
+      "512": 526
+    },
+    "total_uniform_hits_at_k": {
+      "128": 130,
+      "256": 265,
+      "51": 50,
+      "512": 526
+    }
+  },
+  "unopened_reserved_cohorts_preserved": true
+}

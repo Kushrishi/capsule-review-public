@@ -1,0 +1,13 @@
+{
+  "study": "Capsule Review: Galar fitting-pool label-only feasibility audit",
+  "version": "1.1",
+  "original_protocol_version": "1.0",
+  "change_type": "post-inspection methodological correction",
+  "discovery": "After frozen v1.0 was committed, permitted training-pool CSVs 21-60 showed heterogeneous source-frame gaps: 21-38 predominantly step 5; 39-60 predominantly step 1. Applying one step-5 rule to all studies would miscount runs.",
+  "derive_stride_from": "source frame identifiers only; never pathology labels",
+  "stride_policy": "unique modal positive gap per examination; at least 95% of adjacent gaps",
+  "analysis_change": "Count positive annotation runs when two consecutive positive annotated rows have source-frame gap equal to that examination's label-blind modal gap. Break at gaps and nonpositive/unknown rows. Report actual stride and support fraction for each examination. Run lengths remain counts of annotated rows, not time or lesions.",
+  "role_changes": false,
+  "outcome_status": "Exploratory descriptive training-cohort audit, not predeclared confirmatory evaluation. No pathology model fitting or selection on held-out exams.",
+  "source_data": "Official Galar v2 corrected labels, same SHA-256 as frozen protocol. No additional medical images or other labels acquired."
+}

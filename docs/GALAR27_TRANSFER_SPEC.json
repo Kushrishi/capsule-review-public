@@ -1,0 +1,151 @@
+{
+  "study": "Capsule Review | frozen Galar-27 pathology-ranking transfer on an additional source-verified fitting examination",
+  "version": "1.0",
+  "scientific_role": "Exploratory examination-separated training-pool transfer, not a blinded or independent clinical evaluation",
+  "frozen_before_exam27_pixels_and_scores": true,
+  "disclosure": "Examination 27 was chosen because the prior corrected-label fitting-pool audit showed 762 blood-positive annotated rows in four contiguous annotation runs. Its labels have been inspected for acquisition planning, so subsequent inference is not prospectively blinded.",
+  "source": {
+    "dataset": "Galar v2; Le Floch et al.; CC BY 4.0",
+    "figshare_source_file_id": 45258019,
+    "original_archive_bytes": 31989399751,
+    "original_archive_md5_expected_unverified": "dedad47ee55c83a4b991ca60d26fb6ee",
+    "corrected_label_file_id": 60383963,
+    "corrected_label_zip_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "fixed_original_training_pool_selection_sha256": "1aedfcdecbb270687a660acd50f312803ed0884308ea9a0973102aac242409f1"
+  },
+  "acquisition": {
+    "allowed_examination": 27,
+    "complete_png_member_count": 14796,
+    "blocks": [
+      {
+        "block_id": 5,
+        "source_offset": 17398114495,
+        "compressed_bytes": 3489830304,
+        "exam27_png_members": 10842
+      },
+      {
+        "block_id": 6,
+        "source_offset": 20887944799,
+        "compressed_bytes": 3455329610,
+        "exam27_png_members": 3954
+      }
+    ],
+    "total_compressed_bytes": 6945159914,
+    "max_allowed_source_transfer_bytes": 7000000000,
+    "method": "Fetch each exact verified HTTP 206 7z source block with official metadata, extract and verify its matching requested image members, then delete the compressed block before retrieving the next; never stage the full 31.99-GB source.",
+    "checks": "Verify official 7z index-part SHA256 and CRC, block offsets and lengths, full 14,796 PNG-member inventory, exact original frame indices/labels/roles, PNG decoding, per-frame original SHA256, and final private ZIP CRC. Abort before large transfers on any preflight mismatch.",
+    "storage": "Only original image bytes, private source-frame identities, labels and per-frame scores in Capsule Review Library; no raw medical data in Git."
+  },
+  "fixed_selection": {
+    "examination": 27,
+    "preselected_unique_images": 1005,
+    "enriched_fitting_images": 512,
+    "label_blind_uniform_reference_images": 512,
+    "overlap_images": 19,
+    "enriched_blood_positive": 256,
+    "uniform_reference_blood_positive": 26,
+    "positive_annotation_runs": 4,
+    "source_blood_positive_rows": 762,
+    "primary_reference_scope": "512 frozen label-blind source-chronological positions only, with 26 blood=1 annotation labels; never use intentionally enriched-only frames to estimate natural prevalence."
+  },
+  "locked_models": [
+    {
+      "name": "original_checkpoint",
+      "weights_sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3"
+    },
+    {
+      "name": "original_only_continued",
+      "weights_sha256": "ae88ccfedc53d8f419b3da8c0c01ca6b61361ef29858b6a536e25408ba99eefb"
+    },
+    {
+      "name": "expanded_continued",
+      "weights_sha256": "2534d3b7982ee8c557cadc5ad3fcc4c7c4c557f899fa013e881d8655eab97111"
+    }
+  ],
+  "fixed_comparison": {
+    "no_training_or_checkpoint_selection_on_exam27": true,
+    "preprocessing": "Unchanged capsule_review.baseline.image_tensor, aspect-preserving 96×96 RGB black-pad with orientation correction; float32",
+    "scores": "Positive blood class softmax ranking; scores are not calibrated clinical probabilities",
+    "comparators": [
+      "Three locked CNN checkpoints",
+      "Unchanged blood_image_pilot.red_excess",
+      "Deterministic equal-budget uniform source-image sampling"
+    ],
+    "review_budget_percent": [
+      5,
+      10,
+      25,
+      50,
+      75,
+      100
+    ],
+    "per_budget_count": "floor(512×budget/100) within examination; descending score then increasing reference position for CNN/redness",
+    "primary_metrics": [
+      "ROC-AUC and average precision on label-blind 512-frame sample",
+      "Blood-positive sampled-image hits for each review budget"
+    ],
+    "secondary_metrics": "Full 1,005-image union, deliberately enriched: descriptive only, explicitly separate from primary",
+    "decision": "Report all methods and all budgets without tuning, threshold adjustment, cherry-picking or automatic model promotion. Maintain negative transfer evidence from exams 23 and 25.",
+    "uncertainty": "Only 26 blood-positive reference images; one examination; no verified patient identity or independent clinical lesion ground truth."
+  },
+  "protected_examination_roles": {
+    "allowed_new_pixel_examination": [
+      27
+    ],
+    "fitting_only_previously_examined": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      21,
+      23,
+      25,
+      29,
+      30
+    ],
+    "historical_dev_not_independent": [
+      9,
+      10
+    ],
+    "unopened_future_evaluation": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "original_author_holdout_unopened": [
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80
+    ]
+  },
+  "stop_conditions": "Abort on model hash mismatch, source-archive/member hash or index mismatch, altered 1,005-image request, missing or duplicate source image, incorrect 512 reference positions/26 reference positives, incorrect data roles, or incomplete artefact. Never treat unknown labels as negative.",
+  "clinical_validation": false
+}

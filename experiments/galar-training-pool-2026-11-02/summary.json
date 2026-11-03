@@ -1,0 +1,1399 @@
+{
+  "amendment_sha256": "41ef0b110894fe84b63d66db4b4ab57de063ff72ed62ae0c801db1230415174a",
+  "annotated_rows_total": 3004632,
+  "blood_positive_examinations": 32,
+  "blood_positive_rows_total": 373241,
+  "blood_positive_runs_total": 6402,
+  "by_examination": {
+    "21": {
+      "annotated_rows": 7478,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 6,
+      "blood_positive_runs": 3,
+      "blood_short_positive_runs_1_to_25_rows": 3,
+      "exam": 21,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 13,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 289,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "22": {
+      "annotated_rows": 7529,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 0,
+      "blood_positive_runs": 0,
+      "blood_short_positive_runs_1_to_25_rows": 0,
+      "exam": 22,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 4,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "23": {
+      "annotated_rows": 11785,
+      "blood_long_positive_runs_26_plus_rows": 1,
+      "blood_longest_run_rows": 36,
+      "blood_positive_runs": 28,
+      "blood_short_positive_runs_1_to_25_rows": 27,
+      "exam": 23,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 135,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 4,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 8,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 0.999067
+    },
+    "24": {
+      "annotated_rows": 13418,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 0,
+      "blood_positive_runs": 0,
+      "blood_short_positive_runs_1_to_25_rows": 0,
+      "exam": 24,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 214,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "25": {
+      "annotated_rows": 22477,
+      "blood_long_positive_runs_26_plus_rows": 2,
+      "blood_longest_run_rows": 526,
+      "blood_positive_runs": 53,
+      "blood_short_positive_runs_1_to_25_rows": 51,
+      "exam": 25,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 5,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 70,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 795,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 5,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "26": {
+      "annotated_rows": 11841,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 0,
+      "blood_positive_runs": 0,
+      "blood_short_positive_runs_1_to_25_rows": 0,
+      "exam": 26,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 2422,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 106,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "27": {
+      "annotated_rows": 14796,
+      "blood_long_positive_runs_26_plus_rows": 4,
+      "blood_longest_run_rows": 510,
+      "blood_positive_runs": 4,
+      "blood_short_positive_runs_1_to_25_rows": 0,
+      "exam": 27,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 747,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 149,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 762,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "28": {
+      "annotated_rows": 12016,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 0,
+      "blood_positive_runs": 0,
+      "blood_short_positive_runs_1_to_25_rows": 0,
+      "exam": 28,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 18,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 65,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "29": {
+      "annotated_rows": 16018,
+      "blood_long_positive_runs_26_plus_rows": 33,
+      "blood_longest_run_rows": 588,
+      "blood_positive_runs": 107,
+      "blood_short_positive_runs_1_to_25_rows": 74,
+      "exam": 29,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 3847,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 42,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "30": {
+      "annotated_rows": 16953,
+      "blood_long_positive_runs_26_plus_rows": 15,
+      "blood_longest_run_rows": 1249,
+      "blood_positive_runs": 47,
+      "blood_short_positive_runs_1_to_25_rows": 32,
+      "exam": 30,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 1234,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 2,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 4121,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 1,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "31": {
+      "annotated_rows": 24919,
+      "blood_long_positive_runs_26_plus_rows": 34,
+      "blood_longest_run_rows": 376,
+      "blood_positive_runs": 162,
+      "blood_short_positive_runs_1_to_25_rows": 128,
+      "exam": 31,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 25,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 3310,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 69,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 4789,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "32": {
+      "annotated_rows": 23421,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 0,
+      "blood_positive_runs": 0,
+      "blood_short_positive_runs_1_to_25_rows": 0,
+      "exam": 32,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "33": {
+      "annotated_rows": 13297,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 0,
+      "blood_positive_runs": 0,
+      "blood_short_positive_runs_1_to_25_rows": 0,
+      "exam": 33,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "34": {
+      "annotated_rows": 10867,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 12,
+      "blood_positive_runs": 9,
+      "blood_short_positive_runs_1_to_25_rows": 9,
+      "exam": 34,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 6,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 49,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 1,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 390,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "35": {
+      "annotated_rows": 9643,
+      "blood_long_positive_runs_26_plus_rows": 4,
+      "blood_longest_run_rows": 874,
+      "blood_positive_runs": 29,
+      "blood_short_positive_runs_1_to_25_rows": 25,
+      "exam": 35,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 1534,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 33,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "36": {
+      "annotated_rows": 13326,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 18,
+      "blood_positive_runs": 59,
+      "blood_short_positive_runs_1_to_25_rows": 59,
+      "exam": 36,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 5,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 209,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 208,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "37": {
+      "annotated_rows": 18125,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 0,
+      "blood_positive_runs": 0,
+      "blood_short_positive_runs_1_to_25_rows": 0,
+      "exam": 37,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 1021,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "38": {
+      "annotated_rows": 6209,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 0,
+      "blood_positive_runs": 0,
+      "blood_short_positive_runs_1_to_25_rows": 0,
+      "exam": 38,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 34,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 5,
+      "stride_support_fraction": 1.0
+    },
+    "39": {
+      "annotated_rows": 130776,
+      "blood_long_positive_runs_26_plus_rows": 10,
+      "blood_longest_run_rows": 5928,
+      "blood_positive_runs": 286,
+      "blood_short_positive_runs_1_to_25_rows": 276,
+      "exam": 39,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 273,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 10565,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 433,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "40": {
+      "annotated_rows": 131204,
+      "blood_long_positive_runs_26_plus_rows": 11,
+      "blood_longest_run_rows": 331,
+      "blood_positive_runs": 60,
+      "blood_short_positive_runs_1_to_25_rows": 49,
+      "exam": 40,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 1677,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 4778,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "41": {
+      "annotated_rows": 133764,
+      "blood_long_positive_runs_26_plus_rows": 18,
+      "blood_longest_run_rows": 1200,
+      "blood_positive_runs": 47,
+      "blood_short_positive_runs_1_to_25_rows": 29,
+      "exam": 41,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 64,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 4104,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 0.999963
+    },
+    "42": {
+      "annotated_rows": 100086,
+      "blood_long_positive_runs_26_plus_rows": 205,
+      "blood_longest_run_rows": 10995,
+      "blood_positive_runs": 702,
+      "blood_short_positive_runs_1_to_25_rows": 497,
+      "exam": 42,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 6,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 72051,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "43": {
+      "annotated_rows": 119946,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 12,
+      "blood_positive_runs": 5,
+      "blood_short_positive_runs_1_to_25_rows": 5,
+      "exam": 43,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 39,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "44": {
+      "annotated_rows": 131259,
+      "blood_long_positive_runs_26_plus_rows": 9,
+      "blood_longest_run_rows": 768,
+      "blood_positive_runs": 140,
+      "blood_short_positive_runs_1_to_25_rows": 131,
+      "exam": 44,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 21,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 3141,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "45": {
+      "annotated_rows": 127906,
+      "blood_long_positive_runs_26_plus_rows": 170,
+      "blood_longest_run_rows": 1190,
+      "blood_positive_runs": 817,
+      "blood_short_positive_runs_1_to_25_rows": 647,
+      "exam": 45,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 22812,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "46": {
+      "annotated_rows": 129289,
+      "blood_long_positive_runs_26_plus_rows": 17,
+      "blood_longest_run_rows": 228,
+      "blood_positive_runs": 71,
+      "blood_short_positive_runs_1_to_25_rows": 54,
+      "exam": 46,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 3215,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 1736,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "47": {
+      "annotated_rows": 97139,
+      "blood_long_positive_runs_26_plus_rows": 3,
+      "blood_longest_run_rows": 267,
+      "blood_positive_runs": 71,
+      "blood_short_positive_runs_1_to_25_rows": 68,
+      "exam": 47,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 800,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 849,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "48": {
+      "annotated_rows": 122061,
+      "blood_long_positive_runs_26_plus_rows": 229,
+      "blood_longest_run_rows": 3987,
+      "blood_positive_runs": 624,
+      "blood_short_positive_runs_1_to_25_rows": 395,
+      "exam": 48,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 50107,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "49": {
+      "annotated_rows": 124677,
+      "blood_long_positive_runs_26_plus_rows": 278,
+      "blood_longest_run_rows": 746,
+      "blood_positive_runs": 695,
+      "blood_short_positive_runs_1_to_25_rows": 417,
+      "exam": 49,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 29760,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "50": {
+      "annotated_rows": 126779,
+      "blood_long_positive_runs_26_plus_rows": 0,
+      "blood_longest_run_rows": 11,
+      "blood_positive_runs": 6,
+      "blood_short_positive_runs_1_to_25_rows": 6,
+      "exam": 50,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 3,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 25,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "51": {
+      "annotated_rows": 131823,
+      "blood_long_positive_runs_26_plus_rows": 46,
+      "blood_longest_run_rows": 670,
+      "blood_positive_runs": 280,
+      "blood_short_positive_runs_1_to_25_rows": 234,
+      "exam": 51,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 5899,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "52": {
+      "annotated_rows": 131573,
+      "blood_long_positive_runs_26_plus_rows": 20,
+      "blood_longest_run_rows": 2871,
+      "blood_positive_runs": 50,
+      "blood_short_positive_runs_1_to_25_rows": 30,
+      "exam": 52,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 242,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 6674,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "53": {
+      "annotated_rows": 131036,
+      "blood_long_positive_runs_26_plus_rows": 81,
+      "blood_longest_run_rows": 594,
+      "blood_positive_runs": 446,
+      "blood_short_positive_runs_1_to_25_rows": 365,
+      "exam": 53,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 168,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 8201,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 4827,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "54": {
+      "annotated_rows": 125264,
+      "blood_long_positive_runs_26_plus_rows": 60,
+      "blood_longest_run_rows": 1286,
+      "blood_positive_runs": 173,
+      "blood_short_positive_runs_1_to_25_rows": 113,
+      "exam": 54,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 9471,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 4466,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "55": {
+      "annotated_rows": 121488,
+      "blood_long_positive_runs_26_plus_rows": 36,
+      "blood_longest_run_rows": 1295,
+      "blood_positive_runs": 139,
+      "blood_short_positive_runs_1_to_25_rows": 103,
+      "exam": 55,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 6230,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "56": {
+      "annotated_rows": 130217,
+      "blood_long_positive_runs_26_plus_rows": 96,
+      "blood_longest_run_rows": 1643,
+      "blood_positive_runs": 520,
+      "blood_short_positive_runs_1_to_25_rows": 424,
+      "exam": 56,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 15958,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 1411,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "57": {
+      "annotated_rows": 115309,
+      "blood_long_positive_runs_26_plus_rows": 11,
+      "blood_longest_run_rows": 644,
+      "blood_positive_runs": 133,
+      "blood_short_positive_runs_1_to_25_rows": 122,
+      "exam": 57,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 54,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 1743,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 446,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "58": {
+      "annotated_rows": 130689,
+      "blood_long_positive_runs_26_plus_rows": 16,
+      "blood_longest_run_rows": 432,
+      "blood_positive_runs": 180,
+      "blood_short_positive_runs_1_to_25_rows": 164,
+      "exam": 58,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 164,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 2901,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "59": {
+      "annotated_rows": 130232,
+      "blood_long_positive_runs_26_plus_rows": 97,
+      "blood_longest_run_rows": 8096,
+      "blood_positive_runs": 231,
+      "blood_short_positive_runs_1_to_25_rows": 134,
+      "exam": 59,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 51314,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    },
+    "60": {
+      "annotated_rows": 127997,
+      "blood_long_positive_runs_26_plus_rows": 87,
+      "blood_longest_run_rows": 35638,
+      "blood_positive_runs": 225,
+      "blood_short_positive_runs_1_to_25_rows": 138,
+      "exam": 60,
+      "labels": {
+        "active bleeding": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "angiectasia": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        },
+        "blood": {
+          "positive_rows": 53258,
+          "unknown_rows": 0
+        },
+        "polyp": {
+          "positive_rows": 17,
+          "unknown_rows": 0
+        },
+        "ulcer": {
+          "positive_rows": 0,
+          "unknown_rows": 0
+        }
+      },
+      "source_frame_stride": 1,
+      "stride_support_fraction": 1.0
+    }
+  },
+  "constraints": [
+    "No reserved evaluation labels or frames read.",
+    "Per-exam stride derived from label-blind source-frame ID spacing, not pathology labels.",
+    "Positive runs are annotations, not independent lesions or time durations.",
+    "Examination ID is not confirmed to be a unique-patient ID.",
+    "Predefined threshold selects candidate training acquisition only, not model/checkpoint selection.",
+    "No new image download, training, clinical validation or inference performed."
+  ],
+  "exam_count": 40,
+  "examination_roles": {
+    "existing_fitting": [
+      1,
+      8
+    ],
+    "fitting_pool": [
+      21,
+      60
+    ],
+    "historical_development": [
+      9,
+      10
+    ],
+    "unopened_author_holdout": [
+      61,
+      80
+    ],
+    "unopened_future_evaluation": [
+      11,
+      20
+    ]
+  },
+  "frame_archive_groups": [
+    {
+      "blood_positive_annotation_runs": 195,
+      "blood_positive_exam_count": 5,
+      "blood_positive_rows": 5552,
+      "exam_count": 9,
+      "examinations": "21-29",
+      "exams_with_short_blood_runs": 4,
+      "full_source_archive_bytes": 31989399751,
+      "meets_predeclared_support_threshold": true,
+      "source_file_id": 45258019
+    },
+    {
+      "blood_positive_annotation_runs": 605,
+      "blood_positive_exam_count": 6,
+      "blood_positive_rows": 17344,
+      "exam_count": 10,
+      "examinations": "31-40",
+      "exams_with_short_blood_runs": 6,
+      "full_source_archive_bytes": 69219317963,
+      "meets_predeclared_support_threshold": true,
+      "source_file_id": 44755700
+    },
+    {
+      "blood_positive_annotation_runs": 3178,
+      "blood_positive_exam_count": 10,
+      "blood_positive_rows": 184575,
+      "exam_count": 10,
+      "examinations": "41-50",
+      "exams_with_short_blood_runs": 10,
+      "full_source_archive_bytes": 173935092108,
+      "meets_predeclared_support_threshold": true,
+      "source_file_id": 44809350
+    },
+    {
+      "blood_positive_annotation_runs": 2377,
+      "blood_positive_exam_count": 10,
+      "blood_positive_rows": 161649,
+      "exam_count": 10,
+      "examinations": "51-60",
+      "exams_with_short_blood_runs": 10,
+      "full_source_archive_bytes": 202693348645,
+      "meets_predeclared_support_threshold": true,
+      "source_file_id": 44809828
+    }
+  ],
+  "frozen_spec_git_commit": "f537eaaf85c1a0d2e29695e33d382574cdcfc6b6",
+  "other_labels": {
+    "active bleeding": {
+      "positive_examinations": 6,
+      "positive_rows": 2290
+    },
+    "angiectasia": {
+      "positive_examinations": 17,
+      "positive_rows": 4433
+    },
+    "polyp": {
+      "positive_examinations": 16,
+      "positive_rows": 15375
+    },
+    "ulcer": {
+      "positive_examinations": 8,
+      "positive_rows": 11305
+    }
+  },
+  "source": {
+    "article_id": 25304616,
+    "bytes": 17931138,
+    "file_id": 60383963,
+    "file_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "official_md5": "4428f8d4341cc41ade9fd547c19b6e48"
+  },
+  "spec_sha256": "c276f887285cad10abb49ad7839e38c89e6fb2dffc854ca2f6a9e5d887c71291",
+  "status": "descriptive fitting-pool label-only audit; modified stride rule disclosed after inspection",
+  "suggested_first_archive_group": "21-29",
+  "unresolved_image_mapping": {
+    "exam": 30,
+    "reason": "No 30-specific frame archive identified in official v2 file names; confirm membership before any image acquisition."
+  }
+}

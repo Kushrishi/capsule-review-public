@@ -1,0 +1,59 @@
+{
+  "record_type": "galar-exam30-multiblock-fitting-source-verification-v1",
+  "source_file_id": 45258019,
+  "official_archive_bytes": 31989399751,
+  "official_full_md5_expected_not_verified": "dedad47ee55c83a4b991ca60d26fb6ee",
+  "corrected_label_zip_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+  "frozen_private_selection_sha256": "1aedfcdecbb270687a660acd50f312803ed0884308ea9a0973102aac242409f1",
+  "selected_blocks": [
+    {
+      "block_id": 8,
+      "offset": 27843799086,
+      "compressed_bytes": 3514256456,
+      "source_sha256": "a9a551d1fb7a4df34f6cc6622e2eb3e5114337c6d282292b2fbac6631eb02285"
+    },
+    {
+      "block_id": 9,
+      "offset": 31358055542,
+      "compressed_bytes": 630002169,
+      "source_sha256": "5d9dcf750e84b6504154f4689f2097716c2caade08e492d527d8a546c17a1f09"
+    }
+  ],
+  "examination": 30,
+  "verified_png_images": 1006,
+  "explicit_blood_positive_images": 366,
+  "enriched_fit_candidates": 512,
+  "enriched_positive_candidates": 256,
+  "label_blind_uniform_reference_candidates": 512,
+  "label_blind_uniform_positive_candidates": 120,
+  "enriched_uniform_overlap_images": 18,
+  "positive_overlap_images": 10,
+  "annotated_positive_runs_with_enriched_representative": 47,
+  "original_png_bytes": 265915912,
+  "nested_source_zip_sha256": "c20e9ded68735218529812718496ffe3924074a8574a3dc5b402dcecc5582048",
+  "private_manifest_sha256": "142ec6e095489928fc91b1af42d9c0376fab10558c347f94338afb4e34ee9079",
+  "retained_outer_artifact_sha256": "8eaa78453566f57d06ccd094ca3a057db4ed23552d366d540341bb0a73041e45",
+  "verification": "Official HTTP 206 source range, verified 7z member coverage/CRC, actual PNG decode, per-image SHA and byte lengths, unique source identities, inner/outer ZIP CRC, independent artifact replay: zero mismatches.",
+  "github_acquisition_run": "https://github.com/Kushrishi/capsule-review/actions/runs/41459013305",
+  "cumulative_new_exam_acquisition": {
+    "examinations": [
+      21,
+      23,
+      30
+    ],
+    "verified_png_images": 3000,
+    "blood_positive_images": 514,
+    "total_original_png_bytes": 882604279,
+    "confirmed_unique_patients": false
+  },
+  "private_artifact_location": "Capsule Review Library / Galar 21-30 Images",
+  "scientific_role": "Known fitting-candidate source images with intentional enrichment; neither blinded model evaluation nor clinical lesion sensitivity",
+  "limitations": [
+    "Only 3 of 10 newly assigned fitting examinations are acquired.",
+    "Source file full-archive MD5 is not verified from partial blocks.",
+    "Blood-positive enriched sampling has distorted prevalence.",
+    "Annotation-positive runs are not independently diagnosed lesions.",
+    "Examination IDs are not confirmed patient IDs.",
+    "No model training or independent clinical evaluation was performed."
+  ]
+}

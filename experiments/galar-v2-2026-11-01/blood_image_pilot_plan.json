@@ -1,0 +1,16 @@
+{
+  "status": "Exploratory pilot settings fixed before this model fit; NOT prospective registration or independent testing",
+  "study_question": "Can a compact image model rank blood-annotated frames within the existing sparse Galar sample more effectively than an untrained red-excess score and outcome-blind sampling?",
+  "data": "Verified Galar v2 corrected annotations and existing 512-image-per-examination sample; no additional frames accessed",
+  "task": "binary explicit blood label; not active bleeding or all-pathology detection",
+  "train_examination_ids": [1,2,3,4,5,6,7,8],
+  "historical_development_ids": [9,10],
+  "future_evaluation_ids_unopened": [11,12,13,14,15,16,17,18,19,20],
+  "authors_holdout_ids_unopened": "61-80",
+  "predefined_comparators": ["untrained red-excess score", "uniformly sampled frames", "100 seeded random draws"],
+  "model": "same capsule-cnn-v1 architecture with two outputs, no pretrained weights, inverse-frequency training-class weights, CPU",
+  "training_budget": {"epochs":10,"batch_size":32,"learning_rate":0.001,"seed":17,"best_checkpoint":"lowest unweighted historical development cross entropy"},
+  "metrics": ["binary AUROC where both labels exist", "average precision where positives exist", "positive frame recall at 5, 10 and 25 percent per-examination sampling budget", "per-examination results and false positive review selections"],
+  "important_prior_evidence": "Prior public results and training-only audit already revealed exam 7 dominates training blood positives, exam 9 has no blood positives, and exam 10 has positives. No claim of blind model selection.",
+  "limits": ["sparse frames only", "development data already inspected", "one positive development exam", "patient identity unknown", "no lesion/interval sensitivity or clinical reading-time evidence"]
+}

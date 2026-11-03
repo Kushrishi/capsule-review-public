@@ -1,0 +1,132 @@
+{
+  "study": "Capsule Review | prespecified Galar-25 training-pool model transfer and streamed source acquisition",
+  "version": "1.0",
+  "protocol_lock_time": "before acquiring examination-25 image pixels and before scoring any examination-25 image",
+  "classification": "Exploratory fitting-pool transfer. Case 25 was selected with known official blood-label counts and annotation-run counts; NOT blind independent clinical validation.",
+  "source": {
+    "dataset": "Galar v2 corrected labels, Le Floch et al. (CC BY 4.0)",
+    "figshare_image_file_id": 45258019,
+    "original_archive_bytes": 31989399751,
+    "full_archive_md5_expected_but_not_verified": "dedad47ee55c83a4b991ca60d26fb6ee",
+    "labels_file_id": 60383963,
+    "labels_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "frozen_21_30_selection_sha256": "1aedfcdecbb270687a660acd50f312803ed0884308ea9a0973102aac242409f1"
+  },
+  "acquisition": {
+    "allowed_exam": 25,
+    "exact_all_pngs_in_source_exam": 22477,
+    "blocks": [
+      {
+        "id": 2,
+        "offset": 6950241905,
+        "bytes": 3470070406,
+        "exam_image_members": 1762
+      },
+      {
+        "id": 3,
+        "offset": 10420312311,
+        "bytes": 3539043971,
+        "exam_image_members": 15058
+      },
+      {
+        "id": 4,
+        "offset": 13959356282,
+        "bytes": 3438758213,
+        "exam_image_members": 5657
+      }
+    ],
+    "total_compressed_bytes": 10447872590,
+    "max_total_compressed_bytes": 10500000000,
+    "policy": "Retrieve one exact HTTP 206 source block, extract and validate only its allowed requested frames, then remove block compressed bytes before retrieving next block. No three-block simultaneous staging.",
+    "source_checks": "Verify official 7z header CRCs, known index-part SHA256s, full per-exam archive-member count per block and exact source-frame alignment before large transfer; reject missing or unexpected paths, roles, overlaps and bad PNG or ZIP integrity.",
+    "storage": "Only original images, labels, frame identities and checkpoint scores in private Library; no pixels or per-frame data in Git."
+  },
+  "preselected_images": {
+    "exam": 25,
+    "frozen_unique_union": 1013,
+    "fit_enriched": 512,
+    "uniform_reference": 512,
+    "overlap": 11,
+    "enriched_positive": 256,
+    "uniform_positive": 14,
+    "annotation_positive_runs": 53,
+    "positive_source_annotation_rows": 795
+  },
+  "fixed_model_evaluation": {
+    "frozen_candidate_checkpoints": [
+      {
+        "name": "original_checkpoint",
+        "sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3"
+      },
+      {
+        "name": "original_only_continued",
+        "sha256": "ae88ccfedc53d8f419b3da8c0c01ca6b61361ef29858b6a536e25408ba99eefb"
+      },
+      {
+        "name": "expanded_continued",
+        "sha256": "2534d3b7982ee8c557cadc5ad3fcc4c7c4c557f899fa013e881d8655eab97111"
+      }
+    ],
+    "no_checkpoint_selection": true,
+    "no_training_or_adaptation_on_exam25": true,
+    "unchanged_image_tensor": "capsule_review.baseline.image_tensor 96x96 padded RGB",
+    "unchanged_redness_score": "blood_image_pilot.red_excess",
+    "reference_cohort": "512 locked label-blind uniform source-order images for Galar exam25; never use enriched-fit-only images for primary evaluation",
+    "secondary_cohort": "Full 1013 union only as explicitly enriched descriptive analysis",
+    "metrics": [
+      "Within-examination ROC-AUC and average precision (very unstable with 14 positives)",
+      "Positive image hits at 5/10/25/50/75/100% budgets",
+      "Unchanged redness score and deterministic uniform positional sampling at same review budget"
+    ],
+    "ties": "Descending score, ascending source-frame position",
+    "no_model_selection_from_result": true,
+    "clinical_validity": false
+  },
+  "isolation": {
+    "allowed_evaluation_exam": [
+      25
+    ],
+    "already_explored_nonindependent": [
+      9,
+      10,
+      21,
+      23,
+      29,
+      30
+    ],
+    "never_read": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80
+    ],
+    "known_patient_mapping": false
+  },
+  "stop_rules": "Any checkpoint mismatch, frozen input source mismatch, missing frame, incorrect reference count, unexpected source block, transport failure or integrity mismatch aborts and is disclosed. No favorable checkpoint/threshold search."
+}

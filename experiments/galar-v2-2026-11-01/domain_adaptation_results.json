@@ -1,0 +1,128 @@
+{
+  "comparability_note": "Domain-adapted model also changes preprocessing to whole-field resize; this is not a controlled ablation of fine-tuning alone.",
+  "decision_rule": "Do not replace the previous original CNN based on these historical development cases; use newly acquired examination-level data for external model selection.",
+  "folds": {
+    "1": {
+      "candidate_model_checkpoint_sha256": "137feb10b0a0e68e326352c9797858997e7d87a0ad7ac51882bf7b47dc0849fd",
+      "fine_tuned": {
+        "average_precision": 0.13135839516358983,
+        "roc_auc": 0.7101113172541739,
+        "top_10pct_positive": 8
+      },
+      "fold_training_exams": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "heldout_positive_images": 22,
+      "previous_frozen_feature_baseline": {
+        "average_precision": 0.0793216713095702,
+        "roc_auc": 0.6000927643784792,
+        "top_10pct_positive": 5
+      },
+      "uniform_top_10pct": 1,
+      "untrained_redness": {
+        "average_precision": 0.22603158091765493,
+        "roc_auc": 0.8269944341372893,
+        "top_10pct_positive": 11
+      }
+    },
+    "7": {
+      "candidate_model_checkpoint_sha256": "d69354362934916955ae8772faeb482c91162d40c1b4e738e114845d83344e36",
+      "fine_tuned": {
+        "average_precision": 0.7093712182390862,
+        "roc_auc": 0.7506800354251018,
+        "top_10pct_positive": 46
+      },
+      "fold_training_exams": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8
+      ],
+      "heldout_positive_images": 208,
+      "previous_frozen_feature_baseline": {
+        "average_precision": 0.6740815445905366,
+        "roc_auc": 0.7413809463562745,
+        "top_10pct_positive": 43
+      },
+      "uniform_top_10pct": 21,
+      "untrained_redness": {
+        "average_precision": 0.47378244440490785,
+        "roc_auc": 0.5577002150809721,
+        "top_10pct_positive": 24
+      }
+    }
+  },
+  "frozen_manifest_sha256": "4d3e0aba675383d1d5441fca0e1b6e0d226a61c2ae30c780c842cfbfd92c40fb",
+  "frozen_spec_sha256": "cbbf7f2724d5ca0ab03a676775fcb74556bd0a889af35124d9068b93e32d7f65",
+  "heldout_training_folds": [
+    1,
+    7
+  ],
+  "historical_development": {
+    "combined": {
+      "average_precision": 0.475153029363209,
+      "negative": 811,
+      "positive": 213,
+      "roc_auc": 0.6857586125052824
+    },
+    "exam_10": {
+      "average_precision": 0.6918136154311104,
+      "negative": 299,
+      "positive": 213,
+      "roc_auc": 0.6874244351280484
+    },
+    "exams": [
+      9,
+      10
+    ],
+    "new_model_checkpoint_sha256": "4b8f5233ccfb2bab16dc4de83e3e367f7953872d42185bc206f9be414e731b92",
+    "no_independent_validation": true,
+    "original_CNN_combined": {
+      "average_precision": 0.622537869374297,
+      "negative": 811,
+      "positive": 213,
+      "roc_auc": 0.7261886154576442
+    },
+    "original_CNN_exam10": {
+      "average_precision": 0.7469551464617987,
+      "negative": 299,
+      "positive": 213,
+      "roc_auc": 0.7079152731326643
+    },
+    "prior_frozen_feature_model_combined": {
+      "average_precision": 0.3537014363893195,
+      "negative": 811,
+      "positive": 213,
+      "roc_auc": 0.6345264352245816
+    },
+    "review_10pct_exam10": {
+      "fine_tuned": 44,
+      "original_CNN": 47,
+      "uniform": 21
+    }
+  },
+  "source_images_committed_to_git": false,
+  "study": "Capsule Review fixed train-only domain adaptation on Galar sparse images",
+  "train_examinations": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "unopened_reserved_Galar_holdout": "61-80",
+  "zero_lesion_sensitivity_claim": true,
+  "zero_reader_time_claim": true
+}

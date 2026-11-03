@@ -1,0 +1,8 @@
+{
+  "canonical_private_reference_identity_sha256": "5ec4c132525b2ae7ceeeda4ad7a83b8142846a511d718a94fee5b40906ce6814",
+  "exact_original_frame_and_blood_annotation_identity_match": true,
+  "expanded_exam_heldout_identity_records": 7168,
+  "not_independent_clinical_validation": true,
+  "original_exam_heldout_identity_records": 7168,
+  "reserved_examination_ids_accessed": false
+}

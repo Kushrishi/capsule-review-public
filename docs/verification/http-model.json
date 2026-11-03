@@ -1,0 +1,12 @@
+{
+  "transport": "actual localhost HTTP, urllib client",
+  "data": "non-medical geometric fixtures",
+  "passed": 5,
+  "checks": [
+    "actual localhost server responds",
+    "installed model listed over HTTP",
+    "trained software-test model produces eight saved outputs over HTTP",
+    "output is labelled as software testing; no finding auto-approved",
+    "missing token and foreign origin rejected"
+  ]
+}

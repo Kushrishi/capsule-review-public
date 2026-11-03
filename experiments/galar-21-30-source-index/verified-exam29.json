@@ -1,0 +1,74 @@
+{
+  "record": "Galar exam29 source-verified fitting image acquisition (research only)",
+  "date_utc": "2026-11-02",
+  "source": {
+    "official_file_id": 45258019,
+    "full_archive_bytes": 31989399751,
+    "expected_full_archive_md5_unverified": "dedad47ee55c83a4b991ca60d26fb6ee",
+    "corrected_labels_source_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "frozen_private_selection_sha256": "1aedfcdecbb270687a660acd50f312803ed0884308ea9a0973102aac242409f1"
+  },
+  "acquisition": {
+    "examination": 29,
+    "allowed_blocks": [
+      {
+        "id": 7,
+        "offset": 24343274409,
+        "bytes": 3500524677,
+        "source_block_sha256": "5c8329b6b89db89059ec53366c71287a56dc671a1f5b335ed366eb91b348f453"
+      },
+      {
+        "id": 8,
+        "offset": 27843799086,
+        "bytes": 3514256456,
+        "source_block_sha256": "a9a551d1fb7a4df34f6cc6622e2eb3e5114337c6d282292b2fbac6631eb02285"
+      }
+    ],
+    "source_bytes_transferred": 7014781133,
+    "index_bytes_transferred": 1342072,
+    "exact_http_206_ranges": true,
+    "full_archive_md5_verified": false,
+    "official_png_members_for_exam": 16018,
+    "source_run_url": "https://github.com/Kushrishi/capsule-review/actions/runs/41478907544"
+  },
+  "independent_private_artifact_verification": {
+    "unique_images": 1009,
+    "explicit_blood_positive_images": 372,
+    "original_png_bytes": 272047882,
+    "fit_enriched": 512,
+    "uniform_label_blind": 512,
+    "overlap": 15,
+    "fit_positive": 256,
+    "reference_positive": 122,
+    "overlap_positive": 6,
+    "sha256_verified": 1009,
+    "png_decode_verified": 1009,
+    "unique_source_ids_verified": 1009,
+    "duplicate_decoded_pixels_vs_prior_8120": 0,
+    "outer_github_artifact_sha256": "9cf8736cb269fbb91bb2e1405425c7be0958be5914ab4321fa701e61f4b92d66",
+    "nested_private_source_zip_sha256": "124f48bf18dc14a63241c8e2c03918eefecb89ddc465c2cacaa2151d97045be5",
+    "private_manifest_sha256": "d047d1eb7cc6f1f2cc740624bbd61199589abc2ae7ccddadc0876f8b0a4e7cae",
+    "zip_crc_mismatches": 0
+  },
+  "cumulative_new_fitting_acquisition": {
+    "examinations": [
+      21,
+      23,
+      29,
+      30
+    ],
+    "verified_png_images": 4009,
+    "explicit_blood_positive_images": 886,
+    "original_png_bytes": 1154652161,
+    "unique_patients_confirmed": false
+  },
+  "storage": "Original image package, private per-image manifest and labels retained in Capsule Review Library / Galar 21-30 Images; never Git",
+  "limitations": [
+    "Fitting source annotations were inspected before acquisition; not blinded evaluation or a representative clinical case mix.",
+    "Positive-rich frame sampling changes sample prevalence.",
+    "Blood-positive annotated runs are not independently adjudicated lesions.",
+    "Source MD5 cannot be verified from partial compressed blocks.",
+    "The four examinations are not known to represent four distinct patients.",
+    "No diagnosis, reader-time reduction, clinical validity, or lesion sensitivity is claimed."
+  ]
+}

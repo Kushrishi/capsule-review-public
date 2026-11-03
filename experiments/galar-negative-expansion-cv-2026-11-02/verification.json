@@ -1,0 +1,12 @@
+{
+  "aggregate_sha256": "65bec25557b00f0461c490374a3a1c9a0123b215b7f750c0648e3b30537bd471",
+  "checkpoint_count": 3,
+  "clinical_validity": false,
+  "heldout_exam_count_per_arm": 14,
+  "independently_matched_topk_examination_budgets": 56,
+  "independently_replayed_scores": 7168,
+  "largest_absolute_inference_difference": 0.0,
+  "no_reserved_exams_used": true,
+  "source_manifest_sha256": "76b698a5026a90f82b54692ca74f0d056a0cbf61368a9698499c13f85a6644cb",
+  "source_original_images": 11147
+}

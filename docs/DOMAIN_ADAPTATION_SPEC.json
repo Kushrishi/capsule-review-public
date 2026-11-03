@@ -1,0 +1,43 @@
+{
+  "study": "Capsule Review: supervised domain adaptation with examination-separated development",
+  "version": "1.0",
+  "specified_before_first_model_fit": true,
+  "context": "Galar v2 corrected 2025-12-15 blood label; existing 512 sparsely selected source frames per examination, NOT continuous video; historical examples only, never clinical or independent patient evaluation",
+  "manifest_sha256": "4d3e0aba675383d1d5441fca0e1b6e0d226a61c2ae30c780c842cfbfd92c40fb",
+  "original_cnn_metrics_sha256": "781b855c0e14278fb20cb45f25f2481bcf379182aa4dd9d8e9b9c93a12928d7a",
+  "pretrained_weights_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+  "label": "blood only; explicitly marked 0/1, negative does not mean absence of other pathology",
+  "training_examinations": [1,2,3,4,5,6,7,8],
+  "training_only_positive_examination_support": {"1":22,"2":1,"4":2,"6":6,"7":208},
+  "held_out_training_fold_examinations": [1,7],
+  "fold_policy": "train anew on other 7 fitting examinations; evaluate only selected held-out fitting examination. The two selected folds each contain >=20 positives. No checkpoint/algorithm selection based on historically inspected 9-10.",
+  "historical_development_examinations": [9,10],
+  "reserved_examinations": "11-20 not acquired and 61-80 authors' holdout unopened",
+  "fine_tune_architecture": "torchvision mobilenet_v3_small ImageNet V1; freeze features[0:11]; unfreeze features[11:13] and replace classification head with 576-to-1 linear classifier; freeze early batch norm statistics",
+  "preprocessing": "RGB, deterministic bicubic full-field resize to 160x160, tensor in [0,1], ImageNet V1 mean/std; no crop or augmentation. Preserve circular field of view.",
+  "training": {
+    "epochs": 3,
+    "batch_size": 32,
+    "seed": 29,
+    "torch_threads": 4,
+    "optimizer": "AdamW",
+    "last_feature_blocks_learning_rate": 0.00015,
+    "linear_classifier_learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "positive_weight_rule": "min(10.0, n_negative / n_positive) computed only on the current training examinations",
+    "epoch_selection": "Use fixed epoch 3; no early stopping, no development-based selection",
+    "precision": "float32 CPU; deterministic algorithms and seeded shuffled train batches",
+    "no_input_augmentation": true
+  },
+  "training_only_comparators": [
+    "fixed red-excess image score (untrained)",
+    "official frozen MobileNetV3-small feature extraction + train-fold-only standardized weighted logistic head, L2=0.01"
+  ],
+  "metrics": ["per-examination ROC-AUC and average precision", "top-k blood-positive sampled images at budgets 5/10/25/50/75/100 percent", "score histogram", "exam-wise training support", "negative-only examination caution"],
+  "review_budget_denominator": "512 sparse sampled frames per examination; no inference about full examination, clinical time, or distinct lesions",
+  "final_fit": "Fit same fixed 3-epoch architecture on all training examinations 1-8, then perform exactly one descriptive historical comparison on 9-10. Do not choose model based on those development cases.",
+  "promotion_rule": "Do not replace original blood CNN based on historical development results; without genuinely new examination-level evaluation both models stay exploratory candidates",
+  "artifact_policy": "Commit only fixed specification, reproducible code/tests and aggregate results; store original images, source manifests, model weights, per-image predictions and viewer data outside GitHub",
+  "known_limitations": "Small and sparse sample; 208/239 training positives in one exam; unknown unique-patient identity; binary blood annotation is not a diagnosis; development exams previously inspected; distribution shifts and variation uncertain",
+  "license_policy": "Preserve original research dataset attribution; do not add a software license or publish app without user decision"
+}

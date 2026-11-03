@@ -1,0 +1,141 @@
+{
+  "study": "Galar 21-30 source-annotation candidate-density ceiling, exploratory fitting pool",
+  "date": "2026-11-02",
+  "source": "Official corrected Galar v2 annotations, publisher file 60383963, CC BY 4.0",
+  "source_zip_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+  "immutable_protocol_git_blob": "25b920096f555ea9fc09ce3e69deaadb3bce23a2",
+  "full_aggregate_sha256": "0eda3ad58fc05947d490d7420b7926178e3f21ff900ee2f557419b54a253aa05",
+  "official_source_replay": "https://github.com/Kushrishi/capsule-review/actions/runs/41528910104",
+  "full_aggregate_private_library": "/Capsule Review/Galar Density Feasibility 2026-11-02/aggregate.json",
+  "cohort": {
+    "exam_ids": [
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "annotated_positions": 134311,
+    "positive_exams": 6,
+    "exams_without_blood_positive": 4,
+    "blood_positive_annotation_runs": 242,
+    "by_length": {
+      "short_1_5": 117,
+      "medium_6_25": 70,
+      "long_26_plus": 55
+    }
+  },
+  "fixed_absolute_reviewer_images_per_exam": [
+    51,
+    128,
+    256,
+    512
+  ],
+  "comparisons": [
+    {
+      "candidate_images_per_exam": "512",
+      "total_candidate_images": 5120,
+      "represented_runs": 79,
+      "represented_short_runs": 10,
+      "uniform_run_hits_at_k51": 21,
+      "oracle_upper_bound_runs_at_k51": 79,
+      "uniform_run_hits_at_k128": 38,
+      "uniform_run_hits_at_k256": 54,
+      "uniform_run_hits_at_k512": 79
+    },
+    {
+      "candidate_images_per_exam": "1024",
+      "total_candidate_images": 10240,
+      "represented_runs": 118,
+      "represented_short_runs": 19,
+      "uniform_run_hits_at_k51": 25,
+      "oracle_upper_bound_runs_at_k51": 101,
+      "uniform_run_hits_at_k128": 39,
+      "uniform_run_hits_at_k256": 59,
+      "uniform_run_hits_at_k512": 86
+    },
+    {
+      "candidate_images_per_exam": "2048",
+      "total_candidate_images": 20480,
+      "represented_runs": 157,
+      "represented_short_runs": 37,
+      "uniform_run_hits_at_k51": 24,
+      "oracle_upper_bound_runs_at_k51": 129,
+      "uniform_run_hits_at_k128": 47,
+      "uniform_run_hits_at_k256": 67,
+      "uniform_run_hits_at_k512": 84
+    },
+    {
+      "candidate_images_per_exam": "4096",
+      "total_candidate_images": 40960,
+      "represented_runs": 201,
+      "represented_short_runs": 76,
+      "uniform_run_hits_at_k51": 25,
+      "oracle_upper_bound_runs_at_k51": 156,
+      "uniform_run_hits_at_k128": 47,
+      "uniform_run_hits_at_k256": 73,
+      "uniform_run_hits_at_k512": 74
+    },
+    {
+      "candidate_images_per_exam": "8192_clamped_to_source",
+      "total_candidate_images": 80543,
+      "represented_runs": 226,
+      "represented_short_runs": 101,
+      "uniform_run_hits_at_k51": 26,
+      "oracle_upper_bound_runs_at_k51": 173,
+      "uniform_run_hits_at_k128": 47,
+      "uniform_run_hits_at_k256": 74,
+      "uniform_run_hits_at_k512": 76
+    },
+    {
+      "candidate_images_per_exam": "all",
+      "total_candidate_images": 134311,
+      "represented_runs": 242,
+      "represented_short_runs": 117,
+      "uniform_run_hits_at_k51": 26,
+      "oracle_upper_bound_runs_at_k51": 184,
+      "uniform_run_hits_at_k128": 48,
+      "uniform_run_hits_at_k256": 71,
+      "uniform_run_hits_at_k512": 79
+    }
+  ],
+  "selected_exam_source_run_reachability": [
+    {
+      "exam": 23,
+      "source_runs": 28,
+      "represented_at_512": 4,
+      "represented_at_4096": 21,
+      "represented_at_all": 28
+    },
+    {
+      "exam": 25,
+      "source_runs": 53,
+      "represented_at_512": 3,
+      "represented_at_4096": 38,
+      "represented_at_all": 53
+    },
+    {
+      "exam": 29,
+      "source_runs": 107,
+      "represented_at_512": 47,
+      "represented_at_4096": 96,
+      "represented_at_all": 107
+    }
+  ],
+  "limits": {
+    "post_hoc": true,
+    "actual_additional_source_image_pixels_acquired": 0,
+    "new_model_scores_calculated": 0,
+    "clinical_lesion_sensitivity": false,
+    "patient_independent": false,
+    "author_61_80_holdout_opened": false,
+    "future_11_20_evaluation_opened": false,
+    "oracle_uses_ground_truth_labels": true,
+    "candidate_sets_are_not_nested": true
+  }
+}

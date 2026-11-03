@@ -1,0 +1,28 @@
+{
+  "all_1013_prediction_rows_second_pass_byte_identical": true,
+  "all_512_reference_sk_learn_auc_ap_and_budget_hits_matched": true,
+  "clinical_validation": false,
+  "date_utc": "2026-11-02",
+  "exact_blood_label_support": {
+    "enriched_fit": 256,
+    "label_blind_reference": 14,
+    "union": 265
+  },
+  "first_and_second_aggregate_sha256": "47fac3d2b6821eb7c8d044a074b01dd9ff9b0d73b778105aae46afe614399fff",
+  "first_and_second_prediction_csv_sha256": "285d3b14ab0f9e2cf45f4a7ca51205623e5694a17db0d55b9ba421e3023029c7",
+  "frozen_models": {
+    "expanded_continued": "2534d3b7982ee8c557cadc5ad3fcc4c7c4c557f899fa013e881d8655eab97111",
+    "original_checkpoint": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+    "original_only_continued": "ae88ccfedc53d8f419b3da8c0c01ca6b61361ef29858b6a536e25408ba99eefb"
+  },
+  "original_exam25_source_png_count_verified": 1013,
+  "original_source_zip_sha256": "968e2abfe41d3c0ea628197390672a310357f879c25fd86b0da14a30002e45ef",
+  "per_image_sha256_and_png_structure_verified": 1013,
+  "private_source_manifest_sha256": "911ec81835f7b23fb99cdfaed8c6a55595692014cfeeae66ca0ea9f59c0bf35e",
+  "protected_holdout_examinations_accessed": false,
+  "same_source_file_sha256_vs_prior_9129": 0,
+  "source_examination": 25,
+  "source_full_archive_md5_verified": false,
+  "source_original_png_bytes": 307936304,
+  "within_new_exam_exact_decoded_pixel_duplicates": 0
+}

@@ -1,0 +1,137 @@
+{
+  "archive_bytes": 31989399751,
+  "blocks": [
+    {
+      "block_id": 0,
+      "compressed_bytes": 3474498092,
+      "examinations": {
+        "21": 7478,
+        "22": 6244
+      },
+      "image_count": 13722,
+      "member_count": 13723,
+      "uncompressed_bytes": 4294798477
+    },
+    {
+      "block_id": 1,
+      "compressed_bytes": 3475743781,
+      "examinations": {
+        "22": 1285,
+        "23": 11785,
+        "24": 1225
+      },
+      "image_count": 14295,
+      "member_count": 14297,
+      "uncompressed_bytes": 4294673343
+    },
+    {
+      "block_id": 2,
+      "compressed_bytes": 3470070406,
+      "examinations": {
+        "24": 12193,
+        "25": 1762
+      },
+      "image_count": 13955,
+      "member_count": 13956,
+      "uncompressed_bytes": 4294876667
+    },
+    {
+      "block_id": 3,
+      "compressed_bytes": 3539043971,
+      "examinations": {
+        "25": 15058
+      },
+      "image_count": 15058,
+      "member_count": 15058,
+      "uncompressed_bytes": 4294966179
+    },
+    {
+      "block_id": 4,
+      "compressed_bytes": 3438758213,
+      "examinations": {
+        "25": 5657,
+        "26": 8083
+      },
+      "image_count": 13740,
+      "member_count": 13741,
+      "uncompressed_bytes": 4294773020
+    },
+    {
+      "block_id": 5,
+      "compressed_bytes": 3489830304,
+      "examinations": {
+        "26": 3758,
+        "27": 10842
+      },
+      "image_count": 14600,
+      "member_count": 14601,
+      "uncompressed_bytes": 4294926268
+    },
+    {
+      "block_id": 6,
+      "compressed_bytes": 3455329610,
+      "examinations": {
+        "27": 3954,
+        "28": 10378
+      },
+      "image_count": 14332,
+      "member_count": 14333,
+      "uncompressed_bytes": 4294716906
+    },
+    {
+      "block_id": 7,
+      "compressed_bytes": 3500524677,
+      "examinations": {
+        "28": 1638,
+        "29": 13455
+      },
+      "image_count": 15093,
+      "member_count": 15094,
+      "uncompressed_bytes": 4294884663
+    },
+    {
+      "block_id": 8,
+      "compressed_bytes": 3514256456,
+      "examinations": {
+        "29": 2563,
+        "30": 13957
+      },
+      "image_count": 16520,
+      "member_count": 16521,
+      "uncompressed_bytes": 4294804943
+    },
+    {
+      "block_id": 9,
+      "compressed_bytes": 630002169,
+      "examinations": {
+        "30": 2996
+      },
+      "image_count": 2996,
+      "member_count": 2997,
+      "uncompressed_bytes": 778262153
+    }
+  ],
+  "exam21_basename_patterns_only": {
+    "frame_<digits>.PNG": 7478
+  },
+  "full_source_checksum_verified": false,
+  "image_members_by_exam": {
+    "21": 7478,
+    "22": 7529,
+    "23": 11785,
+    "24": 13418,
+    "25": 22477,
+    "26": 11841,
+    "27": 14796,
+    "28": 12016,
+    "29": 16018,
+    "30": 16953
+  },
+  "interpretation": "Index-only candidate; compressed block sizes are not verified pixel bytes or complete source acquisition.",
+  "origin_file_id": 45258019,
+  "other_file_members": 10,
+  "pixels_read": 0,
+  "record_type": "galar-21-29-index-only-block-summary-v1",
+  "total_compression_blocks": 10,
+  "unassigned_image_members": 0
+}

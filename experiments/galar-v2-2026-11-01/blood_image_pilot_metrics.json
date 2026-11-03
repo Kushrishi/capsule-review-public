@@ -1,0 +1,289 @@
+{
+  "status": "exploratory historical development, NOT independent held-out test",
+  "dataset_manifest_sha256": "4d3e0aba675383d1d5441fca0e1b6e0d226a61c2ae30c780c842cfbfd92c40fb",
+  "fitting_examinations": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "development_examinations": [
+    9,
+    10
+  ],
+  "future_unopened_evaluation_examinations": [
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "architecture": "capsule-cnn-v1, 2-class blood vs blood-not-annotated",
+  "training": {
+    "epochs": 10,
+    "seed": 17,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "loss": "train-only inverse-frequency weighted cross entropy",
+    "selection": "minimum historical development unweighted cross entropy",
+    "best_epoch": 8,
+    "best_development_cross_entropy": 0.4053728947183117
+  },
+  "per_examination_support": {
+    "9": {
+      "positive": 0,
+      "total": 512
+    },
+    "10": {
+      "positive": 213,
+      "total": 512
+    }
+  },
+  "cnn": {
+    "aggregate": {
+      "roc_auc": 0.7261886154576442,
+      "average_precision": 0.622537869374297,
+      "positive": 213,
+      "negative": 811
+    },
+    "by_examination": {
+      "9": {
+        "roc_auc": null,
+        "average_precision": null,
+        "positive": 0,
+        "negative": 512
+      },
+      "10": {
+        "roc_auc": 0.7079152731326643,
+        "average_precision": 0.7469551464617987,
+        "positive": 213,
+        "negative": 299
+      }
+    },
+    "budgets": {
+      "5": {
+        "per_examination": {
+          "9": {
+            "frames": 512,
+            "selected": 25,
+            "blood_positive": 0,
+            "model_positive_hits": 0,
+            "model_positive_recall": null,
+            "uniform_positive_hits": 0,
+            "uniform_positive_recall": null,
+            "random_mean_positive_hits": 0.0,
+            "random_mean_positive_recall": null,
+            "model_false_positive_selections": 25
+          },
+          "10": {
+            "frames": 512,
+            "selected": 25,
+            "blood_positive": 213,
+            "model_positive_hits": 25,
+            "model_positive_recall": 0.11737089201877934,
+            "uniform_positive_hits": 9,
+            "uniform_positive_recall": 0.04225352112676056,
+            "random_mean_positive_hits": 10.56,
+            "random_mean_positive_recall": 0.049577464788732394,
+            "model_false_positive_selections": 0
+          }
+        },
+        "pooled_positive_frame_recall": 0.11737089201877934,
+        "examination_macro_positive_frame_recall": 0.11737089201877934
+      },
+      "10": {
+        "per_examination": {
+          "9": {
+            "frames": 512,
+            "selected": 51,
+            "blood_positive": 0,
+            "model_positive_hits": 0,
+            "model_positive_recall": null,
+            "uniform_positive_hits": 0,
+            "uniform_positive_recall": null,
+            "random_mean_positive_hits": 0.0,
+            "random_mean_positive_recall": null,
+            "model_false_positive_selections": 51
+          },
+          "10": {
+            "frames": 512,
+            "selected": 51,
+            "blood_positive": 213,
+            "model_positive_hits": 47,
+            "model_positive_recall": 0.22065727699530516,
+            "uniform_positive_hits": 21,
+            "uniform_positive_recall": 0.09859154929577464,
+            "random_mean_positive_hits": 21.07,
+            "random_mean_positive_recall": 0.09892018779342723,
+            "model_false_positive_selections": 4
+          }
+        },
+        "pooled_positive_frame_recall": 0.22065727699530516,
+        "examination_macro_positive_frame_recall": 0.22065727699530516
+      },
+      "25": {
+        "per_examination": {
+          "9": {
+            "frames": 512,
+            "selected": 128,
+            "blood_positive": 0,
+            "model_positive_hits": 0,
+            "model_positive_recall": null,
+            "uniform_positive_hits": 0,
+            "uniform_positive_recall": null,
+            "random_mean_positive_hits": 0.0,
+            "random_mean_positive_recall": null,
+            "model_false_positive_selections": 128
+          },
+          "10": {
+            "frames": 512,
+            "selected": 128,
+            "blood_positive": 213,
+            "model_positive_hits": 115,
+            "model_positive_recall": 0.539906103286385,
+            "uniform_positive_hits": 51,
+            "uniform_positive_recall": 0.23943661971830985,
+            "random_mean_positive_hits": 52.84,
+            "random_mean_positive_recall": 0.24807511737089202,
+            "model_false_positive_selections": 13
+          }
+        },
+        "pooled_positive_frame_recall": 0.539906103286385,
+        "examination_macro_positive_frame_recall": 0.539906103286385
+      }
+    }
+  },
+  "fixed_red_excess_comparator": {
+    "aggregate": {
+      "roc_auc": 0.5452956125573818,
+      "average_precision": 0.21220618506723532,
+      "positive": 213,
+      "negative": 811
+    },
+    "by_examination": {
+      "9": {
+        "roc_auc": null,
+        "average_precision": null,
+        "positive": 0,
+        "negative": 512
+      },
+      "10": {
+        "roc_auc": 0.6887276838287263,
+        "average_precision": 0.5308863694579602,
+        "positive": 213,
+        "negative": 299
+      }
+    },
+    "budgets": {
+      "5": {
+        "per_examination": {
+          "9": {
+            "frames": 512,
+            "selected": 25,
+            "blood_positive": 0,
+            "model_positive_hits": 0,
+            "model_positive_recall": null,
+            "uniform_positive_hits": 0,
+            "uniform_positive_recall": null,
+            "random_mean_positive_hits": 0.0,
+            "random_mean_positive_recall": null,
+            "model_false_positive_selections": 25
+          },
+          "10": {
+            "frames": 512,
+            "selected": 25,
+            "blood_positive": 213,
+            "model_positive_hits": 16,
+            "model_positive_recall": 0.07511737089201878,
+            "uniform_positive_hits": 9,
+            "uniform_positive_recall": 0.04225352112676056,
+            "random_mean_positive_hits": 10.56,
+            "random_mean_positive_recall": 0.049577464788732394,
+            "model_false_positive_selections": 9
+          }
+        },
+        "pooled_positive_frame_recall": 0.07511737089201878,
+        "examination_macro_positive_frame_recall": 0.07511737089201878
+      },
+      "10": {
+        "per_examination": {
+          "9": {
+            "frames": 512,
+            "selected": 51,
+            "blood_positive": 0,
+            "model_positive_hits": 0,
+            "model_positive_recall": null,
+            "uniform_positive_hits": 0,
+            "uniform_positive_recall": null,
+            "random_mean_positive_hits": 0.0,
+            "random_mean_positive_recall": null,
+            "model_false_positive_selections": 51
+          },
+          "10": {
+            "frames": 512,
+            "selected": 51,
+            "blood_positive": 213,
+            "model_positive_hits": 26,
+            "model_positive_recall": 0.12206572769953052,
+            "uniform_positive_hits": 21,
+            "uniform_positive_recall": 0.09859154929577464,
+            "random_mean_positive_hits": 21.07,
+            "random_mean_positive_recall": 0.09892018779342723,
+            "model_false_positive_selections": 25
+          }
+        },
+        "pooled_positive_frame_recall": 0.12206572769953052,
+        "examination_macro_positive_frame_recall": 0.12206572769953052
+      },
+      "25": {
+        "per_examination": {
+          "9": {
+            "frames": 512,
+            "selected": 128,
+            "blood_positive": 0,
+            "model_positive_hits": 0,
+            "model_positive_recall": null,
+            "uniform_positive_hits": 0,
+            "uniform_positive_recall": null,
+            "random_mean_positive_hits": 0.0,
+            "random_mean_positive_recall": null,
+            "model_false_positive_selections": 128
+          },
+          "10": {
+            "frames": 512,
+            "selected": 128,
+            "blood_positive": 213,
+            "model_positive_hits": 64,
+            "model_positive_recall": 0.3004694835680751,
+            "uniform_positive_hits": 51,
+            "uniform_positive_recall": 0.23943661971830985,
+            "random_mean_positive_hits": 52.84,
+            "random_mean_positive_recall": 0.24807511737089202,
+            "model_false_positive_selections": 64
+          }
+        },
+        "pooled_positive_frame_recall": 0.3004694835680751,
+        "examination_macro_positive_frame_recall": 0.3004694835680751
+      }
+    }
+  },
+  "limitations": [
+    "Sparse selection of 512 source frames per examination, not dense sequences.",
+    "Historical development exams were previously inspected and used for checkpoint selection.",
+    "Only one development examination has blood-positive frames.",
+    "Most fitting positive frames come from one examination.",
+    "Frame scores are not calibrated clinical probabilities.",
+    "Blood annotation is distinct from active bleeding, diagnosis or adjudicated lesions.",
+    "Patient identity is unavailable; examination split does not prove patient independence."
+  ],
+  "weights_sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3"
+}

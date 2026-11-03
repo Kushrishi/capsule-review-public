@@ -1,0 +1,106 @@
+{
+  "study": "Capsule Review — sparse-reference annotation-run coverage ceiling and nonblood workload audit",
+  "version": "1.0",
+  "created": "2026-11-02",
+  "interpretation": "Post-hoc descriptive audit of already inspected Galar examinations. This is NOT blinded preregistration or clinical event/lesion sensitivity.",
+  "scientific_question": "At fixed budgets, does a ranking hit distinct stretches of blood-positive source annotations, or repeatedly select images from the same stretch? Even at 100% review of the saved 512 reference images, how many of the original source's annotated positive stretches are unrepresented?",
+  "data_source": {
+    "corrected_labels_zip": "Official Galar v2 December 2025 corrected labels (Le Floch et al.; CC BY 4.0), file ID 60383963",
+    "sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "reference_image_score_sources": [
+      {
+        "exams": [
+          9,
+          10
+        ],
+        "saved_csv_sha256": "f921194639a99e206c9b24e3e896f25ff1a409669024f87c4b8b42767c70b36b",
+        "role": "historical development; used for original model checkpoint selection; not independent"
+      },
+      {
+        "exams": [
+          21,
+          23,
+          30
+        ],
+        "saved_csv_sha256": "caa85f950ac0912a3a89a3a93aad6c4e24ba1dc186a52e51456bf843e8111812",
+        "role": "exam-selected fitting-candidate transfer; original checkpoint scores only"
+      },
+      {
+        "exams": [
+          29
+        ],
+        "saved_csv_sha256": "f27a410a75cdf51bc726b181083fee3f89e9f71f0bed567c04223c1aebf51e79",
+        "role": "model-expansion examination previously evaluated"
+      },
+      {
+        "exams": [
+          25
+        ],
+        "saved_csv_sha256": "285d3b14ab0f9e2cf45f4a7ca51205623e5694a17db0d55b9ba421e3023029c7",
+        "role": "known negative-transfer examination"
+      },
+      {
+        "exams": [
+          27
+        ],
+        "saved_csv_sha256": "4bd6bb1f605c10c1e1749f3c9d69238951de866c0b72009326923644ca927fe8",
+        "role": "known strong-transfer examination"
+      }
+    ],
+    "image_scores": "Previously saved and source-image verified original CNN predictions; for exams 25/27/29 also fixed original-only and expanded continued checkpoint scores, no new inference.",
+    "reference_cohort": "512 uniform label-blind preselected source-image positions per examination (NOT enriched-only frames), checked for duplicates and equality with corrected source blood label and original frame IDs",
+    "examinations": [
+      9,
+      10,
+      21,
+      23,
+      25,
+      27,
+      29,
+      30
+    ],
+    "unopened_forbidden": "11–20 and original authors' 61–80 holdout"
+  },
+  "run_definition": {
+    "positive_label": "Exactly blood=1; blood=0 does not mean clinically normal, unknown is not negative",
+    "source_order": "Original corrected official label rows in ascending numeric frame",
+    "adjacency": "Two blood-positive rows share a source annotation run iff consecutive in the corrected CSV and original source frame indices differ by exactly 5. Break on 0/blank and on missing/gapped source rows. Check modal nonlabel stride 5 with >95% support on allowed exams before using this rule.",
+    "units": "Contiguous positive annotation runs. NOT independently adjudicated lesions, pathology events or full contiguous video.",
+    "strata": "1–5, 6–25, 26+ positive annotated rows per run"
+  },
+  "comparison": {
+    "measured_on": "Only each examination's fixed 512-reference population; enriched-only images excluded completely",
+    "fixed_budgets_percent": [
+      5,
+      10,
+      25,
+      50,
+      75,
+      100
+    ],
+    "k_rule": "floor(512*budget_percent/100) selected images for all methods",
+    "rank_ties": "descending exact saved score then ascending source frame index",
+    "uniform_positions": "For j=0..k-1, floor((2*j+1)*512/(2*k)) in ascending source-frame order",
+    "methods": "Original compact blood CNN, unchanged original fixed red-excess comparator, uniform sampling. Original-only and expanded continued CNNs only on examination IDs 25, 27 and 29, which were held out from those continued models' fitting.",
+    "primary_outcomes": "For each exam/method/budget, number of FULL ORIGINAL-ANNOTATION blood-positive runs intersected by >=1 selected reference image, total source positive runs, run recall or null when no source-positive runs, and reference-only 100%-review ceiling.",
+    "secondary_outcomes": "Number of selected sampled frames with blood=1 versus blood=0, source-run coverage by fixed run-size strata, count of distinct blood-positive original source positions in the 512 reference cohort.",
+    "negative_exam_audit": "For source annotation blood-negative exam 9 report number of reference frames selected per budget and uncalibrated original CNN-score count above 0.1, 0.5, 0.9. These are NOT diagnostic false positives or calibrated operating thresholds.",
+    "score_thresholds": [
+      0.1,
+      0.5,
+      0.9
+    ],
+    "zero_positive_exams": "Source-positive-run recall undefined/null, not 0% or 100%. Keep selected-image workload.",
+    "selection_policy": "No new model selection, fitting, score modification, optimization, source-pixel access, or reassignment of protected examination roles after seeing run outcomes. Report every exam, every run-length stratum and every fixed budget."
+  },
+  "limits": [
+    "The 512 reference images are themselves sparse; the 100% ceiling refers to inspecting all 512 sampled reference images, not the full examination.",
+    "Original source may include more images than the corrected-labelled positions; only annotated source rows are represented in run denominators.",
+    "Missing true clinical lesion identity, patient identity, capture times and complete video sequence.",
+    "Several original models were previously selected using historical 9–10; earlier outcomes for other examinations already inspected, so no independent generalization claims.",
+    "Exam 9 has no source blood annotation positives, but may contain other pathology; do not call every selection a false clinical diagnosis.",
+    "Review-budget percentages are experiment operating points, not product constraints."
+  ],
+  "private_data": "Original score rows and source frame IDs remain in private Capsule Review Library. Git may contain only the protocol, verified code, synthetic tests, and nonidentifying aggregate examination-level counts.",
+  "clinical_validation": false
+}

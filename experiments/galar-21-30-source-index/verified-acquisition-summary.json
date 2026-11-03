@@ -1,0 +1,59 @@
+{
+  "record_type": "galar-fitting-image-acquisition-verification-v1",
+  "source": "Galar v2 (Le Floch et al.); source image archive official Figshare file 45258019; corrected labels file 60383963; CC BY 4.0",
+  "original_archive_bytes": 31989399751,
+  "original_archive_md5_expected_not_verified": "dedad47ee55c83a4b991ca60d26fb6ee",
+  "corrected_label_zip_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+  "private_selection_sha256": "1aedfcdecbb270687a660acd50f312803ed0884308ea9a0973102aac242409f1",
+  "image_identity_verification": "All retained original PNG bytes independently rehashed against private per-image manifests, decoded and ZIP CRC checked",
+  "examination_unit": "distinct examinations; patient independence unknown",
+  "role": "fitting-candidate images only; not a clinical benchmark or independent holdout",
+  "exam_21": {
+    "source_block_id": 0,
+    "source_block_offset": 32,
+    "source_compressed_bytes_transferred": 3474498092,
+    "source_block_sha256": "c678458d4ef075de1215844dd78079e2e48e9fb894140c7fa5cc1708307bf7fd",
+    "verified_png_images": 993,
+    "explicit_blood_positive_images": 13,
+    "enriched_fit_candidates": 512,
+    "uniform_reference_candidates": 512,
+    "sampled_frame_overlap": 31,
+    "saved_png_bytes": 312847458,
+    "inner_source_zip_sha256": "abc02cfa8e28020da2994b897c2e608db83d0d6c93131342afa8bca985fe5659",
+    "private_manifest_sha256": "3a5a4640a792237a80bd868b57cb78fd672aa9a7540a574e60e13ec01b4f654d",
+    "retained_github_artifact_outer_zip_sha256": "aa18ee3ba5ef98d0ac139fa2a76d033136f95e6686c7645389006c78e6d8c901",
+    "source_ci_run": "https://github.com/Kushrishi/capsule-review/actions/runs/41394331369"
+  },
+  "exam_23": {
+    "source_block_id": 1,
+    "source_block_offset": 3474498124,
+    "source_compressed_bytes_transferred": 3475743781,
+    "source_block_sha256": "b5086f018b7e88c57db7562af624c468796a7b1e812101d07236c184131b08f6",
+    "verified_png_images": 1001,
+    "explicit_blood_positive_images": 135,
+    "enriched_fit_candidates": 512,
+    "uniform_reference_candidates": 512,
+    "sampled_frame_overlap": 23,
+    "saved_png_bytes": 303840909,
+    "inner_source_zip_sha256": "4154c208752a095ecbbeea03380888834c312834989eab863589b9a38ef28b1b",
+    "private_manifest_sha256": "fe3716c73bd19306d96127a611fa189e3c076a0274b7282092fd57bd8b5d7788",
+    "retained_github_artifact_outer_zip_sha256": "44d2f6b6e91cb4f0df0243a8a0dc8560936e787f80b42c8cf1252a6d862be6f8",
+    "source_ci_run": "https://github.com/Kushrishi/capsule-review/actions/runs/41456632451"
+  },
+  "combined": {
+    "unique_png_images": 1994,
+    "explicit_blood_positive_images": 148,
+    "total_saved_png_bytes": 616688367,
+    "new_examinations": 2,
+    "original_source_compressed_bytes_transferred": 6950241873
+  },
+  "private_storage": "Capsule Review Library / Galar 21-30 Images; source images, individual frame IDs and original labels not committed",
+  "future_test_untouched": "Exams 11–20 and authors' 61–80 holdout must not be accessed in this acquisition flow",
+  "limitations": [
+    "Source archive full MD5 cannot be verified from only two compressed blocks.",
+    "Inclusion in fitting/enriched source sample is conditioned on blood label and cannot estimate clinical prevalence or model performance.",
+    "Two distinct examination IDs do not establish independent patients.",
+    "The fixed 8,075-image plan remains incomplete; future studies 22 and 24–30 not yet acquired.",
+    "No model fitting, diagnostic test, lesion sensitivity or time savings is claimed."
+  ]
+}

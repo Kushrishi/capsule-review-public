@@ -1,0 +1,126 @@
+{
+  "study": "Capsule Review — descriptive appearance and blood-rank failure audit on previously evaluated fitting studies",
+  "version": "1.0",
+  "freeze_role": "Committed before any new quantitative appearance feature extraction in this study; previous model scores and the study-level success/failure outcomes have ALREADY been inspected. This is post-hoc failure characterization, NOT blinded preregistration.",
+  "question": "Do simple prespecified image appearance measurements differ within blood-positive versus blood-negative annotated reference frames across Galar exams 25, 27 and 29, helping describe why unchanged CNN rankings vary so much?",
+  "population": {
+    "role": "Exactly 512 prior label-blind reference frame positions per examination, no pathology-enriched-only source positions",
+    "exams": [
+      25,
+      27,
+      29
+    ],
+    "reference_images_per_exam": 512,
+    "positive_support_by_exam": {
+      "25": 14,
+      "27": 26,
+      "29": 122
+    },
+    "selection_sha256": "1aedfcdecbb270687a660acd50f312803ed0884308ea9a0973102aac242409f1",
+    "patient_independence_known": false
+  },
+  "source": {
+    "dataset": "Galar v2 corrected official PNGs from original Figshare file 45258019; Le Floch et al., CC BY 4.0",
+    "private_images_and_scores": [
+      {
+        "exam": 25,
+        "inner_original_zip_sha256": "968e2abfe41d3c0ea628197390672a310357f879c25fd86b0da14a30002e45ef",
+        "private_manifest_sha256": "911ec81835f7b23fb99cdfaed8c6a55595692014cfeeae66ca0ea9f59c0bf35e",
+        "private_scores_sha256": "285d3b14ab0f9e2cf45f4a7ca51205623e5694a17db0d55b9ba421e3023029c7",
+        "union_count": 1013
+      },
+      {
+        "exam": 27,
+        "inner_original_zip_sha256": "13b9b087686985d5e8521df727534bef53eca4d050abf117e459e4229fdec093",
+        "private_manifest_sha256": "8d1ac2f533dce6f33ef56ba1136d8187ac96379c790137c88b69a48d3007244c",
+        "private_scores_sha256": "4bd6bb1f605c10c1e1749f3c9d69238951de866c0b72009326923644ca927fe8",
+        "union_count": 1005
+      },
+      {
+        "exam": 29,
+        "inner_original_zip_sha256": "124f48bf18dc14a63241c8e2c03918eefecb89ddc465c2cacaa2151d97045be5",
+        "private_manifest_sha256": "d047d1eb7cc6f1f2cc740624bbd61199589abc2ae7ccddadc0876f8b0a4e7cae",
+        "private_scores_sha256": "f27a410a75cdf51bc726b181083fee3f89e9f71f0bed567c04223c1aebf51e79",
+        "union_count": 1009
+      }
+    ],
+    "per_image_alignment": "Exact (exam,original source_frame, blood_label, reference_uniform, original_png_sha256) equality between private manifest and prior saved predictions before extracting features. Any mismatch aborts."
+  },
+  "image_transform": {
+    "source": "The ORIGINAL verified PNG, EXIF-transposed and RGB-converted; preserve raw image dimensions",
+    "padded": "Pillow ImageOps.pad to 96×96, method PIL.Image.Resampling.BILINEAR, black fill, exactly as original CNN input preprocessing",
+    "no_manual_segmentation": true
+  },
+  "predefined_appearance_features": [
+    {
+      "name": "mean_luminance",
+      "definition": "mean of pixel luminance 0.2126R+0.7152G+0.0722B /255 on 96×96 padded RGB"
+    },
+    {
+      "name": "mean_saturation",
+      "definition": "mean (max(R,G,B)-min(R,G,B))/max(R,G,B) with zero when max channel is 0, over padded RGB"
+    },
+    {
+      "name": "mean_positive_red_excess",
+      "definition": "mean max(R-max(G,B),0)/255 over padded RGB; separate from historical central-crop red-excess comparator"
+    },
+    {
+      "name": "high_luminance_fraction",
+      "definition": "fraction of padded RGB luminance >=0.95"
+    },
+    {
+      "name": "low_luminance_fraction",
+      "definition": "fraction of padded RGB luminance <=0.10, includes letterboxing"
+    },
+    {
+      "name": "mean_edge_difference",
+      "definition": "mean of horizontal and vertical absolute luminance differences on 96×96 padded RGB, normalized to [0,1]"
+    },
+    {
+      "name": "source_width_div_height",
+      "definition": "original EXIF-oriented RGB source-image width/height"
+    },
+    {
+      "name": "padded_black_fraction",
+      "definition": "fraction of 96×96 padded image pixels with all RGB channels exactly zero"
+    }
+  ],
+  "reference_model_scores": {
+    "names": [
+      "original_checkpoint",
+      "original_only_continued",
+      "expanded_continued",
+      "red_excess"
+    ],
+    "checkpoints": {
+      "original_checkpoint": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+      "original_only_continued": "ae88ccfedc53d8f419b3da8c0c01ca6b61361ef29858b6a536e25408ba99eefb",
+      "expanded_continued": "2534d3b7982ee8c557cadc5ad3fcc4c7c4c557f899fa013e881d8655eab97111"
+    },
+    "no_new_inference_or_fitting": true
+  },
+  "reporting": {
+    "unit": "Individual reference-frame descriptives stratified by examination and blood label; explicitly note within-run correlation",
+    "statistics": [
+      "n",
+      "median",
+      "25th percentile",
+      "75th percentile",
+      "mean"
+    ],
+    "summary": "Report all eight fixed appearance features and all four fixed model scores for positive and negative reference frames in each of three exams; no feature/model selection.",
+    "no_significance_testing": true,
+    "no_auc_for_cherry_picked_features": true,
+    "no_claim_of_causal_mechanism": true,
+    "private": "Original images, exact frame identities, individual features/labels/scores and contact sheets remain in Capsule Review Library.",
+    "github": "Only protocol, reproducibility script, synthetic tests and nonidentifying aggregate report; no raw image, per-image identity or labels."
+  },
+  "protected_holdouts": "Galar 11–20 and authors' 61–80 remain unopened. This study uses ONLY previously examined training-pool image samples from 25, 27, 29.",
+  "limits": [
+    "Blood labels are source annotations, not adjudicated lesions.",
+    "No clinician has reviewed the candidate reasons for errors.",
+    "These features are not an independent diagnostic model.",
+    "Appearance differences cannot establish a causal mechanism or guarantee any augmentation will improve ranking.",
+    "Three examinations, not confirmed distinct patients; case-support 14,26,122 blood-positive images."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "checked_at_utc": "2026-11-02T02:47:08.119450+00:00",
+  "result": {
+    "archive_bytes": 471955454,
+    "folder_name_structure_sha256": "74b2f7f2451bfe3606f407d3de229992b2d5405e879a77143fca077cdbbe62c5",
+    "frame_labels_verified": false,
+    "groups": {
+      "set_1_nonsequential_candidate": {
+        "candidate_images": 6590,
+        "candidate_nonimages": 0,
+        "compressed_bytes": 395122314,
+        "encrypted_files": 6590,
+        "file_count": 6590,
+        "likely_masks_by_path": 3295,
+        "uncompressed_bytes": 454921188
+      },
+      "set_2_sequential_candidate": {
+        "candidate_images": 600,
+        "candidate_nonimages": 0,
+        "compressed_bytes": 75733598,
+        "encrypted_files": 600,
+        "file_count": 600,
+        "likely_masks_by_path": 0,
+        "uncompressed_bytes": 75744545
+      }
+    },
+    "index_bytes_transferred": 736869,
+    "index_request_count": 4,
+    "note": "Index only: exact frame alignment, lesion truth, permissions for any extraction, and source consistency require independent verification",
+    "original_cumulative_upper_bound_bytes": 412500050,
+    "ready_for_pathology_evaluation": false,
+    "remaining_after_index_bytes": 123633993,
+    "resource": "https://rdm.inesctec.pt/dataset/4b80534a-a8f7-472e-8ff7-f35d046c0f62/resource/e060aa66-fc99-4bf0-be59-92355d7ef73e/download/dataset.zip",
+    "source": "https://rdm.inesctec.pt/dataset/nis-2018-003",
+    "source_identity": "archive size and ZIP directory only; full file checksum not verified",
+    "tentatively_within_remaining_budget": false,
+    "total_authorized_source_transfer_bytes": 536870912,
+    "total_index_files": 7190
+  },
+  "status": "index_verified"
+}

@@ -1,0 +1,48 @@
+name: Research pretrained weights handoff
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  official-weights:
+    # Private source acquisition and artifacts must never execute in a public repository.
+    if: ${{ github.event.repository.private == true }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Download pinned official torchvision reference weights (no medical data)
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, urllib.request
+          url='https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth'
+          path=Path('mobilenet_v3_small-047dcff4.pth')
+          hash=hashlib.sha256()
+          size=0
+          req=urllib.request.Request(url,headers={'User-Agent':'CapsuleReviewResearch/0.3'})
+          with urllib.request.urlopen(req,timeout=60) as response, path.open('xb') as out:
+              if response.status!=200 or response.url!=url:
+                  raise RuntimeError('Official weight URL unexpected response or redirect')
+              while True:
+                  buf=response.read(1024*1024)
+                  if not buf: break
+                  size+=len(buf)
+                  if size>20*1024*1024: raise RuntimeError('Weight exceeds 20 MiB cap')
+                  hash.update(buf)
+                  out.write(buf)
+          sha=hash.hexdigest()
+          if not sha.startswith('047dcff4'):
+              raise RuntimeError('Pretrained weight digest does not match published hash prefix')
+          record={'source':url,'sha256':sha,'bytes':size,'purpose':'ImageNet feature-transfer research; NOT a medical model'}
+          Path('weight-provenance.json').write_text(json.dumps(record,indent=2))
+          print(json.dumps(record))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: official-mobilenet-weights
+          path: |
+            mobilenet_v3_small-047dcff4.pth
+            weight-provenance.json
+          retention-days: 7

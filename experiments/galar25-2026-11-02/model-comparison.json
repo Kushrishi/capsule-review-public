@@ -1,0 +1,208 @@
+{
+  "clinical_validity": false,
+  "enriched_union_descriptive_only": {
+    "blood_positive": 265,
+    "n": 1013,
+    "rank_metrics": {
+      "expanded_continued": {
+        "average_precision": 0.33350579070625275,
+        "negative": 748,
+        "positive": 265,
+        "roc_auc": 0.6049742710120064
+      },
+      "original_checkpoint": {
+        "average_precision": 0.3890016107848609,
+        "negative": 748,
+        "positive": 265,
+        "roc_auc": 0.6932347896276886
+      },
+      "original_only_continued": {
+        "average_precision": 0.43780647722159133,
+        "negative": 748,
+        "positive": 265,
+        "roc_auc": 0.6871859549994945
+      },
+      "red_excess": {
+        "average_precision": 0.29461019088326135,
+        "negative": 748,
+        "positive": 265,
+        "roc_auc": 0.5235092321662802
+      }
+    },
+    "review_budgets": {
+      "10": {
+        "blood_positive_images_found": {
+          "expanded_continued": 44,
+          "original_checkpoint": 41,
+          "original_only_continued": 58,
+          "red_excess": 30,
+          "uniform": 27
+        },
+        "selected": 101
+      },
+      "100": {
+        "blood_positive_images_found": {
+          "expanded_continued": 265,
+          "original_checkpoint": 265,
+          "original_only_continued": 265,
+          "red_excess": 265,
+          "uniform": 265
+        },
+        "selected": 1013
+      },
+      "25": {
+        "blood_positive_images_found": {
+          "expanded_continued": 80,
+          "original_checkpoint": 114,
+          "original_only_continued": 134,
+          "red_excess": 72,
+          "uniform": 68
+        },
+        "selected": 253
+      },
+      "5": {
+        "blood_positive_images_found": {
+          "expanded_continued": 25,
+          "original_checkpoint": 16,
+          "original_only_continued": 20,
+          "red_excess": 23,
+          "uniform": 14
+        },
+        "selected": 50
+      },
+      "50": {
+        "blood_positive_images_found": {
+          "expanded_continued": 153,
+          "original_checkpoint": 199,
+          "original_only_continued": 191,
+          "red_excess": 134,
+          "uniform": 135
+        },
+        "selected": 506
+      },
+      "75": {
+        "blood_positive_images_found": {
+          "expanded_continued": 233,
+          "original_checkpoint": 230,
+          "original_only_continued": 222,
+          "red_excess": 206,
+          "uniform": 198
+        },
+        "selected": 759
+      }
+    }
+  },
+  "examination": 25,
+  "limits": [
+    "Only one examination, selected with known fitting-pool label counts.",
+    "Fourteen blood-positive uniformly sampled frames produce unstable image-level AUC/AP.",
+    "Enriched union deliberately overrepresents blood-positive frames.",
+    "Sparse image labels and runs are not independent lesions or consecutive video sensitivity.",
+    "No model tuning or default-model promotion from this comparison.",
+    "Examinations 11-20 and the author holdout 61-80 are not accessed."
+  ],
+  "model_checkpoints_sha256": {
+    "expanded_continued": "2534d3b7982ee8c557cadc5ad3fcc4c7c4c557f899fa013e881d8655eab97111",
+    "original_checkpoint": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+    "original_only_continued": "ae88ccfedc53d8f419b3da8c0c01ca6b61361ef29858b6a536e25408ba99eefb"
+  },
+  "model_selection_from_evaluation": false,
+  "patient_independence_confirmed": false,
+  "reference_cohort": {
+    "blood_positive": 14,
+    "n": 512,
+    "rank_metrics": {
+      "expanded_continued": {
+        "average_precision": 0.024221712034992963,
+        "negative": 498,
+        "positive": 14,
+        "roc_auc": 0.4291451520367183
+      },
+      "original_checkpoint": {
+        "average_precision": 0.022098069351039404,
+        "negative": 498,
+        "positive": 14,
+        "roc_auc": 0.30450372920252433
+      },
+      "original_only_continued": {
+        "average_precision": 0.024853385633149025,
+        "negative": 498,
+        "positive": 14,
+        "roc_auc": 0.23006310958118287
+      },
+      "red_excess": {
+        "average_precision": 0.016456657653739423,
+        "negative": 498,
+        "positive": 14,
+        "roc_auc": 0.16738382099827864
+      }
+    },
+    "review_budgets": {
+      "10": {
+        "blood_positive_images_found": {
+          "expanded_continued": 0,
+          "original_checkpoint": 0,
+          "original_only_continued": 2,
+          "red_excess": 0,
+          "uniform": 1
+        },
+        "selected": 51
+      },
+      "100": {
+        "blood_positive_images_found": {
+          "expanded_continued": 14,
+          "original_checkpoint": 14,
+          "original_only_continued": 14,
+          "red_excess": 14,
+          "uniform": 14
+        },
+        "selected": 512
+      },
+      "25": {
+        "blood_positive_images_found": {
+          "expanded_continued": 2,
+          "original_checkpoint": 3,
+          "original_only_continued": 2,
+          "red_excess": 0,
+          "uniform": 4
+        },
+        "selected": 128
+      },
+      "5": {
+        "blood_positive_images_found": {
+          "expanded_continued": 0,
+          "original_checkpoint": 0,
+          "original_only_continued": 2,
+          "red_excess": 0,
+          "uniform": 1
+        },
+        "selected": 25
+      },
+      "50": {
+        "blood_positive_images_found": {
+          "expanded_continued": 3,
+          "original_checkpoint": 3,
+          "original_only_continued": 3,
+          "red_excess": 1,
+          "uniform": 6
+        },
+        "selected": 256
+      },
+      "75": {
+        "blood_positive_images_found": {
+          "expanded_continued": 14,
+          "original_checkpoint": 6,
+          "original_only_continued": 4,
+          "red_excess": 6,
+          "uniform": 11
+        },
+        "selected": 384
+      }
+    }
+  },
+  "role": "Exploratory fitting-pool transfer, NOT blinded independent clinical validation",
+  "study": "Galar25 fixed original/continued/expanded blood-CNN transfer to a previously selected fitting examination",
+  "training_changed": false,
+  "verified_source_manifest_sha256": "911ec81835f7b23fb99cdfaed8c6a55595692014cfeeae66ca0ea9f59c0bf35e",
+  "verified_source_package_sha256": "968e2abfe41d3c0ea628197390672a310357f879c25fd86b0da14a30002e45ef"
+}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Capsule Review</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#viewer">Skip to viewer</a>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">C</span><div><strong>Capsule Review</strong><span>Research workspace</span></div></div>
+    <div class="header-actions"><span class="local-badge"><i></i>Local workspace</span><button id="helpBtn" class="quiet">Help</button><button id="importBtn" class="primary">Import frames</button></div>
+  </header>
+  <div id="notice" class="notice" role="alert" hidden></div>
+  <div class="workspace">
+    <aside class="library" aria-label="Examinations">
+      <div class="section-title"><h2>Examinations</h2><span id="studyCount">0</span></div>
+      <div id="studies" class="study-list"></div>
+      <div class="library-bottom"><p>Original images, reference labels and reviewer notes stay separate.</p><button id="demoBtn" class="quiet">Open test sequence</button><span class="version" id="version"></span></div>
+    </aside>
+    <main id="viewer" tabindex="-1">
+      <section id="emptyState" class="empty-state">
+        <div class="empty-symbol" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="eyebrow">START A REVIEW</p><h1>Your examination.<br>Your notes.</h1>
+        <p>Browse an image sequence, bookmark useful frames and export an illustrated review. Nothing is uploaded to a cloud service.</p>
+        <button id="emptyImportBtn" class="primary">Import an image sequence</button>
+        <p class="empty-foot">PNG, JPEG and WebP · Use de-identified research data only</p>
+        <div class="honest-status"><strong>No model is connected.</strong><span>This version provides the review workflow. It does not detect disease or generate clinical findings.</span></div>
+      </section>
+      <section id="examination" hidden>
+        <div class="exam-heading"><div><p class="eyebrow" id="sourceText"></p><h1 id="studyTitle"></h1></div><button id="exportBtn" class="outline">Export review</button></div>
+        <div id="syntheticBanner" class="synthetic-banner" hidden>Synthetic test sequence · not clinical data</div>
+        <div class="viewer-meta"><span id="frameCounter"></span><span id="sourceIndex"></span><button class="quiet compact" id="zoomBtn" aria-pressed="false">Fit / 2×</button></div>
+        <div class="image-stage" id="imageStage"><img id="frameImage" alt="Current examination frame"><span class="image-loading" id="imageLoading" hidden>Loading frame…</span></div>
+        <div class="playback">
+          <div class="play-controls"><button id="prevBtn" class="icon-button" aria-label="Previous frame">←</button><button id="playBtn" class="play-button" aria-label="Play frames">Play</button><button id="nextBtn" class="icon-button" aria-label="Next frame">→</button><label class="speed-label">Preview speed <select id="speed"><option value="1">1 frame/s</option><option value="3" selected>3 frames/s</option><option value="6">6 frames/s</option></select></label></div>
+          <label class="jump-label">Go to <input id="jumpInput" type="number" min="1" value="1" aria-label="Go to frame"></label>
+        </div>
+        <label class="sr-only" for="scrubber">Frame position</label><input id="scrubber" class="scrubber" type="range" min="0" max="0" value="0">
+        <div class="timeline-caption"><span>Sequence position</span><span>Preview speed is not acquisition timing</span></div>
+        <p id="sourceContinuity" class="source-continuity" role="status"></p>
+        <p id="sourceStep" class="source-step" hidden></p>
+        <div id="filmstrip" class="filmstrip" aria-label="Nearby frames"></div>
+        <p class="frame-filename" id="frameFilename"></p>
+      </section>
+    </main>
+    <aside class="review-panel" aria-label="Review notes">
+      <div class="section-title"><h2>Frame review</h2><span id="saveStatus" role="status">No frame</span></div>
+      <label class="bookmark-control"><input id="bookmark" type="checkbox" disabled><span>Bookmark this frame</span></label>
+      <label class="field-label" for="reviewLabel">Reviewer label <span>optional</span></label><input id="reviewLabel" maxlength="120" placeholder="Your description" disabled>
+      <label class="field-label" for="reviewNote">Notes</label><textarea id="reviewNote" maxlength="8000" rows="5" placeholder="Record what you want to revisit." disabled></textarea>
+      <button id="saveBtn" class="primary full" disabled>Save review</button>
+      <p class="panel-hint">Saved locally. Navigation saves your draft first.</p>
+      <section class="predictions"><div class="section-title small"><h2>Model suggestions</h2><button id="predictionImportBtn" class="quiet compact" disabled>Import</button></div><div id="localModelControls" hidden><label class="field-label" for="localModel">Local anatomy model</label><select id="localModel"></select><button id="runModelBtn" class="outline full" disabled>Run local model</button><p class="panel-hint">Region classification only—not lesion detection.</p></div><div id="predictions"><p class="muted">No model connected. No predictions are being generated.</p></div></section>
+      <details id="referencePanel"><summary>Dataset reference labels</summary><p class="panel-hint">Source annotations, not model predictions. Hidden until you open this section.</p><div id="referenceLabels">No frame selected.</div></details>
+      <section class="saved-section"><div class="section-title small"><h2>Saved frames</h2><span id="savedCount">0</span></div><div id="savedFrames"><p class="muted">Bookmarks and notes will appear here.</p></div></section>
+      <p class="research-note">Research use only · Not a diagnostic system</p>
+    </aside>
+  </div>
+  <dialog id="importDialog"><form id="importForm">
+    <div class="dialog-heading"><h2>Import an examination</h2><button type="button" class="quiet" data-close="importDialog" aria-label="Close import">×</button></div>
+    <p class="muted">Images are copied to your local workspace. Use de-identified data you are permitted to process.</p>
+    <label class="field-label" for="importTitle">Examination title</label><input id="importTitle" name="title" maxlength="120" required placeholder="For example: Galar 001 — development sample">
+    <label class="field-label" for="importSource">Source / attribution</label><input id="importSource" name="source" maxlength="300" placeholder="Dataset, version and attribution">
+    <div class="file-buttons"><button type="button" id="chooseFilesBtn" class="outline">Choose images</button><button type="button" id="chooseFolderBtn" class="outline">Choose folder</button></div>
+    <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" multiple hidden><input id="folderInput" type="file" webkitdirectory multiple hidden>
+    <p id="fileSelection" class="selection-note">No images selected.</p>
+    <p class="panel-hint">Natural filename order. Browser import: up to 1,000 images / 512 MiB. For larger sequences or Galar annotation CSVs, use the command-line importer.</p>
+    <div class="dialog-actions"><button type="button" class="quiet" data-close="importDialog">Cancel</button><button id="submitImport" type="submit" class="primary" disabled>Import locally</button></div>
+    <p id="importError" class="error-text" role="alert"></p>
+  </form></dialog>
+  <dialog id="helpDialog"><div class="dialog-heading"><h2>Using Capsule Review</h2><button class="quiet" data-close="helpDialog" aria-label="Close help">×</button></div>
+    <p>Import PNG, JPEG or WebP frames. Numbered filenames such as <code>frame_000001.PNG</code> keep their source index. Other filenames use natural sorting.</p>
+    <dl class="shortcut-list"><dt>← / →</dt><dd>Previous / next frame</dd><dt>B</dt><dd>Toggle bookmark</dd><dt>Space</dt><dd>Play / pause preview</dd><dt>Ctrl / ⌘ + S</dt><dd>Save current review</dd></dl>
+    <p>Export includes bookmarked frames and frames with saved notes or labels, with an illustrated HTML file and JSON record. It is not a complete-examination report.</p>
+    <p>Reference labels are separate from model output. Train and install an optional local baseline to run region classification. No medically trained weights are bundled. Prediction scores are not assumed to be calibrated probabilities.</p>
+    <p class="panel-hint">This local app has no user authentication. Keep it on localhost; do not expose it to the internet. Workspace files are not encrypted.</p>
+  </dialog>
+  <input id="predictionFile" type="file" accept="application/json,.json" hidden>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "study": "Capsule Review — additional two negative-label fitting examinations in fixed pooled compact-CNN examination CV",
+  "version": "1.0",
+  "date": "2026-11-02",
+  "status": "Frozen before optimization, after correcting acquisition provenance. Exploratory, previously examined model outcomes and fitting exam labels are known; not new independent or clinical evaluation.",
+  "question": "Does including source-verified 512 images from each additional blood-negative-annotated fitting examination 22 and 24 improve cross-examination blood-label ranking compared with the identical previously frozen 14-examination pooled weighted CNN fitted for exactly 384 optimizer steps?",
+  "source": {
+    "old_fitting_examinations": [1, 2, 3, 4, 5, 6, 7, 8, 21, 23, 25, 27, 29, 30],
+    "new_training_only_examinations": [22, 24],
+    "all_fitting_examinations": [1, 2, 3, 4, 5, 6, 7, 8, 21, 22, 23, 24, 25, 27, 29, 30],
+    "expected_source_png_count": 11147,
+    "expected_blood_positive_source_images": 1663,
+    "new_exam_reference_positions_each": 512,
+    "new_exam_blood_positive_annotations": 0,
+    "original_image_sha_policy": "All ten previously validated source packages re-hashed per original image; independently verified new 22/24 source package must match its receipt and all 1024 source PNG bytes. Reject duplicate source identity/actual image hash, invalid PNG, changed reference role or protected exams.",
+    "preexisting_blood_cv_aggregate_sha256": "1c06c72f97bf67c5d51f24d32c93213743b1fec484a01441a5ba107c7653608f",
+    "new_negative_source_acquisition_spec_git_blob_sha1": "590d5c11d5536dd4368e31cfea16af53b191941c",
+    "reserved_exams": "Original 9-10 previously inspected; future 11-20 and authors 61-80 strictly unopened"
+  },
+  "comparison": {
+    "baseline": "Existing published frozen original pooled_weighted from-scratch compact CNN trained on original fitting pool, in docs/GALAR_EXAM_CV_SPEC.json. Never change baseline scores/checkpoints.",
+    "treatment": "Same code/architecture, seed 37, AdamW lr=0.0002 weight_decay=0.0001, 384 updates, batch size 32, per-fold inverse-frequency class weights, uniform fitting-frame sampling with replacement, no augmentation. Only source images from training-only examinations 22 and 24 are added to fitting pool.",
+    "frozen_folds": {"A": [1, 3, 21, 27, 29], "B": [2, 5, 23, 25, 30], "C": [4, 6, 7, 8]},
+    "heldout_set": "Exactly the original 14 fitting-candidate examinations with their 512 label-blind reference source positions each, while whole examination is excluded from that fold's fitting. Exams 22 and 24 NEVER evaluated in this experiment; fitting-only across all folds.",
+    "model": "Fresh 3-conv GroupNorm/ReLU 2-output AnatomyCNN(2) random seed=37 at each fold, CPU float32 torch threads2, torch.use_deterministic_algorithms(True), exactly last update, no pretrained checkpoint or model selection.",
+    "primary": "Per-examination ROC-AUC and descriptive macro AUC among six exams with >=10 reference blood positives (1,7,25,27,29,30), paired with immutable original pooled results; negative results equally reported.",
+    "secondary": "All 14 per-examination AUC/AP, including null for three blood-negative-labelled original reference exams 3,5,8 and unreliable 1-9-positive exams; at fixed K=51/128/256/512 top-image positive hits versus unchanged original pooled and uniform.",
+    "reproducibility": "Refit/re-score from source original image bytes; independently reload all checkpoints and match all 7168 reference-image scores and 56 K summaries; save all original weights/predictions and source-frame identities privately.",
+    "decision": "No model promotion, threshold optimization, architecture search, or protected-cohort access based on results. Explain whether new exam diversity helps, hurts, or is mixed on already examined fitting studies."
+  },
+  "limitations": "An image with blood=0 may contain other pathology; source intervals do not identify lesions, patients or elapsed capture time. Source data already inspected, no prospective independence or clinical validation. Extra negative images change training population and train-only class weights; this is not a single-variable pixel-appearance causality test.",
+  "artifacts": "Commit frozen spec, reproducible source-verified fitting script, aggregate and tests only. No medical pixels, private per-image metadata/scores, trained weights, or original image paths in Git."
+}

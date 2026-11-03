@@ -1,0 +1,42 @@
+{
+  "aggregate_sha256": "565bd226ad4adc01d678cfaf1df4ef55346fc0f876990eca43a947b2c414308b",
+  "clinical_validation": false,
+  "compressed_blocks": [
+    {
+      "block_id": 5,
+      "compressed_block_sha256": "1533108c5f5f414106c34aee1573423e7f415610352682e29302e47b2457e0bc",
+      "compressed_bytes": 3489830304,
+      "offset": 17398114495,
+      "selected_images_verified": 799,
+      "source_archive_full_md5_verified": false
+    },
+    {
+      "block_id": 6,
+      "compressed_block_sha256": "4b6adb70089791fd14f7a81a6d21bb13c81a304221777460e5b2daeafbdc22e6",
+      "compressed_bytes": 3455329610,
+      "offset": 20887944799,
+      "selected_images_verified": 206,
+      "source_archive_full_md5_verified": false
+    }
+  ],
+  "duplicate_original_file_sha256_with_earlier_10142": 0,
+  "enriched_positive": 256,
+  "image_count": 1005,
+  "model_checkpoint_sha256": {
+    "expanded_continued": "2534d3b7982ee8c557cadc5ad3fcc4c7c4c557f899fa013e881d8655eab97111",
+    "original_checkpoint": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+    "original_only_continued": "ae88ccfedc53d8f419b3da8c0c01ca6b61361ef29858b6a536e25408ba99eefb"
+  },
+  "model_updated": false,
+  "original_png_bytes": 291862996,
+  "outer_zip_sha256": "b04e5e598357b50ccff29c77dfb5b88d2896a1ceaf45eabc2bd7719c363ae47a",
+  "positive_images_in_union": 273,
+  "private_frame_identities_committed": false,
+  "private_manifest_sha256": "8d1ac2f533dce6f33ef56ba1136d8187ac96379c790137c88b69a48d3007244c",
+  "private_prediction_sha256": "4bd6bb1f605c10c1e1749f3c9d69238951de866c0b72009326923644ca927fe8",
+  "reference_count": 512,
+  "reference_positive": 26,
+  "source_27_image_hash_sha256_multiset_digest": "49cd670036e8d3843dc5e30886b96237e0e78ffccccf567252a92fa2e60d40ab",
+  "source_full_archive_md5_verified": false,
+  "source_zip_sha256": "13b9b087686985d5e8521df727534bef53eca4d050abf117e459e4229fdec093"
+}

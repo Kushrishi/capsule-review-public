@@ -1,0 +1,20 @@
+{
+  "clinical_validation": false,
+  "examinations_checked": 8,
+  "individual_source_frame_identity_exported": false,
+  "method_budget_comparisons_recomputed": 144,
+  "original_source_positive_runs_checked": 283,
+  "private_source_csv_digests": {
+    "exam25": "285d3b14ab0f9e2cf45f4a7ca51205623e5694a17db0d55b9ba421e3023029c7",
+    "exam27": "4bd6bb1f605c10c1e1749f3c9d69238951de866c0b72009326923644ca927fe8",
+    "exam29": "f27a410a75cdf51bc726b181083fee3f89e9f71f0bed567c04223c1aebf51e79",
+    "new": "caa85f950ac0912a3a89a3a93aad6c4e24ba1dc186a52e51456bf843e8111812",
+    "pilot": "f921194639a99e206c9b24e3e896f25ff1a409669024f87c4b8b42767c70b36b"
+  },
+  "reserved_exams_11_20_and_61_80_opened": false,
+  "source_aggregate_sha256": "8065f166f2f807b0703d4ef6c28a71d4c452d445db85d8fdd7a4c5313860eb07",
+  "source_original_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+  "source_reference_images_checked": 4096,
+  "unreachable_source_runs_under_complete_512_reference": 173,
+  "verification": "independent real-data run segmentation and all-budget replay passed"
+}

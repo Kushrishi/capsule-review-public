@@ -1,0 +1,331 @@
+{
+  "anatomy_boundary_count": 3,
+  "anatomy_counts": {
+    "1_esophagus": 2,
+    "2_stomach": 370,
+    "3_small_bowel": 3194,
+    "4_colon": 707
+  },
+  "budget_results": [
+    {
+      "budget": 0.05,
+      "k": 214,
+      "methods": {
+        "global_change": {
+          "boundary_count": 3,
+          "boundary_distances": [
+            0,
+            8,
+            0
+          ],
+          "boundary_hits": {
+            "0": 2,
+            "2": 2,
+            "5": 2
+          },
+          "hundred_position_bins_represented": 34,
+          "max_nearest_position_distance": 219,
+          "max_selected_position_gap": 439,
+          "mean_nearest_position_distance": 33.58366,
+          "p95_nearest_position_distance": 116,
+          "regions_represented": 4,
+          "selected_count": 214,
+          "selected_regions": {
+            "1_esophagus": 1,
+            "2_stomach": 41,
+            "3_small_bowel": 157,
+            "4_colon": 15
+          }
+        },
+        "random_anchored": {
+          "boundary_hits_mean": {
+            "0": 0.12,
+            "2": 1.36,
+            "5": 1.75
+          },
+          "draws": 100,
+          "hundred_position_bins_represented": 42.79,
+          "max_nearest_position_distance": 57.1,
+          "max_selected_position_gap": 114.67,
+          "mean_nearest_position_distance": 9.62276,
+          "p95_nearest_position_distance": 28.83,
+          "regions_represented": 4
+        },
+        "stratified_change": {
+          "boundary_count": 3,
+          "boundary_distances": [
+            2,
+            10,
+            11
+          ],
+          "boundary_hits": {
+            "0": 0,
+            "2": 1,
+            "5": 1
+          },
+          "hundred_position_bins_represented": 43,
+          "max_nearest_position_distance": 20,
+          "max_selected_position_gap": 40,
+          "mean_nearest_position_distance": 6.02598,
+          "p95_nearest_position_distance": 14,
+          "regions_represented": 4,
+          "selected_count": 214,
+          "selected_regions": {
+            "1_esophagus": 1,
+            "2_stomach": 18,
+            "3_small_bowel": 159,
+            "4_colon": 36
+          }
+        },
+        "uniform": {
+          "boundary_count": 3,
+          "boundary_distances": [
+            2,
+            9,
+            4
+          ],
+          "boundary_hits": {
+            "0": 0,
+            "2": 1,
+            "5": 2
+          },
+          "hundred_position_bins_represented": 43,
+          "max_nearest_position_distance": 10,
+          "max_selected_position_gap": 21,
+          "mean_nearest_position_distance": 5.01287,
+          "p95_nearest_position_distance": 10,
+          "regions_represented": 4,
+          "selected_count": 214,
+          "selected_regions": {
+            "1_esophagus": 1,
+            "2_stomach": 18,
+            "3_small_bowel": 159,
+            "4_colon": 36
+          }
+        }
+      }
+    },
+    {
+      "budget": 0.1,
+      "k": 428,
+      "methods": {
+        "global_change": {
+          "boundary_count": 3,
+          "boundary_distances": [
+            0,
+            8,
+            0
+          ],
+          "boundary_hits": {
+            "0": 2,
+            "2": 2,
+            "5": 2
+          },
+          "hundred_position_bins_represented": 37,
+          "max_nearest_position_distance": 155,
+          "max_selected_position_gap": 310,
+          "mean_nearest_position_distance": 19.28247,
+          "p95_nearest_position_distance": 82,
+          "regions_represented": 4,
+          "selected_count": 428,
+          "selected_regions": {
+            "1_esophagus": 1,
+            "2_stomach": 74,
+            "3_small_bowel": 333,
+            "4_colon": 20
+          }
+        },
+        "random_anchored": {
+          "boundary_hits_mean": {
+            "0": 0.17,
+            "2": 1.68,
+            "5": 2.27
+          },
+          "draws": 100,
+          "hundred_position_bins_represented": 43,
+          "max_nearest_position_distance": 30.68,
+          "max_selected_position_gap": 61.88,
+          "mean_nearest_position_distance": 4.69001,
+          "p95_nearest_position_distance": 14.02,
+          "regions_represented": 4
+        },
+        "stratified_change": {
+          "boundary_count": 3,
+          "boundary_distances": [
+            2,
+            8,
+            0
+          ],
+          "boundary_hits": {
+            "0": 1,
+            "2": 2,
+            "5": 2
+          },
+          "hundred_position_bins_represented": 43,
+          "max_nearest_position_distance": 10,
+          "max_selected_position_gap": 20,
+          "mean_nearest_position_distance": 2.93798,
+          "p95_nearest_position_distance": 7,
+          "regions_represented": 4,
+          "selected_count": 428,
+          "selected_regions": {
+            "1_esophagus": 1,
+            "2_stomach": 37,
+            "3_small_bowel": 318,
+            "4_colon": 72
+          }
+        },
+        "uniform": {
+          "boundary_count": 3,
+          "boundary_distances": [
+            2,
+            2,
+            5
+          ],
+          "boundary_hits": {
+            "0": 0,
+            "2": 2,
+            "5": 3
+          },
+          "hundred_position_bins_represented": 43,
+          "max_nearest_position_distance": 5,
+          "max_selected_position_gap": 11,
+          "mean_nearest_position_distance": 2.50059,
+          "p95_nearest_position_distance": 5,
+          "regions_represented": 4,
+          "selected_count": 428,
+          "selected_regions": {
+            "1_esophagus": 1,
+            "2_stomach": 37,
+            "3_small_bowel": 319,
+            "4_colon": 71
+          }
+        }
+      }
+    },
+    {
+      "budget": 0.25,
+      "k": 1069,
+      "methods": {
+        "global_change": {
+          "boundary_count": 3,
+          "boundary_distances": [
+            0,
+            5,
+            0
+          ],
+          "boundary_hits": {
+            "0": 2,
+            "2": 2,
+            "5": 3
+          },
+          "hundred_position_bins_represented": 42,
+          "max_nearest_position_distance": 71,
+          "max_selected_position_gap": 143,
+          "mean_nearest_position_distance": 6.65855,
+          "p95_nearest_position_distance": 32,
+          "regions_represented": 4,
+          "selected_count": 1069,
+          "selected_regions": {
+            "1_esophagus": 2,
+            "2_stomach": 141,
+            "3_small_bowel": 880,
+            "4_colon": 46
+          }
+        },
+        "random_anchored": {
+          "boundary_hits_mean": {
+            "0": 0.65,
+            "2": 2.46,
+            "5": 2.91
+          },
+          "draws": 100,
+          "hundred_position_bins_represented": 43,
+          "max_nearest_position_distance": 13.45,
+          "max_selected_position_gap": 27.36,
+          "mean_nearest_position_distance": 1.7124,
+          "p95_nearest_position_distance": 5.1,
+          "regions_represented": 4
+        },
+        "stratified_change": {
+          "boundary_count": 3,
+          "boundary_distances": [
+            2,
+            1,
+            0
+          ],
+          "boundary_hits": {
+            "0": 1,
+            "2": 3,
+            "5": 3
+          },
+          "hundred_position_bins_represented": 43,
+          "max_nearest_position_distance": 4,
+          "max_selected_position_gap": 8,
+          "mean_nearest_position_distance": 1.14674,
+          "p95_nearest_position_distance": 3,
+          "regions_represented": 4,
+          "selected_count": 1069,
+          "selected_regions": {
+            "1_esophagus": 1,
+            "2_stomach": 93,
+            "3_small_bowel": 797,
+            "4_colon": 178
+          }
+        },
+        "uniform": {
+          "boundary_count": 3,
+          "boundary_distances": [
+            2,
+            0,
+            2
+          ],
+          "boundary_hits": {
+            "0": 1,
+            "2": 3,
+            "5": 3
+          },
+          "hundred_position_bins_represented": 43,
+          "max_nearest_position_distance": 2,
+          "max_selected_position_gap": 4,
+          "mean_nearest_position_distance": 0.99977,
+          "p95_nearest_position_distance": 2,
+          "regions_represented": 4,
+          "selected_count": 1069,
+          "selected_regions": {
+            "1_esophagus": 1,
+            "2_stomach": 92,
+            "3_small_bowel": 799,
+            "4_colon": 177
+          }
+        }
+      }
+    }
+  ],
+  "capture_timestamps": null,
+  "clinical_claims_supported": false,
+  "image_change_definition": "Absolute RGB difference on consecutive 64x64 bilinear-resized frames, mean across all RGB pixels /255 including borders. Candidate i>0 uses change between frame i-1 and i; frame 0 gets score 0. No anatomy-label input to policy.",
+  "image_change_stats": {
+    "max": 0.20957478,
+    "mean": 0.05232743
+  },
+  "image_count": 4273,
+  "image_info": {
+    "actual_formats": {
+      "JPEG": 4273
+    },
+    "dimensions": {
+      "320x320": 4273
+    }
+  },
+  "pathology_labels": null,
+  "patient_independence_known": false,
+  "role": "prespecified / to interpret with dataset limitations",
+  "source_index_first": 9,
+  "source_index_last": 4281,
+  "source_indices_complete": true,
+  "source_zip_bytes": 103418092,
+  "source_zip_sha256": "2f6e407a17820e56a1c6af34c6d9853b35ca24fe324336e0b13a8a779a7e14d8",
+  "spec_sha256": "c92500af677a12323ea5b8ebf43feb1b17f41bcf44ccfa80e94f28a19289399e",
+  "study": "s280"
+}

@@ -1,0 +1,83 @@
+{
+  "study": "Capsule Review — frozen original blood CNN transfer audit on newly acquired Galar fitting examinations",
+  "version": "1.0",
+  "status": "Frozen before first score computation; images and source labels have already been acquired and inspected for fitting-candidate selection. This is not a blinded preregistration.",
+  "study_role": "Descriptive transfer assessment of an unchanged historical model; fitting-candidate data only, not independent clinical evaluation",
+  "source_image_packages": [
+    {
+      "exam": 21,
+      "sha256": "abc02cfa8e28020da2994b897c2e608db83d0d6c93131342afa8bca985fe5659",
+      "private_manifest_sha256": "3a5a4640a792237a80bd868b57cb78fd672aa9a7540a574e60e13ec01b4f654d",
+      "selected_images": 993,
+      "uniform_reference_images": 512,
+      "known_uniform_blood_positive": 1
+    },
+    {
+      "exam": 23,
+      "sha256": "4154c208752a095ecbbeea03380888834c312834989eab863589b9a38ef28b1b",
+      "private_manifest_sha256": "fe3716c73bd19306d96127a611fa189e3c076a0274b7282092fd57bd8b5d7788",
+      "selected_images": 1001,
+      "uniform_reference_images": 512,
+      "known_uniform_blood_positive": 4
+    },
+    {
+      "exam": 30,
+      "sha256": "c20e9ded68735218529812718496ffe3924074a8574a3dc5b402dcecc5582048",
+      "private_manifest_sha256": "142ec6e095489928fc91b1af42d9c0376fab10558c347f94338afb4e34ee9079",
+      "selected_images": 1006,
+      "uniform_reference_images": 512,
+      "known_uniform_blood_positive": 120
+    }
+  ],
+  "source_labels": "Official corrected Galar v2 blood=0/1 annotation. Zero does not mean absence of other clinical pathology.",
+  "historical_frozen_cnn": {
+    "model": "Original compact two-output capsule-cnn-v1 blood annotation classifier trained 1–8, historical checkpoint selected on inspected 9–10",
+    "weights_sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+    "source_training_commit": "e3cfb1f4629595d51901829498202d0967f8c83a",
+    "architecture": "3 convolutional blocks Conv3x3 stride2 3->16->32->64; each followed by GroupNorm4/ReLU; AdaptiveAvgPool2d1, Linear64->2",
+    "preprocess": "PIL EXIF transpose; RGB; ImageOps.pad to 96x96, bilinear, black padding; [0,1] float32 CHW; no augmentation",
+    "inference": "torch no-grad eval float32 CPU; softmax class1; no fitting, weight updates, hyperparameter or model selection",
+    "checkpoint_sha_reverified_before_protocol": true
+  },
+  "comparators": {
+    "red_excess": "Original fixed blood-pilot red-excess score (96x96 central crop and same arithmetic); no post hoc color heuristic adjustment",
+    "uniform": "Deterministic uniform position selection on the sorted 512 reference images within each examination at each budget",
+    "workload_budgets_percent": [
+      5,
+      10,
+      25,
+      50,
+      75,
+      100
+    ],
+    "budget_rule": "floor(n*percent/100) selected per exam, model sorted by descending score then increasing source index; same k for red and deterministic-uniform comparators"
+  },
+  "primary_evaluation": {
+    "cohort": "Exactly 512 previously selected label-blind reference images per examination (21,23,30), not enriched fitting-only samples",
+    "unit": "examination ID, not confirmed unique patient",
+    "outcomes": [
+      "per-examination ROC-AUC when positive and negative support exist",
+      "per-examination average precision",
+      "blood-labelled image hits at each budget",
+      "uniform/heuristic same-budget image hits"
+    ],
+    "important_caution": "Exam21 has only 1 blood-positive reference frame and exam23 only 4. Per-exam AUC/AP and top-k are extremely unstable; report all individual positive counts and do not infer population performance."
+  },
+  "secondary_evaluation": {
+    "cohort": "All 993+1001+1006=3000 selected unique images (mix of enriched-fitting and uniform-reference images) per exam",
+    "interpretation": "Descriptive only; positive-label enrichment substantially changes prevalence and selection mechanism, so pooled AP/recall is not natural-case prevalence or clinical validity."
+  },
+  "strict_separation": {
+    "allowed_evaluation_ids": [
+      21,
+      23,
+      30
+    ],
+    "disallowed_ids": "historical model fitting examinations 1–8, inspected development 9–10, reserved future evaluation 11–20, source-author holdout 61–80",
+    "outcome_use": "Do not tune/update the frozen original model based on these outcomes; new training candidates need inner examination-held-out validation and future locked evaluation"
+  },
+  "artifact_policy": "Commit frozen spec, independent code/tests and aggregate results only. Save per-image scores and medical pixels with original identities privately in Capsule Review Library.",
+  "patient_data": "Only deidentified permitted research sources; no Xona confidential computing or PHI",
+  "stop_policy": "Abort if any model hash, image/private manifest hash, source label identity, 512-reference count, or original source-frame name integrity fails. Do not reinterpret unknown labels as negatives.",
+  "clinical_validity": false
+}
