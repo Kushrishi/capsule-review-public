@@ -52,13 +52,21 @@ function stopPlayback() { state.playing = false; clearTimeout(state.timer);
 function renderSourceContinuity() {
   const data = state.sourceCoverage;
   const frameCount = data.imported_frames.toLocaleString();
+  const common = data.common_forward_index_step;
   let message;
-  if (data.assessment === 'index-jumps') {
-    message = `Source-index audit: ${frameCount} imported images, ${data.adjacent_index_jumps.toLocaleString()} jumps larger than +1 (largest forward step +${data.maximum_forward_index_step.toLocaleString()}). Not verified consecutive footage.`;
+  if (data.assessment === 'index-jumps' && common !== null) {
+    const pairCount = data.observed_forward_index_steps.toLocaleString();
+    if (data.regular_observed_source_stride) {
+      message = `Source-index audit: ${frameCount} imported images have a consistent observed +${common.toLocaleString()} index stride across ${pairCount} adjacent pairs. This is sparse imported coverage, not verified consecutive footage.`;
+    } else {
+      message = `Source-index audit: ${frameCount} imported images, common index step +${common.toLocaleString()} in ${data.common_step_pairs.toLocaleString()}/${pairCount} adjacent pairs, with ${data.unusual_forward_index_steps.toLocaleString()} differently spaced ${data.unusual_forward_index_steps === 1 ? 'pair' : 'pairs'} (largest forward step +${data.maximum_forward_index_step.toLocaleString()}). Imported footage may have additional gaps.`;
+    }
+  } else if (data.assessment === 'index-jumps') {
+    message = `Source-index audit: ${frameCount} imported images, ${data.adjacent_index_jumps.toLocaleString()} jumps greater than +1 (largest +${data.maximum_forward_index_step.toLocaleString()}); no consistent source-index stride established. Not verified consecutive footage.`;
   } else if (data.assessment === 'consecutive-imported-indices') {
     message = `Source-index audit: all ${frameCount} imported source IDs are adjacent (+1). This does not establish complete capture or elapsed time.`;
   } else if (data.assessment === 'nonmonotonic') {
-    message = 'Source-index audit: imported source IDs are not strictly increasing. Source-order continuity is not verified.';
+    message = 'Source-index audit: imported source IDs are repeated or not strictly increasing. Source-order continuity is not verified.';
   } else {
     message = `Source-index audit: continuity cannot be established (${data.unnumbered_frames.toLocaleString()} unnumbered images or insufficient source positions).`;
   }
@@ -68,15 +76,23 @@ function renderSourceStep(position) {
   const previous = state.thumbsData.find(item => item.position === position - 1);
   const current = state.frame;
   const stepEl = $('sourceStep');
-  if (!previous || previous.source_index === null || current.source_index === null ||
-      current.source_index - previous.source_index <= 1) {
+  if (!previous || previous.source_index === null || current.source_index === null) {
     stepEl.hidden = true;
     stepEl.textContent = '';
     return;
   }
   const step = current.source_index - previous.source_index;
-  stepEl.textContent = `Imported source IDs jump from #${previous.source_index} to #${current.source_index} (+${step.toLocaleString()} index steps). Intermediate source index positions are not represented in this import.`;
-  stepEl.hidden = false;
+  const common = state.sourceCoverage.common_forward_index_step;
+  let message = '';
+  if (step <= 0) {
+    message = `Imported source IDs are repeated or decreasing (#${previous.source_index} to #${current.source_index}). Source order requires verification.`;
+  } else if (common !== null && step !== common) {
+    message = `Unusual source-index step: #${previous.source_index} to #${current.source_index} (+${step.toLocaleString()}), versus the common observed step +${common.toLocaleString()}. Intermediate source positions, when any, are not represented in this import.`;
+  } else if (common === null && step > 1) {
+    message = `Imported source IDs jump from #${previous.source_index} to #${current.source_index} (+${step.toLocaleString()} index steps). Intermediate index positions are not represented in this import.`;
+  }
+  stepEl.textContent = message;
+  stepEl.hidden = !message;
 }
 async function selectStudy(id) {
   if (state.busy || state.switching || state.saving || state.modelBusy) return;
