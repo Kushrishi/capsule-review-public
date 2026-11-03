@@ -24,6 +24,17 @@ The standard boundary-only export selected 51 scripted bookmarks plus distinct m
 
 The **295-image export has substantially more retained images than the 79-image export**. Therefore this experiment demonstrates evidence **preservation by exporting more images**, not superior *selection accuracy at matched reader workload*. The additional imported images were not automatically viewed by a person, and image-level `blood=1` annotations are **not distinct lesions or independent clinical cases**. No blood-detection model was evaluated or promoted by this replay. The source-index positions may jump; the 512 imported images are **not the full original examination**.
 
+## Crucial equal-retention-workload control
+
+The private original-image annotation receipt also allowed the previously specified, label-blind **midpoint-uniform** comparator from `evidence_receipt._uniform_at_equal_workload` to be evaluated at the **same exact number of retained imported images**. It did not examine any additional held-out study or use labels to select images.
+
+| Exact imported-image retention workload | Scripted interval policy: explicitly blood-positive reference images retained | Same-K midpoint-uniform: positive reference images retained |
+| --- | ---: | ---: |
+| **K=79 of 512** (standard boundary-only export) | **0 of 4** | **1 of 4** |
+| **K=295 of 512** (optional full-span export) | **2 of 4** | **2 of 4** |
+
+Thus, the full-span archive preserves more known positive reference images than the earlier 79-frame archive **because it retains 216 additional imported images**, not because this scripted selection outperformed an equal-workload comparator. At identical K=295 it **tied uniform** on four available positives; at identical K=79 the scripted boundary-only selection retained **fewer** than uniform. These are four correlated annotated images in a previously inspected examination, **not a statistically powered, independent or clinical comparison**. These image-retention counts must not be described as sensitivity, source-run recall, reader effort, unique lesion recovery or AI prioritization benefit.
+
 ## What remains unverified
 
 The exact publisher-corrected original Galar label ZIP, **17,931,138 bytes** and SHA-256 **2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f**, could not be retrieved and authenticated in this private session. Consequently the **full original positive annotation-run denominator, directly retained original source runs, and source-run recall remain unavailable**. Our 2/4 image-level observation must not be promoted to a 50% pathology/lesion sensitivity result, nor can an interval's numerical overlap be counted as clinician detection.
