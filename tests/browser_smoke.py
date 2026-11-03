@@ -112,6 +112,7 @@ with sync_playwright() as p:
     wait_for_js(page, "document.getElementById('jumpInput').value === '2'")
     page.get_by_label('Bookmark this frame').check()
     wait_for_js(page, "document.getElementById('saveStatus').textContent === 'Saved' && document.getElementById('savedCount').textContent === '2'")
+    assert '2 of 24 imported images' in page.locator('#exportEvidenceSummary').inner_text()
     checks.append('Reviewer note and bookmark saved separately')
     page.locator('#reviewNote').fill('Draft saved automatically when navigating.')
     page.get_by_label('Next frame',exact=True).click()
@@ -145,6 +146,9 @@ with sync_playwright() as p:
     page.get_by_role('button', name='Save end', exact=True).click()
     wait_for_js(page, "document.getElementById('intervalCount').textContent === '1'")
     assert 'Imported frames 2–4' in page.locator('#intervals').inner_text()
+    export_summary = page.locator('#exportEvidenceSummary').inner_text()
+    assert '3 of 24 imported images' in export_summary
+    assert '1 marked-interval interior image is not selected' in export_summary
     with page.expect_download() as interval_export:
         page.get_by_role('button', name='Export review').click()
     interval_zip=out/'sample-interval-review.zip'
@@ -162,10 +166,11 @@ with sync_playwright() as p:
     page.once('dialog', lambda dialog: dialog.accept())
     page.get_by_role('button', name='Remove interval 2 to 4').click()
     wait_for_js(page, "document.getElementById('intervalCount').textContent === '0'")
+    assert '2 of 24 imported images' in page.locator('#exportEvidenceSummary').inner_text()
     checks.append('Marked intervals persist across reopening and can be removed')
     page.locator('#jumpInput').fill('2')
     page.locator('#jumpInput').press('Tab')
-    wait_for_js(page, "document.getElementById('jumpInput').value === '2'")
+    wait_for_js(page, "document.getElementById('frameCounter').textContent.startsWith('Frame 2 /') && !document.getElementById('nextBtn').disabled")
     page.locator('#reviewNote').focus();before=page.locator('#jumpInput').input_value()
     page.keyboard.press('ArrowRight');assert page.locator('#jumpInput').input_value()==before
     checks.append('Frame shortcuts do not override text editing')

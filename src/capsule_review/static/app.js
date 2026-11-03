@@ -2,7 +2,7 @@
 const $ = (id) => document.getElementById(id);
 const state = {token: '', studies: [], study: null, frame: null, dirty: false, busy: false,
   saving: false, switching: false, modelBusy: false, models: [], playing: false, timer: null, files: [], thumbsStart: -1, thumbsData: [], sourceCoverage: null,
-  intervals: [], intervalStart: null, savedFrameCount: 0};
+  intervals: [], intervalStart: null, savedFrameCount: 0, savedPositions: []};
 let toastTimer;
 
 function syncControls() {
@@ -106,7 +106,7 @@ async function selectStudy(id) {
   try {
   stopPlayback(); if (state.dirty && !(await saveReview())) return;
   clearError(); state.study = await api(`/api/studies/${id}`); state.frame = null; state.thumbsStart = -1;
-  state.intervalStart = null; state.intervals = []; state.savedFrameCount = 0;
+  state.intervalStart = null; state.intervals = []; state.savedFrameCount = 0; state.savedPositions = [];
   $('intervalNote').value = ''; renderIntervalDraft();
   state.thumbsData = []; state.sourceCoverage = await api(`${base()}/source-coverage`);
   renderSourceContinuity();
@@ -204,8 +204,33 @@ function renderPredictions() {
   }
   $('predictions').append(textElement('p', 'Model scores are not diagnostic certainty. Suggestions do not change your notes.', 'panel-hint'));
 }
+function renderExportEvidence() {
+  if (!state.study) return;
+  const selected = new Set(state.savedPositions);
+  const interior = new Set();
+  for (const interval of state.intervals) {
+    selected.add(interval.start_position);
+    selected.add(interval.end_position);
+    for (let i = interval.start_position + 1; i < interval.end_position; i++) interior.add(i);
+  }
+  const omitted = [...interior].filter(position => !selected.has(position)).length;
+  if (!selected.size) {
+    $('exportEvidenceSummary').textContent = 'Nothing selected for export. Save a frame or mark an image interval.';
+    return;
+  }
+  let message = `Saved export selection: ${selected.size.toLocaleString()} of ${state.study.frame_count.toLocaleString()} imported images.`;
+  if (state.intervals.length) {
+    const noun = omitted === 1 ? 'image is' : 'images are';
+    message += ` ${omitted.toLocaleString()} marked-interval interior ${noun} not selected for export; only boundaries and separately saved images are included.`;
+  }
+  message += ' Selected images are not proof of viewing or medical findings.';
+  if (selected.size > 250) message += ' This selection exceeds the 250-image export limit.';
+  $('exportEvidenceSummary').textContent = message;
+}
 async function loadSaved() {
   const saved = await api(`${base()}/saved`); state.savedFrameCount = saved.length;
+  state.savedPositions = saved.map(item => item.position);
+  renderExportEvidence();
   $('savedCount').textContent = saved.length;
   $('exportBtn').disabled = saved.length === 0 && state.intervals.length === 0;
   $('savedFrames').replaceChildren();
@@ -229,6 +254,7 @@ function renderIntervalDraft() {
 async function loadIntervals() {
   state.intervals = await api(`${base()}/intervals`);
   $('intervalCount').textContent = state.intervals.length;
+  renderExportEvidence();
   $('exportBtn').disabled = state.savedFrameCount === 0 && state.intervals.length === 0;
   $('intervals').replaceChildren();
   if (!state.intervals.length) {
