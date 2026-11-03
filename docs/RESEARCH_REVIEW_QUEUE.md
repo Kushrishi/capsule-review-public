@@ -50,3 +50,27 @@ The same exact corrected Galar archive must be verified before claiming addition
 ## Verification
 
 Synthetic-only CI exercises deterministic exact-K selection for all four policies, invalid score/identity fail-closed behavior, pagination, incomplete-label refusal, no reference-label reads, and reviewer-note immutability through actual localhost API requests. The browser/local-model smoke test **trains and executes** an original geometric software-test model, builds an exact-K review queue, opens a prioritized image without changing saved human notes, and compares with uniform. Private original images, per-frame annotations, saved model predictions and research workspaces remain outside the public repository.
+
+## Review the omitted positions across all policies
+
+**New engineering safeguard (November 3):** the local viewer compares all four
+current policies at the *same user-selected K* via the read-only
+`/api/studies/{study_id}/priority-comparison` endpoint. For each policy it
+reports the maximum and 95th-percentile nearest-selected *imported position*
+distance, plus the largest consecutive **unselected imported-position span**.
+The viewer can open the middle of that skipped span without selecting,
+annotating, bookmarking, or exporting it. If the user chooses all imported
+images (K=N), every policy reports no omission span. Missing or incomplete
+model-label streams are rejected just as they are for the review queue.
+
+This is **transparency for human reviewers**, not risk estimation or a
+content-based diagnosis. No original-video timestamp, physician label,
+clinical event, or continuous footage is inferred from imported ordinals.
+The comparison does not consult source annotations, ground-truth labels,
+patient outcomes or reviewer notes. It is intentionally conservative:
+a technically small ordinal gap does **not** imply clinical safety when
+the originally imported sequence is sparse. The exploratory Galar 10 result
+([retrospective evidence-run audit](GALAR10_FOUR_POLICY_SOURCE_RUN_RESULTS.md))
+illustrates why reviewers should be able to see and inspect gaps, but this
+feature is not tuned or clinically promoted from those already examined cases.
+
