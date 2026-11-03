@@ -12,6 +12,8 @@ This repository currently has **no software licence**. Dataset attribution (incl
 
 **Real-data milestone completed:** a compact anatomy model has been trained on verified Galar images and its predictions saved in the viewer. The companion first-real-run package contains weights, measured results and a small runnable demonstration. The source-only ZIP retains geometric software fixtures. Clinical validation and a hosted service remain outside this release. See [the actual result and limitations](docs/REAL_DATA.md).
 
+**November 3 source-run robustness checkpoint:** an independently reproducible reanalysis of our already verified, *previously inspected* eight Galar studies found that at a fixed 51/512 images per exam (10%), the original CNN reached **28** distinct annotated positive source runs versus **31** for uniform sampling. The seven positive-case macro difference appears positive but **changes sign when Galar 27 is excluded**; at 128/512 (25%), CNN reached 69 versus uniform 55, still post-hoc and unvalidated. At most 110 of 283 original positive runs were reachable from the historical sparse 512-image references. No independent patient-level performance claim or model promotion. [Equal-workload examination-level robustness report](docs/GALAR_RUN_ROBUSTNESS_RESULTS.md).
+
 ## Current research state — 2 November 2026
 
 Capsule Review is a **working, localhost-only capsule-image research viewer**: verified image import and navigation, reviewer bookmarks and notes, saved sessions, illustrated exports and separate source annotation versus model-suggestion layers. The application is **not a clinical decision-support device**.
