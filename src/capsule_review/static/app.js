@@ -59,7 +59,7 @@ function renderSourceContinuity() {
     if (data.regular_observed_source_stride) {
       message = `Source-index audit: ${frameCount} imported images have a consistent observed +${common.toLocaleString()} index stride across ${pairCount} adjacent pairs. This is sparse imported coverage, not verified consecutive footage.`;
     } else {
-      message = `Source-index audit: ${frameCount} imported images, common index step +${common.toLocaleString()} in ${data.common_step_pairs.toLocaleString()}/${pairCount} adjacent pairs, with ${data.unusual_forward_index_steps.toLocaleString()} differently spaced pairs (largest forward step +${data.maximum_forward_index_step.toLocaleString()}). Imported footage may have additional gaps.`;
+      message = `Source-index audit: ${frameCount} imported images, common index step +${common.toLocaleString()} in ${data.common_step_pairs.toLocaleString()}/${pairCount} adjacent pairs, with ${data.unusual_forward_index_steps.toLocaleString()} differently spaced ${data.unusual_forward_index_steps === 1 ? 'pair' : 'pairs'} (largest forward step +${data.maximum_forward_index_step.toLocaleString()}). Imported footage may have additional gaps.`;
     }
   } else if (data.assessment === 'index-jumps') {
     message = `Source-index audit: ${frameCount} imported images, ${data.adjacent_index_jumps.toLocaleString()} jumps greater than +1 (largest +${data.maximum_forward_index_step.toLocaleString()}); no consistent source-index stride established. Not verified consecutive footage.`;
