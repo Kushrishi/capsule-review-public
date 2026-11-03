@@ -44,7 +44,7 @@ def test_six_exam_aggregate_all_workloads_and_comparator_denominators():
         assert baseline["examinations_tied_with_uniform"] == 6
         assert baseline["examinations_worse_than_uniform"] == 0
     assert all(
-        data[method]["blood_positive_reference_images_retained"] == 287
+        data["blood_positive_reference_images_retained"] == 287
         for method, data in result["workloads"]["512"].items()
         if method != "selected_images_per_exam"
     )
@@ -84,7 +84,7 @@ def test_no_private_frame_level_data_or_accidental_software_claims():
     for phrase in (
         "95", "27", "43", "31", "186.8", "9.3",
         "zero of four", "zero of fourteen",
-        "previously examined", "not",
+        "previously inspected", "not",
         "not a pathology lesion detector",
     ):
         assert phrase.casefold() in report.casefold()
