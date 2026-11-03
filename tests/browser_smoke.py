@@ -168,6 +168,19 @@ with sync_playwright() as p:
         assert all('frame_000002.png' not in name for name in archive.namelist())
         assert 'Interior images were not automatically reviewed' in archive.read('review.html').decode()
     checks.append('Browser saves a marked interval and exports only its boundary images')
+    assert 'optional full-span archive would retain 4 imported images' in page.locator('#exportEvidenceSummary').inner_text().lower()
+    page.once('dialog', lambda dialog: dialog.accept())
+    with page.expect_download() as full_span_download:
+        page.get_by_role('button', name='Export full spans', exact=True).click()
+    full_span_path = out/'full-span-evidence.zip'
+    full_span_download.value.save_as(str(full_span_path))
+    with zipfile.ZipFile(full_span_path) as full_span_zip:
+        full_span_record = json.loads(full_span_zip.read('evidence.json'))
+        assert full_span_record['kind'] == 'full-imported-span-evidence'
+        assert [item['position'] for item in full_span_record['frames']] == [0, 1, 2, 3]
+        assert full_span_record['frames'][2]['reason']['marked_span_interior']
+        assert 'images/frame_000002.png' in full_span_zip.namelist()
+    checks.append('Browser offers distinct complete imported-span ZIP with its interior image')
     page.close();page=open_app()
     wait_for_js(page, "document.getElementById('intervalCount').textContent === '1'")
     page.once('dialog', lambda dialog: dialog.accept())

@@ -22,6 +22,7 @@ function syncControls() {
   $('intervalCancelBtn').disabled = running || state.intervalStart === null;
   $('intervalNote').disabled = running || state.intervalStart === null;
   $('auditBtn').disabled = running || !state.study || (state.savedFrameCount === 0 && state.intervals.length === 0);
+  $('fullSpanBtn').disabled = running || !state.study || state.intervals.length === 0;
 }
 
 function announce(message) { $('toast').textContent = message; $('toast').hidden = false;
@@ -224,6 +225,11 @@ function renderExportEvidence() {
   if (state.intervals.length) {
     const noun = omitted === 1 ? 'image is' : 'images are';
     message += ` ${omitted.toLocaleString()} marked-interval interior ${noun} not selected for export; only boundaries and separately saved images are included.`;
+    const fullSpanSelection = new Set(selected);
+    for (const interval of state.intervals) {
+      for (let position = interval.start_position; position <= interval.end_position; position++) fullSpanSelection.add(position);
+    }
+    message += ` The optional full-span archive would retain ${fullSpanSelection.size.toLocaleString()} imported images, including every imported interval interior. This may be a large private ZIP.`;
   }
   message += ' Selected images are not proof of viewing or medical findings.';
   if (selected.size > 250) message += ' This selection exceeds the 250-image export limit.';
@@ -395,6 +401,22 @@ $('auditBtn').addEventListener('click', async () => {
     $('auditReport').textContent = 'Evidence verification did not pass; no verified receipt is available.';
     fail(error);
   } finally { state.auditBusy = false; syncControls(); }
+});
+$('fullSpanBtn').addEventListener('click', async () => {
+  stopPlayback();
+  if (!state.study || !state.intervals.length || !(await saveReview())) return;
+  const studyId = state.study.id;
+  const proceed = window.confirm(
+    'Export ALL imported images inside marked intervals, plus explicitly saved images? ' +
+    'This separate ZIP can be large and may contain private images, reviewer notes and image identities. ' +
+    'Exporting does not mean each image was human-reviewed or that every original video frame was imported.'
+  );
+  if (!proceed || state.study?.id !== studyId) return;
+  const link = document.createElement('a');
+  link.href = `/api/studies/${studyId}/full-span-export`;
+  link.download = 'full-span-evidence.zip';
+  link.click();
+  announce('Full-span evidence download requested. The local server verifies the ZIP before delivery.');
 });
 $('exportBtn').addEventListener('click', async () => {
   stopPlayback(); if (!(await saveReview())) return;
