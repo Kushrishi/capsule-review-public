@@ -1,0 +1,55 @@
+"""Regression checks for the public research handoff and local documentation links.
+
+These tests use public source text only: never load private medical-image data.
+"""
+from pathlib import Path
+import re
+from urllib.parse import unquote
+
+ROOT = Path(__file__).resolve().parents[1]
+DOCS = (
+    ROOT / "README.md",
+    ROOT / "docs" / "GALAR_NEGATIVE_22_24_RESULTS.md",
+    ROOT / "docs" / "GALAR_NEGATIVE_EXPANSION_CV_RESULTS.md",
+    ROOT / "docs" / "PUBLIC_RELEASE_SAFETY.md",
+)
+
+
+def test_critical_public_document_links_resolve():
+    for document in DOCS:
+        assert document.is_file(), f"Missing public document: {document.relative_to(ROOT)}"
+        body = document.read_text(encoding="utf-8")
+        for raw in re.findall(r"\]\(([^)]+)\)", body):
+            target = unquote(raw.split("#", 1)[0].split(" ?", 1)[0].strip())
+            if not target or re.match(r"^(https?://|mailto:|data:|#)", target, re.I):
+                continue
+            resolved = (document.parent / target).resolve()
+            assert resolved.is_relative_to(ROOT.resolve()), (
+                f"Unexpected external local path in {document.relative_to(ROOT)}: {raw}"
+            )
+            assert resolved.is_file(), (
+                f"Broken public link in {document.relative_to(ROOT)}: {target}"
+            )
+
+
+def test_latest_source_inventory_and_scope_are_consistent():
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    provenance = (ROOT / "docs" / "GALAR_NEGATIVE_22_24_RESULTS.md").read_text(encoding="utf-8")
+    results = (ROOT / "docs" / "GALAR_NEGATIVE_EXPANSION_CV_RESULTS.md").read_text(encoding="utf-8")
+    for text in (readme, provenance, results):
+        assert "11,147" in text
+        assert "512" in text
+    assert "16 examinations" in readme
+    assert "No clinical model was promoted" in readme
+    assert "zero" in provenance.lower()
+    assert "23 and 25" in readme
+    assert "blood=0" in provenance
+    assert "61–80" in readme
+
+
+def test_public_research_docs_do_not_claim_model_promotion():
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    provenance = (ROOT / "docs" / "GALAR_NEGATIVE_22_24_RESULTS.md").read_text(encoding="utf-8")
+    assert "not a clinical decision-support device" in readme
+    assert "not a model or clinical validation" in provenance
+    assert (ROOT / "docs" / "PUBLIC_RELEASE_SAFETY.md").exists()
