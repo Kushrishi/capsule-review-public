@@ -168,6 +168,27 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':1440,'height':1050})
     wait_for_js(page, "document.getElementById('frameImage').complete")
     page.screenshot(path=str(out/'viewer-desktop.png'),full_page=True)
+    # Exercise the live browser's common-index-stride and outlier warnings with
+    # synthetic, local-only PNGs. No real medical source is needed for CI.
+    from capsule_review.importer import import_sources
+    fixture_bytes = (frame_dir/'0.png').read_bytes()
+    import_sources(app.state.store,
+        ((f'frame_{index:06d}.PNG', fixture_bytes) for index in (5, 10, 15, 90, 95)),
+        title='Synthetic source stride', source='Nonclinical source-index test', synthetic=True)
+    page.close(); page = open_app()
+    page.get_by_role('button', name='Synthetic source stride', exact=False).click()
+    wait_for_js(page, "document.getElementById('sourceContinuity').textContent.includes('common index step +5')")
+    summary = page.locator('#sourceContinuity').inner_text()
+    assert '1 differently spaced pairs' in summary and 'not acquisition timing' in summary
+    checks.append('Browser distinguishes the common +5 source stride from one outlier')
+    page.locator('#jumpInput').fill('4')
+    page.locator('#jumpInput').press('Tab')
+    wait_for_js(page, "document.getElementById('sourceStep').textContent.includes('Unusual source-index step')")
+    assert '#15 to #90' in page.locator('#sourceStep').inner_text()
+    page.locator('#jumpInput').fill('3')
+    page.locator('#jumpInput').press('Tab')
+    wait_for_js(page, "document.getElementById('jumpInput').value === '3' && document.getElementById('sourceStep').hidden")
+    checks.append('Browser flags the exceptional source step without warning at each regular +5 step')
     if args.with_test_model:
         from test_baseline_data import make_dataset
         from capsule_review.baseline_data import prepare_manifest
