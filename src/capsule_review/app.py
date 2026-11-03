@@ -5,6 +5,7 @@ import json
 import os
 import re
 import secrets
+import shutil
 import sqlite3
 import threading
 import tempfile
@@ -16,9 +17,11 @@ from fastapi.concurrency import run_in_threadpool
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
+from starlette.background import BackgroundTask
 
 from . import __version__
 from .exporter import export_review
+from .full_span_evidence import export_full_span_evidence
 from .evidence_receipt import account_review_evidence
 from .interval_evidence import read_review_export
 from .importer import MAX_FILE_BYTES, create_demo, import_sources, natural_key, now, validate_filename
@@ -381,6 +384,29 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
             raise HTTPException(422, str(exc)) from exc
         except OSError as exc:
             raise HTTPException(422, 'The local selected images could not be verified.') from exc
+
+    @app.get('/api/studies/{study_id}/full-span-export')
+    async def full_span_export(study_id: str):
+        """Opt-in, locally streamed evidence ZIP; standard review export unchanged."""
+        require_study(study_id)
+        folder = Path(tempfile.mkdtemp(prefix='.full-span-evidence-', dir=store.root))
+        archive = folder / 'full-span-evidence.zip'
+        try:
+            # Export and independently verify the written ZIP before serving it.
+            await run_in_threadpool(export_full_span_evidence, store, study_id, archive)
+            return FileResponse(
+                archive, media_type='application/zip',
+                headers={'Content-Disposition': 'attachment; filename="full-span-evidence.zip"'},
+                background=BackgroundTask(shutil.rmtree, folder, ignore_errors=True),
+            )
+        except (ValueError, FileNotFoundError) as exc:
+            shutil.rmtree(folder, ignore_errors=True)
+            # Errors must not disclose private local file paths in HTTP bodies.
+            raise HTTPException(422, str(exc) if isinstance(exc, ValueError) else
+                                'A selected local image is unavailable.') from exc
+        except OSError as exc:
+            shutil.rmtree(folder, ignore_errors=True)
+            raise HTTPException(422, 'The selected local images could not be archived.') from exc
 
     @app.get('/api/studies/{study_id}/export')
     async def export(study_id: str):
