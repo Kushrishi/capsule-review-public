@@ -68,7 +68,7 @@
     "metrics_sha256": "781b855c0e14278fb20cb45f25f2481bcf379182aa4dd9d8e9b9c93a12928d7a",
     "architecture": "capsule-cnn-v1",
     "checkpoint_epoch": 8,
-    "preprocessing": "96x96 RGB with aspect-preserving pad, 0..1 channels",
+    "preprocessing": "96x96 RGB, aspect-preserving pad, 0..1 channels",
     "score": "raw uncalibrated softmax for blood-present class; NEVER a calibrated clinical risk"
   },
   "publisher": {
