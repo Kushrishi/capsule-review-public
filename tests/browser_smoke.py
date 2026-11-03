@@ -135,6 +135,37 @@ with sync_playwright() as p:
         assert 'SYNTHETIC TEST SEQUENCE' in archive.read('review.html').decode()
         archive.extractall(out/'sample-review')
     checks.append('Export download contains two selected frames, illustrated HTML and JSON')
+    # The same 24-frame synthetic examination now supports a separate
+    # reviewer-defined image interval with no automatic interior frame export.
+    page.get_by_role('button', name='Mark start', exact=True).click()
+    page.locator('#intervalNote').fill('Synthetic review span, not a lesion.')
+    page.locator('#jumpInput').fill('4')
+    page.locator('#jumpInput').press('Tab')
+    wait_for_js(page, "document.getElementById('jumpInput').value === '4'")
+    page.get_by_role('button', name='Save end', exact=True).click()
+    wait_for_js(page, "document.getElementById('intervalCount').textContent === '1'")
+    assert 'Imported frames 2–4' in page.locator('#intervals').inner_text()
+    with page.expect_download() as interval_export:
+        page.get_by_role('button', name='Export review').click()
+    interval_zip=out/'sample-interval-review.zip'
+    interval_export.value.save_as(str(interval_zip))
+    with zipfile.ZipFile(interval_zip) as archive:
+        interval_manifest=json.loads(archive.read('review.json'))
+        assert [x['position'] for x in interval_manifest['frames']] == [0,1,3]
+        assert len(interval_manifest['intervals']) == 1
+        assert interval_manifest['intervals'][0]['note'] == 'Synthetic review span, not a lesion.'
+        assert all('frame_000002.png' not in name for name in archive.namelist())
+        assert 'Interior images were not automatically reviewed' in archive.read('review.html').decode()
+    checks.append('Browser saves a marked interval and exports only its boundary images')
+    page.close();page=open_app()
+    wait_for_js(page, "document.getElementById('intervalCount').textContent === '1'")
+    page.once('dialog', lambda dialog: dialog.accept())
+    page.get_by_role('button', name='Remove interval 2 to 4').click()
+    wait_for_js(page, "document.getElementById('intervalCount').textContent === '0'")
+    checks.append('Marked intervals persist across reopening and can be removed')
+    page.locator('#jumpInput').fill('2')
+    page.locator('#jumpInput').press('Tab')
+    wait_for_js(page, "document.getElementById('jumpInput').value === '2'")
     page.locator('#reviewNote').focus();before=page.locator('#jumpInput').input_value()
     page.keyboard.press('ArrowRight');assert page.locator('#jumpInput').input_value()==before
     checks.append('Frame shortcuts do not override text editing')
