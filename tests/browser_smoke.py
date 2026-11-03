@@ -179,7 +179,7 @@ with sync_playwright() as p:
     page.get_by_role('button', name='Synthetic source stride', exact=False).click()
     wait_for_js(page, "document.getElementById('sourceContinuity').textContent.includes('common index step +5')")
     summary = page.locator('#sourceContinuity').inner_text()
-    assert '1 differently spaced pairs' in summary and 'not acquisition timing' in summary
+    assert '1 differently spaced pair' in summary and 'not acquisition timing' in summary
     checks.append('Browser distinguishes the common +5 source stride from one outlier')
     page.locator('#jumpInput').fill('4')
     page.locator('#jumpInput').press('Tab')
