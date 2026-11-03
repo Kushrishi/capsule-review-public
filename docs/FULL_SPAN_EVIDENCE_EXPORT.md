@@ -41,4 +41,8 @@ Public tests run the actual FastAPI import, frame bookmark, interval marking, de
 
 Adversarial tests corrupt or omit a PNG, change an imported image after import, reject the no-interval case, and check temporary-file removal. The browser smoke test downloads both ZIP formats and confirms an interior image appears only in the optional full-span package.
 
+## First private original-image replay after the feature merged
+
+A subsequent source-verified, previously inspected Galar23 engineering replay confirmed the actual original-image retention effect, rather than only synthetic arithmetic. **512/512** original reference PNG bytes passed source checks; **295/295** retained display PNGs had hashes regenerated from original pixels; all **79** prior boundary-only exported images matched byte-for-byte. A separately re-opened private archive preserved the **216** additional imported images, including **two of four** explicitly blood-positive reference images (the boundary-only export preserved zero of those four). This used **295 rather than 79 retained images**, not matched reader workload. The private reconstruction was not a byte-for-byte invocation of the production full-span API. See [complete real-pixel replay and its limitations](GALAR23_FULL_SPAN_REAL_PIXEL_REPLAY.md); raw research archives stay in Library, not public Git.
+
 The original-source blood-positive annotation-run denominators for the separate frozen Galar23 source-run protocol are still gated on the publisher's exact SHA-matched corrected label archive. Neither the extra archive frames nor the synthetic regression test establishes AI model performance, source-run recall, patient independence, physician review time, or clinical validity.
