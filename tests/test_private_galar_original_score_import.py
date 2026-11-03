@@ -184,12 +184,24 @@ def test_partial_or_synthetic_examination_rejected(app, tmp_path, monkeypatch):
 
 def test_command_refuses_existing_private_receipt(client, app, tmp_path, monkeypatch):
     study, archive = _private_test_source(app, tmp_path, monkeypatch)
-    result = replay.import_verified_original_scores(
-        app.state.store, study["id"], "synthetic-fixture", 23, archive
-    )
-    assert result["imported_reference_images"] == 512
-    # Receipt only contains non-identifying aggregates.
-    assert "PRIVATE-NOT-TO-USE" not in json.dumps(result)
+    output = tmp_path / "aggregate-only.json"
+    import sys
+    arguments = [
+        "import_private_galar_original_scores.py",
+        "--data-dir", str(app.state.store.root), "--study-id", study["id"],
+        "--source", "synthetic-fixture", "--examination", "23",
+        "--private-archive", str(archive), "--receipt", str(output),
+    ]
+    monkeypatch.setattr(sys, "argv", arguments)
+    replay.main()
+    receipt = json.loads(output.read_text(encoding="utf-8"))
+    assert receipt["imported_reference_images"] == 512
+    assert receipt["all_normalized_local_display_hashes_rechecked"]
+    assert "PRIVATE-NOT-TO-USE" not in json.dumps(receipt)
+    assert "source_index" not in json.dumps(receipt)
+    with pytest.raises(FileExistsError, match="overwrite"):
+        replay.main()
+    assert json.loads(output.read_text(encoding="utf-8")) == receipt
 
 
 def test_real_production_sources_are_pinned_to_frozen_archive_identities():
