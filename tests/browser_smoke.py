@@ -286,6 +286,25 @@ with sync_playwright() as p:
         page.wait_for_selector('#localModelControls', state='visible')
         wait_for_js(page, "!document.getElementById('runModelBtn').disabled && document.getElementById('savedCount').textContent === '1'")
         checks.append('Local model predictions persist after closing and reopening the viewer')
+        wait_for_js(page, "document.getElementById('prioritySource').options.length >= 1")
+        assert page.locator('#priorityCount').input_value() == str(heldout['frame_count'])
+        page.locator('#priorityCount').fill('3')
+        page.locator('#priorityMethod').select_option('score_diverse')
+        page.get_by_role('button', name='Build review queue', exact=True).click()
+        wait_for_js(page, "document.getElementById('prioritySelected').textContent === '3 selected'")
+        assert page.locator('#priorityItems button').count() == 3
+        message = page.locator('#prioritySummary').inner_text()
+        assert '3 of ' in message and 'equal-K uniform' in message
+        assert 'No pathology labels were consulted' in message
+        page.locator('#priorityItems button').first.click()
+        wait_for_js(page, "document.getElementById('frameImage').complete && document.getElementById('frameImage').naturalWidth > 0")
+        assert page.locator('#savedCount').inner_text() == '1'
+        checks.append('Browser builds scored, chronology-diverse exact-K queue; navigation preserves human review')
+        page.locator('#priorityMethod').select_option('uniform')
+        page.get_by_role('button', name='Build review queue', exact=True).click()
+        wait_for_js(page, "document.getElementById('prioritySelected').textContent === '3 selected'")
+        assert '0 versus 0' not in page.locator('#prioritySummary').inner_text() or heldout['frame_count'] <= 3
+        checks.append('Browser offers independent equal-budget uniform comparator without changing notes')
         page.set_viewport_size({'width':1440,'height':1050})
         page.locator('#toast').wait_for(state='hidden')
         page.screenshot(path=str(out/'local-model-software-test.png'), full_page=True)
