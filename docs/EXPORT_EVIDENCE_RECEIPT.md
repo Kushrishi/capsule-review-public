@@ -8,6 +8,14 @@ Capsule Review can already export a selected review containing original-frame re
 
 The report never reads source clinical labels, makes diagnoses, assumes that selected images were human-viewed, or declares source-index time coverage. Its source-agnostic accounting is compatible with Galar fitting studies, technical Rhode Island sequences, unnamed local PNGs, and synthetic local test data. **Do not upload patient/reviewer data to GitHub or hosted CI.**
 
+## New one-click verification in the local browser
+
+The examination view now has a **Verify evidence** button beside **Export review**. It becomes available once there is a bookmarked/noted frame or a marked interval. Saving draft notes happens before verification. The localhost-only application serializes the actual review ZIP into a temporary, local private directory, reopens it with the exact same integrity reader as the standalone CLI, retrieves the complete local study manifest, reconstructs all current selections and histories, then removes the temporary ZIP. The browser receives **only aggregate counts**, not notes, image bytes or private original frame identifiers. The result explicitly says how many imported interval-interior images were omitted and shows the nearest selected imported-position distance beside the identical-K midpoint-uniform comparator.
+
+A changed bookmark, note or marked interval invalidates the prior browser result: the user must verify again. Failures report that evidence was **not verified**; they never show a green success receipt. This is a convenience layer over the identical offline engineering protocol, not an alternative source for original Galar corrected labels and not a clinical diagnostic test.
+
+The independent CLI below remains useful when verifying an archived ZIP from a **different** time or trusted workspace, because the in-viewer action audits the **current** live workspace state. Automatic browser verification cannot prove historical reader behavior or the original source pixels of images not selected into an export.
+
 ## How to run with an existing local review
 
 1. In the local viewer, export the study's ZIP using **Export selected review**. The ZIP includes full reviewer history and only the selected PNGs.
