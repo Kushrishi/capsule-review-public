@@ -328,7 +328,7 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
     def priority(study_id: str, run: int = Query(..., ge=1),
                  label: str = Query(..., min_length=1, max_length=120),
                  selected_count: int = Query(..., ge=1, le=200_000),
-                 method: str = Query('score_diverse'),
+                 method: str = Query('score_bin'),
                  offset: int = Query(0, ge=0),
                  page_size: int = Query(20, ge=1, le=50)):
         """Read-only exact-workload model/chronology queue, no source labels."""
