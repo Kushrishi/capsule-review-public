@@ -1,0 +1,418 @@
+{
+  "capture_timestamps_available": false,
+  "clinical_validation": false,
+  "historical_study": "s288",
+  "independent_patient_groups_confirmed": false,
+  "new_studies": [
+    "s280",
+    "s284"
+  ],
+  "outcome": "anatomical folder transition reach and source-index coverage; NOT pathology sensitivity",
+  "per_study": {
+    "s280": {
+      "anatomy_boundary_count": 3,
+      "image_count": 4273,
+      "results": [
+        {
+          "budget": 0.05,
+          "global_change": {
+            "boundary_hits_5": 2,
+            "max_nearest_position_distance": 219,
+            "mean_nearest_position_distance": 33.58366
+          },
+          "random_anchored": {
+            "boundary_hits_5": 1.75,
+            "max_nearest_position_distance": 57.1,
+            "mean_nearest_position_distance": 9.62276
+          },
+          "selected": 214,
+          "stratified_change": {
+            "boundary_hits_5": 1,
+            "max_nearest_position_distance": 20,
+            "mean_nearest_position_distance": 6.02598
+          },
+          "uniform": {
+            "boundary_hits_5": 2,
+            "max_nearest_position_distance": 10,
+            "mean_nearest_position_distance": 5.01287
+          }
+        },
+        {
+          "budget": 0.1,
+          "global_change": {
+            "boundary_hits_5": 2,
+            "max_nearest_position_distance": 155,
+            "mean_nearest_position_distance": 19.28247
+          },
+          "random_anchored": {
+            "boundary_hits_5": 2.27,
+            "max_nearest_position_distance": 30.68,
+            "mean_nearest_position_distance": 4.69001
+          },
+          "selected": 428,
+          "stratified_change": {
+            "boundary_hits_5": 2,
+            "max_nearest_position_distance": 10,
+            "mean_nearest_position_distance": 2.93798
+          },
+          "uniform": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 5,
+            "mean_nearest_position_distance": 2.50059
+          }
+        },
+        {
+          "budget": 0.25,
+          "global_change": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 71,
+            "mean_nearest_position_distance": 6.65855
+          },
+          "random_anchored": {
+            "boundary_hits_5": 2.91,
+            "max_nearest_position_distance": 13.45,
+            "mean_nearest_position_distance": 1.7124
+          },
+          "selected": 1069,
+          "stratified_change": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 4,
+            "mean_nearest_position_distance": 1.14674
+          },
+          "uniform": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 2,
+            "mean_nearest_position_distance": 0.99977
+          }
+        }
+      ],
+      "role": "prespecified / to interpret with dataset limitations",
+      "source_zip_sha256": "2f6e407a17820e56a1c6af34c6d9853b35ca24fe324336e0b13a8a779a7e14d8"
+    },
+    "s284": {
+      "anatomy_boundary_count": 3,
+      "image_count": 5117,
+      "results": [
+        {
+          "budget": 0.05,
+          "global_change": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 235,
+            "mean_nearest_position_distance": 42.19523
+          },
+          "random_anchored": {
+            "boundary_hits_5": 1.26,
+            "max_nearest_position_distance": 60.4,
+            "mean_nearest_position_distance": 9.67326
+          },
+          "selected": 256,
+          "stratified_change": {
+            "boundary_hits_5": 2,
+            "max_nearest_position_distance": 20,
+            "mean_nearest_position_distance": 6.07954
+          },
+          "uniform": {
+            "boundary_hits_5": 1,
+            "max_nearest_position_distance": 10,
+            "mean_nearest_position_distance": 5.01466
+          }
+        },
+        {
+          "budget": 0.1,
+          "global_change": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 141,
+            "mean_nearest_position_distance": 21.93688
+          },
+          "random_anchored": {
+            "boundary_hits_5": 2,
+            "max_nearest_position_distance": 32.11,
+            "mean_nearest_position_distance": 4.70334
+          },
+          "selected": 512,
+          "stratified_change": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 10,
+            "mean_nearest_position_distance": 2.95896
+          },
+          "uniform": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 5,
+            "mean_nearest_position_distance": 2.50244
+          }
+        },
+        {
+          "budget": 0.25,
+          "global_change": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 94,
+            "mean_nearest_position_distance": 7.74829
+          },
+          "random_anchored": {
+            "boundary_hits_5": 2.83,
+            "max_nearest_position_distance": 13.69,
+            "mean_nearest_position_distance": 1.71074
+          },
+          "selected": 1280,
+          "stratified_change": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 3,
+            "mean_nearest_position_distance": 1.14716
+          },
+          "uniform": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 2,
+            "mean_nearest_position_distance": 0.9998
+          }
+        }
+      ],
+      "role": "prespecified / to interpret with dataset limitations",
+      "source_zip_sha256": "42eeb48d8ca640c8e3b18dfcf89d98903f6165ca85dbdb9e4c7192be1e107633"
+    },
+    "s288": {
+      "anatomy_boundary_count": 3,
+      "image_count": 4189,
+      "results": [
+        {
+          "budget": 0.05,
+          "global_change": {
+            "boundary_hits_5": 2,
+            "max_nearest_position_distance": 281,
+            "mean_nearest_position_distance": 32.71783
+          },
+          "random_anchored": {
+            "boundary_hits_5": 1.7,
+            "max_nearest_position_distance": 57.03,
+            "mean_nearest_position_distance": 9.62768
+          },
+          "selected": 210,
+          "stratified_change": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 20,
+            "mean_nearest_position_distance": 5.98233
+          },
+          "uniform": {
+            "boundary_hits_5": 2,
+            "max_nearest_position_distance": 10,
+            "mean_nearest_position_distance": 5.00836
+          }
+        },
+        {
+          "budget": 0.1,
+          "global_change": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 225,
+            "mean_nearest_position_distance": 21.01313
+          },
+          "random_anchored": {
+            "boundary_hits_5": 2.32,
+            "max_nearest_position_distance": 30.88,
+            "mean_nearest_position_distance": 4.70359
+          },
+          "selected": 419,
+          "stratified_change": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 9,
+            "mean_nearest_position_distance": 2.97446
+          },
+          "uniform": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 5,
+            "mean_nearest_position_distance": 2.50418
+          }
+        },
+        {
+          "budget": 0.25,
+          "global_change": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 192,
+            "mean_nearest_position_distance": 12.35164
+          },
+          "random_anchored": {
+            "boundary_hits_5": 2.89,
+            "max_nearest_position_distance": 13.44,
+            "mean_nearest_position_distance": 1.71327
+          },
+          "selected": 1048,
+          "stratified_change": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 3,
+            "mean_nearest_position_distance": 1.15947
+          },
+          "uniform": {
+            "boundary_hits_5": 3,
+            "max_nearest_position_distance": 2,
+            "mean_nearest_position_distance": 0.99976
+          }
+        }
+      ],
+      "role": "exploratory / previously inspected",
+      "source_zip_sha256": "145dad913880a155c7ac5942742e1941cb85c9508dd835e8a444ee66a7b0828e"
+    }
+  },
+  "source": "Rhode Island GI VCE, Charoen et al. (2022), original published article",
+  "spec_sha256": "c92500af677a12323ea5b8ebf43feb1b17f41bcf44ccfa80e94f28a19289399e",
+  "study_count": 3,
+  "study_macro": {
+    "all_three": [
+      {
+        "budget": 0.05,
+        "methods": {
+          "global_change": {
+            "mean_anatomy_boundaries_hit_5_of_3": 2.33333,
+            "mean_max_nearest_frame_distance": 245,
+            "mean_nearest_frame_distance": 36.16557
+          },
+          "random_anchored": {
+            "mean_anatomy_boundaries_hit_5_of_3": 1.57,
+            "mean_max_nearest_frame_distance": 58.17667,
+            "mean_nearest_frame_distance": 9.64123
+          },
+          "stratified_change": {
+            "mean_anatomy_boundaries_hit_5_of_3": 2,
+            "mean_max_nearest_frame_distance": 20,
+            "mean_nearest_frame_distance": 6.02928
+          },
+          "uniform": {
+            "mean_anatomy_boundaries_hit_5_of_3": 1.66667,
+            "mean_max_nearest_frame_distance": 10,
+            "mean_nearest_frame_distance": 5.01196
+          }
+        },
+        "studies": 3
+      },
+      {
+        "budget": 0.1,
+        "methods": {
+          "global_change": {
+            "mean_anatomy_boundaries_hit_5_of_3": 2.66667,
+            "mean_max_nearest_frame_distance": 173.66667,
+            "mean_nearest_frame_distance": 20.74416
+          },
+          "random_anchored": {
+            "mean_anatomy_boundaries_hit_5_of_3": 2.19667,
+            "mean_max_nearest_frame_distance": 31.22333,
+            "mean_nearest_frame_distance": 4.69898
+          },
+          "stratified_change": {
+            "mean_anatomy_boundaries_hit_5_of_3": 2.66667,
+            "mean_max_nearest_frame_distance": 9.66667,
+            "mean_nearest_frame_distance": 2.95713
+          },
+          "uniform": {
+            "mean_anatomy_boundaries_hit_5_of_3": 3,
+            "mean_max_nearest_frame_distance": 5,
+            "mean_nearest_frame_distance": 2.5024
+          }
+        },
+        "studies": 3
+      },
+      {
+        "budget": 0.25,
+        "methods": {
+          "global_change": {
+            "mean_anatomy_boundaries_hit_5_of_3": 3,
+            "mean_max_nearest_frame_distance": 119,
+            "mean_nearest_frame_distance": 8.91949
+          },
+          "random_anchored": {
+            "mean_anatomy_boundaries_hit_5_of_3": 2.87667,
+            "mean_max_nearest_frame_distance": 13.52667,
+            "mean_nearest_frame_distance": 1.71214
+          },
+          "stratified_change": {
+            "mean_anatomy_boundaries_hit_5_of_3": 3,
+            "mean_max_nearest_frame_distance": 3.33333,
+            "mean_nearest_frame_distance": 1.15112
+          },
+          "uniform": {
+            "mean_anatomy_boundaries_hit_5_of_3": 3,
+            "mean_max_nearest_frame_distance": 2,
+            "mean_nearest_frame_distance": 0.99978
+          }
+        },
+        "studies": 3
+      }
+    ],
+    "new_two": [
+      {
+        "budget": 0.05,
+        "methods": {
+          "global_change": {
+            "mean_anatomy_boundaries_hit_5_of_3": 2.5,
+            "mean_max_nearest_frame_distance": 227,
+            "mean_nearest_frame_distance": 37.88945
+          },
+          "random_anchored": {
+            "mean_anatomy_boundaries_hit_5_of_3": 1.505,
+            "mean_max_nearest_frame_distance": 58.75,
+            "mean_nearest_frame_distance": 9.64801
+          },
+          "stratified_change": {
+            "mean_anatomy_boundaries_hit_5_of_3": 1.5,
+            "mean_max_nearest_frame_distance": 20,
+            "mean_nearest_frame_distance": 6.05276
+          },
+          "uniform": {
+            "mean_anatomy_boundaries_hit_5_of_3": 1.5,
+            "mean_max_nearest_frame_distance": 10,
+            "mean_nearest_frame_distance": 5.01377
+          }
+        },
+        "studies": 2
+      },
+      {
+        "budget": 0.1,
+        "methods": {
+          "global_change": {
+            "mean_anatomy_boundaries_hit_5_of_3": 2.5,
+            "mean_max_nearest_frame_distance": 148,
+            "mean_nearest_frame_distance": 20.60967
+          },
+          "random_anchored": {
+            "mean_anatomy_boundaries_hit_5_of_3": 2.135,
+            "mean_max_nearest_frame_distance": 31.395,
+            "mean_nearest_frame_distance": 4.69667
+          },
+          "stratified_change": {
+            "mean_anatomy_boundaries_hit_5_of_3": 2.5,
+            "mean_max_nearest_frame_distance": 10,
+            "mean_nearest_frame_distance": 2.94847
+          },
+          "uniform": {
+            "mean_anatomy_boundaries_hit_5_of_3": 3,
+            "mean_max_nearest_frame_distance": 5,
+            "mean_nearest_frame_distance": 2.50151
+          }
+        },
+        "studies": 2
+      },
+      {
+        "budget": 0.25,
+        "methods": {
+          "global_change": {
+            "mean_anatomy_boundaries_hit_5_of_3": 3,
+            "mean_max_nearest_frame_distance": 82.5,
+            "mean_nearest_frame_distance": 7.20342
+          },
+          "random_anchored": {
+            "mean_anatomy_boundaries_hit_5_of_3": 2.87,
+            "mean_max_nearest_frame_distance": 13.57,
+            "mean_nearest_frame_distance": 1.71157
+          },
+          "stratified_change": {
+            "mean_anatomy_boundaries_hit_5_of_3": 3,
+            "mean_max_nearest_frame_distance": 3.5,
+            "mean_nearest_frame_distance": 1.14695
+          },
+          "uniform": {
+            "mean_anatomy_boundaries_hit_5_of_3": 3,
+            "mean_max_nearest_frame_distance": 2,
+            "mean_nearest_frame_distance": 0.99979
+          }
+        },
+        "studies": 2
+      }
+    ]
+  }
+}

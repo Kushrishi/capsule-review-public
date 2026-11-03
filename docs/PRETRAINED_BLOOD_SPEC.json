@@ -1,0 +1,23 @@
+{
+  "schema_version": "1",
+  "purpose": "ImageNet-pretrained frozen visual feature baseline for Galar blood-annotation visibility; does not establish pathology detection, lesion sensitivity or clinical utility",
+  "experiment_role": "historical exploratory development; examination 9 and 10 are previously inspected, not independent tests",
+  "prepared_before_first_feature_inference": true,
+  "frozen_manifest": "capsule-blood-sparse-v1; sha256 4d3e0aba675383d1d5441fca0e1b6e0d226a61c2ae30c780c842cfbfd92c40fb",
+  "train_examinations": [1,2,3,4,5,6,7,8],
+  "development_examinations": [9,10],
+  "training_labels": "binary Galar blood annotation only; zero does not imply absence of every pathology",
+  "backbone": "torchvision mobilenet_v3_small IMAGENET1K_V1; classifier removed; global average pooled final feature tensor, 576 dimensions",
+  "backbone_url": "https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth",
+  "backbone_expected_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+  "preprocessing": "torchvision IMAGENET1K_V1 default: RGB, resize shorter side 256 bilinear, center crop 224, ImageNet RGB mean/std",
+  "head": "binary logistic linear probe; train-feature standardization; train-only inverse-positive frequency BCE; fixed L2=0.01; torch LBFGS max_iter=100, lr=1 with strong-Wolfe search",
+  "trainable_layers": "linear probe only, full ImageNet backbone frozen",
+  "seed": 17,
+  "hyperparameter_selection": "none; do not use development labels or metrics for fitting/preprocessing or hyperparameter selection",
+  "evaluations": "ROC-AUC, average precision, per-examination results (null when no positive), and 5/10/25/50/75/100% sampled-frame ranking curves. Compare frozen legacy CNN and fixed redness score on identical images",
+  "review_budget_interpretation": "fraction of the available sparse sampled images, not full-examination time nor clinical workflow",
+  "future_reserve": "examinations 11-20 are not yet acquired; source authors' 61-80 holdout remains unopened",
+  "repository_policy": "aggregate metrics + reproducible code only. Keep ImageNet weights, Galar images/labels, individual scores/manifest and private viewer studies outside Git. No new software licence.",
+  "analysis_commitment": "report all results, including negative generalization and exam-10-only comparison, without further model search during this run"
+}

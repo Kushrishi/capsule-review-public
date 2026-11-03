@@ -1,0 +1,382 @@
+{
+  "status": "historical exploratory development only, not independent pathology validation",
+  "model": "torchvision ImageNet MobileNetV3-small frozen global-average-pool features + train-only weighted regularized logistic probe",
+  "frozen_spec_sha256": "1bd8dedaca37e41709e84f993b422193d78797744e167e92ee08b30d567fb7cb",
+  "frozen_manifest_sha256": "4d3e0aba675383d1d5441fca0e1b6e0d226a61c2ae30c780c842cfbfd92c40fb",
+  "official_backbone_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+  "preprocessing": "torchvision IMAGENET1K_V1 deterministic validation transform",
+  "label": "Galar v2 explicit blood; absent blood != all-pathology normal",
+  "train_examinations": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "historical_development_examinations": [
+    9,
+    10
+  ],
+  "training_support": {
+    "1": {
+      "positive": 22,
+      "negative": 490
+    },
+    "2": {
+      "positive": 1,
+      "negative": 511
+    },
+    "3": {
+      "positive": 0,
+      "negative": 512
+    },
+    "4": {
+      "positive": 2,
+      "negative": 510
+    },
+    "5": {
+      "positive": 0,
+      "negative": 512
+    },
+    "6": {
+      "positive": 6,
+      "negative": 506
+    },
+    "7": {
+      "positive": 208,
+      "negative": 304
+    },
+    "8": {
+      "positive": 0,
+      "negative": 512
+    }
+  },
+  "evaluation": {
+    "aggregate": {
+      "roc_auc": 0.6345264352245816,
+      "average_precision": 0.3537014363893195,
+      "positive": 213,
+      "negative": 811
+    },
+    "by_examination": {
+      "9": {
+        "roc_auc": null,
+        "average_precision": null,
+        "positive": 0,
+        "negative": 512
+      },
+      "10": {
+        "roc_auc": 0.6677500902853012,
+        "average_precision": 0.6274669046700174,
+        "positive": 213,
+        "negative": 299
+      }
+    },
+    "budgets": {
+      "5": {
+        "per_examination": {
+          "9": {
+            "frames": 512,
+            "selected": 25,
+            "blood_positive": 0,
+            "model_positive_hits": 0,
+            "model_positive_recall": null,
+            "uniform_positive_hits": 0,
+            "uniform_positive_recall": null,
+            "random_mean_positive_hits": 0.0,
+            "random_mean_positive_recall": null,
+            "model_false_positive_selections": 25
+          },
+          "10": {
+            "frames": 512,
+            "selected": 25,
+            "blood_positive": 213,
+            "model_positive_hits": 22,
+            "model_positive_recall": 0.10328638497652583,
+            "uniform_positive_hits": 9,
+            "uniform_positive_recall": 0.04225352112676056,
+            "random_mean_positive_hits": 10.56,
+            "random_mean_positive_recall": 0.049577464788732394,
+            "model_false_positive_selections": 3
+          }
+        },
+        "pooled_positive_frame_recall": 0.10328638497652583,
+        "examination_macro_positive_frame_recall": 0.10328638497652583
+      },
+      "10": {
+        "per_examination": {
+          "9": {
+            "frames": 512,
+            "selected": 51,
+            "blood_positive": 0,
+            "model_positive_hits": 0,
+            "model_positive_recall": null,
+            "uniform_positive_hits": 0,
+            "uniform_positive_recall": null,
+            "random_mean_positive_hits": 0.0,
+            "random_mean_positive_recall": null,
+            "model_false_positive_selections": 51
+          },
+          "10": {
+            "frames": 512,
+            "selected": 51,
+            "blood_positive": 213,
+            "model_positive_hits": 40,
+            "model_positive_recall": 0.18779342723004694,
+            "uniform_positive_hits": 21,
+            "uniform_positive_recall": 0.09859154929577464,
+            "random_mean_positive_hits": 21.07,
+            "random_mean_positive_recall": 0.09892018779342723,
+            "model_false_positive_selections": 11
+          }
+        },
+        "pooled_positive_frame_recall": 0.18779342723004694,
+        "examination_macro_positive_frame_recall": 0.18779342723004694
+      },
+      "25": {
+        "per_examination": {
+          "9": {
+            "frames": 512,
+            "selected": 128,
+            "blood_positive": 0,
+            "model_positive_hits": 0,
+            "model_positive_recall": null,
+            "uniform_positive_hits": 0,
+            "uniform_positive_recall": null,
+            "random_mean_positive_hits": 0.0,
+            "random_mean_positive_recall": null,
+            "model_false_positive_selections": 128
+          },
+          "10": {
+            "frames": 512,
+            "selected": 128,
+            "blood_positive": 213,
+            "model_positive_hits": 83,
+            "model_positive_recall": 0.38967136150234744,
+            "uniform_positive_hits": 51,
+            "uniform_positive_recall": 0.23943661971830985,
+            "random_mean_positive_hits": 52.84,
+            "random_mean_positive_recall": 0.24807511737089202,
+            "model_false_positive_selections": 45
+          }
+        },
+        "pooled_positive_frame_recall": 0.38967136150234744,
+        "examination_macro_positive_frame_recall": 0.38967136150234744
+      }
+    }
+  },
+  "budgets": {
+    "5": {
+      "9": {
+        "total": 512,
+        "selected": 25,
+        "blood_positive": 0,
+        "model_positive_hits": 0,
+        "uniform_positive_hits": 0,
+        "seeded_random_mean_hits": 0.0,
+        "model_positive_recall": null,
+        "uniform_positive_recall": null,
+        "model_selected_blood_label_negative": 25
+      },
+      "10": {
+        "total": 512,
+        "selected": 25,
+        "blood_positive": 213,
+        "model_positive_hits": 22,
+        "uniform_positive_hits": 9,
+        "seeded_random_mean_hits": 10.56,
+        "model_positive_recall": 0.10328638497652583,
+        "uniform_positive_recall": 0.04225352112676056,
+        "model_selected_blood_label_negative": 3
+      }
+    },
+    "10": {
+      "9": {
+        "total": 512,
+        "selected": 51,
+        "blood_positive": 0,
+        "model_positive_hits": 0,
+        "uniform_positive_hits": 0,
+        "seeded_random_mean_hits": 0.0,
+        "model_positive_recall": null,
+        "uniform_positive_recall": null,
+        "model_selected_blood_label_negative": 51
+      },
+      "10": {
+        "total": 512,
+        "selected": 51,
+        "blood_positive": 213,
+        "model_positive_hits": 40,
+        "uniform_positive_hits": 21,
+        "seeded_random_mean_hits": 21.07,
+        "model_positive_recall": 0.18779342723004694,
+        "uniform_positive_recall": 0.09859154929577464,
+        "model_selected_blood_label_negative": 11
+      }
+    },
+    "25": {
+      "9": {
+        "total": 512,
+        "selected": 128,
+        "blood_positive": 0,
+        "model_positive_hits": 0,
+        "uniform_positive_hits": 0,
+        "seeded_random_mean_hits": 0.0,
+        "model_positive_recall": null,
+        "uniform_positive_recall": null,
+        "model_selected_blood_label_negative": 128
+      },
+      "10": {
+        "total": 512,
+        "selected": 128,
+        "blood_positive": 213,
+        "model_positive_hits": 83,
+        "uniform_positive_hits": 51,
+        "seeded_random_mean_hits": 52.84,
+        "model_positive_recall": 0.38967136150234744,
+        "uniform_positive_recall": 0.23943661971830985,
+        "model_selected_blood_label_negative": 45
+      }
+    },
+    "50": {
+      "9": {
+        "total": 512,
+        "selected": 256,
+        "blood_positive": 0,
+        "model_positive_hits": 0,
+        "uniform_positive_hits": 0,
+        "seeded_random_mean_hits": 0.0,
+        "model_positive_recall": null,
+        "uniform_positive_recall": null,
+        "model_selected_blood_label_negative": 256
+      },
+      "10": {
+        "total": 512,
+        "selected": 256,
+        "blood_positive": 213,
+        "model_positive_hits": 136,
+        "uniform_positive_hits": 107,
+        "seeded_random_mean_hits": 106.06,
+        "model_positive_recall": 0.6384976525821596,
+        "uniform_positive_recall": 0.5023474178403756,
+        "model_selected_blood_label_negative": 120
+      }
+    },
+    "75": {
+      "9": {
+        "total": 512,
+        "selected": 384,
+        "blood_positive": 0,
+        "model_positive_hits": 0,
+        "uniform_positive_hits": 0,
+        "seeded_random_mean_hits": 0.0,
+        "model_positive_recall": null,
+        "uniform_positive_recall": null,
+        "model_selected_blood_label_negative": 384
+      },
+      "10": {
+        "total": 512,
+        "selected": 384,
+        "blood_positive": 213,
+        "model_positive_hits": 177,
+        "uniform_positive_hits": 157,
+        "seeded_random_mean_hits": 159.93,
+        "model_positive_recall": 0.8309859154929577,
+        "uniform_positive_recall": 0.7370892018779343,
+        "model_selected_blood_label_negative": 207
+      }
+    },
+    "100": {
+      "9": {
+        "total": 512,
+        "selected": 512,
+        "blood_positive": 0,
+        "model_positive_hits": 0,
+        "uniform_positive_hits": 0,
+        "seeded_random_mean_hits": 0.0,
+        "model_positive_recall": null,
+        "uniform_positive_recall": null,
+        "model_selected_blood_label_negative": 512
+      },
+      "10": {
+        "total": 512,
+        "selected": 512,
+        "blood_positive": 213,
+        "model_positive_hits": 213,
+        "uniform_positive_hits": 213,
+        "seeded_random_mean_hits": 213.0,
+        "model_positive_recall": 1.0,
+        "uniform_positive_recall": 1.0,
+        "model_selected_blood_label_negative": 299
+      }
+    }
+  },
+  "train_only_probe_loss": 0.1287258739255937,
+  "limitations": [
+    "Exams 9/10 were examined during earlier work, no fresh held-out test.",
+    "Only exam 10 contains positive blood-labelled development frames.",
+    "Training positives are concentrated in exam 7 (208 of 239).",
+    "Frame scoring on 512 sparse images/examination; not full-sequence pathology interval coverage.",
+    "Uncalibrated ImageNet feature-transfer score, not a patient diagnosis or severity estimate.",
+    "Patient independence, site/device generalization, and clinical efficacy unverified."
+  ],
+  "original_cnn_unchanged_aggregate": {
+    "aggregate": {
+      "roc_auc": 0.7261886154576442,
+      "average_precision": 0.622537869374297,
+      "positive": 213,
+      "negative": 811
+    },
+    "by_examination": {
+      "9": {
+        "roc_auc": null,
+        "average_precision": null,
+        "positive": 0,
+        "negative": 512
+      },
+      "10": {
+        "roc_auc": 0.7079152731326643,
+        "average_precision": 0.7469551464617987,
+        "positive": 213,
+        "negative": 299
+      }
+    }
+  },
+  "original_redness_unchanged_aggregate": {
+    "aggregate": {
+      "roc_auc": 0.5452956125573818,
+      "average_precision": 0.21220618506723532,
+      "positive": 213,
+      "negative": 811
+    },
+    "by_examination": {
+      "9": {
+        "roc_auc": null,
+        "average_precision": null,
+        "positive": 0,
+        "negative": 512
+      },
+      "10": {
+        "roc_auc": 0.6887276838287263,
+        "average_precision": 0.5308863694579602,
+        "positive": 213,
+        "negative": 299
+      }
+    }
+  },
+  "fitted_probe_sha256": "8502076b478979a1917065eada289ed5e9b625e3d1e46097e3c0423381344b98",
+  "independent_replay": {
+    "status": "independent replay passed",
+    "data_kind": "real Galar historical development",
+    "frames_sha256_and_labels_checked": 1024,
+    "all_saved_scores_reproduced": true,
+    "max_score_absolute_difference": 0,
+    "frozen_source_manifest_sha256": "4d3e0aba675383d1d5441fca0e1b6e0d226a61c2ae30c780c842cfbfd92c40fb",
+    "official_pretrained_weights_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+    "probe_sha256": "8502076b478979a1917065eada289ed5e9b625e3d1e46097e3c0423381344b98",
+    "clinical_validation": false
+  }
+}

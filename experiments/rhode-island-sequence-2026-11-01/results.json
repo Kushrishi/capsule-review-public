@@ -1,0 +1,94 @@
+{
+  "archive_bytes": 79873437,
+  "zip_integrity": "all members CRC passed",
+  "member_count": 4189,
+  "image_count": 4189,
+  "source_index_delta_counts": {
+    "1": 4188
+  },
+  "missing_indices_between_extremes": 0,
+  "unique_source_ids": 4189,
+  "duplicate_file_excess": 0,
+  "duplicate_decoded_rgb_excess": 0,
+  "adjacent_exact_duplicates": 0,
+  "zip_storage_order_equals_numeric_order": true,
+  "actual_formats": {
+    "JPEG": 4189
+  },
+  "dimensions": {
+    "320x320": 4189
+  },
+  "anatomy_counts": {
+    "1_esophagus": 4,
+    "2_stomach": 313,
+    "3_small_bowel": 2575,
+    "4_colon": 1297
+  },
+  "adjacent_thumbnail_mae": {
+    "n": 4188,
+    "mean": 0.04460686817765236,
+    "median": 0.04123487323522568,
+    "p95": 0.08792869001626968,
+    "max": 0.19546888768672943
+  },
+  "seed17_shuffled_thumbnail_mae": {
+    "n": 4188,
+    "mean": 0.08284304291009903,
+    "median": 0.0804106667637825,
+    "p95": 0.12470372021198273,
+    "max": 0.19422423839569092
+  },
+  "policies": [
+    {
+      "budget": 0.05,
+      "selected_count": 210,
+      "max_source_index_gap": 21,
+      "max_nearest_position_distance": 10,
+      "bins_100_hit": 42,
+      "bins_100_total": 42,
+      "anatomy_categories": {
+        "1_esophagus": 1,
+        "2_stomach": 15,
+        "3_small_bowel": 129,
+        "4_colon": 65
+      }
+    },
+    {
+      "budget": 0.1,
+      "selected_count": 419,
+      "max_source_index_gap": 11,
+      "max_nearest_position_distance": 5,
+      "bins_100_hit": 42,
+      "bins_100_total": 42,
+      "anatomy_categories": {
+        "1_esophagus": 1,
+        "2_stomach": 31,
+        "3_small_bowel": 257,
+        "4_colon": 130
+      }
+    },
+    {
+      "budget": 0.25,
+      "selected_count": 1048,
+      "max_source_index_gap": 4,
+      "max_nearest_position_distance": 2,
+      "bins_100_hit": 42,
+      "bins_100_total": 42,
+      "anatomy_categories": {
+        "1_esophagus": 1,
+        "2_stomach": 79,
+        "3_small_bowel": 643,
+        "4_colon": 325
+      }
+    }
+  ],
+  "viewer": {
+    "frames_verified": 4189,
+    "source_hashes_match": true,
+    "display_pixels_match": true,
+    "native_numeric_source_ids_preserved": false
+  },
+  "capture_timestamps_available": false,
+  "clinical_ground_truth_evaluated": false,
+  "scope": "one published-export sequence; no clinical ground-truth endpoint"
+}

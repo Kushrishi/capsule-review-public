@@ -1,0 +1,633 @@
+{
+  "classification_target": "corrected binary visible blood annotation, not diagnosis",
+  "enriched_union_secondary": {
+    "cnn_average_precision": 0.45862657320083317,
+    "cnn_roc_auc": 0.6951566906974714,
+    "images": 3000,
+    "positive": 514,
+    "red_average_precision": 0.15480523418363482,
+    "red_roc_auc": 0.47002044131963905
+  },
+  "experimental_status": "post-acquisition nonblinded training-candidate transfer; no clinical validation",
+  "label_blind_total": {
+    "cnn_average_precision": 0.48746908048073895,
+    "cnn_roc_auc": 0.8714840538625191,
+    "images": 1536,
+    "positive": 125,
+    "red_average_precision": 0.08862823756573529,
+    "red_roc_auc": 0.49568816442239866
+  },
+  "limitations": [
+    "Exam 21 has 1 and exam 23 has 4 labelled positives among 512 uniformly sampled images; discrimination is highly unstable.",
+    "Examinations are not confirmed unique patients. The acquired studies were selected for training based on already inspected labels.",
+    "Annotation positives are not distinct lesions, temporal intervals, reader time or clinical diagnostic events.",
+    "The union of pathology-enriched training and reference images is not a representative test distribution.",
+    "Future reserved evaluation examinations 11-20 and authors' 61-80 remain unopened.",
+    "No architecture, checkpoint, hyperparameters, or thresholds were selected from these results."
+  ],
+  "model_training": "Original CNN trained only on 1-8, checkpoint fixed on historical inspected 9-10; no retraining",
+  "model_weights_sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+  "per_examination": {
+    "21": {
+      "enriched_union_cnn": {
+        "average_precision": 0.04311126100568036,
+        "budgets": {
+          "10": {
+            "blood_positive_images": 5,
+            "positive_images_total": 13,
+            "selected_images": 99
+          },
+          "100": {
+            "blood_positive_images": 13,
+            "positive_images_total": 13,
+            "selected_images": 993
+          },
+          "25": {
+            "blood_positive_images": 12,
+            "positive_images_total": 13,
+            "selected_images": 248
+          },
+          "5": {
+            "blood_positive_images": 0,
+            "positive_images_total": 13,
+            "selected_images": 49
+          },
+          "50": {
+            "blood_positive_images": 13,
+            "positive_images_total": 13,
+            "selected_images": 496
+          },
+          "75": {
+            "blood_positive_images": 13,
+            "positive_images_total": 13,
+            "selected_images": 744
+          }
+        },
+        "roc_auc": 0.8489010989010989
+      },
+      "enriched_union_redness": {
+        "average_precision": 0.1109179219469177,
+        "budgets": {
+          "10": {
+            "blood_positive_images": 11,
+            "positive_images_total": 13,
+            "selected_images": 99
+          },
+          "100": {
+            "blood_positive_images": 13,
+            "positive_images_total": 13,
+            "selected_images": 993
+          },
+          "25": {
+            "blood_positive_images": 11,
+            "positive_images_total": 13,
+            "selected_images": 248
+          },
+          "5": {
+            "blood_positive_images": 7,
+            "positive_images_total": 13,
+            "selected_images": 49
+          },
+          "50": {
+            "blood_positive_images": 13,
+            "positive_images_total": 13,
+            "selected_images": 496
+          },
+          "75": {
+            "blood_positive_images": 13,
+            "positive_images_total": 13,
+            "selected_images": 744
+          }
+        },
+        "roc_auc": 0.8936420722135008
+      },
+      "enriched_union_support": {
+        "blood_positive": 13,
+        "images": 993
+      },
+      "reference_cnn": {
+        "average_precision": 0.011235955056179775,
+        "budgets": {
+          "10": {
+            "blood_positive_images": 0,
+            "positive_images_total": 1,
+            "selected_images": 51
+          },
+          "100": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 512
+          },
+          "25": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 128
+          },
+          "5": {
+            "blood_positive_images": 0,
+            "positive_images_total": 1,
+            "selected_images": 25
+          },
+          "50": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 256
+          },
+          "75": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 384
+          }
+        },
+        "roc_auc": 0.8277886497064579
+      },
+      "reference_redness": {
+        "average_precision": 0.05263157894736842,
+        "budgets": {
+          "10": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 51
+          },
+          "100": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 512
+          },
+          "25": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 128
+          },
+          "5": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 25
+          },
+          "50": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 256
+          },
+          "75": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 384
+          }
+        },
+        "roc_auc": 0.9647749510763209
+      },
+      "reference_support": {
+        "blood_positive": 1,
+        "images": 512
+      },
+      "reference_uniform": {
+        "budgets": {
+          "10": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 51
+          },
+          "100": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 512
+          },
+          "25": {
+            "blood_positive_images": 0,
+            "positive_images_total": 1,
+            "selected_images": 128
+          },
+          "5": {
+            "blood_positive_images": 0,
+            "positive_images_total": 1,
+            "selected_images": 25
+          },
+          "50": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 256
+          },
+          "75": {
+            "blood_positive_images": 1,
+            "positive_images_total": 1,
+            "selected_images": 384
+          }
+        }
+      }
+    },
+    "23": {
+      "enriched_union_cnn": {
+        "average_precision": 0.12879253974746604,
+        "budgets": {
+          "10": {
+            "blood_positive_images": 8,
+            "positive_images_total": 135,
+            "selected_images": 100
+          },
+          "100": {
+            "blood_positive_images": 135,
+            "positive_images_total": 135,
+            "selected_images": 1001
+          },
+          "25": {
+            "blood_positive_images": 10,
+            "positive_images_total": 135,
+            "selected_images": 250
+          },
+          "5": {
+            "blood_positive_images": 7,
+            "positive_images_total": 135,
+            "selected_images": 50
+          },
+          "50": {
+            "blood_positive_images": 14,
+            "positive_images_total": 135,
+            "selected_images": 500
+          },
+          "75": {
+            "blood_positive_images": 76,
+            "positive_images_total": 135,
+            "selected_images": 750
+          }
+        },
+        "roc_auc": 0.2877769224189545
+      },
+      "enriched_union_redness": {
+        "average_precision": 0.09634203068042056,
+        "budgets": {
+          "10": {
+            "blood_positive_images": 1,
+            "positive_images_total": 135,
+            "selected_images": 100
+          },
+          "100": {
+            "blood_positive_images": 135,
+            "positive_images_total": 135,
+            "selected_images": 1001
+          },
+          "25": {
+            "blood_positive_images": 6,
+            "positive_images_total": 135,
+            "selected_images": 250
+          },
+          "5": {
+            "blood_positive_images": 0,
+            "positive_images_total": 135,
+            "selected_images": 50
+          },
+          "50": {
+            "blood_positive_images": 38,
+            "positive_images_total": 135,
+            "selected_images": 500
+          },
+          "75": {
+            "blood_positive_images": 89,
+            "positive_images_total": 135,
+            "selected_images": 750
+          }
+        },
+        "roc_auc": 0.3505089384997004
+      },
+      "enriched_union_support": {
+        "blood_positive": 135,
+        "images": 1001
+      },
+      "reference_cnn": {
+        "average_precision": 0.005947521496875031,
+        "budgets": {
+          "10": {
+            "blood_positive_images": 0,
+            "positive_images_total": 4,
+            "selected_images": 51
+          },
+          "100": {
+            "blood_positive_images": 4,
+            "positive_images_total": 4,
+            "selected_images": 512
+          },
+          "25": {
+            "blood_positive_images": 0,
+            "positive_images_total": 4,
+            "selected_images": 128
+          },
+          "5": {
+            "blood_positive_images": 0,
+            "positive_images_total": 4,
+            "selected_images": 25
+          },
+          "50": {
+            "blood_positive_images": 0,
+            "positive_images_total": 4,
+            "selected_images": 256
+          },
+          "75": {
+            "blood_positive_images": 1,
+            "positive_images_total": 4,
+            "selected_images": 384
+          }
+        },
+        "roc_auc": 0.20275590551181102
+      },
+      "reference_redness": {
+        "average_precision": 0.008132310281290007,
+        "budgets": {
+          "10": {
+            "blood_positive_images": 0,
+            "positive_images_total": 4,
+            "selected_images": 51
+          },
+          "100": {
+            "blood_positive_images": 4,
+            "positive_images_total": 4,
+            "selected_images": 512
+          },
+          "25": {
+            "blood_positive_images": 0,
+            "positive_images_total": 4,
+            "selected_images": 128
+          },
+          "5": {
+            "blood_positive_images": 0,
+            "positive_images_total": 4,
+            "selected_images": 25
+          },
+          "50": {
+            "blood_positive_images": 2,
+            "positive_images_total": 4,
+            "selected_images": 256
+          },
+          "75": {
+            "blood_positive_images": 3,
+            "positive_images_total": 4,
+            "selected_images": 384
+          }
+        },
+        "roc_auc": 0.4173228346456693
+      },
+      "reference_support": {
+        "blood_positive": 4,
+        "images": 512
+      },
+      "reference_uniform": {
+        "budgets": {
+          "10": {
+            "blood_positive_images": 0,
+            "positive_images_total": 4,
+            "selected_images": 51
+          },
+          "100": {
+            "blood_positive_images": 4,
+            "positive_images_total": 4,
+            "selected_images": 512
+          },
+          "25": {
+            "blood_positive_images": 1,
+            "positive_images_total": 4,
+            "selected_images": 128
+          },
+          "5": {
+            "blood_positive_images": 0,
+            "positive_images_total": 4,
+            "selected_images": 25
+          },
+          "50": {
+            "blood_positive_images": 1,
+            "positive_images_total": 4,
+            "selected_images": 256
+          },
+          "75": {
+            "blood_positive_images": 4,
+            "positive_images_total": 4,
+            "selected_images": 384
+          }
+        }
+      }
+    },
+    "30": {
+      "enriched_union_cnn": {
+        "average_precision": 0.7749295815200696,
+        "budgets": {
+          "10": {
+            "blood_positive_images": 85,
+            "positive_images_total": 366,
+            "selected_images": 100
+          },
+          "100": {
+            "blood_positive_images": 366,
+            "positive_images_total": 366,
+            "selected_images": 1006
+          },
+          "25": {
+            "blood_positive_images": 210,
+            "positive_images_total": 366,
+            "selected_images": 251
+          },
+          "5": {
+            "blood_positive_images": 48,
+            "positive_images_total": 366,
+            "selected_images": 50
+          },
+          "50": {
+            "blood_positive_images": 297,
+            "positive_images_total": 366,
+            "selected_images": 503
+          },
+          "75": {
+            "blood_positive_images": 347,
+            "positive_images_total": 366,
+            "selected_images": 754
+          }
+        },
+        "roc_auc": 0.8447532445355193
+      },
+      "enriched_union_redness": {
+        "average_precision": 0.5324940762634827,
+        "budgets": {
+          "10": {
+            "blood_positive_images": 65,
+            "positive_images_total": 366,
+            "selected_images": 100
+          },
+          "100": {
+            "blood_positive_images": 366,
+            "positive_images_total": 366,
+            "selected_images": 1006
+          },
+          "25": {
+            "blood_positive_images": 140,
+            "positive_images_total": 366,
+            "selected_images": 251
+          },
+          "5": {
+            "blood_positive_images": 28,
+            "positive_images_total": 366,
+            "selected_images": 50
+          },
+          "50": {
+            "blood_positive_images": 243,
+            "positive_images_total": 366,
+            "selected_images": 503
+          },
+          "75": {
+            "blood_positive_images": 340,
+            "positive_images_total": 366,
+            "selected_images": 754
+          }
+        },
+        "roc_auc": 0.6981450648907069
+      },
+      "enriched_union_support": {
+        "blood_positive": 366,
+        "images": 1006
+      },
+      "reference_cnn": {
+        "average_precision": 0.732021645317707,
+        "budgets": {
+          "10": {
+            "blood_positive_images": 40,
+            "positive_images_total": 120,
+            "selected_images": 51
+          },
+          "100": {
+            "blood_positive_images": 120,
+            "positive_images_total": 120,
+            "selected_images": 512
+          },
+          "25": {
+            "blood_positive_images": 91,
+            "positive_images_total": 120,
+            "selected_images": 128
+          },
+          "5": {
+            "blood_positive_images": 21,
+            "positive_images_total": 120,
+            "selected_images": 25
+          },
+          "50": {
+            "blood_positive_images": 108,
+            "positive_images_total": 120,
+            "selected_images": 256
+          },
+          "75": {
+            "blood_positive_images": 118,
+            "positive_images_total": 120,
+            "selected_images": 384
+          }
+        },
+        "roc_auc": 0.890582482993197
+      },
+      "reference_redness": {
+        "average_precision": 0.4314007268407122,
+        "budgets": {
+          "10": {
+            "blood_positive_images": 28,
+            "positive_images_total": 120,
+            "selected_images": 51
+          },
+          "100": {
+            "blood_positive_images": 120,
+            "positive_images_total": 120,
+            "selected_images": 512
+          },
+          "25": {
+            "blood_positive_images": 55,
+            "positive_images_total": 120,
+            "selected_images": 128
+          },
+          "5": {
+            "blood_positive_images": 13,
+            "positive_images_total": 120,
+            "selected_images": 25
+          },
+          "50": {
+            "blood_positive_images": 86,
+            "positive_images_total": 120,
+            "selected_images": 256
+          },
+          "75": {
+            "blood_positive_images": 114,
+            "positive_images_total": 120,
+            "selected_images": 384
+          }
+        },
+        "roc_auc": 0.7258715986394545
+      },
+      "reference_support": {
+        "blood_positive": 120,
+        "images": 512
+      },
+      "reference_uniform": {
+        "budgets": {
+          "10": {
+            "blood_positive_images": 13,
+            "positive_images_total": 120,
+            "selected_images": 51
+          },
+          "100": {
+            "blood_positive_images": 120,
+            "positive_images_total": 120,
+            "selected_images": 512
+          },
+          "25": {
+            "blood_positive_images": 28,
+            "positive_images_total": 120,
+            "selected_images": 128
+          },
+          "5": {
+            "blood_positive_images": 7,
+            "positive_images_total": 120,
+            "selected_images": 25
+          },
+          "50": {
+            "blood_positive_images": 62,
+            "positive_images_total": 120,
+            "selected_images": 256
+          },
+          "75": {
+            "blood_positive_images": 91,
+            "positive_images_total": 120,
+            "selected_images": 384
+          }
+        }
+      }
+    }
+  },
+  "reference_subset_mechanism": "Source-position uniform and fixed before inference, no label-based sample enrichment",
+  "review_budget_denominator": "Each examination's 512 label-blind reference source images, not real video length or clinical reading time",
+  "source_integrity": {
+    "21": {
+      "blood_positive_images": 13,
+      "inner_sha256": "abc02cfa8e28020da2994b897c2e608db83d0d6c93131342afa8bca985fe5659",
+      "outer_sha256": "aa18ee3ba5ef98d0ac139fa2a76d033136f95e6686c7645389006c78e6d8c901",
+      "private_manifest_sha256": "3a5a4640a792237a80bd868b57cb78fd672aa9a7540a574e60e13ec01b4f654d",
+      "reference_blood_positive": 1,
+      "reference_images": 512,
+      "source_image_bytes": 312847458,
+      "unique_images": 993
+    },
+    "23": {
+      "blood_positive_images": 135,
+      "inner_sha256": "4154c208752a095ecbbeea03380888834c312834989eab863589b9a38ef28b1b",
+      "outer_sha256": "44d2f6b6e91cb4f0df0243a8a0dc8560936e787f80b42c8cf1252a6d862be6f8",
+      "private_manifest_sha256": "fe3716c73bd19306d96127a611fa189e3c076a0274b7282092fd57bd8b5d7788",
+      "reference_blood_positive": 4,
+      "reference_images": 512,
+      "source_image_bytes": 303840909,
+      "unique_images": 1001
+    },
+    "30": {
+      "blood_positive_images": 366,
+      "inner_sha256": "c20e9ded68735218529812718496ffe3924074a8574a3dc5b402dcecc5582048",
+      "outer_sha256": "8eaa78453566f57d06ccd094ca3a057db4ed23552d366d540341bb0a73041e45",
+      "private_manifest_sha256": "142ec6e095489928fc91b1af42d9c0376fab10558c347f94338afb4e34ee9079",
+      "reference_blood_positive": 120,
+      "reference_images": 512,
+      "source_image_bytes": 265915912,
+      "unique_images": 1006
+    },
+    "new_cross_examination_identical_pixels": 0,
+    "pixel_identity_overlap_with_original_1_to_10": 0
+  },
+  "study": "Frozen original blood CNN descriptive transfer on new fitting Galar exams"
+}

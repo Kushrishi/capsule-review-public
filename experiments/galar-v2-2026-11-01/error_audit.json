@@ -1,0 +1,208 @@
+{
+  "status": "exploratory, post-hoc development error analysis",
+  "frames": 1024,
+  "model_weights_sha256": "b8b7805dde945021738c163280eb7dc446038421a4c21c0f5d241e5fec491af8",
+  "manifest_sha256": "db84bccf0374dd61f0bed08787ffc432c916286c9c83043b1fc901db15e71fe8",
+  "frozen_confusion_matrix_matched": true,
+  "class_order": [
+    "mouth",
+    "esophagus",
+    "stomach",
+    "small intestine",
+    "colon"
+  ],
+  "aggregate_accuracy": 0.68359375,
+  "examinations": {
+    "9": {
+      "frames": 512,
+      "correct": 389,
+      "reference_counts": {
+        "mouth": 11,
+        "esophagus": 2,
+        "stomach": 41,
+        "small intestine": 330,
+        "colon": 128
+      },
+      "prediction_counts": {
+        "mouth": 13,
+        "esophagus": 0,
+        "stomach": 51,
+        "small intestine": 293,
+        "colon": 155
+      },
+      "confusion_matrix": [
+        [
+          10,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          16,
+          24,
+          0
+        ],
+        [
+          0,
+          0,
+          34,
+          252,
+          44
+        ],
+        [
+          0,
+          0,
+          0,
+          17,
+          111
+        ]
+      ],
+      "accuracy": 0.759765625,
+      "reference_transitions_in_sparse_sample": 4,
+      "near_transition_frames": 32,
+      "near_transition_error_rate": 0.4375,
+      "elsewhere_error_rate": 0.22708333333333333,
+      "longest_consecutive_error_run_in_sampled_frames": 17,
+      "most_common_misclassifications": [
+        {
+          "actual": "small intestine",
+          "predicted": "colon",
+          "frames": 44
+        },
+        {
+          "actual": "small intestine",
+          "predicted": "stomach",
+          "frames": 34
+        },
+        {
+          "actual": "stomach",
+          "predicted": "small intestine",
+          "frames": 24
+        },
+        {
+          "actual": "colon",
+          "predicted": "small intestine",
+          "frames": 17
+        },
+        {
+          "actual": "esophagus",
+          "predicted": "mouth",
+          "frames": 2
+        },
+        {
+          "actual": "mouth",
+          "predicted": "stomach",
+          "frames": 1
+        },
+        {
+          "actual": "stomach",
+          "predicted": "mouth",
+          "frames": 1
+        }
+      ],
+      "mean_max_softmax_correct": 0.7633319864849198,
+      "mean_max_softmax_incorrect": 0.6584639798819534
+    },
+    "10": {
+      "frames": 512,
+      "correct": 311,
+      "reference_counts": {
+        "mouth": 0,
+        "esophagus": 0,
+        "stomach": 0,
+        "small intestine": 390,
+        "colon": 122
+      },
+      "prediction_counts": {
+        "mouth": 0,
+        "esophagus": 0,
+        "stomach": 51,
+        "small intestine": 295,
+        "colon": 166
+      },
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          13,
+          261,
+          116
+        ],
+        [
+          0,
+          0,
+          38,
+          34,
+          50
+        ]
+      ],
+      "accuracy": 0.607421875,
+      "reference_transitions_in_sparse_sample": 1,
+      "near_transition_frames": 10,
+      "near_transition_error_rate": 1.0,
+      "elsewhere_error_rate": 0.3804780876494024,
+      "longest_consecutive_error_run_in_sampled_frames": 21,
+      "most_common_misclassifications": [
+        {
+          "actual": "small intestine",
+          "predicted": "colon",
+          "frames": 116
+        },
+        {
+          "actual": "colon",
+          "predicted": "stomach",
+          "frames": 38
+        },
+        {
+          "actual": "colon",
+          "predicted": "small intestine",
+          "frames": 34
+        },
+        {
+          "actual": "small intestine",
+          "predicted": "stomach",
+          "frames": 13
+        }
+      ],
+      "mean_max_softmax_correct": 0.6832629729697175,
+      "mean_max_softmax_incorrect": 0.6473555600465234
+    }
+  },
+  "limitations": [
+    "Development data also selected the checkpoint; not independent final-test results.",
+    "Frames are sampled sparsely; transition windows do not resolve the video boundary precisely.",
+    "Softmax maximum scores are uncalibrated and are not clinical probabilities.",
+    "This post-hoc analysis must not be used for model selection or patient-care decisions."
+  ]
+}

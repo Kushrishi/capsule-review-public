@@ -1,0 +1,96 @@
+{
+  "study": "Capsule Review — source-verified acquisition of blood-negative-annotated Galar fitting examinations 22 and 24",
+  "version": "1.0",
+  "date": "2026-11-02",
+  "status": "Frozen before acquiring new source pixels. Training-source acquisition, not a newly fitted model or an independent/clinical evaluation.",
+  "scientific_question": "Can the original Galar source archive yield two more full-examination-separated 512-image fitting candidates with blood=0 annotations, using previously verified source-block boundaries and the preexisting label-blind fitting/reference source plan?",
+  "allowed_examination_ids": [
+    22,
+    24
+  ],
+  "reserved_examinations": "Future Galar 11–20 and source authors' 61–80 are forbidden. Also do not decode or score other Galar fitting exams from shared solid blocks.",
+  "official_corrected_annotations": {
+    "file_id": 60383963,
+    "filename": "20251215_Labels_Updated.zip",
+    "sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "reader": "Existing scripts/plan_galar_fitting_images.py exclusively parses allowed 21–30 corrected CSVs, not any protected members.",
+    "original_frozen_requested_frame_manifest_sha256": "1aedfcdecbb270687a660acd50f312803ed0884308ea9a0973102aac242409f1"
+  },
+  "examination_source_inventory": {
+    "22": {
+      "original_corrected_annotation_rows": 7529,
+      "source_member_counts_by_block": {
+        "0": 6244,
+        "1": 1285
+      },
+      "source_blood_positive_rows": 0,
+      "source_positive_annotation_runs": 0,
+      "frozen_reference_count": 512,
+      "frozen_enriched_count": 512,
+      "expected_reference_enriched_overlap": 512,
+      "unique_images_to_save": 512
+    },
+    "24": {
+      "original_corrected_annotation_rows": 13418,
+      "source_member_counts_by_block": {
+        "1": 1225,
+        "2": 12193
+      },
+      "source_blood_positive_rows": 0,
+      "source_positive_annotation_runs": 0,
+      "frozen_reference_count": 512,
+      "frozen_enriched_count": 512,
+      "expected_reference_enriched_overlap": 512,
+      "unique_images_to_save": 512
+    }
+  },
+  "source_archive": {
+    "file_id": 45258019,
+    "archive_bytes": 31989399751,
+    "publisher_full_md5": "dedad47ee55c83a4b991ca60d26fb6ee",
+    "publisher_full_md5_verified": false,
+    "verified_index_component_sha256": {
+      "signature-header.bin": "44191aaf136fd4cc2a5bafad2b828bc96310e235731752eaa5f39aa8f912611f",
+      "next-header.bin": "c8de7cca5b73224778e5516e0f9079f00989adbe7a3f0034a6c3fae06889ca5d",
+      "encoded-index-0.bin": "61d38a2c6b0ed445a348ea11287189f9ba86f541678900cc96b8fb674c9e1043"
+    },
+    "exact_allowed_compressed_blocks": [
+      {
+        "block_id": 0,
+        "offset": 32,
+        "bytes": 3474498092,
+        "expected_sha256": "c678458d4ef075de1215844dd78079e2e48e9fb894140c7fa5cc1708307bf7fd"
+      },
+      {
+        "block_id": 1,
+        "offset": 3474498124,
+        "bytes": 3475743781,
+        "expected_sha256": "b5086f018b7e88c57db7562af624c468796a7b1e812101d07236c184131b08f6"
+      },
+      {
+        "block_id": 2,
+        "offset": 6950241905,
+        "bytes": 3470070406,
+        "expected_sha256": "793b010cd7ec383daabbafeb6852646cd791decbc31982976fb6ae64adb0fd34"
+      }
+    ],
+    "total_exact_compressed_transfer_bytes": 10420312279,
+    "full_archive_transfer": false,
+    "source_index_inventory": "experiments/galar-21-30-source-index/layout.json",
+    "preverified_block_receipt": "experiments/galar27-2026-11-02/source-block-coverage.json"
+  },
+  "selection_and_privacy": {
+    "sampling": "Use the pre-existing frozen Galar 21–30 selection plan with 512 label-blind source-chronological midpoint positions per exam. Since all explicit blood labels in 22 and 24 are zero, the fitting-enriched selection is identical to the reference selection. No outcome-conditioned source positions.",
+    "output": "One private original-PNG ZIP with images/022/ and images/024/ and a private per-image SHA-256 + source-frame + annotation provenance manifest; plus public aggregate-only receipts.",
+    "explicit_expected_pngs": 1024,
+    "expected_blood_positive_annotations": 0,
+    "strict_source": "Verify actual 7z member names and source block assignment before any multi-GB transfer; 206 exact range/length, SHA-256 of each full block, 7z CRC, original PNG format and every individual image SHA-256, copy only exact allowlisted archive paths. Delete each compressed block before transferring the next.",
+    "max_compressed_source_transfer_bytes": 10420312279,
+    "output_location": "Private Capsule Review Library, not Git. GitHub Actions artifact retention 30 days is transient only.",
+    "clinical_validity": false,
+    "no_independent_patient_identity": true,
+    "blood_zero_not_healthy": "Only absence of explicit blood=1 annotation in corrected source; not absence of all pathology.",
+    "unopened_future_evaluation": true
+  },
+  "post_acquisition_decision": "Preserve source images for future training-only examination-separated comparison, with prespecified evaluation and no inclusion of these same examination images in their heldout model-fitting folds. Do not promote a model or claim improved generalization from source acquisition alone."
+}

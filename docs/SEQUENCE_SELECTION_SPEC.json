@@ -1,0 +1,33 @@
+{
+  "title": "Capsule Review: true-sequence image-change selection development pilot",
+  "spec_version": "0.1",
+  "specified_before_evaluating_s288_anatomy_transition_results": true,
+  "honesty_note": "The s288 images, size, and anatomical class counts were previously inspected; s288 is post-hoc exploratory development, not an independent evaluation. This design must be frozen before inspecting any new studies.",
+  "existing_development_study": "s288",
+  "future_studies_selected_without_examining_images_or_labels": [
+    {"study": "s280", "source_member": "Study 276-300/s280.zip", "source_member_bytes": 103418092},
+    {"study": "s284", "source_member": "Study 276-300/s284.zip", "source_member_bytes": 115960292}
+  ],
+  "future_study_selection_rule": "Choose the two smallest complete per-study nested ZIP files from the published Study 276-300 bundle, excluding already explored s288, using verified archive index member size only. Freeze these IDs before decoding any images.",
+  "preserved_source": "Rhode Island GI VCE collection v1, official source ndownloader.figshare.com/files/37560007, published article 21183970, publisher paper DOI 10.1038/s41597-022-01726-3",
+  "ordering": "numeric original source filename stem, not filesystem or ZIP member order; reject index gaps, duplicates, unexpected folders, and inconsistent image decoding",
+  "study_unit": "complete published study, not independently identified patient; patient-level independence is unknown",
+  "image_change": "Absolute RGB difference on consecutive 64x64 bilinear-resized frames, mean across all RGB pixels /255 including borders. Candidate i>0 uses change between frame i-1 and i; frame 0 gets score 0. No anatomy-label input to policy.",
+  "budgets": [0.05, 0.10, 0.25],
+  "k_rule": "ceil(budget * n)",
+  "endpoints": "For k>=2 always include first and last positions; k=1 use the midpoint.",
+  "methods": {
+    "uniform": "Integer-spaced endpoints via floor(j*(n-1)/(k-1)), j in [0,k)",
+    "global_change": "Include endpoints; fill k-2 positions by descending adjacent-image change, ties toward earlier position.",
+    "stratified_change": "Include endpoints; partition remaining interior positions into k-2 non-overlapping contiguous equal-quantile bins and select maximum adjacent change from each bin; ties toward earlier position.",
+    "random_anchored": "Include endpoints; sample k-2 remaining positions uniformly without replacement, seeded random.Random(17 + draw_index), 100 draws."
+  },
+  "anatomy_boundary": "First position of each new anatomical folder in the official Rhode Island source; only four region labels, not lesion boundaries.",
+  "boundary_tolerances_frames": [0, 2, 5],
+  "outcomes": ["anatomy_boundaries_reached_at_fixed_index_radius", "max_nearest_selected_position_distance", "mean_nearest_selected_position_distance", "max_selected_position_gap", "number_anatomical_regions_represented", "number_100_position_bins_hit"],
+  "no_lesion_ground_truth": true,
+  "not_clinical_review_time_or_pathology_detection": true,
+  "timestamp_status": "original acquisition timestamps unavailable; source order does not establish elapsed time",
+  "budget_gate": "Do not transfer more than 512 MiB in additional source data or purchase compute without user approval; do not bypass network restrictions",
+  "future_study_content_access_status": "not yet acquired at time of this preregistration"
+}

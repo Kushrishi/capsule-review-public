@@ -1,0 +1,35 @@
+{
+  "actual_index_only_bytes_transferred": 1342072,
+  "full_archive_downloaded": false,
+  "next_header_location": [
+    31989399710,
+    41
+  ],
+  "next_header_type": "encoded",
+  "no_automatic_large_transfer": true,
+  "official_file_id": 45258019,
+  "official_full_archive_bytes": 31989399751,
+  "official_full_archive_md5_expected_not_verified": "dedad47ee55c83a4b991ca60d26fb6ee",
+  "parts": [
+    {
+      "length": 32,
+      "name": "signature-header.bin",
+      "offset": 0,
+      "sha256": "44191aaf136fd4cc2a5bafad2b828bc96310e235731752eaa5f39aa8f912611f"
+    },
+    {
+      "length": 41,
+      "name": "next-header.bin",
+      "offset": 31989399710,
+      "sha256": "c8de7cca5b73224778e5516e0f9079f00989adbe7a3f0034a6c3fae06889ca5d"
+    },
+    {
+      "length": 1341999,
+      "name": "encoded-index-0.bin",
+      "offset": 31988057711,
+      "sha256": "61d38a2c6b0ed445a348ea11287189f9ba86f541678900cc96b8fb674c9e1043"
+    }
+  ],
+  "pixels_acquired": 0,
+  "record_type": "galar-21-29-7z-index-only-v1"
+}

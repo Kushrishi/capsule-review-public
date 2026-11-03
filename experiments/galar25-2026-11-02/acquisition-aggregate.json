@@ -1,0 +1,43 @@
+{
+  "clinical_validation": false,
+  "complete_31gb_original_archive_md5_verified": false,
+  "enriched_fitting_positive": 256,
+  "fit_frames": 512,
+  "original_source_zip_sha256": "968e2abfe41d3c0ea628197390672a310357f879c25fd86b0da14a30002e45ef",
+  "outer_artifact_sha256": "6045abf1651bc6585cbc55ccaaf00d2462ba6a10900f4a11e4f064c62e51bb8b",
+  "overlap": 11,
+  "positive_blood_annotations": 265,
+  "private_manifest_sha256": "911ec81835f7b23fb99cdfaed8c6a55595692014cfeeae66ca0ea9f59c0bf35e",
+  "source_examination": 25,
+  "source_images_verified": 1013,
+  "source_original_png_bytes": 307936304,
+  "uniform_reference_frames": 512,
+  "uniform_reference_positive": 14,
+  "unique_pixel_decodes": 1013,
+  "verified_compressed_block_receipts": [
+    {
+      "block_id": 2,
+      "compressed_block_sha256": "793b010cd7ec383daabbafeb6852646cd791decbc31982976fb6ae64adb0fd34",
+      "compressed_bytes": 3470070406,
+      "offset": 6950241905,
+      "selected_images_verified": 98,
+      "source_archive_full_md5_verified": false
+    },
+    {
+      "block_id": 3,
+      "compressed_block_sha256": "bac9b407b67f3a50314c696a4639df68265fb398b1977a60ed61eb10648f79f5",
+      "compressed_bytes": 3539043971,
+      "offset": 10420312311,
+      "selected_images_verified": 657,
+      "source_archive_full_md5_verified": false
+    },
+    {
+      "block_id": 4,
+      "compressed_block_sha256": "eba4364d8ae1d239f86f356db8f0c6120caa9e0c1603a588e0cf54a5d48abbac",
+      "compressed_bytes": 3438758213,
+      "offset": 13959356282,
+      "selected_images_verified": 258,
+      "source_archive_full_md5_verified": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "aggregate_sha256": "06463d77b9cfaf90efba4b1c813a72721697eeae489ad44a6baf6d56a66f3828",
+  "clinical_validation": false,
+  "new_fitting_exam_replay": {
+    "independent_metric_library": "scikit-learn (roc_auc_score, average_precision_score)",
+    "new_cnn_max_abs_score_error": 0.0,
+    "new_fitting_images_replayed": 3000,
+    "new_red_max_abs_score_error": 0.0,
+    "per_examination_auc_ap_and_all_six_budgets_recomputed": true,
+    "reference_images_replayed": 1536
+  },
+  "original_historical_replay": {
+    "historical_ap": 0.622537869374297,
+    "historical_auc": 0.7261886154576451,
+    "historical_cnn_max_abs_score_error": 4.99198904435616e-10,
+    "historical_frames_replayed": 1024,
+    "historical_red_max_abs_score_error": 1.3889978223158295e-08
+  },
+  "private_score_sha256": "caa85f950ac0912a3a89a3a93aad6c4e24ba1dc186a52e51456bf843e8111812",
+  "verified_model_sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3"
+}

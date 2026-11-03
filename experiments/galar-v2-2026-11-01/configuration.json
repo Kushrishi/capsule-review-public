@@ -1,0 +1,61 @@
+{
+  "created_at_utc": "2026-11-01T20:40:17.154857+00:00",
+  "purpose": "Execute the previously frozen first real Galar anatomy baseline",
+  "source_release": "Galar v2, DOI 10.25452/figshare.plus.25304616.v2; corrected December 2025 labels",
+  "source_archive": {
+    "name": "Galar_Frames_1_to_10.7z",
+    "file_id": 44724816,
+    "bytes": 31155949292,
+    "expected_md5": "ae6b77548691faa05b288a89410aa62e"
+  },
+  "fitting_examinations": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "development_validation_examinations": [
+    9,
+    10
+  ],
+  "sampling": "Use all5120 paths in the recovered requested_frames.csv exactly;512uniform source-order rows per examination; filter anatomy labels only during existing preparation",
+  "requested_frames_sha256": "49fbcc70d59cc8b90017aeecf0a459f227da871967ad9aac8f29321ef4c0a510",
+  "prior_development_plan_sha256": "ad33120e6157ab1767bab0ee6c053afd0450f293a1499fc5d1f7934df5c45adb",
+  "classes": [
+    "mouth",
+    "esophagus",
+    "stomach",
+    "small intestine",
+    "colon"
+  ],
+  "training": {
+    "architecture": "capsule-cnn-v1",
+    "epochs": 10,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "seed": 17,
+    "device": "cpu",
+    "checkpoint_selection": "lowest unweighted development-validation cross-entropy"
+  },
+  "source_implementation_sha256": {
+    "baseline.py": "011f4e73b5e7f24ee386af526a22d00cad796ed2b582a612d226cc2c47d3d991",
+    "baseline_data.py": "babce2e240745b32b88539cc100bd4e2a92d64815a6154d0845cbeb8f02770e8"
+  },
+  "acceptance_before_training": [
+    "full official archive size and MD5 match",
+    "all requested names present and no extras",
+    "per-image archive CRC and PNG validation",
+    "decoded-image overlap check via original manifest preparation"
+  ],
+  "scope": "Examination-separated development pilot; no patient-independent claim; no access to reserved exams61-80; no clinical validation; uncalibrated model scores",
+  "software_verification": {
+    "pytest_passed": 95,
+    "pytest_warning": "Starlette httpx TestClient deprecation; no failures",
+    "elapsed_seconds": 11.38,
+    "execution": "hosted Linux, permitted local socket execution"
+  }
+}

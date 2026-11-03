@@ -1,0 +1,40 @@
+name: Prespecified Rhode Island evaluation
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: rhode-prespecified-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  evaluate-prespecified-studies:
+    # Private source acquisition and artifacts must never execute in a public repository.
+    if: ${{ github.event.repository.private == true }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install only required image/test dependencies
+        run: python -m pip install -e '.[dev]'
+      - name: Verify acquisition and frozen evaluation guards
+        run: python -m pytest -q tests/test_acquire_preregistered_rhode.py tests/test_compare_sequence_selection.py tests/test_sequence_selection_record.py
+      - name: Acquire ONLY s280 and s284 within cumulative 512 MiB budget
+        run: |
+          mkdir -p /tmp/rhode-studies outputs
+          python scripts/acquire_preregistered_rhode.py --spec docs/SEQUENCE_SELECTION_SPEC.json --output-dir /tmp/rhode-studies --receipt outputs/acquisition-receipt.json
+      - name: Re-run unchanged frame-selection evaluation on complete new studies
+        run: |
+          python scripts/compare_sequence_selection.py --archive /tmp/rhode-studies/s280.zip --study-id s280 --spec docs/SEQUENCE_SELECTION_SPEC.json --out outputs/s280-results.json
+          python scripts/compare_sequence_selection.py --archive /tmp/rhode-studies/s284.zip --study-id s284 --spec docs/SEQUENCE_SELECTION_SPEC.json --out outputs/s284-results.json
+          python scripts/summarize_rhode_replication.py --s288 experiments/rhode-s288/sequence_selection_results.json --s280 outputs/s280-results.json --s284 outputs/s284-results.json --out outputs/three-study-summary.json
+      - name: Upload ONLY aggregate research records, not images or source ZIPs
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rhode-replication-metrics-only
+          path: outputs/*.json
+          retention-days: 30
+          if-no-files-found: error

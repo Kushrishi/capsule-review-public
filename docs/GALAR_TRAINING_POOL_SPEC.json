@@ -1,0 +1,161 @@
+{
+  "study": "Capsule Review — corrected Galar v2 training-pool label audit",
+  "version": "1.0",
+  "frozen_before_new_candidate_examination_label_inspection": true,
+  "scientific_question": "Which as-yet-uninspected permitted fitting examinations can diversify blood-positive examination support, particularly short contiguous annotation runs, without examining reserved evaluation cases?",
+  "data_source": {
+    "article_id": 25304616,
+    "version": 2,
+    "corrected_file_id": 60383963,
+    "file": "20251215_Labels_Updated.zip",
+    "bytes": 17931138,
+    "official_md5": "4428f8d4341cc41ade9fd547c19b6e48",
+    "verified_local_source_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "attribution": "Le Floch et al., Galar, 2025; CC BY 4.0"
+  },
+  "preexisting_exam_roles": {
+    "original_fitting": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "previously_inspected_historical_development": [
+      9,
+      10
+    ],
+    "already_assigned_unopened_future_evaluation": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "new_training_pool_label_audit": [
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
+    ],
+    "original_author_reserved_holdout": [
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80
+    ]
+  },
+  "forbidden_label_reads_in_this_audit": "1-20 and 61-80; inner ZIP metadata may be inspected only to enumerate entries",
+  "label_policy": {
+    "primary_label": "blood",
+    "secondary_labels": [
+      "active bleeding",
+      "angiectasia",
+      "ulcer",
+      "polyp"
+    ],
+    "legal_values": [
+      "0",
+      "1",
+      ""
+    ],
+    "missing_values": "unknown, not negative",
+    "contiguous_annotated_run_step": 5,
+    "short_run_definition": "1–25 consecutive positive annotated rows at source-frame stride 5; not a verified distinct lesion",
+    "validation": "exactly one selected CSV per exam; expected columns; ordered unique nonnegative source frame IDs; binary/missing values; reject ambiguity and corruption"
+  },
+  "reported_metrics": [
+    "all 40 training-candidate examination label supports; including negative and missing studies",
+    "per-examination annotated row and primary blood-positive row totals",
+    "number and length distribution of blood-positive annotation runs (not lesions)",
+    "secondary label support summarized separately",
+    "by-archive group positive-examination counts and known official source sizes",
+    "explicit report of missing/unresolved exam-30 source-image mapping"
+  ],
+  "official_frame_archive_options": [
+    {
+      "exams": "21-29",
+      "file_id": 45258019,
+      "bytes": 31989399751
+    },
+    {
+      "exams": "31-40",
+      "file_id": 44755700,
+      "bytes": 69219317963
+    },
+    {
+      "exams": "41-50",
+      "file_id": 44809350,
+      "bytes": 173935092108
+    },
+    {
+      "exams": "51-60",
+      "file_id": 44809828,
+      "bytes": 202693348645
+    }
+  ],
+  "selection_rule": "Only use these fitting-pool labels to prioritize later image acquisition. Report all archive-group results rather than selecting a success-looking group silently. Prefer an affordable group with >=3 distinct blood-positive examinations and >=2 examinations with at least one short blood-positive annotation run. If no group meets those conditions, report that; do not relabel future evaluation cases as training. No archive is authorized for download by this audit.",
+  "execution_limits": "Label-only offline analysis on existing corrected source archive; no image, new model fit, remote compute, clinical review or outcome-based selection on evaluation cases.",
+  "artifact_policy": "Commit frozen spec, aggregate summary, code and tests only. No per-frame labels, filenames/identity manifests, imagery, weights, or reserved-evaluation measurements.",
+  "interpretation": "Training-pool feasibility, not independent test performance. Study ID is not confirmed unique patient ID. Blood annotation != diagnosed lesion. The earlier 9-10 development metrics are not newly blinded."
+}

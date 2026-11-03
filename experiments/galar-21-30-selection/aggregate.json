@@ -1,0 +1,186 @@
+{
+  "analysis": "Galar 21\u201330 fitting-only pre-image-acquisition selection; not a model result",
+  "clinical_validity": false,
+  "data_source_name": "20251215_Labels_Updated.zip",
+  "exam_roles": {
+    "author_unopened_holdout": [
+      61,
+      80
+    ],
+    "new_fitting": [
+      21,
+      30
+    ],
+    "previous_fitting": [
+      1,
+      8
+    ],
+    "unopened_future_evaluation": [
+      11,
+      20
+    ]
+  },
+  "known_limits": [
+    "New fitting sample uses pathology labels for enrichment, so its observed prevalence is not population prevalence.",
+    "Never use pathology-enriched sample as clinical validation.",
+    "Uniform reference positions support only internal exam-held-out comparison when entire exam withheld from fitting.",
+    "No patient IDs available; distinct exams do not prove distinct patients.",
+    "Frame IDs/labels in private manifest must be exactly matched to original verified image bytes before training.",
+    "No source images have been acquired. Source archive layout and exact member filenames still need validation."
+  ],
+  "official_corrected_labels_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+  "overall": {
+    "annotated_positive_runs": 242,
+    "annotated_positive_runs_covered_in_enriched": 242,
+    "examinations": 10,
+    "positive_enriched_candidates": 1172,
+    "positive_examinations": 6,
+    "positive_uniform_reference_candidates": 287,
+    "training_enriched_candidates": 5120,
+    "uniform_reference_candidates": 5120,
+    "unique_frames_requested": 8075
+  },
+  "per_examination": {
+    "21": {
+      "annotated_positive_runs": 3,
+      "annotation_rows": 7478,
+      "blood_positive_source_rows": 13,
+      "dual_purpose_overlap": 31,
+      "enriched_positive_candidates": 13,
+      "enriched_positive_runs_represented": 3,
+      "enriched_training_candidates": 512,
+      "label_blind_reference_candidates": 512,
+      "reference_positive_candidates": 1,
+      "source_frame_stride": 5,
+      "unique_requested_images": 993
+    },
+    "22": {
+      "annotated_positive_runs": 0,
+      "annotation_rows": 7529,
+      "blood_positive_source_rows": 0,
+      "dual_purpose_overlap": 512,
+      "enriched_positive_candidates": 0,
+      "enriched_positive_runs_represented": 0,
+      "enriched_training_candidates": 512,
+      "label_blind_reference_candidates": 512,
+      "reference_positive_candidates": 0,
+      "source_frame_stride": 5,
+      "unique_requested_images": 512
+    },
+    "23": {
+      "annotated_positive_runs": 28,
+      "annotation_rows": 11785,
+      "blood_positive_source_rows": 135,
+      "dual_purpose_overlap": 23,
+      "enriched_positive_candidates": 135,
+      "enriched_positive_runs_represented": 28,
+      "enriched_training_candidates": 512,
+      "label_blind_reference_candidates": 512,
+      "reference_positive_candidates": 4,
+      "source_frame_stride": 5,
+      "unique_requested_images": 1001
+    },
+    "24": {
+      "annotated_positive_runs": 0,
+      "annotation_rows": 13418,
+      "blood_positive_source_rows": 0,
+      "dual_purpose_overlap": 512,
+      "enriched_positive_candidates": 0,
+      "enriched_positive_runs_represented": 0,
+      "enriched_training_candidates": 512,
+      "label_blind_reference_candidates": 512,
+      "reference_positive_candidates": 0,
+      "source_frame_stride": 5,
+      "unique_requested_images": 512
+    },
+    "25": {
+      "annotated_positive_runs": 53,
+      "annotation_rows": 22477,
+      "blood_positive_source_rows": 795,
+      "dual_purpose_overlap": 11,
+      "enriched_positive_candidates": 256,
+      "enriched_positive_runs_represented": 53,
+      "enriched_training_candidates": 512,
+      "label_blind_reference_candidates": 512,
+      "reference_positive_candidates": 14,
+      "source_frame_stride": 5,
+      "unique_requested_images": 1013
+    },
+    "26": {
+      "annotated_positive_runs": 0,
+      "annotation_rows": 11841,
+      "blood_positive_source_rows": 0,
+      "dual_purpose_overlap": 512,
+      "enriched_positive_candidates": 0,
+      "enriched_positive_runs_represented": 0,
+      "enriched_training_candidates": 512,
+      "label_blind_reference_candidates": 512,
+      "reference_positive_candidates": 0,
+      "source_frame_stride": 5,
+      "unique_requested_images": 512
+    },
+    "27": {
+      "annotated_positive_runs": 4,
+      "annotation_rows": 14796,
+      "blood_positive_source_rows": 762,
+      "dual_purpose_overlap": 19,
+      "enriched_positive_candidates": 256,
+      "enriched_positive_runs_represented": 4,
+      "enriched_training_candidates": 512,
+      "label_blind_reference_candidates": 512,
+      "reference_positive_candidates": 26,
+      "source_frame_stride": 5,
+      "unique_requested_images": 1005
+    },
+    "28": {
+      "annotated_positive_runs": 0,
+      "annotation_rows": 12016,
+      "blood_positive_source_rows": 0,
+      "dual_purpose_overlap": 512,
+      "enriched_positive_candidates": 0,
+      "enriched_positive_runs_represented": 0,
+      "enriched_training_candidates": 512,
+      "label_blind_reference_candidates": 512,
+      "reference_positive_candidates": 0,
+      "source_frame_stride": 5,
+      "unique_requested_images": 512
+    },
+    "29": {
+      "annotated_positive_runs": 107,
+      "annotation_rows": 16018,
+      "blood_positive_source_rows": 3847,
+      "dual_purpose_overlap": 15,
+      "enriched_positive_candidates": 256,
+      "enriched_positive_runs_represented": 107,
+      "enriched_training_candidates": 512,
+      "label_blind_reference_candidates": 512,
+      "reference_positive_candidates": 122,
+      "source_frame_stride": 5,
+      "unique_requested_images": 1009
+    },
+    "30": {
+      "annotated_positive_runs": 47,
+      "annotation_rows": 16953,
+      "blood_positive_source_rows": 4121,
+      "dual_purpose_overlap": 18,
+      "enriched_positive_candidates": 256,
+      "enriched_positive_runs_represented": 47,
+      "enriched_training_candidates": 512,
+      "label_blind_reference_candidates": 512,
+      "reference_positive_candidates": 120,
+      "source_frame_stride": 5,
+      "unique_requested_images": 1006
+    }
+  },
+  "private_original_frame_identifiers_committed": false,
+  "private_request_rows": 8075,
+  "private_request_sha256": "1aedfcdecbb270687a660acd50f312803ed0884308ea9a0973102aac242409f1",
+  "sampling": {
+    "enriched_positive_fraction_max": 0.5,
+    "evaluation_sample_rule": "source-chronological uniform, label-blind",
+    "fit_candidate_rule": "run-diverse positive enrichment + uniformly spaced explicitly blood-negative frames",
+    "no_holdout_access": true,
+    "operational_images_per_exam_per_method": 512
+  },
+  "source_frame_archive_file_id": 45258019
+}

@@ -1,0 +1,53 @@
+{
+  "study": "Capsule Review: original-image 512 versus 4096 Galar23 input density at fixed review workload",
+  "version": "1.0",
+  "date": "2026-11-02",
+  "status": "Exploratory fitting-pool experiment committed before new 4096-image source acquisition or scoring. Examination 23 was previously selected using source positive-label availability and scored by earlier CNN/heuristic audits; no independent clinical claims.",
+  "locked_examination": 23,
+  "source_labels": {
+    "file_id": 60383963,
+    "sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "member": "23.csv",
+    "original_annotated_positions": 11785,
+    "source_positive_runs": 28,
+    "source_positive_positions": 135,
+    "source_annotation_stride": 5
+  },
+  "source_images": {
+    "file_id": 45258019,
+    "original_archive_bytes": 31989399751,
+    "publisher_full_archive_md5": "dedad47ee55c83a4b991ca60d26fb6ee",
+    "publisher_full_archive_md5_verified": false,
+    "block_id": 1,
+    "block_offset": 3474498124,
+    "block_compressed_bytes": 3475743781,
+    "verified_block_sha256": "b5086f018b7e88c57db7562af624c468796a7b1e812101d07236c184131b08f6",
+    "block_exam_image_members": 11785,
+    "allow_other_exam_pixels": false,
+    "max_transfer_bytes": 3500000000
+  },
+  "input_sampling": {
+    "candidate_sizes": [512,4096],
+    "rule": "Label-blind chronological midpoint sample from all explicitly annotated original source rows, at positions floor((2*j+1)*N/(2*m)). Use union of the two sets for physical source extraction. Do not supplement based on blood labels.",
+    "historical_512_reference_blood_positive": 4,
+    "historical_512_reference_source_positive_runs": 4,
+    "previously_observed_4096_source_positive_runs": 21
+  },
+  "fixed_absolute_reviewer_frames": [51,128,256,512],
+  "locked_image_score": "Unchanged scripts/blood_image_pilot.red_excess: original PNG; EXIF transpose; RGB; ImageOps.fit centre-crop 96x96; subtract max(G,B) from R, clipped at zero; mean divided by 255. No fitting/normalization/threshold choice after outcomes.",
+  "preexisting_reference_red_roc_auc_rounded": 0.417,
+  "method_definitions": {
+    "uniform": "At each K, select midpoint indices floor((2*j+1)*M/(2*K)) among chronologically sorted candidate M images.",
+    "global_red": "Take K highest unchanged red_excess image scores, ties resolved by ascending original source frame ID.",
+    "bin_stratified_red": "Divide sorted M candidates into exactly K consecutive, nonempty bins using [floor(j*M/K), floor((j+1)*M/K)); select one maximum red score in each bin, ties by ascending source frame ID. No labels enter bin construction or ranking."
+  },
+  "endpoints": {
+    "primary": "For each candidate size, K and method: distinct original corrected-source blood-positive annotation runs intersected and count of explicitly blood=1 chosen images.",
+    "secondary": "Source-annotation-row distance to nearest reviewed selection (maximum, not acquisition seconds), unchanged red baseline ROC-AUC and AP on candidate images (not clinically calibrated).",
+    "no_patient_or_lesion_identity": true,
+    "not_independent_evaluation": true
+  },
+  "integrity": "Verify original corrected label ZIP SHA-256; verify source 7z index/header CRC and frozen layout/source block membership; enforce exact source HTTP 206 Range, block SHA-256, original PNG identity, image count, and no unapproved exam pixels; reproduce historical 512-source reference support and red ROC-AUC within prior publication rounding before new claims. Do not silently relax bounds or refit algorithms.",
+  "data_governance": "Only aggregate counts, immutable source checksum receipts, tests and methods may enter Git. No raw medical images, per-frame identities, per-image scores or labels, weights, or private input manifests. Evaluate only already inspected fitting exam23; do not open Galar 11-20 or authors' 61-80 holdout.",
+  "negative_result_rule": "Report all three methods at all four fixed workload points for both candidate sizes even if all image-score rankings fail. No model promotion or clinical claims. Avoid conflating annotation stride with elapsed acquisition time."
+}

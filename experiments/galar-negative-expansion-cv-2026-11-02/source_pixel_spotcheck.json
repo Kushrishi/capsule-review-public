@@ -1,0 +1,28 @@
+{
+  "clinical_validity": false,
+  "examination_count": 16,
+  "independently_reloaded_original_pngs": 32,
+  "individual_source_image_ids_excluded": true,
+  "input_tensor_bank_sha256": "1d70cdfac8e95f18643b1313af58783a6ef31443ef8b40494e1d0286c73cbc8e",
+  "max_absolute_pixel_difference": 0,
+  "sampled_images_per_examination": {
+    "1": 2,
+    "2": 2,
+    "21": 2,
+    "22": 2,
+    "23": 2,
+    "24": 2,
+    "25": 2,
+    "27": 2,
+    "29": 2,
+    "3": 2,
+    "30": 2,
+    "4": 2,
+    "5": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2
+  },
+  "source_images_original_sha256_manifest_sha256": "76b698a5026a90f82b54692ca74f0d056a0cbf61368a9698499c13f85a6644cb",
+  "source_unaltered": true
+}

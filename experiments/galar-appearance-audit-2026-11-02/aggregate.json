@@ -1,0 +1,621 @@
+{
+  "by_examination": {
+    "25": {
+      "frozen_model_reference_hits_at_10pct": {
+        "expanded_continued": 0,
+        "original_checkpoint": 0,
+        "original_only_continued": 2,
+        "red_excess": 0
+      },
+      "frozen_model_score_positive_minus_negative_median": {
+        "expanded_continued": -0.158809,
+        "original_checkpoint": -0.093804,
+        "original_only_continued": -0.014664,
+        "red_excess": -0.058945
+      },
+      "label_counts": {
+        "0": 498,
+        "1": 14
+      },
+      "prespecified_feature_descriptives_by_label": {
+        "0": {
+          "expanded_continued": {
+            "mean": 0.484175,
+            "median": 0.519677,
+            "n": 498,
+            "p25": 0.236654,
+            "p75": 0.657269
+          },
+          "high_luminance_fraction": {
+            "mean": 0.000344,
+            "median": 0.0,
+            "n": 498,
+            "p25": 0.0,
+            "p75": 0.0
+          },
+          "low_luminance_fraction": {
+            "mean": 0.313196,
+            "median": 0.23112,
+            "n": 498,
+            "p25": 0.112576,
+            "p75": 0.493028
+          },
+          "mean_edge_difference": {
+            "mean": 0.022487,
+            "median": 0.021381,
+            "n": 498,
+            "p25": 0.017227,
+            "p75": 0.026278
+          },
+          "mean_luminance": {
+            "mean": 0.227687,
+            "median": 0.221085,
+            "n": 498,
+            "p25": 0.165764,
+            "p75": 0.299554
+          },
+          "mean_positive_red_excess": {
+            "mean": 0.10208,
+            "median": 0.099166,
+            "n": 498,
+            "p25": 0.061827,
+            "p75": 0.143639
+          },
+          "mean_saturation": {
+            "mean": 0.582425,
+            "median": 0.584097,
+            "n": 498,
+            "p25": 0.534455,
+            "p75": 0.632742
+          },
+          "original_checkpoint": {
+            "mean": 0.256769,
+            "median": 0.167549,
+            "n": 498,
+            "p25": 0.082262,
+            "p75": 0.290591
+          },
+          "original_only_continued": {
+            "mean": 0.111569,
+            "median": 0.073656,
+            "n": 498,
+            "p25": 0.065179,
+            "p75": 0.089967
+          },
+          "padded_black_fraction": {
+            "mean": 0.082438,
+            "median": 0.081272,
+            "n": 498,
+            "p25": 0.079861,
+            "p75": 0.084852
+          },
+          "red_excess": {
+            "mean": 0.102083,
+            "median": 0.099154,
+            "n": 498,
+            "p25": 0.061864,
+            "p75": 0.143642
+          },
+          "source_width_div_height": {
+            "mean": 1.0,
+            "median": 1.0,
+            "n": 498,
+            "p25": 1.0,
+            "p75": 1.0
+          }
+        },
+        "1": {
+          "expanded_continued": {
+            "mean": 0.424079,
+            "median": 0.360868,
+            "n": 14,
+            "p25": 0.324904,
+            "p75": 0.425168
+          },
+          "high_luminance_fraction": {
+            "mean": 0.000194,
+            "median": 0.0,
+            "n": 14,
+            "p25": 0.0,
+            "p75": 0.0
+          },
+          "low_luminance_fraction": {
+            "mean": 0.161319,
+            "median": 0.105903,
+            "n": 14,
+            "p25": 0.105035,
+            "p75": 0.107178
+          },
+          "mean_edge_difference": {
+            "mean": 0.033097,
+            "median": 0.033486,
+            "n": 14,
+            "p25": 0.032409,
+            "p75": 0.037114
+          },
+          "mean_luminance": {
+            "mean": 0.304918,
+            "median": 0.331036,
+            "n": 14,
+            "p25": 0.321061,
+            "p75": 0.33791
+          },
+          "mean_positive_red_excess": {
+            "mean": 0.044261,
+            "median": 0.040202,
+            "n": 14,
+            "p25": 0.016508,
+            "p75": 0.063001
+          },
+          "mean_saturation": {
+            "mean": 0.428749,
+            "median": 0.401934,
+            "n": 14,
+            "p25": 0.375151,
+            "p75": 0.450369
+          },
+          "original_checkpoint": {
+            "mean": 0.187967,
+            "median": 0.073745,
+            "n": 14,
+            "p25": 0.056902,
+            "p75": 0.151189
+          },
+          "original_only_continued": {
+            "mean": 0.096806,
+            "median": 0.058992,
+            "n": 14,
+            "p25": 0.056809,
+            "p75": 0.068205
+          },
+          "padded_black_fraction": {
+            "mean": 0.082458,
+            "median": 0.082574,
+            "n": 14,
+            "p25": 0.081353,
+            "p75": 0.083008
+          },
+          "red_excess": {
+            "mean": 0.044257,
+            "median": 0.040209,
+            "n": 14,
+            "p25": 0.016606,
+            "p75": 0.062884
+          },
+          "source_width_div_height": {
+            "mean": 1.0,
+            "median": 1.0,
+            "n": 14,
+            "p25": 1.0,
+            "p75": 1.0
+          }
+        }
+      },
+      "reference_images": 512
+    },
+    "27": {
+      "frozen_model_reference_hits_at_10pct": {
+        "expanded_continued": 21,
+        "original_checkpoint": 22,
+        "original_only_continued": 21,
+        "red_excess": 15
+      },
+      "frozen_model_score_positive_minus_negative_median": {
+        "expanded_continued": 0.672677,
+        "original_checkpoint": 0.839613,
+        "original_only_continued": 0.47411,
+        "red_excess": 0.066016
+      },
+      "label_counts": {
+        "0": 486,
+        "1": 26
+      },
+      "prespecified_feature_descriptives_by_label": {
+        "0": {
+          "expanded_continued": {
+            "mean": 0.255671,
+            "median": 0.213021,
+            "n": 486,
+            "p25": 0.150145,
+            "p75": 0.32308
+          },
+          "high_luminance_fraction": {
+            "mean": 9e-05,
+            "median": 0.0,
+            "n": 486,
+            "p25": 0.0,
+            "p75": 0.0
+          },
+          "low_luminance_fraction": {
+            "mean": 0.201624,
+            "median": 0.150119,
+            "n": 486,
+            "p25": 0.116292,
+            "p75": 0.237061
+          },
+          "mean_edge_difference": {
+            "mean": 0.024118,
+            "median": 0.019993,
+            "n": 486,
+            "p25": 0.015729,
+            "p75": 0.028011
+          },
+          "mean_luminance": {
+            "mean": 0.269023,
+            "median": 0.277612,
+            "n": 486,
+            "p25": 0.234572,
+            "p75": 0.309598
+          },
+          "mean_positive_red_excess": {
+            "mean": 0.104654,
+            "median": 0.10316,
+            "n": 486,
+            "p25": 0.071601,
+            "p75": 0.138228
+          },
+          "mean_saturation": {
+            "mean": 0.572576,
+            "median": 0.582146,
+            "n": 486,
+            "p25": 0.538777,
+            "p75": 0.62082
+          },
+          "original_checkpoint": {
+            "mean": 0.098598,
+            "median": 0.072852,
+            "n": 486,
+            "p25": 0.062932,
+            "p75": 0.096478
+          },
+          "original_only_continued": {
+            "mean": 0.066019,
+            "median": 0.064845,
+            "n": 486,
+            "p25": 0.062529,
+            "p75": 0.067924
+          },
+          "padded_black_fraction": {
+            "mean": 0.08262,
+            "median": 0.082357,
+            "n": 486,
+            "p25": 0.081163,
+            "p75": 0.083767
+          },
+          "red_excess": {
+            "mean": 0.104645,
+            "median": 0.103154,
+            "n": 486,
+            "p25": 0.071566,
+            "p75": 0.138234
+          },
+          "source_width_div_height": {
+            "mean": 1.0,
+            "median": 1.0,
+            "n": 486,
+            "p25": 1.0,
+            "p75": 1.0
+          }
+        },
+        "1": {
+          "expanded_continued": {
+            "mean": 0.790466,
+            "median": 0.885698,
+            "n": 26,
+            "p25": 0.761868,
+            "p75": 0.931613
+          },
+          "high_luminance_fraction": {
+            "mean": 0.000146,
+            "median": 0.0,
+            "n": 26,
+            "p25": 0.0,
+            "p75": 0.0
+          },
+          "low_luminance_fraction": {
+            "mean": 0.252763,
+            "median": 0.238064,
+            "n": 26,
+            "p25": 0.180935,
+            "p75": 0.309218
+          },
+          "mean_edge_difference": {
+            "mean": 0.019209,
+            "median": 0.016743,
+            "n": 26,
+            "p25": 0.013638,
+            "p75": 0.019261
+          },
+          "mean_luminance": {
+            "mean": 0.249118,
+            "median": 0.247578,
+            "n": 26,
+            "p25": 0.235519,
+            "p75": 0.266
+          },
+          "mean_positive_red_excess": {
+            "mean": 0.162565,
+            "median": 0.169161,
+            "n": 26,
+            "p25": 0.139306,
+            "p75": 0.17708
+          },
+          "mean_saturation": {
+            "mean": 0.697308,
+            "median": 0.70093,
+            "n": 26,
+            "p25": 0.678435,
+            "p75": 0.719642
+          },
+          "original_checkpoint": {
+            "mean": 0.761003,
+            "median": 0.912465,
+            "n": 26,
+            "p25": 0.698503,
+            "p75": 0.956033
+          },
+          "original_only_continued": {
+            "mean": 0.510731,
+            "median": 0.538955,
+            "n": 26,
+            "p25": 0.176239,
+            "p75": 0.768055
+          },
+          "padded_black_fraction": {
+            "mean": 0.081543,
+            "median": 0.081272,
+            "n": 26,
+            "p25": 0.080973,
+            "p75": 0.082303
+          },
+          "red_excess": {
+            "mean": 0.162553,
+            "median": 0.16917,
+            "n": 26,
+            "p25": 0.13929,
+            "p75": 0.177088
+          },
+          "source_width_div_height": {
+            "mean": 1.0,
+            "median": 1.0,
+            "n": 26,
+            "p25": 1.0,
+            "p75": 1.0
+          }
+        }
+      },
+      "reference_images": 512
+    },
+    "29": {
+      "frozen_model_reference_hits_at_10pct": {
+        "expanded_continued": 35,
+        "original_checkpoint": 33,
+        "original_only_continued": 31,
+        "red_excess": 19
+      },
+      "frozen_model_score_positive_minus_negative_median": {
+        "expanded_continued": 0.60692,
+        "original_checkpoint": 0.46277,
+        "original_only_continued": 0.044725,
+        "red_excess": -0.010244
+      },
+      "label_counts": {
+        "0": 390,
+        "1": 122
+      },
+      "prespecified_feature_descriptives_by_label": {
+        "0": {
+          "expanded_continued": {
+            "mean": 0.229822,
+            "median": 0.123234,
+            "n": 390,
+            "p25": 0.108275,
+            "p75": 0.207116
+          },
+          "high_luminance_fraction": {
+            "mean": 0.000149,
+            "median": 0.0,
+            "n": 390,
+            "p25": 0.0,
+            "p75": 0.000217
+          },
+          "low_luminance_fraction": {
+            "mean": 0.130928,
+            "median": 0.106771,
+            "n": 390,
+            "p25": 0.105035,
+            "p75": 0.117296
+          },
+          "mean_edge_difference": {
+            "mean": 0.020613,
+            "median": 0.018056,
+            "n": 390,
+            "p25": 0.015049,
+            "p75": 0.023294
+          },
+          "mean_luminance": {
+            "mean": 0.313645,
+            "median": 0.317507,
+            "n": 390,
+            "p25": 0.296299,
+            "p75": 0.340713
+          },
+          "mean_positive_red_excess": {
+            "mean": 0.133076,
+            "median": 0.135925,
+            "n": 390,
+            "p25": 0.117248,
+            "p75": 0.153107
+          },
+          "mean_saturation": {
+            "mean": 0.586241,
+            "median": 0.588905,
+            "n": 390,
+            "p25": 0.52527,
+            "p75": 0.653279
+          },
+          "original_checkpoint": {
+            "mean": 0.15945,
+            "median": 0.06694,
+            "n": 390,
+            "p25": 0.059017,
+            "p75": 0.108032
+          },
+          "original_only_continued": {
+            "mean": 0.096402,
+            "median": 0.06332,
+            "n": 390,
+            "p25": 0.060046,
+            "p75": 0.067917
+          },
+          "padded_black_fraction": {
+            "mean": 0.081298,
+            "median": 0.081163,
+            "n": 390,
+            "p25": 0.080404,
+            "p75": 0.08214
+          },
+          "red_excess": {
+            "mean": 0.133061,
+            "median": 0.135931,
+            "n": 390,
+            "p25": 0.117235,
+            "p75": 0.153114
+          },
+          "source_width_div_height": {
+            "mean": 1.0,
+            "median": 1.0,
+            "n": 390,
+            "p25": 1.0,
+            "p75": 1.0
+          }
+        },
+        "1": {
+          "expanded_continued": {
+            "mean": 0.626793,
+            "median": 0.730154,
+            "n": 122,
+            "p25": 0.401899,
+            "p75": 0.863814
+          },
+          "high_luminance_fraction": {
+            "mean": 0.000347,
+            "median": 0.000217,
+            "n": 122,
+            "p25": 0.0,
+            "p75": 0.000326
+          },
+          "low_luminance_fraction": {
+            "mean": 0.202188,
+            "median": 0.163249,
+            "n": 122,
+            "p25": 0.116645,
+            "p75": 0.240533
+          },
+          "mean_edge_difference": {
+            "mean": 0.016735,
+            "median": 0.015293,
+            "n": 122,
+            "p25": 0.013294,
+            "p75": 0.017804
+          },
+          "mean_luminance": {
+            "mean": 0.271262,
+            "median": 0.265986,
+            "n": 122,
+            "p25": 0.243927,
+            "p75": 0.303955
+          },
+          "mean_positive_red_excess": {
+            "mean": 0.132241,
+            "median": 0.125717,
+            "n": 122,
+            "p25": 0.107077,
+            "p75": 0.148183
+          },
+          "mean_saturation": {
+            "mean": 0.634519,
+            "median": 0.650065,
+            "n": 122,
+            "p25": 0.590134,
+            "p75": 0.685145
+          },
+          "original_checkpoint": {
+            "mean": 0.539941,
+            "median": 0.52971,
+            "n": 122,
+            "p25": 0.252648,
+            "p75": 0.871761
+          },
+          "original_only_continued": {
+            "mean": 0.237635,
+            "median": 0.108045,
+            "n": 122,
+            "p25": 0.072603,
+            "p75": 0.308068
+          },
+          "padded_black_fraction": {
+            "mean": 0.082188,
+            "median": 0.082248,
+            "n": 122,
+            "p25": 0.081407,
+            "p75": 0.083116
+          },
+          "red_excess": {
+            "mean": 0.132218,
+            "median": 0.125687,
+            "n": 122,
+            "p25": 0.107058,
+            "p75": 0.148145
+          },
+          "source_width_div_height": {
+            "mean": 1.0,
+            "median": 1.0,
+            "n": 122,
+            "p25": 1.0,
+            "p75": 1.0
+          }
+        }
+      },
+      "reference_images": 512
+    }
+  },
+  "examinations": [
+    25,
+    27,
+    29
+  ],
+  "features": [
+    "mean_luminance",
+    "mean_saturation",
+    "mean_positive_red_excess",
+    "high_luminance_fraction",
+    "low_luminance_fraction",
+    "mean_edge_difference",
+    "source_width_div_height",
+    "padded_black_fraction"
+  ],
+  "frozen_model_scores": [
+    "original_checkpoint",
+    "original_only_continued",
+    "expanded_continued",
+    "red_excess"
+  ],
+  "independent_clinical_validation": false,
+  "interpretation_limits": [
+    "Blood labels are source annotations, not adjudicated lesions.",
+    "No clinician has reviewed the candidate reasons for errors.",
+    "These features are not an independent diagnostic model.",
+    "Appearance differences cannot establish a causal mechanism or guarantee any augmentation will improve ranking.",
+    "Three examinations, not confirmed distinct patients; case-support 14,26,122 blood-positive images.",
+    "This is explicitly post-hoc descriptive error characterization after seeing model outcomes.",
+    "Reported medians/IQRs cannot establish causality, clinical pathology or model improvement.",
+    "Blood-positive frames may be serially correlated within a few annotation runs; do not treat them as independent lesions."
+  ],
+  "no_training_or_model_selection": true,
+  "patient_independence_confirmed": false,
+  "per_image_identifiers_or_pixels_committed": false,
+  "protocol_blob_sha": "60b790cc0919f2d80a2d708c77cb08d162149b32",
+  "reference_scope": "Only previously selected label-blind 512-image samples; no enriched-only frames",
+  "study": "Capsule Review descriptive post-hoc Galar appearance failure audit"
+}

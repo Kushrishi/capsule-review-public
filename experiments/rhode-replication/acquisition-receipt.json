@@ -1,0 +1,43 @@
+{
+  "cumulative_budget_bytes": 536870912,
+  "cumulative_data_transfer_upper_bound_bytes": 412500050,
+  "index_bytes": 2099173,
+  "new_data_transfer_bytes_upper_bound": 221477557,
+  "outer_archive_bytes": 5987150542,
+  "outer_md5_verified": false,
+  "previous_acquisition_conservative_upper_bound_bytes": 191022493,
+  "source_url": "https://ndownloader.figshare.com/files/37560007",
+  "spec_sha256": "c92500af677a12323ea5b8ebf43feb1b17f41bcf44ccfa80e94f28a19289399e",
+  "studies": [
+    {
+      "inner_zip_crc_passed": true,
+      "member_bytes": 103418092,
+      "remote_headers": {
+        "Content-Range": "bytes 915085751-1018503842/5987150542",
+        "ETag": "\"4f8a5ba509b4a0654084c66ade1f4097-6\"",
+        "Last-Modified": "Tue, 05 Sep 2023 09:48:03 GMT",
+        "x-amz-version-id": "vsR2YoFePPe0KRrdIZ64T84PBfrwxwQW"
+      },
+      "sha256": "2f6e407a17820e56a1c6af34c6d9853b35ca24fe324336e0b13a8a779a7e14d8",
+      "source_crc32": "1a870799",
+      "source_member": "Study 276-300/s280.zip",
+      "study": "s280"
+    },
+    {
+      "inner_zip_crc_passed": true,
+      "member_bytes": 115960292,
+      "remote_headers": {
+        "Content-Range": "bytes 1647432249-1763392540/5987150542",
+        "ETag": "\"4f8a5ba509b4a0654084c66ade1f4097-6\"",
+        "Last-Modified": "Tue, 05 Sep 2023 09:48:03 GMT",
+        "x-amz-version-id": "vsR2YoFePPe0KRrdIZ64T84PBfrwxwQW"
+      },
+      "sha256": "42eeb48d8ca640c8e3b18dfcf89d98903f6165ca85dbdb9e4c7192be1e107633",
+      "source_crc32": "6f1947e6",
+      "source_member": "Study 276-300/s284.zip",
+      "study": "s284"
+    }
+  ],
+  "timestamp_status": "Unknown original capture times",
+  "unverified_patient_independence": true
+}

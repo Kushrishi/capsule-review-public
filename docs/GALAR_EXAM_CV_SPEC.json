@@ -1,0 +1,113 @@
+{
+  "title": "Capsule Review: examination-separated blood-CNN sampling comparison",
+  "version": "1.0",
+  "date": "2026-11-02",
+  "status": "Frozen before new optimisation. Earlier data labels, exploratory examination transfer outcomes, original pilot and Galar23 negative results have already been inspected. All outcomes remain exploratory, not blinded or patient-independent.",
+  "question": "When fitting from scratch on exactly the same 14 permitted Galar fitting examinations, does examination/class-balanced sampling with predetermined moderate photometric jitter improve within-held-out-examination blood-label ranking over matched-update pooled cross-entropy training?",
+  "source": {
+    "Galar": "Le Floch et al. corrected Galar v2; CC BY 4.0",
+    "historical_manifest_sha256": "0f1cec23f43023788428c0fa694f6f00f42b367fd2ed2f539b97a57443080f59",
+    "historical_manifest_embedded_identifier": "4d3e0aba675383d1d5441fca0e1b6e0d226a61c2ae30c780c842cfbfd92c40fb",
+    "source_exams": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      21,
+      23,
+      25,
+      27,
+      29,
+      30
+    ],
+    "original_512_image_archive_outer_sha256": {
+      "001_002": "303d6daed3593d6e31212be1c78ff7e780c032889cc6632780ea4764ab4ab2b2",
+      "003_004": "3fbb37e6154dc008e3c4f5e037b03d651cb0cdb64967418c9aa1b973ae383047",
+      "005_006": "17d7e68a10b33f436bc06f12c757472b396d09676107eb018c53e650d964b36b",
+      "007_008": "2f87e4a69ab1f30ae11510a1f4f08a0427133e7749c0419ef87bc3c36715c881"
+    },
+    "verified_new_exam_outer_archive_sha256": {
+      "21": "aa18ee3ba5ef98d0ac139fa2a76d033136f95e6686c7645389006c78e6d8c901",
+      "23": "44d2f6b6e91cb4f0df0243a8a0dc8560936e787f80b42c8cf1252a6d862be6f8",
+      "25": "6045abf1651bc6585cbc55ccaaf00d2462ba6a10900f4a11e4f064c62e51bb8b",
+      "27": "b04e5e598357b50ccff29c77dfb5b88d2896a1ceaf45eabc2bd7719c363ae47a",
+      "29": "9cf8736cb269fbb91bb2e1405425c7be0958be5914ab4321fa701e61f4b92d66",
+      "30": "8eaa78453566f57d06ccd094ca3a057db4ed23552d366d540341bb0a73041e45"
+    },
+    "known_support": {
+      "original_training_1_to_8": "4096 images; 239 blood-positive images across five exams; 3/5/8 are blood-negative-labelled",
+      "fitting_21_23_25_27_29_30": "6027 original PNGs, 1424 explicit blood-positive annotations, intentionally enriched selection in each new source exam",
+      "all": "10123 unique source PNGs; 1663 explicit blood-positive labels; every original image hash and source identity verified before fitting"
+    },
+    "allowed_images": "Original 1-8 fixed 512 snapshots plus the 6 verified exam-level unions. Per-fold fit uses all fitting rows ONLY outside its held-out exam IDs, and evaluation only each held-out exam's 512 uniform label-blind reference positions. Never evaluate on enriched-only rows.",
+    "prohibited": "Never read source exams 9-10 (historical checkpoint selection) or reserved 11-20 or authors' 61-80. Do not use original CNN checkpoint as initial weight, since it was trained on old studies included as held-out validation here. No unverified patient independence."
+  },
+  "folds": {
+    "A": {
+      "heldout": [
+        1,
+        3,
+        21,
+        27,
+        29
+      ]
+    },
+    "B": {
+      "heldout": [
+        2,
+        5,
+        23,
+        25,
+        30
+      ]
+    },
+    "C": {
+      "heldout": [
+        4,
+        6,
+        7,
+        8
+      ]
+    }
+  },
+  "model": {
+    "architecture": "existing capsule_review.baseline.AnatomyCNN(2), random initialization from a common seed separately in each fold and arm",
+    "preprocessing": "Existing original PIL EXIF transpose + ImageOps.pad to 96x96 black-padded RGB then float32 [0,1]; no source-label-guided crop",
+    "deterministic_seed": 37,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0002,
+    "weight_decay": 0.0001,
+    "steps_per_fold_arm": 384,
+    "batch_size": 32,
+    "device": "float32 CPU, fixed 2 torch threads, torch.use_deterministic_algorithms(True)",
+    "checkpoint": "Final optimizer update only, no epoch/checkpoint tuning, exactly 3 folds * 2 arms = 6 trained models",
+    "arms": [
+      {
+        "name": "pooled_weighted",
+        "sampling": "Sample uniformly with replacement across all permitted fit images using fixed seeded RNG",
+        "loss": "Cross entropy, train-pool inverse-frequency class weights, normalised so average weight about 1, no cap; no augmentation",
+        "preprocessing_change": "none"
+      },
+      {
+        "name": "exam_balanced_jitter",
+        "sampling": "Sample exam uniformly with replacement across the fit exam IDs, then sample class with probability 0.5 when both explicit classes present in that exam; if only one class present, use that class. Sample an original image uniformly from that exam/class",
+        "loss": "Unweighted cross entropy, balancing is only in sampling",
+        "preprocessing_change": "Fixed train-only brightness multiplier independently uniform [0.75,1.25] and saturation multiplier [0.75,1.25], clamp to [0,1], black padding remains black; no validation augmentation"
+      }
+    ],
+    "same_initial_weights_and_update_count": true,
+    "no_hyperparameter_search": true
+  },
+  "reporting": {
+    "primary": "Per-examination ROC-AUC on label-blind 512-reference images for positive-containing exams with >=10 positive reference labels; macro-average, every exam reported regardless of support",
+    "secondary": "Per-exam AP, ROC-AUC also when 1-9 positives (highly unstable), exactly K=51/128/256/512 top-K blood-positive image hits and corresponding uniform comparator, precision at K (descriptive only), blood-negative examinations 3/5/8 reported with ROC-AUC undefined and uncalibrated score distribution",
+    "abstention": "Every arm picks K per exam in top-K comparisons; 100% 512 ceiling, no clinical sensitivity or physician reading-time claim",
+    "uncertainty": "No frame-wise inferential CI/p-values. Small exam count and unknown patient independence; macro statistics descriptive only.",
+    "model_selection": "Retain both candidates and historical failures regardless of scores; do not promote any model on these previously examined fitting studies. No tuning after results.",
+    "sources": "Only aggregate public per-exam results and source digests in Git; private scores, image IDs, weights and per-image labels in Capsule Review Library."
+  }
+}

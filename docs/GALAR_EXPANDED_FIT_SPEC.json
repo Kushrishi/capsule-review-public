@@ -1,0 +1,148 @@
+{
+  "study": "Capsule Review — fixed-update original-vs-expanded fitting-cohort CNN comparison",
+  "version": "1.0",
+  "frozen_before_first_new_optimization_step": true,
+  "prior_observation_disclosure": "Galar 21/23/30 source pixels and unchanged-original-CNN rankings have already been examined and are fitting-only. Exam29 source blood label counts and positive runs are known from training-pool annotation audit, but no exam29 source pixels or model scores were used to design this training schedule.",
+  "question": "Does adding verified fitting images from examinations 21, 23 and 30 improve the ranking of a fixed adapted CNN on one new examination (29), compared with equally many continued-training optimizer updates on original fitting examinations 1–8 alone?",
+  "source_identity": {
+    "frozen_historical_blood_manifest_sha256": "0f1cec23f43023788428c0fa694f6f00f42b367fd2ed2f539b97a57443080f59",
+    "original_source_manifest_identity": "4d3e0aba675383d1d5441fca0e1b6e0d226a61c2ae30c780c842cfbfd92c40fb",
+    "original_blood_cnn_checkpoint_sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+    "new_training_source_images": {
+      "21": 993,
+      "23": 1001,
+      "30": 1006
+    },
+    "new_training_source_scores_private_sha256": "caa85f950ac0912a3a89a3a93aad6c4e24ba1dc186a52e51456bf843e8111812",
+    "new_eval_exam": 29,
+    "new_eval_source_selection_sha256": "1aedfcdecbb270687a660acd50f312803ed0884308ea9a0973102aac242409f1",
+    "new_eval_requested_images": 1009,
+    "new_eval_uniform_reference_images": 512
+  },
+  "training_data": {
+    "original_training_exam_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "original_frames": 4096,
+    "original_explicit_blood_positive": 239,
+    "additional_fitting_exam_ids": [
+      21,
+      23,
+      30
+    ],
+    "additional_images": 3000,
+    "additional_explicit_blood_positive": 514,
+    "expanded_images": 7096,
+    "expanded_explicit_blood_positive": 753,
+    "prevent_cross_exam_leakage": true,
+    "strictly_forbidden_for_fitting": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      29
+    ],
+    "authors_reserved_holdout": "61–80 never touched"
+  },
+  "arms": [
+    {
+      "id": "original_checkpoint",
+      "initial_checkpoint": "original",
+      "steps": 0
+    },
+    {
+      "id": "original_only_continued",
+      "initial_checkpoint": "original",
+      "train_exams": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "steps": 666
+    },
+    {
+      "id": "expanded_continued",
+      "initial_checkpoint": "original",
+      "train_exams": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        21,
+        23,
+        30
+      ],
+      "steps": 666
+    }
+  ],
+  "frozen_training": {
+    "architecture": "Existing capsule_review.baseline.AnatomyCNN(2); do not modify original 3-convolution-block structure.",
+    "preprocessing": "Existing capsule_review.baseline.image_tensor: EXIF-orient; aspect preserving 96x96 black-padded RGB; convert to float32 in [0,1]; do not augment.",
+    "seed": 37,
+    "device": "float32 CPU, deterministic PyTorch, torch threads=2",
+    "sampling": "Uniform random example index with replacement from each arm's allowed fitting records; same fixed 666 minibatch updates for both continued-training arms. Independent seeded sampler per arm. No exam29 images during optimization.",
+    "steps": 666,
+    "batch_size": 32,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "optimizer": "AdamW",
+    "loss": "Cross-entropy with arm-specific inverse-frequency binary class weights, computed only on that arm's fitting images (no test-label weighting).",
+    "checkpoint": "Exactly last update; no validation-based checkpoint selection or early stopping.",
+    "no_augmentation": true,
+    "no_hyperparameter_search": true
+  },
+  "evaluation": {
+    "primary": "512 frozen, source-chronological, label-blind examination-29 reference images only",
+    "model_score": "softmax of blood-positive class, not calibrated probability of diagnosis",
+    "comparators": [
+      "unchanged original CNN",
+      "original-only continued CNN",
+      "expanded continued CNN",
+      "unchanged blood-pilot red-excess heuristic",
+      "deterministic uniform positional sampling"
+    ],
+    "budgets_percent": [
+      5,
+      10,
+      25,
+      50,
+      75,
+      100
+    ],
+    "primary_metrics": [
+      "ROC-AUC and average precision for the 512 reference images",
+      "blood-positive reference image hits among exactly floor(512*budget%) selected frames at each budget"
+    ],
+    "secondary": "Optional 1009-frame union including intentionally blood-enriched fitting candidates; labelled as case-mix biased and descriptive, never representative performance.",
+    "selection_rule": "No post-hoc score threshold, epoch, checkpoint, learning rate or architecture changes based on examination-29 reference labels or outcomes",
+    "caveats": "Exam29 was chosen as a fitting-pool acquisition target partly using training-cohort annotations; one examination, not confirmed independent patients; sparse-image positives are not lesions."
+  },
+  "success_decision": "Keep and report all three arms regardless of results. Do not promote an expanded model without further examination-level evaluation on genuinely reserved studies.",
+  "safety_and_storage": "No raw source images, individual frame identities, labels, private model scores or fitted weights in Git. Keep private reproducibility bundle in Capsule Review Library.",
+  "intended_product_effect": "Only research suggestion ranking changes after evidence; do not replace app default or claim reader-time benefit.",
+  "clinical_validation": false
+}

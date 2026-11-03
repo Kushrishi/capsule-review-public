@@ -1,0 +1,207 @@
+{
+  "study": "Galar23 actual source-image candidate density and fixed reviewer workload",
+  "role": "Already inspected Galar fitting examination; explicitly post-hoc exploratory, not clinical validation",
+  "source_exam": 23,
+  "frozen_protocol_git_blob_sha1": "1eb7c7e6ee9578800de2c15bcfec9ba520a63e97",
+  "source_corrected_labels_zip_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+  "source_corrected_exam23_csv_sha256": "f031c0a36b7f9a3851a96174858e79030730b105e7c18ebbecbd1a63947bca30",
+  "source_original_7z_file_id": 45258019,
+  "source_original_7z_block_id": 1,
+  "source_original_block_sha256": "b5086f018b7e88c57db7562af624c468796a7b1e812101d07236c184131b08f6",
+  "source_original_block_compressed_bytes": 3475743781,
+  "original_pngs_verified": 4608,
+  "original_pngs_verified_bytes": 1376046128,
+  "original_annotation_rows": 11785,
+  "original_blood_positive_annotated_rows": 135,
+  "original_blood_positive_annotation_runs": 28,
+  "full_private_aggregate_sha256": "648423b1735f1e1a265946805a9ad7386a9ad0fdc2104641cc0dcb4e93fe10de",
+  "full_private_aggregate_library_path": "/Capsule Review/Galar23 Pixel Density 2026-11-02/aggregate.json",
+  "exact_remote_source_execution": "https://github.com/Kushrishi/capsule-review/actions/runs/41531426060",
+  "validated_images_not_committed_to_git": true,
+  "extra_pngs_not_persisted_as_a_second_source_archive": true,
+  "no_new_model_fit": true,
+  "no_reserved_studies_accessed": true,
+  "full_publisher_archive_md5_verified": false,
+  "original_examination_independence_verified": false,
+  "clinical_validity": false,
+  "methods": {
+    "512": {
+      "candidate_images": 512,
+      "candidate_positive_labelled_images": 4,
+      "methods_at_fixed_workload": {
+        "51": {
+          "bin_stratified_red": {
+            "blood_label_positive_image_hits": 0,
+            "distinct_source_annotation_runs_hit": 0,
+            "reviewed_frames": 51,
+            "source_annotation_row_nearest_review_max_gap": 207
+          },
+          "global_red": {
+            "blood_label_positive_image_hits": 0,
+            "distinct_source_annotation_runs_hit": 0,
+            "reviewed_frames": 51,
+            "source_annotation_row_nearest_review_max_gap": 1829
+          },
+          "uniform": {
+            "blood_label_positive_image_hits": 0,
+            "distinct_source_annotation_runs_hit": 0,
+            "reviewed_frames": 51,
+            "source_annotation_row_nearest_review_max_gap": 127
+          }
+        },
+        "128": {
+          "bin_stratified_red": {
+            "blood_label_positive_image_hits": 0,
+            "distinct_source_annotation_runs_hit": 0,
+            "reviewed_frames": 128,
+            "source_annotation_row_nearest_review_max_gap": 80
+          },
+          "global_red": {
+            "blood_label_positive_image_hits": 0,
+            "distinct_source_annotation_runs_hit": 0,
+            "reviewed_frames": 128,
+            "source_annotation_row_nearest_review_max_gap": 1484
+          },
+          "uniform": {
+            "blood_label_positive_image_hits": 1,
+            "distinct_source_annotation_runs_hit": 1,
+            "reviewed_frames": 128,
+            "source_annotation_row_nearest_review_max_gap": 57
+          }
+        },
+        "256": {
+          "bin_stratified_red": {
+            "blood_label_positive_image_hits": 1,
+            "distinct_source_annotation_runs_hit": 1,
+            "reviewed_frames": 256,
+            "source_annotation_row_nearest_review_max_gap": 35
+          },
+          "global_red": {
+            "blood_label_positive_image_hits": 2,
+            "distinct_source_annotation_runs_hit": 2,
+            "reviewed_frames": 256,
+            "source_annotation_row_nearest_review_max_gap": 1415
+          },
+          "uniform": {
+            "blood_label_positive_image_hits": 1,
+            "distinct_source_annotation_runs_hit": 1,
+            "reviewed_frames": 256,
+            "source_annotation_row_nearest_review_max_gap": 34
+          }
+        },
+        "512": {
+          "bin_stratified_red": {
+            "blood_label_positive_image_hits": 4,
+            "distinct_source_annotation_runs_hit": 4,
+            "reviewed_frames": 512,
+            "source_annotation_row_nearest_review_max_gap": 12
+          },
+          "global_red": {
+            "blood_label_positive_image_hits": 4,
+            "distinct_source_annotation_runs_hit": 4,
+            "reviewed_frames": 512,
+            "source_annotation_row_nearest_review_max_gap": 12
+          },
+          "uniform": {
+            "blood_label_positive_image_hits": 4,
+            "distinct_source_annotation_runs_hit": 4,
+            "reviewed_frames": 512,
+            "source_annotation_row_nearest_review_max_gap": 12
+          }
+        }
+      },
+      "original_red_average_precision": 0.008132310281290007,
+      "original_red_roc_auc": 0.4173228346456693,
+      "source_annotation_positive_runs_represented": 4
+    },
+    "4096": {
+      "candidate_images": 4096,
+      "candidate_positive_labelled_images": 48,
+      "methods_at_fixed_workload": {
+        "51": {
+          "bin_stratified_red": {
+            "blood_label_positive_image_hits": 0,
+            "distinct_source_annotation_runs_hit": 0,
+            "reviewed_frames": 51,
+            "source_annotation_row_nearest_review_max_gap": 217
+          },
+          "global_red": {
+            "blood_label_positive_image_hits": 0,
+            "distinct_source_annotation_runs_hit": 0,
+            "reviewed_frames": 51,
+            "source_annotation_row_nearest_review_max_gap": 2178
+          },
+          "uniform": {
+            "blood_label_positive_image_hits": 0,
+            "distinct_source_annotation_runs_hit": 0,
+            "reviewed_frames": 51,
+            "source_annotation_row_nearest_review_max_gap": 116
+          }
+        },
+        "128": {
+          "bin_stratified_red": {
+            "blood_label_positive_image_hits": 0,
+            "distinct_source_annotation_runs_hit": 0,
+            "reviewed_frames": 128,
+            "source_annotation_row_nearest_review_max_gap": 88
+          },
+          "global_red": {
+            "blood_label_positive_image_hits": 0,
+            "distinct_source_annotation_runs_hit": 0,
+            "reviewed_frames": 128,
+            "source_annotation_row_nearest_review_max_gap": 2021
+          },
+          "uniform": {
+            "blood_label_positive_image_hits": 2,
+            "distinct_source_annotation_runs_hit": 2,
+            "reviewed_frames": 128,
+            "source_annotation_row_nearest_review_max_gap": 47
+          }
+        },
+        "256": {
+          "bin_stratified_red": {
+            "blood_label_positive_image_hits": 1,
+            "distinct_source_annotation_runs_hit": 1,
+            "reviewed_frames": 256,
+            "source_annotation_row_nearest_review_max_gap": 45
+          },
+          "global_red": {
+            "blood_label_positive_image_hits": 0,
+            "distinct_source_annotation_runs_hit": 0,
+            "reviewed_frames": 256,
+            "source_annotation_row_nearest_review_max_gap": 1647
+          },
+          "uniform": {
+            "blood_label_positive_image_hits": 4,
+            "distinct_source_annotation_runs_hit": 4,
+            "reviewed_frames": 256,
+            "source_annotation_row_nearest_review_max_gap": 24
+          }
+        },
+        "512": {
+          "bin_stratified_red": {
+            "blood_label_positive_image_hits": 8,
+            "distinct_source_annotation_runs_hit": 6,
+            "reviewed_frames": 512,
+            "source_annotation_row_nearest_review_max_gap": 21
+          },
+          "global_red": {
+            "blood_label_positive_image_hits": 0,
+            "distinct_source_annotation_runs_hit": 0,
+            "reviewed_frames": 512,
+            "source_annotation_row_nearest_review_max_gap": 1425
+          },
+          "uniform": {
+            "blood_label_positive_image_hits": 3,
+            "distinct_source_annotation_runs_hit": 3,
+            "reviewed_frames": 512,
+            "source_annotation_row_nearest_review_max_gap": 12
+          }
+        }
+      },
+      "original_red_average_precision": 0.008465865381395737,
+      "original_red_roc_auc": 0.36380620059288155,
+      "source_annotation_positive_runs_represented": 21
+    }
+  }
+}

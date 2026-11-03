@@ -1,0 +1,148 @@
+{
+  "analysis": "Galar exam29 fixed, prospective-to-training, fitting-cohort evaluation; not blinded clinical validation",
+  "evaluation_examination": 29,
+  "patient_independence_confirmed": false,
+  "primary_reference_images": 512,
+  "primary_reference_blood_positive": 122,
+  "primary_label_blind_method_comparison": [
+    {
+      "method": "original_checkpoint",
+      "frames": 512,
+      "blood_positive": 122,
+      "roc_auc": 0.8594367381252617,
+      "average_precision": 0.6452420358104307
+    },
+    {
+      "method": "original_only_continued",
+      "frames": 512,
+      "blood_positive": 122,
+      "roc_auc": 0.8337746952501062,
+      "average_precision": 0.5825055415133719
+    },
+    {
+      "method": "expanded_continued",
+      "frames": 512,
+      "blood_positive": 122,
+      "roc_auc": 0.8817150063051716,
+      "average_precision": 0.6511411369051572
+    },
+    {
+      "method": "red_excess",
+      "frames": 512,
+      "blood_positive": 122,
+      "roc_auc": 0.43944934846574174,
+      "average_precision": 0.29303446542811984
+    }
+  ],
+  "primary_review_budget_curve": {
+    "5": {
+      "selected_images": 25,
+      "hits_by_method": {
+        "original_checkpoint": 19,
+        "original_only_continued": 14,
+        "expanded_continued": 16,
+        "red_excess": 14,
+        "uniform": 6
+      }
+    },
+    "10": {
+      "selected_images": 51,
+      "hits_by_method": {
+        "original_checkpoint": 33,
+        "original_only_continued": 31,
+        "expanded_continued": 35,
+        "red_excess": 19,
+        "uniform": 10
+      }
+    },
+    "25": {
+      "selected_images": 128,
+      "hits_by_method": {
+        "original_checkpoint": 81,
+        "original_only_continued": 80,
+        "expanded_continued": 78,
+        "red_excess": 25,
+        "uniform": 29
+      }
+    },
+    "50": {
+      "selected_images": 256,
+      "hits_by_method": {
+        "original_checkpoint": 109,
+        "original_only_continued": 107,
+        "expanded_continued": 117,
+        "red_excess": 52,
+        "uniform": 63
+      }
+    },
+    "75": {
+      "selected_images": 384,
+      "hits_by_method": {
+        "original_checkpoint": 119,
+        "original_only_continued": 115,
+        "expanded_continued": 120,
+        "red_excess": 78,
+        "uniform": 91
+      }
+    },
+    "100": {
+      "selected_images": 512,
+      "hits_by_method": {
+        "original_checkpoint": 122,
+        "original_only_continued": 122,
+        "expanded_continued": 122,
+        "red_excess": 122,
+        "uniform": 122
+      }
+    }
+  },
+  "secondary_enriched_union_images": 1009,
+  "secondary_enriched_union_blood_positive": 372,
+  "secondary_enriched_union_comparison_not_representative": [
+    {
+      "method": "original_checkpoint",
+      "frames": 1009,
+      "blood_positive": 372,
+      "roc_auc": 0.8623714994682756,
+      "average_precision": 0.7616448947596692
+    },
+    {
+      "method": "original_only_continued",
+      "frames": 1009,
+      "blood_positive": 372,
+      "roc_auc": 0.8385155551054189,
+      "average_precision": 0.712404832702493
+    },
+    {
+      "method": "expanded_continued",
+      "frames": 1009,
+      "blood_positive": 372,
+      "roc_auc": 0.8869406323323409,
+      "average_precision": 0.7760755142814086
+    },
+    {
+      "method": "red_excess",
+      "frames": 1009,
+      "blood_positive": 372,
+      "roc_auc": 0.445255397444337,
+      "average_precision": 0.4089341386699734
+    }
+  ],
+  "frozen_training_spec_git_blob": "ac042de43b22d33a2860df06fbac03e80a1cb331",
+  "fixed_training_checkpoints": {
+    "original_checkpoint": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+    "original_only_continued": "ae88ccfedc53d8f419b3da8c0c01ca6b61361ef29858b6a536e25408ba99eefb",
+    "expanded_continued": "2534d3b7982ee8c557cadc5ad3fcc4c7c4c557f899fa013e881d8655eab97111"
+  },
+  "source_private_zip_sha256": "124f48bf18dc14a63241c8e2c03918eefecb89ddc465c2cacaa2151d97045be5",
+  "private_image_identity_sha256": "d047d1eb7cc6f1f2cc740624bbd61199589abc2ae7ccddadc0876f8b0a4e7cae",
+  "individual_image_identities_committed": false,
+  "clinical_validity": false,
+  "limitations": [
+    "Exam29 source labels were previously available and its acquisition was informed by positive-run counts, so this is not a truly blinded independent test.",
+    "One evaluation examination cannot establish generalization across patients/devices.",
+    "Blood annotation is not lesion identity or diagnosis.",
+    "Sparse 512-frame reference is not entire video or reader-time measure.",
+    "Each model and workload decision is fixed; no post-evaluation model selection."
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "study": "Capsule Review — source-verified Galar examination 29 fitting-image acquisition",
+  "version": "1.0",
+  "locked_before_new_exam29_pixel_transfer": true,
+  "purpose": "Add an examination with many short/diverse blood-positive annotation runs to training-only development, without tuning on previously inspected Galar case outcomes.",
+  "source": {
+    "official_dataset": "Galar v2; CC BY 4.0; Le Floch et al.",
+    "official_file_id": 45258019,
+    "filename": "Galar_Frames_21_to_29_2.7z",
+    "source_bytes": 31989399751,
+    "expected_full_md5": "dedad47ee55c83a4b991ca60d26fb6ee",
+    "full_source_md5_claim": "Not verified by partial 7z range transfer",
+    "official_corrected_annotations_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f"
+  },
+  "training_only_exam": 29,
+  "source_exam_png_count": 16018,
+  "frozen_fit_selection_sha256": "1aedfcdecbb270687a660acd50f312803ed0884308ea9a0973102aac242409f1",
+  "frozen_requested_source_images": 1009,
+  "frozen_selection": {
+    "fit_enriched": 512,
+    "uniform_label_blind": 512,
+    "overlap": 15,
+    "positive_enriched": 256,
+    "positive_uniform_reference": 122,
+    "source_annotation_runs": 107
+  },
+  "allowed_original_solid_blocks": [
+    {
+      "index": 7,
+      "offset": 24343274409,
+      "bytes": 3500524677,
+      "exam29_member_count": 13455
+    },
+    {
+      "index": 8,
+      "offset": 27843799086,
+      "bytes": 3514256456,
+      "exam29_member_count": 2563
+    }
+  ],
+  "transfer": {
+    "max_original_compressed_block_bytes": 7100000000,
+    "expected_total_source_block_bytes": 7014781133,
+    "allow_exact_http_206_only": true,
+    "verified_index_headers_only": true,
+    "require_full_exam29_png_inventory": true,
+    "deny_nonmatching_source_ids": true,
+    "source_temp_storage_margin_bytes": 5000000000,
+    "require_7z_crc": true,
+    "require_png_decode": true,
+    "require_image_byte_sha256": true,
+    "package_zip_crc": true,
+    "no_overwrite": true
+  },
+  "role_constraints": {
+    "permitted_examinations_in_original_selection": "21–30 fitting candidates only",
+    "source_pixel_examination": 29,
+    "previously_examined_fitting_cohort": "1–8,21,23,30",
+    "historically_inspected_development": "9–10",
+    "future_reserved_evaluation": "11–20",
+    "authors_holdout": "61–80"
+  },
+  "reporting": {
+    "commit": "Only acquisition source code, source metadata aggregate, verification tests and aggregate receipt",
+    "private": "Preserve original PNG, frame-level labels, exact source identities and per-image hashes in private Capsule Review Library, not Git",
+    "no_clinical_claims": true
+  },
+  "scope": "New fitting-data availability, not new diagnostic performance or a newly blinded independent test",
+  "acceptance": "All selected source-image identities and decoded PNG hashes verified, matched against frozen plan, retained outside Git and independently replayed; otherwise no completion claim."
+}

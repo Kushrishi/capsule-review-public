@@ -1,0 +1,194 @@
+{
+  "evaluation_role": "development validation; also used for checkpoint selection",
+  "data_kind": "galar",
+  "split_unit": "examination",
+  "clinical_validation": false,
+  "best_epoch": 5,
+  "validation_loss": 0.6934573468752205,
+  "model": {
+    "frames": 1024,
+    "examinations": 2,
+    "accuracy": 0.68359375,
+    "mean_examination_accuracy": 0.68359375,
+    "balanced_accuracy_supported_classes": 0.5311669623059867,
+    "macro_f1_supported_classes": 0.48108723380819657,
+    "per_class": {
+      "mouth": {
+        "reference_count": 11,
+        "prediction_count": 13,
+        "precision": 0.7692307692307693,
+        "recall": 0.9090909090909091,
+        "f1": 0.8333333333333334
+      },
+      "esophagus": {
+        "reference_count": 2,
+        "prediction_count": 0,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "stomach": {
+        "reference_count": 41,
+        "prediction_count": 102,
+        "precision": 0.1568627450980392,
+        "recall": 0.3902439024390244,
+        "f1": 0.22377622377622378
+      },
+      "small intestine": {
+        "reference_count": 720,
+        "prediction_count": 588,
+        "precision": 0.8724489795918368,
+        "recall": 0.7125,
+        "f1": 0.7844036697247706
+      },
+      "colon": {
+        "reference_count": 250,
+        "prediction_count": 321,
+        "precision": 0.5015576323987538,
+        "recall": 0.644,
+        "f1": 0.563922942206655
+      }
+    },
+    "confusion_matrix": [
+      [
+        10,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        16,
+        24,
+        0
+      ],
+      [
+        0,
+        0,
+        47,
+        513,
+        160
+      ],
+      [
+        0,
+        0,
+        38,
+        51,
+        161
+      ]
+    ],
+    "class_order": [
+      "mouth",
+      "esophagus",
+      "stomach",
+      "small intestine",
+      "colon"
+    ],
+    "per_examination_accuracy": {
+      "10": 0.607421875,
+      "9": 0.759765625
+    }
+  },
+  "training_majority_baseline": {
+    "frames": 1024,
+    "examinations": 2,
+    "accuracy": 0.703125,
+    "mean_examination_accuracy": 0.703125,
+    "balanced_accuracy_supported_classes": 0.2,
+    "macro_f1_supported_classes": 0.1651376146788991,
+    "per_class": {
+      "mouth": {
+        "reference_count": 11,
+        "prediction_count": 0,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "esophagus": {
+        "reference_count": 2,
+        "prediction_count": 0,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "stomach": {
+        "reference_count": 41,
+        "prediction_count": 0,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "small intestine": {
+        "reference_count": 720,
+        "prediction_count": 1024,
+        "precision": 0.703125,
+        "recall": 1.0,
+        "f1": 0.8256880733944955
+      },
+      "colon": {
+        "reference_count": 250,
+        "prediction_count": 0,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        0,
+        11,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        41,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        720,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        250,
+        0
+      ]
+    ],
+    "class_order": [
+      "mouth",
+      "esophagus",
+      "stomach",
+      "small intestine",
+      "colon"
+    ],
+    "per_examination_accuracy": {
+      "10": 0.76171875,
+      "9": 0.64453125
+    }
+  }
+}

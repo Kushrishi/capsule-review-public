@@ -1,0 +1,123 @@
+{
+  "status": "two frozen training-only arms complete; exam29 NOT read or evaluated",
+  "source_checkpoint_sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+  "training_source_hashes": {
+    "historical_manifest": "0f1cec23f43023788428c0fa694f6f00f42b367fd2ed2f539b97a57443080f59",
+    "new_private_scores": "caa85f950ac0912a3a89a3a93aad6c4e24ba1dc186a52e51456bf843e8111812"
+  },
+  "optimization": {
+    "updates": 666,
+    "batch_size": 32,
+    "lr": 0.0001,
+    "weight_decay": 0.0001,
+    "seed": 37
+  },
+  "new_model_results": [
+    {
+      "arm": "original_only_continued",
+      "fitting_examinations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "training_images": 4096,
+      "blood_positive": 239,
+      "blood_negative": 3857,
+      "optimizer_updates": 666,
+      "batch_size": 32,
+      "class_weights": [
+        0.5309826135635376,
+        8.569037437438965
+      ],
+      "sampled_instances_with_replacement": true,
+      "seed": 37,
+      "training_loss_checkpoints": [
+        {
+          "step": 111,
+          "weighted_batch_loss": 0.8059247732162476
+        },
+        {
+          "step": 222,
+          "weighted_batch_loss": 0.08451331406831741
+        },
+        {
+          "step": 333,
+          "weighted_batch_loss": 0.7220639586448669
+        },
+        {
+          "step": 444,
+          "weighted_batch_loss": 0.4025915861129761
+        },
+        {
+          "step": 555,
+          "weighted_batch_loss": 0.7727141380310059
+        },
+        {
+          "step": 666,
+          "weighted_batch_loss": 0.8238255381584167
+        }
+      ],
+      "weights_sha256": "ae88ccfedc53d8f419b3da8c0c01ca6b61361ef29858b6a536e25408ba99eefb"
+    },
+    {
+      "arm": "expanded_continued",
+      "fitting_examinations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        21,
+        23,
+        30
+      ],
+      "training_images": 7096,
+      "blood_positive": 753,
+      "blood_negative": 6343,
+      "optimizer_updates": 666,
+      "batch_size": 32,
+      "class_weights": [
+        0.5593567490577698,
+        4.711819171905518
+      ],
+      "sampled_instances_with_replacement": true,
+      "seed": 37,
+      "training_loss_checkpoints": [
+        {
+          "step": 111,
+          "weighted_batch_loss": 0.7754229307174683
+        },
+        {
+          "step": 222,
+          "weighted_batch_loss": 0.399233877658844
+        },
+        {
+          "step": 333,
+          "weighted_batch_loss": 0.4391668140888214
+        },
+        {
+          "step": 444,
+          "weighted_batch_loss": 0.2772271931171417
+        },
+        {
+          "step": 555,
+          "weighted_batch_loss": 0.82948237657547
+        },
+        {
+          "step": 666,
+          "weighted_batch_loss": 0.6516624093055725
+        }
+      ],
+      "weights_sha256": "2534d3b7982ee8c557cadc5ad3fcc4c7c4c557f899fa013e881d8655eab97111"
+    }
+  ],
+  "clinical_validity": false
+}

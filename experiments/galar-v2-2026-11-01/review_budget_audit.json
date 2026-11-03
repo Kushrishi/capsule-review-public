@@ -1,0 +1,393 @@
+{
+  "status": "post-hoc historical development only; no independent test",
+  "dataset": "Galar v2 (corrected December 2025), CC BY 4.0",
+  "source_corrected_label_zip_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+  "examinations": [
+    9,
+    10
+  ],
+  "task": "blood label visibility, not active bleeding diagnosis",
+  "budget_denominator": "512 previously uniformly sampled images per examination",
+  "full_video_temporal_evaluation": false,
+  "image_model_retrained": false,
+  "selection_design_status": "time-stratified rule investigated after historical development outputs; exploratory only",
+  "annotation_runs_are_not_adjudicated_lesions": true,
+  "budgets_percent": [
+    5,
+    10,
+    25
+  ],
+  "random_policy": "100 independent seeded sample draws per examination and budget; draws are not independent patients",
+  "examination_summaries": {
+    "9": {
+      "source_annotation_positions": 4339,
+      "positive_source_annotation_positions": 0,
+      "unknown_source_annotation_positions": 0,
+      "available_scored_images": 512,
+      "positive_scored_images": 0,
+      "sampled_source_gap_min": 40,
+      "sampled_source_gap_median": 40,
+      "sampled_source_gap_max": 45,
+      "full_video_adjacent_images_available": false,
+      "total_positive_annotation_runs": 0,
+      "reachable_positive_annotation_runs": 0,
+      "unreachable_positive_annotation_runs": 0,
+      "short_positive_runs_le_25_positions": 0,
+      "reachable_short_runs_le_25_positions": 0,
+      "longest_positive_run_positions": 0
+    },
+    "10": {
+      "source_annotation_positions": 9745,
+      "positive_source_annotation_positions": 3983,
+      "unknown_source_annotation_positions": 0,
+      "available_scored_images": 512,
+      "positive_scored_images": 213,
+      "sampled_source_gap_min": 95,
+      "sampled_source_gap_median": 95,
+      "sampled_source_gap_max": 100,
+      "full_video_adjacent_images_available": false,
+      "total_positive_annotation_runs": 41,
+      "reachable_positive_annotation_runs": 31,
+      "unreachable_positive_annotation_runs": 10,
+      "short_positive_runs_le_25_positions": 22,
+      "reachable_short_runs_le_25_positions": 12,
+      "longest_positive_run_positions": 2324
+    }
+  },
+  "budget_results": {
+    "5": {
+      "per_examination": {
+        "9": {
+          "budget_images": 25,
+          "policies": {
+            "cnn_top": {
+              "selected_frames": 25,
+              "positive_frames": 0,
+              "blood_label_zero_frames": 25,
+              "positive_annotation_runs": 0,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 0,
+              "run_coverage_all": null,
+              "run_coverage_reachable": null
+            },
+            "cnn_time_stratified": {
+              "selected_frames": 25,
+              "positive_frames": 0,
+              "blood_label_zero_frames": 25,
+              "positive_annotation_runs": 0,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 0,
+              "run_coverage_all": null,
+              "run_coverage_reachable": null
+            },
+            "red_top": {
+              "selected_frames": 25,
+              "positive_frames": 0,
+              "blood_label_zero_frames": 25,
+              "positive_annotation_runs": 0,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 0,
+              "run_coverage_all": null,
+              "run_coverage_reachable": null
+            },
+            "uniform": {
+              "selected_frames": 25,
+              "positive_frames": 0,
+              "blood_label_zero_frames": 25,
+              "positive_annotation_runs": 0,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 0,
+              "run_coverage_all": null,
+              "run_coverage_reachable": null
+            }
+          },
+          "random_100_draws": {
+            "mean_positive_frames": 0.0,
+            "mean_positive_annotation_runs": 0.0,
+            "min_positive_annotation_runs": 0,
+            "max_positive_annotation_runs": 0
+          }
+        },
+        "10": {
+          "budget_images": 25,
+          "policies": {
+            "cnn_top": {
+              "selected_frames": 25,
+              "positive_frames": 25,
+              "blood_label_zero_frames": 0,
+              "positive_annotation_runs": 2,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 24,
+              "run_coverage_all": 0.04878048780487805,
+              "run_coverage_reachable": 0.06451612903225806
+            },
+            "cnn_time_stratified": {
+              "selected_frames": 25,
+              "positive_frames": 10,
+              "blood_label_zero_frames": 15,
+              "positive_annotation_runs": 5,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 6,
+              "run_coverage_all": 0.12195121951219512,
+              "run_coverage_reachable": 0.16129032258064516
+            },
+            "red_top": {
+              "selected_frames": 25,
+              "positive_frames": 16,
+              "blood_label_zero_frames": 9,
+              "positive_annotation_runs": 6,
+              "short_runs_le_25_positions": 3,
+              "max_positive_images_from_one_run": 8,
+              "run_coverage_all": 0.14634146341463414,
+              "run_coverage_reachable": 0.1935483870967742
+            },
+            "uniform": {
+              "selected_frames": 25,
+              "positive_frames": 9,
+              "blood_label_zero_frames": 16,
+              "positive_annotation_runs": 4,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 6,
+              "run_coverage_all": 0.0975609756097561,
+              "run_coverage_reachable": 0.12903225806451613
+            }
+          },
+          "random_100_draws": {
+            "mean_positive_frames": 10.56,
+            "mean_positive_annotation_runs": 5.0,
+            "min_positive_annotation_runs": 2,
+            "max_positive_annotation_runs": 9
+          }
+        }
+      }
+    },
+    "10": {
+      "per_examination": {
+        "9": {
+          "budget_images": 51,
+          "policies": {
+            "cnn_top": {
+              "selected_frames": 51,
+              "positive_frames": 0,
+              "blood_label_zero_frames": 51,
+              "positive_annotation_runs": 0,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 0,
+              "run_coverage_all": null,
+              "run_coverage_reachable": null
+            },
+            "cnn_time_stratified": {
+              "selected_frames": 51,
+              "positive_frames": 0,
+              "blood_label_zero_frames": 51,
+              "positive_annotation_runs": 0,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 0,
+              "run_coverage_all": null,
+              "run_coverage_reachable": null
+            },
+            "red_top": {
+              "selected_frames": 51,
+              "positive_frames": 0,
+              "blood_label_zero_frames": 51,
+              "positive_annotation_runs": 0,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 0,
+              "run_coverage_all": null,
+              "run_coverage_reachable": null
+            },
+            "uniform": {
+              "selected_frames": 51,
+              "positive_frames": 0,
+              "blood_label_zero_frames": 51,
+              "positive_annotation_runs": 0,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 0,
+              "run_coverage_all": null,
+              "run_coverage_reachable": null
+            }
+          },
+          "random_100_draws": {
+            "mean_positive_frames": 0.0,
+            "mean_positive_annotation_runs": 0.0,
+            "min_positive_annotation_runs": 0,
+            "max_positive_annotation_runs": 0
+          }
+        },
+        "10": {
+          "budget_images": 51,
+          "policies": {
+            "cnn_top": {
+              "selected_frames": 51,
+              "positive_frames": 47,
+              "blood_label_zero_frames": 4,
+              "positive_annotation_runs": 3,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 44,
+              "run_coverage_all": 0.07317073170731707,
+              "run_coverage_reachable": 0.0967741935483871
+            },
+            "cnn_time_stratified": {
+              "selected_frames": 51,
+              "positive_frames": 24,
+              "blood_label_zero_frames": 27,
+              "positive_annotation_runs": 11,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 13,
+              "run_coverage_all": 0.2682926829268293,
+              "run_coverage_reachable": 0.3548387096774194
+            },
+            "red_top": {
+              "selected_frames": 51,
+              "positive_frames": 26,
+              "blood_label_zero_frames": 25,
+              "positive_annotation_runs": 9,
+              "short_runs_le_25_positions": 4,
+              "max_positive_images_from_one_run": 9,
+              "run_coverage_all": 0.21951219512195122,
+              "run_coverage_reachable": 0.2903225806451613
+            },
+            "uniform": {
+              "selected_frames": 51,
+              "positive_frames": 21,
+              "blood_label_zero_frames": 30,
+              "positive_annotation_runs": 10,
+              "short_runs_le_25_positions": 2,
+              "max_positive_images_from_one_run": 12,
+              "run_coverage_all": 0.24390243902439024,
+              "run_coverage_reachable": 0.3225806451612903
+            }
+          },
+          "random_100_draws": {
+            "mean_positive_frames": 21.07,
+            "mean_positive_annotation_runs": 8.84,
+            "min_positive_annotation_runs": 4,
+            "max_positive_annotation_runs": 14
+          }
+        }
+      }
+    },
+    "25": {
+      "per_examination": {
+        "9": {
+          "budget_images": 128,
+          "policies": {
+            "cnn_top": {
+              "selected_frames": 128,
+              "positive_frames": 0,
+              "blood_label_zero_frames": 128,
+              "positive_annotation_runs": 0,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 0,
+              "run_coverage_all": null,
+              "run_coverage_reachable": null
+            },
+            "cnn_time_stratified": {
+              "selected_frames": 128,
+              "positive_frames": 0,
+              "blood_label_zero_frames": 128,
+              "positive_annotation_runs": 0,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 0,
+              "run_coverage_all": null,
+              "run_coverage_reachable": null
+            },
+            "red_top": {
+              "selected_frames": 128,
+              "positive_frames": 0,
+              "blood_label_zero_frames": 128,
+              "positive_annotation_runs": 0,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 0,
+              "run_coverage_all": null,
+              "run_coverage_reachable": null
+            },
+            "uniform": {
+              "selected_frames": 128,
+              "positive_frames": 0,
+              "blood_label_zero_frames": 128,
+              "positive_annotation_runs": 0,
+              "short_runs_le_25_positions": 0,
+              "max_positive_images_from_one_run": 0,
+              "run_coverage_all": null,
+              "run_coverage_reachable": null
+            }
+          },
+          "random_100_draws": {
+            "mean_positive_frames": 0.0,
+            "mean_positive_annotation_runs": 0.0,
+            "min_positive_annotation_runs": 0,
+            "max_positive_annotation_runs": 0
+          }
+        },
+        "10": {
+          "budget_images": 128,
+          "policies": {
+            "cnn_top": {
+              "selected_frames": 128,
+              "positive_frames": 115,
+              "blood_label_zero_frames": 13,
+              "positive_annotation_runs": 10,
+              "short_runs_le_25_positions": 3,
+              "max_positive_images_from_one_run": 97,
+              "run_coverage_all": 0.24390243902439024,
+              "run_coverage_reachable": 0.3225806451612903
+            },
+            "cnn_time_stratified": {
+              "selected_frames": 128,
+              "positive_frames": 59,
+              "blood_label_zero_frames": 69,
+              "positive_annotation_runs": 21,
+              "short_runs_le_25_positions": 5,
+              "max_positive_images_from_one_run": 31,
+              "run_coverage_all": 0.5121951219512195,
+              "run_coverage_reachable": 0.6774193548387096
+            },
+            "red_top": {
+              "selected_frames": 128,
+              "positive_frames": 64,
+              "blood_label_zero_frames": 64,
+              "positive_annotation_runs": 20,
+              "short_runs_le_25_positions": 7,
+              "max_positive_images_from_one_run": 22,
+              "run_coverage_all": 0.4878048780487805,
+              "run_coverage_reachable": 0.6451612903225806
+            },
+            "uniform": {
+              "selected_frames": 128,
+              "positive_frames": 51,
+              "blood_label_zero_frames": 77,
+              "positive_annotation_runs": 17,
+              "short_runs_le_25_positions": 2,
+              "max_positive_images_from_one_run": 31,
+              "run_coverage_all": 0.4146341463414634,
+              "run_coverage_reachable": 0.5483870967741935
+            }
+          },
+          "random_100_draws": {
+            "mean_positive_frames": 52.84,
+            "mean_positive_annotation_runs": 16.02,
+            "min_positive_annotation_runs": 9,
+            "max_positive_annotation_runs": 22
+          }
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Exams 9–10 previously inspected and used for checkpoint selection; comparisons are post-hoc.",
+    "Only exam 10 contains positive blood-label frames among these two development examinations.",
+    "Source-frame gaps are 40–100 versus annotated step 5; no adjacent full-video image pairs.",
+    "Consecutive positive annotation rows are proxies, not independent clinical lesions.",
+    "Each policy selects exactly k already-sampled images, not k positions from the original complete video.",
+    "Positive-run coverage is limited by which annotated runs were ever sampled.",
+    "No independent patient/site/device evaluation or clinician reading-time measurement."
+  ],
+  "input_integrity": {
+    "manifest_sha256": "4d3e0aba675383d1d5441fca0e1b6e0d226a61c2ae30c780c842cfbfd92c40fb",
+    "predictions_sha256": "f921194639a99e206c9b24e3e896f25ff1a409669024f87c4b8b42767c70b36b",
+    "historical_metrics_sha256": "781b855c0e14278fb20cb45f25f2481bcf379182aa4dd9d8e9b9c93a12928d7a",
+    "source_frame_files_rehashed": 1024,
+    "historical_frame_budget_reproduced": true
+  }
+}

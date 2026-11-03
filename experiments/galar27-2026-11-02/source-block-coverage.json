@@ -1,0 +1,131 @@
+{
+  "all_source_blocks_transferred_and_sha256_hashed": true,
+  "blocks": [
+    {
+      "block_id": 0,
+      "compressed_bytes": 3474498092,
+      "compressed_sha256": "c678458d4ef075de1215844dd78079e2e48e9fb894140c7fa5cc1708307bf7fd",
+      "private_acquisition_exam_receipts": [
+        21
+      ],
+      "source_offset": 32
+    },
+    {
+      "block_id": 1,
+      "compressed_bytes": 3475743781,
+      "compressed_sha256": "b5086f018b7e88c57db7562af624c468796a7b1e812101d07236c184131b08f6",
+      "private_acquisition_exam_receipts": [
+        23
+      ],
+      "source_offset": 3474498124
+    },
+    {
+      "block_id": 2,
+      "compressed_bytes": 3470070406,
+      "compressed_sha256": "793b010cd7ec383daabbafeb6852646cd791decbc31982976fb6ae64adb0fd34",
+      "private_acquisition_exam_receipts": [
+        25
+      ],
+      "source_offset": 6950241905
+    },
+    {
+      "block_id": 3,
+      "compressed_bytes": 3539043971,
+      "compressed_sha256": "bac9b407b67f3a50314c696a4639df68265fb398b1977a60ed61eb10648f79f5",
+      "private_acquisition_exam_receipts": [
+        25
+      ],
+      "source_offset": 10420312311
+    },
+    {
+      "block_id": 4,
+      "compressed_bytes": 3438758213,
+      "compressed_sha256": "eba4364d8ae1d239f86f356db8f0c6120caa9e0c1603a588e0cf54a5d48abbac",
+      "private_acquisition_exam_receipts": [
+        25
+      ],
+      "source_offset": 13959356282
+    },
+    {
+      "block_id": 5,
+      "compressed_bytes": 3489830304,
+      "compressed_sha256": "1533108c5f5f414106c34aee1573423e7f415610352682e29302e47b2457e0bc",
+      "private_acquisition_exam_receipts": [
+        27
+      ],
+      "source_offset": 17398114495
+    },
+    {
+      "block_id": 6,
+      "compressed_bytes": 3455329610,
+      "compressed_sha256": "4b6adb70089791fd14f7a81a6d21bb13c81a304221777460e5b2daeafbdc22e6",
+      "private_acquisition_exam_receipts": [
+        27
+      ],
+      "source_offset": 20887944799
+    },
+    {
+      "block_id": 7,
+      "compressed_bytes": 3500524677,
+      "compressed_sha256": "5c8329b6b89db89059ec53366c71287a56dc671a1f5b335ed366eb91b348f453",
+      "private_acquisition_exam_receipts": [
+        29
+      ],
+      "source_offset": 24343274409
+    },
+    {
+      "block_id": 8,
+      "compressed_bytes": 3514256456,
+      "compressed_sha256": "a9a551d1fb7a4df34f6cc6622e2eb3e5114337c6d282292b2fbac6631eb02285",
+      "private_acquisition_exam_receipts": [
+        29,
+        30
+      ],
+      "source_offset": 27843799086
+    },
+    {
+      "block_id": 9,
+      "compressed_bytes": 630002169,
+      "compressed_sha256": "5d9dcf750e84b6504154f4689f2097716c2caade08e492d527d8a546c17a1f09",
+      "private_acquisition_exam_receipts": [
+        30
+      ],
+      "source_offset": 31358055542
+    }
+  ],
+  "clinical_validation": false,
+  "full_original_archive_md5_verified": false,
+  "full_publisher_archive_bytes": 31989399751,
+  "image_identity_records_committed": false,
+  "index_sha256": {
+    "encoded-index-0.bin": "61d38a2c6b0ed445a348ea11287189f9ba86f541678900cc96b8fb674c9e1043",
+    "next-header.bin": "c8de7cca5b73224778e5516e0f9079f00989adbe7a3f0034a6c3fae06889ca5d",
+    "signature-header.bin": "44191aaf136fd4cc2a5bafad2b828bc96310e235731752eaa5f39aa8f912611f"
+  },
+  "interpretation": "Separate full-length source block HTTP 206 transfers were SHA256-accounted across research acquisition runs, including independent matching block 8 receipts. Original 7z index/signature bytes were separately CRC/SHA-verified. These component hashes cannot be combined into the official publisher full-file MD5 and do not establish a complete byte-by-byte reconstructed archive checksum.",
+  "limitations": [
+    "Component block SHA-256s do not establish the publisher full-file MD5.",
+    "Only selected PNGs were individually extracted and decoded; many archive images remain uninspected.",
+    "Archive coverage is technical provenance, not clinical model validity."
+  ],
+  "number_of_unique_compressed_source_blocks": 10,
+  "original_header_and_index_bytes_transferred": 1342072,
+  "publisher_file_id": 45258019,
+  "publisher_full_md5_expected_unverified": "dedad47ee55c83a4b991ca60d26fb6ee",
+  "record_type": "galar-v2-full-archive-original-compressed-range-coverage-receipts-v1",
+  "source_compressed_block_bytes": 31988057679,
+  "source_image_examinations_partially_acquired": [
+    21,
+    23,
+    25,
+    27,
+    29,
+    30
+  ],
+  "source_image_examinations_without_fitting_selection_acquisition": [
+    22,
+    24,
+    26,
+    28
+  ]
+}

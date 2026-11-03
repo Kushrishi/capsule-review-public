@@ -1,0 +1,196 @@
+{
+  "checkpoint_sha256": {
+    "expanded_continued": "2534d3b7982ee8c557cadc5ad3fcc4c7c4c557f899fa013e881d8655eab97111",
+    "original_checkpoint": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+    "original_only_continued": "ae88ccfedc53d8f419b3da8c0c01ca6b61361ef29858b6a536e25408ba99eefb"
+  },
+  "clinical_validation": false,
+  "evaluation_exam": 27,
+  "evaluation_role": "Exploratory fitting-pool examination transfer; not independent clinical validation",
+  "explicit_blood_positive_in_enriched_union": 273,
+  "limitations": [
+    "Exam 27 was selected based on known fitting-pool blood-label support; not blinded validation.",
+    "Twenty-six blood-positive source annotations among 512 reference images lead to unstable examination-level estimates.",
+    "Source blood annotations are not independent physician-adjudicated lesions.",
+    "Source frames are sparse; interval/event sensitivity and reviewer time savings cannot be inferred.",
+    "Positive-enriched union is not a population-prevalence sample.",
+    "No patient identity or source-independent device/site grouping has been established."
+  ],
+  "no_model_training_or_selection": true,
+  "original_source_image_count": 1005,
+  "prespecified_protocol": "docs/GALAR27_TRANSFER_SPEC.json; committed before pixel acquisition or model scoring",
+  "primary_512_label_blind_reference": {
+    "blood_positive": 26,
+    "budgets": {
+      "10": {
+        "hits_by_method": {
+          "expanded_continued": 21,
+          "original_checkpoint": 22,
+          "original_only_continued": 21,
+          "red_excess": 15,
+          "uniform": 2
+        },
+        "selected_images": 51
+      },
+      "100": {
+        "hits_by_method": {
+          "expanded_continued": 26,
+          "original_checkpoint": 26,
+          "original_only_continued": 26,
+          "red_excess": 26,
+          "uniform": 26
+        },
+        "selected_images": 512
+      },
+      "25": {
+        "hits_by_method": {
+          "expanded_continued": 24,
+          "original_checkpoint": 25,
+          "original_only_continued": 23,
+          "red_excess": 19,
+          "uniform": 7
+        },
+        "selected_images": 128
+      },
+      "5": {
+        "hits_by_method": {
+          "expanded_continued": 20,
+          "original_checkpoint": 21,
+          "original_only_continued": 21,
+          "red_excess": 9,
+          "uniform": 1
+        },
+        "selected_images": 25
+      },
+      "50": {
+        "hits_by_method": {
+          "expanded_continued": 26,
+          "original_checkpoint": 26,
+          "original_only_continued": 26,
+          "red_excess": 25,
+          "uniform": 14
+        },
+        "selected_images": 256
+      },
+      "75": {
+        "hits_by_method": {
+          "expanded_continued": 26,
+          "original_checkpoint": 26,
+          "original_only_continued": 26,
+          "red_excess": 26,
+          "uniform": 19
+        },
+        "selected_images": 384
+      }
+    },
+    "methods": {
+      "expanded_continued": {
+        "average_precision": 0.8232335030089464,
+        "roc_auc": 0.9571858182969294
+      },
+      "original_checkpoint": {
+        "average_precision": 0.8655786824380672,
+        "roc_auc": 0.9698480531813866
+      },
+      "original_only_continued": {
+        "average_precision": 0.8479428476664683,
+        "roc_auc": 0.949113643558088
+      },
+      "red_excess": {
+        "average_precision": 0.3899650241913864,
+        "roc_auc": 0.8625356125356125
+      }
+    },
+    "n": 512
+  },
+  "reserved_11_20_61_80_unopened": true,
+  "secondary_1005_pathology_enriched_union_descriptive_only": {
+    "blood_positive": 273,
+    "budgets": {
+      "10": {
+        "hits_by_method": {
+          "expanded_continued": 99,
+          "original_checkpoint": 100,
+          "original_only_continued": 100,
+          "red_excess": 83,
+          "uniform": 28
+        },
+        "selected_images": 100
+      },
+      "100": {
+        "hits_by_method": {
+          "expanded_continued": 273,
+          "original_checkpoint": 273,
+          "original_only_continued": 273,
+          "red_excess": 273,
+          "uniform": 273
+        },
+        "selected_images": 1005
+      },
+      "25": {
+        "hits_by_method": {
+          "expanded_continued": 202,
+          "original_checkpoint": 221,
+          "original_only_continued": 202,
+          "red_excess": 160,
+          "uniform": 69
+        },
+        "selected_images": 251
+      },
+      "5": {
+        "hits_by_method": {
+          "expanded_continued": 50,
+          "original_checkpoint": 50,
+          "original_only_continued": 50,
+          "red_excess": 42,
+          "uniform": 13
+        },
+        "selected_images": 50
+      },
+      "50": {
+        "hits_by_method": {
+          "expanded_continued": 254,
+          "original_checkpoint": 269,
+          "original_only_continued": 249,
+          "red_excess": 255,
+          "uniform": 136
+        },
+        "selected_images": 502
+      },
+      "75": {
+        "hits_by_method": {
+          "expanded_continued": 270,
+          "original_checkpoint": 273,
+          "original_only_continued": 273,
+          "red_excess": 273,
+          "uniform": 205
+        },
+        "selected_images": 753
+      }
+    },
+    "methods": {
+      "expanded_continued": {
+        "average_precision": 0.8789743963767219,
+        "roc_auc": 0.9253738065213475
+      },
+      "original_checkpoint": {
+        "average_precision": 0.9413100703582634,
+        "roc_auc": 0.9705508516983926
+      },
+      "original_only_continued": {
+        "average_precision": 0.8838617470136557,
+        "roc_auc": 0.9285964490882525
+      },
+      "red_excess": {
+        "average_precision": 0.6961548353462264,
+        "roc_auc": 0.8700134109970176
+      }
+    },
+    "n": 1005
+  },
+  "source_archive_file_id": 45258019,
+  "source_compressed_bytes_transferred": 6945159914,
+  "source_private_package_sha256": "13b9b087686985d5e8521df727534bef53eca4d050abf117e459e4229fdec093",
+  "study": "Galar27 frozen transfer of original and two fixed continued-training CNNs",
+  "unit": "examination ID; patient independence unconfirmed"
+}

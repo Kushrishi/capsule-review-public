@@ -1,0 +1,118 @@
+{
+  "title": "Capsule Review: pretrained frozen MobileNetV3 full-field features in training-only Galar examination-disjoint development",
+  "version": "1.0",
+  "frozen_date": "2026-11-02",
+  "role": "Post-hoc exploratory comparison; original data and prior compact CNN failure results have been examined. Not blinded validation, clinical development, or physician evidence preservation.",
+  "scientific_question": "Does one fixed pretrained full-field image representation + training-fold-only regularized linear blood-label classifier generalize across 14 whole held-out fitting examinations better than the previously frozen from-scratch pooled weighted CNN at the same 512 reference-image review budgets?",
+  "sources": {
+    "fitting_exams": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      21,
+      23,
+      25,
+      27,
+      29,
+      30
+    ],
+    "blocked_exams": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80
+    ],
+    "prior_original_image_count": 10123,
+    "prior_original_blood_positive_annotation_count": 1663,
+    "prior_verified_private_metadata_sha256": "78fc3b0d9711b675f3ffe802554d28232a58f01abb36acda60849c96c32fa4c2",
+    "historical_training_manifest_sha256": "0f1cec23f43023788428c0fa694f6f00f42b367fd2ed2f539b97a57443080f59",
+    "historical_training_identifier": "4d3e0aba675383d1d5441fca0e1b6e0d226a61c2ae30c780c842cfbfd92c40fb",
+    "prior_compact_cnn_cv_aggregate_sha256": "1c06c72f97bf67c5d51f24d32c93213743b1fec484a01441a5ba107c7653608f",
+    "only_permitted_validation": "512 source-chronological label-blind reference images per examination, *entire exam omitted from its fold's fit*; enriched-only images strictly train-fold-only",
+    "original_source_zip_sha256": "From verified existing ten source-image package receipts in docs/GALAR_EXAM_CV_SPEC.json, checked again per original image byte digest",
+    "original_pixels_only": true
+  },
+  "partitions": {
+    "A": [
+      1,
+      3,
+      21,
+      27,
+      29
+    ],
+    "B": [
+      2,
+      5,
+      23,
+      25,
+      30
+    ],
+    "C": [
+      4,
+      6,
+      7,
+      8
+    ]
+  },
+  "feature_extractor": {
+    "backbone": "torchvision.models.mobilenet_v3_small ImageNet IMAGENET1K_V1; torchvision 0.25 and torch 2.10 CPU used",
+    "official_pretrained_weights_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+    "feature": "Last convolutional feature output + adaptive global average pool; 576 dimensions",
+    "input": "Original PNG -> EXIF transpose -> RGB -> deterministic 160×160 bicubic full-field direct resize; do NOT center crop; float32 /255; normalize ImageNet mean [0.485,0.456,0.406], std [0.229,0.224,0.225]",
+    "frozen": "No backbone gradient, model.eval; no data-augmentation or calibration; no checkpoint selection",
+    "extraction": "Once per 10,123 verified original PNGs into private feature matrix. Check SHA256 of every source PNG against verified old/new manifests and compare original exam, frame, reference role and label to prior private metadata fingerprint.",
+    "cache": "Private only, original source identity and metadata never in Git"
+  },
+  "linear_probe": {
+    "algorithm": "sklearn LogisticRegression with solver lbfgs and L2 penalty, C=0.1, class_weight='balanced', fit_intercept=true, max_iter=300, tol=1e-6, random_state=37",
+    "scaling": "StandardScaler(with_mean=true,with_std=true) fitted only on training-fold feature vectors; no heldout feature-stat leakage",
+    "fit_policy": "Fit 3 independent fold-only probes, each uses all allowed fitting-only image rows outside its entire heldout examinations. No labels from heldout fold influence fitting or feature standardization.",
+    "source_positivity": "The new fitting source unions contain deliberate blood-positive enrichment. These are training data, not prevalence or clinical review-efficiency estimates.",
+    "hyperparameter_selection": "No search or post-hoc C/threshold/crop/architecture changes. If convergence warning arises, preserve and report without silently increasing iterations.",
+    "saved_values": "Persist each scaler mean/scale, probe coefficients/intercept, feature cache fingerprint and individual predictions privately, not Git"
+  },
+  "comparison": {
+    "reference": "Already merged and immutable prior pooled_weighted compact CNN from scratch, Galar 14 exam 3-fold study; compare exact same heldout exam IDs/source reference roles",
+    "primary": "Per-examination ROC-AUC, descriptive macro mean on the same 6 positive-reference examinations with >=10 positives (1,7,25,27,29,30); paired comparison to previous fixed pooled CNN",
+    "secondary": "Per-examination AP and ROC-AUC for all 11 explicitly positive exams (1-9 positives flagged unreliable), image hits among exactly K=51/128/256/512 reviewed reference frames by model, prior pooled CNN and deterministic uniform",
+    "negative_exam_policy": "3,5,8 are explicitly blood-negative-labelled but may contain other pathology; per-examination ROC-AUC/AP undefined null; report score distribution and forced review workload, never call false clinical diagnoses",
+    "no_source_run_metric": "Sparse reference input is not sufficient to claim actual original annotation-run/lesion recall from model predictions",
+    "uncertainty": "No image-bootstrapped confidence intervals or claims of verified independent patients; 14 exams small and preexamined",
+    "decision": "No model promotion or tuning based on inspected outcomes. Results interpreted as exploratory fit-candidate ranking, not external validation",
+    "reserved": "Keep 11-20 and 61-80 unopened"
+  },
+  "artifacts": "Commit immutable protocol, source-integrity/test code and nonidentifying aggregated per-examination outcomes. Keep images, frame IDs, original labels, fitted coefficients, saved per-image predictions and pretrained weight bytes outside Git."
+}

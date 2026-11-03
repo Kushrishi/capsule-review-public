@@ -1,0 +1,22 @@
+{
+  "transport": "in-process",
+  "browser": "/usr/bin/chromium",
+  "checks": [
+    "24-frame synthetic sequence loads with no model predictions",
+    "Reviewer note and bookmark saved separately",
+    "Navigation saves the draft before leaving the frame",
+    "Closing and reopening the UI restores last frame and persisted notes",
+    "Export download contains two selected frames, illustrated HTML and JSON",
+    "Frame shortcuts do not override text editing",
+    "Keyboard frame navigation works",
+    "End of sequence disables next-frame control",
+    "Help dialog opens and closes",
+    "UI image import succeeds using in-process transport",
+    "No horizontal page overflow at 320, 390, 768 and 1440 pixels",
+    "Browser runs a genuinely trained software-test model on separate synthetic images",
+    "Prediction meaning remains explicit and reviewer notes are not overwritten",
+    "Local model predictions persist after closing and reopening the viewer",
+    "No JavaScript errors observed"
+  ],
+  "javascript_errors": []
+}
