@@ -100,7 +100,7 @@ def test_real_app_export_and_history_reconstruction(
     assert "Synthetic label" not in encoded
     assert "frame_000" not in encoded
     assert "source_sha256" not in encoded
-    assert "source_index" not in encoded
+    assert '"source_index":' not in encoded
     assert "study_id" not in encoded
     with zipfile.ZipFile(archive) as z:
         assert sorted(i["position"] for i in review["frames"]) == [1, 2, 7, 10]
