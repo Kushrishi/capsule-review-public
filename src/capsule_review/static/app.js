@@ -1,12 +1,12 @@
 'use strict';
 const $ = (id) => document.getElementById(id);
 const state = {token: '', studies: [], study: null, frame: null, dirty: false, busy: false,
-  saving: false, switching: false, modelBusy: false, models: [], playing: false, timer: null, files: [], thumbsStart: -1, thumbsData: [], sourceCoverage: null,
+  saving: false, switching: false, modelBusy: false, auditBusy: false, models: [], playing: false, timer: null, files: [], thumbsStart: -1, thumbsData: [], sourceCoverage: null,
   intervals: [], intervalStart: null, savedFrameCount: 0, savedPositions: []};
 let toastTimer;
 
 function syncControls() {
-  const running = state.busy || state.switching || state.saving || state.modelBusy;
+  const running = state.busy || state.switching || state.saving || state.modelBusy || state.auditBusy;
   const blocked = running || !state.frame;
   for (const id of ['importBtn','emptyImportBtn','demoBtn']) $(id).disabled = running;
   for (const button of document.querySelectorAll('.study-button')) button.disabled = running;
@@ -21,12 +21,14 @@ function syncControls() {
     || state.frame.position <= state.intervalStart;
   $('intervalCancelBtn').disabled = running || state.intervalStart === null;
   $('intervalNote').disabled = running || state.intervalStart === null;
+  $('auditBtn').disabled = running || !state.study || (state.savedFrameCount === 0 && state.intervals.length === 0);
 }
 
 function announce(message) { $('toast').textContent = message; $('toast').hidden = false;
   clearTimeout(toastTimer); toastTimer = setTimeout(() => {$('toast').hidden = true;}, 4000); }
 function fail(error) { $('notice').textContent = error.message || String(error); $('notice').hidden = false; }
 function clearError() { $('notice').hidden = true; }
+function clearEvidenceAudit() { $('auditReport').textContent = ''; $('auditReport').hidden = true; }
 function textElement(tag, text, className) { const el = document.createElement(tag);
   el.textContent = text; if (className) el.className = className; return el; }
 async function api(path, options = {}) {
@@ -101,11 +103,11 @@ function renderSourceStep(position) {
   stepEl.hidden = !message;
 }
 async function selectStudy(id) {
-  if (state.busy || state.switching || state.saving || state.modelBusy) return;
+  if (state.busy || state.switching || state.saving || state.modelBusy || state.auditBusy) return;
   state.switching = true; syncControls();
   try {
   stopPlayback(); if (state.dirty && !(await saveReview())) return;
-  clearError(); state.study = await api(`/api/studies/${id}`); state.frame = null; state.thumbsStart = -1;
+  clearError(); clearEvidenceAudit(); state.study = await api(`/api/studies/${id}`); state.frame = null; state.thumbsStart = -1;
   state.intervalStart = null; state.intervals = []; state.savedFrameCount = 0; state.savedPositions = [];
   $('intervalNote').value = ''; renderIntervalDraft();
   state.thumbsData = []; state.sourceCoverage = await api(`${base()}/source-coverage`);
@@ -119,7 +121,7 @@ async function selectStudy(id) {
   await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadIntervals(); await refreshModels();
   } finally { state.switching = false; syncControls(); }
 }
-function markDirty() { if (!state.frame) return; state.dirty = true;
+function markDirty() { if (!state.frame) return; clearEvidenceAudit(); state.dirty = true;
   $('saveStatus').textContent = 'Unsaved'; $('saveBtn').disabled = false; }
 async function saveReview() {
   if (!state.frame || !state.dirty) return true;
@@ -130,7 +132,7 @@ async function saveReview() {
     const review = await api(`${base()}/frames/${state.frame.position}/review`, {
       method: 'PUT', body: JSON.stringify({revision: state.frame.review.revision,
         bookmarked: $('bookmark').checked, note: $('reviewNote').value, label: $('reviewLabel').value})});
-    state.frame.review = review; state.dirty = false; $('saveStatus').textContent = 'Saved';
+    state.frame.review = review; state.dirty = false; clearEvidenceAudit(); $('saveStatus').textContent = 'Saved';
     await loadSaved(); await refreshLibrary(); return true;
   } catch (e) { fail(e); $('saveStatus').textContent = 'Not saved'; $('saveBtn').disabled = false;
     stopPlayback(); return false;
@@ -228,7 +230,7 @@ function renderExportEvidence() {
   $('exportEvidenceSummary').textContent = message;
 }
 async function loadSaved() {
-  const saved = await api(`${base()}/saved`); state.savedFrameCount = saved.length;
+  const saved = await api(`${base()}/saved`); clearEvidenceAudit(); state.savedFrameCount = saved.length;
   state.savedPositions = saved.map(item => item.position);
   renderExportEvidence();
   $('savedCount').textContent = saved.length;
@@ -252,7 +254,7 @@ function renderIntervalDraft() {
   syncControls();
 }
 async function loadIntervals() {
-  state.intervals = await api(`${base()}/intervals`);
+  state.intervals = await api(`${base()}/intervals`); clearEvidenceAudit();
   $('intervalCount').textContent = state.intervals.length;
   renderExportEvidence();
   $('exportBtn').disabled = state.savedFrameCount === 0 && state.intervals.length === 0;
@@ -366,6 +368,30 @@ $('demoBtn').addEventListener('click', async () => {
   try {const existing = state.studies.find(s => s.synthetic); const study = existing || await api('/api/demo', {method:'POST'});
     await selectStudy(study.id); announce('Synthetic test sequence. No clinical data or model predictions.');
   } catch (e) {fail(e);} finally {$('demoBtn').disabled = false;}
+});
+$('auditBtn').addEventListener('click', async () => {
+  stopPlayback();
+  if (!state.study || state.auditBusy || !(await saveReview())) return;
+  const studyId = state.study.id;
+  state.auditBusy = true; syncControls(); clearError();
+  $('auditReport').hidden = false;
+  $('auditReport').textContent = 'Verifying exported image bytes, saved revisions and interval evidence…';
+  try {
+    const report = await api(`/api/studies/${studyId}/evidence-audit`);
+    if (!report.audit_passed || state.study?.id !== studyId) throw new Error('Local evidence verification did not complete.');
+    const chosen = report.selected_position_coverage;
+    const uniform = report.uniform_reference_position_coverage_at_exact_same_workload;
+    $('auditReport').textContent =
+      `Export evidence verified locally: ${report.selected_export_images.toLocaleString()} of ${report.imported_images.toLocaleString()} imported images selected; ` +
+      `${report.explicitly_saved_images.toLocaleString()} explicitly saved, ${report.interval_boundary_images.toLocaleString()} interval boundaries. ` +
+      `${report.interval_interior_images_not_exported.toLocaleString()} imported images strictly inside marked intervals are NOT exported. ` +
+      `At identical selected-image workload, maximum distance to a selected imported position: ${chosen.maximum_nearest_selected_imported_positions} ` +
+      `versus uniform ${uniform.maximum_nearest_selected_imported_positions}. ` +
+      'These are ordinal imported-position distances, not pathology detection, verified recording time or medical review completeness.';
+  } catch (error) {
+    $('auditReport').textContent = 'Evidence verification did not pass; no verified receipt is available.';
+    fail(error);
+  } finally { state.auditBusy = false; syncControls(); }
 });
 $('exportBtn').addEventListener('click', async () => {
   stopPlayback(); if (!(await saveReview())) return;
