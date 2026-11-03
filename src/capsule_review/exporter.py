@@ -104,7 +104,7 @@ def export_review(store: Store, study_id: str) -> bytes:
             f" · observed source IDs #{source_start}–#{source_end}"
             if source_start is not None and source_end is not None else ""
         )
-        note = html.escape(interval['note'] or 'No interval note.').replace('\\n', '<br>')
+        note = html.escape(interval['note'] or 'No interval note.').replace('\n', '<br>')
         interval_cards.append(
             f'<li><strong>Imported frames {start}–{end}</strong>'
             f'{html.escape(source_span)}. {note}</li>'
