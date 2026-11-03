@@ -31,7 +31,7 @@
         <div class="honest-status"><strong>No model is connected.</strong><span>This version provides the review workflow. It does not detect disease or generate clinical findings.</span></div>
       </section>
       <section id="examination" hidden>
-        <div class="exam-heading"><div><p class="eyebrow" id="sourceText"></p><h1 id="studyTitle"></h1></div><div class="evidence-actions"><button id="auditBtn" class="outline" disabled>Verify evidence</button><button id="exportBtn" class="outline">Export review</button></div></div>
+        <div class="exam-heading"><div><p class="eyebrow" id="sourceText"></p><h1 id="studyTitle"></h1></div><div class="evidence-actions"><button id="auditBtn" class="outline" disabled>Verify evidence</button><button id="fullSpanBtn" class="outline" disabled>Export full spans</button><button id="exportBtn" class="outline">Export review</button></div></div>
         <p id="exportEvidenceSummary" class="panel-hint" role="status" aria-live="polite">Nothing selected for export.</p>
         <p id="auditReport" class="evidence-audit" role="status" aria-live="polite" hidden></p>
         <div id="syntheticBanner" class="synthetic-banner" hidden>Synthetic test sequence · not clinical data</div>
@@ -89,6 +89,7 @@
     <dl class="shortcut-list"><dt>← / →</dt><dd>Previous / next frame</dd><dt>B</dt><dd>Toggle bookmark</dd><dt>Space</dt><dd>Play / pause preview</dd><dt>Ctrl / ⌘ + S</dt><dd>Save current review</dd></dl>
     <p>Export includes bookmarked frames and frames with saved notes or labels, with an illustrated HTML file and JSON record. It is not a complete-examination report.</p>
     <p>Select <strong>Verify evidence</strong> to check the actual export against its saved history, image checksums and complete local study manifest. The result counts omitted interval interiors and compares ordinal image positions at equal workload. This is not pathology detection or a clinical assessment.</p>
+    <p><strong>Export review</strong> keeps bookmarked/noted images and interval boundaries only. <strong>Export full spans</strong> produces a separate, potentially large ZIP with every <em>imported</em> image inside marked spans (plus other saved frames). It is verified before being sent and must be kept private. Neither export proves which original-video images were captured, viewed or diagnosed.</p>
     <p>Reference labels are separate from model output. Train and install an optional local baseline to run region classification. No medically trained weights are bundled. Prediction scores are not assumed to be calibrated probabilities.</p>
     <p class="panel-hint">This local app has no user authentication. Keep it on localhost; do not expose it to the internet. Workspace files are not encrypted.</p>
   </dialog>
