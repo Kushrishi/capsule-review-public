@@ -37,6 +37,10 @@ The same pre-existing prediction-import envelope supports at most 200,000 predic
 
 No network inference, cloud upload, automatic clinical report or diagnostic threshold is involved. A completely flat score stream is explicitly flagged as uninformative.
 
+## Real original-score retrospective check
+
+On November 3 the same fixed selection methods were compared on **3,072** earlier source-verified original-CNN reference scores from six previously inspected Galar cases. The comparison ran at six equal-K workloads and a second implementation independently rechecked all **144** case–budget–policy results. At K=51, top score retained 95 explicit positive reference images, versus 27 uniform; but it left an average worst imported-ordinal gap of **186.8**, while uniform's was **5**. Several sparse positive examinations remain severe failures. The UI therefore defaults to **one highest-score image per chronology bin** for a transparent imported-position coverage guard, not because it is a confirmed pathology winner. **All real-image conclusions are exploratory, image-level, and not clinical.** See [full honest experiment record](GALAR_PRIORITY_SCORE_REPLAY.md).
+
 ## What this does NOT validate
 
 This feature provides **working model-guided navigation** and a reproducible, fixed policy ladder—not evidence that any current model detects important medical intervals better than uniform at a given workload. Real Galar score experiments must be evaluated separately, using exact source-image identity, examination-separated cohorts, full original-source annotation-run membership, and nonidentifying public summaries. Sampled blood-positive **images** are not source annotation runs, and source annotation runs are not clinically adjudicated lesions.
