@@ -6,7 +6,7 @@ A local image-sequence viewer with bookmarks, reviewer notes and illustrated exp
 
 This repository currently has **no software licence**. Dataset attribution (including the Galar source's CC BY 4.0) does not grant a separate licence to the application code.
 
-**Working now:** import frames, navigate and preview the sequence, save and reopen a review, and export selected images with notes. Reference annotations and imported model outputs are kept separate from reviewer entries.
+**Working now:** import frames, navigate and preview sequences; preserve human bookmarks, notes and intervals; export and verify saved evidence; and **build a transparent, model-score-guided review queue** from complete local predictions at any exact imported-image workload. Compare highest scores, score + chronological separation, one-per-bin scores and uniform reference. Queue navigation never creates review annotations and is **not validated pathology detection**. [Review queue design and safeguards](docs/RESEARCH_REVIEW_QUEUE.md). Reference annotations and imported model outputs are kept separate from reviewer entries.
 
 **New in 0.2:** a local anatomy-model training pipeline, checked development splits, bounded Galar downloads, and a browser action for running an installed model.
 
