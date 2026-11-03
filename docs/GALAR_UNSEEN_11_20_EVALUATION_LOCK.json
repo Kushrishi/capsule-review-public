@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "status": "Locked research design and model provenance only; no held-out source labels or images accessed; no independent study executed",
+  "date": "2026-11-03",
+  "goal": "Test whether fixed, original blood-CNN score prioritization preserves more distinct corrected-source blood-positive annotation runs than equal-workload uniform on genuinely unexamined Galar examinations.",
+  "scope": {
+    "training_examination_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "historical_checkpoint_selection_examination_ids": [
+      9,
+      10
+    ],
+    "locked_evaluation_examination_ids": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "authors_original_reserved_examination_ids": [
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80
+    ],
+    "unit_of_analysis": "Examination, not confirmed independent patient",
+    "label": "Corrected publisher blood=1 annotation; not diagnosis, active bleeding, unique lesions, or physician time"
+  },
+  "original_model": {
+    "private_package_filename": "capsule-blood-real-pilot.zip",
+    "private_package_sha256": "5e5f47ccca088855a88f92e795a870264ec3489badd3f341056230deae2e84fc",
+    "private_package_bytes": 1361018,
+    "source_commit": "e3cfb1f4629595d51901829498202d0967f8c83a",
+    "weights_member": "model/weights.pt",
+    "weights_sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+    "metadata_member": "model/model.json",
+    "metadata_sha256": "6c0c3fa38f4008a03fdc9f48b1911ff8d5f32dc331c0b85aa9fbf9a9b1bab6eb",
+    "metrics_member": "model/metrics.json",
+    "metrics_sha256": "781b855c0e14278fb20cb45f25f2481bcf379182aa4dd9d8e9b9c93a12928d7a",
+    "architecture": "capsule-cnn-v1",
+    "checkpoint_epoch": 8,
+    "preprocessing": "96x96 RGB with aspect-preserving pad, 0..1 channels",
+    "score": "raw uncalibrated softmax for blood-present class; NEVER a calibrated clinical risk"
+  },
+  "publisher": {
+    "corrected_label_archive": "20251215_Labels_Updated.zip",
+    "figshare_file_id": 60383963,
+    "expected_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "label_blood_values": [
+      "0",
+      "1",
+      ""
+    ],
+    "positive_run_definition": "Maximal consecutive corrected blood=1 annotated rows with original source-frame index increasing exactly 5",
+    "source_frame_times_known": false,
+    "eligible_candidate_population": "All explicit binary blood-labelled source-index positions for each locked examination, with original image bytes independently verified at each position; otherwise stop and report a coverage failure, not an apparent model outcome",
+    "missing_or_blank_labels": "Unknown, not negative; exclude and report. Never interpolate frames, times, source runs or labels."
+  },
+  "methods": {
+    "production_selection_import": "capsule_review.priority.select_positions",
+    "policies": [
+      "uniform",
+      "score",
+      "score_diverse",
+      "score_bin"
+    ],
+    "primary_review_percent": 10,
+    "secondary_review_percents": [
+      5,
+      25,
+      50,
+      100
+    ],
+    "exact_k_rule": "For integer percent p and N eligible imported positions: max(1, floor((N*p+50)/100)), with K capped at N. Research operating points only; product permits any K.",
+    "selection_uses_labels": false,
+    "selection_uses_reviewer_notes": false,
+    "scoring_model_frozen": true,
+    "no_tuning_after_holdout_access": true
+  },
+  "endpoints": {
+    "primary": "Paired, examination-level difference score_bin minus uniform in distinct corrected blood-positive annotation-run recall at 10% equal workload; choose a bounded-coverage method before accessing holdout labels.",
+    "secondary": [
+      "All four policies at all prespecified workloads",
+      "Per-examination and pooled positive annotated run counts",
+      "Short-run 1–5 annotated rows versus 6–25 versus 26+",
+      "Exact K and imported-position omission maxima",
+      "Frame-level positive hits labelled as secondary, not source-run/lesion sensitivity",
+      "Examination-level leave-one-out variation; insufficient exam support reported as such"
+    ],
+    "negative_examinations": "Run recall undefined if zero explicit blood-positive runs; still report total selected images and ranking/coverage technical outcomes.",
+    "uncertainty": "Resample examinations only if exchangeability can reasonably be defended; do not present confidence intervals or p-values as patient-independent when identities unavailable."
+  },
+  "acceptance_gates": [
+    "Preserved model checkpoint and exact original-package SHA-256 independently verified, no weight loading in preflight.",
+    "Lock evaluation protocol in public Git BEFORE examining 11–20 source labels/pixels or scoring them.",
+    "Acquire all eligible original annotated positions with verified source hashes and licence; do not use sparse sample as full source.",
+    "Run fixed model and four existing score-blind-to-label policies on imported original images without holdout feedback.",
+    "Freeze predictions and image/source identity hashes before opening only the permitted locked evaluation CSV members.",
+    "Report every examination and budget, including zero-positive and worse-than-uniform results; no model promotion or clinical validity claim."
+  ],
+  "privacy": {
+    "all_medical_pixels_labels_source_identifiers_per_frame_predictions_weights_and_private_repro_packages_off_git": true,
+    "public_outputs": "Only non-identifying aggregate outcomes, frozen code/protocol, synthetic tests, and reproducibility receipts.",
+    "public_actions_real_data_access_forbidden": true
+  }
+}
