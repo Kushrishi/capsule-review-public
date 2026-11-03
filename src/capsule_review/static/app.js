@@ -2,7 +2,8 @@
 const $ = (id) => document.getElementById(id);
 const state = {token: '', studies: [], study: null, frame: null, dirty: false, busy: false,
   saving: false, switching: false, modelBusy: false, auditBusy: false, models: [], playing: false, timer: null, files: [], thumbsStart: -1, thumbsData: [], sourceCoverage: null,
-  intervals: [], intervalStart: null, savedFrameCount: 0, savedPositions: []};
+  intervals: [], intervalStart: null, savedFrameCount: 0, savedPositions: [],
+  prioritySources: [], priorityQuery: null, priorityData: null, priorityBusy: false};
 let toastTimer;
 
 function syncControls() {
@@ -23,6 +24,11 @@ function syncControls() {
   $('intervalNote').disabled = running || state.intervalStart === null;
   $('auditBtn').disabled = running || !state.study || (state.savedFrameCount === 0 && state.intervals.length === 0);
   $('fullSpanBtn').disabled = running || !state.study || state.intervals.length === 0;
+  const priorityBlocked = running || state.priorityBusy || !state.prioritySources.length;
+  for (const id of ['prioritySource', 'priorityCount', 'priorityMethod', 'priorityBuild']) $(id).disabled = priorityBlocked;
+  $('priorityPrev').disabled = priorityBlocked || !state.priorityData || state.priorityData.offset === 0;
+  $('priorityNext').disabled = priorityBlocked || !state.priorityData ||
+    state.priorityData.offset + state.priorityData.items.length >= state.priorityData.selected_images;
 }
 
 function announce(message) { $('toast').textContent = message; $('toast').hidden = false;
@@ -110,6 +116,7 @@ async function selectStudy(id) {
   stopPlayback(); if (state.dirty && !(await saveReview())) return;
   clearError(); clearEvidenceAudit(); state.study = await api(`/api/studies/${id}`); state.frame = null; state.thumbsStart = -1;
   state.intervalStart = null; state.intervals = []; state.savedFrameCount = 0; state.savedPositions = [];
+  state.prioritySources = []; state.priorityQuery = null; state.priorityData = null; resetPriorityDisplay();
   $('intervalNote').value = ''; renderIntervalDraft();
   state.thumbsData = []; state.sourceCoverage = await api(`${base()}/source-coverage`);
   renderSourceContinuity();
@@ -119,7 +126,7 @@ async function selectStudy(id) {
   $('scrubber').max = state.study.frame_count - 1; $('jumpInput').max = state.study.frame_count;
   $('predictionImportBtn').disabled = false; $('referencePanel').open = false;
   for (const id of ['bookmark', 'reviewLabel', 'reviewNote']) $(id).disabled = false;
-  await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadIntervals(); await refreshModels();
+  await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadIntervals(); await refreshModels(); await loadPriorityRuns();
   } finally { state.switching = false; syncControls(); }
 }
 function markDirty() { if (!state.frame) return; clearEvidenceAudit(); state.dirty = true;
@@ -433,8 +440,117 @@ $('predictionFile').addEventListener('change', async () => {
   try {if (file.size > 20 * 1024 * 1024) throw new Error('Prediction JSON must be at most 20 MiB.');
     if (!(await saveReview())) return;
     const payload = JSON.parse(await file.text()); await api(`${base()}/predictions`, {method:'POST', body:JSON.stringify(payload)});
-    state.study = await api(base()); await navigate(state.frame.position, true); announce('Model output imported; reviewer notes are unchanged.');
+    state.study = await api(base()); await navigate(state.frame.position, true); await loadPriorityRuns(); announce('Model output imported; reviewer notes are unchanged.');
   } catch (e) {fail(e);} finally {$('predictionFile').value = '';}
+});
+
+function resetPriorityDisplay() {
+  state.priorityQuery = null;
+  state.priorityData = null;
+  $('prioritySelected').textContent = 'No queue';
+  $('priorityItems').replaceChildren();
+  $('priorityPage').textContent = '';
+  $('prioritySummary').textContent = state.prioritySources.length
+    ? 'Choose an exact image count and build a research-only, label-blind queue.'
+    : 'Import a model prediction label with a score for every imported image.';
+  syncControls();
+}
+async function loadPriorityRuns() {
+  state.prioritySources = [];
+  resetPriorityDisplay();
+  if (!state.study) return;
+  const available = await api(base() + '/priority-runs');
+  $('prioritySource').replaceChildren();
+  for (const run of available) {
+    for (const label of run.labels) {
+      if (!label.complete) continue;
+      const index = state.prioritySources.length;
+      state.prioritySources.push({run: run.run, label: label.name});
+      const option = textElement('option', run.model_name + ' · ' + label.name +
+        ' (' + run.imported_images.toLocaleString() + ' scored)');
+      option.value = String(index);
+      $('prioritySource').append(option);
+    }
+  }
+  $('priorityCount').max = String(state.study.frame_count);
+  // No fixed 10% quota, forced shortlist or hidden review-workload cap.
+  $('priorityCount').value = String(state.study.frame_count);
+  resetPriorityDisplay();
+}
+async function loadPriorityPage(offset = 0) {
+  if (!state.study || state.priorityBusy || !state.prioritySources.length) return;
+  const studyId = state.study.id;
+  let query;
+  try {
+    if (offset === 0 || !state.priorityQuery) {
+      const index = Number($('prioritySource').value);
+      const source = state.prioritySources[index];
+      const count = Number($('priorityCount').value);
+      if (!source || !Number.isSafeInteger(count) || count < 1 ||
+          count > state.study.frame_count) throw new Error('Choose a number between 1 and every imported image.');
+      query = {
+        run: source.run, label: source.label, selected_count: count,
+        method: $('priorityMethod').value,
+      };
+    } else {
+      query = state.priorityQuery;
+    }
+    state.priorityBusy = true; syncControls(); clearError();
+    $('prioritySummary').textContent = 'Calculating a label-blind review queue from saved model scores…';
+    const params = new URLSearchParams({...query, offset, page_size: 20});
+    const result = await api('/api/studies/' + studyId + '/priority?' + params);
+    if (state.study?.id !== studyId) return;
+    state.priorityQuery = query;
+    state.priorityData = result;
+    $('prioritySelected').textContent = result.selected_images.toLocaleString() + ' selected';
+    const coverage = result.selected_ordinal_coverage;
+    const uniform = result.uniform_ordinal_coverage_at_equal_workload;
+    let message = result.selected_images.toLocaleString() + ' of ' +
+      result.imported_images.toLocaleString() + ' imported frames selected. ' +
+      'Maximum nearest-selected imported-position gap: ' +
+      coverage.maximum_nearest_selected_imported_positions + ' versus ' +
+      uniform.maximum_nearest_selected_imported_positions + ' with equal-K uniform. ' +
+      'No pathology labels were consulted; no bookmarks or reviewer labels were changed.';
+    if (result.scores_constant) message += ' Warning: all model scores are identical, so ordering is uninformative.';
+    $('prioritySummary').textContent = message;
+    $('priorityItems').replaceChildren();
+    for (const item of result.items) {
+      const button = textElement('button', '', 'priority-entry');
+      button.append(
+        textElement('strong', '#' + item.rank.toLocaleString() +
+          ' · Imported frame ' + (item.position + 1).toLocaleString()),
+        textElement('small', 'Model score ' + Number(item.score).toFixed(3) +
+          (result.method === 'uniform' ? ' · not used to select this frame' : '') +
+          ' · Open frame without auto-saving')
+      );
+      button.addEventListener('click', () => {
+        stopPlayback();
+        navigate(item.position).catch(fail);
+      });
+      $('priorityItems').append(button);
+    }
+    const showing = result.items.length ? (result.offset + 1).toLocaleString() + '–' +
+      (result.offset + result.items.length).toLocaleString() : '0';
+    $('priorityPage').textContent = showing + ' of ' + result.selected_images.toLocaleString();
+  } catch (error) {
+    if (state.study?.id === studyId) {
+      $('prioritySummary').textContent = 'Review queue could not be verified or built.';
+      fail(error);
+    }
+  } finally {
+    state.priorityBusy = false;
+    syncControls();
+  }
+}
+for (const id of ['prioritySource', 'priorityCount', 'priorityMethod']) {
+  $(id).addEventListener('change', resetPriorityDisplay);
+}
+$('priorityBuild').addEventListener('click', () => loadPriorityPage(0));
+$('priorityPrev').addEventListener('click', () => {
+  if (state.priorityData) loadPriorityPage(Math.max(0, state.priorityData.offset - 20));
+});
+$('priorityNext').addEventListener('click', () => {
+  if (state.priorityData) loadPriorityPage(state.priorityData.offset + state.priorityData.items.length);
 });
 
 async function refreshModels() {
@@ -460,7 +576,7 @@ $('runModelBtn').addEventListener('click', async () => {
   } catch (error) {fail(error);}
   finally {state.modelBusy = false; $('runModelBtn').textContent = 'Run local model'; syncControls();}
   if (completed && state.study?.id === studyId) {
-    try {state.study = await api(base()); await navigate(state.frame.position, true); announce('Local model finished. Reviewer notes are unchanged.');}
+    try {state.study = await api(base()); await navigate(state.frame.position, true); await loadPriorityRuns(); announce('Local model finished. Reviewer notes are unchanged.');}
     catch (error) {fail(error);}
   }
 });

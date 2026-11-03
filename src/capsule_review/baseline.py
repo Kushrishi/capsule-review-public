@@ -317,9 +317,14 @@ def predict_study(store: Store, study_id: str, run_dir: Path, *, allow_training_
             if not torch.isfinite(scores).all():
                 raise ValueError('Non-finite predictions; no outputs saved.')
             for row, vector in zip(batch, scores.tolist()):
-                top = max(range(len(vector)), key=vector.__getitem__)
-                predictions.append({'position': row['position'], 'image_sha256': row['source_sha256'],
-                                    'label': metadata['classes'][top], 'score': vector[top]})
+                # Save the *complete* class-score vector for every imported
+                # image. Top-1-only output made every individual class stream
+                # incomplete and could not support honest label-specific
+                # queueing. Unselected classes are NOT assumed score zero.
+                for label, score in zip(metadata['classes'], vector):
+                    predictions.append({'position': row['position'],
+                                        'image_sha256': row['source_sha256'],
+                                        'label': label, 'score': score})
     name = 'Software-test model — NOT MEDICAL' if metadata['data_kind'] == 'synthetic-test' else 'Anatomy baseline — research only'
     description = ('Anatomical region only, not lesion detection. Forced choice among: ' + ', '.join(metadata['classes']) +
                    '. Scores are uncalibrated. No clinical validation. ' +

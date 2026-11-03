@@ -52,7 +52,10 @@ class PredictionImport(StrictModel):
     schema_version: Literal[1]
     study_id: str
     model: ModelInfo
-    predictions: Annotated[list[Prediction], Field(min_length=1, max_length=200_000)]
+    # Up to five anatomy score labels per one of 200,000 imported frames.
+    # The browser's user-import size cap remains 20 MiB; local inference may
+    # create a larger payload in memory without posting it over HTTP.
+    predictions: Annotated[list[Prediction], Field(min_length=1, max_length=1_000_000)]
 
 
 class LocalPredictionRequest(StrictModel):

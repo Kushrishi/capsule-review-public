@@ -71,7 +71,14 @@ def test_inference_ignores_reference_labels_and_preserves_notes(run_bundle,tmp_p
     b=predict_study(store,study['id'],run,allow_synthetic_test=True)
     assert [p.model_dump() for p in a.predictions]==[p.model_dump() for p in b.predictions]
     result=save_predictions(store,study['id'],a)
-    assert result['count']==8
+    assert result['count']==16
+    # Two explicit score values are present for *every* frame; a missing
+    # non-top class is not implicitly counted as zero.
+    assert len(a.predictions) == 16
+    for position in range(8):
+        scores = [p.score for p in a.predictions if p.position == position]
+        assert len(scores) == 2
+        assert sum(scores) == pytest.approx(1.0, abs=1e-6)
     frame=store.frame(study['id'],0)
     assert frame['review']['note']=='My independent note' and frame['review']['revision']==1
     assert frame['reference_labels']=={'colon':999}
@@ -104,8 +111,12 @@ def test_model_install_and_browser_api(run_bundle,tmp_path):
         token=client.get('/api/config').json()['token']
         response=client.post(f'/api/studies/{study["id"]}/predict',headers={'x-review-token':token},json={'model_id':model_id})
         assert response.status_code==201,response.text
-        assert response.json()['count']==8
-        assert len(store.frame(study['id'],0)['predictions'])==1
+        assert response.json()['count']==16
+        assert len(store.frame(study['id'],0)['predictions'])==2
+        eligible=client.get(f'/api/studies/{study["id"]}/priority-runs').json()
+        assert len(eligible) == 1
+        assert sorted(label['name'] for label in eligible[0]['labels']) == ['colon', 'stomach']
+        assert all(label['complete'] and label['scored_images'] == 8 for label in eligible[0]['labels'])
         assert client.post(f'/api/studies/{study["id"]}/predict',headers={'x-review-token':token},json={'model_id':'../escape'}).status_code==422
     with pytest.raises(ValueError,match='already installed'):install_model(store,run,allow_synthetic_test=True)
 
