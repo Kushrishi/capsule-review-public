@@ -74,6 +74,8 @@ Open **http://127.0.0.1:8765**. Choose **Open test sequence** to try the workflo
 
 Exports include manually saved frames and **only the start/end boundary images** of reviewer-marked intervals, deduplicated within the existing 250-frame/128-MiB limits. Interval notes and creation/removal history are included in the JSON. Intermediate images are **not automatically exported or presumed reviewed**, and imported image positions/source IDs do not indicate verified original recording times, lesions or diagnostic findings. Dataset labels and predictions are never automatically reported as findings.
 
+**New offline evidence-verification tool:** [audit a local export against its full study manifest](docs/EXPORT_EVIDENCE_RECEIPT.md) using `python scripts/audit_review_evidence.py --review-zip PRIVATE.zip --study-manifest PRIVATE.json --output NEW-AGGREGATE.json`. It recomputes the importer identity checksum, checks all selected PNG bytes, replays reviewer and interval histories, rejects missing saved evidence, and counts omitted interval interiors. It also compares ordinary imported-position proximity to **uniform selection at the exact same selected-image workload**. The local receipt is aggregate-only and is *not* a blood-label/lesion-sensitivity or clinical-time claim. Keep both private inputs outside public GitHub.
+
 ### Larger folders and Galar reference labels
 
 Browser import supports up to 1,000 frames and 512 MiB. Use the CLI for larger image folders:

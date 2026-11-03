@@ -275,6 +275,10 @@ def _validate_intervals(review: dict, imported: list[dict]) -> tuple[list[dict],
         details = (interval["start_position"], interval["end_position"], interval["note"])
         if creation.get(interval["id"]) != details or interval["id"] in deletion:
             raise ValueError("Active reviewer interval is not supported by its immutable event trail.")
+    # Every created interval must either remain active or have exactly one
+    # matching deletion. Previously an orphan creation event passed this gate.
+    if set(creation) - deletion != ids:
+        raise ValueError("Reviewer interval history contains an unaccounted creation or deletion.")
     return intervals, endpoints
 
 
