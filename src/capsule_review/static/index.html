@@ -67,9 +67,9 @@
         <input id="priorityCount" type="number" min="1" step="1" value="1" disabled>
         <label class="field-label" for="priorityMethod">Selection policy</label>
         <select id="priorityMethod" disabled>
+          <option value="score_bin">Top score in each chronology bin (coverage-first)</option>
           <option value="score_diverse">Model score + ordinal separation</option>
           <option value="score">Highest model scores</option>
-          <option value="score_bin">Top score in each chronology bin</option>
           <option value="uniform">Uniform baseline (no scores used)</option>
         </select>
         <button id="priorityBuild" class="outline full" disabled>Build review queue</button>
