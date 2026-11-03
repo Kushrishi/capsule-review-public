@@ -26,6 +26,7 @@ def _synthetic_archive(tmp_path: Path, *, model_epoch=8, fitted=None):
         "model_weights_sha256": sha,
         "source_git_commit": model["source_commit"],
         "architecture": model["architecture"],
+        "input": model["preprocessing"],
         "selected_epoch": model_epoch,
         "classes": ["blood label absent", "blood label present"],
     }
