@@ -64,7 +64,7 @@ Open **http://127.0.0.1:8765**. Choose **Open test sequence** to try the workflo
 ## Review an examination
 
 1. Import PNG, JPEG or WebP images. Filenames are sorted naturally: `frame_2` before `frame_10`.
-2. Use the filmstrip, position slider or arrow keys. The preview rate is not acquisition timing.
+2. Use the filmstrip, position slider or arrow keys. The preview rate is not acquisition timing. The **source-index audit** distinguishes a consistent observed index stride (for example, every +5) from unusual jumps, without inventing missing image content or assuming complete footage.
 3. Bookmark a frame or write a note. Navigation saves the draft first. Ctrl/Command+S saves directly.
 4. Reopen the app to continue at the last position.
 5. Export a ZIP containing an illustrated `review.html`, structured `review.json`, and selected frame images.
