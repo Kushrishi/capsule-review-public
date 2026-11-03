@@ -21,3 +21,15 @@
 .interval-entry-actions button{font-size:10px;padding:4px 5px}
 /* Verified export evidence is a factual audit, not a model recommendation. */
 .evidence-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}.evidence-audit{font-size:11px;line-height:1.65;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0 14px;overflow-wrap:anywhere}.evidence-audit[hidden]{display:none}@media(max-width:740px){.exam-heading{align-items:flex-start;flex-direction:column}.evidence-actions{justify-content:flex-start}}
+
+
+/* An optional model score queue: never promoted to human review evidence. */
+.priority-section{border-top:1px solid var(--line);padding-top:20px;margin-top:20px}
+.priority-section select,.priority-section input[type=number]{display:block;width:100%;max-width:100%;background:#fbfcfb;border:1px solid var(--line);padding:9px;color:var(--ink);font-size:12px}
+.priority-section .field-label{margin-top:12px}
+.priority-items{display:flex;flex-direction:column;gap:7px;margin:12px 0}
+.priority-entry{display:block;width:100%;text-align:left;background:#fbfcfb;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 10px;overflow-wrap:anywhere}
+.priority-entry strong{display:block;font-size:11px}
+.priority-entry small{display:block;font-size:10px;line-height:1.6;color:var(--muted);font-weight:400;margin-top:4px}
+.priority-pager{display:flex;justify-content:space-between;align-items:center;gap:5px;padding:4px 0}
+.priority-pager span{font-size:10px;color:var(--muted);text-align:center}
