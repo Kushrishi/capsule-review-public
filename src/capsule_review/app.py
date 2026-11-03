@@ -5,6 +5,7 @@ import json
 import os
 import re
 import secrets
+import sqlite3
 import threading
 import tempfile
 from pathlib import Path
@@ -19,7 +20,7 @@ from fastapi.staticfiles import StaticFiles
 from . import __version__
 from .exporter import export_review
 from .importer import MAX_FILE_BYTES, create_demo, import_sources, natural_key, now, validate_filename
-from .models import ImportMeta, LocalPredictionRequest, PositionUpdate, PredictionImport, ReviewUpdate
+from .models import ImportMeta, IntervalCreate, LocalPredictionRequest, PositionUpdate, PredictionImport, ReviewUpdate
 from .store import Store
 from .source_coverage import summarize_source_spacing
 from .prediction_service import DuplicateRunError, save_predictions
@@ -218,6 +219,78 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
             return [dict(r) for r in db.execute(
                 "SELECT position,label,note,bookmarked,revision,updated_at FROM reviews WHERE study_id=? "
                 "AND (bookmarked=1 OR note<>'' OR label<>'') ORDER BY position", (study_id,))]
+
+    def interval_rows(study_id: str) -> list[dict]:
+        with store.connect() as db:
+            return [dict(row) for row in db.execute(
+                "SELECT i.id,i.start_position,i.end_position,i.note,i.created_at,"
+                "a.source_index AS start_source_index,b.source_index AS end_source_index "
+                "FROM review_intervals i "
+                "JOIN frames a ON a.study_id=i.study_id AND a.position=i.start_position "
+                "JOIN frames b ON b.study_id=i.study_id AND b.position=i.end_position "
+                "WHERE i.study_id=? ORDER BY i.start_position,i.end_position,i.id",
+                (study_id,),
+            )]
+
+    @app.get('/api/studies/{study_id}/intervals')
+    def intervals(study_id: str):
+        require_study(study_id)
+        return interval_rows(study_id)
+
+    @app.post('/api/studies/{study_id}/intervals', status_code=201)
+    def add_interval(study_id: str, data: IntervalCreate):
+        study = require_study(study_id)
+        if data.start_position >= data.end_position or data.end_position >= study['frame_count']:
+            raise HTTPException(422, 'Choose a start and a later end within the imported examination.')
+        timestamp = now()
+        with store.connect() as db:
+            db.execute('BEGIN IMMEDIATE')
+            count = db.execute(
+                'SELECT COUNT(*) FROM review_intervals WHERE study_id=?', (study_id,)
+            ).fetchone()[0]
+            if count >= 100:
+                raise HTTPException(422, 'At most 100 reviewer intervals per examination.')
+            try:
+                cursor = db.execute(
+                    'INSERT INTO review_intervals(study_id,start_position,end_position,note,created_at) '
+                    'VALUES(?,?,?,?,?)',
+                    (study_id, data.start_position, data.end_position, data.note, timestamp),
+                )
+            except sqlite3.IntegrityError as exc:
+                raise HTTPException(409, 'This image interval is already marked.') from exc
+            db.execute(
+                "INSERT INTO review_interval_events"
+                "(study_id,interval_id,action,start_position,end_position,note,created_at) "
+                "VALUES(?,?,'created',?,?,?,?)",
+                (study_id, cursor.lastrowid, data.start_position, data.end_position,
+                 data.note, timestamp),
+            )
+            interval_id = cursor.lastrowid
+        return next(row for row in interval_rows(study_id) if row['id'] == interval_id)
+
+    @app.delete('/api/studies/{study_id}/intervals/{interval_id}')
+    def delete_interval(study_id: str, interval_id: int):
+        require_study(study_id)
+        with store.connect() as db:
+            db.execute('BEGIN IMMEDIATE')
+            row = db.execute(
+                'SELECT * FROM review_intervals WHERE study_id=? AND id=?',
+                (study_id, interval_id),
+            ).fetchone()
+            if row is None:
+                raise HTTPException(404, 'Reviewer interval not found.')
+            db.execute(
+                "INSERT INTO review_interval_events"
+                "(study_id,interval_id,action,start_position,end_position,note,created_at) "
+                "VALUES(?,?,'deleted',?,?,?,?)",
+                (study_id, interval_id, row['start_position'], row['end_position'],
+                 row['note'], now()),
+            )
+            db.execute(
+                'DELETE FROM review_intervals WHERE study_id=? AND id=?',
+                (study_id, interval_id),
+            )
+        return {'deleted': interval_id}
 
     @app.get('/api/studies/{study_id}/manifest')
     def manifest(study_id: str):

@@ -1,7 +1,8 @@
 'use strict';
 const $ = (id) => document.getElementById(id);
 const state = {token: '', studies: [], study: null, frame: null, dirty: false, busy: false,
-  saving: false, switching: false, modelBusy: false, models: [], playing: false, timer: null, files: [], thumbsStart: -1, thumbsData: [], sourceCoverage: null};
+  saving: false, switching: false, modelBusy: false, models: [], playing: false, timer: null, files: [], thumbsStart: -1, thumbsData: [], sourceCoverage: null,
+  intervals: [], intervalStart: null, savedFrameCount: 0};
 let toastTimer;
 
 function syncControls() {
@@ -15,6 +16,11 @@ function syncControls() {
   $('saveBtn').disabled = blocked || !state.dirty;
   $('prevBtn').disabled = blocked || state.frame.position === 0;
   $('nextBtn').disabled = blocked || state.frame.position >= state.study.frame_count - 1;
+  $('intervalStartBtn').disabled = blocked || state.intervalStart !== null;
+  $('intervalEndBtn').disabled = blocked || state.intervalStart === null
+    || state.frame.position <= state.intervalStart;
+  $('intervalCancelBtn').disabled = running || state.intervalStart === null;
+  $('intervalNote').disabled = running || state.intervalStart === null;
 }
 
 function announce(message) { $('toast').textContent = message; $('toast').hidden = false;
@@ -100,6 +106,8 @@ async function selectStudy(id) {
   try {
   stopPlayback(); if (state.dirty && !(await saveReview())) return;
   clearError(); state.study = await api(`/api/studies/${id}`); state.frame = null; state.thumbsStart = -1;
+  state.intervalStart = null; state.intervals = []; state.savedFrameCount = 0;
+  $('intervalNote').value = ''; renderIntervalDraft();
   state.thumbsData = []; state.sourceCoverage = await api(`${base()}/source-coverage`);
   renderSourceContinuity();
   $('emptyState').hidden = true; $('examination').hidden = false;
@@ -108,7 +116,7 @@ async function selectStudy(id) {
   $('scrubber').max = state.study.frame_count - 1; $('jumpInput').max = state.study.frame_count;
   $('predictionImportBtn').disabled = false; $('referencePanel').open = false;
   for (const id of ['bookmark', 'reviewLabel', 'reviewNote']) $(id).disabled = false;
-  await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await refreshModels();
+  await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadIntervals(); await refreshModels();
   } finally { state.switching = false; syncControls(); }
 }
 function markDirty() { if (!state.frame) return; state.dirty = true;
@@ -147,7 +155,7 @@ async function navigate(position, force = false) {
     $('bookmark').checked = frame.review.bookmarked; $('reviewLabel').value = frame.review.label;
     $('reviewNote').value = frame.review.note; $('saveStatus').textContent = frame.review.revision ? 'Saved' : 'No notes';
     $('saveBtn').disabled = true; state.dirty = false; renderReference(); renderPredictions();
-    await renderFilmstrip(position); renderSourceStep(position);
+    await renderFilmstrip(position); renderSourceStep(position); renderIntervalDraft();
     await api(`${base()}/position`, {method: 'PUT', body: JSON.stringify({position})});
     return true;
   } catch (e) { fail(e); stopPlayback(); return false; }
@@ -197,8 +205,10 @@ function renderPredictions() {
   $('predictions').append(textElement('p', 'Model scores are not diagnostic certainty. Suggestions do not change your notes.', 'panel-hint'));
 }
 async function loadSaved() {
-  const saved = await api(`${base()}/saved`); $('savedCount').textContent = saved.length;
-  $('exportBtn').disabled = saved.length === 0; $('savedFrames').replaceChildren();
+  const saved = await api(`${base()}/saved`); state.savedFrameCount = saved.length;
+  $('savedCount').textContent = saved.length;
+  $('exportBtn').disabled = saved.length === 0 && state.intervals.length === 0;
+  $('savedFrames').replaceChildren();
   if (!saved.length) {$('savedFrames').append(textElement('p', 'Bookmarks and notes will appear here.', 'muted')); return;}
   for (const item of saved) {
     const button = textElement('button', '', 'saved-button');
@@ -207,6 +217,72 @@ async function loadSaved() {
     button.append(img, copy); button.addEventListener('click', () => {stopPlayback(); navigate(item.position);}); $('savedFrames').append(button);
   }
 }
+function renderIntervalDraft() {
+  if (state.intervalStart === null) {
+    $('intervalDraft').textContent = 'No interval in progress.';
+  } else {
+    const start = state.intervalStart + 1;
+    $('intervalDraft').textContent = `Start marked at imported frame ${start}. Navigate to a later image and select Save end. The interval is not saved until then.`;
+  }
+  syncControls();
+}
+async function loadIntervals() {
+  state.intervals = await api(`${base()}/intervals`);
+  $('intervalCount').textContent = state.intervals.length;
+  $('exportBtn').disabled = state.savedFrameCount === 0 && state.intervals.length === 0;
+  $('intervals').replaceChildren();
+  if (!state.intervals.length) {
+    $('intervals').append(textElement('p', 'No image intervals marked.', 'muted'));
+    return;
+  }
+  for (const interval of state.intervals) {
+    const entry = document.createElement('div'); entry.className = 'interval-entry';
+    const start = interval.start_position + 1, end = interval.end_position + 1;
+    entry.append(textElement('strong', `Imported frames ${start}–${end}`));
+    const source = interval.start_source_index !== null && interval.end_source_index !== null
+      ? ` · observed source IDs #${interval.start_source_index}–#${interval.end_source_index}` : '';
+    entry.append(textElement('small', `${end - start + 1} imported positions in selection${source} · no timing inferred`));
+    if (interval.note) entry.append(textElement('p', interval.note));
+    const actions = document.createElement('div'); actions.className = 'interval-entry-actions';
+    for (const [title, position] of [['Go to start', interval.start_position], ['Go to end', interval.end_position]]) {
+      const button = textElement('button', title, 'quiet compact');
+      button.addEventListener('click', () => {stopPlayback(); navigate(position).catch(fail);});
+      actions.append(button);
+    }
+    const remove = textElement('button', 'Remove interval', 'quiet compact');
+    remove.setAttribute('aria-label', `Remove interval ${start} to ${end}`);
+    remove.addEventListener('click', async () => {
+      if (!window.confirm(`Remove marked image interval ${start}–${end}? The deletion is recorded in export history.`)) return;
+      try {
+        await api(`${base()}/intervals/${interval.id}`, {method:'DELETE'});
+        await loadIntervals();
+        announce('Interval removed.');
+      } catch (error) {fail(error);}
+    });
+    actions.append(remove); entry.append(actions); $('intervals').append(entry);
+  }
+}
+$('intervalStartBtn').addEventListener('click', () => {
+  if (!state.frame || state.intervalStart !== null) return;
+  stopPlayback(); state.intervalStart = state.frame.position;
+  renderIntervalDraft(); announce('Start image marked. Navigate forward to save an interval.');
+});
+$('intervalCancelBtn').addEventListener('click', () => {
+  state.intervalStart = null; $('intervalNote').value = '';
+  renderIntervalDraft(); announce('Unsaved interval cancelled.');
+});
+$('intervalEndBtn').addEventListener('click', async () => {
+  if (!state.frame || state.intervalStart === null || state.frame.position <= state.intervalStart) return;
+  try {
+    await api(`${base()}/intervals`, {method:'POST', body:JSON.stringify({
+      start_position:state.intervalStart, end_position:state.frame.position,
+      note:$('intervalNote').value
+    })});
+    state.intervalStart = null; $('intervalNote').value = '';
+    renderIntervalDraft(); await loadIntervals();
+    announce('Reviewer-marked image interval saved locally.');
+  } catch (error) {fail(error);}
+});
 async function playbackTick() {
   if (!state.playing || !state.frame) return;
   if (state.frame.position >= state.study.frame_count - 1) {stopPlayback(); return;}

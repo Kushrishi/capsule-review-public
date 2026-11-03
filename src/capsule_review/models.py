@@ -20,6 +20,14 @@ class PositionUpdate(StrictModel):
     position: int = Field(ge=0)
 
 
+class IntervalCreate(StrictModel):
+    """A reviewer's interval of *imported positions*, not clinical lesion timing."""
+
+    start_position: int = Field(ge=0)
+    end_position: int = Field(ge=0)
+    note: str = Field(default="", max_length=2000)
+
+
 class ImportMeta(StrictModel):
     title: str = Field(min_length=1, max_length=120)
     source: str = Field(default="Local research images", max_length=300)
