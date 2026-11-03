@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "exploratory-private-original-pixel-full-span-retention-replay",
+  "date_utc": "2026-11-03",
+  "research_role": "Previously examined Galar fitting examination 23; scripted selection, not blinded independent evaluation",
+  "privacy": "Nonidentifying aggregate only. No original images, source identifiers, individual labels, private manifests, reviewer notes or weights in this public record.",
+  "source_provenance": {
+    "original_source_reference_pngs_rehashed": 512,
+    "original_source_image_sha256_passed": 512,
+    "normalized_display_png_sha256_recomputed_for_selected_full_span": 295,
+    "previously_exported_boundary_only_display_pngs_matched_byte_for_byte": 79,
+    "full_span_archived_display_png_sha256_reverified": 295,
+    "importer_identity_digest_recomputed_and_matched": true,
+    "previously_saved_reviewer_and_interval_histories_reconciled": true,
+    "private_original_archive_and_receipt_preserved_in_capsule_review_library": true,
+    "current_main_route_executed_byte_for_byte": false,
+    "method": "Private independent full-span format reconstruction against trusted original PNGs and archived actual viewer export; public CI separately executes the current production route on synthetic images."
+  },
+  "selection_policy": {
+    "source_exam": "Galar 23, previously inspected",
+    "imported_reference_images": 512,
+    "predeclared_scripted_bookmarks": 51,
+    "predeclared_scripted_intervals": 16,
+    "standard_boundary_only_export_images": 79,
+    "full_span_export_images": 295,
+    "imported_images_inside_marked_spans": 272,
+    "strict_interior_imported_positions": 240,
+    "additional_images_retained_by_full_spans": 216,
+    "imported_images_still_absent_from_full_span_archive": 217,
+    "original_source_video_completeness_verified": false
+  },
+  "previous_verified_reference_blood_image_labels": {
+    "explicit_blood_positive_imported_reference_images": 4,
+    "blood_positive_reference_images_in_standard_boundary_export": 0,
+    "blood_positive_reference_images_in_full_span_export": 2,
+    "blood_positive_reference_images_outside_full_span_export": 2,
+    "full_original_source_positive_annotation_runs": null,
+    "direct_retained_source_positive_annotation_runs": null,
+    "clinical_lesions": null
+  },
+  "interpretation": "In this previously inspected scripted, label-blind replay, including all imported interval interiors preserved two additional explicitly blood=1 annotated reference images compared with the 79-image boundary-only export. This compares different numbers of retained images (295 versus 79), NOT equal review workload, NOT AI model detection, and NOT an estimate of clinician viewing, sensitivity, unique clinical lesions, original-video coverage or improved AI prioritization. Official corrected full-original-source label archive unavailable in this private session; do not infer annotation-run results.",
+  "frozen_scientific_gate": {
+    "exact_official_corrected_galar_label_zip_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+    "official_corrected_source_verified_in_this_session": false,
+    "protected_exams_11_through_20_and_61_through_80_unopened": true,
+    "model_promoted": false
+  }
+}
