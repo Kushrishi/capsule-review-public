@@ -31,8 +31,9 @@
         <div class="honest-status"><strong>No model is connected.</strong><span>This version provides the review workflow. It does not detect disease or generate clinical findings.</span></div>
       </section>
       <section id="examination" hidden>
-        <div class="exam-heading"><div><p class="eyebrow" id="sourceText"></p><h1 id="studyTitle"></h1></div><button id="exportBtn" class="outline">Export review</button></div>
+        <div class="exam-heading"><div><p class="eyebrow" id="sourceText"></p><h1 id="studyTitle"></h1></div><div class="evidence-actions"><button id="auditBtn" class="outline" disabled>Verify evidence</button><button id="exportBtn" class="outline">Export review</button></div></div>
         <p id="exportEvidenceSummary" class="panel-hint" role="status" aria-live="polite">Nothing selected for export.</p>
+        <p id="auditReport" class="evidence-audit" role="status" aria-live="polite" hidden></p>
         <div id="syntheticBanner" class="synthetic-banner" hidden>Synthetic test sequence · not clinical data</div>
         <div class="viewer-meta"><span id="frameCounter"></span><span id="sourceIndex"></span><button class="quiet compact" id="zoomBtn" aria-pressed="false">Fit / 2×</button></div>
         <div class="image-stage" id="imageStage"><img id="frameImage" alt="Current examination frame"><span class="image-loading" id="imageLoading" hidden>Loading frame…</span></div>
@@ -87,6 +88,7 @@
     <p>Import PNG, JPEG or WebP frames. Numbered filenames such as <code>frame_000001.PNG</code> keep their source index. Other filenames use natural sorting.</p>
     <dl class="shortcut-list"><dt>← / →</dt><dd>Previous / next frame</dd><dt>B</dt><dd>Toggle bookmark</dd><dt>Space</dt><dd>Play / pause preview</dd><dt>Ctrl / ⌘ + S</dt><dd>Save current review</dd></dl>
     <p>Export includes bookmarked frames and frames with saved notes or labels, with an illustrated HTML file and JSON record. It is not a complete-examination report.</p>
+    <p>Select <strong>Verify evidence</strong> to check the actual export against its saved history, image checksums and complete local study manifest. The result counts omitted interval interiors and compares ordinal image positions at equal workload. This is not pathology detection or a clinical assessment.</p>
     <p>Reference labels are separate from model output. Train and install an optional local baseline to run region classification. No medically trained weights are bundled. Prediction scores are not assumed to be calibrated probabilities.</p>
     <p class="panel-hint">This local app has no user authentication. Keep it on localhost; do not expose it to the internet. Workspace files are not encrypted.</p>
   </dialog>
