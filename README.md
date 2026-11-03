@@ -65,11 +65,12 @@ Open **http://127.0.0.1:8765**. Choose **Open test sequence** to try the workflo
 
 1. Import PNG, JPEG or WebP images. Filenames are sorted naturally: `frame_2` before `frame_10`.
 2. Use the filmstrip, position slider or arrow keys. The preview rate is not acquisition timing. The **source-index audit** distinguishes a consistent observed index stride (for example, every +5) from unusual jumps, without inventing missing image content or assuming complete footage.
-3. Bookmark a frame or write a note. Navigation saves the draft first. Ctrl/Command+S saves directly.
-4. Reopen the app to continue at the last position.
-5. Export a ZIP containing an illustrated `review.html`, structured `review.json`, and selected frame images.
+3. Bookmark an individual frame or write a note. Navigation saves the draft first. Ctrl/Command+S saves directly.
+4. For a **reviewer-selected image interval**, choose **Mark start** at the current imported frame, navigate to a later frame, optionally add an interval note, and choose **Save end**. Marked intervals persist after reopening and can be removed; interval creation and removal are recorded separately from individual frame notes and model suggestions.
+5. Reopen the app to continue at the last position and revisit marked interval boundaries.
+6. Export a ZIP containing an illustrated `review.html`, structured `review.json`, and selected frame images.
 
-An export includes bookmarks and frames with notes or reviewer labels. It is not a complete-examination report. Dataset labels and predictions are never automatically reported as findings.
+Exports include manually saved frames and **only the start/end boundary images** of reviewer-marked intervals, deduplicated within the existing 250-frame/128-MiB limits. Interval notes and creation/removal history are included in the JSON. Intermediate images are **not automatically exported or presumed reviewed**, and imported image positions/source IDs do not indicate verified original recording times, lesions or diagnostic findings. Dataset labels and predictions are never automatically reported as findings.
 
 ### Larger folders and Galar reference labels
 
