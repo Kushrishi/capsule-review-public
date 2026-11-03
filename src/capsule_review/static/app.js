@@ -578,22 +578,6 @@ async function loadPriorityPage(offset = 0) {
       'No pathology labels were consulted; no bookmarks or reviewer labels were changed.';
     if (result.scores_constant) message += ' Warning: all model scores are identical, so ordering is uninformative.';
     $('prioritySummary').textContent = message;
-    if (offset === 0) {
-      $('priorityComparison').textContent = 'Comparing all four policies at equal workload…';
-      try {
-        const cmpParams = new URLSearchParams({
-          run: query.run, label: query.label, selected_count: query.selected_count,
-        });
-        const comparison = await api('/api/studies/' + studyId +
-          '/priority-comparison?' + cmpParams);
-        renderPriorityComparison(comparison, studyId);
-      } catch (comparisonError) {
-        if (state.study?.id === studyId) {
-          $('priorityComparison').textContent =
-            'Policy comparison unavailable. The selected queue remains usable.';
-        }
-      }
-    }
     $('priorityItems').replaceChildren();
     for (const item of result.items) {
       const button = textElement('button', '', 'priority-entry');
@@ -613,6 +597,22 @@ async function loadPriorityPage(offset = 0) {
     const showing = result.items.length ? (result.offset + 1).toLocaleString() + '–' +
       (result.offset + result.items.length).toLocaleString() : '0';
     $('priorityPage').textContent = showing + ' of ' + result.selected_images.toLocaleString();
+    if (offset === 0) {
+      $('priorityComparison').textContent = 'Comparing all four policies at equal workload…';
+      try {
+        const cmpParams = new URLSearchParams({
+          run: query.run, label: query.label, selected_count: query.selected_count,
+        });
+        const comparison = await api('/api/studies/' + studyId +
+          '/priority-comparison?' + cmpParams);
+        renderPriorityComparison(comparison, studyId);
+      } catch (comparisonError) {
+        if (state.study?.id === studyId) {
+          $('priorityComparison').textContent =
+            'Policy comparison unavailable. The selected queue remains usable.';
+        }
+      }
+    }
   } catch (error) {
     if (state.study?.id === studyId) {
       $('prioritySummary').textContent = 'Review queue could not be verified or built.';
