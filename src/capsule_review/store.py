@@ -66,6 +66,31 @@ CREATE TABLE IF NOT EXISTS review_events (
     content TEXT NOT NULL,
     created_at TEXT NOT NULL
 );
+-- Appending tables via CREATE IF NOT EXISTS upgrades existing workspaces safely.
+CREATE TABLE IF NOT EXISTS review_intervals (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    study_id TEXT NOT NULL REFERENCES studies(id) ON DELETE CASCADE,
+    start_position INTEGER NOT NULL,
+    end_position INTEGER NOT NULL,
+    note TEXT NOT NULL DEFAULT '' CHECK(length(note) <= 2000),
+    created_at TEXT NOT NULL,
+    CHECK(start_position < end_position),
+    UNIQUE(study_id, start_position, end_position),
+    FOREIGN KEY(study_id, start_position) REFERENCES frames(study_id, position),
+    FOREIGN KEY(study_id, end_position) REFERENCES frames(study_id, position)
+);
+CREATE INDEX IF NOT EXISTS idx_review_intervals_study
+    ON review_intervals(study_id, start_position, end_position);
+CREATE TABLE IF NOT EXISTS review_interval_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    study_id TEXT NOT NULL,
+    interval_id INTEGER NOT NULL,
+    action TEXT NOT NULL CHECK(action IN ('created', 'deleted')),
+    start_position INTEGER NOT NULL,
+    end_position INTEGER NOT NULL,
+    note TEXT NOT NULL,
+    created_at TEXT NOT NULL
+);
 """
 
 
