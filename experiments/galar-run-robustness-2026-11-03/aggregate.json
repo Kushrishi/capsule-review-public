@@ -1,0 +1,524 @@
+{
+  "schema_version": 1,
+  "study": "Post-hoc examination-paired source annotation-run robustness audit",
+  "source_aggregate_sha256": "8065f166f2f807b0703d4ef6c28a71d4c452d445db85d8fdd7a4c5313860eb07",
+  "corrected_source_archive_sha256_from_prior_verified_audit": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+  "source_data_access": "Existing public source-locked aggregate only; no new pixels, original labels, per-frame scores, or reserved studies read",
+  "scientific_design": {
+    "exam_ids_previously_inspected": [
+      "9",
+      "10",
+      "21",
+      "23",
+      "25",
+      "27",
+      "29",
+      "30"
+    ],
+    "positive_source_exam_count": 7,
+    "blood_negative_label_exam_ids": [
+      "9"
+    ],
+    "one_exam_one_unit": true,
+    "patient_independence_verified": false,
+    "independent_holdout_or_blinded_test": false,
+    "clinical_validation": false,
+    "selection_model_promoted": false,
+    "primary_descriptive_metric": "macro average of per-exam (distinct blood-positive source annotation runs retrieved / original source positive annotation runs)",
+    "macro_mean_equal_weight_per_positive_exam": true,
+    "micro_ratio_is_case_mix_weighted": true,
+    "run_is_not_adjudicated_lesion": true,
+    "fixed_review_workload_each_exam": {
+      "5": 25,
+      "10": 51,
+      "25": 128,
+      "50": 256,
+      "75": 384,
+      "100": 512
+    },
+    "methods_present_all_exams": [
+      "original_checkpoint",
+      "red_excess",
+      "uniform"
+    ],
+    "excluded_unmatched_methods": "continued-model arms available only for some fitting/transfer exams; do not pool as though tested on every case",
+    "zero_positive_exams_excluded_from_run_recall_denominator": true,
+    "source_index_spacing_is_not_capture_time": true,
+    "no_significance_tests": "Seven positive-source examinations, prior case inspection and unverified patient independence preclude confirmatory p-values."
+  },
+  "source_run_coverage_ceiling": {
+    "full_source_annotation_runs": 283,
+    "runs_reachable_by_all_512_reference_images": 110,
+    "unreachable_even_at_full_reference_workload": 173,
+    "short_1_to_5_source_runs": 124,
+    "short_1_to_5_reachable_runs": 13
+  },
+  "review_budgets": {
+    "5": {
+      "selected_imported_images_per_exam": 25,
+      "methods": {
+        "original_checkpoint": {
+          "sum_distinct_source_annotation_runs_hit": 18,
+          "micro_source_run_recall": 0.06360424,
+          "macro_per_exam_source_run_recall": 0.13828557,
+          "macro_per_exam_accessible_run_fraction": 0.1722865,
+          "short_1_to_5_run_hits": 0,
+          "medium_6_to_25_run_hits": 1,
+          "long_26_plus_run_hits": 17,
+          "selected_image_count_in_blood_negative_label_exams": 25
+        },
+        "red_excess": {
+          "sum_distinct_source_annotation_runs_hit": 21,
+          "micro_source_run_recall": 0.07420495,
+          "macro_per_exam_source_run_recall": 0.16449691,
+          "macro_per_exam_accessible_run_fraction": 0.29892637,
+          "short_1_to_5_run_hits": 3,
+          "medium_6_to_25_run_hits": 2,
+          "long_26_plus_run_hits": 16,
+          "selected_image_count_in_blood_negative_label_exams": 25
+        },
+        "uniform": {
+          "sum_distinct_source_annotation_runs_hit": 18,
+          "micro_source_run_recall": 0.06360424,
+          "macro_per_exam_source_run_recall": 0.07859475,
+          "macro_per_exam_accessible_run_fraction": 0.16286074,
+          "short_1_to_5_run_hits": 1,
+          "medium_6_to_25_run_hits": 0,
+          "long_26_plus_run_hits": 17,
+          "selected_image_count_in_blood_negative_label_exams": 25
+        }
+      },
+      "paired_against_uniform": {
+        "original_checkpoint": {
+          "macro_source_run_recall_difference": 0.05969083,
+          "positive_exam_wins": 2,
+          "positive_exam_ties": 2,
+          "positive_exam_losses": 3,
+          "minimum_leave_one_exam_out_difference": -0.01369404,
+          "maximum_leave_one_exam_out_difference": 0.07776938,
+          "leave_one_exam_out_difference_by_exam": {
+            "10": 0.07776938,
+            "21": 0.0696393,
+            "23": 0.0696393,
+            "25": 0.07278395,
+            "27": -0.01369404,
+            "29": 0.0649664,
+            "30": 0.0767315
+          },
+          "cases_whose_removal_changes_effect_direction": [
+            "27"
+          ],
+          "variance_warning": "Uncertainty unit is examination, not individual images or runs. Leave-one-exam-out ranges are descriptive stability checks, not 95% CIs."
+        },
+        "red_excess": {
+          "macro_source_run_recall_difference": 0.08590216,
+          "positive_exam_wins": 4,
+          "positive_exam_ties": 1,
+          "positive_exam_losses": 2,
+          "minimum_leave_one_exam_out_difference": 0.04466363,
+          "maximum_leave_one_exam_out_difference": 0.10376528,
+          "leave_one_exam_out_difference_by_exam": {
+            "10": 0.0920891,
+            "21": 0.04466363,
+            "23": 0.10021918,
+            "25": 0.10336384,
+            "27": 0.05855252,
+            "29": 0.09866155,
+            "30": 0.10376528
+          },
+          "cases_whose_removal_changes_effect_direction": [],
+          "variance_warning": "Uncertainty unit is examination, not individual images or runs. Leave-one-exam-out ranges are descriptive stability checks, not 95% CIs."
+        }
+      }
+    },
+    "10": {
+      "selected_imported_images_per_exam": 51,
+      "methods": {
+        "original_checkpoint": {
+          "sum_distinct_source_annotation_runs_hit": 28,
+          "micro_source_run_recall": 0.09893993,
+          "macro_per_exam_source_run_recall": 0.19498269,
+          "macro_per_exam_accessible_run_fraction": 0.25333856,
+          "short_1_to_5_run_hits": 0,
+          "medium_6_to_25_run_hits": 2,
+          "long_26_plus_run_hits": 26,
+          "selected_image_count_in_blood_negative_label_exams": 51
+        },
+        "red_excess": {
+          "sum_distinct_source_annotation_runs_hit": 28,
+          "micro_source_run_recall": 0.09893993,
+          "macro_per_exam_source_run_recall": 0.21637389,
+          "macro_per_exam_accessible_run_fraction": 0.36168742,
+          "short_1_to_5_run_hits": 3,
+          "medium_6_to_25_run_hits": 4,
+          "long_26_plus_run_hits": 21,
+          "selected_image_count_in_blood_negative_label_exams": 51
+        },
+        "uniform": {
+          "sum_distinct_source_annotation_runs_hit": 31,
+          "micro_source_run_recall": 0.10954064,
+          "macro_per_exam_source_run_recall": 0.1585392,
+          "macro_per_exam_accessible_run_fraction": 0.35981142,
+          "short_1_to_5_run_hits": 2,
+          "medium_6_to_25_run_hits": 3,
+          "long_26_plus_run_hits": 26,
+          "selected_image_count_in_blood_negative_label_exams": 51
+        }
+      },
+      "paired_against_uniform": {
+        "original_checkpoint": {
+          "macro_source_run_recall_difference": 0.03644349,
+          "positive_exam_wins": 2,
+          "positive_exam_ties": 2,
+          "positive_exam_losses": 3,
+          "minimum_leave_one_exam_out_difference": -0.0824826,
+          "maximum_leave_one_exam_out_difference": 0.09807296,
+          "leave_one_exam_out_difference_by_exam": {
+            "10": 0.07097269,
+            "21": 0.09807296,
+            "23": 0.0425174,
+            "25": 0.04566206,
+            "27": -0.0824826,
+            "29": 0.03784451,
+            "30": 0.0425174
+          },
+          "cases_whose_removal_changes_effect_direction": [
+            "27"
+          ],
+          "variance_warning": "Uncertainty unit is examination, not individual images or runs. Leave-one-exam-out ranges are descriptive stability checks, not 95% CIs."
+        },
+        "red_excess": {
+          "macro_source_run_recall_difference": 0.05783469,
+          "positive_exam_wins": 1,
+          "positive_exam_ties": 2,
+          "positive_exam_losses": 4,
+          "minimum_leave_one_exam_out_difference": -0.01585953,
+          "maximum_leave_one_exam_out_difference": 0.07456601,
+          "leave_one_exam_out_difference_by_exam": {
+            "10": 0.07153885,
+            "21": 0.06747381,
+            "23": 0.06747381,
+            "25": 0.07061846,
+            "27": -0.01585953,
+            "29": 0.06903144,
+            "30": 0.07456601
+          },
+          "cases_whose_removal_changes_effect_direction": [
+            "27"
+          ],
+          "variance_warning": "Uncertainty unit is examination, not individual images or runs. Leave-one-exam-out ranges are descriptive stability checks, not 95% CIs."
+        }
+      }
+    },
+    "25": {
+      "selected_imported_images_per_exam": 128,
+      "methods": {
+        "original_checkpoint": {
+          "sum_distinct_source_annotation_runs_hit": 69,
+          "micro_source_run_recall": 0.24381625,
+          "macro_per_exam_source_run_recall": 0.32365364,
+          "macro_per_exam_accessible_run_fraction": 0.68301304,
+          "short_1_to_5_run_hits": 8,
+          "medium_6_to_25_run_hits": 11,
+          "long_26_plus_run_hits": 50,
+          "selected_image_count_in_blood_negative_label_exams": 128
+        },
+        "red_excess": {
+          "sum_distinct_source_annotation_runs_hit": 48,
+          "micro_source_run_recall": 0.16961131,
+          "macro_per_exam_source_run_recall": 0.30961861,
+          "macro_per_exam_accessible_run_fraction": 0.49292578,
+          "short_1_to_5_run_hits": 3,
+          "medium_6_to_25_run_hits": 8,
+          "long_26_plus_run_hits": 37,
+          "selected_image_count_in_blood_negative_label_exams": 128
+        },
+        "uniform": {
+          "sum_distinct_source_annotation_runs_hit": 55,
+          "micro_source_run_recall": 0.19434629,
+          "macro_per_exam_source_run_recall": 0.23493242,
+          "macro_per_exam_accessible_run_fraction": 0.45063078,
+          "short_1_to_5_run_hits": 3,
+          "medium_6_to_25_run_hits": 7,
+          "long_26_plus_run_hits": 45,
+          "selected_image_count_in_blood_negative_label_exams": 128
+        }
+      },
+      "paired_against_uniform": {
+        "original_checkpoint": {
+          "macro_source_run_recall_difference": 0.08872122,
+          "positive_exam_wins": 5,
+          "positive_exam_ties": 0,
+          "positive_exam_losses": 2,
+          "minimum_leave_one_exam_out_difference": 0.04795254,
+          "maximum_leave_one_exam_out_difference": 0.13196338,
+          "leave_one_exam_out_difference_by_exam": {
+            "10": 0.13196338,
+            "21": 0.04795254,
+            "23": 0.10946047,
+            "25": 0.10036344,
+            "27": 0.06184143,
+            "29": 0.08014361,
+            "30": 0.0893237
+          },
+          "cases_whose_removal_changes_effect_direction": [],
+          "variance_warning": "Uncertainty unit is examination, not individual images or runs. Leave-one-exam-out ranges are descriptive stability checks, not 95% CIs."
+        },
+        "red_excess": {
+          "macro_source_run_recall_difference": 0.0746862,
+          "positive_exam_wins": 4,
+          "positive_exam_ties": 0,
+          "positive_exam_losses": 3,
+          "minimum_leave_one_exam_out_difference": 0.03157834,
+          "maximum_leave_one_exam_out_difference": 0.10426785,
+          "leave_one_exam_out_difference_by_exam": {
+            "10": 0.07493878,
+            "21": 0.03157834,
+            "23": 0.09308628,
+            "25": 0.09342321,
+            "27": 0.04546723,
+            "29": 0.10426785,
+            "30": 0.0800417
+          },
+          "cases_whose_removal_changes_effect_direction": [],
+          "variance_warning": "Uncertainty unit is examination, not individual images or runs. Leave-one-exam-out ranges are descriptive stability checks, not 95% CIs."
+        }
+      }
+    },
+    "50": {
+      "selected_imported_images_per_exam": 256,
+      "methods": {
+        "original_checkpoint": {
+          "sum_distinct_source_annotation_runs_hit": 81,
+          "micro_source_run_recall": 0.28621908,
+          "macro_per_exam_source_run_recall": 0.34782702,
+          "macro_per_exam_accessible_run_fraction": 0.72829689,
+          "short_1_to_5_run_hits": 9,
+          "medium_6_to_25_run_hits": 15,
+          "long_26_plus_run_hits": 57,
+          "selected_image_count_in_blood_negative_label_exams": 256
+        },
+        "red_excess": {
+          "sum_distinct_source_annotation_runs_hit": 74,
+          "micro_source_run_recall": 0.2614841,
+          "macro_per_exam_source_run_recall": 0.37768179,
+          "macro_per_exam_accessible_run_fraction": 0.70831127,
+          "short_1_to_5_run_hits": 7,
+          "medium_6_to_25_run_hits": 16,
+          "long_26_plus_run_hits": 51,
+          "selected_image_count_in_blood_negative_label_exams": 256
+        },
+        "uniform": {
+          "sum_distinct_source_annotation_runs_hit": 80,
+          "micro_source_run_recall": 0.28268551,
+          "macro_per_exam_source_run_recall": 0.37547792,
+          "macro_per_exam_accessible_run_fraction": 0.68916724,
+          "short_1_to_5_run_hits": 5,
+          "medium_6_to_25_run_hits": 14,
+          "long_26_plus_run_hits": 61,
+          "selected_image_count_in_blood_negative_label_exams": 256
+        }
+      },
+      "paired_against_uniform": {
+        "original_checkpoint": {
+          "macro_source_run_recall_difference": -0.0276509,
+          "positive_exam_wins": 2,
+          "positive_exam_ties": 3,
+          "positive_exam_losses": 2,
+          "minimum_leave_one_exam_out_difference": -0.0525086,
+          "maximum_leave_one_exam_out_difference": 0.02058615,
+          "leave_one_exam_out_difference_by_exam": {
+            "10": 0.02058615,
+            "21": -0.03225938,
+            "23": -0.026307,
+            "25": -0.03854869,
+            "27": -0.03225938,
+            "29": -0.0525086,
+            "30": -0.03225938
+          },
+          "cases_whose_removal_changes_effect_direction": [
+            "10"
+          ],
+          "variance_warning": "Uncertainty unit is examination, not individual images or runs. Leave-one-exam-out ranges are descriptive stability checks, not 95% CIs."
+        },
+        "red_excess": {
+          "macro_source_run_recall_difference": 0.00220387,
+          "positive_exam_wins": 2,
+          "positive_exam_ties": 4,
+          "positive_exam_losses": 1,
+          "minimum_leave_one_exam_out_difference": -0.00962394,
+          "maximum_leave_one_exam_out_difference": 0.0181475,
+          "leave_one_exam_out_difference_by_exam": {
+            "10": -0.00962394,
+            "21": 0.00257118,
+            "23": -0.0033812,
+            "25": 0.00257118,
+            "27": 0.00257118,
+            "29": 0.0181475,
+            "30": 0.00257118
+          },
+          "cases_whose_removal_changes_effect_direction": [
+            "10",
+            "23"
+          ],
+          "variance_warning": "Uncertainty unit is examination, not individual images or runs. Leave-one-exam-out ranges are descriptive stability checks, not 95% CIs."
+        }
+      }
+    },
+    "75": {
+      "selected_imported_images_per_exam": 384,
+      "methods": {
+        "original_checkpoint": {
+          "sum_distinct_source_annotation_runs_hit": 94,
+          "micro_source_run_recall": 0.33215548,
+          "macro_per_exam_source_run_recall": 0.39296168,
+          "macro_per_exam_accessible_run_fraction": 0.82944897,
+          "short_1_to_5_run_hits": 9,
+          "medium_6_to_25_run_hits": 21,
+          "long_26_plus_run_hits": 64,
+          "selected_image_count_in_blood_negative_label_exams": 384
+        },
+        "red_excess": {
+          "sum_distinct_source_annotation_runs_hit": 94,
+          "micro_source_run_recall": 0.33215548,
+          "macro_per_exam_source_run_recall": 0.42198761,
+          "macro_per_exam_accessible_run_fraction": 0.91048632,
+          "short_1_to_5_run_hits": 10,
+          "medium_6_to_25_run_hits": 22,
+          "long_26_plus_run_hits": 62,
+          "selected_image_count_in_blood_negative_label_exams": 384
+        },
+        "uniform": {
+          "sum_distinct_source_annotation_runs_hit": 98,
+          "micro_source_run_recall": 0.34628975,
+          "macro_per_exam_source_run_recall": 0.3919726,
+          "macro_per_exam_accessible_run_fraction": 0.92204138,
+          "short_1_to_5_run_hits": 11,
+          "medium_6_to_25_run_hits": 20,
+          "long_26_plus_run_hits": 67,
+          "selected_image_count_in_blood_negative_label_exams": 384
+        }
+      },
+      "paired_against_uniform": {
+        "original_checkpoint": {
+          "macro_source_run_recall_difference": 0.00098909,
+          "positive_exam_wins": 2,
+          "positive_exam_ties": 2,
+          "positive_exam_losses": 3,
+          "minimum_leave_one_exam_out_difference": -0.04051273,
+          "maximum_leave_one_exam_out_difference": 0.02960922,
+          "leave_one_exam_out_difference_by_exam": {
+            "10": 0.02960922,
+            "21": 0.00115393,
+            "23": 0.01901108,
+            "25": 0.00115393,
+            "27": -0.04051273,
+            "29": -0.00819186,
+            "30": 0.00470003
+          },
+          "cases_whose_removal_changes_effect_direction": [
+            "27",
+            "29"
+          ],
+          "variance_warning": "Uncertainty unit is examination, not individual images or runs. Leave-one-exam-out ranges are descriptive stability checks, not 95% CIs."
+        },
+        "red_excess": {
+          "macro_source_run_recall_difference": 0.03001501,
+          "positive_exam_wins": 2,
+          "positive_exam_ties": 2,
+          "positive_exam_losses": 3,
+          "minimum_leave_one_exam_out_difference": -0.00664915,
+          "maximum_leave_one_exam_out_difference": 0.04436331,
+          "leave_one_exam_out_difference_by_exam": {
+            "10": 0.02282239,
+            "21": 0.03501751,
+            "23": 0.04096989,
+            "25": 0.03501751,
+            "27": -0.00664915,
+            "29": 0.04436331,
+            "30": 0.03856361
+          },
+          "cases_whose_removal_changes_effect_direction": [
+            "27"
+          ],
+          "variance_warning": "Uncertainty unit is examination, not individual images or runs. Leave-one-exam-out ranges are descriptive stability checks, not 95% CIs."
+        }
+      }
+    },
+    "100": {
+      "selected_imported_images_per_exam": 512,
+      "methods": {
+        "original_checkpoint": {
+          "sum_distinct_source_annotation_runs_hit": 110,
+          "micro_source_run_recall": 0.38869258,
+          "macro_per_exam_source_run_recall": 0.45052515,
+          "macro_per_exam_accessible_run_fraction": 1,
+          "short_1_to_5_run_hits": 13,
+          "medium_6_to_25_run_hits": 25,
+          "long_26_plus_run_hits": 72,
+          "selected_image_count_in_blood_negative_label_exams": 512
+        },
+        "red_excess": {
+          "sum_distinct_source_annotation_runs_hit": 110,
+          "micro_source_run_recall": 0.38869258,
+          "macro_per_exam_source_run_recall": 0.45052515,
+          "macro_per_exam_accessible_run_fraction": 1,
+          "short_1_to_5_run_hits": 13,
+          "medium_6_to_25_run_hits": 25,
+          "long_26_plus_run_hits": 72,
+          "selected_image_count_in_blood_negative_label_exams": 512
+        },
+        "uniform": {
+          "sum_distinct_source_annotation_runs_hit": 110,
+          "micro_source_run_recall": 0.38869258,
+          "macro_per_exam_source_run_recall": 0.45052515,
+          "macro_per_exam_accessible_run_fraction": 1,
+          "short_1_to_5_run_hits": 13,
+          "medium_6_to_25_run_hits": 25,
+          "long_26_plus_run_hits": 72,
+          "selected_image_count_in_blood_negative_label_exams": 512
+        }
+      },
+      "paired_against_uniform": {
+        "original_checkpoint": {
+          "macro_source_run_recall_difference": 0,
+          "positive_exam_wins": 0,
+          "positive_exam_ties": 7,
+          "positive_exam_losses": 0,
+          "minimum_leave_one_exam_out_difference": 0,
+          "maximum_leave_one_exam_out_difference": 0,
+          "leave_one_exam_out_difference_by_exam": {
+            "10": 0,
+            "21": 0,
+            "23": 0,
+            "25": 0,
+            "27": 0,
+            "29": 0,
+            "30": 0
+          },
+          "cases_whose_removal_changes_effect_direction": [],
+          "variance_warning": "Uncertainty unit is examination, not individual images or runs. Leave-one-exam-out ranges are descriptive stability checks, not 95% CIs."
+        },
+        "red_excess": {
+          "macro_source_run_recall_difference": 0,
+          "positive_exam_wins": 0,
+          "positive_exam_ties": 7,
+          "positive_exam_losses": 0,
+          "minimum_leave_one_exam_out_difference": 0,
+          "maximum_leave_one_exam_out_difference": 0,
+          "leave_one_exam_out_difference_by_exam": {
+            "10": 0,
+            "21": 0,
+            "23": 0,
+            "25": 0,
+            "27": 0,
+            "29": 0,
+            "30": 0
+          },
+          "cases_whose_removal_changes_effect_direction": [],
+          "variance_warning": "Uncertainty unit is examination, not individual images or runs. Leave-one-exam-out ranges are descriptive stability checks, not 95% CIs."
+        }
+      }
+    }
+  }
+}
