@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-11-03",
+  "study": "Retrospective original-CNN score-guided queue comparison on six previously examined Galar reference examinations",
+  "source_data": "Previously source-verified private prediction reproduction archives; rehashed exact ZIP and internal CSV bytes; original PNG pixels not rehashed in this replay",
+  "research_role": "Post-hoc exploratory; no untouched holdout, no new model training or threshold tuning",
+  "exam_ids_previously_inspected": [
+    "21",
+    "23",
+    "25",
+    "27",
+    "29",
+    "30"
+  ],
+  "reference_images_per_exam": 512,
+  "explicit_blood_positive_reference_images_by_exam": {
+    "21": 1,
+    "23": 4,
+    "25": 14,
+    "27": 26,
+    "29": 122,
+    "30": 120
+  },
+  "total_explicit_blood_positive_reference_images_available": 287,
+  "private_input_archive_sha256": {
+    "prior_frozen_transfer": "9dff0dd9ff38e17353bb6e1a9b343dd0b6a8906f1171bc481a842b74142fce83",
+    "prior_appearance_audit": "2738a64b47d0be4fecfd89fd8aea9a345ce86e237899e4e423d4d7de8ac36eaa"
+  },
+  "verified_private_score_csv_sha256": {
+    "prior_frozen_transfer": "caa85f950ac0912a3a89a3a93aad6c4e24ba1dc186a52e51456bf843e8111812",
+    "prior_appearance_audit": "c07db3c66d027d730eaef82566e1c3a4d210a312e4b5926ee871381f5d608597"
+  },
+  "private_full_aggregate_sha256": "589d2a8700d3ebd811cd979cc83a460b87492e144b09af3c15b98de1a35d6ff5",
+  "private_independent_verification": {
+    "passed": true,
+    "independent_selection_implementations": 2,
+    "verified_exact_K_case_budget_method_combinations": 144,
+    "source_scores_private": true
+  },
+  "method_meaning": {
+    "uniform": "Label-blind exact midpoint K from 512 reference images; independently re-spaced at each K",
+    "score": "Highest original CNN scores with ascending imported-position tie breaks",
+    "score_diverse": "Greedy score-sorted first pass with imported ordinal suppression floor(512/(2K)), then score-fill",
+    "score_bin": "Top-scoring imported image from each of K equal-width chronological bins"
+  },
+  "endpoint": "Retained source-verified explicit blood=1 reference IMAGES, not unique source annotation runs, clinical lesions, sensitivity or independent patients",
+  "workloads": {
+    "25": {
+      "selected_images_per_exam": 25,
+      "uniform": {
+        "blood_positive_reference_images_retained": 15,
+        "macro_examination_positive_image_fraction": 0.03623396,
+        "examinations_better_than_uniform": 0,
+        "examinations_tied_with_uniform": 6,
+        "examinations_worse_than_uniform": 0
+      },
+      "score": {
+        "blood_positive_reference_images_retained": 61,
+        "macro_examination_positive_image_fraction": 0.18973834,
+        "examinations_better_than_uniform": 3,
+        "examinations_tied_with_uniform": 2,
+        "examinations_worse_than_uniform": 1
+      },
+      "score_diverse": {
+        "blood_positive_reference_images_retained": 21,
+        "macro_examination_positive_image_fraction": 0.05454172,
+        "examinations_better_than_uniform": 3,
+        "examinations_tied_with_uniform": 3,
+        "examinations_worse_than_uniform": 0
+      },
+      "score_bin": {
+        "blood_positive_reference_images_retained": 15,
+        "macro_examination_positive_image_fraction": 0.04125533,
+        "examinations_better_than_uniform": 1,
+        "examinations_tied_with_uniform": 4,
+        "examinations_worse_than_uniform": 1
+      }
+    },
+    "51": {
+      "selected_images_per_exam": 51,
+      "uniform": {
+        "blood_positive_reference_images_retained": 27,
+        "macro_examination_positive_image_fraction": 0.2231087,
+        "examinations_better_than_uniform": 0,
+        "examinations_tied_with_uniform": 6,
+        "examinations_worse_than_uniform": 0
+      },
+      "score": {
+        "blood_positive_reference_images_retained": 95,
+        "macro_examination_positive_image_fraction": 0.24166316,
+        "examinations_better_than_uniform": 3,
+        "examinations_tied_with_uniform": 1,
+        "examinations_worse_than_uniform": 2
+      },
+      "score_diverse": {
+        "blood_positive_reference_images_retained": 43,
+        "macro_examination_positive_image_fraction": 0.10547374,
+        "examinations_better_than_uniform": 4,
+        "examinations_tied_with_uniform": 1,
+        "examinations_worse_than_uniform": 1
+      },
+      "score_bin": {
+        "blood_positive_reference_images_retained": 31,
+        "macro_examination_positive_image_fraction": 0.07887818,
+        "examinations_better_than_uniform": 4,
+        "examinations_tied_with_uniform": 1,
+        "examinations_worse_than_uniform": 1
+      }
+    },
+    "128": {
+      "selected_images_per_exam": 128,
+      "uniform": {
+        "blood_positive_reference_images_retained": 69,
+        "macro_examination_positive_image_fraction": 0.21266388,
+        "examinations_better_than_uniform": 0,
+        "examinations_tied_with_uniform": 6,
+        "examinations_worse_than_uniform": 0
+      },
+      "score": {
+        "blood_positive_reference_images_retained": 201,
+        "macro_examination_positive_image_fraction": 0.59968199,
+        "examinations_better_than_uniform": 4,
+        "examinations_tied_with_uniform": 0,
+        "examinations_worse_than_uniform": 2
+      },
+      "score_diverse": {
+        "blood_positive_reference_images_retained": 77,
+        "macro_examination_positive_image_fraction": 0.17289027,
+        "examinations_better_than_uniform": 2,
+        "examinations_tied_with_uniform": 2,
+        "examinations_worse_than_uniform": 2
+      },
+      "score_bin": {
+        "blood_positive_reference_images_retained": 77,
+        "macro_examination_positive_image_fraction": 0.18342891,
+        "examinations_better_than_uniform": 2,
+        "examinations_tied_with_uniform": 3,
+        "examinations_worse_than_uniform": 1
+      }
+    },
+    "256": {
+      "selected_images_per_exam": 256,
+      "uniform": {
+        "blood_positive_reference_images_retained": 147,
+        "macro_examination_positive_image_fraction": 0.54168218,
+        "examinations_better_than_uniform": 0,
+        "examinations_tied_with_uniform": 6,
+        "examinations_worse_than_uniform": 0
+      },
+      "score": {
+        "blood_positive_reference_images_retained": 247,
+        "macro_examination_positive_image_fraction": 0.66795472,
+        "examinations_better_than_uniform": 3,
+        "examinations_tied_with_uniform": 1,
+        "examinations_worse_than_uniform": 2
+      },
+      "score_diverse": {
+        "blood_positive_reference_images_retained": 196,
+        "macro_examination_positive_image_fraction": 0.54508022,
+        "examinations_better_than_uniform": 5,
+        "examinations_tied_with_uniform": 0,
+        "examinations_worse_than_uniform": 1
+      },
+      "score_bin": {
+        "blood_positive_reference_images_retained": 144,
+        "macro_examination_positive_image_fraction": 0.42307692,
+        "examinations_better_than_uniform": 2,
+        "examinations_tied_with_uniform": 1,
+        "examinations_worse_than_uniform": 3
+      }
+    },
+    "384": {
+      "selected_images_per_exam": 384,
+      "uniform": {
+        "blood_positive_reference_images_retained": 217,
+        "macro_examination_positive_image_fraction": 0.83678641,
+        "examinations_better_than_uniform": 0,
+        "examinations_tied_with_uniform": 6,
+        "examinations_worse_than_uniform": 0
+      },
+      "score": {
+        "blood_positive_reference_images_retained": 271,
+        "macro_examination_positive_image_fraction": 0.77288577,
+        "examinations_better_than_uniform": 3,
+        "examinations_tied_with_uniform": 1,
+        "examinations_worse_than_uniform": 2
+      },
+      "score_diverse": {
+        "blood_positive_reference_images_retained": 271,
+        "macro_examination_positive_image_fraction": 0.77288577,
+        "examinations_better_than_uniform": 3,
+        "examinations_tied_with_uniform": 1,
+        "examinations_worse_than_uniform": 2
+      },
+      "score_bin": {
+        "blood_positive_reference_images_retained": 214,
+        "macro_examination_positive_image_fraction": 0.62706419,
+        "examinations_better_than_uniform": 0,
+        "examinations_tied_with_uniform": 3,
+        "examinations_worse_than_uniform": 3
+      }
+    },
+    "512": {
+      "selected_images_per_exam": 512,
+      "uniform": {
+        "blood_positive_reference_images_retained": 287,
+        "macro_examination_positive_image_fraction": 1,
+        "examinations_better_than_uniform": 0,
+        "examinations_tied_with_uniform": 6,
+        "examinations_worse_than_uniform": 0
+      },
+      "score": {
+        "blood_positive_reference_images_retained": 287,
+        "macro_examination_positive_image_fraction": 1,
+        "examinations_better_than_uniform": 0,
+        "examinations_tied_with_uniform": 6,
+        "examinations_worse_than_uniform": 0
+      },
+      "score_diverse": {
+        "blood_positive_reference_images_retained": 287,
+        "macro_examination_positive_image_fraction": 1,
+        "examinations_better_than_uniform": 0,
+        "examinations_tied_with_uniform": 6,
+        "examinations_worse_than_uniform": 0
+      },
+      "score_bin": {
+        "blood_positive_reference_images_retained": 287,
+        "macro_examination_positive_image_fraction": 1,
+        "examinations_better_than_uniform": 0,
+        "examinations_tied_with_uniform": 6,
+        "examinations_worse_than_uniform": 0
+      }
+    }
+  },
+  "limitations": [
+    "Previously inspected examinations; original CNN score and labels are historical, not untouched or newly blinded",
+    "Positive frame hits concentrate within some original source annotation runs; this comparison does not calculate distinct source-run coverage",
+    "Reference selection contains only 512 images per examination; much original source evidence was not imported",
+    "Case 23 retains zero blood-positive reference images among top-scored 51, 128, 256 selections despite four explicit positives",
+    "Case 25 similarly retains zero positives among top-scored 51 images despite fourteen explicit positives",
+    "Region model built into the app is anatomy classification, not this original exploratory blood CNN; user must import an eligible complete score stream",
+    "No model selected or promoted; no clinical diagnostic claim"
+  ],
+  "clinical_validation": false,
+  "patient_independence_verified": false,
+  "model_promoted": false,
+  "source_positive_run_recall_measured": false,
+  "future_gate": "New locked examination-separated study with denser original image input, official corrected source labels, distinct annotation-run metrics and matched workloads."
+}
