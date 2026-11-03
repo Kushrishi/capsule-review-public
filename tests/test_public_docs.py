@@ -9,6 +9,8 @@ from urllib.parse import unquote
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = (
     ROOT / "README.md",
+    ROOT / "AGENTS.md",
+    ROOT / "docs" / "GALAR_UNSEEN_EVALUATION_PLAN.md",
     ROOT / "docs" / "GALAR_NEGATIVE_22_24_RESULTS.md",
     ROOT / "docs" / "GALAR_NEGATIVE_EXPANSION_CV_RESULTS.md",
     ROOT / "docs" / "PUBLIC_RELEASE_SAFETY.md",
@@ -53,3 +55,11 @@ def test_public_research_docs_do_not_claim_model_promotion():
     assert "not a clinical decision-support device" in readme
     assert "not a model or clinical validation" in provenance
     assert (ROOT / "docs" / "PUBLIC_RELEASE_SAFETY.md").exists()
+
+
+def test_public_entrypoints_stay_concise_without_escaped_newlines():
+    """Keep the landing page readable; put experiment chronology in research reports."""
+    for filename, max_words in (("README.md", 1200), ("AGENTS.md", 800)):
+        content = (ROOT / filename).read_text(encoding="utf-8")
+        assert len(content.split()) <= max_words, f"{filename} is becoming a running lab notebook"
+        assert "\\n\\n" not in content, f"{filename} contains literal escaped line breaks"
