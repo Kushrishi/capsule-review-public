@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "title": "Fixed examination-excluded adaptation comparison on previously inspected Galar development references",
+  "date_utc": "2026-11-04",
+  "status": "exploratory; NOT independent external validation",
+  "comparison_type": "three examination-excluded development folds; 2 frozen training arms plus original checkpoint",
+  "original_checkpoint_sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+  "private_preanalysis_design_sha256": "aeb0b6113501eba42cfb5564524e8245394dff377ce6c6040caae12ab244feb4",
+  "private_result_sha256": "54d7384edc425fab8be4e269c0ca451786eb6869deba41942673d58375841a7c",
+  "private_independent_replay_sha256": "81276c7db87a3431d9dc478240fc28d948038626d01b628e8db747d92754b5e3",
+  "source_images_checked": 5632,
+  "original_checkpoint_score_replay_max_absolute_error_lt": 0.000003,
+  "training": {
+    "base_fitting_examinations": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "base_fitting_images": 4096,
+    "per_fold_added_other_development_examinations": 2,
+    "per_fold_added_other_development_images": 1024,
+    "epochs": 2,
+    "batch_size": 64,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "optimizer": "AdamW new optimizer state from original frozen checkpoint",
+    "initialization": "original fitted compact CNN",
+    "photometric_training_only": {
+      "brightness": [
+        0.75,
+        1.25
+      ],
+      "contrast": [
+        0.8,
+        1.2
+      ],
+      "saturation": [
+        0.7,
+        1.3
+      ]
+    },
+    "seed": 4311,
+    "augmentation_seed": 7711
+  },
+  "evaluation": {
+    "already_inspected_cases": [
+      23,
+      25,
+      27
+    ],
+    "images_per_examination": 512,
+    "image_budgets": [
+      51,
+      128,
+      256
+    ],
+    "metrics": [
+      "ROC-AUC",
+      "average precision",
+      "positive reference-image hits at fixed K"
+    ],
+    "zero_positive_cases_included": 0,
+    "complete_original_video_coverage": false,
+    "distinct_annotation_run_recall_evaluated": false
+  },
+  "per_examination": {
+    "23": {
+      "evaluated_images": 512,
+      "positive_reference_images": 4,
+      "training_examinations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        25,
+        27
+      ],
+      "training_images": 5120,
+      "training_positive_images": 279,
+      "models": {
+        "original_checkpoint": {
+          "roc_auc": 0.202755906,
+          "average_precision": 0.005947521,
+          "positive_image_hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          }
+        },
+        "continued_no_augmentation": {
+          "roc_auc": 0.320374016,
+          "average_precision": 0.00687173,
+          "positive_image_hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          }
+        },
+        "continued_photometric": {
+          "roc_auc": 0.402066929,
+          "average_precision": 0.008004046,
+          "positive_image_hits": {
+            "51": 0,
+            "128": 0,
+            "256": 2
+          }
+        }
+      }
+    },
+    "25": {
+      "evaluated_images": 512,
+      "positive_reference_images": 14,
+      "training_examinations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        23,
+        27
+      ],
+      "training_images": 5120,
+      "training_positive_images": 269,
+      "models": {
+        "original_checkpoint": {
+          "roc_auc": 0.304503729,
+          "average_precision": 0.022098069,
+          "positive_image_hits": {
+            "51": 0,
+            "128": 3,
+            "256": 3
+          }
+        },
+        "continued_no_augmentation": {
+          "roc_auc": 0.279977051,
+          "average_precision": 0.023576648,
+          "positive_image_hits": {
+            "51": 2,
+            "128": 3,
+            "256": 3
+          }
+        },
+        "continued_photometric": {
+          "roc_auc": 0.218301779,
+          "average_precision": 0.020208068,
+          "positive_image_hits": {
+            "51": 1,
+            "128": 3,
+            "256": 3
+          }
+        }
+      }
+    },
+    "27": {
+      "evaluated_images": 512,
+      "positive_reference_images": 26,
+      "training_examinations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        23,
+        25
+      ],
+      "training_images": 5120,
+      "training_positive_images": 257,
+      "models": {
+        "original_checkpoint": {
+          "roc_auc": 0.969848053,
+          "average_precision": 0.865578682,
+          "positive_image_hits": {
+            "51": 22,
+            "128": 25,
+            "256": 26
+          }
+        },
+        "continued_no_augmentation": {
+          "roc_auc": 0.938983856,
+          "average_precision": 0.832106429,
+          "positive_image_hits": {
+            "51": 21,
+            "128": 23,
+            "256": 25
+          }
+        },
+        "continued_photometric": {
+          "roc_auc": 0.957106679,
+          "average_precision": 0.826927363,
+          "positive_image_hits": {
+            "51": 21,
+            "128": 24,
+            "256": 26
+          }
+        }
+      }
+    }
+  },
+  "macro": {
+    "original_checkpoint": {
+      "mean_roc_auc": 0.492369229,
+      "mean_average_precision": 0.297874757,
+      "pooled_positive_image_hits": {
+        "51": 22,
+        "128": 28,
+        "256": 29
+      },
+      "examinations_auc_above_original": null
+    },
+    "continued_no_augmentation": {
+      "mean_roc_auc": 0.513111641,
+      "mean_average_precision": 0.287518269,
+      "pooled_positive_image_hits": {
+        "51": 23,
+        "128": 26,
+        "256": 28
+      },
+      "examinations_auc_above_original": 1
+    },
+    "continued_photometric": {
+      "mean_roc_auc": 0.525825129,
+      "mean_average_precision": 0.285046492,
+      "pooled_positive_image_hits": {
+        "51": 22,
+        "128": 27,
+        "256": 31
+      },
+      "examinations_auc_above_original": 1
+    }
+  },
+  "interpretation": {
+    "photometric_mean_auc_gain_vs_original": 0.0334559,
+    "photometric_mean_ap_gain_vs_original": -0.012828265,
+    "photometric_total_top51_positive_hits_gain_vs_original": 0,
+    "model_promotion_approved": false,
+    "clinical_validation": false,
+    "patient_independence_verified": false,
+    "locked_galar_11_20_reused": false,
+    "authors_reserved_61_80_opened": false,
+    "posthoc_patient_generalization_claim": false,
+    "notes": "The three cases were already examined. Appearance augmentation helps one examination's AUC, worsens two, and does not improve total top-51 positive-image hits. Pooled top-K hits are not patient-/event-level coverage; n=3 does not support inference."
+  },
+  "public_privacy": {
+    "original_images_included": false,
+    "individual_frame_labels_included": false,
+    "per_frame_predictions_included": false,
+    "model_weights_included": false,
+    "private_research_receipts_included": false
+  }
+}
