@@ -20,6 +20,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.background import BackgroundTask
 
 from . import __version__
+from .demo_scores import ensure_demo_scores
 from .exporter import export_review
 from .full_span_evidence import export_full_span_evidence
 from .evidence_receipt import account_review_evidence
@@ -110,8 +111,17 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
             return [dict(r) for r in rows]
 
     @app.post('/api/demo', status_code=201)
-    async def demo():
-        return await run_in_threadpool(create_demo, store)
+    async def demo(study_id: str | None = None):
+        """Create the synthetic demo or upgrade its previous version in-place."""
+        def prepare():
+            study = create_demo(store) if study_id is None else store.study(study_id)
+            if study is None:
+                raise ValueError("The built-in test sequence does not exist.")
+            return ensure_demo_scores(store, study["id"])
+        try:
+            return await run_in_threadpool(prepare)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
 
     @app.post('/api/studies/import', status_code=201)
     async def upload(title: str = Form(...), source: str = Form('Local research images'),
