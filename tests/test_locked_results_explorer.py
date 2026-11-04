@@ -7,6 +7,8 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 HTML = ROOT / "src" / "capsule_review" / "static" / "locked-results.html"
+JS = ROOT / "src" / "capsule_review" / "static" / "locked-results.js"
+CSS = ROOT / "src" / "capsule_review" / "static" / "locked-results.css"
 AGGREGATE = ROOT / "experiments" / "galar-unseen-11-20-20261104" / "aggregate.json"
 INDEX = ROOT / "src" / "capsule_review" / "static" / "index.html"
 POLICIES = ("uniform", "score", "score_diverse", "score_bin")
@@ -14,12 +16,9 @@ WORKLOADS = ("5", "10", "25", "50", "100")
 
 
 def _projection():
-    content = HTML.read_text(encoding="utf-8")
-    match = re.search(
-        r'<script id="locked-results-data" type="application/json">([^<]*)</script>',
-        content,
-    )
-    assert match, "Results must be self-contained and available without network access."
+    script = JS.read_text(encoding="utf-8")
+    match = re.search(r"(?m)^const d=(\{[^\n]*\});$", script)
+    assert match, "Aggregate projection must be bundled in an executable same-origin script."
     return json.loads(match.group(1))
 
 
@@ -91,15 +90,23 @@ def test_primary_failure_preserved_and_secondary_labeled():
     assert "not clinical validation" in html.lower()
     assert "undefined" in html.lower()
     assert "not proven unique clinical lesions" in html.lower()
-    assert "data:" not in html.lower().split("<script id=", 1)[0]
+    assert '<script src="/static/locked-results.js" defer></script>' in html
+    assert '<link rel="stylesheet" href="/static/locked-results.css">' in html
+    assert "<style>" not in html and "<script>" not in html and 'style="' not in html
 
 
-def test_local_app_links_to_self_contained_aggregate_explorer(client):
+def test_local_app_serves_csp_compatible_aggregate_explorer(client):
     index = INDEX.read_text(encoding="utf-8")
     assert 'href="/static/locked-results.html"' in index
     response = client.get("/static/locked-results.html")
     assert response.status_code == 200
-    assert "application/json" in response.text
-    assert '<script id="locked-results-data"' in response.text
+    assert "script-src 'self'" in response.headers["content-security-policy"]
+    assert '<script src="/static/locked-results.js" defer></script>' in response.text
+    assert '<link rel="stylesheet" href="/static/locked-results.css">' in response.text
+    assert '<script id="locked-results-data"' not in response.text
     assert "<img " not in response.text
-    assert '<script src=' not in response.text
+    assert 'style="' not in response.text and "<style>" not in response.text
+    for path in ("/static/locked-results.js", "/static/locked-results.css"):
+        asset = client.get(path)
+        assert asset.status_code == 200
+        assert asset.content

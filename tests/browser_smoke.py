@@ -96,6 +96,21 @@ with sync_playwright() as p:
         wait_for_js(page, "document.getElementById('version').textContent.startsWith('v')")
         return page
     page=open_app()
+    # Real browser renders the results explorer under the same strict CSP
+    # that blocks inline scripts/styles. Browser smoke must catch regressions.
+    results_page=context.new_page()
+    results_page.on('pageerror',lambda exc:errors.append('Results explorer: '+str(exc)))
+    results_page.goto(origin+'/static/locked-results.html')
+    wait_for_js(results_page, "document.getElementById('uniformRecall').textContent === '50.62%'")
+    assert results_page.locator('#caseRows tr').count() == 10
+    assert '−1.27' in results_page.locator('.disclosure').inner_text()
+    results_page.locator('#budget').select_option('25')
+    wait_for_js(results_page, "document.getElementById('uniformRecall').textContent === '72.16%'")
+    assert 'secondary' in results_page.locator('#budgetStatus').inner_text().lower()
+    results_page.locator('#method').select_option('score')
+    wait_for_js(results_page, "document.getElementById('policyName').textContent === 'Highest model scores'")
+    results_page.close()
+    checks.append('Strict-CSP browser renders locked public aggregates and interactive policy comparisons')
     page.screenshot(path=str(out/'empty-state.png'),full_page=True)
     page.get_by_role('button',name='Open test sequence').click()
     page.wait_for_selector('#syntheticBanner',state='visible')
