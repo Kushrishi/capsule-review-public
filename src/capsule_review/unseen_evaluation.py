@@ -32,6 +32,8 @@ from capsule_review.priority import (
 # Never import the live product METHODS list: adding exploratory policies must
 # not change historical queue contents or break independent numeric replay.
 LOCKED_METHODS = ("score", "score_diverse", "score_bin", "uniform")
+# Keep the original four-method module API for existing synthetic replay tests.
+METHODS = LOCKED_METHODS
 WORKLOAD_PERCENTS = (5, 10, 25, 50, 100)
 RUN_STRATA = ("1-5", "6-25", "26+")
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
