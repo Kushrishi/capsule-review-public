@@ -48,7 +48,7 @@ The software works; the biomedical evidence is mixed. Earlier experiments used p
 | Examination variation | The original CNN missed positive sampled images in difficult cases **23 and 25** at this workload | Pooled results conceal failures |
 | Locked Galar 11–20 evaluation, complete eligible source inputs | Score-bin minus uniform mean annotation-run recall: **−1.27 percentage points** at equal 10% workload | Two wins, two losses and two ties among six positive-run examinations; four zero-positive cases have undefined recall |
 
-See the [source-run audit](docs/GALAR_RUN_COVERAGE_RESULTS.md), [six-examination omission analysis](docs/GALAR_SIX_EXAM_OMISSION_SPAN_RESULTS.md), and [equal-workload source-run robustness study](docs/GALAR_RUN_ROBUSTNESS_RESULTS.md). Negative results are retained.
+See the [source-run audit](docs/GALAR_RUN_COVERAGE_RESULTS.md), [six-examination omission analysis](docs/GALAR_SIX_EXAM_OMISSION_SPAN_RESULTS.md), and [equal-workload source-run robustness study](docs/GALAR_RUN_ROBUSTNESS_RESULTS.md). Negative results are retained. For a concise technical/scientific decision record—including what the AI can and cannot do, independent-validation gaps and release risks—see the [project maturity audit](docs/PROJECT_MATURITY_AUDIT_20261104.md).
 
 The private research inventory includes **11,147 fitting images across 16 examinations**, including independently verified fitting-source additions from Galar 22 and 24. This is not an independently validated patient cohort. The [source acquisition](docs/GALAR_NEGATIVE_22_24_RESULTS.md) and [matched training comparison](docs/GALAR_NEGATIVE_EXPANSION_CV_RESULTS.md) document the evidence and limits. **No clinical model was promoted.**
 
