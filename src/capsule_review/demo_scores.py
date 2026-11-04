@@ -5,6 +5,7 @@ clinical inference. They exercise the real read-only selection and review UI.
 """
 from __future__ import annotations
 
+from .importer import create_demo
 from .models import ModelInfo, Prediction, PredictionImport
 from .prediction_service import DuplicateRunError, save_predictions
 from .store import Store
@@ -78,3 +79,23 @@ def ensure_demo_scores(store: Store, study_id: str) -> dict:
         # Concurrent demo requests may have inserted the identical run.
         pass
     return store.study(study_id)
+
+
+def open_or_create_demo(store: Store, study_id: str | None = None) -> dict:
+    """Open the existing built-in fixture or create it once, then seed demo scores.
+
+    CLI and HTTP use the same path. The optional explicit study_id is validated
+    by ensure_demo_scores, so a clinical or unrelated study cannot be modified.
+    Only metadata for the generated 24-frame fixture are used for discovery.
+    """
+    if study_id is None:
+        with store.connect() as db:
+            row = db.execute(
+                "SELECT id FROM studies WHERE synthetic=1 AND title='Test sequence' "
+                "AND source=? AND frame_count=? ORDER BY created_at, id LIMIT 1",
+                (DEMO_SOURCE, DEMO_FRAMES),
+            ).fetchone()
+            study_id = row["id"] if row else None
+        if study_id is None:
+            study_id = create_demo(store)["id"]
+    return ensure_demo_scores(store, study_id)
