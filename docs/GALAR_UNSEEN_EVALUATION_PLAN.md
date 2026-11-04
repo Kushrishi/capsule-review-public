@@ -182,6 +182,36 @@ handling. Neither labels nor image outcomes were used to choose a revision;
 no amendment has been adopted in this execution. The frozen evaluation
 remains **not run** and the authors' 61–80 remain unopened.
 
+## Outcome-concealed eligibility resolution — November 4, amendment A1
+
+The [dated amendment](GALAR_ELIGIBILITY_AMENDMENT_20261104.md) and its
+synthetic-tested worker were committed at
+`1231f6113aa1ce9a56d398b914da3b7b0f2723f6` **before** corrected 11–20
+CSV payloads were processed. In a separate `python -I -S` process, only source
+identifiers and binary-label availability were projected; `0` and `1` were
+mapped identically and no polarity/count was disclosed. Original cell bytes
+necessarily entered transient worker memory. This is a disclosed amendment
+to the earlier CSV-access ordering, not a claim that CSVs remained unprocessed
+or that an independent human custodian held the labels.
+
+The [aggregate](../experiments/galar-unseen-eligibility-20261104/aggregate.json)
+shows **163,161 explicit-binary annotated rows**, no unknown rows, and an exact
+one-to-one identity match to the original PNG listing in all ten examinations,
+including endpoints. Examination 15's inferred internal grid position has
+**no corrected annotation row**. It is not an eligible missing image, so the
+earlier filename-grid coverage stop is resolved without excluding examination
+15, changing N, substituting pixels or modifying the primary endpoint.
+
+The private source gate now accepts an explicitly projected eligible identity
+list in addition to its original contiguous-range mode. It checks every PNG
+against those exact identities; it does not interpolate source positions.
+Source runs still split at every index discontinuity. The master prediction
+commitment must bind the eligibility projection and amendment digests as well
+as the original lock, checkpoint, image hashes and four-policy snapshots.
+Original PNG acquisition/integrity, frozen inference and independently retained
+prediction commitments remain separate gates; this projection proves index
+coverage only. Authors' 61–80 payloads remain unopened.
+
 ## Blockers, not waivable assumptions
 
 The original archive of corrected source labels and dense original images from evaluation examinations 11–20 is **not currently present** in the verified private workspace. The 512-image reference subsets from earlier experiments are not a replacement. No 11–20 source image was inspected or source-label value decoded for this work; no holdout score or test accuracy was calculated, and no claim of superior pathology retrieval is made. A prior archive-integrity-only ZIP-wide CRC check touched protected compressed entries without parsing their label values, was disclosed, and was removed from the evaluation pipeline. **The gate stays closed** until verified acquisition and the frozen blinded scoring sequence can be performed in private compute.

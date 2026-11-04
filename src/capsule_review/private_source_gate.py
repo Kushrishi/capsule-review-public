@@ -68,6 +68,7 @@ def verify_original_pngs(
     expected_first: int,
     expected_last: int,
     expected_count: int,
+    expected_source_frames: list[int] | None = None,
 ) -> tuple[list[int], list[str]]:
     """Rehash/fully decode each PNG, not just trust its supplied checksum.
 
@@ -78,9 +79,19 @@ def verify_original_pngs(
         raise ValueError("Private original-image directory is absent or symlinked.")
     if (type(expected_count) is not int or not 1 <= expected_count <= MAX_FRAMES
         or type(expected_first) is not int or type(expected_last) is not int
-        or expected_first < 0 or expected_last != expected_first + 5 * (expected_count - 1)
+        or expected_first < 0
         or type(records) is not list or len(records) != expected_count):
         raise ValueError("The separately pinned original annotated-position range is incomplete.")
+    if expected_source_frames is None:
+        if expected_last != expected_first + 5 * (expected_count - 1):
+            raise ValueError("The separately pinned original annotated-position range is incomplete.")
+        expected_source_frames = list(range(expected_first, expected_last + 1, 5))
+    elif (type(expected_source_frames) is not list
+          or len(expected_source_frames) != expected_count
+          or any(type(f) is not int or f < 0 for f in expected_source_frames)
+          or expected_source_frames[0] != expected_first or expected_source_frames[-1] != expected_last
+          or any(b <= a or (b - a) % 5 for a, b in zip(expected_source_frames, expected_source_frames[1:]))):
+        raise ValueError("Invalid independently projected eligible source identities.")
     frames: list[int] = []
     hashes: list[str] = []
     used_names: set[str] = set()
@@ -88,7 +99,7 @@ def verify_original_pngs(
         if not isinstance(row, dict) or set(row) != {"frame", "name", "sha256"}:
             raise ValueError("Only source identities may enter the label-blind image manifest.")
         frame, name, claimed = row["frame"], row["name"], row["sha256"]
-        if type(frame) is not int or frame != expected_first + 5 * i:
+        if type(frame) is not int or frame != expected_source_frames[i]:
             raise ValueError("Original annotated source-index completeness check failed.")
         if (not isinstance(name, str) or not 1 <= len(name) <= 240
             or not isinstance(claimed, str) or SHA256.fullmatch(claimed) is None):
@@ -163,6 +174,7 @@ def freeze_private_queues(
     weights_sha256: str,
     protocol_path: Path,
     destination: Path,
+    expected_source_frames: list[int] | None = None,
 ) -> str:
     """Write-once private snapshot; return SHA-256 for EXTERNAL anchoring.
 
@@ -181,6 +193,7 @@ def freeze_private_queues(
     frames, hashes = verify_original_pngs(
         image_root, image_records, expected_first=expected_first,
         expected_last=expected_last, expected_count=expected_count,
+        expected_source_frames=expected_source_frames,
     )
     record, _ = _selection_record(
         frames, hashes, [item["name"] for item in image_records],
@@ -253,6 +266,7 @@ def load_private_queues(
     observed_frames, observed_hashes = verify_original_pngs(
         image_root, rows, expected_first=frames[0],
         expected_last=frames[-1], expected_count=len(frames),
+        expected_source_frames=frames,
     )
     if observed_frames != frames or observed_hashes != hashes:
         raise ValueError("Original source identities differ from the frozen private record.")
