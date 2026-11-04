@@ -470,7 +470,7 @@ function resetPriorityDisplay() {
   $('prioritySelected').textContent = 'No queue';
   $('priorityItems').replaceChildren();
   $('priorityPage').textContent = '';
-  $('priorityComparison').textContent = 'Build a queue to inspect omitted imported spans across all four policies.';
+  $('priorityComparison').textContent = 'Build a queue to inspect omitted imported spans across five policies; the guarded option is experimental.';
   $('prioritySummary').textContent = state.prioritySources.length
     ? 'Choose an exact image count and build a research-only, label-blind queue.'
     : 'Import a model prediction label with a score for every imported image.';
@@ -506,6 +506,7 @@ function renderPriorityComparison(report, expectedStudyId) {
     score: 'Highest model scores',
     score_diverse: 'Score + ordinal separation',
     score_bin: 'Top score per chronology bin',
+    score_guarded: 'Experimental: uniform-gap guarded scores',
     uniform: 'Uniform baseline',
   };
   const holder = $('priorityComparison');
@@ -622,7 +623,7 @@ async function loadPriorityPage(offset = 0) {
       (result.offset + result.items.length).toLocaleString() : '0';
     $('priorityPage').textContent = showing + ' of ' + result.selected_images.toLocaleString();
     if (offset === 0) {
-      $('priorityComparison').textContent = 'Comparing all four policies at equal workload…';
+      $('priorityComparison').textContent = 'Comparing five policies (four original plus one experimental) at equal workload…';
       try {
         const cmpParams = new URLSearchParams({
           run: query.run, label: query.label, selected_count: query.selected_count,
