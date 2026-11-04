@@ -29,7 +29,7 @@ def gap_guarded_positions(scores: list[float], selected_count: int) -> list[int]
     """Experimental score optimization with a *hard ordinal omission guard*.
 
     Start from the exactly-K uniform midpoint set. Reposition each anchor
-    *within its original disjoint chronological bin*, accepting a change
+    *within its anchor-derived disjoint chronological cell*, accepting a change
     only if its score strictly increases and its nearest selected neighbors
     would leave no skipped span longer than the uniform baseline's worst span.
 
@@ -53,11 +53,16 @@ def gap_guarded_positions(scores: list[float], selected_count: int) -> list[int]
     bounds = [-1, *anchors, n]
     allowed_gap = max(bounds[i + 1] - bounds[i] - 1
                       for i in range(len(bounds) - 1))
+    # Boundaries are derived from the *actual* uniform midpoints: for some
+    # N/K ratios those midpoints do not lie in floor(i*N/K) bins. Voronoi
+    # boundaries guarantee that every anchor starts inside its own cell.
+    cuts = [0, *[(anchors[i - 1] + anchors[i] + 1) // 2
+                 for i in range(1, selected_count)], n]
     selected = anchors.copy()
     for direction in (range(selected_count), range(selected_count - 1, -1, -1)):
         for i in direction:
-            low = i * n // selected_count
-            high = (i + 1) * n // selected_count  # exclusive
+            low = cuts[i]
+            high = cuts[i + 1]  # exclusive
             left = selected[i - 1] if i else -1
             right = selected[i + 1] if i + 1 < selected_count else n
             # Never exceed the original uniform maximum skipped ordinal span.
