@@ -105,39 +105,26 @@ UNSEEN_RECEIPT = {
     'full_archive_downloaded': False,
     'pixels_acquired': 0,
 }
-UNSEEN_LISTING = """7-Zip (synthetic metadata listing)
-----------
-Path = archive/11/frame_000005.PNG
-Size = 100
-Packed Size = 40
-Folder = -
-Block = 0
-
-Path = archive/20/frame_000010.PNG
-Size = 150
-Packed Size = 80
-Folder = -
-Block = 1
-
-Path = archive/61/frame_000015.PNG
-Size = 130
-Packed Size = 20
-Folder = -
-Block = 2
-"""
-
+UNSEEN_LISTING = (
+    "7-Zip (synthetic metadata listing)\n----------\n" +
+    "\n\n".join(
+        f"Path = archive/{exam}/frame_{exam * 5:06d}.PNG\n"
+        f"Size = 100\nPacked Size = 40\nFolder = -\nBlock = {exam - 11}"
+        for exam in range(11, 21)
+    )
+)
 
 def test_unseen_11_to_20_listing_is_aggregate_only():
     result = m.summarise(UNSEEN_LISTING, UNSEEN_RECEIPT, source='unseen-11-20')
     assert result['origin_file_id'] == 44725302
     assert result['record_type'] == 'galar-11-20-index-only-block-summary-v1'
-    assert result['image_members_by_exam'] == {'11': 1, '20': 1}
-    assert result['unassigned_image_members'] == 1
+    assert result['image_members_by_exam'] == {str(exam): 1 for exam in range(11, 21)}
+    assert result['unassigned_image_members'] == 0
     assert result['pixels_read'] == 0
     assert result['full_source_checksum_verified'] is False
     assert 'exam21_basename_patterns_only' not in result
     assert 'frame_000005' not in str(result)
-    assert 'frame_000010' not in str(result)
+    assert 'frame_000100' not in str(result)
     assert m.get_exam('frames/11/frame_000005.PNG',
                       allowed_exams=m.EXAMINATIONS_BY_SOURCE['unseen-11-20']) == 11
     assert m.get_exam('frames/61/frame_000005.PNG',
@@ -156,3 +143,19 @@ def test_unseen_layout_refuses_wrong_archive_and_untrusted_receipt():
             m.summarise(UNSEEN_LISTING, altered, source='unseen-11-20')
     with pytest.raises(ValueError, match='Unrecognized'):
         m.summarise(UNSEEN_LISTING, UNSEEN_RECEIPT, source='unknown')
+
+
+
+def test_unseen_index_fails_closed_on_partial_cohort_or_wrong_group():
+    # A plausible source index is insufficient if even one locked exam is absent.
+    missing = UNSEEN_LISTING.replace(
+        "archive/20/frame_000100.PNG", "archive/19/frame_000100.PNG",
+    )
+    with pytest.raises(ValueError, match="missing one or more locked examinations"):
+        m.summarise(missing, UNSEEN_RECEIPT, source="unseen-11-20")
+    # A retained image from any other cohort must never be silently counted.
+    unexpected = UNSEEN_LISTING.replace(
+        "archive/20/frame_000100.PNG", "archive/61/frame_000100.PNG",
+    )
+    with pytest.raises(ValueError, match="unexpected image member"):
+        m.summarise(unexpected, UNSEEN_RECEIPT, source="unseen-11-20")
