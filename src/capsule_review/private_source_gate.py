@@ -127,6 +127,7 @@ def _selection_record(
     hashes: list[str],
     names: list[str],
     scores: list[float],
+    examination_id: int,
     weights_sha256: str,
     protocol_sha256: str,
 ) -> tuple[dict, FrozenQueues]:
@@ -134,6 +135,7 @@ def _selection_record(
     private = {
         "schema_version": 1,
         "purpose": "PRIVATE pre-label queue freeze; not clinical validation",
+        "examination_id": examination_id,
         "protocol_sha256": protocol_sha256,
         "model_weights_sha256_claimed": weights_sha256,
         "source_frames": frames,
@@ -154,6 +156,7 @@ def freeze_private_queues(
     image_root: Path,
     image_records: list[dict],
     scores: list[float],
+    examination_id: int,
     expected_first: int,
     expected_last: int,
     expected_count: int,
@@ -168,6 +171,9 @@ def freeze_private_queues(
     privately before calling this function. No source labels may be supplied.
     """
     spec, protocol_digest = _spec(protocol_path)
+    if (type(examination_id) is not int
+        or examination_id not in spec["scope"]["locked_evaluation_examination_ids"]):
+        raise ValueError("Source examination is outside the locked Galar evaluation cohort.")
     if weights_sha256 != spec["original_model"]["weights_sha256"]:
         raise ValueError("The claimed scoring model differs from the original pinned model.")
     if not isinstance(scores, list) or len(scores) != expected_count:
@@ -178,7 +184,7 @@ def freeze_private_queues(
     )
     record, _ = _selection_record(
         frames, hashes, [item["name"] for item in image_records],
-        scores, weights_sha256, protocol_digest,
+        scores, examination_id, weights_sha256, protocol_digest,
     )
     raw = _canonical(record) + b"\n"
     if len(raw) > MAX_PRIVATE_RECORD_BYTES:
@@ -208,6 +214,7 @@ def load_private_queues(
     expected_snapshot_sha256: str,
     image_root: Path,
     protocol_path: Path,
+    expected_exam: int,
 ) -> FrozenQueues:
     """Verify externally anchored snapshot and rehash ALL original PNG bytes."""
     if not isinstance(expected_snapshot_sha256, str) or SHA256.fullmatch(expected_snapshot_sha256) is None:
@@ -219,7 +226,7 @@ def load_private_queues(
         raise ValueError("Frozen snapshot was changed after its external digest.")
     record = json.loads(raw)
     if not isinstance(record, dict) or set(record) != {
-        "schema_version", "purpose", "protocol_sha256", "model_weights_sha256_claimed",
+        "schema_version", "purpose", "examination_id", "protocol_sha256", "model_weights_sha256_claimed",
         "source_frames", "source_image_sha256", "source_image_names", "model_scores",
         "selection_by_percent", "score_input_commitment_sha256",
     } or record["schema_version"] != 1:
@@ -228,6 +235,9 @@ def load_private_queues(
     if (record["protocol_sha256"] != current_protocol_sha
         or record["model_weights_sha256_claimed"] != spec["original_model"]["weights_sha256"]):
         raise ValueError("The protocol or claimed model changed since the freeze.")
+    if (type(expected_exam) is not int or record["examination_id"] != expected_exam
+        or expected_exam not in spec["scope"]["locked_evaluation_examination_ids"]):
+        raise ValueError("The evaluation examination differs from the frozen private source.")
     frames = record["source_frames"]
     hashes = record["source_image_sha256"]
     names = record["source_image_names"]
@@ -247,7 +257,8 @@ def load_private_queues(
     if observed_frames != frames or observed_hashes != hashes:
         raise ValueError("Original source identities differ from the frozen private record.")
     recalculated, frozen = _selection_record(
-        frames, hashes, names, scores, record["model_weights_sha256_claimed"], current_protocol_sha,
+        frames, hashes, names, scores, expected_exam,
+        record["model_weights_sha256_claimed"], current_protocol_sha,
     )
     if recalculated != record:
         raise ValueError("The frozen source/score policies do not replay exactly.")
@@ -287,6 +298,7 @@ def evaluate_private_snapshot(
     frozen = load_private_queues(
         destination=destination, expected_snapshot_sha256=expected_snapshot_sha256,
         image_root=image_root, protocol_path=protocol_path,
+        expected_exam=exam,
     )
     corrected = load_locked_corrected_csv(labels_zip, exam=exam, protocol_path=protocol_path)
     return evaluate_frozen_queues(frozen, corrected)
