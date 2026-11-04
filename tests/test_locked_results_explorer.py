@@ -17,7 +17,7 @@ WORKLOADS = ("5", "10", "25", "50", "100")
 
 def _projection():
     script = JS.read_text(encoding="utf-8")
-    match = re.search(r"(?m)^const d=(\\{[^\\n]*\\});$", script)
+    match = re.search(r"(?m)^const d=(\{[^\n]*\});$", script)
     assert match, "Aggregate projection must be bundled in an executable same-origin script."
     return json.loads(match.group(1))
 
