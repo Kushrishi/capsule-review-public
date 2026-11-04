@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "status": "Exploratory development; not independent validation",
+  "preanalysis_git_design_commit": "b9be0f9f0fe16e4bf5de32257995693ec05ee021",
+  "source": "Original source-verified private reference image embeddings: Galar fitting 1-8 and examined development 23/25/27",
+  "feature_source": {
+    "backbone": "torchvision MobileNetV3-Small ImageNet IMAGENET1K_V1, frozen",
+    "feature_dim": 576,
+    "full_field_preprocessing": "160x160 bicubic direct resize, ImageNet channel normalization; no center crop",
+    "feature_bank_source_images": 10123,
+    "reference_entries_used": 5632,
+    "feature_sha256": "611ac32ca3b0ada15bba65c5aba564fd2a92bdac4d60d9376af89e429181c9ae",
+    "metadata_sha256": "78fc3b0d9711b675f3ffe802554d28232a58f01abb36acda60849c96c32fa4c2",
+    "backbone_weights_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f"
+  },
+  "fitting": {
+    "base_examinations": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "reference_images_each": 512,
+    "source_fitting_total": 4096,
+    "extra_development_training_examinations_per_fold": 2,
+    "extra_reference_images_each": 512,
+    "matched_fitting_total": 5120,
+    "original_checkpoint_historical_fitting_only_original_1_to_8": true,
+    "matched_fitting_pool_only_methods": [
+      "continued_no_augmentation",
+      "continued_photometric",
+      "frozen_mobilenet_v3_linear_probe"
+    ],
+    "note": "Unchanged original CNN trained on the earlier 4,096-image fitting pool; only two CNN continuations and the pretrained probe share the 5,120-image fold training population."
+  },
+  "pretrained_probe": {
+    "architecture": "frozen MobileNetV3-Small + StandardScaler + L2 LogisticRegression",
+    "regularization_C": 0.1,
+    "class_weight": "balanced",
+    "solver": "lbfgs",
+    "max_iter": 300,
+    "tol": 0.000001,
+    "scaler_fitted_only_training_fold": true,
+    "convergence_warnings_total": 0,
+    "seed": 37,
+    "backbone_finetuned": false,
+    "hyperparameter_search": false
+  },
+  "evaluation": {
+    "examinations": [
+      23,
+      25,
+      27
+    ],
+    "reference_positions_each": 512,
+    "positive_reference_images": {
+      "23": 4,
+      "25": 14,
+      "27": 26
+    },
+    "budgets": [
+      51,
+      128,
+      256
+    ],
+    "metric_units": "ROC-AUC, AP, positive annotated image hits (NOT independent lesions/runs)",
+    "patient_independence_verified": false,
+    "full_video_event_ground_truth": false
+  },
+  "case_results": {
+    "23": {
+      "evaluated_exam": 23,
+      "training_examinations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        25,
+        27
+      ],
+      "training_reference_images": 5120,
+      "training_reference_blood_positive": 279,
+      "positive_reference_images": 4,
+      "pretrained_probe_iterations": 134,
+      "methods": {
+        "original_checkpoint": {
+          "roc_auc": 0.20275590551181102,
+          "average_precision": 0.005947521496875031,
+          "positive_reference_images_hit": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          }
+        },
+        "continued_no_augmentation": {
+          "roc_auc": 0.3203740157480315,
+          "average_precision": 0.006871730075700336,
+          "positive_reference_images_hit": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          }
+        },
+        "continued_photometric": {
+          "roc_auc": 0.4020669291338583,
+          "average_precision": 0.008004045616389205,
+          "positive_reference_images_hit": {
+            "51": 0,
+            "128": 0,
+            "256": 2
+          }
+        },
+        "frozen_mobilenet_v3_linear_probe": {
+          "roc_auc": 0.5925196850393701,
+          "average_precision": 0.013064154155703452,
+          "positive_reference_images_hit": {
+            "51": 0,
+            "128": 1,
+            "256": 2
+          }
+        }
+      }
+    },
+    "25": {
+      "evaluated_exam": 25,
+      "training_examinations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        23,
+        27
+      ],
+      "training_reference_images": 5120,
+      "training_reference_blood_positive": 269,
+      "positive_reference_images": 14,
+      "pretrained_probe_iterations": 132,
+      "methods": {
+        "original_checkpoint": {
+          "roc_auc": 0.30450372920252444,
+          "average_precision": 0.022098069351039404,
+          "positive_reference_images_hit": {
+            "51": 0,
+            "128": 3,
+            "256": 3
+          }
+        },
+        "continued_no_augmentation": {
+          "roc_auc": 0.27997705106138837,
+          "average_precision": 0.023576647799131406,
+          "positive_reference_images_hit": {
+            "51": 2,
+            "128": 3,
+            "256": 3
+          }
+        },
+        "continued_photometric": {
+          "roc_auc": 0.2183017785427424,
+          "average_precision": 0.02020806805403072,
+          "positive_reference_images_hit": {
+            "51": 1,
+            "128": 3,
+            "256": 3
+          }
+        },
+        "frozen_mobilenet_v3_linear_probe": {
+          "roc_auc": 0.6473034997131384,
+          "average_precision": 0.33697652041271636,
+          "positive_reference_images_hit": {
+            "51": 7,
+            "128": 8,
+            "256": 10
+          }
+        }
+      }
+    },
+    "27": {
+      "evaluated_exam": 27,
+      "training_examinations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        23,
+        25
+      ],
+      "training_reference_images": 5120,
+      "training_reference_blood_positive": 257,
+      "positive_reference_images": 26,
+      "pretrained_probe_iterations": 125,
+      "methods": {
+        "original_checkpoint": {
+          "roc_auc": 0.9698480531813864,
+          "average_precision": 0.8655786824370671,
+          "positive_reference_images_hit": {
+            "51": 22,
+            "128": 25,
+            "256": 26
+          }
+        },
+        "continued_no_augmentation": {
+          "roc_auc": 0.9389838556505223,
+          "average_precision": 0.8321064294791228,
+          "positive_reference_images_hit": {
+            "51": 21,
+            "128": 23,
+            "256": 25
+          }
+        },
+        "continued_photometric": {
+          "roc_auc": 0.9571066793289013,
+          "average_precision": 0.8269273630956729,
+          "positive_reference_images_hit": {
+            "51": 21,
+            "128": 24,
+            "256": 26
+          }
+        },
+        "frozen_mobilenet_v3_linear_probe": {
+          "roc_auc": 0.5908515352959798,
+          "average_precision": 0.15745030858096604,
+          "positive_reference_images_hit": {
+            "51": 8,
+            "128": 10,
+            "256": 14
+          }
+        }
+      }
+    }
+  },
+  "aggregate": {
+    "original_checkpoint": {
+      "mean_examination_roc_auc": 0.49236922929857396,
+      "mean_examination_average_precision": 0.29787475776166056,
+      "total_positive_images_hit": {
+        "51": 22,
+        "128": 28,
+        "256": 29
+      }
+    },
+    "continued_no_augmentation": {
+      "mean_examination_roc_auc": 0.5131116408199807,
+      "mean_examination_average_precision": 0.2875182691179849,
+      "total_positive_images_hit": {
+        "51": 23,
+        "128": 26,
+        "256": 28
+      }
+    },
+    "continued_photometric": {
+      "mean_examination_roc_auc": 0.525825129001834,
+      "mean_examination_average_precision": 0.2850464922553643,
+      "total_positive_images_hit": {
+        "51": 22,
+        "128": 27,
+        "256": 31
+      }
+    },
+    "frozen_mobilenet_v3_linear_probe": {
+      "mean_examination_roc_auc": 0.6102249066828295,
+      "mean_examination_average_precision": 0.1691636610497953,
+      "total_positive_images_hit": {
+        "51": 15,
+        "128": 19,
+        "256": 26
+      }
+    }
+  },
+  "clinical_validity": false,
+  "model_promoted": false,
+  "clinical_review_time_measured": false,
+  "galar_locked_11_20_reused": false,
+  "galar_reserved_61_80_opened": false,
+  "privacy": {
+    "individual_frames_included": false,
+    "per_image_labels_included": false,
+    "per_frame_predictions_included": false,
+    "trained_coefficients_included": false,
+    "clinical_pixels_included": false,
+    "original_features_included": false
+  },
+  "limitations": [
+    "Three previously inspected examinations, 4 and 14 positives in two cases",
+    "No full source-chronology positive-annotation-run recall",
+    "ImageNet pretrained probe and compact CNN differ in model architecture, preprocessing, and initial training population",
+    "AUC can increase while average precision and early retrieval deteriorate",
+    "No new independent patient cohort or clinical utility evidence"
+  ]
+}
