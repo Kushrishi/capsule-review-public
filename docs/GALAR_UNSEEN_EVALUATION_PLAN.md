@@ -120,6 +120,68 @@ paths in \`listing.txt\` are private. An index summary is not permission to
 start the frozen evaluation; privately verify each needed source block and
 the complete annotated-position image set first.
 
+## Live publisher index execution — November 4
+
+Executed against the real publisher from source commit
+`37ce32f1d0007b3ad52f3bbef7c9c602e9b38389`; see the
+[non-identifying index aggregate](../experiments/galar-unseen-index-20261104/aggregate.json).
+Fresh official API metadata matched both pinned archive records. The image
+archive probe transferred **1,620,989 bytes**, with strict HTTP 206 ranges,
+the 7z signature and start/next-header CRCs verified. Official 7-Zip 25.01
+decoded the complete metadata listing successfully. No original PNG was
+decompressed, no corrected-label value was opened, and no CNN inference or
+locked outcome evaluation was performed. The full archive MD5 is unverified.
+
+| Examination | PNG members | Required solid blocks | Missing internal +5-grid positions |
+| --- | ---: | --- | ---: |
+| 11 | 24,351 | 0, 1 | 0 |
+| 12 | 17,744 | 1, 2, 3 | 0 |
+| 13 | 4,056 | 3 | 0 |
+| 14 | 5,375 | 3 | 0 |
+| 15 | 11,510 | 3, 4 | 1 |
+| 16 | 17,451 | 4, 5 | 0 |
+| 17 | 27,747 | 5, 6, 7 | 0 |
+| 18 | 12,044 | 7, 8 | 0 |
+| 19 | 29,384 | 8, 9, 10 | 0 |
+| 20 | 13,499 | 10, 11 | 0 |
+
+All **163,161** listed PNGs require all **12** solid blocks:
+**40,041,927,480 compressed bytes**, yielding **48,783,602,366 uncompressed
+bytes** including ten nonimage files. Block selection is possible for a
+subset of examinations, but does not materially reduce transfer for the
+complete locked cohort. Keeping the compressed archive and all expanded
+members simultaneously needs about **88.83 GB**, before model/runtime and
+temporary space. A staged block-by-block extraction could reduce peak disk,
+but it has not been executed. No image-block transfer was started.
+
+**Source-eligibility stop:** examination 15 contains one internal +10 index
+jump where the locked source gate requires a complete +5 sequence. The
+other nine have contiguous *internal* filename grids; that alone proves
+neither their endpoints nor binary-label eligibility. The publisher
+catalogue only documents a correction to examination 6; the checked
+publisher description and authors' code README provide no repair for this
+gap or alternate original-image distribution. Do not infer the absent
+position's label, silently drop it, substitute a thumbnail, reduce the
+cohort, or acquire a convenient sample. Resolve source completeness and
+an outcome-blind eligibility/missingness policy before acquisition. Keep
+the exact missing source identity in the private index record only.
+
+The retained original model package and all three model-member checksums
+matched the lock. The real preflight exposed a metadata comparison bug:
+the original metrics file describes the architecture as
+`capsule-cnn-v1, 2-class blood vs blood-not-annotated`, whereas model metadata
+uses `capsule-cnn-v1`. The preflight now compares each exact original
+description and passes on the pinned private package, without changing
+weights, protocol, preprocessing or cohort. Synthetic tests retain
+fail-closed checks for changed descriptions and hashes.
+
+The next executable scientific gate is a publisher-supported, identity-only
+resolution of the missing source position and eligible population, or a
+dated pre-outcome protocol amendment with explicit coverage-failure
+handling. Neither labels nor image outcomes were used to choose a revision;
+no amendment has been adopted in this execution. The frozen evaluation
+remains **not run** and the authors' 61–80 remain unopened.
+
 ## Blockers, not waivable assumptions
 
 The original archive of corrected source labels and dense original images from evaluation examinations 11–20 is **not currently present** in the verified private workspace. The 512-image reference subsets from earlier experiments are not a replacement. No 11–20 source image was inspected or source-label value decoded for this work; no holdout score or test accuracy was calculated, and no claim of superior pathology retrieval is made. A prior archive-integrity-only ZIP-wide CRC check touched protected compressed entries without parsing their label values, was disclosed, and was removed from the evaluation pipeline. **The gate stays closed** until verified acquisition and the frozen blinded scoring sequence can be performed in private compute.

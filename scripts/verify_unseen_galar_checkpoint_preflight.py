@@ -20,6 +20,9 @@ DEV = (9, 10)
 UNSEEN = tuple(range(11, 21))
 AUTHOR_RESERVED = tuple(range(61, 81))
 METHODS = ("uniform", "score", "score_diverse", "score_bin")
+# The checksum-pinned original metrics describes the task as well as the
+# architecture; model/model.json stores the architecture identifier alone.
+METRICS_ARCHITECTURE = "capsule-cnn-v1, 2-class blood vs blood-not-annotated"
 
 
 def file_sha256(path: Path, expected_bytes: int) -> str:
@@ -87,7 +90,7 @@ def audit_package(archive: Path, spec: dict) -> dict:
         or metadata.get("selected_epoch") != model["checkpoint_epoch"]
         or metadata.get("classes") != ["blood label absent", "blood label present"]
         or metrics.get("weights_sha256") != model["weights_sha256"]
-        or metrics.get("architecture") != model["architecture"]
+        or metrics.get("architecture") != METRICS_ARCHITECTURE
         or metrics.get("fitting_examinations") != list(TRAIN)
         or metrics.get("development_examinations") != list(DEV)
         or metrics.get("future_unopened_evaluation_examinations") != list(UNSEEN)

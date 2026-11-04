@@ -1,0 +1,247 @@
+{
+  "acquisition_gate": "STOP: binary-label eligibility is not independently established; one internal +5-grid position is absent in exam 15. Resolve source completeness and missingness before image acquisition or outcome access.",
+  "actual_index_bytes_transferred": 1620989,
+  "all_internal_source_grids_contiguous": false,
+  "archive_bytes": 40043548469,
+  "blocks": [
+    {
+      "block_id": 0,
+      "compressed_bytes": 3603552902,
+      "examinations": {
+        "11": 13004
+      },
+      "image_count": 13004,
+      "member_count": 13004,
+      "uncompressed_bytes": 4294871227
+    },
+    {
+      "block_id": 1,
+      "compressed_bytes": 3619554948,
+      "examinations": {
+        "11": 11347,
+        "12": 539
+      },
+      "image_count": 11886,
+      "member_count": 11887,
+      "uncompressed_bytes": 4294949521
+    },
+    {
+      "block_id": 2,
+      "compressed_bytes": 3519687043,
+      "examinations": {
+        "12": 14282
+      },
+      "image_count": 14282,
+      "member_count": 14282,
+      "uncompressed_bytes": 4294881770
+    },
+    {
+      "block_id": 3,
+      "compressed_bytes": 3508781739,
+      "examinations": {
+        "12": 2923,
+        "13": 4056,
+        "14": 5375,
+        "15": 2159
+      },
+      "image_count": 14513,
+      "member_count": 14516,
+      "uncompressed_bytes": 4294875664
+    },
+    {
+      "block_id": 4,
+      "compressed_bytes": 3457038343,
+      "examinations": {
+        "15": 9351,
+        "16": 6816
+      },
+      "image_count": 16167,
+      "member_count": 16168,
+      "uncompressed_bytes": 4294559395
+    },
+    {
+      "block_id": 5,
+      "compressed_bytes": 3470674875,
+      "examinations": {
+        "16": 10635,
+        "17": 5466
+      },
+      "image_count": 16101,
+      "member_count": 16102,
+      "uncompressed_bytes": 4294653047
+    },
+    {
+      "block_id": 6,
+      "compressed_bytes": 3605678129,
+      "examinations": {
+        "17": 13189
+      },
+      "image_count": 13189,
+      "member_count": 13189,
+      "uncompressed_bytes": 4294670406
+    },
+    {
+      "block_id": 7,
+      "compressed_bytes": 3459128000,
+      "examinations": {
+        "17": 9092,
+        "18": 5979
+      },
+      "image_count": 15071,
+      "member_count": 15072,
+      "uncompressed_bytes": 4294839157
+    },
+    {
+      "block_id": 8,
+      "compressed_bytes": 3487644650,
+      "examinations": {
+        "18": 6065,
+        "19": 8348
+      },
+      "image_count": 14413,
+      "member_count": 14414,
+      "uncompressed_bytes": 4294913455
+    },
+    {
+      "block_id": 9,
+      "compressed_bytes": 3553696836,
+      "examinations": {
+        "19": 13866
+      },
+      "image_count": 13866,
+      "member_count": 13866,
+      "uncompressed_bytes": 4294959887
+    },
+    {
+      "block_id": 10,
+      "compressed_bytes": 3519796146,
+      "examinations": {
+        "19": 7170,
+        "20": 7670
+      },
+      "image_count": 14840,
+      "member_count": 14841,
+      "uncompressed_bytes": 4294805254
+    },
+    {
+      "block_id": 11,
+      "compressed_bytes": 1236693869,
+      "examinations": {
+        "20": 5829
+      },
+      "image_count": 5829,
+      "member_count": 5830,
+      "uncompressed_bytes": 1540623583
+    }
+  ],
+  "cnn_inference_performed": false,
+  "corrected_label_values_opened": false,
+  "decoded_index_listing_7zip_exit_code": 0,
+  "eligible_binary_label_population_verified": false,
+  "execution_date": "2026-11-04",
+  "full_source_checksum_verified": false,
+  "http_206_and_exact_ranges_verified": true,
+  "image_members_by_exam": {
+    "11": 24351,
+    "12": 17744,
+    "13": 4056,
+    "14": 5375,
+    "15": 11510,
+    "16": 17451,
+    "17": 27747,
+    "18": 12044,
+    "19": 29384,
+    "20": 13499
+  },
+  "interpretation": "Index-only candidate; compressed block sizes are not verified pixel bytes or complete source acquisition.",
+  "locked_outcome_analysis_performed": false,
+  "model_package_and_three_member_hashes_verified": true,
+  "origin_file_id": 44725302,
+  "original_model_preflight_passed_after_metadata_comparison_fix": true,
+  "other_file_members": 10,
+  "pixels_read": 0,
+  "record_type": "galar-11-20-index-only-block-summary-v1",
+  "required_blocks_for_all_listed_images": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "required_compressed_bytes_for_all_listed_images": 40041927480,
+  "signature_and_start_and_next_header_crc_verified": true,
+  "source_commit": "37ce32f1d0007b3ad52f3bbef7c9c602e9b38389",
+  "source_coverage_limit": "Index continuity checks internal filename positions only; endpoints and binary-label eligibility remain unverified. Gaps cannot be silently excluded or interpolated.",
+  "source_image_blocks_transferred": 0,
+  "source_index_coverage_by_exam": {
+    "11": {
+      "contiguous_internal_plus5_grid": true,
+      "internal_gap_count": 0,
+      "missing_internal_grid_positions": 0,
+      "unique_image_members": 24351
+    },
+    "12": {
+      "contiguous_internal_plus5_grid": true,
+      "internal_gap_count": 0,
+      "missing_internal_grid_positions": 0,
+      "unique_image_members": 17744
+    },
+    "13": {
+      "contiguous_internal_plus5_grid": true,
+      "internal_gap_count": 0,
+      "missing_internal_grid_positions": 0,
+      "unique_image_members": 4056
+    },
+    "14": {
+      "contiguous_internal_plus5_grid": true,
+      "internal_gap_count": 0,
+      "missing_internal_grid_positions": 0,
+      "unique_image_members": 5375
+    },
+    "15": {
+      "contiguous_internal_plus5_grid": false,
+      "internal_gap_count": 1,
+      "missing_internal_grid_positions": 1,
+      "unique_image_members": 11510
+    },
+    "16": {
+      "contiguous_internal_plus5_grid": true,
+      "internal_gap_count": 0,
+      "missing_internal_grid_positions": 0,
+      "unique_image_members": 17451
+    },
+    "17": {
+      "contiguous_internal_plus5_grid": true,
+      "internal_gap_count": 0,
+      "missing_internal_grid_positions": 0,
+      "unique_image_members": 27747
+    },
+    "18": {
+      "contiguous_internal_plus5_grid": true,
+      "internal_gap_count": 0,
+      "missing_internal_grid_positions": 0,
+      "unique_image_members": 12044
+    },
+    "19": {
+      "contiguous_internal_plus5_grid": true,
+      "internal_gap_count": 0,
+      "missing_internal_grid_positions": 0,
+      "unique_image_members": 29384
+    },
+    "20": {
+      "contiguous_internal_plus5_grid": true,
+      "internal_gap_count": 0,
+      "missing_internal_grid_positions": 0,
+      "unique_image_members": 13499
+    }
+  },
+  "total_compression_blocks": 12,
+  "unassigned_image_members": 0
+}

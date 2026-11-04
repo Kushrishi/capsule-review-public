@@ -16,7 +16,8 @@ from scripts import verify_unseen_galar_checkpoint_preflight as gate
 SPEC = Path(__file__).resolve().parents[1] / "docs/GALAR_UNSEEN_11_20_EVALUATION_LOCK.json"
 
 
-def _synthetic_archive(tmp_path: Path, *, model_epoch=8, fitted=None):
+def _synthetic_archive(tmp_path: Path, *, model_epoch=8, fitted=None,
+                       metrics_architecture="capsule-cnn-v1, 2-class blood vs blood-not-annotated"):
     spec = copy.deepcopy(json.loads(SPEC.read_text(encoding="utf-8")))
     model = spec["original_model"]
     weights = b"not a real checkpoint; generated test fixture"
@@ -32,7 +33,7 @@ def _synthetic_archive(tmp_path: Path, *, model_epoch=8, fitted=None):
     }
     metrics = {
         "weights_sha256": sha,
-        "architecture": model["architecture"],
+        "architecture": metrics_architecture,
         "fitting_examinations": fitted if fitted is not None else list(gate.TRAIN),
         "development_examinations": list(gate.DEV),
         "future_unopened_evaluation_examinations": list(gate.UNSEEN),
@@ -95,6 +96,15 @@ def test_any_changed_model_zip_fails_closed(tmp_path):
     changed[-1] ^= 1  # Keep exact size; force the SHA-256 check to detect mutation.
     package.write_bytes(changed)
     with pytest.raises(ValueError, match="checksum"):
+        gate.audit_package(package, spec)
+
+
+@pytest.mark.parametrize("architecture", [
+    "capsule-cnn-v1", "capsule-cnn-v2, 2-class blood vs blood-not-annotated",
+])
+def test_different_metrics_architecture_fails_even_with_matching_hashes(tmp_path, architecture):
+    package, spec = _synthetic_archive(tmp_path, metrics_architecture=architecture)
+    with pytest.raises(ValueError, match="provenance"):
         gate.audit_package(package, spec)
 
 
