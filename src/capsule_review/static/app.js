@@ -1,5 +1,6 @@
 'use strict';
 const $ = (id) => document.getElementById(id);
+const SYNTHETIC_DEMO_RUN_ID = 'capsule-review-synthetic-demo-v1';
 const state = {token: '', studies: [], study: null, frame: null, dirty: false, busy: false,
   saving: false, switching: false, modelBusy: false, auditBusy: false, models: [], playing: false, timer: null, files: [], thumbsStart: -1, thumbsData: [], sourceCoverage: null,
   intervals: [], intervalStart: null, savedFrameCount: 0, savedPositions: [],
@@ -29,6 +30,7 @@ function syncControls() {
   $('priorityPrev').disabled = priorityBlocked || !state.priorityData || state.priorityData.offset === 0;
   $('priorityNext').disabled = priorityBlocked || !state.priorityData ||
     state.priorityData.offset + state.priorityData.items.length >= state.priorityData.selected_images;
+  $('syntheticQueueBtn').disabled = priorityBlocked;
 }
 
 function announce(message) { $('toast').textContent = message; $('toast').hidden = false;
@@ -123,6 +125,12 @@ async function selectStudy(id) {
   $('emptyState').hidden = true; $('examination').hidden = false;
   $('studyTitle').textContent = state.study.title; $('sourceText').textContent = state.study.source;
   $('syntheticBanner').hidden = !state.study.synthetic;
+  const hasDemoScores = state.study.synthetic &&
+    state.study.runs.some(run => run.model.run_id === SYNTHETIC_DEMO_RUN_ID);
+  $('syntheticGuide').hidden = !hasDemoScores;
+  $('syntheticBanner').textContent = hasDemoScores
+    ? 'Generated synthetic frames AND example scores · not AI inference or clinical evidence'
+    : 'Synthetic test sequence · not clinical data';
   $('scrubber').max = state.study.frame_count - 1; $('jumpInput').max = state.study.frame_count;
   $('predictionImportBtn').disabled = false; $('referencePanel').open = false;
   for (const id of ['bookmark', 'reviewLabel', 'reviewNote']) $(id).disabled = false;
@@ -202,17 +210,26 @@ function renderPredictions() {
   if (!rows.length) {$('predictions').append(textElement('p', state.study.runs.length ? 'No imported predictions for this frame.' : 'No model connected. No predictions are being generated.', 'muted')); return;}
   for (const prediction of rows) {
     const row = textElement('div', '', 'prediction');
-    row.append(textElement('strong', `${prediction.label} · score ${prediction.score.toFixed(3)}`),
+    const example = state.study.synthetic && prediction.model.run_id === SYNTHETIC_DEMO_RUN_ID;
+    row.append(textElement('strong', `${prediction.label} · ${example ? 'generated value' : 'score'} ${prediction.score.toFixed(3)}`),
       textElement('small', prediction.model.name));
     const details = document.createElement('details');
-    details.append(textElement('summary', 'Model details'),
+    details.append(textElement('summary', example ? 'Fixture details' : 'Model details'),
       textElement('small', `${prediction.model.version} · ${prediction.model.run_id}`));
     if (prediction.model.description) details.append(textElement('small', prediction.model.description));
     row.append(details);
-    const copy = textElement('button', 'Use as reviewer label', 'quiet compact');
-    copy.addEventListener('click', () => {$('reviewLabel').value = prediction.label; markDirty();}); row.append(copy); $('predictions').append(row);
+    if (!example) {
+      const copy = textElement('button', 'Use as reviewer label', 'quiet compact');
+      copy.addEventListener('click', () => {$('reviewLabel').value = prediction.label; markDirty();});
+      row.append(copy);
+    }
+    $('predictions').append(row);
   }
-  $('predictions').append(textElement('p', 'Model scores are not diagnostic certainty. Suggestions do not change your notes.', 'panel-hint'));
+  $('predictions').append(textElement('p',
+    state.study.synthetic && rows.some(p => p.model.run_id === SYNTHETIC_DEMO_RUN_ID)
+      ? 'Generated example values demonstrate queue mechanics only. No model was run and no medical outcomes exist.'
+      : 'Model scores are not diagnostic certainty. Suggestions do not change your notes.',
+    'panel-hint'));
 }
 function renderExportEvidence() {
   if (!state.study) return;
@@ -380,8 +397,11 @@ $('importForm').addEventListener('submit', async (event) => {
 });
 $('demoBtn').addEventListener('click', async () => {
   stopPlayback(); $('demoBtn').disabled = true;
-  try {const existing = state.studies.find(s => s.synthetic); const study = existing || await api('/api/demo', {method:'POST'});
-    await selectStudy(study.id); announce('Synthetic test sequence. No clinical data or model predictions.');
+  try {const existing = state.studies.find(s => s.synthetic && s.title === 'Test sequence' &&
+       s.source === 'Generated software-test images' && s.frame_count === 24);
+     const path = existing ? '/api/demo?study_id=' + encodeURIComponent(existing.id) : '/api/demo';
+     const study = await api(path, {method:'POST'});
+    await selectStudy(study.id); announce('Nonmedical test sequence loaded with generated score examples, not AI predictions.');
   } catch (e) {fail(e);} finally {$('demoBtn').disabled = false;}
 });
 $('auditBtn').addEventListener('click', async () => {
@@ -475,7 +495,9 @@ async function loadPriorityRuns() {
   }
   $('priorityCount').max = String(state.study.frame_count);
   // No fixed 10% quota, forced shortlist or hidden review-workload cap.
-  $('priorityCount').value = String(state.study.frame_count);
+  $('priorityCount').value = String(
+    state.study.runs.some(run => run.model.run_id === SYNTHETIC_DEMO_RUN_ID)
+      ? 6 : state.study.frame_count);
   resetPriorityDisplay();
 }
 function renderPriorityComparison(report, expectedStudyId) {
@@ -561,7 +583,7 @@ async function loadPriorityPage(offset = 0) {
       query = state.priorityQuery;
     }
     state.priorityBusy = true; syncControls(); clearError();
-    $('prioritySummary').textContent = 'Calculating a label-blind review queue from saved model scores…';
+    $('prioritySummary').textContent = 'Calculating a label-blind review queue from saved scores…';
     const params = new URLSearchParams({...query, offset, page_size: 20});
     const result = await api('/api/studies/' + studyId + '/priority?' + params);
     if (state.study?.id !== studyId) return;
@@ -576,6 +598,8 @@ async function loadPriorityPage(offset = 0) {
       coverage.maximum_nearest_selected_imported_positions + ' versus ' +
       uniform.maximum_nearest_selected_imported_positions + ' with equal-K uniform. ' +
       'No pathology labels were consulted; no bookmarks or reviewer labels were changed.';
+    const generatedExample = result.model_name === 'Generated ranking example (not AI)';
+    if (generatedExample) message += ' These are deterministic generated examples, not AI predictions.';
     if (result.scores_constant) message += ' Warning: all model scores are identical, so ordering is uninformative.';
     $('prioritySummary').textContent = message;
     $('priorityItems').replaceChildren();
@@ -584,7 +608,7 @@ async function loadPriorityPage(offset = 0) {
       button.append(
         textElement('strong', '#' + item.rank.toLocaleString() +
           ' · Imported frame ' + (item.position + 1).toLocaleString()),
-        textElement('small', 'Model score ' + Number(item.score).toFixed(3) +
+        textElement('small', (generatedExample ? 'Generated example ' : 'Model score ') + Number(item.score).toFixed(3) +
           (result.method === 'uniform' ? ' · not used to select this frame' : '') +
           ' · Open frame without auto-saving')
       );
@@ -627,6 +651,13 @@ for (const id of ['prioritySource', 'priorityCount', 'priorityMethod']) {
   $(id).addEventListener('change', resetPriorityDisplay);
 }
 $('priorityBuild').addEventListener('click', () => loadPriorityPage(0));
+$('syntheticQueueBtn').addEventListener('click', () => {
+  if (!state.study?.synthetic || !state.prioritySources.length || state.priorityBusy) return;
+  $('priorityCount').value = '6';
+  $('priorityMethod').value = 'score';
+  resetPriorityDisplay();
+  loadPriorityPage(0).catch(fail);
+});
 $('priorityPrev').addEventListener('click', () => {
   if (state.priorityData) loadPriorityPage(Math.max(0, state.priorityData.offset - 20));
 });

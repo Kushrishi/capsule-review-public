@@ -35,6 +35,10 @@
         <p id="exportEvidenceSummary" class="panel-hint" role="status" aria-live="polite">Nothing selected for export.</p>
         <p id="auditReport" class="evidence-audit" role="status" aria-live="polite" hidden></p>
         <div id="syntheticBanner" class="synthetic-banner" hidden>Synthetic test sequence · not clinical data</div>
+        <section id="syntheticGuide" class="synthetic-guide" aria-label="Generated-score demonstration" hidden>
+          <div><strong>Try a complete review-queue demo</strong><p>All 24 frames and scores are generated for software testing. No AI model, medical labels, or private images are involved. Compare six selected frames across four methods; the generated high scores deliberately cluster together.</p></div>
+          <button id="syntheticQueueBtn" class="outline compact" type="button">Compare six-image queues</button>
+        </section>
         <div class="viewer-meta"><span id="frameCounter"></span><span id="sourceIndex"></span><button class="quiet compact" id="zoomBtn" aria-pressed="false">Fit / 2×</button></div>
         <div class="image-stage" id="imageStage"><img id="frameImage" alt="Current examination frame"><span class="image-loading" id="imageLoading" hidden>Loading frame…</span></div>
         <div class="playback">
