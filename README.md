@@ -39,19 +39,20 @@ For details, see the [review workflow](docs/RESEARCH_REVIEW_QUEUE.md), [evidence
 
 ## What we have learned
 
-The software works; the biomedical evidence is mixed. These results come from **previously examined** research material, not independent clinical testing.
+The software works; the biomedical evidence is mixed. Earlier experiments used previously examined material. A completed, locked Galar 11–20 study adds examination-level evidence; no clinical validation is established.
 
 | Observation | Result | Interpretation |
 | --- | --- | --- |
 | Sparse source-reference ceiling | Only **110 of 283** original blood-positive annotation runs were represented by the 512-image references across eight examined cases | Better ranking cannot recover source intervals absent from its input |
 | Highest-CNN-score ranking at 51/512 images per case | **95** labelled-positive images across six examined cases, versus **27** for uniform | Image hits alone are not distinct-run recall; score ranking left much larger unselected spans |
 | Examination variation | The original CNN missed positive sampled images in difficult cases **23 and 25** at this workload | Pooled results conceal failures |
+| Locked Galar 11–20 evaluation, complete eligible source inputs | Score-bin minus uniform mean annotation-run recall: **−1.27 percentage points** at equal 10% workload | Two wins, two losses and two ties among six positive-run examinations; four zero-positive cases have undefined recall |
 
 See the [source-run audit](docs/GALAR_RUN_COVERAGE_RESULTS.md), [six-examination omission analysis](docs/GALAR_SIX_EXAM_OMISSION_SPAN_RESULTS.md), and [equal-workload source-run robustness study](docs/GALAR_RUN_ROBUSTNESS_RESULTS.md). Negative results are retained.
 
 The private research inventory includes **11,147 fitting images across 16 examinations**, including independently verified fitting-source additions from Galar 22 and 24. This is not an independently validated patient cohort. The [source acquisition](docs/GALAR_NEGATIVE_22_24_RESULTS.md) and [matched training comparison](docs/GALAR_NEGATIVE_EXPANSION_CV_RESULTS.md) document the evidence and limits. **No clinical model was promoted.**
 
-**Next scientific question:** On previously unopened Galar examinations 11–20, can a frozen original blood-score model preserve more *distinct corrected-label positive annotation runs* than uniform sampling at equal workload? The protocol and checkpoint are frozen, but the complete eligible original images and corrected labels have not yet been acquired and evaluated. The authors' reserved examinations **61–80** remain unopened. Read the [locked evaluation plan](docs/GALAR_UNSEEN_EVALUATION_PLAN.md) and [research issue](https://github.com/Kushrishi/capsule-review-public/issues/24). Neither annotation runs nor positive frames are confirmed distinct lesions.
+**Locked evaluation completed November 4:** All **163,161 eligible original images** from examinations **11–20** were acquired, source-verified and scored with the original frozen CNN. Predictions and all review queues were privately retained and externally committed before analyst blood-outcome access, following a disclosed outcome-concealed eligibility amendment. At equal 10% workload, score-bin averaged **49.35%** positive annotation-run recall versus **50.62%** for uniform. The primary result does **not demonstrate improvement**. Read the [complete results and failures](docs/GALAR_UNSEEN_11_20_RESULTS.md), [original design](docs/GALAR_UNSEEN_EVALUATION_PLAN.md) and [research issue](https://github.com/Kushrishi/capsule-review-public/issues/24). The authors' reserved **61–80** remain unopened. Annotation runs are not confirmed distinct lesions, and patient independence and actual reading-time benefit are unverified.
 
 ## Project map
 

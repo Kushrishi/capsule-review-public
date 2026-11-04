@@ -1,0 +1,4388 @@
+{
+  "authors_reserved_61_to_80_opened": false,
+  "budget_summary": {
+    "10": {
+      "policies": {
+        "score": {
+          "maximum_largest_unselected_imported_span": 9129,
+          "mean_defined_examination_run_recall": 0.24735656833333333,
+          "pooled_annotation_runs_hit": 28,
+          "positive_annotated_images_hit": 305
+        },
+        "score_bin": {
+          "maximum_largest_unselected_imported_span": 18,
+          "mean_defined_examination_run_recall": 0.4935096033333333,
+          "pooled_annotation_runs_hit": 64,
+          "positive_annotated_images_hit": 174
+        },
+        "score_diverse": {
+          "maximum_largest_unselected_imported_span": 3566,
+          "mean_defined_examination_run_recall": 0.43300513333333335,
+          "pooled_annotation_runs_hit": 62,
+          "positive_annotated_images_hit": 199
+        },
+        "uniform": {
+          "maximum_largest_unselected_imported_span": 10,
+          "mean_defined_examination_run_recall": 0.5061783683333333,
+          "pooled_annotation_runs_hit": 63,
+          "positive_annotated_images_hit": 170
+        }
+      },
+      "selected_images_all_examinations": 16316
+    },
+    "100": {
+      "policies": {
+        "score": {
+          "maximum_largest_unselected_imported_span": 0,
+          "mean_defined_examination_run_recall": 1.0,
+          "pooled_annotation_runs_hit": 154,
+          "positive_annotated_images_hit": 1742
+        },
+        "score_bin": {
+          "maximum_largest_unselected_imported_span": 0,
+          "mean_defined_examination_run_recall": 1.0,
+          "pooled_annotation_runs_hit": 154,
+          "positive_annotated_images_hit": 1742
+        },
+        "score_diverse": {
+          "maximum_largest_unselected_imported_span": 0,
+          "mean_defined_examination_run_recall": 1.0,
+          "pooled_annotation_runs_hit": 154,
+          "positive_annotated_images_hit": 1742
+        },
+        "uniform": {
+          "maximum_largest_unselected_imported_span": 0,
+          "mean_defined_examination_run_recall": 1.0,
+          "pooled_annotation_runs_hit": 154,
+          "positive_annotated_images_hit": 1742
+        }
+      },
+      "selected_images_all_examinations": 163161
+    },
+    "25": {
+      "policies": {
+        "score": {
+          "maximum_largest_unselected_imported_span": 9121,
+          "mean_defined_examination_run_recall": 0.40547614833333334,
+          "pooled_annotation_runs_hit": 78,
+          "positive_annotated_images_hit": 714
+        },
+        "score_bin": {
+          "maximum_largest_unselected_imported_span": 6,
+          "mean_defined_examination_run_recall": 0.816730525,
+          "pooled_annotation_runs_hit": 103,
+          "positive_annotated_images_hit": 441
+        },
+        "score_diverse": {
+          "maximum_largest_unselected_imported_span": 2590,
+          "mean_defined_examination_run_recall": 0.589137475,
+          "pooled_annotation_runs_hit": 101,
+          "positive_annotated_images_hit": 485
+        },
+        "uniform": {
+          "maximum_largest_unselected_imported_span": 3,
+          "mean_defined_examination_run_recall": 0.7216240833333334,
+          "pooled_annotation_runs_hit": 101,
+          "positive_annotated_images_hit": 435
+        }
+      },
+      "selected_images_all_examinations": 40792
+    },
+    "5": {
+      "policies": {
+        "score": {
+          "maximum_largest_unselected_imported_span": 13811,
+          "mean_defined_examination_run_recall": 0.07932154,
+          "pooled_annotation_runs_hit": 11,
+          "positive_annotated_images_hit": 212
+        },
+        "score_bin": {
+          "maximum_largest_unselected_imported_span": 38,
+          "mean_defined_examination_run_recall": 0.42447877666666667,
+          "pooled_annotation_runs_hit": 39,
+          "positive_annotated_images_hit": 87
+        },
+        "score_diverse": {
+          "maximum_largest_unselected_imported_span": 3566,
+          "mean_defined_examination_run_recall": 0.2931272916666667,
+          "pooled_annotation_runs_hit": 43,
+          "positive_annotated_images_hit": 103
+        },
+        "uniform": {
+          "maximum_largest_unselected_imported_span": 20,
+          "mean_defined_examination_run_recall": 0.4235696466666667,
+          "pooled_annotation_runs_hit": 41,
+          "positive_annotated_images_hit": 87
+        }
+      },
+      "selected_images_all_examinations": 8159
+    },
+    "50": {
+      "policies": {
+        "score": {
+          "maximum_largest_unselected_imported_span": 3394,
+          "mean_defined_examination_run_recall": 0.65652212,
+          "pooled_annotation_runs_hit": 117,
+          "positive_annotated_images_hit": 1218
+        },
+        "score_bin": {
+          "maximum_largest_unselected_imported_span": 2,
+          "mean_defined_examination_run_recall": 0.900919085,
+          "pooled_annotation_runs_hit": 126,
+          "positive_annotated_images_hit": 879
+        },
+        "score_diverse": {
+          "maximum_largest_unselected_imported_span": 2590,
+          "mean_defined_examination_run_recall": 0.78783525,
+          "pooled_annotation_runs_hit": 123,
+          "positive_annotated_images_hit": 984
+        },
+        "uniform": {
+          "maximum_largest_unselected_imported_span": 1,
+          "mean_defined_examination_run_recall": 0.8876915716666667,
+          "pooled_annotation_runs_hit": 125,
+          "positive_annotated_images_hit": 865
+        }
+      },
+      "selected_images_all_examinations": 81583
+    }
+  },
+  "clinical_polarity_concealed_until_external_prediction_commitment": true,
+  "clinical_validation": false,
+  "defined_primary_examinations": 6,
+  "eligibility_amendment_sha256": "53d25fe7dca7ffac54cc2126a7b607e1b621275153c6c0c1632d6e3ec666f2b5",
+  "examinations": 10,
+  "external_anchor": {
+    "github_comment_created_at": "2026-11-04T17:40:25Z",
+    "github_comment_url": "https://github.com/Kushrishi/capsule-review-public/issues/24#issuecomment-6637642856",
+    "github_commit": "d9516cff6e296570bd6dbfc3a4b75139106c032e",
+    "private_preoutcome_package_sha256": "3ad6d551e4ac13137e83e406161c1bf005d2754f68bb3880d0f4818db8382d38"
+  },
+  "external_commitment_github_commit": "d9516cff6e296570bd6dbfc3a4b75139106c032e",
+  "independent_policy_budget_audits_passed": 200,
+  "leave_one_defined_examination_out_mean_range": [
+    -0.043773946,
+    0.009797482
+  ],
+  "master_prediction_sha256": "6944ce6348c76ee69ec06138aa10f926a0632710c089222dd7a765c803e90068",
+  "mean_examination_level_score_bin_minus_uniform_run_recall": -0.012668765,
+  "model_tuned_on_evaluation_outcomes": false,
+  "patient_independence_verified": false,
+  "per_examination": {
+    "11": {
+      "annotation_runs_are_not_lesions": true,
+      "clinical_validation": false,
+      "imported_annotated_images": 24351,
+      "independent_patient_validation": false,
+      "original_image_pixels_rehashed_by_this_module": false,
+      "positive_annotated_images": 34,
+      "positive_annotation_runs": 9,
+      "primary_workload_percent": 10,
+      "review_results": [
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.0,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 6108,
+                "mean_nearest_selected_imported_positions": 1299.14245822,
+                "p95_nearest_selected_imported_positions": 4910
+              },
+              "largest_unselected_imported_span": 6108,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.33333333,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 19,
+                "mean_nearest_selected_imported_positions": 6.00669377,
+                "p95_nearest_selected_imported_positions": 14
+              },
+              "largest_unselected_imported_span": 38,
+              "positive_annotated_images_hit": 3,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.11111111,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 776,
+                "mean_nearest_selected_imported_positions": 51.21711634,
+                "p95_nearest_selected_imported_positions": 302
+              },
+              "largest_unselected_imported_span": 1552,
+              "positive_annotated_images_hit": 1,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.11111111,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 10,
+                "mean_nearest_selected_imported_positions": 4.99815203,
+                "p95_nearest_selected_imported_positions": 9
+              },
+              "largest_unselected_imported_span": 19,
+              "positive_annotated_images_hit": 1,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 1218,
+          "review_percent": 5,
+          "score_bin_minus_uniform_run_recall": 0.22222222
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.0,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 6107,
+                "mean_nearest_selected_imported_positions": 870.1387212,
+                "p95_nearest_selected_imported_positions": 4890
+              },
+              "largest_unselected_imported_span": 6107,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.33333333,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9,
+                "mean_nearest_selected_imported_positions": 3.00406554,
+                "p95_nearest_selected_imported_positions": 7
+              },
+              "largest_unselected_imported_span": 18,
+              "positive_annotated_images_hit": 4,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.11111111,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 208,
+                "mean_nearest_selected_imported_positions": 9.15547616,
+                "p95_nearest_selected_imported_positions": 46
+              },
+              "largest_unselected_imported_span": 416,
+              "positive_annotated_images_hit": 1,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.44444444,
+              "distinct_positive_annotation_runs_hit": 4,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 5,
+                "mean_nearest_selected_imported_positions": 2.50010267,
+                "p95_nearest_selected_imported_positions": 5
+              },
+              "largest_unselected_imported_span": 9,
+              "positive_annotated_images_hit": 4,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 0,
+                "6-25": 2
+              }
+            }
+          },
+          "review_images": 2435,
+          "review_percent": 10,
+          "score_bin_minus_uniform_run_recall": -0.11111111
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.11111111,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1748,
+                "mean_nearest_selected_imported_positions": 203.58933925,
+                "p95_nearest_selected_imported_positions": 1140
+              },
+              "largest_unselected_imported_span": 3496,
+              "positive_annotated_images_hit": 3,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.88888889,
+              "distinct_positive_annotation_runs_hit": 8,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3,
+                "mean_nearest_selected_imported_positions": 1.17177939,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 6,
+              "positive_annotated_images_hit": 12,
+              "run_lengths_hit": {
+                "1-5": 5,
+                "26+": 0,
+                "6-25": 3
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.55555556,
+              "distinct_positive_annotation_runs_hit": 5,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 774,
+                "mean_nearest_selected_imported_positions": 35.60613527,
+                "p95_nearest_selected_imported_positions": 211
+              },
+              "largest_unselected_imported_span": 1548,
+              "positive_annotated_images_hit": 7,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 0,
+                "6-25": 3
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.77777778,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 2,
+                "mean_nearest_selected_imported_positions": 0.99995893,
+                "p95_nearest_selected_imported_positions": 2
+              },
+              "largest_unselected_imported_span": 3,
+              "positive_annotated_images_hit": 9,
+              "run_lengths_hit": {
+                "1-5": 4,
+                "26+": 0,
+                "6-25": 3
+              }
+            }
+          },
+          "review_images": 6088,
+          "review_percent": 25,
+          "score_bin_minus_uniform_run_recall": 0.11111111
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.66666667,
+              "distinct_positive_annotation_runs_hit": 6,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 775,
+                "mean_nearest_selected_imported_positions": 37.86554967,
+                "p95_nearest_selected_imported_positions": 220
+              },
+              "largest_unselected_imported_span": 1549,
+              "positive_annotated_images_hit": 14,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 0,
+                "6-25": 3
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.88888889,
+              "distinct_positive_annotation_runs_hit": 8,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.49997947,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 19,
+              "run_lengths_hit": {
+                "1-5": 5,
+                "26+": 0,
+                "6-25": 3
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.66666667,
+              "distinct_positive_annotation_runs_hit": 6,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 775,
+                "mean_nearest_selected_imported_positions": 37.86554967,
+                "p95_nearest_selected_imported_positions": 220
+              },
+              "largest_unselected_imported_span": 1549,
+              "positive_annotated_images_hit": 14,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 0,
+                "6-25": 3
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.66666667,
+              "distinct_positive_annotation_runs_hit": 6,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.49997947,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 1,
+              "positive_annotated_images_hit": 15,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 0,
+                "6-25": 3
+              }
+            }
+          },
+          "review_images": 12176,
+          "review_percent": 50,
+          "score_bin_minus_uniform_run_recall": 0.22222222
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 9,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 34,
+              "run_lengths_hit": {
+                "1-5": 6,
+                "26+": 0,
+                "6-25": 3
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 9,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 34,
+              "run_lengths_hit": {
+                "1-5": 6,
+                "26+": 0,
+                "6-25": 3
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 9,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 34,
+              "run_lengths_hit": {
+                "1-5": 6,
+                "26+": 0,
+                "6-25": 3
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 9,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 34,
+              "run_lengths_hit": {
+                "1-5": 6,
+                "26+": 0,
+                "6-25": 3
+              }
+            }
+          },
+          "review_images": 24351,
+          "review_percent": 100,
+          "score_bin_minus_uniform_run_recall": 0.0
+        }
+      ],
+      "schema_version": 1,
+      "score_identity_commitment_sha256": "bfee7e35dd3c37c6193458e87c76f85c7c7a2ba3fa45a3d165f01a0dede8fb89",
+      "source_run_lengths": {
+        "1-5": 6,
+        "26+": 0,
+        "6-25": 3
+      },
+      "source_type": "original_corrected_annotated_positions_only",
+      "source_zip_and_checkpoint_verified_by_this_module": false
+    },
+    "12": {
+      "annotation_runs_are_not_lesions": true,
+      "clinical_validation": false,
+      "imported_annotated_images": 17744,
+      "independent_patient_validation": false,
+      "original_image_pixels_rehashed_by_this_module": false,
+      "positive_annotated_images": 30,
+      "positive_annotation_runs": 3,
+      "primary_workload_percent": 10,
+      "review_results": [
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.0,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1563,
+                "mean_nearest_selected_imported_positions": 286.46167719,
+                "p95_nearest_selected_imported_positions": 1163
+              },
+              "largest_unselected_imported_span": 2746,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.33333333,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 19,
+                "mean_nearest_selected_imported_positions": 5.96528404,
+                "p95_nearest_selected_imported_positions": 14
+              },
+              "largest_unselected_imported_span": 38,
+              "positive_annotated_images_hit": 1,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.33333333,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 346,
+                "mean_nearest_selected_imported_positions": 17.56396528,
+                "p95_nearest_selected_imported_positions": 95
+              },
+              "largest_unselected_imported_span": 539,
+              "positive_annotated_images_hit": 1,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 10,
+                "mean_nearest_selected_imported_positions": 5.00112714,
+                "p95_nearest_selected_imported_positions": 10
+              },
+              "largest_unselected_imported_span": 20,
+              "positive_annotated_images_hit": 3,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 0,
+                "6-25": 1
+              }
+            }
+          },
+          "review_images": 887,
+          "review_percent": 5,
+          "score_bin_minus_uniform_run_recall": -0.66666667
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.33333333,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 891,
+                "mean_nearest_selected_imported_positions": 125.67904644,
+                "p95_nearest_selected_imported_positions": 567
+              },
+              "largest_unselected_imported_span": 1675,
+              "positive_annotated_images_hit": 5,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.33333333,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9,
+                "mean_nearest_selected_imported_positions": 2.9594229,
+                "p95_nearest_selected_imported_positions": 7
+              },
+              "largest_unselected_imported_span": 18,
+              "positive_annotated_images_hit": 2,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.66666667,
+              "distinct_positive_annotation_runs_hit": 2,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 326,
+                "mean_nearest_selected_imported_positions": 10.63784941,
+                "p95_nearest_selected_imported_positions": 43
+              },
+              "largest_unselected_imported_span": 496,
+              "positive_annotated_images_hit": 4,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.33333333,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 5,
+                "mean_nearest_selected_imported_positions": 2.50056357,
+                "p95_nearest_selected_imported_positions": 5
+              },
+              "largest_unselected_imported_span": 10,
+              "positive_annotated_images_hit": 2,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 1
+              }
+            }
+          },
+          "review_images": 1774,
+          "review_percent": 10,
+          "score_bin_minus_uniform_run_recall": 0.0
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.33333333,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 429,
+                "mean_nearest_selected_imported_positions": 34.89985347,
+                "p95_nearest_selected_imported_positions": 195
+              },
+              "largest_unselected_imported_span": 857,
+              "positive_annotated_images_hit": 15,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.66666667,
+              "distinct_positive_annotation_runs_hit": 2,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3,
+                "mean_nearest_selected_imported_positions": 1.15306583,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 6,
+              "positive_annotated_images_hit": 7,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.33333333,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 108,
+                "mean_nearest_selected_imported_positions": 2.81193643,
+                "p95_nearest_selected_imported_positions": 5
+              },
+              "largest_unselected_imported_span": 216,
+              "positive_annotated_images_hit": 6,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.66666667,
+              "distinct_positive_annotation_runs_hit": 2,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 2,
+                "mean_nearest_selected_imported_positions": 1.0,
+                "p95_nearest_selected_imported_positions": 2
+              },
+              "largest_unselected_imported_span": 3,
+              "positive_annotated_images_hit": 7,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 0,
+                "6-25": 1
+              }
+            }
+          },
+          "review_images": 4436,
+          "review_percent": 25,
+          "score_bin_minus_uniform_run_recall": 0.0
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.66666667,
+              "distinct_positive_annotation_runs_hit": 2,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 338,
+                "mean_nearest_selected_imported_positions": 11.26949955,
+                "p95_nearest_selected_imported_positions": 60
+              },
+              "largest_unselected_imported_span": 516,
+              "positive_annotated_images_hit": 25,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 15,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 17,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 1,
+              "positive_annotated_images_hit": 15,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 0,
+                "6-25": 1
+              }
+            }
+          },
+          "review_images": 8872,
+          "review_percent": 50,
+          "score_bin_minus_uniform_run_recall": 0.0
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 30,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 30,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 30,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 30,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 0,
+                "6-25": 1
+              }
+            }
+          },
+          "review_images": 17744,
+          "review_percent": 100,
+          "score_bin_minus_uniform_run_recall": 0.0
+        }
+      ],
+      "schema_version": 1,
+      "score_identity_commitment_sha256": "c718a99a080b818b7665f87565c57cc1705081fb425c02b6848da848c6cacc6c",
+      "source_run_lengths": {
+        "1-5": 2,
+        "26+": 0,
+        "6-25": 1
+      },
+      "source_type": "original_corrected_annotated_positions_only",
+      "source_zip_and_checkpoint_verified_by_this_module": false
+    },
+    "13": {
+      "annotation_runs_are_not_lesions": true,
+      "clinical_validation": false,
+      "imported_annotated_images": 4056,
+      "independent_patient_validation": false,
+      "original_image_pixels_rehashed_by_this_module": false,
+      "positive_annotated_images": 0,
+      "positive_annotation_runs": 0,
+      "primary_workload_percent": 10,
+      "review_results": [
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 828,
+                "mean_nearest_selected_imported_positions": 223.0433925,
+                "p95_nearest_selected_imported_positions": 727
+              },
+              "largest_unselected_imported_span": 1655,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 19,
+                "mean_nearest_selected_imported_positions": 6.00887574,
+                "p95_nearest_selected_imported_positions": 14
+              },
+              "largest_unselected_imported_span": 38,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 139,
+                "mean_nearest_selected_imported_positions": 13.23890533,
+                "p95_nearest_selected_imported_positions": 61
+              },
+              "largest_unselected_imported_span": 278,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 10,
+                "mean_nearest_selected_imported_positions": 4.99506903,
+                "p95_nearest_selected_imported_positions": 9
+              },
+              "largest_unselected_imported_span": 19,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 203,
+          "review_percent": 5,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 828,
+                "mean_nearest_selected_imported_positions": 188.57618343,
+                "p95_nearest_selected_imported_positions": 727
+              },
+              "largest_unselected_imported_span": 1655,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9,
+                "mean_nearest_selected_imported_positions": 2.93860947,
+                "p95_nearest_selected_imported_positions": 7
+              },
+              "largest_unselected_imported_span": 18,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 139,
+                "mean_nearest_selected_imported_positions": 9.81262327,
+                "p95_nearest_selected_imported_positions": 54
+              },
+              "largest_unselected_imported_span": 278,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 5,
+                "mean_nearest_selected_imported_positions": 2.49753452,
+                "p95_nearest_selected_imported_positions": 5
+              },
+              "largest_unselected_imported_span": 9,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 406,
+          "review_percent": 10,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 305,
+                "mean_nearest_selected_imported_positions": 41.63239645,
+                "p95_nearest_selected_imported_positions": 212
+              },
+              "largest_unselected_imported_span": 610,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3,
+                "mean_nearest_selected_imported_positions": 1.14250493,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 6,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 20,
+                "mean_nearest_selected_imported_positions": 1.25739645,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 39,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 2,
+                "mean_nearest_selected_imported_positions": 1.0,
+                "p95_nearest_selected_imported_positions": 2
+              },
+              "largest_unselected_imported_span": 3,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 1014,
+          "review_percent": 25,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 89,
+                "mean_nearest_selected_imported_positions": 6.33382643,
+                "p95_nearest_selected_imported_positions": 36
+              },
+              "largest_unselected_imported_span": 178,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 1,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 2028,
+          "review_percent": 50,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 4056,
+          "review_percent": 100,
+          "score_bin_minus_uniform_run_recall": null
+        }
+      ],
+      "schema_version": 1,
+      "score_identity_commitment_sha256": "3710d902d346625429ec926e68e1e67bd7d91030b5a908949f5af8891cf7f3f1",
+      "source_run_lengths": {
+        "1-5": 0,
+        "26+": 0,
+        "6-25": 0
+      },
+      "source_type": "original_corrected_annotated_positions_only",
+      "source_zip_and_checkpoint_verified_by_this_module": false
+    },
+    "14": {
+      "annotation_runs_are_not_lesions": true,
+      "clinical_validation": false,
+      "imported_annotated_images": 5375,
+      "independent_patient_validation": false,
+      "original_image_pixels_rehashed_by_this_module": false,
+      "positive_annotated_images": 0,
+      "positive_annotation_runs": 0,
+      "primary_workload_percent": 10,
+      "review_results": [
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1258,
+                "mean_nearest_selected_imported_positions": 223.37432558,
+                "p95_nearest_selected_imported_positions": 990
+              },
+              "largest_unselected_imported_span": 1258,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 19,
+                "mean_nearest_selected_imported_positions": 6.05581395,
+                "p95_nearest_selected_imported_positions": 14
+              },
+              "largest_unselected_imported_span": 38,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 148,
+                "mean_nearest_selected_imported_positions": 13.34995349,
+                "p95_nearest_selected_imported_positions": 58
+              },
+              "largest_unselected_imported_span": 295,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 10,
+                "mean_nearest_selected_imported_positions": 4.99534884,
+                "p95_nearest_selected_imported_positions": 9
+              },
+              "largest_unselected_imported_span": 19,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 269,
+          "review_percent": 5,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 444,
+                "mean_nearest_selected_imported_positions": 93.79069767,
+                "p95_nearest_selected_imported_positions": 310
+              },
+              "largest_unselected_imported_span": 887,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9,
+                "mean_nearest_selected_imported_positions": 3.05730233,
+                "p95_nearest_selected_imported_positions": 7
+              },
+              "largest_unselected_imported_span": 18,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 108,
+                "mean_nearest_selected_imported_positions": 8.35255814,
+                "p95_nearest_selected_imported_positions": 37
+              },
+              "largest_unselected_imported_span": 216,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 5,
+                "mean_nearest_selected_imported_positions": 2.49767442,
+                "p95_nearest_selected_imported_positions": 5
+              },
+              "largest_unselected_imported_span": 9,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 538,
+          "review_percent": 10,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 220,
+                "mean_nearest_selected_imported_positions": 29.37265116,
+                "p95_nearest_selected_imported_positions": 145
+              },
+              "largest_unselected_imported_span": 439,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3,
+                "mean_nearest_selected_imported_positions": 1.17432558,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 6,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 102,
+                "mean_nearest_selected_imported_positions": 7.03032558,
+                "p95_nearest_selected_imported_positions": 36
+              },
+              "largest_unselected_imported_span": 203,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 2,
+                "mean_nearest_selected_imported_positions": 0.99981395,
+                "p95_nearest_selected_imported_positions": 2
+              },
+              "largest_unselected_imported_span": 3,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 1344,
+          "review_percent": 25,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 108,
+                "mean_nearest_selected_imported_positions": 7.19348837,
+                "p95_nearest_selected_imported_positions": 37
+              },
+              "largest_unselected_imported_span": 216,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.49990698,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 108,
+                "mean_nearest_selected_imported_positions": 7.19348837,
+                "p95_nearest_selected_imported_positions": 37
+              },
+              "largest_unselected_imported_span": 216,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.49990698,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 1,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 2688,
+          "review_percent": 50,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 5375,
+          "review_percent": 100,
+          "score_bin_minus_uniform_run_recall": null
+        }
+      ],
+      "schema_version": 1,
+      "score_identity_commitment_sha256": "bd0b912a4eae64011bf844269ea594c78e9b0c0dc866656b01c1e416cae26fd5",
+      "source_run_lengths": {
+        "1-5": 0,
+        "26+": 0,
+        "6-25": 0
+      },
+      "source_type": "original_corrected_annotated_positions_only",
+      "source_zip_and_checkpoint_verified_by_this_module": false
+    },
+    "15": {
+      "annotation_runs_are_not_lesions": true,
+      "clinical_validation": false,
+      "imported_annotated_images": 11510,
+      "independent_patient_validation": false,
+      "original_image_pixels_rehashed_by_this_module": false,
+      "positive_annotated_images": 196,
+      "positive_annotation_runs": 7,
+      "primary_workload_percent": 10,
+      "review_results": [
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.14285714,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 4332,
+                "mean_nearest_selected_imported_positions": 919.89391833,
+                "p95_nearest_selected_imported_positions": 3757
+              },
+              "largest_unselected_imported_span": 4332,
+              "positive_annotated_images_hit": 59,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 1,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.57142857,
+              "distinct_positive_annotation_runs_hit": 4,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 19,
+                "mean_nearest_selected_imported_positions": 6.01285838,
+                "p95_nearest_selected_imported_positions": 14
+              },
+              "largest_unselected_imported_span": 38,
+              "positive_annotated_images_hit": 12,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 2,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.28571429,
+              "distinct_positive_annotation_runs_hit": 2,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 141,
+                "mean_nearest_selected_imported_positions": 12.72267593,
+                "p95_nearest_selected_imported_positions": 58
+              },
+              "largest_unselected_imported_span": 282,
+              "positive_annotated_images_hit": 10,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 2,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.28571429,
+              "distinct_positive_annotation_runs_hit": 2,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 10,
+                "mean_nearest_selected_imported_positions": 4.99565595,
+                "p95_nearest_selected_imported_positions": 9
+              },
+              "largest_unselected_imported_span": 19,
+              "positive_annotated_images_hit": 9,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 2,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 576,
+          "review_percent": 5,
+          "score_bin_minus_uniform_run_recall": 0.28571428
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.71428571,
+              "distinct_positive_annotation_runs_hit": 5,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1177,
+                "mean_nearest_selected_imported_positions": 203.92936577,
+                "p95_nearest_selected_imported_positions": 890
+              },
+              "largest_unselected_imported_span": 2354,
+              "positive_annotated_images_hit": 83,
+              "run_lengths_hit": {
+                "1-5": 4,
+                "26+": 1,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.57142857,
+              "distinct_positive_annotation_runs_hit": 4,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9,
+                "mean_nearest_selected_imported_positions": 3.01659427,
+                "p95_nearest_selected_imported_positions": 7
+              },
+              "largest_unselected_imported_span": 18,
+              "positive_annotated_images_hit": 20,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 2,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.57142857,
+              "distinct_positive_annotation_runs_hit": 4,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 77,
+                "mean_nearest_selected_imported_positions": 4.90764553,
+                "p95_nearest_selected_imported_positions": 20
+              },
+              "largest_unselected_imported_span": 153,
+              "positive_annotated_images_hit": 20,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 2,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.42857143,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 5,
+                "mean_nearest_selected_imported_positions": 2.5,
+                "p95_nearest_selected_imported_positions": 5
+              },
+              "largest_unselected_imported_span": 9,
+              "positive_annotated_images_hit": 19,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 2,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 1151,
+          "review_percent": 10,
+          "score_bin_minus_uniform_run_recall": 0.14285714
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.85714286,
+              "distinct_positive_annotation_runs_hit": 6,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 304,
+                "mean_nearest_selected_imported_positions": 35.00060817,
+                "p95_nearest_selected_imported_positions": 177
+              },
+              "largest_unselected_imported_span": 607,
+              "positive_annotated_images_hit": 108,
+              "run_lengths_hit": {
+                "1-5": 5,
+                "26+": 1,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3,
+                "mean_nearest_selected_imported_positions": 1.16585578,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 6,
+              "positive_annotated_images_hit": 51,
+              "run_lengths_hit": {
+                "1-5": 5,
+                "26+": 2,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.85714286,
+              "distinct_positive_annotation_runs_hit": 6,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 103,
+                "mean_nearest_selected_imported_positions": 5.55464813,
+                "p95_nearest_selected_imported_positions": 29
+              },
+              "largest_unselected_imported_span": 205,
+              "positive_annotated_images_hit": 61,
+              "run_lengths_hit": {
+                "1-5": 4,
+                "26+": 2,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.57142857,
+              "distinct_positive_annotation_runs_hit": 4,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 2,
+                "mean_nearest_selected_imported_positions": 0.99982624,
+                "p95_nearest_selected_imported_positions": 2
+              },
+              "largest_unselected_imported_span": 3,
+              "positive_annotated_images_hit": 48,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 2,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 2878,
+          "review_percent": 25,
+          "score_bin_minus_uniform_run_recall": 0.42857143
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 103,
+                "mean_nearest_selected_imported_positions": 5.64213727,
+                "p95_nearest_selected_imported_positions": 31
+              },
+              "largest_unselected_imported_span": 205,
+              "positive_annotated_images_hit": 129,
+              "run_lengths_hit": {
+                "1-5": 5,
+                "26+": 2,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.85714286,
+              "distinct_positive_annotation_runs_hit": 6,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 100,
+              "run_lengths_hit": {
+                "1-5": 4,
+                "26+": 2,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 133,
+              "run_lengths_hit": {
+                "1-5": 5,
+                "26+": 2,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 1,
+              "positive_annotated_images_hit": 99,
+              "run_lengths_hit": {
+                "1-5": 5,
+                "26+": 2,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 5755,
+          "review_percent": 50,
+          "score_bin_minus_uniform_run_recall": -0.14285714
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 196,
+              "run_lengths_hit": {
+                "1-5": 5,
+                "26+": 2,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 196,
+              "run_lengths_hit": {
+                "1-5": 5,
+                "26+": 2,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 196,
+              "run_lengths_hit": {
+                "1-5": 5,
+                "26+": 2,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 196,
+              "run_lengths_hit": {
+                "1-5": 5,
+                "26+": 2,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 11510,
+          "review_percent": 100,
+          "score_bin_minus_uniform_run_recall": 0.0
+        }
+      ],
+      "schema_version": 1,
+      "score_identity_commitment_sha256": "db41ab05b3b12380a8350aa7a7345923d6edc59260a98f2a8039c7f79917e885",
+      "source_run_lengths": {
+        "1-5": 5,
+        "26+": 2,
+        "6-25": 0
+      },
+      "source_type": "original_corrected_annotated_positions_only",
+      "source_zip_and_checkpoint_verified_by_this_module": false
+    },
+    "16": {
+      "annotation_runs_are_not_lesions": true,
+      "clinical_validation": false,
+      "imported_annotated_images": 17451,
+      "independent_patient_validation": false,
+      "original_image_pixels_rehashed_by_this_module": false,
+      "positive_annotated_images": 0,
+      "positive_annotation_runs": 0,
+      "primary_workload_percent": 10,
+      "review_results": [
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 2127,
+                "mean_nearest_selected_imported_positions": 354.41516245,
+                "p95_nearest_selected_imported_positions": 1691
+              },
+              "largest_unselected_imported_span": 4253,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 19,
+                "mean_nearest_selected_imported_positions": 5.9791416,
+                "p95_nearest_selected_imported_positions": 14
+              },
+              "largest_unselected_imported_span": 38,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 162,
+                "mean_nearest_selected_imported_positions": 12.63469142,
+                "p95_nearest_selected_imported_positions": 58
+              },
+              "largest_unselected_imported_span": 324,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 10,
+                "mean_nearest_selected_imported_positions": 4.99742135,
+                "p95_nearest_selected_imported_positions": 9
+              },
+              "largest_unselected_imported_span": 19,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 873,
+          "review_percent": 5,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 929,
+                "mean_nearest_selected_imported_positions": 126.77199014,
+                "p95_nearest_selected_imported_positions": 493
+              },
+              "largest_unselected_imported_span": 1858,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9,
+                "mean_nearest_selected_imported_positions": 3.00509999,
+                "p95_nearest_selected_imported_positions": 7
+              },
+              "largest_unselected_imported_span": 18,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 118,
+                "mean_nearest_selected_imported_positions": 5.17208183,
+                "p95_nearest_selected_imported_positions": 19
+              },
+              "largest_unselected_imported_span": 235,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 5,
+                "mean_nearest_selected_imported_positions": 2.50014326,
+                "p95_nearest_selected_imported_positions": 5
+              },
+              "largest_unselected_imported_span": 9,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 1745,
+          "review_percent": 10,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 382,
+                "mean_nearest_selected_imported_positions": 30.80791932,
+                "p95_nearest_selected_imported_positions": 150
+              },
+              "largest_unselected_imported_span": 763,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3,
+                "mean_nearest_selected_imported_positions": 1.16274139,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 6,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 139,
+                "mean_nearest_selected_imported_positions": 5.30210303,
+                "p95_nearest_selected_imported_positions": 24
+              },
+              "largest_unselected_imported_span": 277,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 2,
+                "mean_nearest_selected_imported_positions": 0.9999427,
+                "p95_nearest_selected_imported_positions": 2
+              },
+              "largest_unselected_imported_span": 3,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 4363,
+          "review_percent": 25,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 138,
+                "mean_nearest_selected_imported_positions": 4.96166409,
+                "p95_nearest_selected_imported_positions": 24
+              },
+              "largest_unselected_imported_span": 276,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.49997135,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 138,
+                "mean_nearest_selected_imported_positions": 4.96166409,
+                "p95_nearest_selected_imported_positions": 24
+              },
+              "largest_unselected_imported_span": 276,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.49997135,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 1,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 8726,
+          "review_percent": 50,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 17451,
+          "review_percent": 100,
+          "score_bin_minus_uniform_run_recall": null
+        }
+      ],
+      "schema_version": 1,
+      "score_identity_commitment_sha256": "0c59e123b8f73b5a8987cf1d0dc1438ec0c7586f92b6f6252eb2ee3f31e015dc",
+      "source_run_lengths": {
+        "1-5": 0,
+        "26+": 0,
+        "6-25": 0
+      },
+      "source_type": "original_corrected_annotated_positions_only",
+      "source_zip_and_checkpoint_verified_by_this_module": false
+    },
+    "17": {
+      "annotation_runs_are_not_lesions": true,
+      "clinical_validation": false,
+      "imported_annotated_images": 27747,
+      "independent_patient_validation": false,
+      "original_image_pixels_rehashed_by_this_module": false,
+      "positive_annotated_images": 150,
+      "positive_annotation_runs": 8,
+      "primary_workload_percent": 10,
+      "review_results": [
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.0,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 4134,
+                "mean_nearest_selected_imported_positions": 434.67535229,
+                "p95_nearest_selected_imported_positions": 2747
+              },
+              "largest_unselected_imported_span": 4134,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.5,
+              "distinct_positive_annotation_runs_hit": 4,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 19,
+                "mean_nearest_selected_imported_positions": 5.98760226,
+                "p95_nearest_selected_imported_positions": 14
+              },
+              "largest_unselected_imported_span": 38,
+              "positive_annotated_images_hit": 7,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 2,
+                "6-25": 2
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.125,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3566,
+                "mean_nearest_selected_imported_positions": 241.59231629,
+                "p95_nearest_selected_imported_positions": 2179
+              },
+              "largest_unselected_imported_span": 3566,
+              "positive_annotated_images_hit": 1,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.375,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 10,
+                "mean_nearest_selected_imported_positions": 5.0012614,
+                "p95_nearest_selected_imported_positions": 10
+              },
+              "largest_unselected_imported_span": 20,
+              "positive_annotated_images_hit": 6,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 2,
+                "6-25": 1
+              }
+            }
+          },
+          "review_images": 1387,
+          "review_percent": 5,
+          "score_bin_minus_uniform_run_recall": 0.125
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.0,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 4132,
+                "mean_nearest_selected_imported_positions": 359.74217032,
+                "p95_nearest_selected_imported_positions": 2745
+              },
+              "largest_unselected_imported_span": 4132,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.625,
+              "distinct_positive_annotation_runs_hit": 5,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9,
+                "mean_nearest_selected_imported_positions": 3.02843551,
+                "p95_nearest_selected_imported_positions": 7
+              },
+              "largest_unselected_imported_span": 18,
+              "positive_annotated_images_hit": 14,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 2,
+                "6-25": 3
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.125,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3566,
+                "mean_nearest_selected_imported_positions": 240.17100948,
+                "p95_nearest_selected_imported_positions": 2179
+              },
+              "largest_unselected_imported_span": 3566,
+              "positive_annotated_images_hit": 1,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.75,
+              "distinct_positive_annotation_runs_hit": 6,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 5,
+                "mean_nearest_selected_imported_positions": 2.4997297,
+                "p95_nearest_selected_imported_positions": 5
+              },
+              "largest_unselected_imported_span": 9,
+              "positive_annotated_images_hit": 16,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 2,
+                "6-25": 3
+              }
+            }
+          },
+          "review_images": 2775,
+          "review_percent": 10,
+          "score_bin_minus_uniform_run_recall": -0.125
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.125,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3616,
+                "mean_nearest_selected_imported_positions": 259.65960284,
+                "p95_nearest_selected_imported_positions": 2229
+              },
+              "largest_unselected_imported_span": 3616,
+              "positive_annotated_images_hit": 2,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.75,
+              "distinct_positive_annotation_runs_hit": 6,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3,
+                "mean_nearest_selected_imported_positions": 1.16607201,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 6,
+              "positive_annotated_images_hit": 37,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 2,
+                "6-25": 3
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.125,
+              "distinct_positive_annotation_runs_hit": 1,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1295,
+                "mean_nearest_selected_imported_positions": 87.3941327,
+                "p95_nearest_selected_imported_positions": 726
+              },
+              "largest_unselected_imported_span": 2590,
+              "positive_annotated_images_hit": 4,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.875,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 2,
+                "mean_nearest_selected_imported_positions": 0.99996396,
+                "p95_nearest_selected_imported_positions": 2
+              },
+              "largest_unselected_imported_span": 3,
+              "positive_annotated_images_hit": 38,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 2,
+                "6-25": 3
+              }
+            }
+          },
+          "review_images": 6937,
+          "review_percent": 25,
+          "score_bin_minus_uniform_run_recall": -0.125
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.25,
+              "distinct_positive_annotation_runs_hit": 2,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1295,
+                "mean_nearest_selected_imported_positions": 87.11457094,
+                "p95_nearest_selected_imported_positions": 726
+              },
+              "largest_unselected_imported_span": 2590,
+              "positive_annotated_images_hit": 10,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.875,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.49998198,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 75,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 2,
+                "6-25": 3
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.25,
+              "distinct_positive_annotation_runs_hit": 2,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1295,
+                "mean_nearest_selected_imported_positions": 87.11457094,
+                "p95_nearest_selected_imported_positions": 726
+              },
+              "largest_unselected_imported_span": 2590,
+              "positive_annotated_images_hit": 10,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 0,
+                "6-25": 1
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.875,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.49998198,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 1,
+              "positive_annotated_images_hit": 75,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 2,
+                "6-25": 3
+              }
+            }
+          },
+          "review_images": 13874,
+          "review_percent": 50,
+          "score_bin_minus_uniform_run_recall": 0.0
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 8,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 150,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 2,
+                "6-25": 3
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 8,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 150,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 2,
+                "6-25": 3
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 8,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 150,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 2,
+                "6-25": 3
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 8,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 150,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 2,
+                "6-25": 3
+              }
+            }
+          },
+          "review_images": 27747,
+          "review_percent": 100,
+          "score_bin_minus_uniform_run_recall": 0.0
+        }
+      ],
+      "schema_version": 1,
+      "score_identity_commitment_sha256": "90449b9a7ae8db932614947cc5c16beacc2bfc27bf357ad19e1ffcd9699162e0",
+      "source_run_lengths": {
+        "1-5": 3,
+        "26+": 2,
+        "6-25": 3
+      },
+      "source_type": "original_corrected_annotated_positions_only",
+      "source_zip_and_checkpoint_verified_by_this_module": false
+    },
+    "18": {
+      "annotation_runs_are_not_lesions": true,
+      "clinical_validation": false,
+      "imported_annotated_images": 12044,
+      "independent_patient_validation": false,
+      "original_image_pixels_rehashed_by_this_module": false,
+      "positive_annotated_images": 0,
+      "positive_annotation_runs": 0,
+      "primary_workload_percent": 10,
+      "review_results": [
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 2454,
+                "mean_nearest_selected_imported_positions": 569.63309532,
+                "p95_nearest_selected_imported_positions": 2153
+              },
+              "largest_unselected_imported_span": 4908,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 19,
+                "mean_nearest_selected_imported_positions": 5.98530389,
+                "p95_nearest_selected_imported_positions": 14
+              },
+              "largest_unselected_imported_span": 38,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 69,
+                "mean_nearest_selected_imported_positions": 8.02806377,
+                "p95_nearest_selected_imported_positions": 29
+              },
+              "largest_unselected_imported_span": 138,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 10,
+                "mean_nearest_selected_imported_positions": 5.00166058,
+                "p95_nearest_selected_imported_positions": 10
+              },
+              "largest_unselected_imported_span": 20,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 602,
+          "review_percent": 5,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 946,
+                "mean_nearest_selected_imported_positions": 163.65335437,
+                "p95_nearest_selected_imported_positions": 645
+              },
+              "largest_unselected_imported_span": 1891,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9,
+                "mean_nearest_selected_imported_positions": 3.00074726,
+                "p95_nearest_selected_imported_positions": 7
+              },
+              "largest_unselected_imported_span": 18,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 63,
+                "mean_nearest_selected_imported_positions": 4.00166058,
+                "p95_nearest_selected_imported_positions": 13
+              },
+              "largest_unselected_imported_span": 125,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 5,
+                "mean_nearest_selected_imported_positions": 2.50083029,
+                "p95_nearest_selected_imported_positions": 5
+              },
+              "largest_unselected_imported_span": 10,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 1204,
+          "review_percent": 10,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 503,
+                "mean_nearest_selected_imported_positions": 59.9525905,
+                "p95_nearest_selected_imported_positions": 291
+              },
+              "largest_unselected_imported_span": 1005,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3,
+                "mean_nearest_selected_imported_positions": 1.15501495,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 6,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 18,
+                "mean_nearest_selected_imported_positions": 1.15252408,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 36,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 2,
+                "mean_nearest_selected_imported_positions": 1.0,
+                "p95_nearest_selected_imported_positions": 2
+              },
+              "largest_unselected_imported_span": 3,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 3011,
+          "review_percent": 25,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 65,
+                "mean_nearest_selected_imported_positions": 3.63658253,
+                "p95_nearest_selected_imported_positions": 18
+              },
+              "largest_unselected_imported_span": 129,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 1,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 6022,
+          "review_percent": 50,
+          "score_bin_minus_uniform_run_recall": null
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": null,
+              "distinct_positive_annotation_runs_hit": 0,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 0,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 0,
+                "6-25": 0
+              }
+            }
+          },
+          "review_images": 12044,
+          "review_percent": 100,
+          "score_bin_minus_uniform_run_recall": null
+        }
+      ],
+      "schema_version": 1,
+      "score_identity_commitment_sha256": "56e949ce2b5f102abdfc2d17b97e46b68c5ad528287bb4079a84b06bd9517c2e",
+      "source_run_lengths": {
+        "1-5": 0,
+        "26+": 0,
+        "6-25": 0
+      },
+      "source_type": "original_corrected_annotated_positions_only",
+      "source_zip_and_checkpoint_verified_by_this_module": false
+    },
+    "19": {
+      "annotation_runs_are_not_lesions": true,
+      "clinical_validation": false,
+      "imported_annotated_images": 29384,
+      "independent_patient_validation": false,
+      "original_image_pixels_rehashed_by_this_module": false,
+      "positive_annotated_images": 601,
+      "positive_annotation_runs": 11,
+      "primary_workload_percent": 10,
+      "review_results": [
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.27272727,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9137,
+                "mean_nearest_selected_imported_positions": 3053.60886877,
+                "p95_nearest_selected_imported_positions": 7668
+              },
+              "largest_unselected_imported_span": 13811,
+              "positive_annotated_images_hit": 9,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 2,
+                "6-25": 1
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.63636364,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 19,
+                "mean_nearest_selected_imported_positions": 5.93731282,
+                "p95_nearest_selected_imported_positions": 14
+              },
+              "largest_unselected_imported_span": 38,
+              "positive_annotated_images_hit": 32,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 4,
+                "6-25": 2
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.63636364,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 344,
+                "mean_nearest_selected_imported_positions": 23.74812823,
+                "p95_nearest_selected_imported_positions": 143
+              },
+              "largest_unselected_imported_span": 625,
+              "positive_annotated_images_hit": 41,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 4,
+                "6-25": 2
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.54545455,
+              "distinct_positive_annotation_runs_hit": 6,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 10,
+                "mean_nearest_selected_imported_positions": 5.00068064,
+                "p95_nearest_selected_imported_positions": 10
+              },
+              "largest_unselected_imported_span": 20,
+              "positive_annotated_images_hit": 31,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 4,
+                "6-25": 2
+              }
+            }
+          },
+          "review_images": 1469,
+          "review_percent": 5,
+          "score_bin_minus_uniform_run_recall": 0.09090909
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.27272727,
+              "distinct_positive_annotation_runs_hit": 3,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9129,
+                "mean_nearest_selected_imported_positions": 1891.36863599,
+                "p95_nearest_selected_imported_positions": 7660
+              },
+              "largest_unselected_imported_span": 9129,
+              "positive_annotated_images_hit": 33,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 2,
+                "6-25": 1
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.72727273,
+              "distinct_positive_annotation_runs_hit": 8,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9,
+                "mean_nearest_selected_imported_positions": 2.99251293,
+                "p95_nearest_selected_imported_positions": 7
+              },
+              "largest_unselected_imported_span": 18,
+              "positive_annotated_images_hit": 60,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 4,
+                "6-25": 3
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.72727273,
+              "distinct_positive_annotation_runs_hit": 8,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 156,
+                "mean_nearest_selected_imported_positions": 7.81340185,
+                "p95_nearest_selected_imported_positions": 43
+              },
+              "largest_unselected_imported_span": 312,
+              "positive_annotated_images_hit": 80,
+              "run_lengths_hit": {
+                "1-5": 2,
+                "26+": 4,
+                "6-25": 2
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.72727273,
+              "distinct_positive_annotation_runs_hit": 8,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 5,
+                "mean_nearest_selected_imported_positions": 2.50034032,
+                "p95_nearest_selected_imported_positions": 5
+              },
+              "largest_unselected_imported_span": 10,
+              "positive_annotated_images_hit": 60,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 4,
+                "6-25": 4
+              }
+            }
+          },
+          "review_images": 2938,
+          "review_percent": 10,
+          "score_bin_minus_uniform_run_recall": 0.0
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.45454545,
+              "distinct_positive_annotation_runs_hit": 5,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9121,
+                "mean_nearest_selected_imported_positions": 1485.67822625,
+                "p95_nearest_selected_imported_positions": 7652
+              },
+              "largest_unselected_imported_span": 9121,
+              "positive_annotated_images_hit": 245,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 4,
+                "6-25": 1
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 11,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3,
+                "mean_nearest_selected_imported_positions": 1.17176014,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 6,
+              "positive_annotated_images_hit": 150,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 4,
+                "6-25": 4
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 11,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 36,
+                "mean_nearest_selected_imported_positions": 1.29298258,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 71,
+              "positive_annotated_images_hit": 169,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 4,
+                "6-25": 4
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.81818182,
+              "distinct_positive_annotation_runs_hit": 9,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 2,
+                "mean_nearest_selected_imported_positions": 1.0,
+                "p95_nearest_selected_imported_positions": 2
+              },
+              "largest_unselected_imported_span": 3,
+              "positive_annotated_images_hit": 150,
+              "run_lengths_hit": {
+                "1-5": 1,
+                "26+": 4,
+                "6-25": 4
+              }
+            }
+          },
+          "review_images": 7346,
+          "review_percent": 25,
+          "score_bin_minus_uniform_run_recall": 0.18181818
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.54545455,
+              "distinct_positive_annotation_runs_hit": 6,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1697,
+                "mean_nearest_selected_imported_positions": 169.0808263,
+                "p95_nearest_selected_imported_positions": 1022
+              },
+              "largest_unselected_imported_span": 3394,
+              "positive_annotated_images_hit": 516,
+              "run_lengths_hit": {
+                "1-5": 0,
+                "26+": 4,
+                "6-25": 2
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 11,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 299,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 4,
+                "6-25": 4
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 11,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 286,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 4,
+                "6-25": 4
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 11,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.5,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 1,
+              "positive_annotated_images_hit": 303,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 4,
+                "6-25": 4
+              }
+            }
+          },
+          "review_images": 14692,
+          "review_percent": 50,
+          "score_bin_minus_uniform_run_recall": 0.0
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 11,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 601,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 4,
+                "6-25": 4
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 11,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 601,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 4,
+                "6-25": 4
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 11,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 601,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 4,
+                "6-25": 4
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 11,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 601,
+              "run_lengths_hit": {
+                "1-5": 3,
+                "26+": 4,
+                "6-25": 4
+              }
+            }
+          },
+          "review_images": 29384,
+          "review_percent": 100,
+          "score_bin_minus_uniform_run_recall": 0.0
+        }
+      ],
+      "schema_version": 1,
+      "score_identity_commitment_sha256": "7d4837cc5f2841a0c80c35079b3b79b1d90fdfdb0b92ecaf144496b894657b5e",
+      "source_run_lengths": {
+        "1-5": 3,
+        "26+": 4,
+        "6-25": 4
+      },
+      "source_type": "original_corrected_annotated_positions_only",
+      "source_zip_and_checkpoint_verified_by_this_module": false
+    },
+    "20": {
+      "annotation_runs_are_not_lesions": true,
+      "clinical_validation": false,
+      "imported_annotated_images": 13499,
+      "independent_patient_validation": false,
+      "original_image_pixels_rehashed_by_this_module": false,
+      "positive_annotated_images": 731,
+      "positive_annotation_runs": 116,
+      "primary_workload_percent": 10,
+      "review_results": [
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.06034483,
+              "distinct_positive_annotation_runs_hit": 7,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 526,
+                "mean_nearest_selected_imported_positions": 83.63286169,
+                "p95_nearest_selected_imported_positions": 300
+              },
+              "largest_unselected_imported_span": 1052,
+              "positive_annotated_images_hit": 144,
+              "run_lengths_hit": {
+                "1-5": 4,
+                "26+": 2,
+                "6-25": 1
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.17241379,
+              "distinct_positive_annotation_runs_hit": 20,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 19,
+                "mean_nearest_selected_imported_positions": 6.07667235,
+                "p95_nearest_selected_imported_positions": 14
+              },
+              "largest_unselected_imported_span": 38,
+              "positive_annotated_images_hit": 32,
+              "run_lengths_hit": {
+                "1-5": 6,
+                "26+": 5,
+                "6-25": 9
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.26724138,
+              "distinct_positive_annotation_runs_hit": 31,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 208,
+                "mean_nearest_selected_imported_positions": 16.39521446,
+                "p95_nearest_selected_imported_positions": 84
+              },
+              "largest_unselected_imported_span": 415,
+              "positive_annotated_images_hit": 49,
+              "run_lengths_hit": {
+                "1-5": 13,
+                "26+": 5,
+                "6-25": 13
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.22413793,
+              "distinct_positive_annotation_runs_hit": 26,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 10,
+                "mean_nearest_selected_imported_positions": 4.9996296,
+                "p95_nearest_selected_imported_positions": 9
+              },
+              "largest_unselected_imported_span": 19,
+              "positive_annotated_images_hit": 37,
+              "run_lengths_hit": {
+                "1-5": 9,
+                "26+": 5,
+                "6-25": 12
+              }
+            }
+          },
+          "review_images": 675,
+          "review_percent": 5,
+          "score_bin_minus_uniform_run_recall": -0.05172414
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.1637931,
+              "distinct_positive_annotation_runs_hit": 19,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 431,
+                "mean_nearest_selected_imported_positions": 46.79146603,
+                "p95_nearest_selected_imported_positions": 196
+              },
+              "largest_unselected_imported_span": 862,
+              "positive_annotated_images_hit": 184,
+              "run_lengths_hit": {
+                "1-5": 10,
+                "26+": 3,
+                "6-25": 6
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.37068966,
+              "distinct_positive_annotation_runs_hit": 43,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 9,
+                "mean_nearest_selected_imported_positions": 3.01800133,
+                "p95_nearest_selected_imported_positions": 7
+              },
+              "largest_unselected_imported_span": 18,
+              "positive_annotated_images_hit": 74,
+              "run_lengths_hit": {
+                "1-5": 23,
+                "26+": 5,
+                "6-25": 15
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.39655172,
+              "distinct_positive_annotation_runs_hit": 46,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 208,
+                "mean_nearest_selected_imported_positions": 13.30528187,
+                "p95_nearest_selected_imported_positions": 75
+              },
+              "largest_unselected_imported_span": 415,
+              "positive_annotated_images_hit": 93,
+              "run_lengths_hit": {
+                "1-5": 24,
+                "26+": 5,
+                "6-25": 17
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.35344828,
+              "distinct_positive_annotation_runs_hit": 41,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 5,
+                "mean_nearest_selected_imported_positions": 2.4998148,
+                "p95_nearest_selected_imported_positions": 5
+              },
+              "largest_unselected_imported_span": 9,
+              "positive_annotated_images_hit": 69,
+              "run_lengths_hit": {
+                "1-5": 17,
+                "26+": 5,
+                "6-25": 19
+              }
+            }
+          },
+          "review_images": 1350,
+          "review_percent": 10,
+          "score_bin_minus_uniform_run_recall": 0.01724138
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.55172414,
+              "distinct_positive_annotation_runs_hit": 64,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 302,
+                "mean_nearest_selected_imported_positions": 24.7502778,
+                "p95_nearest_selected_imported_positions": 126
+              },
+              "largest_unselected_imported_span": 604,
+              "positive_annotated_images_hit": 341,
+              "run_lengths_hit": {
+                "1-5": 47,
+                "26+": 3,
+                "6-25": 14
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.59482759,
+              "distinct_positive_annotation_runs_hit": 69,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 3,
+                "mean_nearest_selected_imported_positions": 1.15215942,
+                "p95_nearest_selected_imported_positions": 3
+              },
+              "largest_unselected_imported_span": 6,
+              "positive_annotated_images_hit": 184,
+              "run_lengths_hit": {
+                "1-5": 42,
+                "26+": 5,
+                "6-25": 22
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.6637931,
+              "distinct_positive_annotation_runs_hit": 77,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 206,
+                "mean_nearest_selected_imported_positions": 11.33765464,
+                "p95_nearest_selected_imported_positions": 66
+              },
+              "largest_unselected_imported_span": 412,
+              "positive_annotated_images_hit": 238,
+              "run_lengths_hit": {
+                "1-5": 53,
+                "26+": 5,
+                "6-25": 19
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.62068966,
+              "distinct_positive_annotation_runs_hit": 72,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 2,
+                "mean_nearest_selected_imported_positions": 0.99992592,
+                "p95_nearest_selected_imported_positions": 2
+              },
+              "largest_unselected_imported_span": 3,
+              "positive_annotated_images_hit": 183,
+              "run_lengths_hit": {
+                "1-5": 45,
+                "26+": 5,
+                "6-25": 22
+              }
+            }
+          },
+          "review_images": 3375,
+          "review_percent": 25,
+          "score_bin_minus_uniform_run_recall": -0.02586207
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 0.81034483,
+              "distinct_positive_annotation_runs_hit": 94,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 206,
+                "mean_nearest_selected_imported_positions": 12.77339062,
+                "p95_nearest_selected_imported_positions": 77
+              },
+              "largest_unselected_imported_span": 412,
+              "positive_annotated_images_hit": 524,
+              "run_lengths_hit": {
+                "1-5": 70,
+                "26+": 5,
+                "6-25": 19
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 0.78448276,
+              "distinct_positive_annotation_runs_hit": 91,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.49996296,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 2,
+              "positive_annotated_images_hit": 371,
+              "run_lengths_hit": {
+                "1-5": 64,
+                "26+": 5,
+                "6-25": 22
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 0.81034483,
+              "distinct_positive_annotation_runs_hit": 94,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 206,
+                "mean_nearest_selected_imported_positions": 12.77339062,
+                "p95_nearest_selected_imported_positions": 77
+              },
+              "largest_unselected_imported_span": 412,
+              "positive_annotated_images_hit": 524,
+              "run_lengths_hit": {
+                "1-5": 70,
+                "26+": 5,
+                "6-25": 19
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 0.78448276,
+              "distinct_positive_annotation_runs_hit": 91,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 1,
+                "mean_nearest_selected_imported_positions": 0.49996296,
+                "p95_nearest_selected_imported_positions": 1
+              },
+              "largest_unselected_imported_span": 1,
+              "positive_annotated_images_hit": 358,
+              "run_lengths_hit": {
+                "1-5": 64,
+                "26+": 5,
+                "6-25": 22
+              }
+            }
+          },
+          "review_images": 6750,
+          "review_percent": 50,
+          "score_bin_minus_uniform_run_recall": 0.0
+        },
+        {
+          "policies": {
+            "score": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 116,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 731,
+              "run_lengths_hit": {
+                "1-5": 89,
+                "26+": 5,
+                "6-25": 22
+              }
+            },
+            "score_bin": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 116,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 731,
+              "run_lengths_hit": {
+                "1-5": 89,
+                "26+": 5,
+                "6-25": 22
+              }
+            },
+            "score_diverse": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 116,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 731,
+              "run_lengths_hit": {
+                "1-5": 89,
+                "26+": 5,
+                "6-25": 22
+              }
+            },
+            "uniform": {
+              "annotation_run_recall": 1.0,
+              "distinct_positive_annotation_runs_hit": 116,
+              "imported_position_coverage": {
+                "maximum_nearest_selected_imported_positions": 0,
+                "mean_nearest_selected_imported_positions": 0.0,
+                "p95_nearest_selected_imported_positions": 0
+              },
+              "largest_unselected_imported_span": 0,
+              "positive_annotated_images_hit": 731,
+              "run_lengths_hit": {
+                "1-5": 89,
+                "26+": 5,
+                "6-25": 22
+              }
+            }
+          },
+          "review_images": 13499,
+          "review_percent": 100,
+          "score_bin_minus_uniform_run_recall": 0.0
+        }
+      ],
+      "schema_version": 1,
+      "score_identity_commitment_sha256": "69e01e7c1926260665e2ed05b08f86c1bc262864fdfbce1eb75cff2445413cf8",
+      "source_run_lengths": {
+        "1-5": 89,
+        "26+": 5,
+        "6-25": 22
+      },
+      "source_type": "original_corrected_annotated_positions_only",
+      "source_zip_and_checkpoint_verified_by_this_module": false
+    }
+  },
+  "primary_per_examination": [
+    {
+      "difference": -0.11111111,
+      "eligible_images": 24351,
+      "examination": 11,
+      "positive_annotation_runs": 9,
+      "review_images": 2435,
+      "score_bin_run_recall": 0.33333333,
+      "uniform_run_recall": 0.44444444
+    },
+    {
+      "difference": 0.0,
+      "eligible_images": 17744,
+      "examination": 12,
+      "positive_annotation_runs": 3,
+      "review_images": 1774,
+      "score_bin_run_recall": 0.33333333,
+      "uniform_run_recall": 0.33333333
+    },
+    {
+      "difference": null,
+      "eligible_images": 4056,
+      "examination": 13,
+      "positive_annotation_runs": 0,
+      "review_images": 406,
+      "score_bin_run_recall": null,
+      "uniform_run_recall": null
+    },
+    {
+      "difference": null,
+      "eligible_images": 5375,
+      "examination": 14,
+      "positive_annotation_runs": 0,
+      "review_images": 538,
+      "score_bin_run_recall": null,
+      "uniform_run_recall": null
+    },
+    {
+      "difference": 0.14285714,
+      "eligible_images": 11510,
+      "examination": 15,
+      "positive_annotation_runs": 7,
+      "review_images": 1151,
+      "score_bin_run_recall": 0.57142857,
+      "uniform_run_recall": 0.42857143
+    },
+    {
+      "difference": null,
+      "eligible_images": 17451,
+      "examination": 16,
+      "positive_annotation_runs": 0,
+      "review_images": 1745,
+      "score_bin_run_recall": null,
+      "uniform_run_recall": null
+    },
+    {
+      "difference": -0.125,
+      "eligible_images": 27747,
+      "examination": 17,
+      "positive_annotation_runs": 8,
+      "review_images": 2775,
+      "score_bin_run_recall": 0.625,
+      "uniform_run_recall": 0.75
+    },
+    {
+      "difference": null,
+      "eligible_images": 12044,
+      "examination": 18,
+      "positive_annotation_runs": 0,
+      "review_images": 1204,
+      "score_bin_run_recall": null,
+      "uniform_run_recall": null
+    },
+    {
+      "difference": 0.0,
+      "eligible_images": 29384,
+      "examination": 19,
+      "positive_annotation_runs": 11,
+      "review_images": 2938,
+      "score_bin_run_recall": 0.72727273,
+      "uniform_run_recall": 0.72727273
+    },
+    {
+      "difference": 0.01724138,
+      "eligible_images": 13499,
+      "examination": 20,
+      "positive_annotation_runs": 116,
+      "review_images": 1350,
+      "score_bin_run_recall": 0.37068966,
+      "uniform_run_recall": 0.35344828
+    }
+  ],
+  "primary_review_percent": 10,
+  "raw_csv_bytes_processed_for_eligibility_before_prediction_freeze": true,
+  "reading_time_benefit_measured": false,
+  "schema_version": 1,
+  "score_bin_better_at_primary": 2,
+  "score_bin_tied_at_primary": 2,
+  "score_bin_worse_at_primary": 2,
+  "source_code_commit": "a3eb0e5af0898a790f86ea2ccd43de5679c40751",
+  "source_images": 163161,
+  "source_integrity": {
+    "all_ten_snapshot_and_png_replays_passed_before_outcome_release": true,
+    "compressed_bytes_transferred": 40041927480,
+    "compressed_source_blocks": 12,
+    "duplicate_png_bytes_within_examination": 0,
+    "examination15_internal_gap_has_no_corrected_annotation_row": true,
+    "full_archive_md5": "fdc88663514f5691a14c08dff13c667e",
+    "full_archive_md5_verified": true,
+    "missing_eligible_source_images": 0,
+    "original_png_bytes": 48757425342,
+    "original_pngs": 163161,
+    "png_member_crc_byte_hash_and_full_decode_verified": true,
+    "source_archive_file_id": 44725302
+  },
+  "source_runs_are_adjudicated_lesions": false,
+  "study": "Locked original-CNN Galar 11\u201320 annotation-run retrieval under outcome-concealed eligibility amendment A1",
+  "undefined_zero_positive_examinations": [
+    13,
+    14,
+    16,
+    18
+  ],
+  "worse_than_uniform": [
+    {
+      "difference_in_run_recall": -0.11111111,
+      "examination": 11,
+      "method": "score",
+      "method_runs_hit": 0,
+      "positive_annotation_runs": 9,
+      "review_images": 1218,
+      "review_percent": 5,
+      "uniform_runs_hit": 1
+    },
+    {
+      "difference_in_run_recall": -1.0,
+      "examination": 12,
+      "method": "score",
+      "method_runs_hit": 0,
+      "positive_annotation_runs": 3,
+      "review_images": 887,
+      "review_percent": 5,
+      "uniform_runs_hit": 3
+    },
+    {
+      "difference_in_run_recall": -0.14285715,
+      "examination": 15,
+      "method": "score",
+      "method_runs_hit": 1,
+      "positive_annotation_runs": 7,
+      "review_images": 576,
+      "review_percent": 5,
+      "uniform_runs_hit": 2
+    },
+    {
+      "difference_in_run_recall": -0.375,
+      "examination": 17,
+      "method": "score",
+      "method_runs_hit": 0,
+      "positive_annotation_runs": 8,
+      "review_images": 1387,
+      "review_percent": 5,
+      "uniform_runs_hit": 3
+    },
+    {
+      "difference_in_run_recall": -0.27272728,
+      "examination": 19,
+      "method": "score",
+      "method_runs_hit": 3,
+      "positive_annotation_runs": 11,
+      "review_images": 1469,
+      "review_percent": 5,
+      "uniform_runs_hit": 6
+    },
+    {
+      "difference_in_run_recall": -0.1637931,
+      "examination": 20,
+      "method": "score",
+      "method_runs_hit": 7,
+      "positive_annotation_runs": 116,
+      "review_images": 675,
+      "review_percent": 5,
+      "uniform_runs_hit": 26
+    },
+    {
+      "difference_in_run_recall": -0.66666667,
+      "examination": 12,
+      "method": "score_diverse",
+      "method_runs_hit": 1,
+      "positive_annotation_runs": 3,
+      "review_images": 887,
+      "review_percent": 5,
+      "uniform_runs_hit": 3
+    },
+    {
+      "difference_in_run_recall": -0.25,
+      "examination": 17,
+      "method": "score_diverse",
+      "method_runs_hit": 1,
+      "positive_annotation_runs": 8,
+      "review_images": 1387,
+      "review_percent": 5,
+      "uniform_runs_hit": 3
+    },
+    {
+      "difference_in_run_recall": -0.66666667,
+      "examination": 12,
+      "method": "score_bin",
+      "method_runs_hit": 1,
+      "positive_annotation_runs": 3,
+      "review_images": 887,
+      "review_percent": 5,
+      "uniform_runs_hit": 3
+    },
+    {
+      "difference_in_run_recall": -0.05172414,
+      "examination": 20,
+      "method": "score_bin",
+      "method_runs_hit": 20,
+      "positive_annotation_runs": 116,
+      "review_images": 675,
+      "review_percent": 5,
+      "uniform_runs_hit": 26
+    },
+    {
+      "difference_in_run_recall": -0.44444444,
+      "examination": 11,
+      "method": "score",
+      "method_runs_hit": 0,
+      "positive_annotation_runs": 9,
+      "review_images": 2435,
+      "review_percent": 10,
+      "uniform_runs_hit": 4
+    },
+    {
+      "difference_in_run_recall": -0.75,
+      "examination": 17,
+      "method": "score",
+      "method_runs_hit": 0,
+      "positive_annotation_runs": 8,
+      "review_images": 2775,
+      "review_percent": 10,
+      "uniform_runs_hit": 6
+    },
+    {
+      "difference_in_run_recall": -0.45454546,
+      "examination": 19,
+      "method": "score",
+      "method_runs_hit": 3,
+      "positive_annotation_runs": 11,
+      "review_images": 2938,
+      "review_percent": 10,
+      "uniform_runs_hit": 8
+    },
+    {
+      "difference_in_run_recall": -0.18965518,
+      "examination": 20,
+      "method": "score",
+      "method_runs_hit": 19,
+      "positive_annotation_runs": 116,
+      "review_images": 1350,
+      "review_percent": 10,
+      "uniform_runs_hit": 41
+    },
+    {
+      "difference_in_run_recall": -0.33333333,
+      "examination": 11,
+      "method": "score_diverse",
+      "method_runs_hit": 1,
+      "positive_annotation_runs": 9,
+      "review_images": 2435,
+      "review_percent": 10,
+      "uniform_runs_hit": 4
+    },
+    {
+      "difference_in_run_recall": -0.625,
+      "examination": 17,
+      "method": "score_diverse",
+      "method_runs_hit": 1,
+      "positive_annotation_runs": 8,
+      "review_images": 2775,
+      "review_percent": 10,
+      "uniform_runs_hit": 6
+    },
+    {
+      "difference_in_run_recall": -0.11111111,
+      "examination": 11,
+      "method": "score_bin",
+      "method_runs_hit": 3,
+      "positive_annotation_runs": 9,
+      "review_images": 2435,
+      "review_percent": 10,
+      "uniform_runs_hit": 4
+    },
+    {
+      "difference_in_run_recall": -0.125,
+      "examination": 17,
+      "method": "score_bin",
+      "method_runs_hit": 5,
+      "positive_annotation_runs": 8,
+      "review_images": 2775,
+      "review_percent": 10,
+      "uniform_runs_hit": 6
+    },
+    {
+      "difference_in_run_recall": -0.66666667,
+      "examination": 11,
+      "method": "score",
+      "method_runs_hit": 1,
+      "positive_annotation_runs": 9,
+      "review_images": 6088,
+      "review_percent": 25,
+      "uniform_runs_hit": 7
+    },
+    {
+      "difference_in_run_recall": -0.33333334,
+      "examination": 12,
+      "method": "score",
+      "method_runs_hit": 1,
+      "positive_annotation_runs": 3,
+      "review_images": 4436,
+      "review_percent": 25,
+      "uniform_runs_hit": 2
+    },
+    {
+      "difference_in_run_recall": -0.75,
+      "examination": 17,
+      "method": "score",
+      "method_runs_hit": 1,
+      "positive_annotation_runs": 8,
+      "review_images": 6937,
+      "review_percent": 25,
+      "uniform_runs_hit": 7
+    },
+    {
+      "difference_in_run_recall": -0.36363637,
+      "examination": 19,
+      "method": "score",
+      "method_runs_hit": 5,
+      "positive_annotation_runs": 11,
+      "review_images": 7346,
+      "review_percent": 25,
+      "uniform_runs_hit": 9
+    },
+    {
+      "difference_in_run_recall": -0.06896552,
+      "examination": 20,
+      "method": "score",
+      "method_runs_hit": 64,
+      "positive_annotation_runs": 116,
+      "review_images": 3375,
+      "review_percent": 25,
+      "uniform_runs_hit": 72
+    },
+    {
+      "difference_in_run_recall": -0.22222222,
+      "examination": 11,
+      "method": "score_diverse",
+      "method_runs_hit": 5,
+      "positive_annotation_runs": 9,
+      "review_images": 6088,
+      "review_percent": 25,
+      "uniform_runs_hit": 7
+    },
+    {
+      "difference_in_run_recall": -0.33333334,
+      "examination": 12,
+      "method": "score_diverse",
+      "method_runs_hit": 1,
+      "positive_annotation_runs": 3,
+      "review_images": 4436,
+      "review_percent": 25,
+      "uniform_runs_hit": 2
+    },
+    {
+      "difference_in_run_recall": -0.75,
+      "examination": 17,
+      "method": "score_diverse",
+      "method_runs_hit": 1,
+      "positive_annotation_runs": 8,
+      "review_images": 6937,
+      "review_percent": 25,
+      "uniform_runs_hit": 7
+    },
+    {
+      "difference_in_run_recall": -0.125,
+      "examination": 17,
+      "method": "score_bin",
+      "method_runs_hit": 6,
+      "positive_annotation_runs": 8,
+      "review_images": 6937,
+      "review_percent": 25,
+      "uniform_runs_hit": 7
+    },
+    {
+      "difference_in_run_recall": -0.02586207,
+      "examination": 20,
+      "method": "score_bin",
+      "method_runs_hit": 69,
+      "positive_annotation_runs": 116,
+      "review_images": 3375,
+      "review_percent": 25,
+      "uniform_runs_hit": 72
+    },
+    {
+      "difference_in_run_recall": -0.33333333,
+      "examination": 12,
+      "method": "score",
+      "method_runs_hit": 2,
+      "positive_annotation_runs": 3,
+      "review_images": 8872,
+      "review_percent": 50,
+      "uniform_runs_hit": 3
+    },
+    {
+      "difference_in_run_recall": -0.625,
+      "examination": 17,
+      "method": "score",
+      "method_runs_hit": 2,
+      "positive_annotation_runs": 8,
+      "review_images": 13874,
+      "review_percent": 50,
+      "uniform_runs_hit": 7
+    },
+    {
+      "difference_in_run_recall": -0.45454545,
+      "examination": 19,
+      "method": "score",
+      "method_runs_hit": 6,
+      "positive_annotation_runs": 11,
+      "review_images": 14692,
+      "review_percent": 50,
+      "uniform_runs_hit": 11
+    },
+    {
+      "difference_in_run_recall": -0.625,
+      "examination": 17,
+      "method": "score_diverse",
+      "method_runs_hit": 2,
+      "positive_annotation_runs": 8,
+      "review_images": 13874,
+      "review_percent": 50,
+      "uniform_runs_hit": 7
+    },
+    {
+      "difference_in_run_recall": -0.14285714,
+      "examination": 15,
+      "method": "score_bin",
+      "method_runs_hit": 6,
+      "positive_annotation_runs": 7,
+      "review_images": 5755,
+      "review_percent": 50,
+      "uniform_runs_hit": 7
+    }
+  ]
+}

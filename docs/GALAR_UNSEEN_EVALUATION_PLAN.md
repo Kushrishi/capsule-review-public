@@ -1,5 +1,7 @@
 # Locked unseen-examination Galar blood-evidence evaluation
 
+**Execution update — November 4:** the full ten-examination study is complete; see the [locked results](GALAR_UNSEEN_11_20_RESULTS.md). The original design and its historical November 3 status below are retained. The original JSON lock and amendment A1 remain byte-for-byte unchanged.
+
 **November 3, 2026. Status: design and original-checkpoint provenance fixed; independent evaluation NOT RUN.** The machine-readable [evaluation lock](GALAR_UNSEEN_11_20_EVALUATION_LOCK.json) is the source of truth. This is a project-level prespecified research protocol, **not** a registered trial, blinded patient study, clinical validation or claimed novel diagnostic method.
 
 ## Scientific question and why this is next
