@@ -176,3 +176,82 @@ def test_replay_receipt_matches_written_parts(tmp_path,serve):
     assert rec['official_file_id'] is None
     assert rec['full_archive_downloaded'] is False
     assert rec['no_automatic_large_transfer'] is True
+
+
+def unseen_catalog():
+    source = m.APPROVED_SOURCES["unseen-11-20"]
+    return {"id": 25304616, "version": 2, "files": [{
+        "id": source["id"],
+        "name": source["name"],
+        "size": source["size"],
+        "download_url": source["url"],
+        "supplied_md5": source["md5"],
+        "computed_md5": source["md5"],
+        "is_link_only": False,
+    }]}
+
+
+def test_unseen_official_catalog_exact_identity_and_fail_closed_variations():
+    actual = m.validate_official_catalog(unseen_catalog(), "unseen-11-20")
+    assert actual["id"] == 44725302
+    assert actual["size"] == 40_043_548_469
+    assert actual["md5"] == "fdc88663514f5691a14c08dff13c667e"
+    assert actual["name"] == "Galar_Frames_11_to_20.7z"
+    for field, altered in [
+        ("size", actual["size"] - 1),
+        ("name", "Galar_Frames_21_to_29_2.7z"),
+        ("computed_md5", "0" * 32),
+        ("supplied_md5", "0" * 32),
+        ("download_url", "https://example.org/malicious.7z"),
+        ("is_link_only", True),
+    ]:
+        catalog = unseen_catalog()
+        catalog["files"][0][field] = altered
+        with pytest.raises(ValueError, match="publisher archive"):
+            m.validate_official_catalog(catalog, "unseen-11-20")
+    bad_version = unseen_catalog()
+    bad_version["version"] = 3
+    with pytest.raises(ValueError, match="Galar v2 catalog"):
+        m.validate_official_catalog(bad_version, "unseen-11-20")
+    bad_article = unseen_catalog()
+    bad_article["id"] = 0
+    with pytest.raises(ValueError, match="Galar v2 catalog"):
+        m.validate_official_catalog(bad_article, "unseen-11-20")
+    missing = unseen_catalog()
+    missing["files"] = []
+    with pytest.raises(ValueError, match="missing or duplicated"):
+        m.validate_official_catalog(missing, "unseen-11-20")
+    duplicate = unseen_catalog()
+    duplicate["files"].append(dict(duplicate["files"][0]))
+    with pytest.raises(ValueError, match="missing or duplicated"):
+        m.validate_official_catalog(duplicate, "unseen-11-20")
+
+
+def test_unseen_index_only_profile_uses_206_and_never_reads_image_payload(tmp_path, serve):
+    raw = archive(next_header=b"\x01\x00", payload=b"synthetic compressed body NEVER OPEN")
+    url, handler = serve(raw)
+    client = m.RangeClient(
+        url, len(raw), cap=64 * 1024,
+        source="unseen-11-20", allow_test_http=True,
+    )
+    report = m.inspect(client, tmp_path / "unseen")
+    assert report["record_type"] == "galar-11-20-7z-index-only-v1"
+    assert report["official_file_id"] is None  # Synthetic local mock, not publisher.
+    assert report["full_archive_downloaded"] is False
+    assert report["pixels_acquired"] == 0
+    assert report["actual_index_only_bytes_transferred"] == 34
+    assert handler.requests == ["bytes=0-31", f"bytes={len(raw)-2}-{len(raw)-1}"]
+    assert (tmp_path / "unseen" / "signature-header.bin").stat().st_size == 32
+    assert len((tmp_path / "unseen" / "next-header.bin").read_bytes()) == 2
+    assert not any(part["name"].startswith("image") for part in report["parts"])
+
+
+def test_unseen_source_url_and_size_pinned_without_network():
+    expected = m.APPROVED_SOURCES["unseen-11-20"]
+    m.RangeClient(expected["url"], expected["size"], source="unseen-11-20")
+    with pytest.raises(ValueError, match="official"):
+        m.RangeClient(expected["url"], expected["size"] + 1, source="unseen-11-20")
+    with pytest.raises(ValueError, match="official"):
+        m.RangeClient("https://example.org/other.7z", expected["size"], source="unseen-11-20")
+    with pytest.raises(ValueError, match="Unknown official"):
+        m.RangeClient(expected["url"], expected["size"], source="unknown")
