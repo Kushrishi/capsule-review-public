@@ -14,6 +14,7 @@ DOCS = (
     ROOT / "docs" / "GALAR_NEGATIVE_22_24_RESULTS.md",
     ROOT / "docs" / "GALAR_NEGATIVE_EXPANSION_CV_RESULTS.md",
     ROOT / "docs" / "PUBLIC_RELEASE_SAFETY.md",
+    ROOT / "docs" / "PROJECT_MATURITY_AUDIT_20261104.md",
 )
 
 
