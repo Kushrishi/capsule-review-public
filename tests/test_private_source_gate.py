@@ -250,7 +250,7 @@ def test_manifest_rejects_label_keys_source_gaps_symlinks_bad_png(tmp_path):
         gate.verify_original_pngs(**dict(args, records=[
             dict(records[0], blood="1"), *records[1:]
         ]))
-    with pytest.raises(ValueError, match="completeness"):
+    with pytest.raises(ValueError, match="incomplete"):
         gate.verify_original_pngs(**dict(args, records=[
             records[0], *records[2:]
         ]))
