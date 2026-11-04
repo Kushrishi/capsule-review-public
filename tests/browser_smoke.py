@@ -125,6 +125,14 @@ with sync_playwright() as p:
     wait_for_js(page, "document.querySelectorAll('#priorityComparison tbody tr').length === 5")
     assert 'deterministic generated examples' in page.locator('#prioritySummary').inner_text().lower()
     assert 'Generated example' in page.locator('#priorityItems').inner_text()
+    # A real Chromium UI test of the fifth, explicitly experimental method.
+    page.locator('#priorityMethod').select_option('score_guarded')
+    page.get_by_role('button', name='Build review queue', exact=True).click()
+    wait_for_js(page, "document.getElementById('prioritySelected').textContent === '6 selected'")
+    wait_for_js(page, "document.getElementById('priorityComparison').textContent.includes('uniform-gap guarded')")
+    assert page.locator('#priorityItems button').count() == 6
+    assert not page.locator('#bookmark').is_checked()
+    checks.append('Browser executes exploratory guarded policy without changing reviewer labels')
     assert page.locator('#reviewNote').input_value() == ''
     assert not page.locator('#bookmark').is_checked()
     page.screenshot(path=str(out/'synthetic-queue-demo.png'),full_page=True)
