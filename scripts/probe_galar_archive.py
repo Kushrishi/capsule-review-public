@@ -1,4 +1,4 @@
-"""Bounded HTTP-Range inspection of the official Galar 21–29 solid 7z archive.
+"""Bounded HTTP-Range inspection of a pinned official Galar 7z archive.
 
 This is a metadata-only technical probe. It NEVER requests image compressed data,
 never makes a full-file request, and refuses 200 OK before reading its body.
@@ -21,9 +21,55 @@ FILE_ID = 45258019
 ARCHIVE_SIZE = 31_989_399_751
 SOURCE_URL = f'https://ndownloader.figshare.com/files/{FILE_ID}'
 EXPECTED_FULL_MD5 = 'dedad47ee55c83a4b991ca60d26fb6ee'
+# Official publisher v2 catalog saved on 2026-11-01; verify a fresh
+# private catalog against these exact values before probing 11–20.
+UNSEEN_FILE_ID = 44725302
+UNSEEN_ARCHIVE_SIZE = 40_043_548_469
+UNSEEN_EXPECTED_FULL_MD5 = 'fdc88663514f5691a14c08dff13c667e'
+UNSEEN_SOURCE_URL = f'https://ndownloader.figshare.com/files/{UNSEEN_FILE_ID}'
+APPROVED_SOURCES = {
+    'fitting-21-30': {
+        'id': FILE_ID, 'name': 'Galar_Frames_21_to_29_2.7z',
+        'size': ARCHIVE_SIZE, 'md5': EXPECTED_FULL_MD5, 'url': SOURCE_URL,
+        'receipt_type': 'galar-21-29-7z-index-only-v1',
+    },
+    'unseen-11-20': {
+        'id': UNSEEN_FILE_ID, 'name': 'Galar_Frames_11_to_20.7z',
+        'size': UNSEEN_ARCHIVE_SIZE, 'md5': UNSEEN_EXPECTED_FULL_MD5,
+        'url': UNSEEN_SOURCE_URL,
+        'receipt_type': 'galar-11-20-7z-index-only-v1',
+    },
+}
 MAX_TRANSFER = 8 * 1024 * 1024
 SIGNATURE = b'7z\xbc\xaf\x27\x1c'
 ALLOWED_REDIRECT_HOSTS = frozenset({'ndownloader.figshare.com', 'figshare.com', 'api.figshare.com'})
+
+
+def validate_official_catalog(catalog: dict, source: str) -> dict:
+    """Validate the publisher v2 record against exact pinned file metadata.
+
+    Metadata verification is NOT image access, a full-archive checksum or
+    proof that this catalog was retrieved recently.
+    """
+    if source not in APPROVED_SOURCES:
+        raise ValueError('Unknown approved source profile.')
+    if (not isinstance(catalog, dict) or catalog.get('id') != 25304616
+            or catalog.get('version') != 2 or not isinstance(catalog.get('files'), list)):
+        raise ValueError('The official Galar v2 catalog identity changed.')
+    expected = APPROVED_SOURCES[source]
+    files = [item for item in catalog['files']
+             if isinstance(item, dict) and item.get('id') == expected['id']]
+    if len(files) != 1:
+        raise ValueError('Pinned official Galar archive is missing or duplicated.')
+    item = files[0]
+    if (item.get('name') != expected['name']
+            or item.get('size') != expected['size']
+            or item.get('download_url') != expected['url']
+            or item.get('is_link_only') is not False
+            or item.get('computed_md5') != expected['md5']
+            or item.get('supplied_md5') != expected['md5']):
+        raise ValueError('Pinned publisher archive name, URL, size or MD5 changed.')
+    return expected
 
 
 def allowed_redirect(url: str) -> bool:
@@ -59,9 +105,13 @@ def unpack_int(data: bytes, pos: int) -> tuple[int, int]:
 class RangeClient:
     """Account exact HTTP bytes at the remote official source, fail closed."""
 
-    def __init__(self, url: str, size: int, cap: int = MAX_TRANSFER, *, allow_test_http=False):
-        if not allow_test_http and (url != SOURCE_URL or size != ARCHIVE_SIZE):
-            raise ValueError('Only official Galar 21–29 source URL and size are accepted.')
+    def __init__(self, url: str, size: int, cap: int = MAX_TRANSFER, *,
+                 allow_test_http=False, source='fitting-21-30'):
+        if source not in APPROVED_SOURCES:
+            raise ValueError('Unknown official Galar source profile.')
+        expected = APPROVED_SOURCES[source]
+        if not allow_test_http and (url != expected['url'] or size != expected['size']):
+            raise ValueError('Only the selected official Galar source URL and size are accepted.')
         if cap <= 0 or cap > MAX_TRANSFER:
             raise ValueError('Metadata transfer cap must not exceed 8 MiB.')
         self.url = url
@@ -69,6 +119,7 @@ class RangeClient:
         self.cap = cap
         self.total = 0
         self.allow_test_http = allow_test_http
+        self.source_profile = source
 
     def read(self, start: int, length: int) -> bytes:
         if (start < 0 or length <= 0 or start > self.size - length
@@ -161,11 +212,13 @@ def inspect(client: RangeClient, destination: Path, *, sparse_path: Path | None 
     for i, (start, size) in enumerate(encoded_header_streams(next_header, client.size)):
         acquire(f'encoded-index-{i}.bin', start, size)
 
+    profile = APPROVED_SOURCES[client.source_profile]
+    trusted_url = client.url == profile['url'] and client.size == profile['size']
     receipt = {
-        'record_type': 'galar-21-29-7z-index-only-v1',
-        'official_file_id': FILE_ID if client.url == SOURCE_URL else None,
+        'record_type': profile['receipt_type'],
+        'official_file_id': profile['id'] if trusted_url else None,
         'official_full_archive_bytes': client.size,
-        'official_full_archive_md5_expected_not_verified': EXPECTED_FULL_MD5 if client.url == SOURCE_URL else None,
+        'official_full_archive_md5_expected_not_verified': profile['md5'] if trusted_url else None,
         'actual_index_only_bytes_transferred': client.total,
         'full_archive_downloaded': False,
         'pixels_acquired': 0,
@@ -191,11 +244,26 @@ def inspect(client: RangeClient, destination: Path, *, sparse_path: Path | None 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--destination', type=Path, required=True, help='New directory; metadata only.')
-    ap.add_argument('--sparse', action='store_true', help='Create a sparse 31.99-GB *logical* archive file, with only verified header bytes.')
+    ap.add_argument('--destination', type=Path, required=True, help='New private staging directory; metadata only.')
+    ap.add_argument('--source', choices=tuple(APPROVED_SOURCES), default='fitting-21-30')
+    ap.add_argument('--catalog', type=Path, help='Freshly downloaded official Figshare v2 JSON catalog; required for unseen.')
+    ap.add_argument('--sparse', action='store_true',
+                    help='Create a large *logical sparse file* containing only verified header bytes.')
     args = ap.parse_args()
-    client = RangeClient(SOURCE_URL, ARCHIVE_SIZE)
-    report = inspect(client, args.destination, sparse_path=(args.destination / 'headers-only.7z') if args.sparse else None)
+    source = APPROVED_SOURCES[args.source]
+    if args.source == 'unseen-11-20':
+        if args.catalog is None:
+            ap.error('--catalog is required for unseen source metadata.')
+        if (args.catalog.is_symlink() or not args.catalog.is_file()
+                or not 0 < args.catalog.stat().st_size <= 8 * 1024 * 1024):
+            ap.error('A regular, bounded official catalog JSON file is required.')
+        validate_official_catalog(json.loads(args.catalog.read_text(encoding='utf-8')), args.source)
+        repository_root = Path(__file__).resolve().parents[1]
+        if args.destination.resolve(strict=False).is_relative_to(repository_root):
+            ap.error('Unseen source index receipts must remain outside public Git.')
+    client = RangeClient(source['url'], source['size'], source=args.source)
+    report = inspect(client, args.destination,
+                     sparse_path=(args.destination / 'headers-only.7z') if args.sparse else None)
     print('Verified official 7z header CRCs and strict HTTP byte ranges.')
     print(json.dumps({k: v for k, v in report.items() if k not in {'parts'}}))
 
