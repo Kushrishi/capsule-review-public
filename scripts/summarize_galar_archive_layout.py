@@ -60,7 +60,8 @@ def summarise(text: str, index_receipt: dict, *, source: str = 'fitting-21-30') 
     expected = APPROVED_SOURCES[source]
     if (index_receipt.get('official_file_id') != expected['id']
             or index_receipt.get('official_full_archive_bytes') != expected['size']
-            or index_receipt.get('record_type', expected['receipt_type']) != expected['receipt_type']
+            or (source == 'unseen-11-20' and index_receipt.get('record_type') != expected['receipt_type'])
+            or (source == 'fitting-21-30' and index_receipt.get('record_type', expected['receipt_type']) != expected['receipt_type'])
             or index_receipt.get('full_archive_downloaded') is not False
             or index_receipt.get('pixels_acquired') != 0):
         raise ValueError('Trusted matching header-only Galar receipt is required.')
