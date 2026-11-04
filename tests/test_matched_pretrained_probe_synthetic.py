@@ -3,12 +3,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import zipfile
-import numpy as np
 import pytest
 
-from scripts.matched_pretrained_probe import fit_one_fold, read_verified_private_features
-
+np=pytest.importorskip("numpy")
 pytest.importorskip("sklearn")
+from scripts.matched_pretrained_probe import fit_one_fold, read_verified_private_features
 
 
 def synthetic_reference_bank():
@@ -64,8 +63,8 @@ def test_refuse_modified_fitting_population_and_invalid_holdout():
     with pytest.raises(ValueError):
         fit_one_fold(x,y,leaked,25)
     changed=y.copy()
-    changed[np.flatnonzero(exams==27)[0]]=0
-    changed[np.flatnonzero(exams==27)[1]]=0
+    positive_27=np.flatnonzero((exams==27)&(y==1))[0]
+    changed[positive_27]=0
     with pytest.raises(ValueError):
         fit_one_fold(x,changed,exams,23)
 
