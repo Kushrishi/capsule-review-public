@@ -16,6 +16,7 @@ DOCS = (
     ROOT / "docs" / "PUBLIC_RELEASE_SAFETY.md",
     ROOT / "docs" / "PROJECT_MATURITY_AUDIT_20261104.md",
     ROOT / "docs" / "SUPERVISOR_DEMO.md",
+    ROOT / "docs" / "RESEARCH_COLLABORATION_BRIEF.md",
 )
 
 
