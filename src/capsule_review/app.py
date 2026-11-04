@@ -20,12 +20,12 @@ from fastapi.staticfiles import StaticFiles
 from starlette.background import BackgroundTask
 
 from . import __version__
-from .demo_scores import ensure_demo_scores
+from .demo_scores import open_or_create_demo
 from .exporter import export_review
 from .full_span_evidence import export_full_span_evidence
 from .evidence_receipt import account_review_evidence
 from .interval_evidence import read_review_export
-from .importer import MAX_FILE_BYTES, create_demo, import_sources, natural_key, now, validate_filename
+from .importer import MAX_FILE_BYTES, import_sources, natural_key, now, validate_filename
 from .models import ImportMeta, IntervalCreate, LocalPredictionRequest, PositionUpdate, PredictionImport, ReviewUpdate
 from .store import Store
 from .source_coverage import summarize_source_spacing
@@ -113,13 +113,8 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
     @app.post('/api/demo', status_code=201)
     async def demo(study_id: str | None = None):
         """Create the synthetic demo or upgrade its previous version in-place."""
-        def prepare():
-            study = create_demo(store) if study_id is None else store.study(study_id)
-            if study is None:
-                raise ValueError("The built-in test sequence does not exist.")
-            return ensure_demo_scores(store, study["id"])
         try:
-            return await run_in_threadpool(prepare)
+            return await run_in_threadpool(open_or_create_demo, store, study_id)
         except ValueError as exc:
             raise HTTPException(422, str(exc)) from exc
 
