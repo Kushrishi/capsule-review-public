@@ -125,6 +125,7 @@ def verify_original_pngs(
 def _selection_record(
     frames: list[int],
     hashes: list[str],
+    names: list[str],
     scores: list[float],
     weights_sha256: str,
     protocol_sha256: str,
@@ -137,6 +138,7 @@ def _selection_record(
         "model_weights_sha256_claimed": weights_sha256,
         "source_frames": frames,
         "source_image_sha256": hashes,
+        "source_image_names": names,
         "model_scores": scores,
         "selection_by_percent": [
             [percent, count, [[method, list(positions)] for method, positions in policies]]
@@ -174,7 +176,10 @@ def freeze_private_queues(
         image_root, image_records, expected_first=expected_first,
         expected_last=expected_last, expected_count=expected_count,
     )
-    record, _ = _selection_record(frames, hashes, scores, weights_sha256, protocol_digest)
+    record, _ = _selection_record(
+        frames, hashes, [item["name"] for item in image_records],
+        scores, weights_sha256, protocol_digest,
+    )
     raw = _canonical(record) + b"\n"
     if len(raw) > MAX_PRIVATE_RECORD_BYTES:
         raise ValueError("The private freeze snapshot is too large.")
@@ -215,7 +220,7 @@ def load_private_queues(
     record = json.loads(raw)
     if not isinstance(record, dict) or set(record) != {
         "schema_version", "purpose", "protocol_sha256", "model_weights_sha256_claimed",
-        "source_frames", "source_image_sha256", "model_scores",
+        "source_frames", "source_image_sha256", "source_image_names", "model_scores",
         "selection_by_percent", "score_input_commitment_sha256",
     } or record["schema_version"] != 1:
         raise ValueError("The private frozen snapshot schema changed.")
@@ -225,11 +230,14 @@ def load_private_queues(
         raise ValueError("The protocol or claimed model changed since the freeze.")
     frames = record["source_frames"]
     hashes = record["source_image_sha256"]
+    names = record["source_image_names"]
     scores = record["model_scores"]
     if not isinstance(frames, list) or not frames:
         raise ValueError("Frozen original source identities are missing.")
-    rows = [{"frame": f, "name": f"frame_{f:06d}.png", "sha256": h}
-            for f, h in zip(frames, hashes)]
+    if not isinstance(names, list) or len(names) != len(frames):
+        raise ValueError("Original image filenames are missing from the frozen snapshot.")
+    rows = [{"frame": f, "name": name, "sha256": h}
+            for f, name, h in zip(frames, names, hashes)]
     if len(rows) != len(frames):
         raise ValueError("Frozen original source checksums are incomplete.")
     observed_frames, observed_hashes = verify_original_pngs(
@@ -239,7 +247,7 @@ def load_private_queues(
     if observed_frames != frames or observed_hashes != hashes:
         raise ValueError("Original source identities differ from the frozen private record.")
     recalculated, frozen = _selection_record(
-        frames, hashes, scores, record["model_weights_sha256_claimed"], current_protocol_sha,
+        frames, hashes, names, scores, record["model_weights_sha256_claimed"], current_protocol_sha,
     )
     if recalculated != record:
         raise ValueError("The frozen source/score policies do not replay exactly.")
