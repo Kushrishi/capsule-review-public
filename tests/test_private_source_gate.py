@@ -69,6 +69,7 @@ def _case(tmp_path: Path, *, positive=(5, 6, 15, 16), unknown=(), missing=()):
     return {
         "image_root": images,
         "image_records": entries,
+        "examination_id": 11,
         "scores": [(20 - i) / 20 for i in range(20)],  # Deliberately wrong.
         "expected_first": 0,
         "expected_last": 95,
@@ -119,6 +120,7 @@ def test_full_synthetic_png_to_private_freeze_to_one_label_to_aggregate(tmp_path
     private = json.loads(case["destination"].read_bytes())
     assert private["source_image_names"][0] == "research-source-0000.png"
     assert private["source_frames"] == list(range(0, 100, 5))
+    assert private["examination_id"] == 11
     assert private["model_weights_sha256_claimed"] == MODEL_SHA
     assert private["source_image_sha256"] == [
         row["sha256"] for row in case["image_records"]
@@ -279,3 +281,26 @@ def test_private_snapshot_must_be_outside_public_repository(tmp_path):
     with pytest.raises(ValueError, match="may not be written inside public"):
         _freeze(dict(case, destination=public_root / "never-create-freeze.json"))
     assert not (public_root / "never-create-freeze.json").exists()
+
+
+def test_cross_examination_label_member_rejected_before_any_zip_read(tmp_path, monkeypatch):
+    case = _case(tmp_path)
+    digest = _freeze(case)
+    accessed = []
+    monkeypatch.setattr(
+        gate, "load_locked_corrected_csv",
+        lambda *a, **kw: accessed.append("labels opened"),
+    )
+    with pytest.raises(ValueError, match="evaluation examination differs"):
+        gate.evaluate_private_snapshot(
+            destination=case["destination"],
+            expected_snapshot_sha256=digest,
+            image_root=case["image_root"],
+            protocol_path=case["protocol_path"],
+            labels_zip=case["labels_zip"],
+            exam=12,
+        )
+    assert accessed == []
+    # The originating exam cannot be changed after writing a frozen snapshot.
+    with pytest.raises(FileExistsError):
+        _freeze(dict(case, examination_id=12))
