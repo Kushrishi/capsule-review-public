@@ -68,6 +68,27 @@ K. If this occurs in the real dataset, resolve the missingness/eligibility
 policy in a dated amendment *before* viewing holdout values; never
 silently drop unknown frames, infer negatives or retune queues.
 
+## Private source-byte and queue-freeze gate
+
+`capsule_review.private_source_gate` now supports a separate **private-only**
+pre-label stage. It requires a source-index range established independently of
+outcome labels, rehashes and fully decodes **every supplied original PNG**, then
+writes a restrictive, exclusive-create snapshot of the source identities,
+claimed pinned model SHA-256, score stream, protocol SHA-256 and all four
+exact-K selections. It returns a snapshot SHA-256 that must be preserved in a
+**separate, independently timestamped private record** before the label ZIP
+is opened. On evaluation, it checks that external digest, rehashes all pixels,
+replays the selections and reads only the expressly approved CSV member.
+
+Tests use **generated images and a generated ZIP only**; they also verify
+that other examinations (including the authors' reserved 61–80) are not
+decoded. This is a privacy/integrity rehearsal, not original clinical data
+processing. The code does **not** run the original CNN, verify that supplied
+scores actually came from that model, prove patient independence, validate
+the independently asserted source-index extent, or create an external
+trusted timestamp. The existing private model-package preflight and a
+separate source-acquisition provenance check remain compulsory.
+
 ## Blockers, not waivable assumptions
 
 The original archive of corrected source labels and dense original images from evaluation examinations 11–20 is **not currently present** in the verified private workspace. The 512-image reference subsets from earlier experiments are not a replacement. No 11–20 source image was inspected or source-label value decoded for this work; no holdout score or test accuracy was calculated, and no claim of superior pathology retrieval is made. A prior archive-integrity-only ZIP-wide CRC check touched protected compressed entries without parsing their label values, was disclosed, and was removed from the evaluation pipeline. **The gate stays closed** until verified acquisition and the frozen blinded scoring sequence can be performed in private compute.
