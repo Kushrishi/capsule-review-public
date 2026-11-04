@@ -25,7 +25,7 @@ py -m venv .venv
 .\.venv\Scripts\capsule-review.exe serve
 ```
 
-Open [http://127.0.0.1:8765](http://127.0.0.1:8765) and select **Open test sequence**. This uses generated, nonmedical images; you do not need research data or model weights to try the application. The server binds to localhost.
+Open [http://127.0.0.1:8765](http://127.0.0.1:8765) and select **Open test sequence**. It creates 24 **generated, nonmedical images** and a complete set of **deterministic example scores**—not learned model predictions. Select **Compare six-image queues** to exercise the real four-policy, exact-K queue and inspect omitted spans without any research data or model weights. You can then bookmark frames, add notes, mark intervals, verify evidence and export a review. Earlier generated test sequences are updated on demand without overwriting notes or creating duplicate score runs. The server binds to localhost. The **Study results** link opens the separate public-aggregate-only [locked Galar results explorer](src/capsule_review/static/locked-results.html); the synthetic demo is *not* a replay of Galar clinical findings.
 
 ## What works
 
