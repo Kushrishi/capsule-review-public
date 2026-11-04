@@ -38,7 +38,8 @@ def _source_csv(*, positive=(5, 6, 15, 16), unknown=(), missing=()) -> bytes:
     return out.getvalue().encode()
 
 
-def _case(tmp_path: Path, *, positive=(5, 6, 15, 16)):
+def _case(tmp_path: Path, *, positive=(5, 6, 15, 16), unknown=(), missing=()):
+    tmp_path.mkdir(parents=True, exist_ok=True)
     images = tmp_path / "original_synthetic_png"
     images.mkdir()
     entries = []
@@ -58,7 +59,7 @@ def _case(tmp_path: Path, *, positive=(5, 6, 15, 16)):
     # A deliberately uninspectable authors' member, plus other study entries.
     labels = tmp_path / "generated_corrected_labels.zip"
     with zipfile.ZipFile(labels, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-        archive.writestr("11.csv", _source_csv(positive=positive))
+        archive.writestr("11.csv", _source_csv(positive=positive, unknown=unknown, missing=missing))
         archive.writestr("61.csv", b"PROTECTED AUTHORS' CSV: NEVER PARSE THIS")
         archive.writestr("12.csv", b"OTHER LOCKED EXAM: NEVER PARSE THIS")
     spec = json.loads(ORIGINAL_SPEC.read_text(encoding="utf-8"))
@@ -223,25 +224,16 @@ def test_unauthorized_label_members_and_wrong_archive_fail_closed(tmp_path, monk
 
 def test_unknown_and_missing_annotations_fail_closed(tmp_path):
     for variant in ("unknown", "missing"):
-        case = _case(tmp_path / variant)
+        case = _case(
+            tmp_path / variant,
+            unknown=(7,) if variant == "unknown" else (),
+            missing=(7,) if variant == "missing" else (),
+        )
         digest = _freeze(case)
-        with zipfile.ZipFile(case["labels_zip"], "w", compression=zipfile.ZIP_DEFLATED) as archive:
-            archive.writestr(
-                "11.csv",
-                _source_csv(unknown=(7,)) if variant == "unknown"
-                else _source_csv(missing=(7,)),
-            )
-            archive.writestr("61.csv", b"PRIVATE")
-        spec = json.loads(case["protocol_path"].read_text())
-        spec["publisher"]["expected_sha256"] = hashlib.sha256(
-            case["labels_zip"].read_bytes()
-        ).hexdigest()
-        case["protocol_path"].write_text(json.dumps(spec))
-        # The *protocol itself* changed after freezing; this must stop
-        # BEFORE any label parsing. A fresh synthetic freeze is needed.
-        with pytest.raises(ValueError, match="protocol or claimed model"):
+        # The locked protocol remains identical after freezing; only the
+        # synthetic CSV outcome differs. No eligibility is silently altered.
+        with pytest.raises(ValueError, match="Unknown labels|Missing, extra|stride"):
             _evaluate(case, digest)
-
 
 def test_manifest_rejects_label_keys_source_gaps_symlinks_bad_png(tmp_path):
     case = _case(tmp_path)
