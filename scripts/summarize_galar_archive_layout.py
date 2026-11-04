@@ -12,7 +12,13 @@ import json
 from pathlib import Path, PurePosixPath
 import re
 
+from probe_galar_archive import APPROVED_SOURCES
+
 EXPECTED_EXAMS = frozenset(range(21, 31))
+EXAMINATIONS_BY_SOURCE = {
+    'fitting-21-30': EXPECTED_EXAMS,
+    'unseen-11-20': frozenset(range(11, 21)),
+}
 IMAGE_EXTENSIONS = frozenset({'.png', '.jpg', '.jpeg', '.webp'})
 
 
@@ -37,22 +43,28 @@ def records(text: str) -> list[dict[str, str]]:
     return entries
 
 
-def get_exam(path: str) -> int | None:
+def get_exam(path: str, *, allowed_exams: frozenset[int] = EXPECTED_EXAMS) -> int | None:
     if (not path or path.startswith(('/', '\\')) or '\x00' in path or
             '..' in path.replace('\\', '/').split('/') or ':' in path):
         raise ValueError('Unsafe archive member path.')
     segments = path.replace('\\', '/').split('/')
-    matches = {int(s) for s in segments[:-1] if s.isdigit() and int(s) in EXPECTED_EXAMS}
+    matches = {int(s) for s in segments[:-1] if s.isdigit() and int(s) in allowed_exams}
     if len(matches) > 1:
         raise ValueError('Ambiguous exam ID in archive path.')
     return next(iter(matches)) if matches else None
 
 
-def summarise(text: str, index_receipt: dict) -> dict:
-    if (index_receipt.get('official_file_id') != 45258019
+def summarise(text: str, index_receipt: dict, *, source: str = 'fitting-21-30') -> dict:
+    if source not in EXAMINATIONS_BY_SOURCE:
+        raise ValueError('Unrecognized approved Galar source profile.')
+    expected = APPROVED_SOURCES[source]
+    if (index_receipt.get('official_file_id') != expected['id']
+            or index_receipt.get('official_full_archive_bytes') != expected['size']
+            or index_receipt.get('record_type', expected['receipt_type']) != expected['receipt_type']
             or index_receipt.get('full_archive_downloaded') is not False
             or index_receipt.get('pixels_acquired') != 0):
-        raise ValueError('Trusted Galar 21–29 header-only receipt is required.')
+        raise ValueError('Trusted matching header-only Galar receipt is required.')
+    allowed_exams = EXAMINATIONS_BY_SOURCE[source]
     images = Counter()
     exam21_basename_patterns = Counter()
     blocks: dict[int, dict] = {}
@@ -62,7 +74,7 @@ def summarise(text: str, index_receipt: dict) -> dict:
         path = entry['Path']
         is_dir = entry.get('Folder') == '+' or entry.get('Attributes', '').startswith('D')
         if is_dir:
-            get_exam(path)
+            get_exam(path, allowed_exams=allowed_exams)
             continue
         suffix = Path(path).suffix.lower()
         blockstr = entry.get('Block', '').strip()
@@ -85,26 +97,28 @@ def summarise(text: str, index_receipt: dict) -> dict:
         if suffix not in IMAGE_EXTENSIONS:
             other += 1
             continue
-        exam = get_exam(path)
+        exam = get_exam(path, allowed_exams=allowed_exams)
         if exam is None:
             unassigned += 1
             continue
         images[exam] += 1
-        if exam == 21:
+        if source == 'fitting-21-30' and exam == 21:
             # Structural pattern only. Do not export individual source frame IDs.
             exam21_basename_patterns[re.sub(r'\d+', '<digits>', PurePosixPath(path.replace('\\', '/')).name)] += 1
         item['image_count'] += 1
         item['examinations'][exam] += 1
     if not blocks or any(n < 1 for n in images.values()):
         raise ValueError('No compression blocks or files.')
-    return {
-        'record_type': 'galar-21-29-index-only-block-summary-v1',
-        'origin_file_id': 45258019,
+    result = {
+        'record_type': (
+            'galar-21-29-index-only-block-summary-v1'
+            if source == 'fitting-21-30' else 'galar-11-20-index-only-block-summary-v1'
+        ),
+        'origin_file_id': expected['id'],
         'archive_bytes': index_receipt['official_full_archive_bytes'],
         'pixels_read': 0,
         'full_source_checksum_verified': False,
         'image_members_by_exam': {str(x): images[x] for x in sorted(images)},
-        'exam21_basename_patterns_only': dict(sorted(exam21_basename_patterns.items())),
         'unassigned_image_members': unassigned,
         'other_file_members': other,
         'total_compression_blocks': len(blocks),
@@ -113,6 +127,9 @@ def summarise(text: str, index_receipt: dict) -> dict:
                    for _, row in sorted(blocks.items())],
         'interpretation': 'Index-only candidate; compressed block sizes are not verified pixel bytes or complete source acquisition.'
     }
+    if source == 'fitting-21-30':
+        result['exam21_basename_patterns_only'] = dict(sorted(exam21_basename_patterns.items()))
+    return result
 
 
 def main():
@@ -120,11 +137,13 @@ def main():
     p.add_argument('--7z-listing', type=Path, required=True)
     p.add_argument('--source-receipt', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--source', choices=tuple(EXAMINATIONS_BY_SOURCE),
+                   default='fitting-21-30')
     args = p.parse_args()
     if args.output.exists():
         p.error('Refuse to overwrite previous layout result.')
     receipt = json.loads(args.source_receipt.read_text())
-    result = summarise(args.__dict__['7z_listing'].read_text(encoding='utf8'), receipt)
+    result = summarise(args.__dict__['7z_listing'].read_text(encoding='utf8'), receipt, source=args.source)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + '\n')
     print('Parsed archive index: blocks', result['total_compression_blocks'],
           'mapped examinations', len(result['image_members_by_exam']),
