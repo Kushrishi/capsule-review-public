@@ -86,3 +86,7 @@ The [non-identifying aggregate](../experiments/galar-unseen-11-20-20261104/aggre
 The pure accounting module’s `*_verified_by_this_module=false` fields refer to that module alone; the separate end-to-end source gates above performed the byte/checkpoint/ZIP validation. Original frozen protocol/model metadata retain their historical initial status; this report records completed execution.
 
 Patient independence and cross-patient generalization are unverified. Runs are not adjudicated lesions; reference annotations are not clinical truth; ordinal gaps are not time. No human-reader sensitivity, actual clinician-time benefit, diagnostic validity, novelty or publication readiness is established. Four zero-positive cases and only six defined paired observations limit interpretation. No model is promoted. The earlier sparse-reference results and negative findings remain unchanged.
+
+## Dataset attribution
+
+Le Floch et al., [*Galar — a large multi-label video capsule endoscopy dataset*](https://doi.org/10.1038/s41597-025-05112-7), *Scientific Data* **12**, 828 (2025). Dataset: [Figshare+ version 2](https://doi.org/10.25452/figshare.plus.25304616.v2), **CC BY 4.0**. The corrected reference archive is `20251215_Labels_Updated.zip` (file **60383963**, SHA-256 `2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f`). Dataset attribution is separate from the repository's software licensing.
