@@ -110,6 +110,11 @@ def summarise(text: str, index_receipt: dict, *, source: str = 'fitting-21-30') 
         item['examinations'][exam] += 1
     if not blocks or any(n < 1 for n in images.values()):
         raise ValueError('No compression blocks or files.')
+    if source == 'unseen-11-20':
+        if unassigned:
+            raise ValueError('Unseen source index contains an unexpected image member.')
+        if set(images) != allowed_exams:
+            raise ValueError('Unseen source index is missing one or more locked examinations.')
     result = {
         'record_type': (
             'galar-21-29-index-only-block-summary-v1'
