@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "study": "Exploratory fitting-only photometric model robustness; NOT independent validation",
+  "source": "Original CNN fixed weights; privately retained original Galar 23/25/27 reference images",
+  "original_model_weights_sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+  "unpromoted_candidate_weights_sha256": "16dff266f242d3bce7a510a0f13f158500776bd2f9ea8626809866ce337cacdb",
+  "fitting_examinations": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "previously_inspected_examinations": [
+    23,
+    25,
+    27
+  ],
+  "total_evaluation_reference_images": 1536,
+  "verified_original_image_hashes": 1536,
+  "perturbations": "On 96x96 padded model input, original; brightness ×.75/×1.25; contrast ×.8 about whole-image mean; saturation ×.7/×1.3 with RGB luminance mix; clamp to [0,1]",
+  "candidate_training": {
+    "fixed_epochs": 8,
+    "seed": 17,
+    "augmentation_seed": 25072026,
+    "verified_fitting_images": 4096,
+    "positive_fitting_images": 239,
+    "brightness_range": [
+      0.75,
+      1.25
+    ],
+    "contrast_range": [
+      0.8,
+      1.2
+    ],
+    "saturation_range": [
+      0.7,
+      1.3
+    ],
+    "trained_on_held_out_examinations": false
+  },
+  "per_examination": {
+    "23": {
+      "images": 512,
+      "positive_annotated_images": 4,
+      "original_model": {
+        "roc_auc": 0.202756,
+        "average_precision": 0.005948,
+        "top_51_positive_images": 0
+      },
+      "color_augmented_candidate": {
+        "roc_auc": 0.466043,
+        "average_precision": 0.017785,
+        "top_51_positive_images": 1
+      },
+      "repeat_inference": {
+        "brightness_075": {
+          "roc_auc": 0.1875,
+          "top_51_positive_images": 0,
+          "rank_spearman_to_original": 0.954429,
+          "top_51_changed_positions": 10
+        },
+        "brightness_125": {
+          "roc_auc": 0.271654,
+          "top_51_positive_images": 0,
+          "rank_spearman_to_original": 0.97796,
+          "top_51_changed_positions": 10
+        },
+        "contrast_080": {
+          "roc_auc": 0.20128,
+          "top_51_positive_images": 0,
+          "rank_spearman_to_original": 0.727131,
+          "top_51_changed_positions": 45
+        },
+        "original": {
+          "roc_auc": 0.202756,
+          "top_51_positive_images": 0,
+          "rank_spearman_to_original": 1,
+          "top_51_changed_positions": 0
+        },
+        "saturation_070": {
+          "roc_auc": 0.29626,
+          "top_51_positive_images": 0,
+          "rank_spearman_to_original": 0.559564,
+          "top_51_changed_positions": 47
+        },
+        "saturation_130": {
+          "roc_auc": 0.331693,
+          "top_51_positive_images": 0,
+          "rank_spearman_to_original": 0.821686,
+          "top_51_changed_positions": 31
+        }
+      },
+      "original_score_replay_max_abs_difference": 0.000001818
+    },
+    "25": {
+      "images": 512,
+      "positive_annotated_images": 14,
+      "original_model": {
+        "roc_auc": 0.304504,
+        "average_precision": 0.022098,
+        "top_51_positive_images": 0
+      },
+      "color_augmented_candidate": {
+        "roc_auc": 0.478342,
+        "average_precision": 0.035398,
+        "top_51_positive_images": 1
+      },
+      "repeat_inference": {
+        "brightness_075": {
+          "roc_auc": 0.293029,
+          "top_51_positive_images": 0,
+          "rank_spearman_to_original": 0.988934,
+          "top_51_changed_positions": 1
+        },
+        "brightness_125": {
+          "roc_auc": 0.301779,
+          "top_51_positive_images": 0,
+          "rank_spearman_to_original": 0.976264,
+          "top_51_changed_positions": 1
+        },
+        "contrast_080": {
+          "roc_auc": 0.246558,
+          "top_51_positive_images": 2,
+          "rank_spearman_to_original": 0.897028,
+          "top_51_changed_positions": 20
+        },
+        "original": {
+          "roc_auc": 0.304504,
+          "top_51_positive_images": 0,
+          "rank_spearman_to_original": 1,
+          "top_51_changed_positions": 0
+        },
+        "saturation_070": {
+          "roc_auc": 0.263769,
+          "top_51_positive_images": 2,
+          "rank_spearman_to_original": 0.792155,
+          "top_51_changed_positions": 44
+        },
+        "saturation_130": {
+          "roc_auc": 0.208548,
+          "top_51_positive_images": 0,
+          "rank_spearman_to_original": 0.489421,
+          "top_51_changed_positions": 7
+        }
+      },
+      "original_score_replay_max_abs_difference": 0.000002146
+    },
+    "27": {
+      "images": 512,
+      "positive_annotated_images": 26,
+      "original_model": {
+        "roc_auc": 0.969848,
+        "average_precision": 0.865579,
+        "top_51_positive_images": 22
+      },
+      "color_augmented_candidate": {
+        "roc_auc": 0.880579,
+        "average_precision": 0.783841,
+        "top_51_positive_images": 21
+      },
+      "repeat_inference": {
+        "brightness_075": {
+          "roc_auc": 0.977287,
+          "top_51_positive_images": 24,
+          "rank_spearman_to_original": 0.920793,
+          "top_51_changed_positions": 10
+        },
+        "brightness_125": {
+          "roc_auc": 0.960272,
+          "top_51_positive_images": 21,
+          "rank_spearman_to_original": 0.94029,
+          "top_51_changed_positions": 6
+        },
+        "contrast_080": {
+          "roc_auc": 0.914134,
+          "top_51_positive_images": 15,
+          "rank_spearman_to_original": 0.598036,
+          "top_51_changed_positions": 31
+        },
+        "original": {
+          "roc_auc": 0.969848,
+          "top_51_positive_images": 22,
+          "rank_spearman_to_original": 1,
+          "top_51_changed_positions": 0
+        },
+        "saturation_070": {
+          "roc_auc": 0.735992,
+          "top_51_positive_images": 7,
+          "rank_spearman_to_original": 0.482023,
+          "top_51_changed_positions": 39
+        },
+        "saturation_130": {
+          "roc_auc": 0.968661,
+          "top_51_positive_images": 22,
+          "rank_spearman_to_original": 0.656268,
+          "top_51_changed_positions": 20
+        }
+      },
+      "original_score_replay_max_abs_difference": 0.000002027
+    }
+  },
+  "clinical_validity": false,
+  "independent_evaluation": false,
+  "patient_independence_verified": false,
+  "model_promoted": false,
+  "locked_galar_11_20_not_reused": true,
+  "authors_reserved_61_80_unopened": true,
+  "no_original_images_labels_individual_scores_or_model_weights_published": true,
+  "limitations": [
+    "3 previously inspected reference examinations, not independent patients",
+    "4 and 14 positives in hard examinations; unstable examination-level metrics",
+    "Sparsely sampled 512 images, not full video event/annotation-run recall",
+    "Changed image appearance is synthetic stress testing, not a calibrated real-world acquisition shift",
+    "No clinical sensitivity or reading-time benefits established",
+    "A candidate that improves hard cases can still deteriorate on other examinations"
+  ]
+}
