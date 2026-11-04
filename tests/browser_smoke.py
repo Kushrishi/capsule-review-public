@@ -122,13 +122,13 @@ with sync_playwright() as p:
     assert page.get_by_role('button', name='Use as reviewer label').count() == 0
     page.get_by_role('button', name='Compare six-image queues').click()
     wait_for_js(page, "document.getElementById('prioritySelected').textContent === '6 selected'")
-    wait_for_js(page, "document.querySelectorAll('#priorityComparison tbody tr').length === 4")
+    wait_for_js(page, "document.querySelectorAll('#priorityComparison tbody tr').length === 5")
     assert 'deterministic generated examples' in page.locator('#prioritySummary').inner_text().lower()
     assert 'Generated example' in page.locator('#priorityItems').inner_text()
     assert page.locator('#reviewNote').input_value() == ''
     assert not page.locator('#bookmark').is_checked()
     page.screenshot(path=str(out/'synthetic-queue-demo.png'),full_page=True)
-    checks.append('Generated nonmedical scores enable all four exact-K queue policies without an AI model')
+    checks.append('Generated nonmedical scores enable five exact-K policies without an AI model')
     page.locator('#reviewLabel').fill('Navigation check')
     page.locator('#reviewNote').fill('Software test: verify this frame, save the note, and reopen the review.')
     page.get_by_role('button',name='Save review',exact=True).click()
@@ -325,7 +325,7 @@ with sync_playwright() as p:
         wait_for_js(page, "document.getElementById('frameImage').complete && document.getElementById('frameImage').naturalWidth > 0")
         assert page.locator('#savedCount').inner_text() == '1'
         checks.append('Browser builds scored, chronology-diverse exact-K queue; navigation preserves human review')
-        wait_for_js(page, "document.querySelectorAll('#priorityComparison tbody tr').length === 4")
+        wait_for_js(page, "document.querySelectorAll('#priorityComparison tbody tr').length === 5")
         assert 'Highest model scores' in page.locator('#priorityComparison').inner_text()
         assert 'Uniform baseline' in page.locator('#priorityComparison').inner_text()
         assert '3 of ' in page.locator('#priorityComparison').inner_text()
@@ -334,7 +334,7 @@ with sync_playwright() as p:
             inspectable.first.click()
             wait_for_js(page, "document.getElementById('frameImage').complete && document.getElementById('frameImage').naturalWidth > 0")
             assert page.locator('#savedCount').inner_text() == '1'
-        checks.append('Four equal-K policy gap comparisons render; omitted image inspection preserves reviews')
+        checks.append('Five equal-K policy gap comparisons render; omitted image inspection preserves reviews')
         page.locator('#priorityMethod').select_option('uniform')
         page.get_by_role('button', name='Build review queue', exact=True).click()
         wait_for_js(page, "document.getElementById('prioritySelected').textContent === '3 selected'")
