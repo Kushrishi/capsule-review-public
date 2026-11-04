@@ -304,3 +304,38 @@ def test_cross_examination_label_member_rejected_before_any_zip_read(tmp_path, m
     # The originating exam cannot be changed after writing a frozen snapshot.
     with pytest.raises(FileExistsError):
         _freeze(dict(case, examination_id=12))
+
+
+def test_explicit_eligibility_accepts_real_source_gap_but_not_missing_eligible_image(tmp_path):
+    case = _case(tmp_path)
+    entries = [row for i, row in enumerate(case['image_records']) if i != 2]
+    expected = [row['frame'] for row in entries]
+    args = dict(root=case['image_root'], records=entries, expected_first=0,
+                expected_last=95, expected_count=19)
+    # Inferring a contiguous grid is still forbidden without a separate identity set.
+    with pytest.raises(ValueError, match='incomplete'):
+        gate.verify_original_pngs(**args)
+    frames, _ = gate.verify_original_pngs(**args, expected_source_frames=expected)
+    assert frames == expected and 10 not in frames
+    with pytest.raises(ValueError, match='completeness'):
+        gate.verify_original_pngs(**dict(args, records=case['image_records'][:19]),
+                                  expected_source_frames=expected)
+    with pytest.raises(ValueError, match='eligible source identities'):
+        gate.verify_original_pngs(**args, expected_source_frames=list(reversed(expected)))
+    # Freeze/load replays the exact explicit identities; it does not synthesize the gap.
+    case.update(image_records=entries, expected_count=19, expected_source_frames=expected,
+                scores=[(19-i)/19 for i in range(19)])
+    sha = _freeze(case)
+    frozen = gate.load_private_queues(destination=case['destination'], expected_snapshot_sha256=sha,
+                                     image_root=case['image_root'], protocol_path=case['protocol_path'],
+                                     expected_exam=11)
+    assert frozen.source_frames == tuple(expected)
+
+
+def test_explicit_gap_does_not_bridge_corrected_positive_annotation_runs():
+    from capsule_review.interval_evidence import segment_positive_runs
+    runs, _ = segment_positive_runs([
+        {'frame': 0, 'blood': '1'}, {'frame': 5, 'blood': '1'},
+        {'frame': 15, 'blood': '1'}, {'frame': 20, 'blood': '1'},
+    ])
+    assert [tuple(run['frames']) for run in runs] == [(0, 5), (15, 20)]
