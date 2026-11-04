@@ -63,3 +63,13 @@ def test_public_entrypoints_stay_concise_without_escaped_newlines():
         content = (ROOT / filename).read_text(encoding="utf-8")
         assert len(content.split()) <= max_words, f"{filename} is becoming a running lab notebook"
         assert "\\n\\n" not in content, f"{filename} contains literal escaped line breaks"
+
+
+def test_interval_export_copy_distinguishes_boundary_and_full_span_exports():
+    html = (ROOT / "src" / "capsule_review" / "static" / "index.html").read_text(
+        encoding="utf-8"
+    )
+    assert "Export review keeps interval endpoints and saved frames." in html
+    assert "Export full spans includes every imported image within marked intervals" in html
+    assert "not unimported video frames" in html
+    assert "never unseen interior images" not in html
