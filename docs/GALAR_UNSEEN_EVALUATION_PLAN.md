@@ -89,6 +89,37 @@ the independently asserted source-index extent, or create an external
 trusted timestamp. The existing private model-package preflight and a
 separate source-acquisition provenance check remain compulsory.
 
+## Private archive index preflight — November 4
+
+The saved official Figshare Galar v2 catalogue identifies
+\`Galar_Frames_11_to_20.7z\` (file **44725302**; **40,043,548,469 bytes**;
+publisher MD5 \`fdc88663514f5691a14c08dff13c667e\`). The live publisher
+page still lists v2, but current API file metadata was not independently
+retrieved during this update. Before any source-byte transfer, obtain a
+**fresh** official metadata catalogue privately and check these pinned fields.
+
+\`\`\`bash
+capsule-review data catalog --output /private/galar-v2-catalog.json
+python scripts/probe_galar_archive.py --source unseen-11-20 \
+  --catalog /private/galar-v2-catalog.json \
+  --destination /private/galar-unseen-index --sparse
+7z l -slt /private/galar-unseen-index/headers-only.7z \
+  > /private/galar-unseen-index/listing.txt
+python scripts/summarize_galar_archive_layout.py --source unseen-11-20 \
+  --7z-listing /private/galar-unseen-index/listing.txt \
+  --source-receipt /private/galar-unseen-index/receipt.json \
+  --output /private/galar-unseen-index/summary.json
+\`\`\`
+
+This *index-only* preflight enforces HTTP 206, strict byte ranges, archive
+header CRCs and an **8 MiB total metadata transfer ceiling**. It does not
+fetch source image blocks, examine corrected labels, verify the full 40 GB
+archive MD5 or demonstrate complete image provenance. Keep the sparse
+listing and receipt **outside public Git and Actions**: individual source
+paths in \`listing.txt\` are private. An index summary is not permission to
+start the frozen evaluation; privately verify each needed source block and
+the complete annotated-position image set first.
+
 ## Blockers, not waivable assumptions
 
 The original archive of corrected source labels and dense original images from evaluation examinations 11–20 is **not currently present** in the verified private workspace. The 512-image reference subsets from earlier experiments are not a replacement. No 11–20 source image was inspected or source-label value decoded for this work; no holdout score or test accuracy was calculated, and no claim of superior pathology retrieval is made. A prior archive-integrity-only ZIP-wide CRC check touched protected compressed entries without parsing their label values, was disclosed, and was removed from the evaluation pipeline. **The gate stays closed** until verified acquisition and the frozen blinded scoring sequence can be performed in private compute.
