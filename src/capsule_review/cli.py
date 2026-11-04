@@ -6,7 +6,8 @@ from pathlib import Path
 
 from .app import create_app
 from .baseline_data import ANATOMY_CLASSES, prepare_manifest, read_json
-from .importer import create_demo, import_folder
+from .importer import import_folder
+from .demo_scores import open_or_create_demo
 from .prediction_service import save_predictions
 from .store import Store
 
@@ -18,7 +19,7 @@ def main():
     commands = parser.add_subparsers(dest='command', required=True)
     serve = commands.add_parser('serve', help='Start the browser application on localhost')
     serve.add_argument('--port', type=int, default=8765)
-    commands.add_parser('demo', help='Import non-medical test images')
+    commands.add_parser('demo', help='Create/reopen nonmedical frames and generated example scores')
     commands.add_parser('studies', help='List imported examinations and their IDs')
     imp = commands.add_parser('import', help='Import local research images')
     imp.add_argument('folder', type=Path)
@@ -114,7 +115,7 @@ def main():
                 with store.connect() as db:
                     result = [dict(row) for row in db.execute('SELECT id,title,frame_count,synthetic FROM studies ORDER BY created_at')]
             elif args.command == 'demo':
-                result = create_demo(store)
+                result = open_or_create_demo(store)
             else:
                 result = import_folder(store, args.folder, title=args.title, source=args.source, labels=args.labels)
         print(json.dumps(result, indent=2, allow_nan=False))
