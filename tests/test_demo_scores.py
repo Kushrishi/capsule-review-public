@@ -42,7 +42,7 @@ def test_api_demo_scores_are_complete_nonmedical_and_comparable(client, headers,
         assert db.execute(
             "SELECT COUNT(*) FROM review_intervals WHERE study_id=?", (study["id"],)
         ).fetchone()[0] == 0
-    for method in ("score", "score_diverse", "score_bin", "uniform"):
+    for method in ("score", "score_diverse", "score_bin", "uniform", "score_guarded"):
         response = client.get(base + "/priority", params={
             "run": run, "label": DEMO_LABEL, "selected_count": 6,
             "method": method, "page_size": 20,
@@ -58,7 +58,7 @@ def test_api_demo_scores_are_complete_nonmedical_and_comparable(client, headers,
     })
     assert comparison.status_code == 200
     methods = {x["method"]: x for x in comparison.json()["methods"]}
-    assert set(methods) == {"score", "score_diverse", "score_bin", "uniform"}
+    assert set(methods) == {"score", "score_diverse", "score_bin", "uniform", "score_guarded"}
     assert methods["score"]["largest_unselected_span"]["imported_images_not_in_queue"] > (
         methods["uniform"]["largest_unselected_span"]["imported_images_not_in_queue"]
     )

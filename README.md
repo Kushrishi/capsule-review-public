@@ -33,7 +33,7 @@ For a concise, evidence-based overview suitable for researchers, see the [collab
 
 - **Review:** Import PNG, JPEG or WebP sequences; navigate, bookmark, annotate, and resume locally.
 - **Preserve:** Mark image intervals, export saved frames and interval boundaries, or explicitly export every *imported* image in marked spans. Verify exported bytes and review history.
-- **Compare:** Import a complete score stream for the exact source images, choose any review count from 1 through all imported images, and compare four label-blind policies: top score, score with spacing, score per chronology bin, and uniform sampling. Inspect their largest omitted spans.
+- **Compare:** Import a complete score stream for the exact source images, choose any review count from 1 through all imported images, and compare the four original label-blind policies—top score, score with spacing, score per chronology bin, and uniform sampling—plus an **experimental gap-guarded score policy** that cannot worsen uniform's largest skipped imported-position span. The experimental option has **no verified pathology-recall benefit**. Inspect their largest omitted spans.
 
 Models provide suggestions only. Reference annotations, predictions and human notes remain separate. Neither image order nor source-index gaps establish original recording time or complete video coverage.
 

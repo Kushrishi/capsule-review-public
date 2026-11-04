@@ -11,7 +11,7 @@ import math
 
 from .store import Store
 
-METHODS = ("score", "score_diverse", "score_bin", "uniform")
+METHODS = ("score", "score_diverse", "score_bin", "uniform", "score_guarded")
 MAX_FRAMES = 200_000
 
 
@@ -25,12 +25,71 @@ def uniform_midpoints(length: int, selected_count: int) -> list[int]:
     return selected
 
 
+def gap_guarded_positions(scores: list[float], selected_count: int) -> list[int]:
+    """Experimental score optimization with a *hard ordinal omission guard*.
+
+    Start from the exactly-K uniform midpoint set. Reposition each anchor
+    *within its anchor-derived disjoint chronological cell*, accepting a change
+    only if its score strictly increases and its nearest selected neighbors
+    would leave no skipped span longer than the uniform baseline's worst span.
+
+    One left-to-right and one right-to-left coordinate sweep, with score and
+    earliest-position tie breaks, are fixed in code (not tuned to outcomes).
+    O(N) after score validation; no patient labels, notes or image pixels.
+
+    Proof of guard: every update checks both affected adjacent gaps against
+    the frozen uniform maximum, and all other gaps are unchanged. At the
+    boundaries, sentinel positions -1 and N count the leading/trailing gap.
+    Each accepted update strictly increases the sum of selected scores, so
+    the final sum is at least that of deterministic uniform sampling.
+
+    The guard is in *imported ordinal positions only*: it does not prove
+    pathologic event coverage, elapsed time, or clinical sensitivity.
+    """
+    n = len(scores)
+    anchors = uniform_midpoints(n, selected_count)
+    if selected_count == n:
+        return anchors
+    bounds = [-1, *anchors, n]
+    allowed_gap = max(bounds[i + 1] - bounds[i] - 1
+                      for i in range(len(bounds) - 1))
+    # Boundaries are derived from the *actual* uniform midpoints: for some
+    # N/K ratios those midpoints do not lie in floor(i*N/K) bins. Voronoi
+    # boundaries guarantee that every anchor starts inside its own cell.
+    cuts = [0, *[(anchors[i - 1] + anchors[i] + 1) // 2
+                 for i in range(1, selected_count)], n]
+    selected = anchors.copy()
+    for direction in (range(selected_count), range(selected_count - 1, -1, -1)):
+        for i in direction:
+            low = cuts[i]
+            high = cuts[i + 1]  # exclusive
+            left = selected[i - 1] if i else -1
+            right = selected[i + 1] if i + 1 < selected_count else n
+            # Never exceed the original uniform maximum skipped ordinal span.
+            low = max(low, right - allowed_gap - 1)
+            high = min(high, left + allowed_gap + 2)
+            current = selected[i]
+            if not low <= current < high:
+                raise AssertionError("Uniform-gap-preserving swap interval is empty.")
+            best = current
+            for p in range(low, high):
+                if scores[p] > scores[best] or (scores[p] == scores[best] and p < best):
+                    best = p
+            # Equal-score swaps are deliberately suppressed: on flat scores
+            # the result must remain identical to the label-blind baseline.
+            if scores[best] > scores[current]:
+                selected[i] = best
+    return sorted(selected, key=lambda p: (-scores[p], p))
+
+
 def select_positions(scores: list[float], selected_count: int, method: str) -> list[int]:
     """Deterministic exactly-K review queue using scores, not ground-truth.
 
     Score method: descending raw score. Diverse method: greedy score ranking
     suppressing nearby imported positions; fill any shortfall by score.
     Bin method: select highest score in each of K chronological bins.
+    Guarded method: locally improve uniform score without increasing its
+    maximum omitted imported-position span; *not evaluated on Galar*.
     Uniform: independent midpoint sample, recomputed at each K.
     """
     n = len(scores)
@@ -43,6 +102,8 @@ def select_positions(scores: list[float], selected_count: int, method: str) -> l
         raise ValueError("Prediction scores must be finite numbers from zero to one.")
     if method == "uniform":
         return uniform_midpoints(n, selected_count)
+    if method == "score_guarded":
+        return gap_guarded_positions(scores, selected_count)
 
     ranked = sorted(range(n), key=lambda p: (-scores[p], p))
     if method == "score":
@@ -222,7 +283,7 @@ def priority_queue(store: Store, study_id: str, run: int, label: str,
 
 def compare_priority_methods(store: Store, study_id: str, run: int,
                              label: str, selected_count: int) -> dict:
-    """Same input/run/workload, four label-blind policies, no review writes.
+    """Same input/run/workload, original four plus one exploratory guard, no writes.
 
     Deliberately reuses the public queue path so its validation, image-count
     requirements and coverage computations cannot diverge from the product.

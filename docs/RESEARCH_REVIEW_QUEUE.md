@@ -16,7 +16,7 @@ This is a *navigation aid* for research. The local application still does not sh
 
 The user enters any integer **K between 1 and N**, where N is the number of imported frames. The default is **all N**, deliberately avoiding a silent 10% threshold. Results can be generated at K=1, at 5%, at 10%, at 25%, at 100%, or at any other number. The queue shows the selected frame positions and their original numeric model scores; it paginates at 20 frames without dropping the rest. No model run may be queued unless that specific label has **one imported prediction for every frame**; missing predictions are never silently classified as negative.
 
-There are four explicit, deterministic policies:
+The **four original**, previously evaluated policies remain unchanged (and the frozen Galar results still refer only to them):
 
 | Policy | How it uses the model | Interpretation |
 | --- | --- | --- |
@@ -25,7 +25,9 @@ There are four explicit, deterministic policies:
 | **Top score per chronological bin** | Divide N imported positions into K nonempty consecutive bins and take each bin's highest-scoring image | Ensures one selected image in each equal-size imported-position segment |
 | **Uniform baseline** | Select exact deterministic midpoint positions in K source-chronological bins | A label-blind, model-free reference |
 
-All methods retain **exactly K** imported images, with no duplicate positions. For fair comparison, the queue reports **ordinal nearest-selected-image coverage**, including maximum distance, alongside the same-K uniform control. These numbers are distances in the imported sequence; they are **not original capture times, clinically adjudicated lesions or pathology sensitivity**. Uniform and per-bin selections are recalculated at each K and need not be nested. Diversity suppression also changes as K changes; do not treat separately computed results as cumulative retrieval curves.
+**Experimental candidate added November 4:** the optional fifth policy, `score_guarded`, starts from deterministic uniform midpoints and makes two fixed coordinate-improvement sweeps. Each anchor can move toward a higher score only inside its own anchor-defined chronological cell, and only if the global maximum contiguous **omitted imported-position span** remains no larger than uniform's original worst span. Its selected-score sum is therefore at least uniform's, but **the guarantee is solely technical**: different frames are selected and important events may be missed. It is **not** part of the locked Galar 11–20 comparison, has not been evaluated on its outcomes, and cannot be called an improved medical model or validated review policy. See the [algorithm and proof conditions](EXPERIMENTAL_GAP_GUARDED_SELECTION.md).
+
+All five current options retain **exactly K** imported images, with no duplicate positions. For fair comparison, the queue reports **ordinal nearest-selected-image coverage**, including maximum distance, alongside the same-K uniform control. These numbers are distances in the imported sequence; they are **not original capture times, clinically adjudicated lesions or pathology sensitivity**. Uniform and per-bin selections are recalculated at each K and need not be nested. Diversity suppression also changes as K changes; do not treat separately computed results as cumulative retrieval curves.
 
 ## Preserving the human workflow
 
@@ -51,11 +53,11 @@ The same exact corrected Galar archive must be verified before claiming addition
 
 ## Verification
 
-Synthetic-only CI exercises deterministic exact-K selection for all four policies, invalid score/identity fail-closed behavior, pagination, incomplete-label refusal, no reference-label reads, and reviewer-note immutability through actual localhost API requests. The browser/local-model smoke test **trains and executes** an original geometric software-test model, builds an exact-K review queue, opens a prioritized image without changing saved human notes, and compares with uniform. Private original images, per-frame annotations, saved model predictions and research workspaces remain outside the public repository.
+Synthetic-only CI exercises deterministic exact-K selection for all four original policies and the exploratory bounded-gap candidate, invalid score/identity fail-closed behavior, pagination, incomplete-label refusal, no reference-label reads, and reviewer-note immutability through actual localhost API requests. The browser/local-model smoke test **trains and executes** an original geometric software-test model, builds an exact-K review queue, opens a prioritized image without changing saved human notes, and compares with uniform. Private original images, per-frame annotations, saved model predictions and research workspaces remain outside the public repository.
 
 ## Review the omitted positions across all policies
 
-**New engineering safeguard (November 3):** the local viewer compares all four
+**Engineering safeguard (November 3; expanded November 4):** the local viewer compares all four original policies and the optional experimental candidate
 current policies at the *same user-selected K* via the read-only
 `/api/studies/{study_id}/priority-comparison` endpoint. For each policy it
 reports the maximum and 95th-percentile nearest-selected *imported position*

@@ -34,7 +34,11 @@ from pathlib import Path
 import statistics
 import zipfile
 
-from capsule_review.priority import METHODS, select_positions
+from capsule_review.priority import select_positions
+
+# Historical November 3 source-run audit was frozen to these four policies.
+# Never import the growing set of live product options into its replay.
+METHODS = ("score", "score_diverse", "score_bin", "uniform")
 
 SOURCE_SHA256 = "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f"
 PRIOR_SHA256 = "8065f166f2f807b0703d4ef6c28a71d4c452d445db85d8fdd7a4c5313860eb07"

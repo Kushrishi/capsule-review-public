@@ -17,6 +17,7 @@ DOCS = (
     ROOT / "docs" / "PROJECT_MATURITY_AUDIT_20261104.md",
     ROOT / "docs" / "SUPERVISOR_DEMO.md",
     ROOT / "docs" / "RESEARCH_COLLABORATION_BRIEF.md",
+    ROOT / "docs" / "EXPERIMENTAL_GAP_GUARDED_SELECTION.md",
 )
 
 

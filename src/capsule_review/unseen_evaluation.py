@@ -23,12 +23,17 @@ from capsule_review.interval_evidence import (
 )
 from capsule_review.priority import (
     MAX_FRAMES,
-    METHODS,
     largest_unselected_span,
     ordinal_coverage,
     select_positions,
 )
 
+# Frozen November 4 Galar study was explicitly a *four-policy* evaluation.
+# Never import the live product METHODS list: adding exploratory policies must
+# not change historical queue contents or break independent numeric replay.
+LOCKED_METHODS = ("score", "score_diverse", "score_bin", "uniform")
+# Keep the original four-method module API for existing synthetic replay tests.
+METHODS = LOCKED_METHODS
 WORKLOAD_PERCENTS = (5, 10, 25, 50, 100)
 RUN_STRATA = ("1-5", "6-25", "26+")
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
@@ -92,7 +97,7 @@ def freeze_queues(
         k = exact_k(n, percent)
         methods = tuple(
             (method, tuple(select_positions(scores, k, method)))
-            for method in METHODS
+            for method in LOCKED_METHODS
         )
         if any(len(positions) != k or len(set(positions)) != k
                for _, positions in methods):
@@ -126,7 +131,7 @@ def evaluate_frozen_queues(frozen: FrozenQueues, corrected_source_csv: bytes) ->
     ):
         if percent != expected_percent or k != exact_k(n, percent):
             raise ValueError("The frozen exact-K workload definition changed.")
-        if tuple(method for method, _ in selections) != METHODS:
+        if tuple(method for method, _ in selections) != LOCKED_METHODS:
             raise ValueError("A frozen selection policy was changed.")
         methods = {}
         for method, positions in selections:

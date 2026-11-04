@@ -36,7 +36,7 @@
         <p id="auditReport" class="evidence-audit" role="status" aria-live="polite" hidden></p>
         <div id="syntheticBanner" class="synthetic-banner" hidden>Synthetic test sequence · not clinical data</div>
         <section id="syntheticGuide" class="synthetic-guide" aria-label="Generated-score demonstration" hidden>
-          <div><strong>Try a complete review-queue demo</strong><p>All 24 frames and scores are generated for software testing. No AI model, medical labels, or private images are involved. Compare six selected frames across four methods; the generated high scores deliberately cluster together.</p></div>
+          <div><strong>Try a complete review-queue demo</strong><p>All 24 frames and scores are generated for software testing. No AI model, medical labels, or private images are involved. Compare six selected frames across five methods (four original, one experimental); the generated high scores deliberately cluster together.</p></div>
           <button id="syntheticQueueBtn" class="outline compact" type="button">Compare six-image queues</button>
         </section>
         <div class="viewer-meta"><span id="frameCounter"></span><span id="sourceIndex"></span><button class="quiet compact" id="zoomBtn" aria-pressed="false">Fit / 2×</button></div>
@@ -72,6 +72,7 @@
         <label class="field-label" for="priorityMethod">Selection policy</label>
         <select id="priorityMethod" disabled>
           <option value="score_bin">Top score in each chronology bin (coverage-first)</option>
+          <option value="score_guarded">Experimental: score with uniform-gap guard</option>
           <option value="score_diverse">Model score + ordinal separation</option>
           <option value="score">Highest model scores</option>
           <option value="uniform">Uniform baseline (no scores used)</option>
@@ -80,7 +81,7 @@
         <p id="prioritySummary" class="panel-hint" role="status" aria-live="polite">Import complete frame-level model predictions to enable ranking.</p>
         <section class="priority-comparison" aria-label="Same-workload omitted image comparison">
           <h3>Where would each policy leave gaps?</h3>
-          <p class="panel-hint">All four methods are compared at the same image count. These are gaps in imported positions—not original video time, missing medical evidence, or clinical risk estimates.</p>
+          <p class="panel-hint">All five methods are compared at the same image count. The guarded policy is experimental and has not been evaluated for medical benefit. These are gaps in imported positions—not original video time, missing medical evidence, or clinical risk estimates.</p>
           <div id="priorityComparison" role="status" aria-live="polite">Build a queue to compare which imported image spans would be skipped.</div>
         </section>
         <div id="priorityItems" class="priority-items"></div>

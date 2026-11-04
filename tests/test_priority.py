@@ -18,7 +18,7 @@ def test_fixed_methods_exact_k_and_deterministic_across_all_workloads():
     for k in (1, 2, 4, 11, 20, 36, 37):
         baseline = uniform_midpoints(37, k)
         assert len(baseline) == k
-        for method in ("uniform", "score", "score_diverse", "score_bin"):
+        for method in ("uniform", "score", "score_diverse", "score_bin", "score_guarded"):
             result = select_positions(scores, k, method)
             assert result == select_positions(scores, k, method)
             assert len(result) == len(set(result)) == k
@@ -96,7 +96,7 @@ def test_real_api_readonly_queue_multiple_methods_paging_and_labels(client, app,
         {"name": "test-pattern", "scored_images": 24, "complete": True}
     ]
     outputs = {}
-    for method in ("score", "score_diverse", "score_bin", "uniform"):
+    for method in ("score", "score_diverse", "score_bin", "uniform", "score_guarded"):
         r = client.get(base + "/priority", params={
             "run": run, "label": "test-pattern", "selected_count": 8,
             "method": method, "page_size": 3
@@ -184,7 +184,7 @@ def test_annotated_source_fields_cannot_change_queue_predictions(client, app, he
 
 def test_large_100_percent_budget_and_constant_score_detection(client, app, headers):
     _, run, base = _fixture(app, client, headers, n=24)
-    for method in ("score_diverse", "score_bin", "score", "uniform"):
+    for method in ("score_diverse", "score_bin", "score", "uniform", "score_guarded"):
         outcome = client.get(base + "/priority", params={
             "run": run, "label": "test-pattern", "selected_count": 24, "method": method
         })
