@@ -42,6 +42,32 @@ Public CI uses only generated synthetic ZIP members. The private package must **
 
 **Decision rule:** no clinical efficacy or model promotion based solely on these outputs. The primary endpoint would establish only *project-independent examination-level blood annotation-run retrieval* under a fixed retrospective dataset, not patient-generalization, unique-lesion sensitivity, image safety, clinical diagnosis, or actual physician reading-time savings. Without sufficient eligible source data or reliable provenance, report the missing-data failure and keep the scientific gate open.
 
+## Synthetic mechanical preflight — November 3
+
+`capsule_review.unseen_evaluation` separates two steps: (1) create all four
+**label-blind, exact-K** review queues from synthetic source indices, image
+checksum strings and model scores; (2) *afterward*, read a generated corrected
+annotation CSV and count distinct positive source runs, positive frames,
+run-length categories and imported-position omissions. A synthetic
+counterexample verifies that the CNN-score and chronology-bin methods can
+**lose** to uniform, while a zero-positive case has **undefined**, not zero,
+run recall. The public check is
+`tests/test_unseen_galar_synthetic_end_to_end.py`.
+
+The pure module does **not** acquire source data, rehash image pixels, load
+the pinned model, verify the official corrected ZIP or independently certify
+when predictions were frozen. Its commitment digest is not a timestamped
+external record. Those remain mandatory **private** gates before real
+evaluation. Synthetic tests are not medical measurements.
+
+**Missingness safeguard:** the current synthetic engine fails closed when
+an annotated candidate has a blank label or the source identities do not
+match exactly. The frozen protocol describes excluding and reporting unknown
+labels, but selecting a new candidate set after reading outcomes could alter
+K. If this occurs in the real dataset, resolve the missingness/eligibility
+policy in a dated amendment *before* viewing holdout values; never
+silently drop unknown frames, infer negatives or retune queues.
+
 ## Blockers, not waivable assumptions
 
 The original archive of corrected source labels and dense original images from evaluation examinations 11–20 is **not currently present** in the verified private workspace. The 512-image reference subsets from earlier experiments are not a replacement. No 11–20 source image was inspected or source-label value decoded for this work; no holdout score or test accuracy was calculated, and no claim of superior pathology retrieval is made. A prior archive-integrity-only ZIP-wide CRC check touched protected compressed entries without parsing their label values, was disclosed, and was removed from the evaluation pipeline. **The gate stays closed** until verified acquisition and the frozen blinded scoring sequence can be performed in private compute.
