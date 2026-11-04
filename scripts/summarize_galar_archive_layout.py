@@ -67,6 +67,7 @@ def summarise(text: str, index_receipt: dict, *, source: str = 'fitting-21-30') 
         raise ValueError('Trusted matching header-only Galar receipt is required.')
     allowed_exams = EXAMINATIONS_BY_SOURCE[source]
     images = Counter()
+    source_indices: dict[int, set[int]] = defaultdict(set)
     exam21_basename_patterns = Counter()
     blocks: dict[int, dict] = {}
     unassigned = 0
@@ -102,6 +103,15 @@ def summarise(text: str, index_receipt: dict, *, source: str = 'fitting-21-30') 
         if exam is None:
             unassigned += 1
             continue
+        if source == 'unseen-11-20':
+            name = PurePosixPath(path.replace('\\', '/')).name
+            match = re.fullmatch(r'frame_(\d+)\.PNG', name)
+            if match is None:
+                raise ValueError('Unexpected unseen original PNG filename.')
+            frame = int(match.group(1))
+            if frame in source_indices[exam]:
+                raise ValueError('Duplicate unseen source index within examination.')
+            source_indices[exam].add(frame)
         images[exam] += 1
         if source == 'fitting-21-30' and exam == 21:
             # Structural pattern only. Do not export individual source frame IDs.
@@ -135,6 +145,31 @@ def summarise(text: str, index_receipt: dict, *, source: str = 'fitting-21-30') 
     }
     if source == 'fitting-21-30':
         result['exam21_basename_patterns_only'] = dict(sorted(exam21_basename_patterns.items()))
+    else:
+        if any(row['compressed_bytes'] is None for row in blocks.values()):
+            raise ValueError('Missing unseen compressed block size; transfer estimate is incomplete.')
+        coverage = {}
+        for exam in sorted(allowed_exams):
+            ordered = sorted(source_indices[exam])
+            strides = [b - a for a, b in zip(ordered, ordered[1:])]
+            if any(step % 5 for step in strides):
+                raise ValueError('Unseen source indices disagree with the locked +5 grid.')
+            coverage[str(exam)] = {
+                'unique_image_members': len(ordered),
+                'internal_gap_count': sum(step > 5 for step in strides),
+                'missing_internal_grid_positions': sum(step // 5 - 1 for step in strides),
+                'contiguous_internal_plus5_grid': all(step == 5 for step in strides),
+            }
+        result['source_index_coverage_by_exam'] = coverage
+        result['all_internal_source_grids_contiguous'] = all(
+            row['contiguous_internal_plus5_grid'] for row in coverage.values())
+        result['eligible_binary_label_population_verified'] = False
+        result['required_blocks_for_all_listed_images'] = sorted(blocks)
+        result['required_compressed_bytes_for_all_listed_images'] = sum(
+            row['compressed_bytes'] for row in blocks.values())
+        result['source_coverage_limit'] = (
+            'Index continuity checks internal filename positions only; endpoints and binary-label '
+            'eligibility remain unverified. Gaps cannot be silently excluded or interpolated.')
     return result
 
 

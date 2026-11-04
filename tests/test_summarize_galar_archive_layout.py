@@ -159,3 +159,48 @@ def test_unseen_index_fails_closed_on_partial_cohort_or_wrong_group():
     )
     with pytest.raises(ValueError, match="unexpected image member"):
         m.summarise(unexpected, UNSEEN_RECEIPT, source="unseen-11-20")
+
+
+def _extra_unseen_member(name):
+    return (UNSEEN_LISTING + f"\n\nPath = archive/11/{name}\n"
+            "Size = 100\nPacked Size =\nFolder = -\nBlock = 0\n")
+
+
+def test_unseen_internal_gap_is_reported_without_exporting_source_ids():
+    result = m.summarise(_extra_unseen_member('frame_000065.PNG'),
+                         UNSEEN_RECEIPT, source='unseen-11-20')
+    assert result['source_index_coverage_by_exam']['11'] == {
+        'unique_image_members': 2, 'internal_gap_count': 1,
+        'missing_internal_grid_positions': 1, 'contiguous_internal_plus5_grid': False,
+    }
+    assert result['all_internal_source_grids_contiguous'] is False
+    assert result['eligible_binary_label_population_verified'] is False
+    assert result['required_blocks_for_all_listed_images'] == list(range(10))
+    assert result['required_compressed_bytes_for_all_listed_images'] == 400
+    assert '000065' not in str(result)
+    assert 'source_frames' not in result
+
+
+@pytest.mark.parametrize('name,message', [
+    ('frame_000055.PNG', 'Duplicate unseen source index'),
+    ('frame_55.PNG', 'Duplicate unseen source index'),
+    ('frame_000056.PNG', r'locked \+5 grid'),
+    ('unknown.png', 'Unexpected unseen original PNG filename'),
+])
+def test_unseen_index_rejects_ambiguous_or_off_grid_members(name, message):
+    with pytest.raises(ValueError, match=message):
+        m.summarise(_extra_unseen_member(name), UNSEEN_RECEIPT, source='unseen-11-20')
+
+
+def test_contiguous_index_does_not_claim_label_eligibility_or_endpoint_completeness():
+    result = m.summarise(_extra_unseen_member('frame_000060.PNG'),
+                         UNSEEN_RECEIPT, source='unseen-11-20')
+    assert result['all_internal_source_grids_contiguous'] is True
+    assert result['eligible_binary_label_population_verified'] is False
+    assert 'endpoints' in result['source_coverage_limit']
+
+
+def test_unseen_transfer_estimate_requires_every_packed_block_size():
+    with pytest.raises(ValueError, match='Missing unseen compressed block size'):
+        m.summarise(UNSEEN_LISTING.replace('Packed Size = 40', 'Packed Size =', 1),
+                    UNSEEN_RECEIPT, source='unseen-11-20')
