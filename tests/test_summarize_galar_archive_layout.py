@@ -96,3 +96,63 @@ def test_structural_name_patterns_do_not_expose_original_frame_identifiers():
     result=m.summarise(LISTING,RECEIPT)
     assert result['exam21_basename_patterns_only']=={'a.png':1,'b.png':1}
     assert not any('000000' in name for name in result['exam21_basename_patterns_only'])
+
+
+UNSEEN_RECEIPT = {
+    'record_type': 'galar-11-20-7z-index-only-v1',
+    'official_file_id': 44725302,
+    'official_full_archive_bytes': 40_043_548_469,
+    'full_archive_downloaded': False,
+    'pixels_acquired': 0,
+}
+UNSEEN_LISTING = """7-Zip (synthetic metadata listing)
+----------
+Path = archive/11/frame_000005.PNG
+Size = 100
+Packed Size = 40
+Folder = -
+Block = 0
+
+Path = archive/20/frame_000010.PNG
+Size = 150
+Packed Size = 80
+Folder = -
+Block = 1
+
+Path = archive/61/frame_000015.PNG
+Size = 130
+Packed Size = 20
+Folder = -
+Block = 2
+"""
+
+
+def test_unseen_11_to_20_listing_is_aggregate_only():
+    result = m.summarise(UNSEEN_LISTING, UNSEEN_RECEIPT, source='unseen-11-20')
+    assert result['origin_file_id'] == 44725302
+    assert result['record_type'] == 'galar-11-20-index-only-block-summary-v1'
+    assert result['image_members_by_exam'] == {'11': 1, '20': 1}
+    assert result['unassigned_image_members'] == 1
+    assert result['pixels_read'] == 0
+    assert result['full_source_checksum_verified'] is False
+    assert 'exam21_basename_patterns_only' not in result
+    assert 'frame_000005' not in str(result)
+    assert 'frame_000010' not in str(result)
+    assert m.get_exam('frames/11/frame_000005.PNG',
+                      allowed_exams=m.EXAMINATIONS_BY_SOURCE['unseen-11-20']) == 11
+    assert m.get_exam('frames/61/frame_000005.PNG',
+                      allowed_exams=m.EXAMINATIONS_BY_SOURCE['unseen-11-20']) is None
+
+
+def test_unseen_layout_refuses_wrong_archive_and_untrusted_receipt():
+    for altered in (
+        {**UNSEEN_RECEIPT, 'official_file_id': 45258019},
+        {**UNSEEN_RECEIPT, 'official_full_archive_bytes': 32},
+        {**UNSEEN_RECEIPT, 'full_archive_downloaded': True},
+        {**UNSEEN_RECEIPT, 'pixels_acquired': 1},
+        {**UNSEEN_RECEIPT, 'record_type': 'galar-21-29-7z-index-only-v1'},
+    ):
+        with pytest.raises(ValueError, match='Trusted matching'):
+            m.summarise(UNSEEN_LISTING, altered, source='unseen-11-20')
+    with pytest.raises(ValueError, match='Unrecognized'):
+        m.summarise(UNSEEN_LISTING, UNSEEN_RECEIPT, source='unknown')
