@@ -1,4 +1,27 @@
-# Current verification — November 1, 2026
+# Verification
+
+## Public software checks — November 3, 2026
+
+The public repository has passing GitHub Actions on the previously verified `main`
+commit `93535ccb9a32f66ec39d6eff4ad5e84fc0232ba1`:
+
+| Scope | Evidence | Result |
+| --- | --- | --- |
+| Python 3.11, 3.12 and 3.13 | [Tests run](https://github.com/Kushrishi/capsule-review-public/actions/runs/41731955994) | Passed |
+| Local-model and Chromium browser smoke | Same Tests run | Passed |
+| Source privacy file-format guard | [Privacy run](https://github.com/Kushrishi/capsule-review-public/actions/runs/41731956116) | Passed |
+
+These are **software regression checks**. They do not independently verify medical
+model accuracy, unseen Galar examinations, original patient identities, clinical
+sensitivity or reduced reviewer time. The public actions load generated data only.
+No medical images, private score records or trained weights are bundled with this
+repository. Check the latest `main` workflow runs before declaring later commits
+verified.
+
+## Historical development verification — November 1–2, 2026
+
+The original November 1 measurements below are retained with their original
+run context. They are **not the current public CI test totals**.
 
 | Check | Actual result |
 |---|---|
