@@ -108,3 +108,40 @@ def test_demo_scoring_cannot_modify_ordinary_or_other_synthetic_studies(
         assert app.state.store.study(target["id"])["runs"] == []
     assert client.post("/api/demo", headers=headers, params={"study_id": "missing"}).status_code == 422
     assert client.post("/api/demo").status_code == 403
+
+
+def test_cli_demo_builds_and_reopens_same_complete_synthetic_fixture(tmp_path, monkeypatch, capsys):
+    """The documented no-clinical-data CLI path matches the browser demo."""
+    import json
+    import sys
+    from capsule_review.cli import main
+    from capsule_review.store import Store
+
+    workspace = tmp_path / "supervisor-demo"
+    monkeypatch.setattr(sys, "argv", [
+        "capsule-review", "--data-dir", str(workspace), "demo",
+    ])
+    main()
+    first = json.loads(capsys.readouterr().out)
+    assert first["synthetic"] is True
+    assert first["frame_count"] == DEMO_FRAMES
+    assert len(first["runs"]) == 1
+    assert first["runs"][0]["model"]["run_id"] == DEMO_RUN_ID
+    main()
+    second = json.loads(capsys.readouterr().out)
+    assert second["id"] == first["id"]
+    assert len(second["runs"]) == 1
+    assert second["runs"][0]["id"] == first["runs"][0]["id"]
+
+    store = Store(workspace)
+    with store.connect() as db:
+        assert db.execute("SELECT COUNT(*) FROM studies").fetchone()[0] == 1
+        assert db.execute(
+            "SELECT COUNT(*) FROM predictions WHERE study_id=?", (first["id"],)
+        ).fetchone()[0] == DEMO_FRAMES
+        assert db.execute("SELECT COUNT(*) FROM reviews").fetchone()[0] == 0
+        assert db.execute("SELECT COUNT(*) FROM review_intervals").fetchone()[0] == 0
+    for i in range(DEMO_FRAMES):
+        frame = store.frame(first["id"], i)
+        assert frame["reference_labels"] == {}
+        assert len(frame["predictions"]) == 1
