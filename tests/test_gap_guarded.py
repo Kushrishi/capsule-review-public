@@ -20,6 +20,16 @@ def _max_omitted(n: int, selected: list[int]) -> int:
     return span["imported_images_not_in_queue"] if span else 0
 
 
+def test_original_research_replays_remain_exactly_four_policy():
+    from capsule_review import unseen_evaluation as locked
+    from scripts import evaluate_galar_source_run_queues as historical
+
+    original = ("score", "score_diverse", "score_bin", "uniform")
+    assert locked.LOCKED_METHODS == locked.METHODS == original
+    assert historical.METHODS == original
+    assert METHODS == (*original, "score_guarded")
+
+
 def test_guard_invariants_cover_thousands_of_n_and_k_combinations():
     rng = random.Random(20261104)
     assert METHODS[:4] == ("score", "score_diverse", "score_bin", "uniform")
