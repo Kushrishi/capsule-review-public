@@ -11,8 +11,9 @@ Reproduction (in an access-controlled local directory):
 
 Input directory requires capsule-blood-real-pilot.zip and the verified
 galar-pilot-images-001-002.zip, 003-004.zip, 005-006.zip, 007-008.zip.
-Only fitting records from manifest are loaded: 9–10 are NOT read; 11–20
-and the source authors' 61–80 are NEVER read. No evaluation is performed
+The historical manifest includes development metadata for 9–10, but only
+Galar 1–8 source pixels and fitting labels are loaded into the training bank.
+The completed 11–20 and authors' reserved 61–80 images are NEVER read. No evaluation is performed
 by this script. This is exploratory, not patient-disjoint clinical validation.
 """
 from __future__ import annotations
