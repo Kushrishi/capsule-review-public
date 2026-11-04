@@ -2,6 +2,8 @@
 
 **November 3, 2026 | Working product feature, not a clinically validated AI model**
 
+**Evidence update — November 4:** the [locked Galar 11–20 study](GALAR_UNSEEN_11_20_RESULTS.md) is complete on all 163,161 eligible source images. At equal 10% workload, score-bin's mean examination-level annotation-run recall was 1.27 percentage points below uniform. The default remains a transparent coverage heuristic, without a demonstrated primary pathology-retrieval advantage. The November 3 evidence below is retained as history; authors' 61–80 remain unopened.
+
 ## What changed
 
 Before this feature, Capsule Review could store and display model suggestions on one image at a time, but could not turn a full image-sequence score stream into an inspectable **review queue**. A user can now open an imported examination, import predictions or run an installed local model, then build a navigable list of proposed images. The queue uses the **selected model run and a single score label**—no reference labels, reviewer notes or model comparisons are secretly mixed into the ranking.

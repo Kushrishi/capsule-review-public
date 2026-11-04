@@ -1,0 +1,39 @@
+{
+  "analysis_driver_sha256": "a4cd9fc5a78081f435dab0cbbc0d678c8787ce4b5522f7423f74e99d4434d7e7",
+  "authors_reserved_61_to_80_payloads_opened": false,
+  "clinical_polarity_disclosed_to_analyst_at_commitment": false,
+  "corrected_csvs_processed_for_concealed_eligibility_before_predictions": true,
+  "date": "2026-11-04",
+  "eligibility_amendment_commit": "1231f6113aa1ce9a56d398b914da3b7b0f2723f6",
+  "eligibility_amendment_sha256": "53d25fe7dca7ffac54cc2126a7b607e1b621275153c6c0c1632d6e3ec666f2b5",
+  "eligibility_projection_record_sha256": "0905ee661f914984af16323d1b26d0b55f041457adf333367e5ba91629696986",
+  "examinations": 10,
+  "full_publisher_archive_md5": "fdc88663514f5691a14c08dff13c667e",
+  "full_publisher_archive_md5_verified": true,
+  "master_prediction_sha256": "6944ce6348c76ee69ec06138aa10f926a0632710c089222dd7a765c803e90068",
+  "original_cnn_scores_and_all_policy_selections_frozen": true,
+  "original_model_checkpoint_sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+  "original_png_bytes": 48757425342,
+  "original_pngs": 163161,
+  "original_protocol_sha256": "92483affe61abe4ab6fe2a420f9f988099c9b485a862f0d5aca83e4900b825db",
+  "outcome_analysis_performed_at_commitment": false,
+  "policies": [
+    "uniform",
+    "score",
+    "score_diverse",
+    "score_bin"
+  ],
+  "primary_workload_percent": 10,
+  "private_preoutcome_package_sha256": "3ad6d551e4ac13137e83e406161c1bf005d2754f68bb3880d0f4818db8382d38",
+  "private_snapshots_durably_retained": true,
+  "record_type": "externally-retained-pre-outcome-prediction-commitment-v1",
+  "review_workloads_percent": [
+    5,
+    10,
+    25,
+    50,
+    100
+  ],
+  "scope": "Externally retained prediction commitment under precommitted amendment A1; not independent human blinding, trial registration, patient-independence evidence or clinical validation.",
+  "source_code_commit": "a3eb0e5af0898a790f86ea2ccd43de5679c40751"
+}

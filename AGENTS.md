@@ -7,7 +7,7 @@ Capsule Review is a **local research viewer** for capsule-endoscopy image sequen
 - [README](README.md): user workflow, installation, project map and current evidence.
 - [Research protocol](docs/RESEARCH_PROTOCOL.md): clinical terminology, data separation, and evaluation limits.
 - [Research review queue](docs/RESEARCH_REVIEW_QUEUE.md): the four exact-K selection methods.
-- [Frozen future evaluation](docs/GALAR_UNSEEN_EVALUATION_PLAN.md): unopened Galar 11–20 and original checkpoint.
+- [Locked evaluation design](docs/GALAR_UNSEEN_EVALUATION_PLAN.md) and [completed results](docs/GALAR_UNSEEN_11_20_RESULTS.md): original checkpoint, outcome-concealed eligibility amendment and Galar 11–20 findings.
 - [Release boundary](docs/PUBLIC_RELEASE_SAFETY.md): data/CI restrictions.
 - `docs/*RESULTS.md`, `experiments/`: original experimental records, including negative outcomes.
 
@@ -16,7 +16,7 @@ Historical results are evidence, not instructions to create new findings. Do not
 ## Non-negotiable scientific boundaries
 
 1. **No clinical claims without corresponding evidence.** `blood=1` is a frame annotation, not a unique lesion, diagnosis, calibrated clinical probability, or reading-time benefit. Neither model accuracy nor image coverage proves patient safety.
-2. **Maintain examination separation.** Galar 1–8 trained the original blood CNN; 9–10 were previously inspected. Examinations 21/23/25/27/29/30 have been used for exploratory model transfer. The next project-level locked evaluation set 11–20 remains unopened for outcome testing; the dataset authors' separate reserved 61–80 remains unopened. Do not touch protected label values to tune or rank models. A previous ZIP-wide CRC-only integrity traversal is documented; do not repeat it.
+2. **Maintain examination separation.** Galar 1–8 trained the original blood CNN; 9–10 were previously inspected. Examinations 21/23/25/27/29/30 supported exploratory model transfer. The locked 11–20 evaluation is now complete under amendment A1: its primary 10% comparison did not demonstrate improvement. Do not tune on these results and call 11–20 untouched or newly independent. The authors' reserved 61–80 remains unopened. A previous ZIP-wide CRC-only integrity traversal is documented; do not repeat it.
 3. **No artificial coverage.** Missing labels are unknown, not negative. Source image ID gaps are not elapsed time. Sampled 512-image references are not dense complete video. At a fixed review count, report actual distinct annotated runs reached, not just positive sampled images.
 4. **Preserve the human workflow.** Reviewer notes, source labels, model suggestions and exports stay distinct. Model navigation does not save findings or conceal unselected images. The viewer permits any exact K from 1 to all imported images; 10% is a research operating point, not a product cap.
 5. **Preserve independent evaluation.** Before accessing any untouched source label or image, lock the model, preprocessing, source identities, selection policies, workloads, evaluation set and metrics. Do not retune against examined failures and call the next result independent. No model is currently promoted for clinical use.
@@ -29,4 +29,4 @@ Historical results are evidence, not instructions to create new findings. Do not
 - Prefer small, readable changes, predictable interfaces and simple navigation. Use one canonical explanation and link to detailed historical reports rather than copying new dated paragraphs into the README.
 - Do not invent a code licence, publish a model checkpoint, alter source licensing, or make claims about clinical novelty, external validation or publication readiness.
 
-**Next scientific gate:** acquire complete eligible original annotated-position images and the pinned corrected source labels in a private environment, freeze predictions first, then evaluate the locked 11–20 cohort. If source access or integrity fails, record the failure rather than using sparse substitutes. Track the decisive work in [issue #24](https://github.com/Kushrishi/capsule-review-public/issues/24).
+**Current scientific record:** [issue #24](https://github.com/Kushrishi/capsule-review-public/issues/24) and the [locked results](docs/GALAR_UNSEEN_11_20_RESULTS.md) contain the completed full-source comparison, external prediction commitment and all negative findings. No model is promoted. Any new independent evaluation requires a new prespecified protocol; leave authors' 61–80 closed.
