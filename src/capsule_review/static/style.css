@@ -45,3 +45,6 @@
 .priority-comparison-table thead th{white-space:normal}
 .priority-comparison-table .comparison-active{background:var(--soft)}
 .priority-comparison-table button{white-space:nowrap;font-size:12px;padding:5px 6px}
+.research-link{font-size:12px;white-space:nowrap;color:var(--accent);text-decoration:none;font-weight:650}
+.research-link:hover{text-decoration:underline}
+@media(max-width:570px){.research-link{font-size:10px}}
