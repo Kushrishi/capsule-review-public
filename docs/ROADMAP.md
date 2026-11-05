@@ -33,6 +33,8 @@ We are not copying code, weights, dataset licences or claims from these projects
 
 ### Stage 1 — Qualify development material and eliminate split ambiguity (**next scientific priority**)
 
+**November 5 checkpoint:** byte verification is complete for all **11,147** retained selected originals. See [source audit](GALAR_DEVELOPMENT_SOURCE_AUDIT_20261105.md). The next gate is **NOT passed**: no verified independent patient grouping, no adjudication of visual-similarity candidates and no complete event-label coverage. Use [the offline verified-source preflight](../scripts/check_development_cohort.py) when a new private manifest is available. This is a measurable step toward better AI, not an accuracy result.
+
 **Build:** one private, checked inventory of available fitting/development examinations and image/video identities; label coverage states *positive / negative / unknown*, patient/exam grouping where available, device/source domain, positive-run distribution, partial/truncated sequence flags, consent/licence, deduplication and retention. The already described **11,147-image 16-examination fitting inventory** is not automatically eligible for any proposed task: recheck source grouping and what is actually labeled. Keep source pixels and patient groups private.
 
 **Acceptance:** a fixed **development-only cohort manifest** plus an executable leakage/annotation preflight; failures and small positive-run support explicitly counted; training/selection/evaluation group identities checked. First choose independent-group units where defensible; if patient grouping is unverified, say examination-separated only.
