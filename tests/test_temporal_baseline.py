@@ -92,3 +92,43 @@ def test_synthetic_spread_can_reduce_peak_localization_not_guarantee_gain():
     assert smoothed[3:6] == [1., 1., 1.]
     assert smoothed[2] == smoothed[6] == 0
     # Deliberately do not assert pathology/run recall improvements.
+
+
+def test_verified_galar_like_stride_five_is_supported_without_invented_frames():
+    indices = [200, 205, 210, 215, 220]
+    scores = [0.0, .7, 0.0, 0.1, 0.0]
+    assert temporal_max_scores(scores, indices, window=3, source_stride=5) == (
+        naive(scores, 3))
+    chosen = temporal_selection(scores, indices, window=3, source_stride=5,
+                                selected_count=2, policy="score_bin")
+    assert len(set(chosen)) == 2
+    # A source-5 export is not source-1; a caller cannot forget the declared stride.
+    with pytest.raises(ValueError, match="stride"):
+        temporal_max_scores(scores, indices, window=3)
+    # Nor can a true gap be renamed as a stride-5 export position.
+    with pytest.raises(ValueError, match="stride"):
+        temporal_max_scores(scores, [200, 205, 215, 220, 225],
+                            window=3, source_stride=5)
+
+
+@pytest.mark.parametrize("bad_step", [0, -5, True, 1.0, 1_000_001, "5"])
+def test_source_stride_must_be_explicit_positive_integer(bad_step):
+    with pytest.raises(ValueError, match="stride"):
+        temporal_max_scores([0.2, .7, 0.1], [20, 25, 30],
+                            window=3, source_stride=bad_step)
+
+
+def test_variable_step_export_is_not_a_single_contiguous_sequence():
+    # The known Galar 5->1 transition occurs ACROSS examinations; don't
+    # concatenate them or infer a single step from labels.
+    with pytest.raises(ValueError, match="stride"):
+        temporal_max_scores([.1, .7, .2, .3], [100, 105, 106, 107],
+                            window=3, source_stride=5)
+
+
+def test_source_stride_one_default_is_backward_compatible():
+    scores = [0.0, .3, .8, .0, .2]
+    indices = list(range(5))
+    for window in (1, 3, 5):
+        assert temporal_max_scores(scores, indices, window=window) == (
+            temporal_max_scores(scores, indices, window=window, source_stride=1))

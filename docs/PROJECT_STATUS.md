@@ -65,6 +65,10 @@ A metadata-only [audit of the official Kvasir-Capsule split CSVs](KVASIR_OFFICIA
 
 An [offline, fail-closed contiguous-source temporal score baseline](TEMPORAL_CONTIGUOUS_BASELINE_20261105.md) and synthetic tests are available for future qualified **dense** sequences. This is not training, model promotion, new clinical evidence or a product default. Missing source-frame positions prohibit the computation; sampled Galar reference images cannot be represented as consecutive input. No frozen evaluation was reopened.
 
+## November 5 development acquisition decision
+
+The [prior corrected-label audit for Galar 21–60](GALAR_TRAINING_POOL_RESULTS.md) was recovered and reconciled; its labels were **already inspected**, not newly independent. A [bounded next-source decision](GALAR_NEXT_DEVELOPMENT_COHORT_20261105.md) prioritizes **the full 31–40 development group** for source-archive feasibility: 6/10 blood-positive exams, 17,344 positive annotated rows, 605 native-stride-defined annotation runs, ~69.22 GB compressed. Image access, independent patient grouping and a fresh outcome benchmark **remain blocked**. The experimental temporal control now supports caller-authenticated native source strides 1 or 5 without smoothing across source gaps; no AI-performance claim follows.
+
 ## Current constraints and next action
 
 The highest-impact missing asset is **diverse, source-verified development data with complete outcome semantics and defensible examination/patient separation**, followed by an independent, fully adjudicated external cohort. Neither a larger neural network nor a polished interface substitutes for those requirements.
