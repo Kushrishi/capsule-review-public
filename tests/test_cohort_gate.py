@@ -83,3 +83,14 @@ def test_documenting_nonclinical_kvasir_like_candidate_is_not_approval():
         data["checks"][k]["status"] = "unknown"
         data["checks"][k]["reason"] = "Not verified in published dataset"
     assert assess(data).decision == "BLOCKED"
+
+def test_cli_template_is_all_unknown_and_never_implies_approval(monkeypatch, capsys):
+    import json
+    import sys
+    from scripts.check_cohort_gate import main
+    monkeypatch.setattr(sys, "argv", ["cohort-gate", "--template"])
+    assert main() == 0
+    template = json.loads(capsys.readouterr().out)
+    assert set(template["checks"]) == set(REQUIRED)
+    assert {v["status"] for v in template["checks"].values()} == {"unknown"}
+    assert assess(template).decision == "BLOCKED"
