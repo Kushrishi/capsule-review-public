@@ -249,3 +249,57 @@ def test_original_png_private_package_verified_without_public_artifacts(tmp_path
         assert z.read("images/035/frame_0000105.PNG")[:8]==b"\x89PNG\r\n\x1a\n"
     with pytest.raises(FileExistsError):
         m.package_original_images(original,tmp_path/"stage",package,members,labels,{})
+
+
+def test_real_offline_preflight_does_not_require_7zip_or_network(tmp_path, monkeypatch, capsys):
+    """The label/source gate is usable where archive extraction is unavailable."""
+    aggregate = Path(__file__).resolve().parents[1] / (
+        "experiments/galar-31-40-index-20261105/aggregate.json"
+    )
+    fake_labels = tmp_path / "private-corrected-source-labels.zip"
+    fake_labels.write_bytes(b"synthetic-test-fixture")
+    monkeypatch.setattr(m, "verified_label_rows",
+                        lambda _: {i*5: "0" for i in range(9643)})
+    monkeypatch.setattr(m, "MIN_PRIVATE_AVAILABLE_BYTES", 0)
+    monkeypatch.setattr(m.shutil, "which", lambda exe: None)
+    def forbidden(*args,**kwargs):
+        raise AssertionError("Offline preflight tried to access original image bytes or network.")
+    monkeypatch.setattr(m, "inspect", forbidden)
+    monkeypatch.setattr(m, "download_one_block", forbidden)
+    monkeypatch.setattr(sys, "argv", [
+        "acquire_galar35_private.py",
+        "--index-aggregate", str(aggregate),
+        "--labels-zip", str(fake_labels),
+        "--workdir", str(tmp_path / "private-galar-stage"),
+        "--private-package", str(tmp_path / "private-galar-originals.zip"),
+        "--check-only",
+    ])
+    m.main()
+    result = json.loads(capsys.readouterr().out)
+    assert result["decision"] == "PRIVATE_SOURCE_PRECHECK_READY"
+    assert result["indexed_images"] == 9643
+    assert result["images_downloaded"] == 0
+    assert not (tmp_path / "private-galar-stage").exists()
+
+
+def test_acquisition_still_requires_real_7zip(tmp_path, monkeypatch):
+    aggregate = Path(__file__).resolve().parents[1] / (
+        "experiments/galar-31-40-index-20261105/aggregate.json"
+    )
+    fake_labels = tmp_path / "private-corrected-source-labels.zip"
+    fake_labels.write_bytes(b"synthetic-test-fixture")
+    monkeypatch.setattr(m, "verified_label_rows",
+                        lambda _: {i*5: "0" for i in range(9643)})
+    monkeypatch.setattr(m, "MIN_PRIVATE_AVAILABLE_BYTES", 0)
+    monkeypatch.setattr(m.shutil, "which", lambda _: None)
+    monkeypatch.setattr(sys, "argv", [
+        "acquire_galar35_private.py",
+        "--index-aggregate", str(aggregate),
+        "--labels-zip", str(fake_labels),
+        "--workdir", str(tmp_path / "private-galar-stage"),
+        "--private-package", str(tmp_path / "private-galar-originals.zip"),
+        "--acquire",
+    ])
+    with pytest.raises(SystemExit):
+        m.main()
+    assert not (tmp_path / "private-galar-stage").exists()
