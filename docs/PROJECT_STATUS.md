@@ -42,7 +42,7 @@ The completed evaluation **must not be re-opened or retuned**. Galar 11–20 is 
 
 A fresh [private-backed development source audit](GALAR_DEVELOPMENT_SOURCE_AUDIT_20261105.md) independently rehashed **11,147 original selected PNGs** from 16 examinations, including source identities, labels and sampling roles. **Zero** exact duplicate PNG SHA values were found; **76.7%** of selected positives sit in four examinations. A coarse visual screen flagged unresolved lookalike candidates, which cannot identify patients. Group identity and complete original-video label coverage remain unverified, so this does **not** qualify a patient-independent or complete-event study.
 
-The next action is to resolve **patient/examination grouping, coarse duplicate candidates and a fixed development-only manifest**, not another arbitrary model fit. A new [local source preflight](../scripts/check_development_cohort.py) enforces hashes, label states and examination/group leakage checks for future data. It never independently authenticates the custodian's assertions.
+The 5,293 coarse dHash candidates have now been [rechecked using original-image structural similarity](GALAR_VISUAL_SIMILARITY_TRIAGE_20261105.md): none met strict pixel-aligned close-copy criteria, but this is **not** an exhaustive or patient-identity screen.\n\nThe next action is to resolve **patient/examination grouping, coarse duplicate candidates and a fixed development-only manifest**, not another arbitrary model fit. A new [local source preflight](../scripts/check_development_cohort.py) enforces hashes, label states and examination/group leakage checks for future data. It never independently authenticates the custodian's assertions.
 
 ## Current constraints and next action
 

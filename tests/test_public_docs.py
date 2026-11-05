@@ -25,6 +25,7 @@ DOCS = (
     ROOT / "docs" / "PROJECT_STATUS.md",
     ROOT / "docs" / "ROADMAP.md",
     ROOT / "docs" / "GALAR_DEVELOPMENT_SOURCE_AUDIT_20261105.md",
+    ROOT / "docs" / "GALAR_VISUAL_SIMILARITY_TRIAGE_20261105.md",
 )
 
 

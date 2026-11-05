@@ -31,6 +31,10 @@ The selected pool has **11** examinations containing any positive reference imag
 
 The per-examination selected/reference aggregates and private-receipt hash are preserved in the [non-identifying source audit aggregate](../experiments/galar-development-source-audit-20261105/aggregate.json). We checked it against the [earlier verified expansion records](GALAR_NEGATIVE_EXPANSION_CV_RESULTS.md).
 
+## November 5 second-stage similarity follow-up
+
+The earlier 5,293 equal-dHash pairs have now undergone a separate, source-byte-reverified [64×64 SSIM and RGB comparison](GALAR_VISUAL_SIMILARITY_TRIAGE_20261105.md). Across the **499** original candidate frames, **zero** of the **5,293** pairs met strict *pixel-aligned* close-copy criteria; highest SSIM was **0.7903**. These are not known repeated patients, but **unsearched pairs, geometric transformations and unauthenticated patient groups remain unresolved**. This result does not change the source-evaluation or clinical no-go decision.
+
 ## Duplicate / patient independence audit
 
 All original-PNG SHA-256 digests are different. That does **not** establish unique underlying patients, duplicate-free anatomy, or absence of visually similar images.
