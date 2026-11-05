@@ -317,8 +317,8 @@ def main() -> None:
     free=shutil.disk_usage(args.workdir.parent).free
     if free < MIN_PRIVATE_AVAILABLE_BYTES:
         p.error("Insufficient free PRIVATE storage for source block, decompression, and archive.")
-    if shutil.which("7z") is None:
-        p.error("7z command unavailable.")
+    # Offline preflight requires source hashes and adequate private storage,
+    # but no archive extraction tool or network access.
     if args.check_only:
         print(json.dumps({
             "decision":"PRIVATE_SOURCE_PRECHECK_READY",
@@ -326,6 +326,8 @@ def main() -> None:
             "indexed_images":len(labels),"full_source_md5_verified":False,
             "images_downloaded":0,"needs_separate_image_transfer":True},sort_keys=True))
         return
+    if shutil.which("7z") is None:
+        p.error("7z command unavailable for --acquire.")
     args.workdir.mkdir(parents=True)
     index_dir=args.workdir/"index"
     receipt=inspect(
