@@ -17,6 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LOCKED = ROOT / "experiments/galar-unseen-11-20-20261104/aggregate.json"
 DEVELOPMENT = ROOT / "experiments/galar-matched-pretrained-probe-20261104/aggregate.json"
+EXAM_BALANCED = ROOT / "experiments/galar-exam-tempered-cnn-20261105/aggregate.json"
 
 
 def load(path: Path) -> dict:
@@ -28,7 +29,7 @@ def load(path: Path) -> dict:
     return data
 
 
-def summarize(locked: dict, development: dict) -> dict:
+def summarize(locked: dict, development: dict, balanced: dict | None = None) -> dict:
     """Verify completed-study boundaries before presenting numerical outcomes."""
     if (locked.get("source_images") != 163161
         or locked.get("primary_review_percent") != 10
@@ -74,6 +75,34 @@ def summarize(locked: dict, development: dict) -> dict:
             < original["mean_examination_average_precision"]):
         raise ValueError("Latest development trade-off was changed or erased.")
 
+    if balanced is None:
+        balanced = load(EXAM_BALANCED)
+    if (balanced.get("preanalysis_git_commit") != "eeafd155f4ddf5f2beef5d7b383f41159cded5ef"
+        or balanced.get("n_examinations") != 16
+        or balanced.get("positive_reference_examinations") != 11
+        or balanced.get("verified_uniform_reference_images") != 8192
+        or balanced.get("exploratory_signal_rule", {}).get("met") is not False
+        or balanced.get("data_boundary", {}).get("patient_independence_verified") is not False
+        or balanced.get("data_boundary", {}).get("model_promoted") is not False
+        or balanced.get("data_boundary", {}).get("heldout_11_20_reused") is not False
+        or balanced.get("data_boundary", {}).get("reserved_61_80_opened") is not False):
+        raise ValueError("Latest retrospective development scope or negative decision changed.")
+    b = balanced["aggregate"]
+    pooled_b = b["pooled_class_balanced"]
+    tempered_b = b["tempered_examination_balanced"]
+    bdelta = 100 * (
+        tempered_b["mean_positive_examination_recall_at_k"]["51"]
+        - pooled_b["mean_positive_examination_recall_at_k"]["51"]
+    )
+    if (not math.isclose(bdelta, -0.12987695364744534, abs_tol=1e-9)
+        or pooled_b["pooled_positive_reference_hits_at_k"]["51"] != 151
+        or tempered_b["pooled_positive_reference_hits_at_k"]["51"] != 148
+        or not tempered_b["mean_defined_examination_average_precision"]
+            < pooled_b["mean_defined_examination_average_precision"]
+        or (balanced["top51_cases_improved"], balanced["top51_cases_deteriorated"],
+            balanced["top51_cases_tied"]) != (1,2,8)):
+        raise ValueError("Latest negative examination-tempered CNN result changed.")
+
     return {
         "evidence_state": "completed retrospective research, not clinical validation",
         "viewer": "functional local research software; no public pathology checkpoint",
@@ -99,9 +128,23 @@ def summarize(locked: dict, development: dict) -> dict:
             "pretrained_probe_positive_hits_at_51_total": 15,
             "model_promoted": False,
         },
+        "latest_examination_balancing": {
+            "status": "negative retrospective, examination-separated development",
+            "examinations": 16,
+            "positive_reference_examinations": 11,
+            "pooled_macro_10_percent_image_recall": round(
+                pooled_b["mean_positive_examination_recall_at_k"]["51"], 6),
+            "tempered_macro_10_percent_image_recall": round(
+                tempered_b["mean_positive_examination_recall_at_k"]["51"], 6),
+            "paired_primary_difference_pp": round(bdelta, 7),
+            "pooled_top51_positive_images": 151,
+            "tempered_top51_positive_images": 148,
+            "signal_threshold_met": False,
+            "model_promoted": False,
+        },
         "external_evaluation": "blocked: no independent, fully annotated cohort qualified",
         "reserved_galar_61_80": "unopened",
-        "next_gate": "verify development cohort groups, label coverage, source rights and stable training/evaluation splits before more model comparisons",
+        "next_gate": "obtain authenticated patient/device grouping and diverse positive examinations before another model study",
     }
 
 
@@ -109,7 +152,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", action="store_true", help="Emit the nonidentifying status JSON.")
     args = parser.parse_args()
-    state = summarize(load(LOCKED), load(DEVELOPMENT))
+    state = summarize(load(LOCKED), load(DEVELOPMENT), load(EXAM_BALANCED))
     if args.json:
         print(json.dumps(state, indent=2, sort_keys=True))
     else:
@@ -125,6 +168,13 @@ def main() -> int:
               f"{d['original_cnn_macro_auc']:.3f} -> {d['pretrained_probe_macro_auc']:.3f}, "
               f"but top-51 positive hits {d['original_cnn_positive_hits_at_51_total']} "
               f"-> {d['pretrained_probe_positive_hits_at_51_total']}; NO promotion")
+        e = state["latest_examination_balancing"]
+        print(f"Nov 5 16-exam study: 10% macro image recall "
+              f"{e['pooled_macro_10_percent_image_recall']:.1%} -> "
+              f"{e['tempered_macro_10_percent_image_recall']:.1%}, "
+              f"delta {e['paired_primary_difference_pp']:+.2f} pp; "
+              f"positive image hits {e['pooled_top51_positive_images']} -> "
+              f"{e['tempered_top51_positive_images']}; NEGATIVE, no promotion")
         print("External clinical cohort: NOT QUALIFIED. Reserved Galar 61–80: unopened.")
         print("Next: verify development cohort and independent event labels before model claims.")
     return 0

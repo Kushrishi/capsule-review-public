@@ -3,7 +3,7 @@ from __future__ import annotations
 from copy import deepcopy
 import pytest
 
-from scripts.project_status import DEVELOPMENT, LOCKED, load, summarize
+from scripts.project_status import DEVELOPMENT, EXAM_BALANCED, LOCKED, load, summarize
 
 
 def test_status_is_derived_from_frozen_public_aggregates():
@@ -19,6 +19,13 @@ def test_status_is_derived_from_frozen_public_aggregates():
     assert development["original_cnn_positive_hits_at_51_total"] == 22
     assert development["pretrained_probe_positive_hits_at_51_total"] == 15
     assert development["model_promoted"] is False
+    recent = result["latest_examination_balancing"]
+    assert recent["examinations"] == 16
+    assert recent["paired_primary_difference_pp"] == pytest.approx(-0.129877, abs=1e-6)
+    assert recent["pooled_top51_positive_images"] == 151
+    assert recent["tempered_top51_positive_images"] == 148
+    assert recent["signal_threshold_met"] is False
+    assert recent["model_promoted"] is False
     assert result["reserved_galar_61_80"] == "unopened"
 
 
@@ -38,3 +45,15 @@ def test_unfavorable_science_cannot_be_silently_rewritten(mutate):
     mutate(g, d)
     with pytest.raises(ValueError):
         summarize(g, d)
+
+
+def test_latest_candidate_failure_cannot_be_hidden_from_status():
+    g, d, b = load(LOCKED), load(DEVELOPMENT), load(EXAM_BALANCED)
+    changed = deepcopy(b)
+    changed["aggregate"]["tempered_examination_balanced"]["pooled_positive_reference_hits_at_k"]["51"] = 166
+    with pytest.raises(ValueError):
+        summarize(g, d, changed)
+    changed = deepcopy(b)
+    changed["data_boundary"]["model_promoted"] = True
+    with pytest.raises(ValueError):
+        summarize(g, d, changed)

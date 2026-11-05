@@ -1,0 +1,572 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-05",
+  "study": "Prelocked same-CNN examination-tempered training compared against pooled class-balanced training",
+  "study_role": "exploratory retrospective development; known Galar outcomes; NOT independent patient validation",
+  "preanalysis_git_commit": "eeafd155f4ddf5f2beef5d7b383f41159cded5ef",
+  "source": "Previously selected, source-SHA-verified original Galar examinations 1-8,21,22,23,24,25,27,29,30",
+  "verified_original_selected_png_images": 11147,
+  "verified_uniform_reference_images": 8192,
+  "verified_selected_blood_positive_images": 1663,
+  "positive_uniform_reference_images": 526,
+  "n_examinations": 16,
+  "positive_reference_examinations": 11,
+  "zero_positive_reference_examinations": 5,
+  "folds": [
+    {
+      "fold": 1,
+      "heldout_exams": [
+        7,
+        8,
+        22,
+        24
+      ],
+      "fit_selected_images": 9099,
+      "heldout_reference_images": 2048
+    },
+    {
+      "fold": 2,
+      "heldout_exams": [
+        29,
+        4,
+        2,
+        3
+      ],
+      "fit_selected_images": 8602,
+      "heldout_reference_images": 2048
+    },
+    {
+      "fold": 3,
+      "heldout_exams": [
+        30,
+        23,
+        21,
+        5
+      ],
+      "fit_selected_images": 7635,
+      "heldout_reference_images": 2048
+    },
+    {
+      "fold": 4,
+      "heldout_exams": [
+        27,
+        1,
+        25,
+        6
+      ],
+      "fit_selected_images": 8105,
+      "heldout_reference_images": 2048
+    }
+  ],
+  "training": {
+    "architecture": "unchanged AnatomyCNN(2), 3 Conv+GroupNorm+ReLU blocks, 16/32/64, global average pool",
+    "initialization": "from scratch identical seed for paired arms in each fold",
+    "seed_formula": "1700 + fold index (1..4)",
+    "epochs": 6,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 64,
+    "preprocessing": "original EXIF RGB aspect-preserving 96x96 bilinear padding [0,1]",
+    "augmentation": "none",
+    "early_stop_or_checkpoint_selection": false,
+    "pooled_weight": "1/global fitting class count, normalized to mean 1",
+    "tempered_weight": "1/sqrt(examination×class fitting count), normalized within class to equal class total mass and overall mean 1"
+  },
+  "evaluation": {
+    "source_uniform_reference_only": true,
+    "heldout_examination_enrichment_used_for_fitting_or_scoring": false,
+    "primary": "mean positive-examination top-51 image recall, candidate minus control in percentage points",
+    "secondary": [
+      "mean defined-examination average precision",
+      "mean defined-examination ROC-AUC",
+      "positive reference image counts K51/K128/K256",
+      "mean positive-examination recall K128/K256"
+    ],
+    "fixed_image_budgets": [
+      51,
+      128,
+      256
+    ],
+    "source_frame_tie_rule": "descending score then earliest original frame",
+    "zero_positive_exam_auc_ap_recall": "undefined (null, excluded from macro)",
+    "positive_examination_count": 11
+  },
+  "per_examination": {
+    "1": {
+      "fold": 4,
+      "reference_images": 512,
+      "positive_reference_images": 22,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 5,
+            "128": 9,
+            "256": 15
+          },
+          "roc_auc": 0.6549165120593692,
+          "average_precision": 0.07905923903484438
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 5,
+            "128": 12,
+            "256": 16
+          },
+          "roc_auc": 0.6792207792207793,
+          "average_precision": 0.09691070774862447
+        }
+      }
+    },
+    "2": {
+      "fold": 2,
+      "reference_images": 512,
+      "positive_reference_images": 1,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": 0.45792563600782776,
+          "average_precision": 0.0035971223021582736
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": 0.10763209393346385,
+          "average_precision": 0.002188183807439825
+        }
+      }
+    },
+    "3": {
+      "fold": 2,
+      "reference_images": 512,
+      "positive_reference_images": 0,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": null,
+          "average_precision": null
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": null,
+          "average_precision": null
+        }
+      }
+    },
+    "4": {
+      "fold": 2,
+      "reference_images": 512,
+      "positive_reference_images": 2,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": 0.27647058823529413,
+          "average_precision": 0.003957231040564373
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 1,
+            "256": 2
+          },
+          "roc_auc": 0.8156862745098039,
+          "average_precision": 0.015889029003783105
+        }
+      }
+    },
+    "5": {
+      "fold": 3,
+      "reference_images": 512,
+      "positive_reference_images": 0,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": null,
+          "average_precision": null
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": null,
+          "average_precision": null
+        }
+      }
+    },
+    "6": {
+      "fold": 4,
+      "reference_images": 512,
+      "positive_reference_images": 6,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 1,
+            "256": 1
+          },
+          "roc_auc": 0.4555335968379447,
+          "average_precision": 0.012100086596689858
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 3
+          },
+          "roc_auc": 0.4696969696969697,
+          "average_precision": 0.012108257004162721
+        }
+      }
+    },
+    "7": {
+      "fold": 1,
+      "reference_images": 512,
+      "positive_reference_images": 208,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 50,
+            "128": 106,
+            "256": 161
+          },
+          "roc_auc": 0.8426113360323886,
+          "average_precision": 0.8111224604359756
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 47,
+            "128": 102,
+            "256": 163
+          },
+          "roc_auc": 0.836190536437247,
+          "average_precision": 0.7796607780138519
+        }
+      }
+    },
+    "8": {
+      "fold": 1,
+      "reference_images": 512,
+      "positive_reference_images": 0,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": null,
+          "average_precision": null
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": null,
+          "average_precision": null
+        }
+      }
+    },
+    "21": {
+      "fold": 3,
+      "reference_images": 512,
+      "positive_reference_images": 1,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 1,
+            "256": 1
+          },
+          "roc_auc": 0.7514677103718199,
+          "average_precision": 0.0078125
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 1
+          },
+          "roc_auc": 0.7299412915851272,
+          "average_precision": 0.007194244604316547
+        }
+      }
+    },
+    "22": {
+      "fold": 1,
+      "reference_images": 512,
+      "positive_reference_images": 0,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": null,
+          "average_precision": null
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": null,
+          "average_precision": null
+        }
+      }
+    },
+    "23": {
+      "fold": 3,
+      "reference_images": 512,
+      "positive_reference_images": 4,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 1,
+            "256": 2
+          },
+          "roc_auc": 0.421259842519685,
+          "average_precision": 0.010592948311803924
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 1,
+            "256": 2
+          },
+          "roc_auc": 0.4207677165354331,
+          "average_precision": 0.011095582792416264
+        }
+      }
+    },
+    "24": {
+      "fold": 1,
+      "reference_images": 512,
+      "positive_reference_images": 0,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": null,
+          "average_precision": null
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 0,
+            "256": 0
+          },
+          "roc_auc": null,
+          "average_precision": null
+        }
+      }
+    },
+    "25": {
+      "fold": 4,
+      "reference_images": 512,
+      "positive_reference_images": 14,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 3,
+            "256": 5
+          },
+          "roc_auc": 0.3131095811818704,
+          "average_precision": 0.021322449714312998
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 0,
+            "128": 2,
+            "256": 5
+          },
+          "roc_auc": 0.3260183591508893,
+          "average_precision": 0.02138956399557286
+        }
+      }
+    },
+    "27": {
+      "fold": 4,
+      "reference_images": 512,
+      "positive_reference_images": 26,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 23,
+            "128": 25,
+            "256": 25
+          },
+          "roc_auc": 0.9700063311174423,
+          "average_precision": 0.8645007629244922
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 23,
+            "128": 25,
+            "256": 26
+          },
+          "roc_auc": 0.9762583095916431,
+          "average_precision": 0.8599780804117526
+        }
+      }
+    },
+    "29": {
+      "fold": 2,
+      "reference_images": 512,
+      "positive_reference_images": 122,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 34,
+            "128": 77,
+            "256": 117
+          },
+          "roc_auc": 0.876817990752417,
+          "average_precision": 0.6507833718397937
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 33,
+            "128": 77,
+            "256": 115
+          },
+          "roc_auc": 0.8681588902900378,
+          "average_precision": 0.6142090213966452
+        }
+      }
+    },
+    "30": {
+      "fold": 3,
+      "reference_images": 512,
+      "positive_reference_images": 120,
+      "methods": {
+        "pooled_class_balanced": {
+          "hits": {
+            "51": 39,
+            "128": 75,
+            "256": 109
+          },
+          "roc_auc": 0.8464498299319727,
+          "average_precision": 0.6250930100091587
+        },
+        "tempered_examination_balanced": {
+          "hits": {
+            "51": 40,
+            "128": 79,
+            "256": 106
+          },
+          "roc_auc": 0.8378613945578232,
+          "average_precision": 0.6532518552727853
+        }
+      }
+    }
+  },
+  "aggregate": {
+    "pooled_class_balanced": {
+      "mean_positive_examination_recall_at_k": {
+        "51": 0.17781465926026283,
+        "128": 0.4333949706527948,
+        "256": 0.5735049414073259
+      },
+      "mean_defined_examination_average_precision": 0.28090374383725397,
+      "mean_defined_examination_roc_auc": 0.6242335413680029,
+      "pooled_positive_reference_hits_at_k": {
+        "51": 151,
+        "128": 298,
+        "256": 436
+      }
+    },
+    "tempered_examination_balanced": {
+      "mean_positive_examination_recall_at_k": {
+        "51": 0.17651588972378837,
+        "128": 0.3799741490501551,
+        "256": 0.699456883156585
+      },
+      "mean_defined_examination_average_precision": 0.2794432094592137,
+      "mean_defined_examination_roc_auc": 0.6424938741372015,
+      "pooled_positive_reference_hits_at_k": {
+        "51": 148,
+        "128": 299,
+        "256": 439
+      }
+    }
+  },
+  "primary_candidate_minus_control_pp": -0.12987695364744534,
+  "ap_candidate_minus_control": -0.001460534378040279,
+  "top51_cases_improved": 1,
+  "top51_cases_deteriorated": 2,
+  "top51_cases_tied": 8,
+  "exploratory_signal_rule": {
+    "primary_delta_min_pp": 5,
+    "ap_nonnegative_delta_required": true,
+    "max_deteriorated_examinations": 2,
+    "met": false
+  },
+  "decision": "REJECT_CANDIDATE_FOR_PROMOTION: negative primary; AUC increase insufficient; no clinically reliable improvement demonstrated",
+  "data_boundary": {
+    "patient_independence_verified": false,
+    "complete_video_event_annotation_coverage": false,
+    "heldout_11_20_reused": false,
+    "reserved_61_80_opened": false,
+    "independent_clinical_evaluation": false,
+    "clinical_validation": false,
+    "model_promoted": false,
+    "original_images_published": false,
+    "individual_source_frames_or_labels_published": false,
+    "prediction_streams_or_checkpoint_weights_published": false
+  },
+  "private_reproducibility": {
+    "saved_checkpoints": 8,
+    "saved_prediction_streams": 8,
+    "source_checkpoint_reinference_independently_completed": false,
+    "score_level_metric_replay_completed": true,
+    "verified_predictions_per_arm": 8192,
+    "source_manifest_sha256": "76b698a5026a90f82b54692ca74f0d056a0cbf61368a9698499c13f85a6644cb",
+    "private_archive_sha256": "9dd1cca41d07299191cd867886ddfa7c1d84d8b188a9ff349b8067ca541f1ea1",
+    "recording_only_resume_events": 2,
+    "first_fold_and_second_fold_completed_artifacts_reused": true,
+    "temporary_preprocessed_pixel_cache_deleted": true
+  },
+  "limitations": [
+    "Fold groups stratified on previously inspected outcomes; not an independent pre-outcome split",
+    "Patient independence and source acquisition-device/site grouping unverified",
+    "Known reference sampling and added positive-enriched training examples; no complete chronological original video endpoint",
+    "Only 11 positive-reference exams, five zero-positive exams (undefined pathology positive recall)",
+    "Small positive support in some exams creates large macro-metric swings at higher workloads",
+    "Different model checkpoints evaluated; no human reader time or lesion-detection endpoint",
+    "Two receipt-only interruptions recovered existing checkpoint and scores; logged epoch losses of recovered arms recorded at six decimals, not full precision"
+  ]
+}
