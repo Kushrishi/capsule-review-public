@@ -1,0 +1,49 @@
+# Current project status
+
+**Reviewed November 5, 2026.** This is the starting point for understanding the entire public repository. For the current numerical research record, run `python scripts/project_status.py`: it reads the existing frozen aggregates rather than a manually maintained score table.
+
+## The project in one minute
+
+**Capsule Review** is local, research-only software for navigating capsule-endoscopy sequences, recording human findings, inspecting AI-generated frame rankings, comparing fixed-size review queues and exporting verifiable source-image evidence.
+
+**What works:** the browser viewer, local import/storage, bookmarks, notes and interval annotations, generated no-medical-data demonstration, score import, five queue policies (four original plus one experimental), evidence exports and checks, a public aggregate results explorer, and automated Python/browser tests.
+
+**What the AI is:** real compact CNN and pretrained-model research using Galar images, evaluated in separate development experiments. The real pathology-model checkpoints, medical pixels, individual labels and scores are **private**. The public 24-frame demo uses generated *non-AI* values. **No pathology model is promoted as a clinically effective default.** This is not a medical device.
+
+## Scientific evidence, in the correct order
+
+| Evidence | What it actually shows | What it does not show |
+| --- | --- | --- |
+| Original compact blood CNN and anatomy baseline | Real training/inference and working integrations | Reliable independent clinical detection |
+| Development studies including 23/25/27 | Considerable cross-examination variation; changing model/augmentation/representation can help some cases and harm others | New untouched patient-level validation |
+| **Locked Galar 11–20, November 4** | **163,161** original verified images, ten examinations, six with annotated blood-positive runs. At equal **10% primary** workload, score-bin mean positive-run recall **49.35%** versus uniform **50.62%**: **−1.2668765 percentage points** (negative). At **25% secondary**: **+9.5106442 pp**, heterogeneous | Demonstrated clinical benefit, guaranteed lesion retention, reader-time reduction |
+| Matched pretrained representation | Development mean ROC-AUC **0.492 → 0.610**, while mean AP **0.298 → 0.169** and positive-image hits at 51 selected images **22 → 15** on three previously inspected cases | An improved model for use, or evidence of distinct event-run coverage |
+
+The four zero-positive-run examinations (13, 14, 16, 18) have **undefined** positive-run recall. Source annotation runs are not independently diagnosed lesions. High-score ranking retrieved more positive images in the locked primary experiment but fewer **distinct** positive annotation runs than uniform selection; image enrichment is not event preservation.
+
+The completed evaluation **must not be re-opened or retuned**. Galar 11–20 is already examined and is not available as a fresh test. The source authors' reserved Galar **61–80** outcomes remain unopened. Previous clinical source archives and individual predictions are private; the entire original 11–20 image archive was **not durably retained**. Patient grouping, external testing and clinical-time benefits are unverified.
+
+## Find the part of the repository you need
+
+| I want to... | Start here |
+| --- | --- |
+| Run the product and understand the demo | [README](../README.md), [five-minute synthetic walkthrough](SUPERVISOR_DEMO.md) |
+| Inspect the code | `src/capsule_review/app.py` (API), `static/` (viewer), `store.py` (local persistence), `priority.py` (selectors), `interval_evidence.py` / `exporter.py` (review provenance) |
+| Understand the scientific target and boundaries | [Research protocol](RESEARCH_PROTOCOL.md), [review policies](RESEARCH_REVIEW_QUEUE.md), [source coverage limitations](DENSE_SEQUENCE_DATA_GATE.md) |
+| Read the strongest completed experiment | [Frozen design](GALAR_UNSEEN_11_20_EVALUATION_LOCK.json), [locked results](GALAR_UNSEEN_11_20_RESULTS.md), [nonidentifying aggregate](../experiments/galar-unseen-11-20-20261104/aggregate.json) |
+| Understand why the AI is not promoted | [Latest pretrained comparison](GALAR_MATCHED_PRETRAINED_PROBE_20261104.md), [exam-excluded CNN adaptation](GALAR_EXAM_EXCLUDED_ADAPTATION_RESULTS.md), [appearance robustness](ORIGINAL_BLOOD_PHOTOMETRIC_ROBUSTNESS_20261104.md) |
+| Understand source qualification | [External cohort screen](EXTERNAL_COHORT_QUALIFICATION_20261104.md), [conditional external protocol](EXTERNAL_REPLICATION_DESIGN_DRAFT_20261104.md) |
+| Reproduce software verification | `tests/`, [verification guide](VERIFICATION.md), `.github/workflows/tests.yml` and `public-source-privacy.yml` |
+| Find previous experiments | `docs/*RESULTS.md`, `docs/*SPEC.json`, `experiments/*/aggregate.json`, `scripts/`: **historical research archive**. Preserve original dates and outcomes |
+
+**Repository map:** `src/` is the running application; `scripts/` houses research/verification utilities; `experiments/` retains public aggregate outcomes; `docs/` holds protocols and history; `tests/` contains synthetic, source-boundary, API and browser checks. Older experiment files are not necessarily current operating instructions.
+
+## Current constraints and next action
+
+The highest-impact missing asset is **diverse, source-verified development data with complete outcome semantics and defensible examination/patient separation**, followed by an independent, fully adjudicated external cohort. Neither a larger neural network nor a polished interface substitutes for those requirements.
+
+The next engineering/scientific stage is **development-cohort qualification and leakage auditing**, then a fixed, comparable model-development benchmark. Read [the adaptive roadmap](ROADMAP.md). Before acquiring/scoring a new external cohort, use the strictly structural `python scripts/check_cohort_gate.py /private/worksheet.json` preflight; even an all-pass result still needs explicit human review and a separate pre-outcome study lock.
+
+Other unresolved engineering decisions: lack of a public software licence, unprotected `main` (CI is voluntarily checked but not enforced), and localhost-only security without encryption or multiuser access. Do not host patient uploads or publish source artifacts to make a quick demo.
+
+**Working principle:** measure improvements on *the right target*—distinct annotated evidence retained at a fixed review workload, with patient/exam-grouped uncertainty when valid. Keep every failure visible. Do not equate higher ROC-AUC, a lower image count or a synthetic demo with clinical benefit.
