@@ -88,12 +88,12 @@ def assess(candidate: Any) -> GateResult:
         elif status == "pass":
             passed += 1
         else:
+            # Never echo worksheet text in a terminal report. Even a human
+            # "reason" could inadvertently contain patient/source identifiers.
             problems.append({
                 "check": key,
                 "status": status,
-                # Reasons are supplied by a human; callers MUST only use
-                # non-identifying, shareable text in these fields.
-                "reason": reason or ("Evidence incomplete" if status == "unknown" else "Failed"),
+                "reason": "Evidence incomplete" if status == "unknown" else "Failed",
             })
 
     decision = "HUMAN_REVIEW_REQUIRED" if not problems else "BLOCKED"
