@@ -61,6 +61,10 @@ The [full cross-examination neighbour audit](GALAR_CROSS_EXAM_NEIGHBOR_AUDIT_202
 ## November 5 external-data screening result
 
 A metadata-only [audit of the official Kvasir-Capsule split CSVs](KVASIR_OFFICIAL_SPLIT_AUDIT_20261105.md) found 43 distinct video IDs, seven video IDs appearing in both image-split files, no cross-file frame-ID overlap, and **446 rows labelled `Blood` from only two source videos**. This does not validate patient-level independence, complete event labels or a new model. Kvasir remains a **conditional external candidate**, not a source of confirmed independent blood-event ground truth. The reusable aggregate-only audit has synthetic tests; no clinical images were acquired.
+## November 5 software-only temporal control
+
+An [offline, fail-closed contiguous-source temporal score baseline](TEMPORAL_CONTIGUOUS_BASELINE_20261105.md) and synthetic tests are available for future qualified **dense** sequences. This is not training, model promotion, new clinical evidence or a product default. Missing source-frame positions prohibit the computation; sampled Galar reference images cannot be represented as consecutive input. No frozen evaluation was reopened.
+
 ## Current constraints and next action
 
 The highest-impact missing asset is **diverse, source-verified development data with complete outcome semantics and defensible examination/patient separation**, followed by an independent, fully adjudicated external cohort. Neither a larger neural network nor a polished interface substitutes for those requirements.
