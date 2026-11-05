@@ -1,0 +1,77 @@
+name: Galar 31-40 bounded source-index feasibility
+
+on:
+  # One source-metadata run when this workflow is introduced on this branch.
+  # Never automatically fetch source data on main.
+  push:
+    branches: [research/galar-31-40-index-only-20261105]
+    paths:
+      - '.github/workflows/galar-31-40-index-only.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: capsule-galar31-40-index-only
+  cancel-in-progress: false
+
+jobs:
+  verify-source-index:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install test dependencies and 7z metadata lister
+        run: |
+          python -m pip install -e '.[dev]'
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq p7zip-full >/dev/null
+      - name: Run synthetic offline source guard tests BEFORE networking
+        run: |
+          python -m pytest -q \
+            tests/test_probe_galar_archive.py \
+            tests/test_summarize_galar_archive_layout.py \
+            tests/test_galar31_40_index.py
+      - name: Get only official publisher metadata (8 MiB maximum)
+        run: |
+          mkdir -p /tmp/galar31-40-metadata
+          python - <<'PY'
+          from pathlib import Path
+          from capsule_review.data_download import get_catalog
+          from scripts.probe_galar_archive import validate_official_catalog
+          p=Path('/tmp/galar31-40-metadata/catalog.json')
+          catalog=get_catalog(p)
+          selected=validate_official_catalog(catalog,'fitting-31-40')
+          assert selected['id']==44755700
+          assert selected['size']==69219317963
+          print('Official publisher v2 source identity verified; no images accessed.')
+          PY
+      - name: Read only the 7z signature and encoded index (8 MiB cap)
+        run: |
+          python scripts/probe_galar_archive.py \
+            --source fitting-31-40 \
+            --catalog /tmp/galar31-40-metadata/catalog.json \
+            --destination /tmp/galar31-40-index \
+            --sparse
+      - name: Check private member listing and produce non-identifying feasibility report
+        run: |
+          7z l -slt /tmp/galar31-40-index/headers-only.7z \
+            > /tmp/galar31-40-index/private-original-member-listing.txt
+          python scripts/audit_galar31_40_index.py \
+            --listing /tmp/galar31-40-index/private-original-member-listing.txt \
+            --receipt /tmp/galar31-40-index/receipt.json \
+            --output /tmp/galar31-40-index/aggregate.json
+      - name: Upload ONLY aggregate and metadata-only receipt (no medical source records)
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: galar31-40-nonidentifying-index-feasibility
+          path: |
+            /tmp/galar31-40-index/aggregate.json
+            /tmp/galar31-40-index/receipt.json
+          retention-days: 7
+          if-no-files-found: error
