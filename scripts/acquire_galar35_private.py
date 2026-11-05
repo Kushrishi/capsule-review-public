@@ -39,6 +39,8 @@ BLOCK_START = 17_802_009_149
 BLOCK_BYTES = 3_453_334_016
 BLOCK_STOP_EXCLUSIVE = BLOCK_START + BLOCK_BYTES
 EXPECTED_IMAGES = 9_643
+LABEL_ARCHIVE_BYTES = 17_931_138
+EXPECTED_BLOCK_IMAGE_MEMBERS = {34: 2876, 35: 9643, 36: 3098}
 EXPECTED_POSITIVE_IMAGES = 1_534
 EXPECTED_ANNOTATION_RUNS = 29
 NATIVE_STRIDE = 5
@@ -100,11 +102,11 @@ def validate_public_index(aggregate: dict) -> dict:
 
 def verified_label_rows(labels_zip: Path) -> dict[int, str]:
     """Read ONLY 35.csv from a SHA-verified official archive. Unknowns fail closed."""
-    if labels_zip.stat().st_size != 17_931_138 or sha256_file(labels_zip) != LABEL_ARCHIVE_SHA256:
+    if labels_zip.stat().st_size != LABEL_ARCHIVE_BYTES or sha256_file(labels_zip) != LABEL_ARCHIVE_SHA256:
         raise ValueError("Corrected official annotation archive SHA/size mismatch.")
     with zipfile.ZipFile(labels_zip) as z:
-        if z.testzip() is not None:
-            raise ValueError("Corrected source ZIP CRC mismatch.")
+        # Only opening 35.csv checks its CRC; testzip() would read protected
+        # 11–20 / 61–80 members and is expressly forbidden here.
         info = z.getinfo("35.csv")  # Does not read 11-20, 61-80 contents.
         if info.is_dir() or info.file_size <= 0 or info.file_size > 64 * 1024 * 1024:
             raise ValueError("Unexpected corrected examination-35 label CSV.")
@@ -167,7 +169,7 @@ def index_members(listing: str, labels: dict[int, str]) -> list[tuple[int, str]]
                 raise ValueError("Original source index missing annotation or duplicate.")
             seen.add(frame)
             members.append((frame, path))
-    if counts != {34: 2876, 35: 9643, 36: 3098}:
+    if counts != EXPECTED_BLOCK_IMAGE_MEMBERS:
         raise ValueError("Source solid block member partition changed.")
     if seen != set(labels):
         raise ValueError("Original published image/export label join incomplete.")
