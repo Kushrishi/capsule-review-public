@@ -71,6 +71,8 @@ The [prior corrected-label audit for Galar 21–60](GALAR_TRAINING_POOL_RESULTS.
 
 ## Current constraints and next action
 
+**Galar 35 execution checkpoint:** [all 9,643 original published PNGs have now been acquired and independently byte-verified](GALAR35_VERIFIED_ACQUISITION_20261105.md) from the single authorized block 5. Complete-image durable retention is blocked by storage quota; originals remain temporary. No full-sequence inference or new performance evaluation has run. The checkpoint and corrected labels are retained privately. Resolve private source retention before scoring and preserving the pre-audit score freeze.
+
 The highest-impact missing asset is **diverse, source-verified development data with complete outcome semantics and defensible examination/patient separation**, followed by an independent, fully adjudicated external cohort. Neither a larger neural network nor a polished interface substitutes for those requirements.
 
 The next engineering/scientific stage is **development-cohort qualification and leakage auditing**, then a fixed, comparable model-development benchmark. Read [the adaptive roadmap](ROADMAP.md). Before acquiring/scoring a new external cohort, use the strictly structural `python scripts/check_cohort_gate.py /private/worksheet.json` preflight; even an all-pass result still needs explicit human review and a separate pre-outcome study lock.
