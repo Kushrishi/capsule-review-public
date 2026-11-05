@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "title": "Cross-examination near-duplicate/leakage triage, source-verified selected images",
+  "research_status": "Completed retrospective research source-quality audit; no independent patient or clinical validation",
+  "original_selected_images": 11147,
+  "source_examinations": 16,
+  "original_exact_png_sha256_duplicates": 0,
+  "full_population_coarse_dhash": {
+    "number_original_source_verified_hashes": 11147,
+    "all_cross_examination_pairs_compared": 57789904,
+    "coarse_exact_equal_hash_pairs": 5293,
+    "coarse_hamming_distance_at_most_six_pairs": 704222,
+    "original_images_with_minimum_cross_examination_hash_distance_at_most_six": 5645,
+    "distance_histogram_zero_through_six": {
+      "0": 5293,
+      "1": 16399,
+      "2": 39339,
+      "3": 75333,
+      "4": 122177,
+      "5": 184587,
+      "6": 261094
+    },
+    "limits": "Every cross-examination dHash distance counted, but coarse hash proximity alone is not a duplicate, clinical lesion or patient identity"
+  },
+  "original_image_pretrained_embedding_screen": {
+    "source": "Previous verified ImageNet MobileNetV3-Small feature bank; no newly trained model or pixel acquisition",
+    "verified_feature_bank_sha256": "611ac32ca3b0ada15bba65c5aba564fd2a92bdac4d60d9376af89e429181c9ae",
+    "verified_private_metadata_sha256": "78fc3b0d9711b675f3ffe802554d28232a58f01abb36acda60849c96c32fa4c2",
+    "feature_vector_dim": 576,
+    "source_images": 10123,
+    "source_examinations": 14,
+    "excluded_from_feature_bank_examinations": [
+      22,
+      24
+    ],
+    "algorithm": "Exact cosine similarity search in 256-image batches; five most similar source images from different examination IDs, evaluated for each source image",
+    "unique_cross_examination_top_five_pairs": 43434,
+    "strongest_cross_exam_cosine": 0.9587886333465576,
+    "images_whose_best_different_exam_cosine_at_least_0_98": 0,
+    "private_original_pixel_followup": {
+      "selection": "All 551 unique top-five cross-examination pairs with cosine >= 0.92, threshold fixed for this descriptive follow-up",
+      "candidate_pairs": 551,
+      "fresh_original_png_sha256_reverified": 451,
+      "source_archives_read": 10,
+      "method": "64x64 full-field RGB area resize; grayscale pixel-aligned SSIM and full/central normalized RGB MAE; same strict rule used in the prior PR #48 audit",
+      "strict_close_copy_thresholds": {
+        "minimum_grayscale_ssim": 0.95,
+        "maximum_full_rgb_mae": 0.06,
+        "maximum_central_rgb_mae": 0.07
+      },
+      "maximum_grayscale_ssim": 0.7915423,
+      "mean_grayscale_ssim": 0.4874851,
+      "ssim_at_least_0_90_pairs": 0,
+      "ssim_at_least_0_95_pairs": 0,
+      "strict_pixel_aligned_close_copy_pairs": 0,
+      "private_numeric_pair_records_sha256": "e1a8c554feff940dd33e4b1e2df71f78c2e9a98a4c5f7a776e060286b776339a"
+    }
+  },
+  "privacy_and_replay": {
+    "private_archive_sha256": "5e43c1a39422ece4a3b1549f47ec397d14f2c6fddd58146b5492e4443ab6e53d",
+    "archive_bytes": 571736,
+    "members": 11,
+    "contained_original_medical_pixels": false,
+    "contained_original_frozen_576d_feature_bank": false,
+    "retained_private_source_frame_indices": true,
+    "public_source_frame_indices": false,
+    "public_per_image_embedding_or_predictions": false
+  },
+  "limitations": {
+    "all_11147_images_in_pretrained_feature_search": false,
+    "coarse_dhash_is_near_duplicate_approval": false,
+    "embeddings_are_validated_for_patient_linkage": false,
+    "rotation_scale_crop_or_color_invariant_duplicate_proof": false,
+    "all_57789904_pairs_evaluated_by_original_pixel_ssim": false,
+    "patient_to_examination_uniqueness_authenticated": false,
+    "complete_source_video_event_annotations": false,
+    "clinical_model_improvement_tested": false,
+    "retrospective_source_development_data": true,
+    "source_authors_reserved_61_80_outcomes_unopened": true,
+    "previous_locked_galar_11_20_primary_unchanged": true
+  },
+  "scientific_decision": "No strict close pixel-aligned copies among the 551 strongest screened cross-examination embedding pairs; additional evidence against obvious source duplication, but independence remains unverified. No AI model promotion.",
+  "next_high_value_dependency": "Custodian-backed patient-to-video linkage and acquisition device/site provenance; then qualified independent diverse-positive source exams, not repeated model tuning on the known pool."
+}
