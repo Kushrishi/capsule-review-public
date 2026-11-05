@@ -98,6 +98,7 @@ def inspect(manifest: dict, *, source_root: Path, pinned_sha256: str) -> dict:
         counts["images"] += 1
         counts["label_"+label] += 1
         counts["split_"+split] += 1
+        counts[split+"_"+label] += 1
         splits.add(split)
         state = per_exam.setdefault(ex, {"splits":set(), "groups":set(), "positive":0,
                                          "n":0})
@@ -146,8 +147,12 @@ def inspect(manifest: dict, *, source_root: Path, pinned_sha256: str) -> dict:
         errors.add("examination_split_leakage")
     if any(len(parts) > 1 for parts in patient_to_splits.values()):
         errors.add("patient_group_split_leakage")
-    if counts["label_positive"] < 1:
-        errors.add("no_positive_images")
+    if counts["fit_positive"] < 1 or counts["fit_negative"] < 1:
+        errors.add("fit_split_missing_binary_class")
+    if counts["evaluate_positive"] < 1 or counts["evaluate_negative"] < 1:
+        errors.add("evaluation_split_missing_binary_class")
+    if any(len(state["groups"]) > 1 for state in per_exam.values()):
+        errors.add("examination_maps_to_multiple_patient_groups")
     if not rights_ref.strip():
         errors.add("data_rights_evidence_missing")
     if task == "complete_event_retrieval":
