@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "record_type": "galar-31-40-published-metadata-index-aggregate-v1",
+  "date": "2026-11-05",
+  "official_source": {
+    "article_id": 25304616,
+    "version": 2,
+    "file_id": 44755700,
+    "filename": "Galar_Frames_31_to_40.7z",
+    "expected_publisher_md5_unverified": "3bd4f9c9132e32d1a15d1ead5d96d0e2",
+    "declared_archive_bytes": 69219317963
+  },
+  "verification": {
+    "github_workflow_run_id": 42103020040,
+    "github_workflow_url": "https://github.com/Kushrishi/capsule-review-public/actions/runs/42103020040",
+    "artifact_id": 13448534710,
+    "downloaded_artifact_zip_sha256": "c4bbbc542bc863fad88745c79195e520a1bf074a87a5968769c05c9c30b6c6de",
+    "index_only_transferred_bytes": 3629193,
+    "header_crc_verified": true,
+    "exact_http_206_range_required": true,
+    "publisher_metadata_exactly_matched": true,
+    "original_image_pixels_acquired": 0,
+    "full_archive_md5_verified": false,
+    "source_image_counts_match_previous_corrected_label_rows": true,
+    "all_internal_native_export_grids_contiguous": true,
+    "patient_independence_verified": false,
+    "complete_clinical_outcome_labels_verified": false
+  },
+  "image_members_total": 381787,
+  "compression_block_count": 18,
+  "compressed_block_bytes_total": 69215688770,
+  "archive_layout_reconciliation": {
+    "compressed_blocks_plus_fetched_header_equals_declared_archive_bytes": true
+  },
+  "studies": {
+    "31": {
+      "image_members": 24919,
+      "previous_label_positive_rows": 3310,
+      "previous_label_positive_runs": 162,
+      "native_source_stride": 5,
+      "internal_native_grid_gaps": 0,
+      "required_block_ids_for_complete_export": [
+        0,
+        1
+      ],
+      "compressed_bytes_if_full_solid_blocks_required": 7094259360
+    },
+    "32": {
+      "image_members": 23421,
+      "previous_label_positive_rows": 0,
+      "previous_label_positive_runs": 0,
+      "native_source_stride": 5,
+      "internal_native_grid_gaps": 0,
+      "required_block_ids_for_complete_export": [
+        1,
+        2,
+        3
+      ],
+      "compressed_bytes_if_full_solid_blocks_required": 10803629651
+    },
+    "33": {
+      "image_members": 13297,
+      "previous_label_positive_rows": 0,
+      "previous_label_positive_runs": 0,
+      "native_source_stride": 5,
+      "internal_native_grid_gaps": 0,
+      "required_block_ids_for_complete_export": [
+        3,
+        4
+      ],
+      "compressed_bytes_if_full_solid_blocks_required": 7091985967
+    },
+    "34": {
+      "image_members": 10867,
+      "previous_label_positive_rows": 49,
+      "previous_label_positive_runs": 9,
+      "native_source_stride": 5,
+      "internal_native_grid_gaps": 0,
+      "required_block_ids_for_complete_export": [
+        4,
+        5
+      ],
+      "compressed_bytes_if_full_solid_blocks_required": 6963285731
+    },
+    "35": {
+      "image_members": 9643,
+      "previous_label_positive_rows": 1534,
+      "previous_label_positive_runs": 29,
+      "native_source_stride": 5,
+      "internal_native_grid_gaps": 0,
+      "required_block_ids_for_complete_export": [
+        5
+      ],
+      "compressed_bytes_if_full_solid_blocks_required": 3453334016
+    },
+    "36": {
+      "image_members": 13326,
+      "previous_label_positive_rows": 209,
+      "previous_label_positive_runs": 59,
+      "native_source_stride": 5,
+      "internal_native_grid_gaps": 0,
+      "required_block_ids_for_complete_export": [
+        5,
+        6
+      ],
+      "compressed_bytes_if_full_solid_blocks_required": 6884204970
+    },
+    "37": {
+      "image_members": 18125,
+      "previous_label_positive_rows": 0,
+      "previous_label_positive_runs": 0,
+      "native_source_stride": 5,
+      "internal_native_grid_gaps": 0,
+      "required_block_ids_for_complete_export": [
+        6,
+        7
+      ],
+      "compressed_bytes_if_full_solid_blocks_required": 6892487867
+    },
+    "38": {
+      "image_members": 6209,
+      "previous_label_positive_rows": 0,
+      "previous_label_positive_runs": 0,
+      "native_source_stride": 5,
+      "internal_native_grid_gaps": 0,
+      "required_block_ids_for_complete_export": [
+        7,
+        8
+      ],
+      "compressed_bytes_if_full_solid_blocks_required": 7555919684
+    },
+    "39": {
+      "image_members": 130776,
+      "previous_label_positive_rows": 10565,
+      "previous_label_positive_runs": 286,
+      "native_source_stride": 1,
+      "internal_native_grid_gaps": 0,
+      "required_block_ids_for_complete_export": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "compressed_bytes_if_full_solid_blocks_required": 25510343310
+    },
+    "40": {
+      "image_members": 131204,
+      "previous_label_positive_rows": 1677,
+      "previous_label_positive_runs": 60,
+      "native_source_stride": 1,
+      "internal_native_grid_gaps": 0,
+      "required_block_ids_for_complete_export": [
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "compressed_bytes_if_full_solid_blocks_required": 19833541469
+    }
+  },
+  "blocks": [
+    {
+      "block_id": 0,
+      "compressed_bytes": 3488427751,
+      "image_members_by_exam": {
+        "31": 13262
+      }
+    },
+    {
+      "block_id": 1,
+      "compressed_bytes": 3605831609,
+      "image_members_by_exam": {
+        "31": 11657,
+        "32": 1487
+      }
+    },
+    {
+      "block_id": 2,
+      "compressed_bytes": 3615763790,
+      "image_members_by_exam": {
+        "32": 14380
+      }
+    },
+    {
+      "block_id": 3,
+      "compressed_bytes": 3582034252,
+      "image_members_by_exam": {
+        "32": 7554,
+        "33": 6039
+      }
+    },
+    {
+      "block_id": 4,
+      "compressed_bytes": 3509951715,
+      "image_members_by_exam": {
+        "33": 7258,
+        "34": 7991
+      }
+    },
+    {
+      "block_id": 5,
+      "compressed_bytes": 3453334016,
+      "image_members_by_exam": {
+        "34": 2876,
+        "35": 9643,
+        "36": 3098
+      }
+    },
+    {
+      "block_id": 6,
+      "compressed_bytes": 3430870954,
+      "image_members_by_exam": {
+        "36": 10228,
+        "37": 5454
+      }
+    },
+    {
+      "block_id": 7,
+      "compressed_bytes": 3461616913,
+      "image_members_by_exam": {
+        "37": 12671,
+        "38": 2562
+      }
+    },
+    {
+      "block_id": 8,
+      "compressed_bytes": 4094302771,
+      "image_members_by_exam": {
+        "38": 3647,
+        "39": 18604
+      }
+    },
+    {
+      "block_id": 9,
+      "compressed_bytes": 4286659793,
+      "image_members_by_exam": {
+        "39": 23161
+      }
+    },
+    {
+      "block_id": 10,
+      "compressed_bytes": 4278159490,
+      "image_members_by_exam": {
+        "39": 24900
+      }
+    },
+    {
+      "block_id": 11,
+      "compressed_bytes": 4283327520,
+      "image_members_by_exam": {
+        "39": 22120
+      }
+    },
+    {
+      "block_id": 12,
+      "compressed_bytes": 4291866727,
+      "image_members_by_exam": {
+        "39": 22445
+      }
+    },
+    {
+      "block_id": 13,
+      "compressed_bytes": 4276027009,
+      "image_members_by_exam": {
+        "39": 19546,
+        "40": 6798
+      }
+    },
+    {
+      "block_id": 14,
+      "compressed_bytes": 4258972837,
+      "image_members_by_exam": {
+        "40": 32854
+      }
+    },
+    {
+      "block_id": 15,
+      "compressed_bytes": 4250671804,
+      "image_members_by_exam": {
+        "40": 35558
+      }
+    },
+    {
+      "block_id": 16,
+      "compressed_bytes": 4262760340,
+      "image_members_by_exam": {
+        "40": 35102
+      }
+    },
+    {
+      "block_id": 17,
+      "compressed_bytes": 2785109479,
+      "image_members_by_exam": {
+        "40": 20892
+      }
+    }
+  ],
+  "conclusion": "Best single-block full-export source is study 35; block 5 also includes partial study 34 and 36 records; this is development-only acquisition feasibility, not an independent test.",
+  "limits": "No source image bytes, per-frame identities, individual annotations, model predictions, source full checksum, or patient linkage were checked or included."
+}
