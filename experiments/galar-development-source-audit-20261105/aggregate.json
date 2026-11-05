@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-11-05",
+  "study": "Existing Galar sparse development pool: byte-level independent archive reconciliation",
+  "scope": "Already acquired selected original PNGs only; not full original videos, not new patient evaluation",
+  "data_policy": "No new medical acquisition, training, model selection or holdout evaluation",
+  "original_image_sha256_reverified": 11147,
+  "selected_frame_identities_verified": 11147,
+  "source_original_png_bytes_rehashed": 3374503965,
+  "independently_checked_private_source_packages": 11,
+  "source_byte_mismatch_count": 0,
+  "source_manifest_label_or_role_mismatch_count": 0,
+  "exact_original_png_sha256_duplicate_count": 0,
+  "examination_count": 16,
+  "selected_blood_positive_images": 1663,
+  "selected_explicit_blood_negative_images": 9484,
+  "selected_unknown_labels": 0,
+  "unimported_positions_have_verified_negative_labels": false,
+  "reference_images": 8192,
+  "reference_positive_images": 526,
+  "additional_enriched_images": 2955,
+  "zero_selected_positive_examination_ids": [
+    3,
+    5,
+    8,
+    22,
+    24
+  ],
+  "four_largest_positive_examinations": [
+    29,
+    30,
+    27,
+    25
+  ],
+  "four_largest_positive_share": 0.7672880336740829,
+  "per_examination": {
+    "1": {
+      "selected_images": 512,
+      "blood_positive_selected_images": 22,
+      "explicit_blood_negative_selected_images": 490,
+      "reference_images": 512,
+      "reference_blood_positive_images": 22,
+      "additional_enrichment_images": 0,
+      "source_examination_id_is_patient_id": false
+    },
+    "2": {
+      "selected_images": 512,
+      "blood_positive_selected_images": 1,
+      "explicit_blood_negative_selected_images": 511,
+      "reference_images": 512,
+      "reference_blood_positive_images": 1,
+      "additional_enrichment_images": 0,
+      "source_examination_id_is_patient_id": false
+    },
+    "3": {
+      "selected_images": 512,
+      "blood_positive_selected_images": 0,
+      "explicit_blood_negative_selected_images": 512,
+      "reference_images": 512,
+      "reference_blood_positive_images": 0,
+      "additional_enrichment_images": 0,
+      "source_examination_id_is_patient_id": false
+    },
+    "4": {
+      "selected_images": 512,
+      "blood_positive_selected_images": 2,
+      "explicit_blood_negative_selected_images": 510,
+      "reference_images": 512,
+      "reference_blood_positive_images": 2,
+      "additional_enrichment_images": 0,
+      "source_examination_id_is_patient_id": false
+    },
+    "5": {
+      "selected_images": 512,
+      "blood_positive_selected_images": 0,
+      "explicit_blood_negative_selected_images": 512,
+      "reference_images": 512,
+      "reference_blood_positive_images": 0,
+      "additional_enrichment_images": 0,
+      "source_examination_id_is_patient_id": false
+    },
+    "6": {
+      "selected_images": 512,
+      "blood_positive_selected_images": 6,
+      "explicit_blood_negative_selected_images": 506,
+      "reference_images": 512,
+      "reference_blood_positive_images": 6,
+      "additional_enrichment_images": 0,
+      "source_examination_id_is_patient_id": false
+    },
+    "7": {
+      "selected_images": 512,
+      "blood_positive_selected_images": 208,
+      "explicit_blood_negative_selected_images": 304,
+      "reference_images": 512,
+      "reference_blood_positive_images": 208,
+      "additional_enrichment_images": 0,
+      "source_examination_id_is_patient_id": false
+    },
+    "8": {
+      "selected_images": 512,
+      "blood_positive_selected_images": 0,
+      "explicit_blood_negative_selected_images": 512,
+      "reference_images": 512,
+      "reference_blood_positive_images": 0,
+      "additional_enrichment_images": 0,
+      "source_examination_id_is_patient_id": false
+    },
+    "21": {
+      "selected_images": 993,
+      "blood_positive_selected_images": 13,
+      "explicit_blood_negative_selected_images": 980,
+      "reference_images": 512,
+      "reference_blood_positive_images": 1,
+      "additional_enrichment_images": 481,
+      "source_examination_id_is_patient_id": false
+    },
+    "22": {
+      "selected_images": 512,
+      "blood_positive_selected_images": 0,
+      "explicit_blood_negative_selected_images": 512,
+      "reference_images": 512,
+      "reference_blood_positive_images": 0,
+      "additional_enrichment_images": 0,
+      "source_examination_id_is_patient_id": false
+    },
+    "23": {
+      "selected_images": 1001,
+      "blood_positive_selected_images": 135,
+      "explicit_blood_negative_selected_images": 866,
+      "reference_images": 512,
+      "reference_blood_positive_images": 4,
+      "additional_enrichment_images": 489,
+      "source_examination_id_is_patient_id": false
+    },
+    "24": {
+      "selected_images": 512,
+      "blood_positive_selected_images": 0,
+      "explicit_blood_negative_selected_images": 512,
+      "reference_images": 512,
+      "reference_blood_positive_images": 0,
+      "additional_enrichment_images": 0,
+      "source_examination_id_is_patient_id": false
+    },
+    "25": {
+      "selected_images": 1013,
+      "blood_positive_selected_images": 265,
+      "explicit_blood_negative_selected_images": 748,
+      "reference_images": 512,
+      "reference_blood_positive_images": 14,
+      "additional_enrichment_images": 501,
+      "source_examination_id_is_patient_id": false
+    },
+    "27": {
+      "selected_images": 1005,
+      "blood_positive_selected_images": 273,
+      "explicit_blood_negative_selected_images": 732,
+      "reference_images": 512,
+      "reference_blood_positive_images": 26,
+      "additional_enrichment_images": 493,
+      "source_examination_id_is_patient_id": false
+    },
+    "29": {
+      "selected_images": 1009,
+      "blood_positive_selected_images": 372,
+      "explicit_blood_negative_selected_images": 637,
+      "reference_images": 512,
+      "reference_blood_positive_images": 122,
+      "additional_enrichment_images": 497,
+      "source_examination_id_is_patient_id": false
+    },
+    "30": {
+      "selected_images": 1006,
+      "blood_positive_selected_images": 366,
+      "explicit_blood_negative_selected_images": 640,
+      "reference_images": 512,
+      "reference_blood_positive_images": 120,
+      "additional_enrichment_images": 494,
+      "source_examination_id_is_patient_id": false
+    }
+  },
+  "visual_similarity_screen": {
+    "status": "unresolved coarse similarity candidates; not confirmed duplicates or patients",
+    "method": "64-bit grayscale 9x8 dHash exact equality across different examination IDs; no human adjudication",
+    "decoded_image_count": 11147,
+    "unique_dhash_values": 10735,
+    "cross_examination_matching_dhash_groups": 106,
+    "images_with_cross_exam_matching_dhash": 499,
+    "private_cross_exam_candidate_pairs": 5293,
+    "near_duplicate_status": "not ruled out"
+  },
+  "patient_independence_verified": false,
+  "examination_level_disjointness_possible": true,
+  "source_complete_original_video_coverage_verified": false,
+  "independent_external_event_recall_eligible": false,
+  "training_readiness": "EXAMINATION_SEPARATED_EXPLORATION_ONLY; patient independence unresolved; do not promote model",
+  "external_research_study_readiness": "BLOCKED",
+  "limits": [
+    "Source original images were verified against private archive manifests, not original publisher full 31.99 GB file hash",
+    "Public per-examination counts do not carry underlying source frames, labels, filenames or image SHA256",
+    "Original sparse reference and enrichment roles are selections, not complete source video intervals",
+    "Selected blood-negative labels do not imply unselected or unannotated frames are negative",
+    "Source examination ID does not prove patient independence; device/site grouping unverified",
+    "dHash candidate matches are weak visual signals; no near-duplicate adjudication or repeated-patient determination",
+    "No independent clinical utility, diagnostic performance, event-run sensitivity or clinician time measured"
+  ],
+  "privacy": {
+    "private_receipt_sha256": "5cf828dd0288364bfe0bb2a5e3a6615b9e5ddaac91dec51b1a7765923fd04709",
+    "private_metadata_sha256": "76b698a5026a90f82b54692ca74f0d056a0cbf61368a9698499c13f85a6644cb",
+    "original_pixels_published": false,
+    "frame_identifiers_published": false,
+    "per_image_labels_published": false,
+    "patient_ids_published": false,
+    "source_hashes_published": false
+  },
+  "original_locked_11_20_result_unchanged": true,
+  "authors_reserved_61_80_unopened": true
+}
