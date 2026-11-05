@@ -4,7 +4,9 @@ Capsule Review is a **local research viewer** for capsule-endoscopy image sequen
 
 ## Read first (in this order)
 
-- [README](README.md): short product entry point and run commands.\n- [Current project status](docs/PROJECT_STATUS.md): the canonical software/research state and where to find evidence.\n- [Adaptive roadmap](docs/ROADMAP.md): next scientific tasks, data gates and go/no-go criteria.
+- [README](README.md): short product entry point and run commands.
+- [Current project status](docs/PROJECT_STATUS.md): the canonical software/research state and where to find evidence.
+- [Adaptive roadmap](docs/ROADMAP.md): next scientific tasks, data gates and go/no-go criteria.
 - [Research protocol](docs/RESEARCH_PROTOCOL.md): clinical terminology, data separation, and evaluation limits.
 - [Research review queue](docs/RESEARCH_REVIEW_QUEUE.md): the four previously evaluated exact-K policies and one explicitly experimental bounded-gap candidate.
 - [Locked evaluation design](docs/GALAR_UNSEEN_EVALUATION_PLAN.md) and [completed results](docs/GALAR_UNSEEN_11_20_RESULTS.md): original checkpoint, outcome-concealed eligibility amendment and Galar 11–20 findings.
