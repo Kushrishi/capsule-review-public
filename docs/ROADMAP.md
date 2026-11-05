@@ -45,6 +45,9 @@ The next gate is **NOT passed**: no verified independent patient grouping, no ex
 
 ### Stage 2 — Build a *fair, hard-to-game* AI benchmark
 
+**November 5 development finding:** the [matched 16-exam class-weighting comparison](GALAR_EXAM_TEMPERED_CNN_RESULTS_20261105.md) trained eight real CNN checkpoints and found **no benefit on its predefined 10% mean examination-positive-image recall endpoint**. That eliminates a simple examination-tempered loss fix on the current, already inspected pool. Further training-exponent/epoch sweeps on the same cases would be posthoc; prioritize **new positive-examination diversity and authentic source/patient grouping** instead.
+
+
 **Build:** one standardized training/evaluation harness, with frozen task semantics, splits, source hashes, model identity, preprocessing, budgets, seeds, exact-K tie policy, and a model card/receipt per candidate. No repeated tuning against the already inspected Galar 11–20 or original authors' 61–80.
 
 **Minimum comparison:** uniform / existing original CNN / a simple transparent colour or linear baseline / an endoscopy-relevant pretrained encoder **only if rights and input compatibility are established**. A compact temporal smoothing or 1-D sequence model is warranted **only on verified consecutive sequences**; sparse 512-frame references must not masquerade as dense temporal videos. Use a simple temporal baseline before a transformer. No automatic increase in architectures just because a prior model failed.
