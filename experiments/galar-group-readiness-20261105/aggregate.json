@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-11-05",
+  "evidence_type": "retrospective development grouping and illustrative fold feasibility; not independent patient validation",
+  "source_integrity_audit": "galar-development-source-audit-20261105",
+  "available_examinations": 16,
+  "previously_sha256_verified_selected_images": 11147,
+  "selected_images_with_uniform_reference_role": 8192,
+  "uniform_reference_positive_images": 526,
+  "selected_positive_images_including_enriched_additions": 1663,
+  "reference_positive_examinations": 11,
+  "reference_top_four_positive_share": 0.9049429657794676,
+  "reference_effective_positive_exam_count": 3.7407858089289094,
+  "enriched_selected_top_four_positive_share": 0.7672880336740829,
+  "enriched_selected_effective_positive_exam_count": 5.770293588050334,
+  "metadata_availability": {
+    "capsule_system_examinations_verified_from_existing_publisher_extract": 8,
+    "verified_capsule_system_values_for_known_fitting_examinations": [
+      "PillCam SB3"
+    ],
+    "capsule_system_examinations_missing": 8,
+    "collection_site_examinations_authenticated": 0,
+    "patient_group_examinations_authenticated": 0,
+    "publisher_packet_available_exam_ids": "1-10 only; 9-10 are outside the currently selected 16-exam development pool",
+    "demographic_values_published": false
+  },
+  "source_paper_group_semantics": {
+    "paper_url": "https://doi.org/10.1038/s41597-025-05112-7",
+    "published_splits_code_url": "https://github.com/EKFZ-AI-Endoscopy/GalarCapsuleML/blob/main/generate_folds.py",
+    "actual_published_fold_group_key": "video",
+    "independent_patient_group_key_verified": false,
+    "study_id_alone_is_patient_id": false
+  },
+  "illustrative_reference_only_four_folds": [
+    {
+      "fold": 1,
+      "exam_count": 4,
+      "reference_frames": 2048,
+      "reference_positive_images": 208
+    },
+    {
+      "fold": 2,
+      "exam_count": 4,
+      "reference_frames": 2048,
+      "reference_positive_images": 125
+    },
+    {
+      "fold": 3,
+      "exam_count": 4,
+      "reference_frames": 2048,
+      "reference_positive_images": 125
+    },
+    {
+      "fold": 4,
+      "exam_count": 4,
+      "reference_frames": 2048,
+      "reference_positive_images": 68
+    }
+  ],
+  "illustrative_fold_source": "Deterministic descending reference-positive exam count; seed top four separate, then assign remaining exams to lowest current positive-support fold with fixed capacity four. Uses already inspected outcomes; not new external validation or a frozen new study.",
+  "private_packet_sha256": "790fb023304ef5e786b9e74c9d885061e796ac9d2f21de87a3f24407f82578c7",
+  "private_packet_contains_original_medical_pixels": false,
+  "private_packet_contains_age_or_sex_values": false,
+  "confirmed_independent_patients": false,
+  "source_complete_event_ground_truth": false,
+  "new_trained_model": false,
+  "model_promoted": false,
+  "original_galar_11_20_reopened": false,
+  "authors_reserved_galar_61_80_opened": false,
+  "decision": "EXAMINATION_SEPARATED_EXPLORATION_ONLY; no independent-patient or clinical model claims",
+  "next_required_evidence": [
+    "custodian-backed patient-study linkage or explicit proof that every study is a different patient",
+    "missing source system/device information for development exams 21-30",
+    "collection site linkage where defensible",
+    "private fixed development-only manifest with reference/enrichment roles and source hashes",
+    "separately qualified complete chronological event annotations before run-level outcome claims"
+  ]
+}
