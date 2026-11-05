@@ -1,86 +1,54 @@
 # Capsule Review
 
-A local research viewer for capsule-endoscopy image sequences. Review images, record observations, and export verifiable evidence. Experimental model scores can help prioritize frames, but never replace a human review.
+**A local research application for reviewing capsule-endoscopy images and studying how AI-guided selection preserves important evidence.**
 
-**Status:** Working research software; **not a clinical decision-support device**. No medical model is distributed with the public source.
+Capsule Review lets a human navigate image sequences, record findings, compare fixed-size review queues, inspect what was skipped and export verifiable evidence. It is **working research software, not a clinical decision-support device**. The real AI experiments use private medical data; the public demo uses generated images and **non-AI example scores**. **No clinical model was promoted.**
 
-## Try it locally
+## Start here
 
-Requires Python 3.11+.
+**New to the project?** Read [current status and the code map](docs/PROJECT_STATUS.md), then [the adaptive research roadmap](docs/ROADMAP.md). They explain what is completed, what failed, the next scientific gate and how our priorities change when new evidence becomes available.
 
-**macOS / Linux**
+**Try the software** (Python 3.11+, from a checked-out repository):
 
-```bash
-python3 -m venv .venv
-. .venv/bin/activate
-python -m pip install -e .
-capsule-review serve
-```
-
-**Windows PowerShell**
-
-```powershell
-py -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e .
-.\.venv\Scripts\capsule-review.exe serve
-```
-
-Open [http://127.0.0.1:8765](http://127.0.0.1:8765) and select **Open test sequence**. It creates 24 **generated, nonmedical images** and a complete set of **deterministic example scores**—not learned model predictions. Select **Compare six-image queues** to exercise the original four exact-K selection policies and an explicitly experimental fifth option and inspect omitted spans without any research data or model weights. You can then bookmark frames, add notes, mark intervals, verify evidence and export a review. Earlier generated test sequences are updated on demand without overwriting notes or creating duplicate score runs. The server binds to localhost. The **Study results** link opens the separate public-aggregate-only [locked Galar results explorer](src/capsule_review/static/locked-results.html); the synthetic demo is *not* a replay of Galar clinical findings.
-
-For new, **actual-model** research (not synthetic UI scores), see the [original blood CNN appearance stress test and unpromoted photometric training candidate](docs/ORIGINAL_BLOOD_PHOTOMETRIC_ROBUSTNESS_20261104.md). Its previously examined development results are mixed and do **not** establish clinical benefit. The follow-up [three-fold examination-excluded CNN adaptation](docs/GALAR_EXAM_EXCLUDED_ADAPTATION_RESULTS.md) again found no consistent improvement; neither candidate is promoted. A [matched ImageNet-pretrained MobileNetV3 probe](docs/GALAR_MATCHED_PRETRAINED_PROBE_20261104.md) raised macro ROC-AUC but **reduced average precision and fixed-workload positive-image retrieval**; it was also not promoted.
-
-For a concise, evidence-based overview suitable for researchers, see the [collaboration brief](docs/RESEARCH_COLLABORATION_BRIEF.md). For a reproducible five-minute, no-clinical-data presentation—with verified commands, demonstration steps, and the actual negative scientific results—see the [supervisor demonstration walkthrough](docs/SUPERVISOR_DEMO.md).
-
-## What works
-
-- **Review:** Import PNG, JPEG or WebP sequences; navigate, bookmark, annotate, and resume locally.
-- **Preserve:** Mark image intervals, export saved frames and interval boundaries, or explicitly export every *imported* image in marked spans. Verify exported bytes and review history.
-- **Compare:** Import a complete score stream for the exact source images, choose any review count from 1 through all imported images, and compare the four original label-blind policies—top score, score with spacing, score per chronology bin, and uniform sampling—plus an **experimental gap-guarded score policy** that cannot worsen uniform's largest skipped imported-position span. The experimental option has **no verified pathology-recall benefit**. Inspect their largest omitted spans.
-
-Models provide suggestions only. Reference annotations, predictions and human notes remain separate. Neither image order nor source-index gaps establish original recording time or complete video coverage.
-
-For details, see the [review workflow](docs/RESEARCH_REVIEW_QUEUE.md), [evidence exports](docs/FULL_SPAN_EVIDENCE_EXPORT.md), and [prediction format](docs/PREDICTIONS.md). An optional **anatomy** baseline can be trained locally; it is not a pathology detector. See [MODEL.md](docs/MODEL.md).
-
-## What we have learned
-
-The software works; the biomedical evidence is mixed. Earlier experiments used previously examined material. A completed, locked Galar 11–20 study adds examination-level evidence; no clinical validation is established.
-
-| Observation | Result | Interpretation |
-| --- | --- | --- |
-| Sparse source-reference ceiling | Only **110 of 283** original blood-positive annotation runs were represented by the 512-image references across eight examined cases | Better ranking cannot recover source intervals absent from its input |
-| Highest-CNN-score ranking at 51/512 images per case | **95** labelled-positive images across six examined cases, versus **27** for uniform | Image hits alone are not distinct-run recall; score ranking left much larger unselected spans |
-| Examination variation | The original CNN missed positive sampled images in difficult cases **23 and 25** at this workload | Pooled results conceal failures |
-| Locked Galar 11–20 evaluation, complete eligible source inputs | Score-bin minus uniform mean annotation-run recall: **−1.27 percentage points** at equal 10% workload | Two wins, two losses and two ties among six positive-run examinations; four zero-positive cases have undefined recall |
-
-See the [source-run audit](docs/GALAR_RUN_COVERAGE_RESULTS.md), [six-examination omission analysis](docs/GALAR_SIX_EXAM_OMISSION_SPAN_RESULTS.md), and [equal-workload source-run robustness study](docs/GALAR_RUN_ROBUSTNESS_RESULTS.md). Negative results are retained. For a concise technical/scientific decision record—including what the AI can and cannot do, independent-validation gaps and release risks—see the [project maturity audit](docs/PROJECT_MATURITY_AUDIT_20261104.md).
-
-The private research inventory includes **11,147 fitting images across 16 examinations**, including independently verified fitting-source additions from Galar 22 and 24. This is not an independently validated patient cohort. The [source acquisition](docs/GALAR_NEGATIVE_22_24_RESULTS.md) and [matched training comparison](docs/GALAR_NEGATIVE_EXPANSION_CV_RESULTS.md) document the evidence and limits. **No clinical model was promoted.**
-
-**Locked evaluation completed November 4:** All **163,161 eligible original images** from examinations **11–20** were acquired, source-verified and scored with the original frozen CNN. Predictions and all review queues were privately retained and externally committed before analyst blood-outcome access, following a disclosed outcome-concealed eligibility amendment. At equal 10% workload, score-bin averaged **49.35%** positive annotation-run recall versus **50.62%** for uniform. The primary result does **not demonstrate improvement**. Read the [complete results and failures](docs/GALAR_UNSEEN_11_20_RESULTS.md), [original design](docs/GALAR_UNSEEN_EVALUATION_PLAN.md) and [research issue](https://github.com/Kushrishi/capsule-review-public/issues/24). The authors' reserved **61–80** remain unopened. Annotation runs are not confirmed distinct lesions, and patient independence and actual reading-time benefit are unverified.
-
-## Project map
-
-| Path | Purpose |
+| macOS / Linux | Windows PowerShell |
 | --- | --- |
-| `src/capsule_review/` | Local viewer, import, annotations, queue, storage and exports |
-| `tests/` | Synthetic unit, API, integration and browser checks |
-| `scripts/` | Reproducible research and source-verification utilities |
-| `experiments/` | Versioned, non-identifying aggregate research records |
-| `docs/` | Protocols, provenance, measured results and scientific limitations |
+| `python3 -m venv .venv` | `py -m venv .venv` |
+| `. .venv/bin/activate` | `.\.venv\Scripts\python.exe -m pip install -e .` |
+| `python -m pip install -e .` | `.\.venv\Scripts\capsule-review.exe serve` |
+| `capsule-review serve` | |
 
-Run the checks locally:
+Open **http://127.0.0.1:8765** and click **Open test sequence**. The self-contained demo creates 24 synthetic frames and generated scores. Try **Compare six-image queues**, switch between the original four methods and the experimental fifth one, then bookmark, annotate, verify and export a review. **Study results** opens the previously completed Galar aggregate, not a live medical prediction.
+
+For a command-by-command walkthrough, see [the reproducible demo](docs/SUPERVISOR_DEMO.md).
+
+## What works, and what is still research
+
+- **Software:** image import and chronological navigation; reviewer notes, bookmarks and intervals; read-only scored suggestions; exact-K selection comparisons; omitted-source-position spans; byte-verifiable review exports; synthetic/API/browser regression tests.
+- **Experimental AI:** trained CNNs and a frozen pretrained MobileNetV3 probe have been tested on actual Galar images. Performance varies sharply across examinations. No publicly distributed pathology checkpoint and **no demonstrated generalizable clinical benefit**.
+- **Best completed study:** 163,161 original images from Galar examinations 11–20. At the prespecified **10% primary** workload, score-bin retained **49.35%** of distinct positive annotation runs versus **50.62%** for uniform: **−1.27 percentage points**. The **25% secondary** result was positive but heterogeneous and not confirmatory. See [the frozen results](docs/GALAR_UNSEEN_11_20_RESULTS.md).
+- **Current blocker:** robust group-separated training, fully qualified external event labels and patient/examination independence. Source-annotation runs are not adjudicated lesions; an image budget is not clinician reading time. The original authors' Galar **61–80** outcomes remain unopened.
+
+The scientific record can be checked without private data:
 
 ```bash
-python -m pip install -e '.[dev]'
-python -m pytest -q
-python -m playwright install chromium
-python tests/browser_smoke.py
+python scripts/project_status.py
+python scripts/project_status.py --json
 ```
 
-Public CI tests Python 3.11, 3.12 and 3.13, a local-model/browser run, and a source-file privacy gate. That establishes software test coverage, **not clinical efficacy**.
+## Repository map
 
-## Data, safety and licensing
+| Directory | Purpose |
+| --- | --- |
+| `src/capsule_review/` | Local FastAPI viewer, score/selection methods and evidence exports |
+| `tests/` | Unit, API, synthetic ML, browser and research-integrity regression tests |
+| `scripts/` | Experiment implementations and verification; **not** all scripts are active workflows |
+| `experiments/` | Public non-identifying aggregate results, including failures |
+| `docs/` | [Current status](docs/PROJECT_STATUS.md), [adaptive roadmap](docs/ROADMAP.md), original protocols and **historical research archive** |
 
-Use only data you are permitted to process and keep the application on localhost. Workspace files are not encrypted; there is no multi-user authentication. Original medical images, individual source labels and predictions, model checkpoints and research packages are **not** in this public repository. See the [release boundary](docs/PUBLIC_RELEASE_SAFETY.md) and [research protocol](docs/RESEARCH_PROTOCOL.md). The historical `Kushrishi/capsule-review` archive remains private.
+Run the public tests with `python -m pip install -e '.[dev]'` followed by `python -m pytest -q`. For browser testing, install Chromium with `python -m playwright install chromium` and run `python tests/browser_smoke.py`. The full CI also checks Python 3.11–3.13, a local-model/browser path and a tracked-file privacy gate.
 
-The application currently has **no software licence**. Dataset attribution, including Galar's CC BY 4.0 terms, is separate from permission to reuse this code. Do not assume this repository grants a software licence.
+## Privacy, limitations and rights
+
+Keep the application bound to **localhost**. There is no multiuser authentication or workspace encryption. Never commit source medical pixels, per-image labels/predictions, model weights or private research packages. A public aggregate is **not** clinical proof. Read [the research protocol](docs/RESEARCH_PROTOCOL.md) and [public release boundary](docs/PUBLIC_RELEASE_SAFETY.md).
+
+This publicly viewable repository currently has **no software licence**; do not assume unrestricted redistribution or reuse. Original dataset and model-weight rights require separate review.
