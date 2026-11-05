@@ -43,6 +43,8 @@ The next gate is **NOT passed**: no verified independent patient grouping, no ex
 
 **If blocked:** stop new training comparisons and prioritize authoritative source metadata or adjudication. Do **not** relabel unknown as blood-negative to increase sample size.
 
+**November 5 source-leakage update:** a [broader cross-examination neighbour screen](GALAR_CROSS_EXAM_NEIGHBOR_AUDIT_20261105.md) found no strict close copies among 551 original-image-verified top embedding pairs, but verified patient linkage and additional independent positive examinations remain unavailable. This does **not** lift the Stage 1 independence gate.
+
 ### Stage 2 — Build a *fair, hard-to-game* AI benchmark
 
 **November 5 development finding:** the [matched 16-exam class-weighting comparison](GALAR_EXAM_TEMPERED_CNN_RESULTS_20261105.md) trained eight real CNN checkpoints and found **no benefit on its predefined 10% mean examination-positive-image recall endpoint**. That eliminates a simple examination-tempered loss fix on the current, already inspected pool. Further training-exponent/epoch sweeps on the same cases would be posthoc; prioritize **new positive-examination diversity and authentic source/patient grouping** instead.
