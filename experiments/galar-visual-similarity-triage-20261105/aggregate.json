@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "study": "Second-stage image resemblance triage on source-verified prior Galar selected-frame candidates",
+  "date": "2026-11-05",
+  "candidate_scope": "Only cross-examination pairs with identical coarse 64-bit 9x8 grayscale dHash; NOT exhaustive across all images",
+  "prior_source_selected_images": 11147,
+  "original_source_png_sha256_duplicate_count": 0,
+  "source_images_reverified_in_second_stage": 499,
+  "cross_examination_candidate_pairs": 5293,
+  "method": "Source-SHA-verified original PNGs; exact 64x64 full-frame RGB pixel grid; grayscale structural similarity index (SSIM), RGB mean absolute error and central 48x48 RGB mean absolute error",
+  "strict_pixel_aligned_close_copy_rule": {
+    "grayscale_ssim_min": 0.95,
+    "full_rgb_mae_max": 0.06,
+    "center_rgb_mae_max": 0.07
+  },
+  "metrics": {
+    "strict_close_copy_candidate_pairs": 0,
+    "grayscale_ssim_at_least_0_70_pairs": 44,
+    "grayscale_ssim_at_least_0_90_pairs": 0,
+    "grayscale_ssim_max": 0.7902994,
+    "grayscale_ssim_mean": 0.4942104
+  },
+  "interpretation": "No pair among the preexisting coarse collisions satisfied strict aligned close-copy criteria. Does not clear unrelated pairs, geometric/colour-transformed copies or repeated patients.",
+  "reproducibility": {
+    "private_candidate_scores_sha256": "51f8eee0795efc731a74a41f506a9b9b0fad374f65661d47a9cb998d48022f8b",
+    "prior_private_source_audit_sha256": "5cf828dd0288364bfe0bb2a5e3a6615b9e5ddaac91dec51b1a7765923fd04709",
+    "private_second_stage_archive_sha256": "aaee88df0c857d645b445a339cb796dc8f89bd1cad07f335167dd3cb4125227c",
+    "source_images_or_pairwise_identity_data_published": false
+  },
+  "limits": {
+    "pixel_aligned_only": true,
+    "candidate_set_only": true,
+    "complete_global_duplicate_search": false,
+    "rotated_warped_transformed_copy_detection": false,
+    "independent_patient_identity_verified": false,
+    "human_visual_adjudication_done": false,
+    "source_complete_event_ground_truth_verified": false,
+    "clinical_effectiveness_or_model_improvement_tested": false,
+    "galar_locked_11_20_reopened": false,
+    "galar_reserved_61_80_opened": false
+  },
+  "next_gate": "Obtain trusted patient/examination grouping and device/site metadata; define source-safe development folds and verify task-specific exhaustive event coverage before event-level claims."
+}
