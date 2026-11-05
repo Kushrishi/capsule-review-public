@@ -39,6 +39,14 @@ APPROVED_SOURCES = {
         'url': UNSEEN_SOURCE_URL,
         'receipt_type': 'galar-11-20-7z-index-only-v1',
     },
+    'fitting-31-40': {
+        'id': 44755700,
+        'name': 'Galar_Frames_31_to_40.7z',
+        'size': 69_219_317_963,
+        'md5': '3bd4f9c9132e32d1a15d1ead5d96d0e2',
+        'url': 'https://ndownloader.figshare.com/files/44755700',
+        'receipt_type': 'galar-31-40-7z-index-only-v1',
+    },
 }
 MAX_TRANSFER = 8 * 1024 * 1024
 SIGNATURE = b'7z\xbc\xaf\x27\x1c'
@@ -251,16 +259,16 @@ def main() -> None:
                     help='Create a large *logical sparse file* containing only verified header bytes.')
     args = ap.parse_args()
     source = APPROVED_SOURCES[args.source]
-    if args.source == 'unseen-11-20':
+    if args.source in ('unseen-11-20', 'fitting-31-40'):
         if args.catalog is None:
-            ap.error('--catalog is required for unseen source metadata.')
+            ap.error('--catalog is required for this pinned source profile.')
         if (args.catalog.is_symlink() or not args.catalog.is_file()
                 or not 0 < args.catalog.stat().st_size <= 8 * 1024 * 1024):
             ap.error('A regular, bounded official catalog JSON file is required.')
         validate_official_catalog(json.loads(args.catalog.read_text(encoding='utf-8')), args.source)
         repository_root = Path(__file__).resolve().parents[1]
         if args.destination.resolve(strict=False).is_relative_to(repository_root):
-            ap.error('Unseen source index receipts must remain outside public Git.')
+            ap.error('Source index receipts must remain outside public Git.')
     client = RangeClient(source['url'], source['size'], source=args.source)
     report = inspect(client, args.destination,
                      sparse_path=(args.destination / 'headers-only.7z') if args.sparse else None)
