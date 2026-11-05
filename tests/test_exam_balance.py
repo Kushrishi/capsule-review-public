@@ -1,7 +1,8 @@
 """Synthetic-only tests of exam-balanced learning and strict reference evaluation."""
 from __future__ import annotations
-import numpy as np
 import pytest
+
+np = pytest.importorskip('numpy')
 
 from capsule_review.exam_balance import (
     ALLOWED_EXAMINATIONS, ARMS, EXACT_K, HELDOUT_FOLDS,
