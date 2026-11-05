@@ -24,6 +24,7 @@ DOCS = (
     ROOT / "docs" / "GALAR_MATCHED_PRETRAINED_PROBE_20261104.md",
     ROOT / "docs" / "PROJECT_STATUS.md",
     ROOT / "docs" / "ROADMAP.md",
+    ROOT / "docs" / "GALAR_DEVELOPMENT_SOURCE_AUDIT_20261105.md",
 )
 
 

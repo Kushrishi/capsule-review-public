@@ -7,6 +7,7 @@ Capsule Review is a **local research viewer** for capsule-endoscopy image sequen
 - [README](README.md): short product entry point and run commands.
 - [Current project status](docs/PROJECT_STATUS.md): the canonical software/research state and where to find evidence.
 - [Adaptive roadmap](docs/ROADMAP.md): next scientific tasks, data gates and go/no-go criteria.
+- [Verified selected-source audit](docs/GALAR_DEVELOPMENT_SOURCE_AUDIT_20261105.md): all 11,147 existing original image bytes checked; patient-group and complete-event claims still blocked.
 - [Research protocol](docs/RESEARCH_PROTOCOL.md): clinical terminology, data separation, and evaluation limits.
 - [Research review queue](docs/RESEARCH_REVIEW_QUEUE.md): the four previously evaluated exact-K policies and one explicitly experimental bounded-gap candidate.
 - [Locked evaluation design](docs/GALAR_UNSEEN_EVALUATION_PLAN.md) and [completed results](docs/GALAR_UNSEEN_11_20_RESULTS.md): original checkpoint, outcome-concealed eligibility amendment and Galar 11–20 findings.

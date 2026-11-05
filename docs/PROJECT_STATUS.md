@@ -38,6 +38,12 @@ The completed evaluation **must not be re-opened or retuned**. Galar 11–20 is 
 
 **Repository map:** `src/` is the running application; `scripts/` houses research/verification utilities; `experiments/` retains public aggregate outcomes; `docs/` holds protocols and history; `tests/` contains synthetic, source-boundary, API and browser checks. Older experiment files are not necessarily current operating instructions.
 
+## November 5 source-data milestone
+
+A fresh [private-backed development source audit](GALAR_DEVELOPMENT_SOURCE_AUDIT_20261105.md) independently rehashed **11,147 original selected PNGs** from 16 examinations, including source identities, labels and sampling roles. **Zero** exact duplicate PNG SHA values were found; **76.7%** of selected positives sit in four examinations. A coarse visual screen flagged unresolved lookalike candidates, which cannot identify patients. Group identity and complete original-video label coverage remain unverified, so this does **not** qualify a patient-independent or complete-event study.
+
+The next action is to resolve **patient/examination grouping, coarse duplicate candidates and a fixed development-only manifest**, not another arbitrary model fit. A new [local source preflight](../scripts/check_development_cohort.py) enforces hashes, label states and examination/group leakage checks for future data. It never independently authenticates the custodian's assertions.
+
 ## Current constraints and next action
 
 The highest-impact missing asset is **diverse, source-verified development data with complete outcome semantics and defensible examination/patient separation**, followed by an independent, fully adjudicated external cohort. Neither a larger neural network nor a polished interface substitutes for those requirements.
