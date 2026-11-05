@@ -22,6 +22,8 @@ DOCS = (
     ROOT / "docs" / "GALAR_EXAM_EXCLUDED_ADAPTATION_RESULTS.md",
     ROOT / "docs" / "MATCHED_PRETRAINED_PROBE_LOCK_20261104.md",
     ROOT / "docs" / "GALAR_MATCHED_PRETRAINED_PROBE_20261104.md",
+    ROOT / "docs" / "PROJECT_STATUS.md",
+    ROOT / "docs" / "ROADMAP.md",
 )
 
 
@@ -42,17 +44,20 @@ def test_critical_public_document_links_resolve():
             )
 
 
-def test_latest_source_inventory_and_scope_are_consistent():
+def test_current_science_is_linked_not_manually_copied_into_readme():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    status = (ROOT / "docs" / "PROJECT_STATUS.md").read_text(encoding="utf-8")
+    roadmap = (ROOT / "docs" / "ROADMAP.md").read_text(encoding="utf-8")
     provenance = (ROOT / "docs" / "GALAR_NEGATIVE_22_24_RESULTS.md").read_text(encoding="utf-8")
     results = (ROOT / "docs" / "GALAR_NEGATIVE_EXPANSION_CV_RESULTS.md").read_text(encoding="utf-8")
-    for text in (readme, provenance, results):
-        assert "11,147" in text
-        assert "512" in text
-    assert "16 examinations" in readme
-    assert "No clinical model was promoted" in readme
-    assert "zero" in provenance.lower()
-    assert "23 and 25" in readme
+    for record in (provenance, results):
+        assert "11,147" in record and "512" in record
+    assert "11,147" in roadmap
+    assert "16-examination" in roadmap
+    assert "docs/PROJECT_STATUS.md" in readme
+    assert "docs/ROADMAP.md" in readme
+    assert "No clinical model was promoted." in readme
+    assert "10% primary" in status and "−1.2668765" in status
     assert "blood=0" in provenance
     assert "61–80" in readme
 
@@ -67,7 +72,7 @@ def test_public_research_docs_do_not_claim_model_promotion():
 
 def test_public_entrypoints_stay_concise_without_escaped_newlines():
     """Keep the landing page readable; put experiment chronology in research reports."""
-    for filename, max_words in (("README.md", 1200), ("AGENTS.md", 800)):
+    for filename, max_words in (("README.md", 800), ("AGENTS.md", 800)):
         content = (ROOT / filename).read_text(encoding="utf-8")
         assert len(content.split()) <= max_words, f"{filename} is becoming a running lab notebook"
         assert "\\n\\n" not in content, f"{filename} contains literal escaped line breaks"
