@@ -24,6 +24,7 @@ DOCS = (
     ROOT / "docs" / "GALAR_MATCHED_PRETRAINED_PROBE_20261104.md",
     ROOT / "docs" / "PROJECT_STATUS.md",
     ROOT / "docs" / "ROADMAP.md",
+    ROOT / "docs" / "GALAR_DEVELOPMENT_SOURCE_AUDIT_20261105.md",
 )
 
 
@@ -75,7 +76,9 @@ def test_public_entrypoints_stay_concise_without_escaped_newlines():
     for filename, max_words in (("README.md", 800), ("AGENTS.md", 800)):
         content = (ROOT / filename).read_text(encoding="utf-8")
         assert len(content.split()) <= max_words, f"{filename} is becoming a running lab notebook"
-        assert "\\n\\n" not in content, f"{filename} contains literal escaped line breaks"
+        assert "\
+\
+" not in content, f"{filename} contains literal escaped line breaks"
 
 
 def test_interval_export_copy_distinguishes_boundary_and_full_span_exports():
