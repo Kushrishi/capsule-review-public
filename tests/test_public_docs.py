@@ -76,9 +76,7 @@ def test_public_entrypoints_stay_concise_without_escaped_newlines():
     for filename, max_words in (("README.md", 800), ("AGENTS.md", 800)):
         content = (ROOT / filename).read_text(encoding="utf-8")
         assert len(content.split()) <= max_words, f"{filename} is becoming a running lab notebook"
-        assert "\
-\
-" not in content, f"{filename} contains literal escaped line breaks"
+        assert "\\n\\n" not in content, f"{filename} contains literal escaped line breaks"
 
 
 def test_interval_export_copy_distinguishes_boundary_and_full_span_exports():
