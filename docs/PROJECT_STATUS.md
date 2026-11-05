@@ -54,6 +54,10 @@ One predefined **16-examination, four-fold from-scratch CNN experiment** tested 
 
 All 16 source examinations had already been inspected. A stronger conclusion requires additional diverse positive examinations, authenticated patient/device grouping and a separate independent outcome protocol. The locked Galar 11–20 negative study remains unchanged.
 
+## November 5 expanded cross-examination source audit
+
+The [full cross-examination neighbour audit](GALAR_CROSS_EXAM_NEIGHBOR_AUDIT_20261105.md) compared **57,789,904 cross-exam coarse-hash pairs** across all 11,147 previously verified selected images, plus exact nearest-neighbour searches using **10,123 original-image MobileNetV3 embeddings** across 14 exams. A source-SHA-verified pixel follow-up checked the 551 strongest embedding pairs (451 unique images); none met strict pixel-aligned close-copy criteria. This reduces one leakage concern but **does not prove different patients**, certify exhaustive transformed-duplicate clearance or improve model performance.
+
 ## Current constraints and next action
 
 The highest-impact missing asset is **diverse, source-verified development data with complete outcome semantics and defensible examination/patient separation**, followed by an independent, fully adjudicated external cohort. Neither a larger neural network nor a polished interface substitutes for those requirements.
