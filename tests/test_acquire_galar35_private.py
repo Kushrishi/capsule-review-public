@@ -1,10 +1,8 @@
 """Synthetic only: verify Galar 35 PRIVATE source contract without medical data/network."""
 from __future__ import annotations
 
-import csv
 import hashlib
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from io import BytesIO
 import json
 from pathlib import Path
 import sys
@@ -62,8 +60,6 @@ def synthetic_labels(tmp_path, monkeypatch):
         {"frame":"105", "blood":"1"},
         {"frame":"110", "blood":"0"},
     ]
-    s=BytesIO()
-    writer=csv.DictWriter(s if False else [], fieldnames=["frame","blood"]) if False else None
     text="frame,blood\n"+"\n".join(f"{x['frame']},{x['blood']}" for x in records)+"\n"
     with zipfile.ZipFile(p, "x", compression=zipfile.ZIP_DEFLATED) as z:
         z.writestr("35.csv",text)
