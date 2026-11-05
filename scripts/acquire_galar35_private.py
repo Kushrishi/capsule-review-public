@@ -265,10 +265,14 @@ def package_original_images(sparse: Path, stage: Path, archive: Path,
             digest=sha256_file(file)
             size=file.stat().st_size
             total+=size
+            # Keep the publisher's *exact original basename*, including
+            # any nonuniform zero padding; frame numbers are not filenames.
+            original_basename = rel.name
             manifest.append({"examination":35,"source_frame":frame,
+                "original_filename":original_basename,
                 "original_png_sha256":digest,"original_png_bytes":size,
                 "blood_label":int(labels[frame])})
-            z.write(file,arcname=f"images/035/frame_{frame:06d}.PNG")
+            z.write(file,arcname=f"images/035/{original_basename}")
         z.writestr("source-frame-private-manifest.json",
                    json.dumps(manifest,indent=2,sort_keys=True)+"\n")
         z.writestr("source-block-private-receipt.json",
