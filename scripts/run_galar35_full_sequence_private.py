@@ -136,7 +136,7 @@ def load_original_model(model_zip: Path):
     expected = net.state_dict()
     if (not isinstance(state, dict) or set(state) != set(expected)
             or any(not isinstance(v, torch.Tensor)
-                   or v.shape != expected[k]
+                   or v.shape != expected[k].shape
                    or not torch.isfinite(v).all() for k, v in state.items())):
         raise ValueError("Untrusted or incompatible CNN tensors.")
     net.load_state_dict(state, strict=True)
