@@ -1,9 +1,9 @@
 """Experimental source-contiguous, label-blind temporal score baselines.
 
 Not connected to the local viewer or promoted as an AI model. Requires an
-explicit, individually verified one-step source-index vector; sampled Galar
-512-frame references are ineligible. Source indexes represent acquisition
-order, NOT guaranteed elapsed time or clinical outcome. Original raw model
+explicit, independently verified native source-index stride and a complete
+stream of that published export; sampled Galar 512-frame references are
+ineligible. Source indexes are not capture timestamps. Original raw model
 scores must exist at every supplied position. This code never reads labels.
 """
 from __future__ import annotations
@@ -16,32 +16,38 @@ from capsule_review.priority import select_positions
 MAX_LENGTH = 200_000
 
 
-def _validate(scores: list[float], source_indices: list[int], window: int) -> None:
+def _validate(scores: list[float], source_indices: list[int], window: int,
+              source_stride: int) -> None:
     if (not isinstance(scores, list) or not isinstance(source_indices, list)
         or not 1 <= len(scores) == len(source_indices) <= MAX_LENGTH):
         raise ValueError("A bounded full score and source-index stream is required.")
     if type(window) is not int or window < 1 or window % 2 == 0 or window > len(scores):
         raise ValueError("Choose an odd window within the source stream.")
+    if type(source_stride) is not int or not 1 <= source_stride <= 1_000_000:
+        raise ValueError("Provide a positive verified native source stride.")
     for score in scores:
         if type(score) not in (int, float) or not math.isfinite(score) or not 0 <= score <= 1:
             raise ValueError("Scores must be finite uncalibrated values in [0,1].")
     if any(type(i) is not int or i < 0 or i > 10**12 for i in source_indices):
         raise ValueError("Verified nonnegative integer source indices are required.")
-    if any(b - a != 1 for a, b in zip(source_indices, source_indices[1:])):
-        raise ValueError("Nonconsecutive source frames: do not smooth across missing source positions.")
+    if any(b - a != source_stride for a, b in zip(source_indices, source_indices[1:])):
+        raise ValueError("Source-index gaps or stride mismatch: do not smooth across missing export positions.")
 
 
 def temporal_max_scores(scores: list[float], source_indices: list[int], *,
-                        window: int = 3) -> list[float]:
+                        window: int = 3, source_stride: int = 1) -> list[float]:
     """Return a fixed centred rolling maximum, without crossing source gaps.
 
-    A score for frame i becomes the maximum RAW model score among verified
-    positions [i-window//2, i+window//2]. At edges the window truncates.
+    A score for published-export position i becomes the maximum RAW model
+    score among verified positions [i-window//2, i+window//2], not among
+    invented intermediate device exposures. At edges the window truncates.
+    The caller must authenticate source_stride from independent source
+    chronology; this function will never infer it from model outcomes.
     O(N) monotonic deque. A short signal can therefore lift its neighbours;
     this is an experimental heuristic, not pathology detection or proof of
     improved distinct-event retention.
     """
-    _validate(scores, source_indices, window)
+    _validate(scores, source_indices, window, source_stride)
     n = len(scores)
     half = window // 2
     ranked: deque[int] = deque()
@@ -63,7 +69,7 @@ def temporal_max_scores(scores: list[float], source_indices: list[int], *,
 
 def temporal_selection(scores: list[float], source_indices: list[int], *,
                        window: int, selected_count: int,
-                       policy: str = "score_bin") -> list[int]:
+                       policy: str = "score_bin", source_stride: int = 1) -> list[int]:
     """Build exactly-K queue positions using existing policy; no label access.
 
     Only the established, transparent score_bin/score/score_diverse policies
@@ -72,5 +78,5 @@ def temporal_selection(scores: list[float], source_indices: list[int], *,
     """
     if policy not in ("score", "score_diverse", "score_bin"):
         raise ValueError("Select a documented, fixed score-based policy.")
-    values = temporal_max_scores(scores, source_indices, window=window)
+    values = temporal_max_scores(scores, source_indices, window=window, source_stride=source_stride)
     return select_positions(values, selected_count, policy)
