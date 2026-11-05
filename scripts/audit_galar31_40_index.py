@@ -159,7 +159,7 @@ def main() -> int:
     if args.output.exists() or args.output.is_symlink():
         p.error("Refuse to overwrite prior audit.")
     if (args.listing.is_symlink() or not args.listing.is_file()
-        or not 0 < args.listing.stat().st_size <= 64*1024*1024
+        or not 0 < args.listing.stat().st_size <= 256*1024*1024
         or args.receipt.is_symlink() or not args.receipt.is_file()
         or not 0 < args.receipt.stat().st_size <= 64*1024):
         p.error("Missing or oversized private index input.")
