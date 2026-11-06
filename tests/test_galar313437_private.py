@@ -57,3 +57,26 @@ def test_queue_replay_includes_fixed_temporal():
         assert set(row['policies'])=={'uniform','score','score_diverse','score_bin'}
         for queue in [*row['policies'].values(),row['temporal_window3_score_bin']]:
             assert len(queue)==len(set(queue))==row['k']
+
+
+def test_oracle_matching_against_all_small_binary_sequences():
+    from itertools import product
+    for n in range(1,8):
+        for k in range(1,n+1):
+            choices=[range(i*n//k,(i+1)*n//k) for i in range(k)]
+            for labels in product((0,1),repeat=n):
+                runs=[]
+                for i,y in enumerate(labels):
+                    if y:
+                        if i==0 or not labels[i-1]:runs.append([])
+                        runs[-1].append(i)
+                actual=m.fixed_bin_oracle(runs,n,k)
+                optimum=max(sum(bool(set(q).intersection(r)) for r in runs) for q in product(*choices))
+                assert actual['maximum_distinct_runs']==optimum
+                assert actual['positive_bins']==sum(any(labels[p] for p in c) for c in choices)
+
+
+def test_oracle_handles_competing_singletons_and_unknown_order():
+    assert m.fixed_bin_oracle([[0],[2]],10,1)['maximum_distinct_runs']==1
+    assert m.fixed_bin_oracle([],10,1)['run_recall_ceiling'] is None
+    with pytest.raises(ValueError):m.fixed_bin_oracle([[2],[1]],10,2)

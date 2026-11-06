@@ -1,0 +1,7 @@
+# Pre-audit ancillary fixed-bin feasibility diagnostic
+
+November6,2026. Add this diagnostic before opening the separate31/34/37 outcome audit. It changes no primary/secondary comparison, selection queue, model, cohort, seed or workload. Predictions may already be computing; no new label-dependent performance has been calculated. This is an explicitly ancillary mechanistic upper bound added to distinguish model-score failure from fixed selection-geometry limits.
+
+At10/25%, compute the maximum number of distinct source annotation runs reachable by any selection of one position in each of the unchanged floor-partitioned chronological bins. A run is adjacent to each bin containing one of its positive positions. Maximum run–bin matching, with each bin usable once, gives the ceiling. Ordered disjoint positive runs induce ordered intervals of eligible bins, permitting earliest-free-bin greedy matching; synthetic exhaustive enumeration over all binary streams of length1–7 verifies the result against every feasible queue. Also count bins containing any positive position, the fixed-bin positive-image-retrieval ceiling.
+
+These use outcome labels solely for a diagnostic oracle, never for a deployable policy or tuning. A ceiling below all runs quantifies a structural limitation; a large gap below the ceiling identifies remaining score/policy/reference limitations without proving their clinical causes. Do not reinterpret annotation runs as independent lesions. The independently implemented replay must reproduce the bound using a separate matching algorithm.

@@ -109,6 +109,29 @@ def verify_retention(seal, base):
                 raise ValueError('Missing or mismatched remote retention record.')
 
 
+
+def fixed_bin_oracle(runs, n, k):
+    """Ancillary reference-label upper bound, never a deployable selector.
+
+    Ordered disjoint positive runs induce ordered intervals of eligible bins.
+    Earliest free eligible-bin matching gives maximum distinct-run cardinality.
+    """
+    if type(n) is not int or type(k) is not int or not 1<=k<=n:
+        raise ValueError('Invalid oracle partition.')
+    next_free=0;matched=0;positive_bins=set();previous=-1
+    for run in runs:
+        if (not run or any(type(x) is not int or not 0<=x<n for x in run)
+                or run[0]<=previous or any(b!=a+1 for a,b in zip(run,run[1:]))):
+            raise ValueError('Ordered disjoint contiguous positive-position runs required.')
+        previous=run[-1]
+        a=((run[0]+1)*k-1)//n;b=((run[-1]+1)*k-1)//n
+        positive_bins.update(range(a,b+1))
+        candidate=max(a,next_free)
+        if candidate<=b:matched+=1;next_free=candidate+1
+    return {'maximum_distinct_runs':matched,'positive_bins':len(positive_bins),
+            'run_recall_ceiling':matched/len(runs) if runs else None}
+
+
 def audit(base, labels_path, seal):
     verify_retention(seal,base)
     if sha256_file(labels_path,32*1024**2)!=LABEL_SHA:raise ValueError('Corrected label archive changed.')
@@ -139,6 +162,7 @@ def audit(base, labels_path, seal):
         result['examinations'][str(exam)]={};draws[str(exam)]={}
         for percent in (10,25):
             report,repetitions=analyze(scores,y,frames,stride=5,percent=percent,exam=exam)
+            report['ancillary_fixed_bin_oracle']=fixed_bin_oracle(runs,n,report['k'])
             frozen_q=next(v for v in q if v['review_percent']==percent)
             selected={**frozen_q['policies'],'temporal_window3_score_bin':frozen_q['temporal_window3_score_bin']}
             report['policies']['temporal_window3_score_bin']=metrics(y,runs,selected['temporal_window3_score_bin'])
