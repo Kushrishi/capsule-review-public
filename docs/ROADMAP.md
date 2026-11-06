@@ -99,3 +99,13 @@ All future studies should carry a privately retained immutable **experiment cont
 Keep `main` stable via required tests/privacy checks and reviewed changes. Before an ordinary open-source release, decide code ownership, a software licence and third-party weight/dataset licences. Do not weaken localhost-only security or host private patient data. Follow [AGENTS.md](../AGENTS.md) for technical/privacy boundaries.
 
 **Single next execution priority:** Stage 1, a reproducible development-cohort/split/annotation-coverage audit; **not** another arbitrary CNN candidate, outreach email, or new download. This is the dependency most likely to unlock legitimate AI progress.
+
+## November6 mechanistic checkpoint
+
+[Geometry-matched frozen-score controls](SCORE_GEOMETRY_RESULTS_20261106.md)
+show local score value on Galar35/36 beyond one-per-bin coverage. This narrows
+the failure hypothesis: useful local ranking coexists with poor global transfer
+and missed short runs. Preserve that signal; prioritize qualified source/domain
+diversity and a broader fixed benchmark before a new fit or selector sweep.
+The same report screens all31–40 sources and costs a bounded34–37 extension;
+no new examination acquisition was justified or performed in that experiment.

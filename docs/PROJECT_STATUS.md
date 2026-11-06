@@ -98,3 +98,13 @@ The next engineering/scientific stage is **development-cohort qualification and 
 Other unresolved engineering decisions: lack of a public software licence, unprotected `main` (CI is voluntarily checked but not enforced), and localhost-only security without encryption or multiuser access. Do not host patient uploads or publish source artifacts to make a quick demo.
 
 **Working principle:** measure improvements on *the right target*—distinct annotated evidence retained at a fixed review workload, with patient/exam-grouped uncertainty when valid. Keep every failure visible. Do not equate higher ROC-AUC, a lower image count or a synthetic demo with clinical benefit.
+
+## November6: scores versus selection geometry
+
+A [frozen-score controlled experiment](SCORE_GEOMETRY_RESULTS_20261106.md) reused
+complete Galar35/36 predictions without inference or training. At10%, raw score-bin
+exceeded geometry-matched randomized scores by **21.76 /16.08 run-recall pp**;
+the equal-examination contrast was **+18.92 pp**. Local score information helped
+on both inspected cases, but short-run omissions, global-ranking heterogeneity,
+the negative11–20 primary and inconsistent16-exam alignment remain. No model
+improved or was promoted; a qualified broader cohort remains the next investment.

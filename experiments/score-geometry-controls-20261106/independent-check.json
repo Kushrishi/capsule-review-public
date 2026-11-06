@@ -1,0 +1,12 @@
+{
+  "independent_implementation_imported_production_code": false,
+  "exam_budget_records": 4,
+  "within_bin_randomization_draws_replayed": 40000,
+  "coarse_shift_draws_replayed": 4000,
+  "phase_selections_replayed": 400,
+  "exact_expectations_agree": true,
+  "all_count_and_run_stratum_repetition_arrays_agree": true,
+  "independent_script_sha256": "f7f30f5512d5303777bf48bdd5047663f82c40253d348e07770993a6e35c7640",
+  "new_original_pixel_verification": false,
+  "new_inference": false
+}
