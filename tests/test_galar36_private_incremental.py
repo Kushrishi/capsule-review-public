@@ -254,10 +254,14 @@ def test_source_listing_selects_full36_not_partial34_or37(monkeypatch):
     })
     fake=SimpleNamespace(returncode=0,stdout=listing.encode(),stderr=b"")
     monkeypatch.setattr(m.subprocess,"run",lambda *a,**k:fake)
-    # The expected per block counts are protected and must be validated.
+    kept=m.list_complete_exam36(Path("synthetic.7z"),{
+        100:"0",105:"1",110:"1",115:"0"
+    })
+    assert [frame for frame,_ in kept]==[100,105,110,115]
+    assert all("/36/" in path for _,path in kept)
     with pytest.raises(ValueError,match="Complete Galar36"):
         m.list_complete_exam36(Path("synthetic.7z"),{
-            100:"0",105:"1",110:"1",115:"0"
+            100:"0",105:"1",110:"1",115:"0",120:"0"
         })
 
 
