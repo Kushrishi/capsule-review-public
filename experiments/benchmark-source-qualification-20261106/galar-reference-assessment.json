@@ -1,0 +1,348 @@
+{
+  "schema_version": 1,
+  "assessment_type": "reference_standard_and_cost_not_CNN_evaluation",
+  "contract_commit": "5204205f61582c6f78c562e633a1c2a82a6ced30",
+  "new_images_acquired": 0,
+  "new_model_inference": false,
+  "new_performance_estimate": false,
+  "reserved_outcomes_opened": false,
+  "examinations": {
+    "31": {
+      "annotation_rows": 24919,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "unknown_target_rows": 0,
+      "native_stride": 5,
+      "internal_source_gaps": 0,
+      "run_lengths": {
+        "1-5": 83,
+        "6-25": 45,
+        "26+": 34,
+        "singleton": 14
+      },
+      "between_run_negative_gap_counts": {
+        "six_plus_negative": 70,
+        "three_to_five_negative": 36,
+        "two_negative": 30,
+        "one_negative": 25
+      },
+      "label_relationship_counts": {
+        "active_bleeding_positive": 25,
+        "hematin_positive": 0,
+        "blood_and_active_bleeding": 25,
+        "active_bleeding_without_blood_label": 0,
+        "blood_without_active_bleeding_label": 3285,
+        "blood_and_hematin": 0
+      },
+      "clinical_events_adjudicated": false,
+      "patient_grouping_authenticated": false
+    },
+    "32": {
+      "annotation_rows": 23421,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "unknown_target_rows": 0,
+      "native_stride": 5,
+      "internal_source_gaps": 0,
+      "run_lengths": {
+        "1-5": 0,
+        "6-25": 0,
+        "26+": 0,
+        "singleton": 0
+      },
+      "between_run_negative_gap_counts": {},
+      "label_relationship_counts": {
+        "active_bleeding_positive": 0,
+        "hematin_positive": 0,
+        "blood_and_active_bleeding": 0,
+        "active_bleeding_without_blood_label": 0,
+        "blood_without_active_bleeding_label": 0,
+        "blood_and_hematin": 0
+      },
+      "clinical_events_adjudicated": false,
+      "patient_grouping_authenticated": false
+    },
+    "33": {
+      "annotation_rows": 13297,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "unknown_target_rows": 0,
+      "native_stride": 5,
+      "internal_source_gaps": 0,
+      "run_lengths": {
+        "1-5": 0,
+        "6-25": 0,
+        "26+": 0,
+        "singleton": 0
+      },
+      "between_run_negative_gap_counts": {},
+      "label_relationship_counts": {
+        "active_bleeding_positive": 0,
+        "hematin_positive": 20,
+        "blood_and_active_bleeding": 0,
+        "active_bleeding_without_blood_label": 0,
+        "blood_without_active_bleeding_label": 0,
+        "blood_and_hematin": 0
+      },
+      "clinical_events_adjudicated": false,
+      "patient_grouping_authenticated": false
+    },
+    "34": {
+      "annotation_rows": 10867,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "unknown_target_rows": 0,
+      "native_stride": 5,
+      "internal_source_gaps": 0,
+      "run_lengths": {
+        "1-5": 4,
+        "6-25": 5,
+        "26+": 0,
+        "singleton": 2
+      },
+      "between_run_negative_gap_counts": {
+        "six_plus_negative": 7,
+        "three_to_five_negative": 1
+      },
+      "label_relationship_counts": {
+        "active_bleeding_positive": 0,
+        "hematin_positive": 161,
+        "blood_and_active_bleeding": 0,
+        "active_bleeding_without_blood_label": 0,
+        "blood_without_active_bleeding_label": 49,
+        "blood_and_hematin": 0
+      },
+      "clinical_events_adjudicated": false,
+      "patient_grouping_authenticated": false
+    },
+    "35": {
+      "annotation_rows": 9643,
+      "positive_images": 1534,
+      "positive_runs": 29,
+      "unknown_target_rows": 0,
+      "native_stride": 5,
+      "internal_source_gaps": 0,
+      "run_lengths": {
+        "1-5": 14,
+        "6-25": 11,
+        "26+": 4,
+        "singleton": 3
+      },
+      "between_run_negative_gap_counts": {
+        "six_plus_negative": 18,
+        "two_negative": 3,
+        "three_to_five_negative": 4,
+        "one_negative": 3
+      },
+      "label_relationship_counts": {
+        "active_bleeding_positive": 0,
+        "hematin_positive": 1057,
+        "blood_and_active_bleeding": 0,
+        "active_bleeding_without_blood_label": 0,
+        "blood_without_active_bleeding_label": 1534,
+        "blood_and_hematin": 876
+      },
+      "clinical_events_adjudicated": false,
+      "patient_grouping_authenticated": false
+    },
+    "36": {
+      "annotation_rows": 13326,
+      "positive_images": 209,
+      "positive_runs": 59,
+      "unknown_target_rows": 0,
+      "native_stride": 5,
+      "internal_source_gaps": 0,
+      "run_lengths": {
+        "1-5": 44,
+        "6-25": 15,
+        "26+": 0,
+        "singleton": 23
+      },
+      "between_run_negative_gap_counts": {
+        "three_to_five_negative": 5,
+        "six_plus_negative": 51,
+        "one_negative": 2
+      },
+      "label_relationship_counts": {
+        "active_bleeding_positive": 0,
+        "hematin_positive": 0,
+        "blood_and_active_bleeding": 0,
+        "active_bleeding_without_blood_label": 0,
+        "blood_without_active_bleeding_label": 209,
+        "blood_and_hematin": 0
+      },
+      "clinical_events_adjudicated": false,
+      "patient_grouping_authenticated": false
+    },
+    "37": {
+      "annotation_rows": 18125,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "unknown_target_rows": 0,
+      "native_stride": 5,
+      "internal_source_gaps": 0,
+      "run_lengths": {
+        "1-5": 0,
+        "6-25": 0,
+        "26+": 0,
+        "singleton": 0
+      },
+      "between_run_negative_gap_counts": {},
+      "label_relationship_counts": {
+        "active_bleeding_positive": 0,
+        "hematin_positive": 15,
+        "blood_and_active_bleeding": 0,
+        "active_bleeding_without_blood_label": 0,
+        "blood_without_active_bleeding_label": 0,
+        "blood_and_hematin": 0
+      },
+      "clinical_events_adjudicated": false,
+      "patient_grouping_authenticated": false
+    },
+    "38": {
+      "annotation_rows": 6209,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "unknown_target_rows": 0,
+      "native_stride": 5,
+      "internal_source_gaps": 0,
+      "run_lengths": {
+        "1-5": 0,
+        "6-25": 0,
+        "26+": 0,
+        "singleton": 0
+      },
+      "between_run_negative_gap_counts": {},
+      "label_relationship_counts": {
+        "active_bleeding_positive": 0,
+        "hematin_positive": 0,
+        "blood_and_active_bleeding": 0,
+        "active_bleeding_without_blood_label": 0,
+        "blood_without_active_bleeding_label": 0,
+        "blood_and_hematin": 0
+      },
+      "clinical_events_adjudicated": false,
+      "patient_grouping_authenticated": false
+    },
+    "39": {
+      "annotation_rows": 130776,
+      "positive_images": 10565,
+      "positive_runs": 286,
+      "unknown_target_rows": 0,
+      "native_stride": 1,
+      "internal_source_gaps": 0,
+      "run_lengths": {
+        "1-5": 160,
+        "6-25": 116,
+        "26+": 10,
+        "singleton": 47
+      },
+      "between_run_negative_gap_counts": {
+        "six_plus_negative": 254,
+        "one_negative": 9,
+        "two_negative": 7,
+        "three_to_five_negative": 15
+      },
+      "label_relationship_counts": {
+        "active_bleeding_positive": 273,
+        "hematin_positive": 0,
+        "blood_and_active_bleeding": 273,
+        "active_bleeding_without_blood_label": 0,
+        "blood_without_active_bleeding_label": 10292,
+        "blood_and_hematin": 0
+      },
+      "clinical_events_adjudicated": false,
+      "patient_grouping_authenticated": false
+    },
+    "40": {
+      "annotation_rows": 131204,
+      "positive_images": 1677,
+      "positive_runs": 60,
+      "unknown_target_rows": 0,
+      "native_stride": 1,
+      "internal_source_gaps": 0,
+      "run_lengths": {
+        "1-5": 19,
+        "6-25": 30,
+        "26+": 11,
+        "singleton": 8
+      },
+      "between_run_negative_gap_counts": {
+        "three_to_five_negative": 4,
+        "one_negative": 2,
+        "six_plus_negative": 52,
+        "two_negative": 1
+      },
+      "label_relationship_counts": {
+        "active_bleeding_positive": 0,
+        "hematin_positive": 0,
+        "blood_and_active_bleeding": 0,
+        "active_bleeding_without_blood_label": 0,
+        "blood_without_active_bleeding_label": 1677,
+        "blood_and_hematin": 0
+      },
+      "clinical_events_adjudicated": false,
+      "patient_grouping_authenticated": false
+    }
+  },
+  "cost_feasibility": {
+    "all_nonempty_new_case_subsets_evaluated": 255,
+    "budget_bytes": 8589934592,
+    "support_floor_not_power_calculation": {
+      "new_positive_examinations": 2,
+      "new_zero_blood_examinations": 1
+    },
+    "minimum_support_floor_cohort": {
+      "examinations": [
+        31,
+        34,
+        37
+      ],
+      "new_positive_examinations": 2,
+      "new_zero_blood_examinations": 1,
+      "new_blocks": [
+        0,
+        1,
+        4,
+        7
+      ],
+      "incremental_bytes": 14065827988
+    },
+    "support_floor_subsets_within_budget": 0,
+    "full_expansion": {
+      "examinations": [
+        31,
+        32,
+        33,
+        34,
+        37,
+        38,
+        39,
+        40
+      ],
+      "new_positive_examinations": 4,
+      "new_zero_blood_examinations": 4,
+      "new_blocks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "incremental_bytes": 62331483800
+    },
+    "cost_is_shared_block_union_not_sum_of_per_exam_costs": true,
+    "retained_5_6_credit_uses_prior_verified_receipts_not_new_source_access": true
+  }
+}

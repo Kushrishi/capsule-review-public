@@ -1,0 +1,16 @@
+{
+  "archive_bytes": 2307032,
+  "sha256": "823531b739d6282e8199237bb8132a5a97de1dd825c94725470f30d94d27f5a5",
+  "publisher_md5_verified": true,
+  "solid": true,
+  "compression_blocks": 1,
+  "archive_members": 82,
+  "uncompressed_bytes": 246523562,
+  "metadata_member_bytes": 1634,
+  "metadata_member_isolated_compression_block": false,
+  "metadata_or_label_payload_extracted": false,
+  "reserved_outcome_payloads_opened": false,
+  "author_repository_tree_contains_metadata_mirror": false,
+  "author_tree_sha": "e595bbcdf32cc6c869e9aac8b010fb26b8bc6bef",
+  "license_from_current_figshare_v2_catalog": "CC BY 4.0"
+}
