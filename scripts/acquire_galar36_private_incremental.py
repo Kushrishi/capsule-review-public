@@ -284,7 +284,8 @@ def list_complete_exam36(sparse: Path, labels: dict[int,str]) -> list[tuple[int,
                 raise ValueError("Duplicate/unlabelled Galar36 original source frame.")
             seen[frame]=path
             per_block[int(blk)]+=1
-    if per_block!={5:3098,6:10228} or set(seen)!=set(labels):
+    if (per_block != {block: members[EXAM] for block, members in EXPECTED_BLOCK_MEMBERS.items()}
+            or set(seen) != set(labels)):
         raise ValueError("Complete Galar36 original source image membership not verified.")
     return sorted(seen.items())
 
