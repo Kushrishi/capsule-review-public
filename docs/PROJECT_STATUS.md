@@ -71,6 +71,14 @@ The [prior corrected-label audit for Galar 21–60](GALAR_TRAINING_POOL_RESULTS.
 
 ## Current constraints and next action
 
+**Galar36 complete-source replication:** [13,326 original PNGs were acquired,
+verified and scored with the unchanged CNN](GALAR36_FULL_SEQUENCE_RESULTS_20261106.md).
+At 10%, uniform/global-score/raw-score-bin/window-3 reach **15/6/28/20 of 59
+positive annotation runs**. Score-bin's advantage over uniform repeats on this
+development case, but global ranking performs poorly and temporal processing
+again loses net coverage. All outcomes are independently replayed; no model is
+promoted and the locked Galar11–20 negative primary remains unchanged.
+
 **November 6 diagnostic:** a [chronology-conditioned score audit](SCORE_ALIGNMENT_RESULTS_20261106.md)
 reused the 16-examination out-of-fold CNN predictions without new acquisition,
 training, inference or Galar 35 evaluation. At K=51, control CNN macro

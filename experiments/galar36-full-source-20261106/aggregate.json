@@ -1,0 +1,470 @@
+{
+  "all_original_png_hashes_checked_against_private_manifest": true,
+  "all_source_images_rescored": true,
+  "authors_61_80_accessed": false,
+  "blood_positive_original_annotated_images": 209,
+  "clinical_validation": false,
+  "exam": 36,
+  "execution_provenance": {
+    "all_original_image_and_snapshot_remote_payloads_verified_before_outcome_audit": true,
+    "frozen_snapshot_sha256": "a636cb9c74f5019a58bc03414a6e428298eb833bb5cf69066dc4a78cf4d6dd90",
+    "independent_queue_and_metric_replay_passed": true,
+    "new_model_training": false,
+    "original_galar35_inference_repeated": false,
+    "source_code_commit": "cb25a284606dcfd7c83334d6c3fbdb8d6911406a"
+  },
+  "independent_patient_validation": false,
+  "limitations": "Complete published source grid is not entire device exposure. Already inspected study36 cannot be an independent held-out test; patient linkage/site/device provenance unverified; annotated runs are not clinical adjudicated lesions or proof of time savings.",
+  "model_promoted": false,
+  "original_source_images_verified": 13326,
+  "positive_annotation_runs_not_adjudicated_lesions": 59,
+  "previously_inspected_development_only": true,
+  "primary_descriptive_workload_percent": 10,
+  "protected_11_20_reopened": false,
+  "record_type": "galar36-complete-original-image-development-replication-v1",
+  "review_results": [
+    {
+      "policies": {
+        "score": {
+          "annotation_run_recall": 0.0,
+          "distinct_positive_annotation_runs_hit": 0,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 2442,
+            "mean_nearest_selected_imported_positions": 608.11338736,
+            "p95_nearest_selected_imported_positions": 2109
+          },
+          "largest_unselected_imported_span": 4884,
+          "positive_annotated_images_hit": 0,
+          "run_lengths_hit": {
+            "1-5": 0,
+            "26+": 0,
+            "6-25": 0
+          }
+        },
+        "score_bin": {
+          "annotation_run_recall": 0.28813559,
+          "distinct_positive_annotation_runs_hit": 17,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 19,
+            "mean_nearest_selected_imported_positions": 5.99204563,
+            "p95_nearest_selected_imported_positions": 14
+          },
+          "largest_unselected_imported_span": 38,
+          "positive_annotated_images_hit": 17,
+          "run_lengths_hit": {
+            "1-5": 9,
+            "26+": 0,
+            "6-25": 8
+          }
+        },
+        "score_diverse": {
+          "annotation_run_recall": 0.30508475,
+          "distinct_positive_annotation_runs_hit": 18,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 79,
+            "mean_nearest_selected_imported_positions": 7.85839712,
+            "p95_nearest_selected_imported_positions": 27
+          },
+          "largest_unselected_imported_span": 157,
+          "positive_annotated_images_hit": 19,
+          "run_lengths_hit": {
+            "1-5": 8,
+            "26+": 0,
+            "6-25": 10
+          }
+        },
+        "temporal_window3_score_bin": {
+          "annotation_run_recall": 0.25423729,
+          "distinct_positive_annotation_runs_hit": 15,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 19,
+            "mean_nearest_selected_imported_positions": 6.16111361,
+            "p95_nearest_selected_imported_positions": 14
+          },
+          "largest_unselected_imported_span": 38,
+          "positive_annotated_images_hit": 15,
+          "run_lengths_hit": {
+            "1-5": 6,
+            "26+": 0,
+            "6-25": 9
+          }
+        },
+        "uniform": {
+          "annotation_run_recall": 0.25423729,
+          "distinct_positive_annotation_runs_hit": 15,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 10,
+            "mean_nearest_selected_imported_positions": 5.00225124,
+            "p95_nearest_selected_imported_positions": 10
+          },
+          "largest_unselected_imported_span": 20,
+          "positive_annotated_images_hit": 15,
+          "run_lengths_hit": {
+            "1-5": 7,
+            "26+": 0,
+            "6-25": 8
+          }
+        }
+      },
+      "review_images": 666,
+      "review_percent": 5,
+      "score_bin_minus_uniform_run_recall": 0.0338983,
+      "temporal_minus_raw_score_bin_run_recall": -0.0338983
+    },
+    {
+      "policies": {
+        "score": {
+          "annotation_run_recall": 0.10169492,
+          "distinct_positive_annotation_runs_hit": 6,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 806,
+            "mean_nearest_selected_imported_positions": 156.59305118,
+            "p95_nearest_selected_imported_positions": 551
+          },
+          "largest_unselected_imported_span": 1611,
+          "positive_annotated_images_hit": 12,
+          "run_lengths_hit": {
+            "1-5": 3,
+            "26+": 0,
+            "6-25": 3
+          }
+        },
+        "score_bin": {
+          "annotation_run_recall": 0.47457627,
+          "distinct_positive_annotation_runs_hit": 28,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 9,
+            "mean_nearest_selected_imported_positions": 2.99489719,
+            "p95_nearest_selected_imported_positions": 7
+          },
+          "largest_unselected_imported_span": 18,
+          "positive_annotated_images_hit": 33,
+          "run_lengths_hit": {
+            "1-5": 14,
+            "26+": 0,
+            "6-25": 14
+          }
+        },
+        "score_diverse": {
+          "annotation_run_recall": 0.49152542,
+          "distinct_positive_annotation_runs_hit": 29,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 71,
+            "mean_nearest_selected_imported_positions": 5.02003602,
+            "p95_nearest_selected_imported_positions": 19
+          },
+          "largest_unselected_imported_span": 142,
+          "positive_annotated_images_hit": 32,
+          "run_lengths_hit": {
+            "1-5": 16,
+            "26+": 0,
+            "6-25": 13
+          }
+        },
+        "temporal_window3_score_bin": {
+          "annotation_run_recall": 0.33898305,
+          "distinct_positive_annotation_runs_hit": 20,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 9,
+            "mean_nearest_selected_imported_positions": 3.12284256,
+            "p95_nearest_selected_imported_positions": 7
+          },
+          "largest_unselected_imported_span": 18,
+          "positive_annotated_images_hit": 25,
+          "run_lengths_hit": {
+            "1-5": 8,
+            "26+": 0,
+            "6-25": 12
+          }
+        },
+        "uniform": {
+          "annotation_run_recall": 0.25423729,
+          "distinct_positive_annotation_runs_hit": 15,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 5,
+            "mean_nearest_selected_imported_positions": 2.49924959,
+            "p95_nearest_selected_imported_positions": 5
+          },
+          "largest_unselected_imported_span": 9,
+          "positive_annotated_images_hit": 16,
+          "run_lengths_hit": {
+            "1-5": 4,
+            "26+": 0,
+            "6-25": 11
+          }
+        }
+      },
+      "review_images": 1333,
+      "review_percent": 10,
+      "score_bin_minus_uniform_run_recall": 0.22033898,
+      "temporal_minus_raw_score_bin_run_recall": -0.13559322
+    },
+    {
+      "policies": {
+        "score": {
+          "annotation_run_recall": 0.45762712,
+          "distinct_positive_annotation_runs_hit": 27,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 169,
+            "mean_nearest_selected_imported_positions": 13.03084196,
+            "p95_nearest_selected_imported_positions": 53
+          },
+          "largest_unselected_imported_span": 338,
+          "positive_annotated_images_hit": 79,
+          "run_lengths_hit": {
+            "1-5": 17,
+            "26+": 0,
+            "6-25": 10
+          }
+        },
+        "score_bin": {
+          "annotation_run_recall": 0.69491525,
+          "distinct_positive_annotation_runs_hit": 41,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 3,
+            "mean_nearest_selected_imported_positions": 1.15443494,
+            "p95_nearest_selected_imported_positions": 3
+          },
+          "largest_unselected_imported_span": 6,
+          "positive_annotated_images_hit": 67,
+          "run_lengths_hit": {
+            "1-5": 26,
+            "26+": 0,
+            "6-25": 15
+          }
+        },
+        "score_diverse": {
+          "annotation_run_recall": 0.62711864,
+          "distinct_positive_annotation_runs_hit": 37,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 71,
+            "mean_nearest_selected_imported_positions": 2.96067837,
+            "p95_nearest_selected_imported_positions": 12
+          },
+          "largest_unselected_imported_span": 142,
+          "positive_annotated_images_hit": 67,
+          "run_lengths_hit": {
+            "1-5": 23,
+            "26+": 0,
+            "6-25": 14
+          }
+        },
+        "temporal_window3_score_bin": {
+          "annotation_run_recall": 0.59322034,
+          "distinct_positive_annotation_runs_hit": 35,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 3,
+            "mean_nearest_selected_imported_positions": 1.1849017,
+            "p95_nearest_selected_imported_positions": 3
+          },
+          "largest_unselected_imported_span": 6,
+          "positive_annotated_images_hit": 60,
+          "run_lengths_hit": {
+            "1-5": 20,
+            "26+": 0,
+            "6-25": 15
+          }
+        },
+        "uniform": {
+          "annotation_run_recall": 0.61016949,
+          "distinct_positive_annotation_runs_hit": 36,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 2,
+            "mean_nearest_selected_imported_positions": 0.99984992,
+            "p95_nearest_selected_imported_positions": 2
+          },
+          "largest_unselected_imported_span": 3,
+          "positive_annotated_images_hit": 52,
+          "run_lengths_hit": {
+            "1-5": 21,
+            "26+": 0,
+            "6-25": 15
+          }
+        }
+      },
+      "review_images": 3332,
+      "review_percent": 25,
+      "score_bin_minus_uniform_run_recall": 0.08474576,
+      "temporal_minus_raw_score_bin_run_recall": -0.10169491
+    },
+    {
+      "policies": {
+        "score": {
+          "annotation_run_recall": 0.74576271,
+          "distinct_positive_annotation_runs_hit": 44,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 68,
+            "mean_nearest_selected_imported_positions": 2.46315474,
+            "p95_nearest_selected_imported_positions": 11
+          },
+          "largest_unselected_imported_span": 136,
+          "positive_annotated_images_hit": 133,
+          "run_lengths_hit": {
+            "1-5": 30,
+            "26+": 0,
+            "6-25": 14
+          }
+        },
+        "score_bin": {
+          "annotation_run_recall": 0.84745763,
+          "distinct_positive_annotation_runs_hit": 50,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 1,
+            "mean_nearest_selected_imported_positions": 0.5,
+            "p95_nearest_selected_imported_positions": 1
+          },
+          "largest_unselected_imported_span": 2,
+          "positive_annotated_images_hit": 117,
+          "run_lengths_hit": {
+            "1-5": 35,
+            "26+": 0,
+            "6-25": 15
+          }
+        },
+        "score_diverse": {
+          "annotation_run_recall": 0.77966102,
+          "distinct_positive_annotation_runs_hit": 46,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 1,
+            "mean_nearest_selected_imported_positions": 0.5,
+            "p95_nearest_selected_imported_positions": 1
+          },
+          "largest_unselected_imported_span": 2,
+          "positive_annotated_images_hit": 107,
+          "run_lengths_hit": {
+            "1-5": 31,
+            "26+": 0,
+            "6-25": 15
+          }
+        },
+        "temporal_window3_score_bin": {
+          "annotation_run_recall": 0.77966102,
+          "distinct_positive_annotation_runs_hit": 46,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 1,
+            "mean_nearest_selected_imported_positions": 0.5,
+            "p95_nearest_selected_imported_positions": 1
+          },
+          "largest_unselected_imported_span": 2,
+          "positive_annotated_images_hit": 109,
+          "run_lengths_hit": {
+            "1-5": 31,
+            "26+": 0,
+            "6-25": 15
+          }
+        },
+        "uniform": {
+          "annotation_run_recall": 0.81355932,
+          "distinct_positive_annotation_runs_hit": 48,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 1,
+            "mean_nearest_selected_imported_positions": 0.5,
+            "p95_nearest_selected_imported_positions": 1
+          },
+          "largest_unselected_imported_span": 1,
+          "positive_annotated_images_hit": 105,
+          "run_lengths_hit": {
+            "1-5": 33,
+            "26+": 0,
+            "6-25": 15
+          }
+        }
+      },
+      "review_images": 6663,
+      "review_percent": 50,
+      "score_bin_minus_uniform_run_recall": 0.03389831,
+      "temporal_minus_raw_score_bin_run_recall": -0.06779661
+    },
+    {
+      "policies": {
+        "score": {
+          "annotation_run_recall": 1.0,
+          "distinct_positive_annotation_runs_hit": 59,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 0,
+            "mean_nearest_selected_imported_positions": 0.0,
+            "p95_nearest_selected_imported_positions": 0
+          },
+          "largest_unselected_imported_span": 0,
+          "positive_annotated_images_hit": 209,
+          "run_lengths_hit": {
+            "1-5": 44,
+            "26+": 0,
+            "6-25": 15
+          }
+        },
+        "score_bin": {
+          "annotation_run_recall": 1.0,
+          "distinct_positive_annotation_runs_hit": 59,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 0,
+            "mean_nearest_selected_imported_positions": 0.0,
+            "p95_nearest_selected_imported_positions": 0
+          },
+          "largest_unselected_imported_span": 0,
+          "positive_annotated_images_hit": 209,
+          "run_lengths_hit": {
+            "1-5": 44,
+            "26+": 0,
+            "6-25": 15
+          }
+        },
+        "score_diverse": {
+          "annotation_run_recall": 1.0,
+          "distinct_positive_annotation_runs_hit": 59,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 0,
+            "mean_nearest_selected_imported_positions": 0.0,
+            "p95_nearest_selected_imported_positions": 0
+          },
+          "largest_unselected_imported_span": 0,
+          "positive_annotated_images_hit": 209,
+          "run_lengths_hit": {
+            "1-5": 44,
+            "26+": 0,
+            "6-25": 15
+          }
+        },
+        "temporal_window3_score_bin": {
+          "annotation_run_recall": 1.0,
+          "distinct_positive_annotation_runs_hit": 59,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 0,
+            "mean_nearest_selected_imported_positions": 0.0,
+            "p95_nearest_selected_imported_positions": 0
+          },
+          "largest_unselected_imported_span": 0,
+          "positive_annotated_images_hit": 209,
+          "run_lengths_hit": {
+            "1-5": 44,
+            "26+": 0,
+            "6-25": 15
+          }
+        },
+        "uniform": {
+          "annotation_run_recall": 1.0,
+          "distinct_positive_annotation_runs_hit": 59,
+          "imported_position_coverage": {
+            "maximum_nearest_selected_imported_positions": 0,
+            "mean_nearest_selected_imported_positions": 0.0,
+            "p95_nearest_selected_imported_positions": 0
+          },
+          "largest_unselected_imported_span": 0,
+          "positive_annotated_images_hit": 209,
+          "run_lengths_hit": {
+            "1-5": 44,
+            "26+": 0,
+            "6-25": 15
+          }
+        }
+      },
+      "review_images": 13326,
+      "review_percent": 100,
+      "score_bin_minus_uniform_run_recall": 0.0,
+      "temporal_minus_raw_score_bin_run_recall": 0.0
+    }
+  ],
+  "schema_version": 1,
+  "scoring_checkpoint_sha256": "f2c77f669b75ddddb4604c2f15070e97b7aef470d4c3af5193dd3e0eacbcc9f3",
+  "unchanged_original_cnn": true
+}
