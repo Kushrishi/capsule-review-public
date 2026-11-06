@@ -33,3 +33,30 @@ A fixed source-ID increment of one was overly restrictive for the **already veri
 **Current status: BLOCKED FOR NEW PHYSICAL-DATA EVALUATION.** The official image endpoint has not been successfully reached in this runtime, patient linkage and source device/site information remain incomplete, and no new 31–40 source images were acquired here. The next valuable real-world step is a **bounded archive-header and data-access feasibility check** from an environment with permitted source access, not another 16-exam CNN sweep.
 
 Reference: Le Floch et al. (2025), [official dataset](https://doi.org/10.25452/figshare.plus.25304616.v2), CC BY 4.0. No medical images, identifiable source-level records or individual predictions belong in the public repository.
+
+
+## November 6 update — incremental positive-examination diversity after PR #62
+
+The November 5 status above is superseded **for examination 35 only**. [PR #61](https://github.com/Kushrishi/capsule-review-public/pull/61) completed and privately retained all 9,643 original Galar35 PNGs and block 5, executed the unchanged CNN, and recorded a negative fixed window-3 result. [PR #62](https://github.com/Kushrishi/capsule-review-public/pull/62) found that 16-exam CNN early positive-image retrieval was heterogeneous after conditioning on coarse chronology: macro primary excess **−2.2330 percentage points**. No AI model was promoted.
+
+The previously verified 18-block official index now permits a source-budget comparison for improving *positive-examination diversity* without reacquiring the full 69 GB archive. The new [offline incremental acquisition cost planner](../scripts/plan_galar31_40_development_blocks.py) only reads the public source index, enforces exact publisher source/range/label-count metadata, and never downloads images.
+
+| Full published-export study added alongside study 35 | Incremental block(s), assuming retained block 5 is reverified | Incremental original compressed bytes | Previously audited blood-positive row fraction | Positive source-annotation runs |
+| --- | --- | ---: | ---: | ---: |
+| **36: first conditional candidate** | **6** | **3,430,870,954** | **209/13,326 (1.57%)** | **59** |
+| 34: alternative very-low-prevalence case | 4 | 3,509,951,715 | 49/10,867 (0.45%) | 9 |
+| Both 34 and 36 | 4 and 6 | 6,940,822,669 | heterogeneous | 68 additional |
+
+Existing block 5 holds only **3,098 partial Galar36 images** and **2,876 partial Galar34 images**; these are **not complete original sequences**. A bounded block-6 transfer would supply the remaining 10,228 indexed images for Galar36. These are verified *index economics*, not downloaded or checksum-verified new image bytes.
+
+Run the metadata-only cost gate without network access:
+
+```bash
+python scripts/plan_galar31_40_development_blocks.py \
+  --exam 35 --exam 36 --presumed-retained-block 5 \
+  --max-additional-bytes 3500000000
+```
+
+**No new source transfer or model fitting was performed by this planning change.** A separately approved, bounded original-image acquisition can support clearly labelled **examination-separated development**, even while patient linkage is unavailable. Verify the saved private block-5 hashes and source rights/storage first; prevent known source overlap, record unresolved site/device/patient metadata explicitly, and freeze the examination-exclusive development design before fitting. **Authenticated patient grouping is required for patient-independent validation claims, not to conduct any exploratory study at all.** Previously inspected labels cannot become a newly blinded outcome. Galar 11–20 locked negative primary and authors' 61–80 remain protected.
+
+The next actionable choice is whether to fund and privately verify **one additional 3.43 GB source block (6)** for a *complete* low-prevalence Galar36 development study, with the existing block 5 reverified. In parallel, seek stronger group/device provenance; neither missing patient IDs nor apparently promising past outcomes should be concealed. Do not call the resulting exploratory analysis a validated clinical improvement.
