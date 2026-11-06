@@ -67,3 +67,35 @@ Inputs and outputs are private and must be independently access-controlled and d
 **Fixed-policy replication comes before new model fitting.** Run the *unchanged original CNN checkpoint*, original preprocessing and the same original four exact-K selection policies plus the fixed temporal window-3 comparator on every Galar36 published original image, at the same 5/10/25/50/100% budgets, using separately frozen predictions and private labels. Measure source-defined annotation-run coverage and failure modes, without choosing a new temporal window or selecting the best policy based on Galar35. This is a development replication to study heterogeneity, not an independent clinical test.
 
 Only after source integrity and grouping checks should a distinct, explicitly locked examination-diversity *training* experiment be contemplated. Unique patient linkage and source-site/device provenance are not yet authenticated; do not claim patient-independent generalization. Galar11–20's negative frozen primary remains unchanged and authors' reserved 61–80 outcomes stay unopened.
+
+## Complete original-CNN evaluation — separate PRIVATE score and audit stages
+
+After the source PNG package has been privately retained and its SHA-256 recorded, use `scripts/run_galar36_fixed_policy_private.py`. It reuses the existing exact original CNN model/weights verification and RGB 96×96 inference, and freezes the four original exact-K policies plus the same predeclared temporal window-3 score-bin at 5/10/25/50/100% workloads. No new model training or temporal window selection occurs.
+
+**First score (pass NO outcome archive to this process):**
+
+```bash
+python scripts/run_galar36_fixed_policy_private.py --score \
+  --source-originals /private/galar36-original-pngs.zip \
+  --expected-originals-sha256 <private-PNG-ZIP-SHA256> \
+  --model-zip /private/capsule-blood-real-pilot.zip \
+  --score-snapshot /private/galar36-frozen-original-scores.json
+```
+
+Store the sensitive immutable score snapshot **durably** and independently record its printed SHA-256 **before outcome access**. It contains individual private source image IDs, hashes, scores and frozen selection queues.
+
+**Then audit the already-sealed snapshot using ONLY the corrected official `36.csv`:**
+
+```bash
+python scripts/run_galar36_fixed_policy_private.py --audit \
+  --source-originals /private/galar36-original-pngs.zip \
+  --expected-originals-sha256 <private-PNG-ZIP-SHA256> \
+  --score-snapshot /private/galar36-frozen-original-scores.json \
+  --score-snapshot-sha256 <sealed-snapshot-SHA256> \
+  --corrected-labels-zip /private/20251215_Labels_Updated.zip \
+  --private-output /private/galar36-development-aggregate.json
+```
+
+The second stage refuses outcome access for modified frozen scores/queues, altered source PNG package, incomplete original source grid or mismatched source/annotation manifest. It verifies original image hashes and both solid-block provenance receipts before generating **aggregate-only** positive-image and distinct-annotation-run retrieval results.
+
+All inputs, frozen raw predictions, original images, model weights and detailed manifests remain private; no sensitive data may be placed in public Git/Actions. These **study36 development results are not yet measured**. Prior inspection of study36 labels and missing patient linkage prevent independent blinded or clinical generalization claims. Do not reopen Galar11–20 or authors' reserved Galar61–80.
