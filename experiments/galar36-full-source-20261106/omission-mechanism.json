@@ -1,0 +1,173 @@
+{
+  "annotation_run_length_counts": {
+    "1-5": 44,
+    "26+": 0,
+    "6-25": 15
+  },
+  "development_post_audit_explanation": true,
+  "no_model_or_policy_tuning": true,
+  "results": [
+    {
+      "distinct_run_union_all_five_policies": 30,
+      "global_score_vs_bin": {
+        "reached_only_by_global_score": 0,
+        "reached_only_by_score_bin": 17
+      },
+      "review_percent": 5,
+      "temporal_vs_raw": {
+        "gained": 4,
+        "gained_run_lengths": {
+          "1-5": 2,
+          "26+": 0,
+          "6-25": 2
+        },
+        "lost": 6,
+        "lost_run_lengths": {
+          "1-5": 5,
+          "26+": 0,
+          "6-25": 1
+        },
+        "position_shift_counts": {
+          "-1": 6
+        },
+        "raw_positive_selections_in_lost_runs": 6,
+        "same_bin_smoothed_score_ties": 6,
+        "same_bin_target_label_negative": 6,
+        "same_bin_target_one_position_earlier": 6,
+        "target_raw_score_lower": 6
+      }
+    },
+    {
+      "distinct_run_union_all_five_policies": 39,
+      "global_score_vs_bin": {
+        "reached_only_by_global_score": 2,
+        "reached_only_by_score_bin": 24
+      },
+      "review_percent": 10,
+      "temporal_vs_raw": {
+        "gained": 4,
+        "gained_run_lengths": {
+          "1-5": 4,
+          "26+": 0,
+          "6-25": 0
+        },
+        "lost": 12,
+        "lost_run_lengths": {
+          "1-5": 10,
+          "26+": 0,
+          "6-25": 2
+        },
+        "position_shift_counts": {
+          "-1": 8,
+          "-3": 1,
+          "-7": 1,
+          "2": 1,
+          "7": 1
+        },
+        "raw_positive_selections_in_lost_runs": 12,
+        "same_bin_smoothed_score_ties": 8,
+        "same_bin_target_label_negative": 12,
+        "same_bin_target_one_position_earlier": 8,
+        "target_raw_score_lower": 12
+      }
+    },
+    {
+      "distinct_run_union_all_five_policies": 51,
+      "global_score_vs_bin": {
+        "reached_only_by_global_score": 4,
+        "reached_only_by_score_bin": 18
+      },
+      "review_percent": 25,
+      "temporal_vs_raw": {
+        "gained": 4,
+        "gained_run_lengths": {
+          "1-5": 4,
+          "26+": 0,
+          "6-25": 0
+        },
+        "lost": 10,
+        "lost_run_lengths": {
+          "1-5": 10,
+          "26+": 0,
+          "6-25": 0
+        },
+        "position_shift_counts": {
+          "-1": 8,
+          "-3": 1,
+          "1": 1
+        },
+        "raw_positive_selections_in_lost_runs": 10,
+        "same_bin_smoothed_score_ties": 8,
+        "same_bin_target_label_negative": 10,
+        "same_bin_target_one_position_earlier": 8,
+        "target_raw_score_lower": 10
+      }
+    },
+    {
+      "distinct_run_union_all_five_policies": 59,
+      "global_score_vs_bin": {
+        "reached_only_by_global_score": 3,
+        "reached_only_by_score_bin": 9
+      },
+      "review_percent": 50,
+      "temporal_vs_raw": {
+        "gained": 2,
+        "gained_run_lengths": {
+          "1-5": 2,
+          "26+": 0,
+          "6-25": 0
+        },
+        "lost": 6,
+        "lost_run_lengths": {
+          "1-5": 6,
+          "26+": 0,
+          "6-25": 0
+        },
+        "position_shift_counts": {
+          "-1": 4,
+          "1": 2
+        },
+        "raw_positive_selections_in_lost_runs": 6,
+        "same_bin_smoothed_score_ties": 3,
+        "same_bin_target_label_negative": 6,
+        "same_bin_target_one_position_earlier": 4,
+        "target_raw_score_lower": 6
+      }
+    },
+    {
+      "distinct_run_union_all_five_policies": 59,
+      "global_score_vs_bin": {
+        "reached_only_by_global_score": 0,
+        "reached_only_by_score_bin": 0
+      },
+      "review_percent": 100,
+      "temporal_vs_raw": {
+        "gained": 0,
+        "gained_run_lengths": {
+          "1-5": 0,
+          "26+": 0,
+          "6-25": 0
+        },
+        "lost": 0,
+        "lost_run_lengths": {
+          "1-5": 0,
+          "26+": 0,
+          "6-25": 0
+        },
+        "position_shift_counts": {},
+        "raw_positive_selections_in_lost_runs": 0,
+        "same_bin_smoothed_score_ties": 0,
+        "same_bin_target_label_negative": 0,
+        "same_bin_target_one_position_earlier": 0,
+        "target_raw_score_lower": 0
+      }
+    }
+  ],
+  "supporting_raw_score_diagnostics": {
+    "average_precision": 0.018928164003797144,
+    "blood_positive_prevalence": 0.015683625994296863,
+    "calibration_evaluated": false,
+    "roc_auc": 0.5785329896226563,
+    "unique_raw_scores": 13210
+  }
+}
