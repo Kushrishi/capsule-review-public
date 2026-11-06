@@ -100,7 +100,12 @@ def verify_retention(seal, base):
         for role in ('originals','scores'):
             record=seal.get('examinations',{}).get(str(exam),{}).get(role,{})
             path=base/f'galar{exam}-{role}.{ "zip" if role=="originals" else "json"}'
-            if record.get('remote_sha256')!=sha256_file(path,16*1024**3) or record.get('remote_bytes')!=path.stat().st_size:
+            if role=='originals':
+                if record.get('durable_representation')!='publisher-original-solid-blocks' or record.get('complete_png_restore_from_remote_verified_blocks') is not True:
+                    raise ValueError('A2.1 complete remote-source PNG restore proof required.')
+                pin=record.get('working_package_sha256');size=record.get('working_package_bytes')
+            else:pin=record.get('remote_sha256');size=record.get('remote_bytes')
+            if pin!=sha256_file(path,16*1024**3) or size!=path.stat().st_size:
                 raise ValueError('Missing or mismatched remote retention record.')
 
 
@@ -117,7 +122,7 @@ def audit(base, labels_path, seal):
                 or s.get('labels_accessed_during_scoring') is not False):raise ValueError('Untrusted score snapshot.')
         entries=s['complete_original_scores'];frames=[x['source_frame'] for x in entries];hashes=[x['original_png_sha256'] for x in entries];scores=[x['original_cnn_score'] for x in entries]
         frozen,q=queues(frames,hashes,scores)
-        if s.get('original_package_sha256')!=seal['examinations'][str(exam)]['originals']['remote_sha256'] or len(frames)!=n or q!=s['frozen_queues'] or frozen.input_commitment_sha256!=s['input_commitment_sha256']:
+        if s.get('original_package_sha256')!=seal['examinations'][str(exam)]['originals']['working_package_sha256'] or len(frames)!=n or q!=s['frozen_queues'] or frozen.input_commitment_sha256!=s['input_commitment_sha256']:
             raise ValueError('Frozen source/queue commitment changed.')
         with zipfile.ZipFile(base/f'galar{exam}-originals.zip') as z:
             members=source_members(z,exam)
@@ -144,6 +149,13 @@ def audit(base, labels_path, seal):
                 m['short_runs_missed']=sum(len(r)<=5 and not chosen.intersection(r) for r in runs)
                 m['source_position_coverage']=ordinal_coverage(n,positions)
                 m['largest_unselected_span_images']=(largest_unselected_span(n,positions) or {}).get('imported_images_not_in_queue',0)
+            raw_selected=set(selected['score_bin']);temporal_selected=set(selected['temporal_window3_score_bin'])
+            reached_raw=[bool(raw_selected.intersection(run)) for run in runs]
+            reached_temporal=[bool(temporal_selected.intersection(run)) for run in runs]
+            report['temporal_vs_raw']={'runs_lost':sum(a and not b for a,b in zip(reached_raw,reached_temporal)),
+                'runs_gained':sum(b and not a for a,b in zip(reached_raw,reached_temporal)),
+                'short_runs_lost':sum(len(run)<=5 and a and not b for run,a,b in zip(runs,reached_raw,reached_temporal)),
+                'short_runs_gained':sum(len(run)<=5 and b and not a for run,a,b in zip(runs,reached_raw,reached_temporal))}
             result['examinations'][str(exam)][str(percent)]=report;draws[str(exam)][str(percent)]=repetitions
             print(f'{exam} {percent}% outcome controls completed',flush=True)
     import numpy as np

@@ -1,6 +1,6 @@
 """Verified retained-index target extraction, original bytes only; no labels."""
 from pathlib import Path
-import py7zr,json,hashlib,zipfile,sys,shutil,zlib,io,re
+import py7zr,json,hashlib,zipfile,sys,shutil,zlib,io,re,subprocess
 from PIL import Image
 import argparse
 parser=argparse.ArgumentParser(description=__doc__)
@@ -26,9 +26,14 @@ assert len(rows)==expected[exam]
 # One extracted exam + its ZIP; reserve 3GB, account for concurrently queued ranges.
 need=sum(x['bytes'] for x in rows)*2+3_000_000_000
 assert shutil.disk_usage(p).free>need,('extraction storage gate',need,shutil.disk_usage(p).free)
-stage=p/f'extract-{exam}';assert not stage.exists();stage.mkdir()
+stage=p/f'extract-{exam}';stage.mkdir(exist_ok=True)
 print('Extracting approved examination',exam,flush=True)
-with py7zr.SevenZipFile(p/'source.sparse.7z') as z:z.extract(path=stage,targets=[x['path'] for x in rows])
+native=p/'native-7zip/7zz'
+if native.exists():
+ targets=p/f'extract-{exam}-approved-members.txt';targets.write_text('\n'.join(x['path'] for x in rows)+'\n')
+ subprocess.run([str(native.resolve()),'x','-y','-aoa','-mmt=2','-i@'+str(targets.resolve()),'-o'+str(stage.resolve()),str((p/'source.sparse.7z').resolve())],check=True)
+else:
+ with py7zr.SevenZipFile(p/'source.sparse.7z') as z:z.extract(path=stage,targets=[x['path'] for x in rows])
 manifest=[];dest=p/f'galar{exam}-originals.zip';assert not dest.exists()
 with zipfile.ZipFile(dest,'x',compression=zipfile.ZIP_STORED,allowZip64=True) as z:
  for i,row in enumerate(sorted(rows,key=lambda x:int(Path(x['path']).stem.split('_')[1])),1):
