@@ -1,0 +1,6 @@
+{
+  "independent_production_imports": false,
+  "examination_run_short_singleton_gap_counts_matched": 10,
+  "exhaustive_shared_block_optimizer_matched": true,
+  "no_images_or_predictions_accessed": true
+}

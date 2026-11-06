@@ -108,3 +108,12 @@ the equal-examination contrast was **+18.92 pp**. Local score information helped
 on both inspected cases, but short-run omissions, global-ranking heterogeneity,
 the negative11–20 primary and inconsistent16-exam alignment remain. No model
 improved or was promoted; a qualified broader cohort remains the next investment.
+
+## November6 benchmark expansion qualification
+
+A [new source/reference-standard assessment](BENCHMARK_SOURCE_QUALIFICATION_20261106.md)
+checked official catalogs, CAPTIV8 grouping metadata, all ten already-inspected
+Galar31–40 annotation streams and255 possible new-case subsets. It found324 short
+runs among605, but no new source-diverse cohort admitted under the frozen
+qualification/resource contract. No additional images, inference or training;
+patient/domain linkage and complete external blood-event truth remain blockers.
