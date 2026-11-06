@@ -1,0 +1,95 @@
+{
+  "development_post_audit_explanation": true,
+  "no_window_or_model_tuning": true,
+  "results": [
+    {
+      "gained_runs": 0,
+      "lost_run_lengths": [
+        1,
+        2,
+        3,
+        5,
+        13,
+        15
+      ],
+      "lost_runs": 6,
+      "raw_positive_selections_in_lost_runs": 6,
+      "review_percent": 5,
+      "same_bin_temporal_selections_negative": 6,
+      "same_bin_temporal_selections_one_position_earlier": 4,
+      "temporal_minus_raw_position_shifts": {
+        "-1": 4,
+        "15": 1,
+        "7": 1
+      }
+    },
+    {
+      "gained_runs": 0,
+      "lost_run_lengths": [
+        1,
+        1,
+        2,
+        3,
+        5,
+        5
+      ],
+      "lost_runs": 6,
+      "raw_positive_selections_in_lost_runs": 6,
+      "review_percent": 10,
+      "same_bin_temporal_selections_negative": 6,
+      "same_bin_temporal_selections_one_position_earlier": 4,
+      "temporal_minus_raw_position_shifts": {
+        "-1": 4,
+        "-4": 1,
+        "7": 1
+      }
+    },
+    {
+      "gained_runs": 0,
+      "lost_run_lengths": [
+        1,
+        2,
+        2,
+        2,
+        2,
+        3,
+        5
+      ],
+      "lost_runs": 7,
+      "raw_positive_selections_in_lost_runs": 9,
+      "review_percent": 25,
+      "same_bin_temporal_selections_negative": 9,
+      "same_bin_temporal_selections_one_position_earlier": 5,
+      "temporal_minus_raw_position_shifts": {
+        "-1": 5,
+        "-2": 1,
+        "2": 1,
+        "3": 2
+      }
+    },
+    {
+      "gained_runs": 0,
+      "lost_run_lengths": [
+        1
+      ],
+      "lost_runs": 1,
+      "raw_positive_selections_in_lost_runs": 1,
+      "review_percent": 50,
+      "same_bin_temporal_selections_negative": 1,
+      "same_bin_temporal_selections_one_position_earlier": 1,
+      "temporal_minus_raw_position_shifts": {
+        "-1": 1
+      }
+    },
+    {
+      "gained_runs": 0,
+      "lost_run_lengths": [],
+      "lost_runs": 0,
+      "raw_positive_selections_in_lost_runs": 0,
+      "review_percent": 100,
+      "same_bin_temporal_selections_negative": 0,
+      "same_bin_temporal_selections_one_position_earlier": 0,
+      "temporal_minus_raw_position_shifts": {}
+    }
+  ]
+}

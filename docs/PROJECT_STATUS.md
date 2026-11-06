@@ -71,7 +71,7 @@ The [prior corrected-label audit for Galar 21–60](GALAR_TRAINING_POOL_RESULTS.
 
 ## Current constraints and next action
 
-**Galar 35 execution checkpoint:** [all 9,643 original published PNGs have now been acquired and independently byte-verified](GALAR35_VERIFIED_ACQUISITION_20261105.md) from the single authorized block 5. Complete-image durable retention is blocked by storage quota; originals remain temporary. No full-sequence inference or new performance evaluation has run. The checkpoint and corrected labels are retained privately. Resolve private source retention before scoring and preserving the pre-audit score freeze.
+**Galar 35 full-source experiment completed:** [all 9,643 original published PNGs were privately retained, scored, sealed before the separate audit, and independently evaluated](GALAR35_FULL_SEQUENCE_RESULTS_20261105.md). At 10%, uniform/raw score-bin/fixed temporal window-3 reach **16/23/17 of 29 positive annotation runs**. Temporal processing loses six raw-covered short runs and gains none; it is not promoted. Raw score-bin is favourable on this previously inspected development case, which does not revise the historical Galar 11–20 negative primary or establish generalization. The original-image package, original checkpoint, corrected labels and frozen score snapshot are retained privately.
 
 The highest-impact missing asset is **diverse, source-verified development data with complete outcome semantics and defensible examination/patient separation**, followed by an independent, fully adjudicated external cohort. Neither a larger neural network nor a polished interface substitutes for those requirements.
 
