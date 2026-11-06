@@ -149,9 +149,10 @@ def retained_index_parts(receipts_zip: Path) -> list[tuple[int, bytes]]:
     if receipts_zip.is_symlink() or not receipts_zip.is_file():
         raise ValueError("Private Galar35 source-index receipts ZIP missing or unsafe.")
     with zipfile.ZipFile(receipts_zip) as z:
-        receipt_blob = z.read(PRIVATE_RECEIPT_ROOT + "receipt.json")
-        if not 0 < len(receipt_blob) <= 64 * 1024:
+        receipt_info = z.getinfo(PRIVATE_RECEIPT_ROOT + "receipt.json")
+        if not 0 < receipt_info.file_size <= 64 * 1024:
             raise ValueError("Unexpected private index receipt size.")
+        receipt_blob = z.read(receipt_info)
         receipt = json.loads(receipt_blob)
         if (receipt.get("official_file_id") != FILE_ID
                 or receipt.get("official_full_archive_bytes") != ARCHIVE_SIZE
@@ -262,6 +263,7 @@ def list_complete_exam36(sparse: Path, labels: dict[int,str]) -> list[tuple[int,
         raise ValueError("7z cannot read the pinned full original source index.")
     seen={}
     per_block={5:0,6:0}
+    all_members={5:{},6:{}}
     for item in records(listing.stdout.decode("utf-8",errors="replace")):
         if item.get("Folder") == "+" or item.get("Attributes","").startswith("D"):
             continue
@@ -278,6 +280,7 @@ def list_complete_exam36(sparse: Path, labels: dict[int,str]) -> list[tuple[int,
         match=NAME.fullmatch(basename)
         if match is None:
             raise ValueError("Unexpected original publisher PNG name.")
+        all_members[int(blk)][ex] = all_members[int(blk)].get(ex,0)+1
         if ex==EXAM:
             frame=int(match.group(1))
             if frame in seen or frame not in labels:
@@ -285,7 +288,7 @@ def list_complete_exam36(sparse: Path, labels: dict[int,str]) -> list[tuple[int,
             seen[frame]=path
             per_block[int(blk)]+=1
     if (per_block != {block: members[EXAM] for block, members in EXPECTED_BLOCK_MEMBERS.items()}
-            or set(seen) != set(labels)):
+            or all_members != EXPECTED_BLOCK_MEMBERS or set(seen) != set(labels)):
         raise ValueError("Complete Galar36 original source image membership not verified.")
     return sorted(seen.items())
 
@@ -295,6 +298,9 @@ def private_package36(sparse: Path, members: list[tuple[int,str]],
                       receipts: dict) -> dict:
     if stage.exists() or output.exists() or output.is_symlink():
         raise FileExistsError("Original medical image package cannot overwrite existing private files.")
+    if (len(members) != EXPECTED_SOURCE_IMAGES or
+            {frame for frame,_ in members} != set(labels)):
+        raise ValueError("Incomplete or duplicated private original image selection.")
     stage.mkdir(parents=True)
     listing=stage/"original-galar36-member-paths-PRIVATE.txt"
     listing.write_text("\n".join(p for _,p in members)+"\n",encoding="utf-8")
