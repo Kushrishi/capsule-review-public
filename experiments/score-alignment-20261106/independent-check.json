@@ -1,0 +1,10 @@
+{
+  "circular_offsets_checked": 147456,
+  "examination_policy_budget_records_checked": 288,
+  "independent_replay_passed": true,
+  "new_checkpoint_inference": false,
+  "primary_macro_excess_recall": -0.022330390401017263,
+  "production_modules_imported": false,
+  "source_result_sha256": "4c5bacc969cd01699a7d1016cc507143d7ed62faef3e80937d1129af21e27720",
+  "summary_records_checked": 18
+}

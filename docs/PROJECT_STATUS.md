@@ -71,6 +71,16 @@ The [prior corrected-label audit for Galar 21–60](GALAR_TRAINING_POOL_RESULTS.
 
 ## Current constraints and next action
 
+**November 6 diagnostic:** a [chronology-conditioned score audit](SCORE_ALIGNMENT_RESULTS_20261106.md)
+reused the 16-examination out-of-fold CNN predictions without new acquisition,
+training, inference or Galar 35 evaluation. At K=51, control CNN macro
+positive-image recall is **17.78%**, versus **20.01%** under an allocation-matched
+16-block reference expectation (**−2.23 pp**). Pooled hits remain above expected;
+five positive examinations have positive conditional contrasts, four negative and
+two tied. This heterogeneous retrospective result establishes neither causal
+pathology learning nor improved AI. Authenticated, source-diverse development
+material remains the next model gate.
+
 **Galar 35 full-source experiment completed:** [all 9,643 original published PNGs were privately retained, scored, sealed before the separate audit, and independently evaluated](GALAR35_FULL_SEQUENCE_RESULTS_20261105.md). At 10%, uniform/raw score-bin/fixed temporal window-3 reach **16/23/17 of 29 positive annotation runs**. Temporal processing loses six raw-covered short runs and gains none; it is not promoted. Raw score-bin is favourable on this previously inspected development case, which does not revise the historical Galar 11–20 negative primary or establish generalization. The original-image package, original checkpoint, corrected labels and frozen score snapshot are retained privately.
 
 The highest-impact missing asset is **diverse, source-verified development data with complete outcome semantics and defensible examination/patient separation**, followed by an independent, fully adjudicated external cohort. Neither a larger neural network nor a polished interface substitutes for those requirements.
