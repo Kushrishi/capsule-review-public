@@ -1,0 +1,219 @@
+{
+  "schema": 1,
+  "design": "matched-budget fitting-examination diversity, development only",
+  "base_commit": "0b5245bc866c22f793e00f71868b66bd2e9b0cc5",
+  "frozen_utc": "2026-11-07T04:45:47.149890+00:00",
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "training": {
+    "epochs": 8,
+    "updates": 1024,
+    "batch": 32,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "positive": 239,
+    "other": 3857
+  },
+  "harness_sha256": "c518f5dd169156e5bf062feb98d9fb1973fc348dae33fdd7d46d65e6e23d21ed",
+  "evaluation_code_sha256": "70aff8e708062d42bb7d00703c6dda2ea5385a8270775da10e12b4aed6a8e10e",
+  "independent_code_sha256": "0e12beec57206835348bbddb2b5ebace18f3ac765d23c3a6fe8d9277404bf7f5",
+  "architecture_source_sha256": "377241dd05adb15cfafb7ff8b480380d4c5289b7392be7a091adbf37b10f6501",
+  "private_manifest_sha256": "1dc9008826646f2fe716a3dda221775369e85580275093ee3009d7e2f3ae964a",
+  "private_selected_arms_sha256": "6e802083e2b61e742ab4a22ebac53d3f9779f4075f0fdf1b36eabb36f39a48f3",
+  "fitting_tensor_sha256": "1dc84cdf303af5b34913a9da5d882e7605db57bbeb581883cbde643677b09aad",
+  "benchmark_tensor_sha256": {
+    "31": "4a87f9788d6789a191c821e01600373d532edbe4d0ebbe0b7c7fbb60e4793178",
+    "34": "84078f23d71dcedd77ddb03180935826b61d7fbffa5b950c01000258f52f17e4",
+    "37": "bbf22a22d655a926d6480cfdacb20823716943bb45e36f73a242675f6447643b"
+  },
+  "historical_score_sha256": {
+    "31": "c4cc7e58dda3540537df1ca78ba78f3724ccc4f059d501578aa2cdf7e2531a63",
+    "34": "9c524e4b486253f455fafee1b3c356fa50e2576fd80c164e1fc75b23bff57ace",
+    "37": "fbe8b44540d51f3fdf967fed7775d39e56046a504a4988503682d19714820052"
+  },
+  "historical_repetitions_sha256": "bfa1207531ebd6cd6c58ec247c6e3b3c69b361792cd2028c8b0237448f533853",
+  "labels_zip_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+  "pool_counts": {
+    "1": {
+      "positive": 22,
+      "negative": 490
+    },
+    "2": {
+      "positive": 1,
+      "negative": 511
+    },
+    "3": {
+      "positive": 0,
+      "negative": 512
+    },
+    "4": {
+      "positive": 2,
+      "negative": 510
+    },
+    "5": {
+      "positive": 0,
+      "negative": 512
+    },
+    "6": {
+      "positive": 6,
+      "negative": 506
+    },
+    "7": {
+      "positive": 208,
+      "negative": 304
+    },
+    "8": {
+      "positive": 0,
+      "negative": 512
+    },
+    "21": {
+      "positive": 1,
+      "negative": 511
+    },
+    "23": {
+      "positive": 4,
+      "negative": 508
+    },
+    "25": {
+      "positive": 14,
+      "negative": 498
+    },
+    "27": {
+      "positive": 26,
+      "negative": 486
+    },
+    "29": {
+      "positive": 122,
+      "negative": 390
+    },
+    "30": {
+      "positive": 120,
+      "negative": 392
+    }
+  },
+  "selected_counts": {
+    "original_population": {
+      "1": {
+        "positive": 22,
+        "other": 490
+      },
+      "2": {
+        "positive": 1,
+        "other": 511
+      },
+      "3": {
+        "positive": 0,
+        "other": 512
+      },
+      "4": {
+        "positive": 2,
+        "other": 510
+      },
+      "5": {
+        "positive": 0,
+        "other": 512
+      },
+      "6": {
+        "positive": 6,
+        "other": 506
+      },
+      "7": {
+        "positive": 208,
+        "other": 304
+      },
+      "8": {
+        "positive": 0,
+        "other": 512
+      }
+    },
+    "diverse_population": {
+      "1": {
+        "positive": 22,
+        "other": 276
+      },
+      "2": {
+        "positive": 1,
+        "other": 276
+      },
+      "3": {
+        "positive": 0,
+        "other": 276
+      },
+      "4": {
+        "positive": 2,
+        "other": 276
+      },
+      "5": {
+        "positive": 0,
+        "other": 276
+      },
+      "6": {
+        "positive": 6,
+        "other": 276
+      },
+      "7": {
+        "positive": 55,
+        "other": 276
+      },
+      "8": {
+        "positive": 0,
+        "other": 275
+      },
+      "21": {
+        "positive": 1,
+        "other": 275
+      },
+      "23": {
+        "positive": 4,
+        "other": 275
+      },
+      "25": {
+        "positive": 14,
+        "other": 275
+      },
+      "27": {
+        "positive": 26,
+        "other": 275
+      },
+      "29": {
+        "positive": 54,
+        "other": 275
+      },
+      "30": {
+        "positive": 54,
+        "other": 275
+      }
+    }
+  },
+  "shared_fitting_images_between_arms": 2293,
+  "preflight": {
+    "eligible_reference_images": 7168,
+    "positive": 526,
+    "other": 6642,
+    "all_archives_and_eligible_pngs_verified": true,
+    "source_labels_joined": true,
+    "source_license": "Galar v2 CC BY 4.0; Le Floch et al.",
+    "retained_catalog_sha256": "937aa5d070c4fc16319f0a16a148667c941172e16e35dc5364fad0dc9fb9c706",
+    "benchmark_pngs_rechecked": 53911,
+    "exact_png_overlap": 0,
+    "exact_preprocessed_overlap": 0,
+    "preprocessing_parity_archives": 10,
+    "architecture_state_keys_shapes_match_historical": true,
+    "patient_independence_verified": false,
+    "additional_fitting_device_site_verified": false,
+    "reserved61_80_opened": false
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "torch": "2.15.0+cpu",
+    "numpy": "2.3.5",
+    "pillow": "12.3.0",
+    "threads": 2
+  },
+  "primary": "10% raw score-bin run recall, equal weights 31 and 34; all paired seeds; joint historical/uniform/exact geometry contrasts",
+  "secondary": "25%, per-examination, short/medium/long/singletons, positive-image and fixed global/diverse policies; 37 undefined positive recall",
+  "selection": "fixed final epoch8; no model, seed, checkpoint, sample or outcome-based selection; no promotion"
+}
