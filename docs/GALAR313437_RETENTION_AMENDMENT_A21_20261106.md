@@ -1,0 +1,11 @@
+# Galar31/34/37 retention amendment A2.1
+
+November6,2026, before any new CNN scoring or outcome audit. Amend only the storage representation in lock bd59b4936770d8d782df0e29df5cf8a9df1af15d. No cohort, source bytes/ranges, checkpoint, preprocessing, policy, seed or endpoint changes.
+
+**Durable original-image containers will be the original publisher compression blocks0/1/4/5/6/7 plus the pinned7z signature/headers/index.** Each is retained privately in ordered, byte-bounded transport parts with actual remote readback, wrapper and raw-part SHA256, reconstructed full-block SHA256 and exact range manifests. All53,911 original PNG byte streams must be reproducibly restorable from these remote-verified original blocks, with source CRC, full PNG decoding, native grid/membership and per-image SHA256 matched to the pre-inference source manifests. Restore tools/versions and receipts remain private.
+
+The per-examination PNG ZIPs are explicitly temporary working copies derived from those authoritative sources. Their package hashes and member manifests are retained, but the working ZIP containers need not also be uploaded. This avoids16.47GB of redundant private pixel storage/transfer while preserving the exact original PNG bytes without recompression. Do not describe the working ZIPs themselves as remotely retained.
+
+Before the separate outcome audit, verify (1) every required remote compressed byte and every full-block SHA, (2) a complete target-PNG restore/replay from those remote-verified ranges, (3) all original per-image hashes, and (4) remote frozen prediction/queue snapshots, source/checkpoint/label evidence and seals. An upload acknowledgment or local extraction is insufficient. Record the durable representation as `publisher-original-solid-blocks`; retention seals must distinguish the original working-package hash from the actually retained source-block hashes and remote transport IDs. No full69GB archive download or upload. No partial neighbour becomes a complete benchmark case.
+
+This is a storage-format efficiency amendment made before new outcomes, not a change to scientific admission, evidence requirements or analysis. External outreach remains deferred. All original medical pixels and private identities remain outside public Git/Actions.

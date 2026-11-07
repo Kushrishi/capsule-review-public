@@ -1,0 +1,9 @@
+{
+  "source_images_independently_hash_rechecked": 53911,
+  "all_policy_queues_reproduced": 75,
+  "exam_budget_records": 6,
+  "randomization_controls_replayed": 66600,
+  "joint_macro_primary_results_independently_verified": true,
+  "production_code_imported": false,
+  "script_sha256": "528aa3db4bec39bb9a99a907107068b6ea32b46a191b3e1272d8d5cc1ca5eac1"
+}

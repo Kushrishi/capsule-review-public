@@ -2,6 +2,9 @@
 
 **Reviewed November 5, 2026.** This is the starting point for understanding the entire public repository. For the current numerical research record, run `python scripts/project_status.py`: it reads the existing frozen aggregates rather than a manually maintained score table.
 
+
+**Latest complete-source replication (November7, 2026 UTC):** [Galar31/34/37 results](GALAR313437_FULL_SOURCE_RESULTS_20261107.md):53,911 original images scored with the unchanged CNN. At10%, equal-positive-examination raw-bin run recall59.26% versus uniform78.09%; score information versus matched geometry was heterogeneous and inconclusive. No model promoted; patient/site/device grouping remains unverified. Earlier frozen negative results remain unchanged.
+
 ## The project in one minute
 
 **Capsule Review** is local, research-only software for navigating capsule-endoscopy sequences, recording human findings, inspecting AI-generated frame rankings, comparing fixed-size review queues and exporting verifiable source-image evidence.

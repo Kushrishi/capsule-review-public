@@ -1,0 +1,330 @@
+{
+  "31": {
+    "10": {
+      "score": {
+        "positive_images_by_run_stratum": {
+          "1-5": 51,
+          "6-25": 158,
+          "26+": 791
+        },
+        "maximum_positive_hits_in_one_run": 136,
+        "fraction_positive_hits_in_most_selected_run": 0.136
+      },
+      "score_diverse": {
+        "positive_images_by_run_stratum": {
+          "1-5": 20,
+          "6-25": 45,
+          "26+": 334
+        },
+        "maximum_positive_hits_in_one_run": 54,
+        "fraction_positive_hits_in_most_selected_run": 0.13533834586466165
+      },
+      "score_bin": {
+        "positive_images_by_run_stratum": {
+          "1-5": 19,
+          "6-25": 45,
+          "26+": 258
+        },
+        "maximum_positive_hits_in_one_run": 38,
+        "fraction_positive_hits_in_most_selected_run": 0.11801242236024845
+      },
+      "uniform": {
+        "positive_images_by_run_stratum": {
+          "1-5": 33,
+          "6-25": 51,
+          "26+": 259
+        },
+        "maximum_positive_hits_in_one_run": 38,
+        "fraction_positive_hits_in_most_selected_run": 0.11078717201166181
+      },
+      "temporal_window3_score_bin": {
+        "positive_images_by_run_stratum": {
+          "1-5": 21,
+          "6-25": 41,
+          "26+": 262
+        },
+        "maximum_positive_hits_in_one_run": 38,
+        "fraction_positive_hits_in_most_selected_run": 0.11728395061728394
+      },
+      "temporal_mechanism": {
+        "short_runs_lost": 5,
+        "short_runs_lost_with_adjacent_leftward_max_plateau_tie": 3
+      },
+      "control_summaries": {
+        "within_bin_permuted_scores": {
+          "mean_runs": 91.5299,
+          "reference_95_interval": [
+            83.0,
+            100.0
+          ]
+        },
+        "geometry_uniform_in_bin": {
+          "mean_runs": 91.5299,
+          "reference_95_interval": [
+            83.0,
+            100.0
+          ]
+        },
+        "systematic_phase_sensitivity": {
+          "mean_runs": 94.91,
+          "reference_95_interval": [
+            89.0,
+            109.0
+          ]
+        },
+        "coarse16_circular_shift": {
+          "mean_runs": 90.367,
+          "reference_95_interval": [
+            83.0,
+            99.0
+          ]
+        }
+      }
+    },
+    "25": {
+      "score": {
+        "positive_images_by_run_stratum": {
+          "1-5": 85,
+          "6-25": 248,
+          "26+": 1314
+        },
+        "maximum_positive_hits_in_one_run": 191,
+        "fraction_positive_hits_in_most_selected_run": 0.11596842744383729
+      },
+      "score_diverse": {
+        "positive_images_by_run_stratum": {
+          "1-5": 53,
+          "6-25": 125,
+          "26+": 862
+        },
+        "maximum_positive_hits_in_one_run": 138,
+        "fraction_positive_hits_in_most_selected_run": 0.1326923076923077
+      },
+      "score_bin": {
+        "positive_images_by_run_stratum": {
+          "1-5": 48,
+          "6-25": 123,
+          "26+": 650
+        },
+        "maximum_positive_hits_in_one_run": 94,
+        "fraction_positive_hits_in_most_selected_run": 0.11449451887941535
+      },
+      "uniform": {
+        "positive_images_by_run_stratum": {
+          "1-5": 53,
+          "6-25": 124,
+          "26+": 652
+        },
+        "maximum_positive_hits_in_one_run": 94,
+        "fraction_positive_hits_in_most_selected_run": 0.11338962605548854
+      },
+      "temporal_window3_score_bin": {
+        "positive_images_by_run_stratum": {
+          "1-5": 55,
+          "6-25": 122,
+          "26+": 651
+        },
+        "maximum_positive_hits_in_one_run": 94,
+        "fraction_positive_hits_in_most_selected_run": 0.11352657004830918
+      },
+      "temporal_mechanism": {
+        "short_runs_lost": 11,
+        "short_runs_lost_with_adjacent_leftward_max_plateau_tie": 3
+      },
+      "control_summaries": {
+        "within_bin_permuted_scores": {
+          "mean_runs": 128.7589,
+          "reference_95_interval": [
+            121.0,
+            136.0
+          ]
+        },
+        "geometry_uniform_in_bin": {
+          "mean_runs": 128.7589,
+          "reference_95_interval": [
+            121.0,
+            136.0
+          ]
+        },
+        "systematic_phase_sensitivity": {
+          "mean_runs": 132.0,
+          "reference_95_interval": [
+            125.475,
+            136.0
+          ]
+        },
+        "coarse16_circular_shift": {
+          "mean_runs": 127.933,
+          "reference_95_interval": [
+            120.0,
+            135.0
+          ]
+        }
+      }
+    }
+  },
+  "34": {
+    "10": {
+      "score": {
+        "positive_images_by_run_stratum": {
+          "1-5": 0,
+          "6-25": 0,
+          "26+": 0
+        },
+        "maximum_positive_hits_in_one_run": 0,
+        "fraction_positive_hits_in_most_selected_run": null
+      },
+      "score_diverse": {
+        "positive_images_by_run_stratum": {
+          "1-5": 1,
+          "6-25": 7,
+          "26+": 0
+        },
+        "maximum_positive_hits_in_one_run": 2,
+        "fraction_positive_hits_in_most_selected_run": 0.25
+      },
+      "score_bin": {
+        "positive_images_by_run_stratum": {
+          "1-5": 1,
+          "6-25": 6,
+          "26+": 0
+        },
+        "maximum_positive_hits_in_one_run": 2,
+        "fraction_positive_hits_in_most_selected_run": 0.2857142857142857
+      },
+      "uniform": {
+        "positive_images_by_run_stratum": {
+          "1-5": 4,
+          "6-25": 5,
+          "26+": 0
+        },
+        "maximum_positive_hits_in_one_run": 2,
+        "fraction_positive_hits_in_most_selected_run": 0.2222222222222222
+      },
+      "temporal_window3_score_bin": {
+        "positive_images_by_run_stratum": {
+          "1-5": 0,
+          "6-25": 4,
+          "26+": 0
+        },
+        "maximum_positive_hits_in_one_run": 2,
+        "fraction_positive_hits_in_most_selected_run": 0.5
+      },
+      "temporal_mechanism": {
+        "short_runs_lost": 1,
+        "short_runs_lost_with_adjacent_leftward_max_plateau_tie": 1
+      },
+      "control_summaries": {
+        "within_bin_permuted_scores": {
+          "mean_runs": 4.1651,
+          "reference_95_interval": [
+            2.0,
+            7.0
+          ]
+        },
+        "geometry_uniform_in_bin": {
+          "mean_runs": 4.1651,
+          "reference_95_interval": [
+            2.0,
+            7.0
+          ]
+        },
+        "systematic_phase_sensitivity": {
+          "mean_runs": 4.5,
+          "reference_95_interval": [
+            4.0,
+            8.0
+          ]
+        },
+        "coarse16_circular_shift": {
+          "mean_runs": 4.061,
+          "reference_95_interval": [
+            2.0,
+            6.0
+          ]
+        }
+      }
+    },
+    "25": {
+      "score": {
+        "positive_images_by_run_stratum": {
+          "1-5": 0,
+          "6-25": 13,
+          "26+": 0
+        },
+        "maximum_positive_hits_in_one_run": 4,
+        "fraction_positive_hits_in_most_selected_run": 0.3076923076923077
+      },
+      "score_diverse": {
+        "positive_images_by_run_stratum": {
+          "1-5": 3,
+          "6-25": 19,
+          "26+": 0
+        },
+        "maximum_positive_hits_in_one_run": 6,
+        "fraction_positive_hits_in_most_selected_run": 0.2727272727272727
+      },
+      "score_bin": {
+        "positive_images_by_run_stratum": {
+          "1-5": 2,
+          "6-25": 12,
+          "26+": 0
+        },
+        "maximum_positive_hits_in_one_run": 4,
+        "fraction_positive_hits_in_most_selected_run": 0.2857142857142857
+      },
+      "uniform": {
+        "positive_images_by_run_stratum": {
+          "1-5": 2,
+          "6-25": 11,
+          "26+": 0
+        },
+        "maximum_positive_hits_in_one_run": 3,
+        "fraction_positive_hits_in_most_selected_run": 0.23076923076923078
+      },
+      "temporal_window3_score_bin": {
+        "positive_images_by_run_stratum": {
+          "1-5": 1,
+          "6-25": 10,
+          "26+": 0
+        },
+        "maximum_positive_hits_in_one_run": 3,
+        "fraction_positive_hits_in_most_selected_run": 0.2727272727272727
+      },
+      "temporal_mechanism": {
+        "short_runs_lost": 2,
+        "short_runs_lost_with_adjacent_leftward_max_plateau_tie": 1
+      },
+      "control_summaries": {
+        "within_bin_permuted_scores": {
+          "mean_runs": 6.6924,
+          "reference_95_interval": [
+            5.0,
+            8.0
+          ]
+        },
+        "geometry_uniform_in_bin": {
+          "mean_runs": 6.6924,
+          "reference_95_interval": [
+            5.0,
+            8.0
+          ]
+        },
+        "systematic_phase_sensitivity": {
+          "mean_runs": 6.75,
+          "reference_95_interval": [
+            5.0,
+            8.0
+          ]
+        },
+        "coarse16_circular_shift": {
+          "mean_runs": 6.563,
+          "reference_95_interval": [
+            5.0,
+            8.0
+          ]
+        }
+      }
+    }
+  }
+}
