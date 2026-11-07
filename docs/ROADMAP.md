@@ -1,6 +1,8 @@
 # Capsule Review — adaptive scientific and product roadmap
 
-**Decision date: November 5, 2026.** This is the **current plan**, not a preregistered clinical study, a promised schedule, or a substitute for the dated protocols in the research archive. Review it when a dependency changes or an experiment produces new evidence; preserve historical protocols/results.
+**Decision date: November 7, 2026 UTC.** This is the **current plan**, not a preregistered clinical study, a promised schedule, or a substitute for the dated protocols in the research archive. Review it when a dependency changes or an experiment produces new evidence; preserve historical protocols/results.
+
+**Latest decision:** the [matched training-diversity ablation](MATCHED_DIVERSITY_ABLATION_RESULTS_20261107.md) trained all six fixed CNNs and found zero mean primary benefit at10% workload. Broader fitting references alone did not fix short-run omissions. Do not select the favorable seed or repeat this sampler until a winner appears. The single next improvement hypothesis is a fitting-only, short-event local-ranking objective: first qualify enough real short-positive examples and genuine neighbouring negatives; sparse references cannot stand in for dense neighbours. Freeze any ensuing objective comparison and retain this ensemble as its control. Patient/domain confirmation remains a separate unresolved gate.
 
 ## Mission and definition of success
 
@@ -98,7 +100,7 @@ All future studies should carry a privately retained immutable **experiment cont
 
 Keep `main` stable via required tests/privacy checks and reviewed changes. Before an ordinary open-source release, decide code ownership, a software licence and third-party weight/dataset licences. Do not weaken localhost-only security or host private patient data. Follow [AGENTS.md](../AGENTS.md) for technical/privacy boundaries.
 
-**Single next execution priority:** Stage 1, a reproducible development-cohort/split/annotation-coverage audit; **not** another arbitrary CNN candidate, outreach email, or new download. This is the dependency most likely to unlock legitimate AI progress.
+**Single next execution priority (updated November7):** qualify fitting-only short-event and local-neighbour support for the fixed ranking-loss comparison described above. Do not repeat the completed diversity ablation or select a benchmark-favorable seed. No outreach is authorized.
 
 ## November6 mechanistic checkpoint
 

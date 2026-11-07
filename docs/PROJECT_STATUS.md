@@ -1,6 +1,8 @@
 # Current project status
 
-**Reviewed November 5, 2026.** This is the starting point for understanding the entire public repository. For the current numerical research record, run `python scripts/project_status.py`: it reads the existing frozen aggregates rather than a manually maintained score table.
+**Reviewed November 7, 2026 UTC.** This is the starting point for understanding the entire public repository. For the historical numerical research record, run `python scripts/project_status.py`; the latest controlled training result is linked immediately below.
+
+**Latest controlled AI improvement test:** [matched training-diversity ablation](MATCHED_DIVERSITY_ABLATION_RESULTS_20261107.md). Six real CNN fits used identical architecture, 4,096-image/239-positive budgets, 1,024 updates and paired seeds17/29/43. Original and broader fitting populations both averaged61.0082% run recall at10% workload, versus uniform78.0864%; primary diversity effect0.00pp. One seed improved and two worsened. The25% secondary effect was+0.2058pp and heterogeneous. All outcomes were independently replayed; no model promoted. The next fitting gate is adequate short-event/true-neighbour support for a fixed local-ranking objective comparison, rather than further seed selection.
 
 
 **Latest complete-source replication (November7, 2026 UTC):** [Galar31/34/37 results](GALAR313437_FULL_SOURCE_RESULTS_20261107.md):53,911 original images scored with the unchanged CNN. At10%, equal-positive-examination raw-bin run recall59.26% versus uniform78.09%; score information versus matched geometry was heterogeneous and inconclusive. No model promoted; patient/site/device grouping remains unverified. Earlier frozen negative results remain unchanged.
