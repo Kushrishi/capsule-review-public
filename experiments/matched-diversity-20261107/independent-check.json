@@ -1,0 +1,8 @@
+{
+  "exam_budget_model_records": 42,
+  "policy_sets_replayed": 168,
+  "exact_null_expectations_replayed": 84,
+  "all_seed_macro_changes_verified": true,
+  "production_selector_or_evaluator_imported": false,
+  "script_sha256": "0e12beec57206835348bbddb2b5ebace18f3ac765d23c3a6fe8d9277404bf7f5"
+}
