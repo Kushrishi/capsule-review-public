@@ -10,7 +10,7 @@ p=args.private_dir.resolve()
 if p.is_relative_to(pathlib.Path(__file__).resolve().parents[1]):raise ValueError('Private evidence must stay outside public Git.')
 labels_path=args.labels_zip.resolve()
 report=json.load(open(p/'aggregate.json'));draws=json.load(open(p/'repetitions-private.json'))
-seal=json.load(open(p/'retention-seal.json'));checks=0;queues_checked=0
+seal=json.load(open(p/'retention-seal.json'));checks=0;queues_checked=0;verified_primary_inputs={}
 
 def digest(path):
  h=hashlib.sha256()
@@ -98,6 +98,8 @@ for exam,expected in ((31,24919),(34,10867),(37,18125)):
   oracle=r['ancillary_fixed_bin_oracle']
   assert oracle['maximum_distinct_runs']==len(matching)
   assert oracle['positive_bins']==len(set(b for ns in neighbours for b in ns))
+  assert r['positive_runs']==len(runs) and r['positive_images']==int(y.sum())
+  verified_primary_inputs[(exam,percent)]={'raw':counts(qs['score_bin'])[1],'uniform':counts(qs['uniform'])[1],'denominator':len(runs),'null':sum(expectation)}
   exact=r['controls']['within_bin_permuted_scores']['analytic_expected_counts']
   assert abs(sum(expectation)-exact['runs_reached'])<1e-9
   assert abs(float(np.dot(y,prob))-exact['positive_images'])<1e-8
@@ -119,6 +121,17 @@ for exam,expected in ((31,24919),(34,10867),(37,18125)):
    winners=starts+np.argmax(np.where(valid,v[gather],-np.inf),axis=1);shifted.append(counts(winners))
   np.testing.assert_array_equal(shifted,draws[str(exam)][str(percent)]['coarse_shift'])
   checks+=1;print('Independent replay passed',exam,percent,flush=True)
-result={'source_images_independently_hash_rechecked':53911,'all_policy_queues_reproduced':queues_checked,'exam_budget_records':checks,'randomization_controls_replayed':checks*11100,'production_code_imported':False,'script_sha256':digest(pathlib.Path(__file__))}
+for percent in (10,25):
+ inputs=[verified_primary_inputs[(exam,percent)] for exam in (31,34)]
+ real=sum(x['raw']/x['denominator'] for x in inputs)/2
+ uniform=sum(x['uniform']/x['denominator'] for x in inputs)/2
+ null=sum(x['null']/x['denominator'] for x in inputs)/2
+ macro=report['macro'][str(percent)]
+ np.testing.assert_allclose([macro['score_bin_run_recall'],macro['uniform_run_recall'],macro['score_bin_minus_uniform'],macro['score_bin_minus_geometry_exact']],[real,uniform,real-uniform,real-null],rtol=0,atol=1e-10)
+ assert macro['positive_examinations']==2
+ conditional=sum(np.asarray(draws[str(exam)][str(percent)]['permutation'])[:,1]/verified_primary_inputs[(exam,percent)]['denominator'] for exam in (31,34))/2
+ np.testing.assert_allclose(macro['conditional_reference_95'],np.quantile(real-conditional,[.025,.975]),rtol=0,atol=1e-12)
+print('Both equal-examination joint primary contrasts and conditional references independently verified',flush=True)
+result={'source_images_independently_hash_rechecked':53911,'all_policy_queues_reproduced':queues_checked,'exam_budget_records':checks,'randomization_controls_replayed':checks*11100,'joint_macro_primary_results_independently_verified':True,'production_code_imported':False,'script_sha256':digest(pathlib.Path(__file__))}
 with (p/'independent-replay-check.json').open('x') as f:json.dump(result,f,indent=2)
 print(json.dumps(result))
