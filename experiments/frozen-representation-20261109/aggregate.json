@@ -1,0 +1,445 @@
+{
+  "study": "Pinned ImageNet MobileNetV3-Small frozen representation vs compact CNN on 69 genuine Galar short-event pairs",
+  "date": "2026-11-09",
+  "role": "exploratory already-inspected development examinations, not independent clinical validation",
+  "exams": [
+    23,
+    25,
+    29,
+    30
+  ],
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "objectives": [
+    "classification",
+    "ranking"
+  ],
+  "new_linear_head_fits": 24,
+  "updates_per_fit": 1024,
+  "genuine_short_runs": 69,
+  "genuine_singletons": 21,
+  "no_new_source_images": true,
+  "feature_bank": {
+    "images": 4412,
+    "dimensions": 576,
+    "old_rows_byte_identical": 4232,
+    "new_rows": 180,
+    "canary_originals_verified": 3,
+    "canary_max_abs_feature_difference": 0.0,
+    "feature_sha256": "6a4495ce0c64e1fff9c66a26afed4fb24c1a81989e4ba5d913c291853f9dff69"
+  },
+  "reproducibility": {
+    "official_pretrained_weight_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+    "prefit_lock_sha256": "812839a49a2e604863b6a8a79128c6e91a38c88ed34eeb78219928e2df798ced",
+    "sealed_prediction_receipt_sha256": "c21612b3a92a7caeaa67197715f3fbcca71e72851ab20e2ae4eddc4be83d4747",
+    "sealed_private_prediction_archive_sha256": "6b254b3b3e736672863bca49d3f3367fc0a3eadb14ecbe9f398dc156aa5c693b",
+    "original_training_code_sha256": "8b9f5be6e46f5f11ec52ae494865696c0b979bf2148227b60a45625ba36a21d7",
+    "postfit_evaluator_erratum_sha256": "3353f0fc3500bbcbebf2a434415b8f7c6401b66b764b784515fc6da3658ecd40",
+    "corrected_evaluator_sha256": "f2e252cfee0431fba049aabe34fffd9ed3c6d0496c804dc9740197b4a02d4af1",
+    "private_images_predictions_weights_or_source_rows_publicly_disclosed": false,
+    "independent_logit_checkpoint_replays": 24,
+    "independent_per_cell_reconciliation": 24
+  },
+  "macro_pair_ordering_pct": {
+    "published_cnn": {
+      "classification": 63.77195871761091,
+      "ranking": 72.29084321475626
+    },
+    "frozen_mobilenet": {
+      "classification": 50.94038208168642,
+      "ranking": 49.08432147562583
+    }
+  },
+  "macro_singleton_ordering_pct": {
+    "published_cnn": {
+      "classification": 52.77777777777778,
+      "ranking": 62.22222222222222
+    },
+    "frozen_mobilenet": {
+      "classification": 33.888888888888886,
+      "ranking": 31.11111111111111
+    }
+  },
+  "paired_comparisons": {
+    "mobilenet_ranking_minus_mobilenet_classification": {
+      "macro_pp": -1.856060606060606,
+      "by_seed_pp": {
+        "17": 1.2499999999999982,
+        "29": -2.272727272727272,
+        "43": -4.545454545454544
+      },
+      "by_exam_pp": {
+        "23": 0.0,
+        "25": 1.6666666666666645,
+        "29": -9.090909090909088,
+        "30": 0.0
+      }
+    },
+    "mobilenet_classification_minus_pr72_cnn_classification": {
+      "macro_pp": -12.83157663592446,
+      "by_seed_pp": {
+        "17": -20.632411067193672,
+        "29": -8.162055335968379,
+        "43": -9.700263504611332
+      },
+      "by_exam_pp": {
+        "23": -13.043478260869565,
+        "25": -3.3333333333333326,
+        "29": -6.060606060606063,
+        "30": -28.888888888888886
+      }
+    },
+    "mobilenet_ranking_minus_pr72_cnn_ranking": {
+      "macro_pp": -23.20652173913044,
+      "by_seed_pp": {
+        "17": -21.745718050065875,
+        "29": -29.082674571805008,
+        "43": -18.791172595520425
+      },
+      "by_exam_pp": {
+        "23": -14.492753623188406,
+        "25": -11.66666666666667,
+        "29": -33.33333333333333,
+        "30": -33.33333333333333
+      }
+    }
+  },
+  "singleton_comparisons": {
+    "mobilenet_ranking_minus_mobilenet_classification": {
+      "macro_pp": -2.777777777777778,
+      "by_seed_pp": {
+        "17": 4.166666666666666,
+        "29": 0.0,
+        "43": -12.5
+      },
+      "by_exam_pp": {
+        "23": 0.0,
+        "25": 5.5555555555555545,
+        "29": -16.666666666666664,
+        "30": 0.0
+      }
+    },
+    "mobilenet_classification_minus_pr72_cnn_classification": {
+      "macro_pp": -18.88888888888889,
+      "by_seed_pp": {
+        "17": -31.666666666666664,
+        "29": -18.33333333333333,
+        "43": -6.666666666666665
+      },
+      "by_exam_pp": {
+        "23": -19.999999999999996,
+        "25": 22.222222222222225,
+        "29": 0.0,
+        "30": -77.77777777777777
+      }
+    },
+    "mobilenet_ranking_minus_pr72_cnn_ranking": {
+      "macro_pp": -31.11111111111111,
+      "by_seed_pp": {
+        "17": -29.166666666666664,
+        "29": -55.00000000000001,
+        "43": -9.166666666666666
+      },
+      "by_exam_pp": {
+        "23": -13.333333333333334,
+        "25": 22.222222222222225,
+        "29": -66.66666666666666,
+        "30": -66.66666666666666
+      }
+    }
+  },
+  "advance_gates": {
+    "mobilenet_ranking_minus_mobilenet_classification": false,
+    "mobilenet_classification_minus_pr72_cnn_classification": false,
+    "mobilenet_ranking_minus_pr72_cnn_ranking": false,
+    "classification_eligible_for_further_benchmark": false,
+    "ranking_eligible_for_further_benchmark": false
+  },
+  "mobilenet_heldout_cells": [
+    {
+      "exam": 23,
+      "seed": 17,
+      "arm": "classification",
+      "runs": 23,
+      "ordered": 11.0,
+      "pair_accuracy": 0.4782608695652174,
+      "singletons": 10,
+      "singleton_ordered": 4.0,
+      "ties": 0
+    },
+    {
+      "exam": 23,
+      "seed": 17,
+      "arm": "ranking",
+      "runs": 23,
+      "ordered": 11.0,
+      "pair_accuracy": 0.4782608695652174,
+      "singletons": 10,
+      "singleton_ordered": 4.0,
+      "ties": 0
+    },
+    {
+      "exam": 23,
+      "seed": 29,
+      "arm": "classification",
+      "runs": 23,
+      "ordered": 9.0,
+      "pair_accuracy": 0.391304347826087,
+      "singletons": 10,
+      "singleton_ordered": 3.0,
+      "ties": 0
+    },
+    {
+      "exam": 23,
+      "seed": 29,
+      "arm": "ranking",
+      "runs": 23,
+      "ordered": 9.0,
+      "pair_accuracy": 0.391304347826087,
+      "singletons": 10,
+      "singleton_ordered": 3.0,
+      "ties": 0
+    },
+    {
+      "exam": 23,
+      "seed": 43,
+      "arm": "classification",
+      "runs": 23,
+      "ordered": 8.0,
+      "pair_accuracy": 0.34782608695652173,
+      "singletons": 10,
+      "singleton_ordered": 2.0,
+      "ties": 0
+    },
+    {
+      "exam": 23,
+      "seed": 43,
+      "arm": "ranking",
+      "runs": 23,
+      "ordered": 8.0,
+      "pair_accuracy": 0.34782608695652173,
+      "singletons": 10,
+      "singleton_ordered": 2.0,
+      "ties": 0
+    },
+    {
+      "exam": 25,
+      "seed": 17,
+      "arm": "classification",
+      "runs": 20,
+      "ordered": 13.0,
+      "pair_accuracy": 0.65,
+      "singletons": 6,
+      "singleton_ordered": 5.0,
+      "ties": 0
+    },
+    {
+      "exam": 25,
+      "seed": 17,
+      "arm": "ranking",
+      "runs": 20,
+      "ordered": 14.0,
+      "pair_accuracy": 0.7,
+      "singletons": 6,
+      "singleton_ordered": 6.0,
+      "ties": 0
+    },
+    {
+      "exam": 25,
+      "seed": 29,
+      "arm": "classification",
+      "runs": 20,
+      "ordered": 12.0,
+      "pair_accuracy": 0.6,
+      "singletons": 6,
+      "singleton_ordered": 5.0,
+      "ties": 0
+    },
+    {
+      "exam": 25,
+      "seed": 29,
+      "arm": "ranking",
+      "runs": 20,
+      "ordered": 12.0,
+      "pair_accuracy": 0.6,
+      "singletons": 6,
+      "singleton_ordered": 5.0,
+      "ties": 0
+    },
+    {
+      "exam": 25,
+      "seed": 43,
+      "arm": "classification",
+      "runs": 20,
+      "ordered": 14.0,
+      "pair_accuracy": 0.7,
+      "singletons": 6,
+      "singleton_ordered": 6.0,
+      "ties": 0
+    },
+    {
+      "exam": 25,
+      "seed": 43,
+      "arm": "ranking",
+      "runs": 20,
+      "ordered": 14.0,
+      "pair_accuracy": 0.7,
+      "singletons": 6,
+      "singleton_ordered": 6.0,
+      "ties": 0
+    },
+    {
+      "exam": 29,
+      "seed": 17,
+      "arm": "classification",
+      "runs": 11,
+      "ordered": 5.0,
+      "pair_accuracy": 0.45454545454545453,
+      "singletons": 2,
+      "singleton_ordered": 0.0,
+      "ties": 0
+    },
+    {
+      "exam": 29,
+      "seed": 17,
+      "arm": "ranking",
+      "runs": 11,
+      "ordered": 5.0,
+      "pair_accuracy": 0.45454545454545453,
+      "singletons": 2,
+      "singleton_ordered": 0.0,
+      "ties": 0
+    },
+    {
+      "exam": 29,
+      "seed": 29,
+      "arm": "classification",
+      "runs": 11,
+      "ordered": 6.0,
+      "pair_accuracy": 0.5454545454545454,
+      "singletons": 2,
+      "singleton_ordered": 0.0,
+      "ties": 0
+    },
+    {
+      "exam": 29,
+      "seed": 29,
+      "arm": "ranking",
+      "runs": 11,
+      "ordered": 5.0,
+      "pair_accuracy": 0.45454545454545453,
+      "singletons": 2,
+      "singleton_ordered": 0.0,
+      "ties": 0
+    },
+    {
+      "exam": 29,
+      "seed": 43,
+      "arm": "classification",
+      "runs": 11,
+      "ordered": 6.0,
+      "pair_accuracy": 0.5454545454545454,
+      "singletons": 2,
+      "singleton_ordered": 1.0,
+      "ties": 0
+    },
+    {
+      "exam": 29,
+      "seed": 43,
+      "arm": "ranking",
+      "runs": 11,
+      "ordered": 4.0,
+      "pair_accuracy": 0.36363636363636365,
+      "singletons": 2,
+      "singleton_ordered": 0.0,
+      "ties": 0
+    },
+    {
+      "exam": 30,
+      "seed": 17,
+      "arm": "classification",
+      "runs": 15,
+      "ordered": 7.0,
+      "pair_accuracy": 0.4666666666666667,
+      "singletons": 3,
+      "singleton_ordered": 0.0,
+      "ties": 0
+    },
+    {
+      "exam": 30,
+      "seed": 17,
+      "arm": "ranking",
+      "runs": 15,
+      "ordered": 7.0,
+      "pair_accuracy": 0.4666666666666667,
+      "singletons": 3,
+      "singleton_ordered": 0.0,
+      "ties": 0
+    },
+    {
+      "exam": 30,
+      "seed": 29,
+      "arm": "classification",
+      "runs": 15,
+      "ordered": 7.0,
+      "pair_accuracy": 0.4666666666666667,
+      "singletons": 3,
+      "singleton_ordered": 0.0,
+      "ties": 0
+    },
+    {
+      "exam": 30,
+      "seed": 29,
+      "arm": "ranking",
+      "runs": 15,
+      "ordered": 7.0,
+      "pair_accuracy": 0.4666666666666667,
+      "singletons": 3,
+      "singleton_ordered": 0.0,
+      "ties": 0
+    },
+    {
+      "exam": 30,
+      "seed": 43,
+      "arm": "classification",
+      "runs": 15,
+      "ordered": 7.0,
+      "pair_accuracy": 0.4666666666666667,
+      "singletons": 3,
+      "singleton_ordered": 0.0,
+      "ties": 0
+    },
+    {
+      "exam": 30,
+      "seed": 43,
+      "arm": "ranking",
+      "runs": 15,
+      "ordered": 7.0,
+      "pair_accuracy": 0.4666666666666667,
+      "singletons": 3,
+      "singleton_ordered": 0.0,
+      "ties": 0
+    }
+  ],
+  "pooled_over_3_seeds": {
+    "classification": {
+      "ordered": 105,
+      "evaluated": 207,
+      "singleton_ordered": 26,
+      "singleton_evaluated": 63
+    },
+    "ranking": {
+      "ordered": 103,
+      "evaluated": 207,
+      "singleton_ordered": 26,
+      "singleton_evaluated": 63
+    }
+  },
+  "clinical_model_promoted": false,
+  "full_source_10_percent_evaluation_authorized": false,
+  "patient_grouping_verified": false,
+  "note": "Repeated seeds and nearby image pairs are not independent patients; macro equal-exam results differ from pooled run and singleton counts. 10% fixed-workload run preservation was NOT evaluated in this experiment."
+}
