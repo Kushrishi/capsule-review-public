@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "base_commit": "bf0783d4dae60b3ad2f5def9d8884fde88d0fc66",
+  "frozen_utc": "2026-11-09T17:21:07.102854+00:00",
+  "exams": [
+    23,
+    25,
+    29,
+    30
+  ],
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "updates": 1024,
+  "ranking_weight": 0.5,
+  "bank_sha256": "6ba01d0d39438c48d32df1ad287efdbe0c7f35a8600b30e02510361e0c076e7f",
+  "manifest_sha256": "338e55c9d4412975e79dff4f08ff70da8196f15f5e9b35bc8b6f0b59e61b36b1",
+  "training_code_sha256": "fc17b4f67b5a4bb007c908948e15922d8fc3344cfd8ca3e686eaf2d6bdbf91cc",
+  "objective_code_sha256": "742d5cc83fdeafab0de9f3ae815f23b21044a27c87db738d232e66e94cfc17f9",
+  "architecture_code_sha256": "377241dd05adb15cfafb7ff8b480380d4c5289b7392be7a091adbf37b10f6501",
+  "evaluation_code_sha256": "a884320be197622e1b85d8b29f647889fed28fb1097a2831daa81ae437cfd1f2",
+  "independent_code_sha256": "9be7835b6b39c32ae435844827c4f418b4a72c2c0fabc9f5cf7e7e5470d8156a",
+  "design_sha256": "262ec835b8da1cd3f6a0362cde404c66e8d430e588633c1f3ad11b05a57c830f",
+  "input_proof_sha256": "6b613cca6e33a6709d9107d44fa1f9b68c74657a6828645bbae057256590199f",
+  "source_check_sha256": "55f8e4c3c34726c98413ad24e77e63d5193803a27e4cba37a6096f93525ab2f6",
+  "similarity_check_sha256": "41ff5aa2b0c3d7490cfb77003c94eacecc3d335822adab1b6e14c88e118aeb01",
+  "new_originals_retention_sha256": "36345a4d0f042c912167361cbceaf914cd4817e5c2eef2631af311cc3859d661",
+  "legacy_fitting_bank_sha256": "ab80763638c4e13187c03e50203de2f1e0af3c50c932f75d09213ab50c340401",
+  "new_models": 24,
+  "legacy_models_reused": 24,
+  "heldout_runs_by_exam": {
+    "23": 23,
+    "25": 20,
+    "29": 11,
+    "30": 15
+  },
+  "singletons_by_exam": {
+    "23": 10,
+    "25": 6,
+    "29": 2,
+    "30": 3
+  },
+  "training_runs_by_heldout_exam": {
+    "23": 46,
+    "25": 49,
+    "29": 58,
+    "30": 54
+  },
+  "reference_images": 4096,
+  "primary_downstream": "10%exact-K distinct annotation-run recall,unchanged",
+  "development_data_contrast": "expanded balanced69 classification minus retained legacy32 classification;equal examination/seed pair ordering",
+  "intervention": "joint independent-run support expansion and equal examination pair exposure;not count-only causal estimate",
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "torch": "2.15.0+cpu",
+    "numpy": "2.3.5",
+    "pillow": "12.3.0"
+  },
+  "compressed_piece_timing_amendment": "71 pieces saved/readback-verified before merge;actual159 PNGs already durably readback-verified before fit",
+  "conditional_policy_code_sha256": "10b16b2a856a45b092e26b87bbacfdb1675355f7067b7acecd4f6d80fd39a62c"
+}
