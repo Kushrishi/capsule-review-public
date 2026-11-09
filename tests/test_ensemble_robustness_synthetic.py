@@ -3,7 +3,7 @@ import importlib.util
 from pathlib import Path
 import pytest
 np=pytest.importorskip("numpy")
-ROOT=Path(__file__).resolve().parent
+ROOT=Path(__file__).resolve().parents[1]/"scripts"
 s=importlib.util.spec_from_file_location('robust',ROOT/'ensemble_robustness_audit.py')
 module=importlib.util.module_from_spec(s);s.loader.exec_module(module)
 
