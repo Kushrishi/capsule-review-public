@@ -1,0 +1,26 @@
+{
+  "support": {
+    "metric_cells_independently_verified": 96,
+    "models_independently_reconstructed": 48,
+    "logit_values_verified": 13344,
+    "maximum_logit_difference": 0,
+    "paired_contrast_records_verified": 48,
+    "all_match": true
+  },
+  "policy": {
+    "selected_sets_and_counts_verified": 18,
+    "all_match": true
+  },
+  "opportunities": {
+    "independent_source_runs": 142,
+    "all_one_two_block_scenarios_verified": 191,
+    "retained_run_count": 32,
+    "no_additional_retained_runs": true,
+    "all_match": true
+  },
+  "retention": {
+    "complete_blocks_verified": 2,
+    "bytes": 7014787752,
+    "pieces": 71
+  }
+}
