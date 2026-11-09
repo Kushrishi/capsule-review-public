@@ -1,0 +1,6542 @@
+{
+  "development_only": true,
+  "model_promoted": false,
+  "patient_independence_verified": false,
+  "reserved61_80_opened": false,
+  "lock_sha256": "59b141a6ac6538535201e983d224e34053239aa44aa33947de2f96f535c9d8fe",
+  "records": [
+    {
+      "arm": "historical_checkpoint",
+      "seed": null,
+      "exam": 31,
+      "percent": 10,
+      "n": 24919,
+      "k": 2492,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 343,
+          "positive_image_recall": 0.10362537764350453,
+          "runs_reached": 109,
+          "run_recall": 0.6728395061728395,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 33,
+              "recall": 0.39759036144578314
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 42,
+              "recall": 0.9333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 322,
+          "positive_image_recall": 0.09728096676737161,
+          "runs_reached": 84,
+          "run_recall": 0.5185185185185185,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 17,
+              "recall": 0.20481927710843373
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 33,
+              "recall": 0.7333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 1000,
+          "positive_image_recall": 0.3021148036253776,
+          "runs_reached": 60,
+          "run_recall": 0.37037037037037035,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 21,
+              "recall": 0.25301204819277107
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 23,
+              "recall": 0.5111111111111111
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 16,
+              "recall": 0.47058823529411764
+            }
+          },
+          "singletons_reached": 5,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 399,
+          "positive_image_recall": 0.12054380664652568,
+          "runs_reached": 78,
+          "run_recall": 0.48148148148148145,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 20,
+              "recall": 0.24096385542168675
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 27,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 31,
+              "recall": 0.9117647058823529
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": -4.623456790123454,
+      "raw_minus_uniform_pp": -15.432098765432102,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 91.5299,
+          "run_reference_95": [
+            83.0,
+            100.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 94.91,
+          "run_reference_95": [
+            89.0,
+            109.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "historical_checkpoint",
+      "seed": null,
+      "exam": 31,
+      "percent": 25,
+      "n": 24919,
+      "k": 6230,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 829,
+          "positive_image_recall": 0.25045317220543806,
+          "runs_reached": 132,
+          "run_recall": 0.8148148148148148,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 53,
+              "recall": 0.6385542168674698
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 821,
+          "positive_image_recall": 0.24803625377643504,
+          "runs_reached": 121,
+          "run_recall": 0.7469135802469136,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 42,
+              "recall": 0.5060240963855421
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 4,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 1647,
+          "positive_image_recall": 0.49758308157099695,
+          "runs_reached": 82,
+          "run_recall": 0.5061728395061729,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 33,
+              "recall": 0.39759036144578314
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 25,
+              "recall": 0.5555555555555556
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 24,
+              "recall": 0.7058823529411765
+            }
+          },
+          "singletons_reached": 6,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 1040,
+          "positive_image_recall": 0.31419939577039274,
+          "runs_reached": 101,
+          "run_recall": 0.6234567901234568,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 40,
+              "recall": 0.4819277108433735
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 28,
+              "recall": 0.6222222222222222
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 33,
+              "recall": 0.9705882352941176
+            }
+          },
+          "singletons_reached": 6,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": -4.783950617283951,
+      "raw_minus_uniform_pp": -6.79012345679012,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 128.7589,
+          "run_reference_95": [
+            121.0,
+            136.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 132.0,
+          "run_reference_95": [
+            125.475,
+            136.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 17,
+      "exam": 31,
+      "percent": 10,
+      "n": 24919,
+      "k": 2492,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 343,
+          "positive_image_recall": 0.10362537764350453,
+          "runs_reached": 109,
+          "run_recall": 0.6728395061728395,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 33,
+              "recall": 0.39759036144578314
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 42,
+              "recall": 0.9333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 331,
+          "positive_image_recall": 0.1,
+          "runs_reached": 90,
+          "run_recall": 0.5555555555555556,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 19,
+              "recall": 0.2289156626506024
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 37,
+              "recall": 0.8222222222222222
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 1289,
+          "positive_image_recall": 0.3894259818731118,
+          "runs_reached": 78,
+          "run_recall": 0.48148148148148145,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 22,
+              "recall": 0.26506024096385544
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 27,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 29,
+              "recall": 0.8529411764705882
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 450,
+          "positive_image_recall": 0.13595166163141995,
+          "runs_reached": 97,
+          "run_recall": 0.5987654320987654,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 25,
+              "recall": 0.30120481927710846
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 38,
+              "recall": 0.8444444444444444
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": -0.91975308641975,
+      "raw_minus_uniform_pp": -11.728395061728392,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 91.5299,
+          "run_reference_95": [
+            83.0,
+            100.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 94.91,
+          "run_reference_95": [
+            89.0,
+            109.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 17,
+      "exam": 31,
+      "percent": 25,
+      "n": 24919,
+      "k": 6230,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 829,
+          "positive_image_recall": 0.25045317220543806,
+          "runs_reached": 132,
+          "run_recall": 0.8148148148148148,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 53,
+              "recall": 0.6385542168674698
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 830,
+          "positive_image_recall": 0.25075528700906347,
+          "runs_reached": 128,
+          "run_recall": 0.7901234567901234,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 49,
+              "recall": 0.5903614457831325
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 1993,
+          "positive_image_recall": 0.6021148036253776,
+          "runs_reached": 114,
+          "run_recall": 0.7037037037037037,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 41,
+              "recall": 0.4939759036144578
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 39,
+              "recall": 0.8666666666666667
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 5,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 1199,
+          "positive_image_recall": 0.3622356495468278,
+          "runs_reached": 124,
+          "run_recall": 0.7654320987654321,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 48,
+              "recall": 0.5783132530120482
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 42,
+              "recall": 0.9333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": -0.46296296296296297,
+      "raw_minus_uniform_pp": -2.4691358024691357,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 128.7589,
+          "run_reference_95": [
+            121.0,
+            136.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 132.0,
+          "run_reference_95": [
+            125.475,
+            136.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 29,
+      "exam": 31,
+      "percent": 10,
+      "n": 24919,
+      "k": 2492,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 343,
+          "positive_image_recall": 0.10362537764350453,
+          "runs_reached": 109,
+          "run_recall": 0.6728395061728395,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 33,
+              "recall": 0.39759036144578314
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 42,
+              "recall": 0.9333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 319,
+          "positive_image_recall": 0.09637462235649547,
+          "runs_reached": 87,
+          "run_recall": 0.5370370370370371,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 18,
+              "recall": 0.21686746987951808
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 35,
+              "recall": 0.7777777777777778
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 1456,
+          "positive_image_recall": 0.4398791540785498,
+          "runs_reached": 79,
+          "run_recall": 0.4876543209876543,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 23,
+              "recall": 0.27710843373493976
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 24,
+              "recall": 0.5333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 32,
+              "recall": 0.9411764705882353
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 471,
+          "positive_image_recall": 0.14229607250755286,
+          "runs_reached": 93,
+          "run_recall": 0.5740740740740741,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 25,
+              "recall": 0.30120481927710846
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 34,
+              "recall": 0.7555555555555555
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": -2.7716049382716017,
+      "raw_minus_uniform_pp": -13.58024691358024,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 91.5299,
+          "run_reference_95": [
+            83.0,
+            100.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 94.91,
+          "run_reference_95": [
+            89.0,
+            109.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 29,
+      "exam": 31,
+      "percent": 25,
+      "n": 24919,
+      "k": 6230,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 829,
+          "positive_image_recall": 0.25045317220543806,
+          "runs_reached": 132,
+          "run_recall": 0.8148148148148148,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 53,
+              "recall": 0.6385542168674698
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 812,
+          "positive_image_recall": 0.24531722054380664,
+          "runs_reached": 118,
+          "run_recall": 0.7283950617283951,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 39,
+              "recall": 0.46987951807228917
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 2300,
+          "positive_image_recall": 0.6948640483383686,
+          "runs_reached": 112,
+          "run_recall": 0.691358024691358,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 44,
+              "recall": 0.5301204819277109
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 34,
+              "recall": 0.7555555555555555
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 5,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 1268,
+          "positive_image_recall": 0.38308157099697887,
+          "runs_reached": 131,
+          "run_recall": 0.808641975308642,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 56,
+              "recall": 0.6746987951807228
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 41,
+              "recall": 0.9111111111111111
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 4,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": -6.635802469135802,
+      "raw_minus_uniform_pp": -8.64197530864197,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 128.7589,
+          "run_reference_95": [
+            121.0,
+            136.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 132.0,
+          "run_reference_95": [
+            125.475,
+            136.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 43,
+      "exam": 31,
+      "percent": 10,
+      "n": 24919,
+      "k": 2492,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 343,
+          "positive_image_recall": 0.10362537764350453,
+          "runs_reached": 109,
+          "run_recall": 0.6728395061728395,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 33,
+              "recall": 0.39759036144578314
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 42,
+              "recall": 0.9333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 330,
+          "positive_image_recall": 0.09969788519637462,
+          "runs_reached": 93,
+          "run_recall": 0.5740740740740741,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 23,
+              "recall": 0.27710843373493976
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 36,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 1314,
+          "positive_image_recall": 0.3969788519637462,
+          "runs_reached": 76,
+          "run_recall": 0.4691358024691358,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 22,
+              "recall": 0.26506024096385544
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 24,
+              "recall": 0.5333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 30,
+              "recall": 0.8823529411764706
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 448,
+          "positive_image_recall": 0.13534743202416918,
+          "runs_reached": 96,
+          "run_recall": 0.5925925925925926,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 27,
+              "recall": 0.3253012048192771
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 35,
+              "recall": 0.7777777777777778
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": 0.9320987654321019,
+      "raw_minus_uniform_pp": -9.876543209876543,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 91.5299,
+          "run_reference_95": [
+            83.0,
+            100.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 94.91,
+          "run_reference_95": [
+            89.0,
+            109.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 43,
+      "exam": 31,
+      "percent": 25,
+      "n": 24919,
+      "k": 6230,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 829,
+          "positive_image_recall": 0.25045317220543806,
+          "runs_reached": 132,
+          "run_recall": 0.8148148148148148,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 53,
+              "recall": 0.6385542168674698
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 827,
+          "positive_image_recall": 0.24984894259818732,
+          "runs_reached": 126,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 47,
+              "recall": 0.5662650602409639
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 4,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 2073,
+          "positive_image_recall": 0.6262839879154078,
+          "runs_reached": 113,
+          "run_recall": 0.6975308641975309,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 43,
+              "recall": 0.5180722891566265
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 36,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 6,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 1204,
+          "positive_image_recall": 0.3637462235649547,
+          "runs_reached": 120,
+          "run_recall": 0.7407407407407407,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 44,
+              "recall": 0.5301204819277109
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 42,
+              "recall": 0.9333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": -1.6975308641975309,
+      "raw_minus_uniform_pp": -3.703703703703698,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 128.7589,
+          "run_reference_95": [
+            121.0,
+            136.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 132.0,
+          "run_reference_95": [
+            125.475,
+            136.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 17,
+      "exam": 31,
+      "percent": 10,
+      "n": 24919,
+      "k": 2492,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 343,
+          "positive_image_recall": 0.10362537764350453,
+          "runs_reached": 109,
+          "run_recall": 0.6728395061728395,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 33,
+              "recall": 0.39759036144578314
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 42,
+              "recall": 0.9333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 322,
+          "positive_image_recall": 0.09728096676737161,
+          "runs_reached": 82,
+          "run_recall": 0.5061728395061729,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 14,
+              "recall": 0.1686746987951807
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 34,
+              "recall": 0.7555555555555555
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 1089,
+          "positive_image_recall": 0.32900302114803626,
+          "runs_reached": 67,
+          "run_recall": 0.41358024691358025,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 17,
+              "recall": 0.20481927710843373
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 21,
+              "recall": 0.4666666666666667
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 29,
+              "recall": 0.8529411764705882
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 407,
+          "positive_image_recall": 0.1229607250755287,
+          "runs_reached": 91,
+          "run_recall": 0.5617283950617284,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 25,
+              "recall": 0.30120481927710846
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 33,
+              "recall": 0.7333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 33,
+              "recall": 0.9705882352941176
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": -5.858024691358022,
+      "raw_minus_uniform_pp": -16.666666666666664,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 91.5299,
+          "run_reference_95": [
+            83.0,
+            100.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 94.91,
+          "run_reference_95": [
+            89.0,
+            109.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 17,
+      "exam": 31,
+      "percent": 25,
+      "n": 24919,
+      "k": 6230,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 829,
+          "positive_image_recall": 0.25045317220543806,
+          "runs_reached": 132,
+          "run_recall": 0.8148148148148148,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 53,
+              "recall": 0.6385542168674698
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 824,
+          "positive_image_recall": 0.24894259818731118,
+          "runs_reached": 125,
+          "run_recall": 0.7716049382716049,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 47,
+              "recall": 0.5662650602409639
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 44,
+              "recall": 0.9777777777777777
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 1721,
+          "positive_image_recall": 0.519939577039275,
+          "runs_reached": 104,
+          "run_recall": 0.6419753086419753,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 37,
+              "recall": 0.4457831325301205
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 35,
+              "recall": 0.7777777777777778
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 32,
+              "recall": 0.9411764705882353
+            }
+          },
+          "singletons_reached": 4,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 1072,
+          "positive_image_recall": 0.3238670694864048,
+          "runs_reached": 118,
+          "run_recall": 0.7283950617283951,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 43,
+              "recall": 0.5180722891566265
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 41,
+              "recall": 0.9111111111111111
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": -2.314814814814815,
+      "raw_minus_uniform_pp": -4.320987654320985,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 128.7589,
+          "run_reference_95": [
+            121.0,
+            136.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 132.0,
+          "run_reference_95": [
+            125.475,
+            136.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 29,
+      "exam": 31,
+      "percent": 10,
+      "n": 24919,
+      "k": 2492,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 343,
+          "positive_image_recall": 0.10362537764350453,
+          "runs_reached": 109,
+          "run_recall": 0.6728395061728395,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 33,
+              "recall": 0.39759036144578314
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 42,
+              "recall": 0.9333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 329,
+          "positive_image_recall": 0.09939577039274924,
+          "runs_reached": 95,
+          "run_recall": 0.5864197530864198,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 21,
+              "recall": 0.25301204819277107
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 40,
+              "recall": 0.8888888888888888
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 899,
+          "positive_image_recall": 0.2716012084592145,
+          "runs_reached": 91,
+          "run_recall": 0.5617283950617284,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 30,
+              "recall": 0.3614457831325301
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 27,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 446,
+          "positive_image_recall": 0.13474320241691842,
+          "runs_reached": 100,
+          "run_recall": 0.6172839506172839,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 29,
+              "recall": 0.3493975903614458
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 37,
+              "recall": 0.8222222222222222
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": 2.1666666666666696,
+      "raw_minus_uniform_pp": -8.64197530864197,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 91.5299,
+          "run_reference_95": [
+            83.0,
+            100.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 94.91,
+          "run_reference_95": [
+            89.0,
+            109.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 29,
+      "exam": 31,
+      "percent": 25,
+      "n": 24919,
+      "k": 6230,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 829,
+          "positive_image_recall": 0.25045317220543806,
+          "runs_reached": 132,
+          "run_recall": 0.8148148148148148,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 53,
+              "recall": 0.6385542168674698
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 823,
+          "positive_image_recall": 0.2486404833836858,
+          "runs_reached": 124,
+          "run_recall": 0.7654320987654321,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 45,
+              "recall": 0.5421686746987951
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 1697,
+          "positive_image_recall": 0.5126888217522658,
+          "runs_reached": 118,
+          "run_recall": 0.7283950617283951,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 46,
+              "recall": 0.5542168674698795
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 38,
+              "recall": 0.8444444444444444
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 4,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 1175,
+          "positive_image_recall": 0.3549848942598187,
+          "runs_reached": 126,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 49,
+              "recall": 0.5903614457831325
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 43,
+              "recall": 0.9555555555555556
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": -2.932098765432099,
+      "raw_minus_uniform_pp": -4.938271604938271,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 128.7589,
+          "run_reference_95": [
+            121.0,
+            136.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 132.0,
+          "run_reference_95": [
+            125.475,
+            136.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 43,
+      "exam": 31,
+      "percent": 10,
+      "n": 24919,
+      "k": 2492,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 343,
+          "positive_image_recall": 0.10362537764350453,
+          "runs_reached": 109,
+          "run_recall": 0.6728395061728395,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 33,
+              "recall": 0.39759036144578314
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 42,
+              "recall": 0.9333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 328,
+          "positive_image_recall": 0.09909365558912386,
+          "runs_reached": 96,
+          "run_recall": 0.5925925925925926,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 25,
+              "recall": 0.30120481927710846
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 37,
+              "recall": 0.8222222222222222
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 1277,
+          "positive_image_recall": 0.38580060422960727,
+          "runs_reached": 70,
+          "run_recall": 0.43209876543209874,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 20,
+              "recall": 0.24096385542168675
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 22,
+              "recall": 0.4888888888888889
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 28,
+              "recall": 0.8235294117647058
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 430,
+          "positive_image_recall": 0.1299093655589124,
+          "runs_reached": 97,
+          "run_recall": 0.5987654320987654,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 28,
+              "recall": 0.3373493975903614
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 35,
+              "recall": 0.7777777777777778
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 331.0,
+        "runs_reached": 91.49,
+        "strata": {
+          "short_1_5": 21.689999999999998,
+          "medium_6_25": 35.8,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": 2.7839506172839537,
+      "raw_minus_uniform_pp": -8.024691358024693,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 91.5299,
+          "run_reference_95": [
+            83.0,
+            100.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 94.91,
+          "run_reference_95": [
+            89.0,
+            109.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 43,
+      "exam": 31,
+      "percent": 25,
+      "n": 24919,
+      "k": 6230,
+      "positive_images": 3310,
+      "positive_runs": 162,
+      "policies": {
+        "uniform": {
+          "positive_images": 829,
+          "positive_image_recall": 0.25045317220543806,
+          "runs_reached": 132,
+          "run_recall": 0.8148148148148148,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 53,
+              "recall": 0.6385542168674698
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        },
+        "score_bin": {
+          "positive_images": 825,
+          "positive_image_recall": 0.24924471299093656,
+          "runs_reached": 128,
+          "run_recall": 0.7901234567901234,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 49,
+              "recall": 0.5903614457831325
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 45,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        },
+        "score": {
+          "positive_images": 1929,
+          "positive_image_recall": 0.5827794561933535,
+          "runs_reached": 105,
+          "run_recall": 0.6481481481481481,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 37,
+              "recall": 0.4457831325301205
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 34,
+              "recall": 0.7555555555555555
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 3,
+          "singletons_total": 14
+        },
+        "score_diverse": {
+          "positive_images": 1155,
+          "positive_image_recall": 0.34894259818731116,
+          "runs_reached": 125,
+          "run_recall": 0.7716049382716049,
+          "strata": {
+            "short_1_5": {
+              "total": 83,
+              "reached": 49,
+              "recall": 0.5903614457831325
+            },
+            "medium_6_25": {
+              "total": 45,
+              "reached": 42,
+              "recall": 0.9333333333333333
+            },
+            "long_26_plus": {
+              "total": 34,
+              "reached": 34,
+              "recall": 1.0
+            }
+          },
+          "singletons_reached": 4,
+          "singletons_total": 14
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 827.5,
+        "runs_reached": 128.75,
+        "strata": {
+          "short_1_5": 49.8125,
+          "medium_6_25": 44.9375,
+          "long_26_plus": 34.0
+        }
+      },
+      "score_effect_pp": -0.46296296296296297,
+      "raw_minus_uniform_pp": -2.4691358024691357,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 128.7589,
+          "run_reference_95": [
+            121.0,
+            136.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 132.0,
+          "run_reference_95": [
+            125.475,
+            136.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "historical_checkpoint",
+      "seed": null,
+      "exam": 34,
+      "percent": 10,
+      "n": 10867,
+      "k": 1087,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 9,
+          "positive_image_recall": 0.1836734693877551,
+          "runs_reached": 8,
+          "run_recall": 0.8888888888888888,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 4,
+              "recall": 1.0
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 7,
+          "positive_image_recall": 0.14285714285714285,
+          "runs_reached": 6,
+          "run_recall": 0.6666666666666666,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": 0.0,
+          "runs_reached": 0,
+          "run_recall": 0.0,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 0,
+              "recall": 0.0
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 0,
+              "recall": 0.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 8,
+          "positive_image_recall": 0.16326530612244897,
+          "runs_reached": 6,
+          "run_recall": 0.6666666666666666,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": 20.555555555555554,
+      "raw_minus_uniform_pp": -22.22222222222222,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 4.1651,
+          "run_reference_95": [
+            2.0,
+            7.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 4.5,
+          "run_reference_95": [
+            4.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "historical_checkpoint",
+      "seed": null,
+      "exam": 34,
+      "percent": 25,
+      "n": 10867,
+      "k": 2717,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 13,
+          "positive_image_recall": 0.2653061224489796,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 14,
+          "positive_image_recall": 0.2857142857142857,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 13,
+          "positive_image_recall": 0.2653061224489796,
+          "runs_reached": 4,
+          "run_recall": 0.4444444444444444,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 0,
+              "recall": 0.0
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 22,
+          "positive_image_recall": 0.4489795918367347,
+          "runs_reached": 8,
+          "run_recall": 0.8888888888888888,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 3,
+              "recall": 0.75
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": 3.4722222222222223,
+      "raw_minus_uniform_pp": 0.0,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 6.6924,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 6.75,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 17,
+      "exam": 34,
+      "percent": 10,
+      "n": 10867,
+      "k": 1087,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 9,
+          "positive_image_recall": 0.1836734693877551,
+          "runs_reached": 8,
+          "run_recall": 0.8888888888888888,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 4,
+              "recall": 1.0
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 4,
+          "positive_image_recall": 0.08163265306122448,
+          "runs_reached": 4,
+          "run_recall": 0.4444444444444444,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 3,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 11,
+          "positive_image_recall": 0.22448979591836735,
+          "runs_reached": 5,
+          "run_recall": 0.5555555555555556,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 3,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 7,
+          "positive_image_recall": 0.14285714285714285,
+          "runs_reached": 6,
+          "run_recall": 0.6666666666666666,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": -1.6666666666666705,
+      "raw_minus_uniform_pp": -44.44444444444444,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 4.1651,
+          "run_reference_95": [
+            2.0,
+            7.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 4.5,
+          "run_reference_95": [
+            4.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 17,
+      "exam": 34,
+      "percent": 25,
+      "n": 10867,
+      "k": 2717,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 13,
+          "positive_image_recall": 0.2653061224489796,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 13,
+          "positive_image_recall": 0.2653061224489796,
+          "runs_reached": 8,
+          "run_recall": 0.8888888888888888,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 3,
+              "recall": 0.75
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 21,
+          "positive_image_recall": 0.42857142857142855,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 3,
+              "recall": 0.75
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 15,
+          "positive_image_recall": 0.30612244897959184,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 3,
+              "recall": 0.75
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": 14.583333333333334,
+      "raw_minus_uniform_pp": 11.111111111111105,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 6.6924,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 6.75,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 29,
+      "exam": 34,
+      "percent": 10,
+      "n": 10867,
+      "k": 1087,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 9,
+          "positive_image_recall": 0.1836734693877551,
+          "runs_reached": 8,
+          "run_recall": 0.8888888888888888,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 4,
+              "recall": 1.0
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 6,
+          "positive_image_recall": 0.12244897959183673,
+          "runs_reached": 3,
+          "run_recall": 0.3333333333333333,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 0,
+              "recall": 0.0
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 3,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 6,
+          "positive_image_recall": 0.12244897959183673,
+          "runs_reached": 3,
+          "run_recall": 0.3333333333333333,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 2,
+              "recall": 0.4
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 5,
+          "positive_image_recall": 0.10204081632653061,
+          "runs_reached": 4,
+          "run_recall": 0.4444444444444444,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 0,
+              "recall": 0.0
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": -12.77777777777778,
+      "raw_minus_uniform_pp": -55.55555555555556,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 4.1651,
+          "run_reference_95": [
+            2.0,
+            7.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 4.5,
+          "run_reference_95": [
+            4.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 29,
+      "exam": 34,
+      "percent": 25,
+      "n": 10867,
+      "k": 2717,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 13,
+          "positive_image_recall": 0.2653061224489796,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 13,
+          "positive_image_recall": 0.2653061224489796,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 17,
+          "positive_image_recall": 0.3469387755102041,
+          "runs_reached": 4,
+          "run_recall": 0.4444444444444444,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 3,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 12,
+          "positive_image_recall": 0.24489795918367346,
+          "runs_reached": 6,
+          "run_recall": 0.6666666666666666,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": 3.4722222222222223,
+      "raw_minus_uniform_pp": 0.0,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 6.6924,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 6.75,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 43,
+      "exam": 34,
+      "percent": 10,
+      "n": 10867,
+      "k": 1087,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 9,
+          "positive_image_recall": 0.1836734693877551,
+          "runs_reached": 8,
+          "run_recall": 0.8888888888888888,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 4,
+              "recall": 1.0
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 5,
+          "positive_image_recall": 0.10204081632653061,
+          "runs_reached": 5,
+          "run_recall": 0.5555555555555556,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 3,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 5,
+          "positive_image_recall": 0.10204081632653061,
+          "runs_reached": 4,
+          "run_recall": 0.4444444444444444,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 3,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 7,
+          "positive_image_recall": 0.14285714285714285,
+          "runs_reached": 6,
+          "run_recall": 0.6666666666666666,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": 9.444444444444441,
+      "raw_minus_uniform_pp": -33.33333333333333,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 4.1651,
+          "run_reference_95": [
+            2.0,
+            7.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 4.5,
+          "run_reference_95": [
+            4.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 43,
+      "exam": 34,
+      "percent": 25,
+      "n": 10867,
+      "k": 2717,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 13,
+          "positive_image_recall": 0.2653061224489796,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 13,
+          "positive_image_recall": 0.2653061224489796,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 19,
+          "positive_image_recall": 0.3877551020408163,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 18,
+          "positive_image_recall": 0.3673469387755102,
+          "runs_reached": 8,
+          "run_recall": 0.8888888888888888,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 3,
+              "recall": 0.75
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": 3.4722222222222223,
+      "raw_minus_uniform_pp": 0.0,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 6.6924,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 6.75,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 17,
+      "exam": 34,
+      "percent": 10,
+      "n": 10867,
+      "k": 1087,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 9,
+          "positive_image_recall": 0.1836734693877551,
+          "runs_reached": 8,
+          "run_recall": 0.8888888888888888,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 4,
+              "recall": 1.0
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 4,
+          "positive_image_recall": 0.08163265306122448,
+          "runs_reached": 3,
+          "run_recall": 0.3333333333333333,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 2,
+              "recall": 0.4
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 5,
+          "positive_image_recall": 0.10204081632653061,
+          "runs_reached": 3,
+          "run_recall": 0.3333333333333333,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 2,
+              "recall": 0.4
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 6,
+          "positive_image_recall": 0.12244897959183673,
+          "runs_reached": 5,
+          "run_recall": 0.5555555555555556,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 3,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": -12.77777777777778,
+      "raw_minus_uniform_pp": -55.55555555555556,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 4.1651,
+          "run_reference_95": [
+            2.0,
+            7.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 4.5,
+          "run_reference_95": [
+            4.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 17,
+      "exam": 34,
+      "percent": 25,
+      "n": 10867,
+      "k": 2717,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 13,
+          "positive_image_recall": 0.2653061224489796,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 12,
+          "positive_image_recall": 0.24489795918367346,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 16,
+          "positive_image_recall": 0.32653061224489793,
+          "runs_reached": 6,
+          "run_recall": 0.6666666666666666,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 12,
+          "positive_image_recall": 0.24489795918367346,
+          "runs_reached": 6,
+          "run_recall": 0.6666666666666666,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": 3.4722222222222223,
+      "raw_minus_uniform_pp": 0.0,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 6.6924,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 6.75,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 29,
+      "exam": 34,
+      "percent": 10,
+      "n": 10867,
+      "k": 1087,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 9,
+          "positive_image_recall": 0.1836734693877551,
+          "runs_reached": 8,
+          "run_recall": 0.8888888888888888,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 4,
+              "recall": 1.0
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 7,
+          "positive_image_recall": 0.14285714285714285,
+          "runs_reached": 5,
+          "run_recall": 0.5555555555555556,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 6,
+          "positive_image_recall": 0.12244897959183673,
+          "runs_reached": 4,
+          "run_recall": 0.4444444444444444,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 3,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 6,
+          "positive_image_recall": 0.12244897959183673,
+          "runs_reached": 5,
+          "run_recall": 0.5555555555555556,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": 9.444444444444441,
+      "raw_minus_uniform_pp": -33.33333333333333,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 4.1651,
+          "run_reference_95": [
+            2.0,
+            7.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 4.5,
+          "run_reference_95": [
+            4.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 29,
+      "exam": 34,
+      "percent": 25,
+      "n": 10867,
+      "k": 2717,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 13,
+          "positive_image_recall": 0.2653061224489796,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 14,
+          "positive_image_recall": 0.2857142857142857,
+          "runs_reached": 8,
+          "run_recall": 0.8888888888888888,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 3,
+              "recall": 0.75
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 14,
+          "positive_image_recall": 0.2857142857142857,
+          "runs_reached": 6,
+          "run_recall": 0.6666666666666666,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 16,
+          "positive_image_recall": 0.32653061224489793,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": 14.583333333333334,
+      "raw_minus_uniform_pp": 11.111111111111105,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 6.6924,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 6.75,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 43,
+      "exam": 34,
+      "percent": 10,
+      "n": 10867,
+      "k": 1087,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 9,
+          "positive_image_recall": 0.1836734693877551,
+          "runs_reached": 8,
+          "run_recall": 0.8888888888888888,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 4,
+              "recall": 1.0
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 2,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 4,
+          "positive_image_recall": 0.08163265306122448,
+          "runs_reached": 4,
+          "run_recall": 0.4444444444444444,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 3,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 4,
+          "positive_image_recall": 0.08163265306122448,
+          "runs_reached": 3,
+          "run_recall": 0.3333333333333333,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 2,
+              "recall": 0.4
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 4,
+          "positive_image_recall": 0.08163265306122448,
+          "runs_reached": 4,
+          "run_recall": 0.4444444444444444,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 1,
+              "recall": 0.25
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 3,
+              "recall": 0.6
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 4.9,
+        "runs_reached": 4.15,
+        "strata": {
+          "short_1_5": 0.7,
+          "medium_6_25": 3.45,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": -1.6666666666666705,
+      "raw_minus_uniform_pp": -44.44444444444444,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 4.1651,
+          "run_reference_95": [
+            2.0,
+            7.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 4.5,
+          "run_reference_95": [
+            4.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 43,
+      "exam": 34,
+      "percent": 25,
+      "n": 10867,
+      "k": 2717,
+      "positive_images": 49,
+      "positive_runs": 9,
+      "policies": {
+        "uniform": {
+          "positive_images": 13,
+          "positive_image_recall": 0.2653061224489796,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 2
+        },
+        "score_bin": {
+          "positive_images": 12,
+          "positive_image_recall": 0.24489795918367346,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        },
+        "score": {
+          "positive_images": 16,
+          "positive_image_recall": 0.32653061224489793,
+          "runs_reached": 6,
+          "run_recall": 0.6666666666666666,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 4,
+              "recall": 0.8
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        },
+        "score_diverse": {
+          "positive_images": 18,
+          "positive_image_recall": 0.3673469387755102,
+          "runs_reached": 7,
+          "run_recall": 0.7777777777777778,
+          "strata": {
+            "short_1_5": {
+              "total": 4,
+              "reached": 2,
+              "recall": 0.5
+            },
+            "medium_6_25": {
+              "total": 5,
+              "reached": 5,
+              "recall": 1.0
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 1,
+          "singletons_total": 2
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 12.25,
+        "runs_reached": 6.6875,
+        "strata": {
+          "short_1_5": 1.75,
+          "medium_6_25": 4.9375,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": 3.4722222222222223,
+      "raw_minus_uniform_pp": 0.0,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 6.6924,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 6.75,
+          "run_reference_95": [
+            5.0,
+            8.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "historical_checkpoint",
+      "seed": null,
+      "exam": 37,
+      "percent": 10,
+      "n": 18125,
+      "k": 1813,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "historical_checkpoint",
+      "seed": null,
+      "exam": 37,
+      "percent": 25,
+      "n": 18125,
+      "k": 4531,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 17,
+      "exam": 37,
+      "percent": 10,
+      "n": 18125,
+      "k": 1813,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 17,
+      "exam": 37,
+      "percent": 25,
+      "n": 18125,
+      "k": 4531,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 29,
+      "exam": 37,
+      "percent": 10,
+      "n": 18125,
+      "k": 1813,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 29,
+      "exam": 37,
+      "percent": 25,
+      "n": 18125,
+      "k": 4531,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 43,
+      "exam": 37,
+      "percent": 10,
+      "n": 18125,
+      "k": 1813,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "classification",
+      "seed": 43,
+      "exam": 37,
+      "percent": 25,
+      "n": 18125,
+      "k": 4531,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 17,
+      "exam": 37,
+      "percent": 10,
+      "n": 18125,
+      "k": 1813,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 17,
+      "exam": 37,
+      "percent": 25,
+      "n": 18125,
+      "k": 4531,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 29,
+      "exam": 37,
+      "percent": 10,
+      "n": 18125,
+      "k": 1813,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 29,
+      "exam": 37,
+      "percent": 25,
+      "n": 18125,
+      "k": 4531,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 43,
+      "exam": 37,
+      "percent": 10,
+      "n": 18125,
+      "k": 1813,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    },
+    {
+      "arm": "local_ranking",
+      "seed": 43,
+      "exam": 37,
+      "percent": 25,
+      "n": 18125,
+      "k": 4531,
+      "positive_images": 0,
+      "positive_runs": 0,
+      "policies": {
+        "uniform": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_bin": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        },
+        "score_diverse": {
+          "positive_images": 0,
+          "positive_image_recall": null,
+          "runs_reached": 0,
+          "run_recall": null,
+          "strata": {
+            "short_1_5": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "medium_6_25": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            },
+            "long_26_plus": {
+              "total": 0,
+              "reached": 0,
+              "recall": null
+            }
+          },
+          "singletons_reached": 0,
+          "singletons_total": 0
+        }
+      },
+      "geometry_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_permutation_exact": {
+        "positive_images": 0.0,
+        "runs_reached": 0,
+        "strata": {
+          "short_1_5": 0,
+          "medium_6_25": 0,
+          "long_26_plus": 0
+        }
+      },
+      "score_effect_pp": null,
+      "raw_minus_uniform_pp": null,
+      "bins_with_tied_maximum": 0,
+      "reused_geometry_and_phase_reference": {
+        "geometry": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 10000
+        },
+        "phases": {
+          "mean_runs": 0.0,
+          "run_reference_95": [
+            0.0,
+            0.0
+          ],
+          "draws": 100
+        }
+      }
+    }
+  ],
+  "paired_seed_effects": {},
+  "macro": {
+    "10": {
+      "historical_checkpoint": {
+        "raw_run_recall": 0.5925925925925926,
+        "score_effect_pp": 7.96604938271605,
+        "raw_minus_uniform_pp": -18.82716049382716
+      },
+      "all_paired_seeds": [
+        {
+          "seed": 17,
+          "classification": {
+            "raw_run_recall": 0.5,
+            "score_effect_pp": -1.2932098765432103,
+            "raw_minus_uniform_pp": -28.086419753086417,
+            "conditional_geometry_reference_95_pp": [
+              -15.432098765432102,
+              11.728395061728397
+            ]
+          },
+          "local_ranking": {
+            "raw_run_recall": 0.41975308641975306,
+            "score_effect_pp": -9.317901234567902,
+            "raw_minus_uniform_pp": -36.111111111111114,
+            "conditional_geometry_reference_95_pp": [
+              -23.456790123456795,
+              3.7037037037037033
+            ]
+          },
+          "ranking_minus_classification_pp": -8.024691358024693,
+          "ranking_minus_historical_pp": -17.28395061728395
+        },
+        {
+          "seed": 29,
+          "classification": {
+            "raw_run_recall": 0.43518518518518523,
+            "score_effect_pp": -7.7746913580246915,
+            "raw_minus_uniform_pp": -34.5679012345679,
+            "conditional_geometry_reference_95_pp": [
+              -21.91358024691358,
+              5.24691358024692
+            ]
+          },
+          "local_ranking": {
+            "raw_run_recall": 0.5709876543209877,
+            "score_effect_pp": 5.805555555555555,
+            "raw_minus_uniform_pp": -20.987654320987648,
+            "conditional_geometry_reference_95_pp": [
+              -8.333333333333325,
+              18.827160493827172
+            ]
+          },
+          "ranking_minus_classification_pp": 13.580246913580252,
+          "ranking_minus_historical_pp": -2.160493827160481
+        },
+        {
+          "seed": 43,
+          "classification": {
+            "raw_run_recall": 0.5648148148148149,
+            "score_effect_pp": 5.188271604938271,
+            "raw_minus_uniform_pp": -21.604938271604937,
+            "conditional_geometry_reference_95_pp": [
+              -8.950617283950614,
+              18.209876543209884
+            ]
+          },
+          "local_ranking": {
+            "raw_run_recall": 0.5185185185185185,
+            "score_effect_pp": 0.5586419753086416,
+            "raw_minus_uniform_pp": -26.23456790123457,
+            "conditional_geometry_reference_95_pp": [
+              -13.580246913580252,
+              13.580246913580247
+            ]
+          },
+          "ranking_minus_classification_pp": -4.629629629629639,
+          "ranking_minus_historical_pp": -7.4074074074074066
+        }
+      ],
+      "mean_paired_change_pp": 0.30864197530864007,
+      "seed_sd_pp": 11.618228533776989,
+      "seed_range_pp": [
+        -8.024691358024693,
+        13.580246913580252
+      ],
+      "positive_paired_seeds": 1,
+      "per_exam_seed_mean_changes_pp": {
+        "31": 0.617283950617283,
+        "34": -5.921189464667501e-16
+      },
+      "two_exam_resampling_support_pp": [
+        -5.921189464667501e-16,
+        0.30864197530864124,
+        0.617283950617283
+      ]
+    },
+    "25": {
+      "historical_checkpoint": {
+        "raw_run_recall": 0.7623456790123457,
+        "score_effect_pp": -0.6558641975308643,
+        "raw_minus_uniform_pp": -3.39506172839506
+      },
+      "all_paired_seeds": [
+        {
+          "seed": 17,
+          "classification": {
+            "raw_run_recall": 0.8395061728395061,
+            "score_effect_pp": 7.060185185185185,
+            "raw_minus_uniform_pp": 4.320987654320985,
+            "conditional_geometry_reference_95_pp": [
+              -2.4691358024691357,
+              17.28395061728394
+            ]
+          },
+          "local_ranking": {
+            "raw_run_recall": 0.7746913580246914,
+            "score_effect_pp": 0.5787037037037037,
+            "raw_minus_uniform_pp": -2.1604938271604923,
+            "conditional_geometry_reference_95_pp": [
+              -8.950617283950614,
+              10.802469135802461
+            ]
+          },
+          "ranking_minus_classification_pp": -6.481481481481477,
+          "ranking_minus_historical_pp": 1.2345679012345623
+        },
+        {
+          "seed": 29,
+          "classification": {
+            "raw_run_recall": 0.7530864197530864,
+            "score_effect_pp": -1.58179012345679,
+            "raw_minus_uniform_pp": -4.320987654320985,
+            "conditional_geometry_reference_95_pp": [
+              -11.111111111111105,
+              8.64197530864197
+            ]
+          },
+          "local_ranking": {
+            "raw_run_recall": 0.8271604938271604,
+            "score_effect_pp": 5.825617283950617,
+            "raw_minus_uniform_pp": 3.086419753086417,
+            "conditional_geometry_reference_95_pp": [
+              -3.703703703703709,
+              16.049382716049365
+            ]
+          },
+          "ranking_minus_classification_pp": 7.407407407407396,
+          "ranking_minus_historical_pp": 6.481481481481466
+        },
+        {
+          "seed": 43,
+          "classification": {
+            "raw_run_recall": 0.7777777777777778,
+            "score_effect_pp": 0.8873456790123457,
+            "raw_minus_uniform_pp": -1.851851851851849,
+            "conditional_geometry_reference_95_pp": [
+              -8.64197530864197,
+              11.111111111111105
+            ]
+          },
+          "local_ranking": {
+            "raw_run_recall": 0.7839506172839505,
+            "score_effect_pp": 1.5046296296296298,
+            "raw_minus_uniform_pp": -1.2345679012345678,
+            "conditional_geometry_reference_95_pp": [
+              -8.024691358024693,
+              11.728395061728381
+            ]
+          },
+          "ranking_minus_classification_pp": 0.6172839506172756,
+          "ranking_minus_historical_pp": 2.160493827160481
+        }
+      ],
+      "mean_paired_change_pp": 0.5144032921810647,
+      "seed_sd_pp": 6.945015980138952,
+      "seed_range_pp": [
+        -6.481481481481477,
+        7.407407407407396
+      ],
+      "positive_paired_seeds": 2,
+      "per_exam_seed_mean_changes_pp": {
+        "31": 1.028806584362137,
+        "34": 0.0
+      },
+      "two_exam_resampling_support_pp": [
+        0.0,
+        0.5144032921810685,
+        1.028806584362137
+      ]
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "base_commit": "31fbe74a6463768bb15be69dba9e6180d653c5d5",
+  "acquisition_lock_commit": "f187ef0cad36c1895b28200e61af852a4357d880",
+  "frozen_utc": "2026-11-09T04:02:10.717111+00:00",
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "ranking_weight": 0.5,
+  "updates": 1024,
+  "training_code_sha256": "742d5cc83fdeafab0de9f3ae815f23b21044a27c87db738d232e66e94cfc17f9",
+  "evaluation_code_sha256": "09b009ce1daecdd650efee29bc2d6b291701672433ee0d0ea63299aeff885a4b",
+  "independent_code_sha256": "9a0bf893a134f226eb8b6b32248c27a17c50367351085b6959d11af55ddb9918",
+  "private_manifest_sha256": "5b4d2d9e501445eeac4445093221640c038e31dd2fe37e4e78db9f2d56022d6c",
+  "fitting_bank_sha256": "ab80763638c4e13187c03e50203de2f1e0af3c50c932f75d09213ab50c340401",
+  "private_acquisition_plan_sha256": "2df3b7633d5a2f44ac087b467e8327c5cb4d9994c7933b32f8221a368de010cf",
+  "new_originals_package_sha256": "50954e19e64f4102ea3a8022a8278fcd6d234f0f220f2d9e6231ef48d0ffae22",
+  "data": {
+    "distinct_images": 4156,
+    "fixed_background_references": 4096,
+    "background_positive": 239,
+    "background_other": 3857,
+    "local_short_runs": 32,
+    "pairs_by_exam": {
+      "21": 1,
+      "23": 4,
+      "25": 1,
+      "29": 11,
+      "30": 15
+    },
+    "new_original_images": 21,
+    "new_png_bytes": 4871891,
+    "retained_original_pngs_reverified": 10123,
+    "source_archive_hashes_reverified": 10,
+    "png_benchmark_overlap": 0,
+    "unknown_labels_used": 0,
+    "patient_independence_verified": false
+  },
+  "exposures_per_arm": {
+    "reference_images": 16384,
+    "local_positive": 8192,
+    "local_negative": 8192,
+    "all_positive": 9148,
+    "all_negative": 23620,
+    "batch": 32,
+    "references_per_batch": 16,
+    "pairs_per_batch": 8,
+    "core_passes": 4,
+    "pair_repetitions": 256
+  },
+  "architecture": "capsule-cnn-v1; unchanged96x96EXIF/RGBpaddedbilinearfloat32/255",
+  "optimizer": {
+    "name": "AdamW",
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "deterministic": true,
+    "threads": 2
+  },
+  "primary": "10% equal-positive-examination raw score-bin distinct-run recall: local_ranking minus classification, every paired seed; uniform and exact geometry joint",
+  "secondary": "25%, short runs, singleton omissions, positive images, global ranking failures, heterogeneity",
+  "selection": "final1024updates only; no favorable seed or checkpoint selection; no promotion",
+  "historical_score_sha256": {
+    "31": "c4cc7e58dda3540537df1ca78ba78f3724ccc4f059d501578aa2cdf7e2531a63",
+    "34": "9c524e4b486253f455fafee1b3c356fa50e2576fd80c164e1fc75b23bff57ace",
+    "37": "fbe8b44540d51f3fdf967fed7775d39e56046a504a4988503682d19714820052"
+  },
+  "historical_repetitions_sha256": "bfa1207531ebd6cd6c58ec247c6e3b3c69b361792cd2028c8b0237448f533853",
+  "labels_zip_sha256": "2f5ba84c47d343d51952e78bf22183b9d04ba8c105f625af3cf9ffb20412e52f",
+  "benchmark_tensor_sha256": {
+    "31": "4a87f9788d6789a191c821e01600373d532edbe4d0ebbe0b7c7fbb60e4793178",
+    "34": "84078f23d71dcedd77ddb03180935826b61d7fbffa5b950c01000258f52f17e4",
+    "37": "bbf22a22d655a926d6480cfdacb20823716943bb45e36f73a242675f6447643b"
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "torch": "2.15.0+cpu",
+    "numpy": "2.3.5",
+    "pillow": "12.3.0"
+  },
+  "rights": "Galar v2; Le Floch et al.; CC BY4.0; live official metadata and corrected source labels pinned",
+  "reserved11_20_or61_80_used": false,
+  "google_drive_upload_attempted": false
+}
