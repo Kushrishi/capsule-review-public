@@ -3,7 +3,7 @@ from importlib.util import spec_from_file_location, module_from_spec
 from pathlib import Path
 import unittest
 
-spec=spec_from_file_location('ensemble',Path(__file__).with_name('exploratory_seed_ensemble.py'))
+spec=spec_from_file_location('ensemble',Path(__file__).resolve().parents[1]/'scripts'/'exploratory_seed_ensemble.py')
 mod=module_from_spec(spec);spec.loader.exec_module(mod)
 
 class TestSeedEnsemble(unittest.TestCase):
