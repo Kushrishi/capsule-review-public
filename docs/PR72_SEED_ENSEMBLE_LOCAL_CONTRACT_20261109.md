@@ -1,0 +1,13 @@
+# Capsule Review — non-promotional PR72 seed-ensemble diagnostic
+
+**Scope:** Retrospective, development-only reanalysis of existing, previously inspected PR72 data; no new fitting, no new images, no source changes, no external validation, no model or selector promotion.
+
+**Motivation:** Prior error-persistence audit reported model disagreement on 42/69 short runs. Determine whether predeclared simple combinations of the three fixed training seeds reduce local pair-ordering errors and singleton misses, relative to individual-seed means. This is hypothesis-generating and is not a new unbiased held-out evaluation.
+
+**Frozen inputs:** `Short_Event_Foundation_Private_Final_Evidence_20261109.zip` from Library, nested `frozen-packages/Short_Event_Support_Preoutcome_Evidence_20261109.zip`; support-manifest 69 distinct runs (23/20/11/15 across exams23/25/29/30), fixed seeds17/29/43, classification/ranking arms, and SHA-sealed 24 endpoint logit files. Validate every sealed-prediction file SHA and size and reproduce all 24 published correct counts before computing ensembles.
+
+**Methods, no model selection or tuning:** For each held-out examination and each arm, (1) existing single-seed mean pair ordering as reference; (2) seed majority vote across the three signs of `(logit_blood-logit_other)_positive - (logit_blood-logit_other)_negative`, strict majority wins, no ties; (3) mean the three *raw pair margins*, then order positive above negative iff mean margin > 0; exact ties contribute 0.5. Never inspect held-out labels during any model fitting (none is performed). Do not normalize based on the heldout annotation endpoint distribution and do not search alternative weights/thresholds. Singletons are run_length == 1 and are separately reported. Evaluate every source examination and the equal-examination mean, separately for classification and ranking.
+
+**No advancement claims:** These ensembles depend on three seeds of the same fitting cohort and reuse previously inspected development labels. If a method improves retrospectively, a genuinely new source examination and a separately frozen downstream exact-K evaluation would be required to claim utility. Do not treat pair ordering as clinical lesion sensitivity or 10% exact-K event recall.
+
+**Privacy:** Private manifest/predictions never exported; public report contains only non-identifying exam-level counts and macro percentages. Verify an independent script reproduces every published base score and new aggregate.
