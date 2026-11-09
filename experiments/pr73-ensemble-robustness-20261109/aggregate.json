@@ -1,0 +1,202 @@
+{
+  "status": "retrospective_posthoc_development_only_no_model_promotion",
+  "unit": "original annotated short run; examinations not verified patient-independent",
+  "source_proofs": {
+    "source_sha256": "c1e43e05debe7287e39b6428ce9f131ee954412a9c91a6c2b9a56ef6337e8b43",
+    "manifest_sha256": "338e55c9d4412975e79dff4f08ff70da8196f15f5e9b35bc8b6f0b59e61b36b1",
+    "nested_sha256": "1c300ddbda538a3ccf6f70ba480147006d78e979e9afbf220365840d877ac232"
+  },
+  "cohort": {
+    "exams": [
+      23,
+      25,
+      29,
+      30
+    ],
+    "distinct_short_runs": 69,
+    "distinct_singleton_runs": 21,
+    "seed_models_per_objective": 3
+  },
+  "summary": {
+    "classification": {
+      "individual_seed_mean": {
+        "macro": 0.6377195871761089,
+        "pooled": 0.6328502415458936,
+        "singleton_macro": 0.5277777777777778,
+        "singleton_pooled": 0.5555555555555556
+      },
+      "three_seed_majority": {
+        "macro": 0.6142621870882741,
+        "pooled": 0.6086956521739131,
+        "singleton_macro": 0.5,
+        "singleton_pooled": 0.5238095238095238
+      },
+      "raw_mean_margin": {
+        "macro": 0.6709650856389987,
+        "pooled": 0.6666666666666666,
+        "singleton_macro": 0.5166666666666666,
+        "singleton_pooled": 0.5238095238095238
+      },
+      "train_rms_normalized_mean": {
+        "macro": 0.6709650856389987,
+        "pooled": 0.6666666666666666,
+        "singleton_macro": 0.5166666666666666,
+        "singleton_pooled": 0.5238095238095238
+      },
+      "omit_seed_17": {
+        "macro": 0.6126317523056654,
+        "pooled": 0.6086956521739131,
+        "singleton_macro": 0.36666666666666664,
+        "singleton_pooled": 0.38095238095238093
+      },
+      "omit_seed_29": {
+        "macro": 0.7244894598155468,
+        "pooled": 0.7101449275362319,
+        "singleton_macro": 0.6583333333333333,
+        "singleton_pooled": 0.5714285714285714
+      },
+      "omit_seed_43": {
+        "macro": 0.6549407114624506,
+        "pooled": 0.6666666666666666,
+        "singleton_macro": 0.5,
+        "singleton_pooled": 0.5714285714285714
+      },
+      "seed_scale_probe_envelope": {
+        "seed_rescaling_macro_range": [
+          0.560737812911726,
+          0.7212285902503294
+        ],
+        "seed_rescaling_singleton_macro_range": [
+          0.36666666666666664,
+          0.6416666666666666
+        ]
+      },
+      "per_examination": [
+        {
+          "exam": 23,
+          "runs": 23,
+          "correct": 12.0,
+          "singletons": 10,
+          "singleton_correct": 4.0
+        },
+        {
+          "exam": 25,
+          "runs": 20,
+          "correct": 15.0,
+          "singletons": 6,
+          "singleton_correct": 4.0
+        },
+        {
+          "exam": 29,
+          "runs": 11,
+          "correct": 6.0,
+          "singletons": 2,
+          "singleton_correct": 0.0
+        },
+        {
+          "exam": 30,
+          "runs": 15,
+          "correct": 13.0,
+          "singletons": 3,
+          "singleton_correct": 3.0
+        }
+      ]
+    },
+    "local_ranking": {
+      "individual_seed_mean": {
+        "macro": 0.7229084321475626,
+        "pooled": 0.7053140096618357,
+        "singleton_macro": 0.6222222222222222,
+        "singleton_pooled": 0.5714285714285714
+      },
+      "three_seed_majority": {
+        "macro": 0.7522891963109355,
+        "pooled": 0.7391304347826086,
+        "singleton_macro": 0.6416666666666666,
+        "singleton_pooled": 0.5714285714285714
+      },
+      "raw_mean_margin": {
+        "macro": 0.7891469038208169,
+        "pooled": 0.7681159420289855,
+        "singleton_macro": 0.85,
+        "singleton_pooled": 0.7142857142857143
+      },
+      "train_rms_normalized_mean": {
+        "macro": 0.7891469038208169,
+        "pooled": 0.7681159420289855,
+        "singleton_macro": 0.85,
+        "singleton_pooled": 0.7142857142857143
+      },
+      "omit_seed_17": {
+        "macro": 0.7241106719367589,
+        "pooled": 0.6956521739130435,
+        "singleton_macro": 0.725,
+        "singleton_pooled": 0.6190476190476191
+      },
+      "omit_seed_29": {
+        "macro": 0.7224802371541502,
+        "pooled": 0.6956521739130435,
+        "singleton_macro": 0.6,
+        "singleton_pooled": 0.5714285714285714
+      },
+      "omit_seed_43": {
+        "macro": 0.7516469038208169,
+        "pooled": 0.7246376811594203,
+        "singleton_macro": 0.8083333333333333,
+        "singleton_pooled": 0.6666666666666666
+      },
+      "seed_scale_probe_envelope": {
+        "seed_rescaling_macro_range": [
+          0.6924077733860342,
+          0.8041831357048749
+        ],
+        "seed_rescaling_singleton_macro_range": [
+          0.575,
+          0.85
+        ]
+      },
+      "per_examination": [
+        {
+          "exam": 23,
+          "runs": 23,
+          "correct": 12.0,
+          "singletons": 10,
+          "singleton_correct": 4.0
+        },
+        {
+          "exam": 25,
+          "runs": 20,
+          "correct": 19.0,
+          "singletons": 6,
+          "singleton_correct": 6.0
+        },
+        {
+          "exam": 29,
+          "runs": 11,
+          "correct": 9.0,
+          "singletons": 2,
+          "singleton_correct": 2.0
+        },
+        {
+          "exam": 30,
+          "runs": 15,
+          "correct": 13.0,
+          "singletons": 3,
+          "singleton_correct": 3.0
+        }
+      ]
+    }
+  },
+  "rescaling_probe_factors": [
+    0.25,
+    0.5,
+    2.0,
+    4.0
+  ],
+  "warnings": [
+    "All policies examined after PR72 outcomes already known.",
+    "Two-seed omission and rescaling are sensitivity probes; no selection or tuning.",
+    "Training-RMS scales use only fitting-pair margins, no held-out outcomes.",
+    "Ensemble result is NOT complete-source exact-K event recall or clinical validation."
+  ]
+}
