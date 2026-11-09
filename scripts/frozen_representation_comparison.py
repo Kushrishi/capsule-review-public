@@ -199,7 +199,7 @@ def evaluate(private_root:Path,scores_dir:Path,out:Path,receipt_sha:str,lock_pat
     from recover_frozen_mobilenet import build
     if sha_file(scores_dir/'prediction-receipt.json')!=receipt_sha:
         raise ValueError('Prediction seal mismatch')
-    _,m,_,_,_=build(private_root)
+    _,pairs,_,_,_=build(private_root)
     rec_data=json.loads((scores_dir/'prediction-receipt.json').read_text())
     if sha_file(lock_path)!=rec_data.get('prefit_lock_sha256'):
         raise ValueError('Outcome evaluation lacks the original frozen prefit lock')
@@ -212,7 +212,7 @@ def evaluate(private_root:Path,scores_dir:Path,out:Path,receipt_sha:str,lock_pat
         if sha_file(path)!=rec['score_sha256']:raise ValueError('Sealed score digest changed')
         pred=json.loads(path.read_text())
         logits=dict(zip(pred['endpoint_indices'],pred['logits']))
-        held=[p for p in m['pairs'] if p['exam']==rec['exam']]
+        held=[p for p in pairs if p['exam']==rec['exam']]
         correct=0;ties=0;singleton_correct=0;singletons=0
         for p in held:
             zpos=logits[p['positive_index']][1]-logits[p['positive_index']][0]
