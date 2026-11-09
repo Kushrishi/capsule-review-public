@@ -2,8 +2,8 @@
 import io, sys
 from pathlib import Path
 from PIL import Image
-import numpy as np
 import pytest
+np = pytest.importorskip("numpy", reason="Redness pixel tests require the optional ML dependency")
 script_dir=Path(__file__).resolve().parents[1]/'scripts'
 if not script_dir.is_dir():script_dir=Path(__file__).resolve().parent
 sys.path.insert(0,str(script_dir))
