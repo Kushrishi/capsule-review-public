@@ -1,0 +1,43 @@
+{
+  "method": "Fixed central-aperture redness ratio (no training)",
+  "status": "Exploratory, previously inspected development-only",
+  "n_distinct_runs": 69,
+  "n_distinct_singletons": 21,
+  "macro_ordering": 0.5411561264822135,
+  "pooled_correct": 37,
+  "macro_singleton_ordering": 0.6,
+  "pooled_correct_singletons": 12,
+  "per_exam": [
+    {
+      "exam": 23,
+      "n_runs": 23,
+      "correct": 11,
+      "n_singletons": 10,
+      "correct_singletons": 4
+    },
+    {
+      "exam": 25,
+      "n_runs": 20,
+      "correct": 13,
+      "n_singletons": 6,
+      "correct_singletons": 5
+    },
+    {
+      "exam": 29,
+      "n_runs": 11,
+      "correct": 7,
+      "n_singletons": 2,
+      "correct_singletons": 1
+    },
+    {
+      "exam": 30,
+      "n_runs": 15,
+      "correct": 6,
+      "n_singletons": 3,
+      "correct_singletons": 2
+    }
+  ],
+  "clinical_model_promoted": false,
+  "independent_patient_validation": false,
+  "downstream_10pct_event_recall_assessed": false
+}

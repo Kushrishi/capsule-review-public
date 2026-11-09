@@ -1,0 +1,40 @@
+{
+  "n_distinct_runs": 69,
+  "n_singletons": 21,
+  "paired_agreement": {
+    "both_correct": 32,
+    "red_only": 5,
+    "cnn_only": 21,
+    "both_wrong": 11
+  },
+  "singleton_paired_agreement": {
+    "both_correct": 10,
+    "red_only": 2,
+    "cnn_only": 5,
+    "both_wrong": 4
+  },
+  "per_exam": {
+    "23": {
+      "both_correct": 6,
+      "both_wrong": 6,
+      "cnn_only": 6,
+      "red_only": 5
+    },
+    "25": {
+      "both_correct": 13,
+      "cnn_only": 6,
+      "both_wrong": 1
+    },
+    "29": {
+      "both_correct": 7,
+      "cnn_only": 2,
+      "both_wrong": 2
+    },
+    "30": {
+      "both_correct": 6,
+      "both_wrong": 2,
+      "cnn_only": 7
+    }
+  },
+  "note": "Retrospective source-development only; counts are not patient-independent; no threshold/ensemble weights fitted."
+}
