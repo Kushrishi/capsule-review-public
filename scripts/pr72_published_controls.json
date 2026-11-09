@@ -1,0 +1,19 @@
+{
+  "source": "https://github.com/Kushrishi/capsule-review-public/blob/100550448ddf4ac65c4b42d40504050b119029ed/experiments/short-event-foundation-20261109/aggregate.json",
+  "cohort": "expanded_balanced69",
+  "description": "Only published aggregate PR72 cells. No original image identities, annotations, model scores, or source membership.",
+  "cells": [
+    [23,17,"classification",23,12,10,5],[23,17,"ranking",23,14,10,4],
+    [23,29,"classification",23,14,10,7],[23,29,"ranking",23,13,10,5],
+    [23,43,"classification",23,11,10,3],[23,43,"ranking",23,11,10,4],
+    [25,17,"classification",20,17,6,6],[25,17,"ranking",20,14,6,4],
+    [25,29,"classification",20,12,6,3],[25,29,"ranking",20,17,6,5],
+    [25,43,"classification",20,12,6,3],[25,43,"ranking",20,16,6,4],
+    [29,17,"classification",11,7,2,0],[29,17,"ranking",11,8,2,1],
+    [29,29,"classification",11,5,2,0],[29,29,"ranking",11,8,2,2],
+    [29,43,"classification",11,7,2,1],[29,43,"ranking",11,9,2,1],
+    [30,17,"classification",15,13,3,3],[30,17,"ranking",15,14,3,3],
+    [30,29,"classification",15,10,3,2],[30,29,"ranking",15,14,3,3],
+    [30,43,"classification",15,11,3,2],[30,43,"ranking",15,8,3,0]
+  ]
+}
