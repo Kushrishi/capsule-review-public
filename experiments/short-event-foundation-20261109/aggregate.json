@@ -1,0 +1,1532 @@
+{
+  "cells": [
+    {
+      "cohort": "legacy32",
+      "exam": 23,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 23,
+        "correct": 9,
+        "ties": 0,
+        "ordering": 0.391304347826087,
+        "singletons": 10,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 28,
+        "correct": 28,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 5,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 23,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 23,
+        "correct": 11,
+        "ties": 0,
+        "ordering": 0.4782608695652174,
+        "singletons": 10,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 28,
+        "correct": 28,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 5,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 23,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 23,
+        "correct": 13,
+        "ties": 0,
+        "ordering": 0.5652173913043478,
+        "singletons": 10,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 28,
+        "correct": 28,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 5,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 23,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 23,
+        "correct": 10,
+        "ties": 0,
+        "ordering": 0.43478260869565216,
+        "singletons": 10,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 28,
+        "correct": 28,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 5,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 23,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 23,
+        "correct": 10,
+        "ties": 0,
+        "ordering": 0.43478260869565216,
+        "singletons": 10,
+        "singleton_ordering": 0.3
+      },
+      "training": {
+        "pairs": 28,
+        "correct": 28,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 5,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 23,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 23,
+        "correct": 13,
+        "ties": 0,
+        "ordering": 0.5652173913043478,
+        "singletons": 10,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 28,
+        "correct": 28,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 5,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 25,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 20,
+        "correct": 14,
+        "ties": 0,
+        "ordering": 0.7,
+        "singletons": 6,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 25,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 20,
+        "correct": 14,
+        "ties": 0,
+        "ordering": 0.7,
+        "singletons": 6,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 25,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 20,
+        "correct": 12,
+        "ties": 0,
+        "ordering": 0.6,
+        "singletons": 6,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 25,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 20,
+        "correct": 13,
+        "ties": 0,
+        "ordering": 0.65,
+        "singletons": 6,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 25,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 20,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 0.85,
+        "singletons": 6,
+        "singleton_ordering": 0.8333333333333334
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 25,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 20,
+        "correct": 13,
+        "ties": 0,
+        "ordering": 0.65,
+        "singletons": 6,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 29,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 11,
+        "correct": 7,
+        "ties": 0,
+        "ordering": 0.6363636363636364,
+        "singletons": 2,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 21,
+        "correct": 21,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 4,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 29,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 11,
+        "correct": 6,
+        "ties": 0,
+        "ordering": 0.5454545454545454,
+        "singletons": 2,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 21,
+        "correct": 21,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 4,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 29,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 11,
+        "correct": 8,
+        "ties": 0,
+        "ordering": 0.7272727272727273,
+        "singletons": 2,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 21,
+        "correct": 21,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 4,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 29,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 11,
+        "correct": 8,
+        "ties": 0,
+        "ordering": 0.7272727272727273,
+        "singletons": 2,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 21,
+        "correct": 21,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 4,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 29,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 11,
+        "correct": 7,
+        "ties": 0,
+        "ordering": 0.6363636363636364,
+        "singletons": 2,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 21,
+        "correct": 21,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 4,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 29,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 11,
+        "correct": 8,
+        "ties": 0,
+        "ordering": 0.7272727272727273,
+        "singletons": 2,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 21,
+        "correct": 21,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 4,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 30,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 15,
+        "correct": 10,
+        "ties": 0,
+        "ordering": 0.6666666666666666,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 17,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 30,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 15,
+        "correct": 10,
+        "ties": 0,
+        "ordering": 0.6666666666666666,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 17,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 30,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 15,
+        "correct": 12,
+        "ties": 0,
+        "ordering": 0.8,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 17,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 30,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 15,
+        "correct": 12,
+        "ties": 0,
+        "ordering": 0.8,
+        "singletons": 3,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 17,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 30,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 15,
+        "correct": 11,
+        "ties": 0,
+        "ordering": 0.7333333333333333,
+        "singletons": 3,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 17,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "legacy32",
+      "exam": 30,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 15,
+        "correct": 11,
+        "ties": 0,
+        "ordering": 0.7333333333333333,
+        "singletons": 3,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 17,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 23,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 23,
+        "correct": 12,
+        "ties": 0,
+        "ordering": 0.5217391304347826,
+        "singletons": 10,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 46,
+        "correct": 46,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 11,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 23,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 23,
+        "correct": 14,
+        "ties": 0,
+        "ordering": 0.6086956521739131,
+        "singletons": 10,
+        "singleton_ordering": 0.4
+      },
+      "training": {
+        "pairs": 46,
+        "correct": 46,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 11,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 23,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 23,
+        "correct": 14,
+        "ties": 0,
+        "ordering": 0.6086956521739131,
+        "singletons": 10,
+        "singleton_ordering": 0.7
+      },
+      "training": {
+        "pairs": 46,
+        "correct": 46,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 11,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 23,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 23,
+        "correct": 13,
+        "ties": 0,
+        "ordering": 0.5652173913043478,
+        "singletons": 10,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 46,
+        "correct": 46,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 11,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 23,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 23,
+        "correct": 11,
+        "ties": 0,
+        "ordering": 0.4782608695652174,
+        "singletons": 10,
+        "singleton_ordering": 0.3
+      },
+      "training": {
+        "pairs": 46,
+        "correct": 46,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 11,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 23,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 23,
+        "correct": 11,
+        "ties": 0,
+        "ordering": 0.4782608695652174,
+        "singletons": 10,
+        "singleton_ordering": 0.4
+      },
+      "training": {
+        "pairs": 46,
+        "correct": 46,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 11,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 25,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 20,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 0.85,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 49,
+        "correct": 48,
+        "ties": 0,
+        "ordering": 0.9795918367346939,
+        "singletons": 15,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 25,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 20,
+        "correct": 14,
+        "ties": 0,
+        "ordering": 0.7,
+        "singletons": 6,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 49,
+        "correct": 49,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 15,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 25,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 20,
+        "correct": 12,
+        "ties": 0,
+        "ordering": 0.6,
+        "singletons": 6,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 49,
+        "correct": 47,
+        "ties": 0,
+        "ordering": 0.9591836734693877,
+        "singletons": 15,
+        "singleton_ordering": 0.8666666666666667
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 25,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 20,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 0.85,
+        "singletons": 6,
+        "singleton_ordering": 0.8333333333333334
+      },
+      "training": {
+        "pairs": 49,
+        "correct": 49,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 15,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 25,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 20,
+        "correct": 12,
+        "ties": 0,
+        "ordering": 0.6,
+        "singletons": 6,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 49,
+        "correct": 48,
+        "ties": 0,
+        "ordering": 0.9795918367346939,
+        "singletons": 15,
+        "singleton_ordering": 0.9333333333333333
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 25,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 20,
+        "correct": 16,
+        "ties": 0,
+        "ordering": 0.8,
+        "singletons": 6,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 49,
+        "correct": 49,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 15,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 29,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 11,
+        "correct": 7,
+        "ties": 0,
+        "ordering": 0.6363636363636364,
+        "singletons": 2,
+        "singleton_ordering": 0.0
+      },
+      "training": {
+        "pairs": 58,
+        "correct": 57,
+        "ties": 0,
+        "ordering": 0.9827586206896551,
+        "singletons": 19,
+        "singleton_ordering": 0.9473684210526315
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 29,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 11,
+        "correct": 8,
+        "ties": 0,
+        "ordering": 0.7272727272727273,
+        "singletons": 2,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 58,
+        "correct": 57,
+        "ties": 0,
+        "ordering": 0.9827586206896551,
+        "singletons": 19,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 29,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 11,
+        "correct": 5,
+        "ties": 0,
+        "ordering": 0.45454545454545453,
+        "singletons": 2,
+        "singleton_ordering": 0.0
+      },
+      "training": {
+        "pairs": 58,
+        "correct": 55,
+        "ties": 0,
+        "ordering": 0.9482758620689655,
+        "singletons": 19,
+        "singleton_ordering": 0.9473684210526315
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 29,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 11,
+        "correct": 8,
+        "ties": 0,
+        "ordering": 0.7272727272727273,
+        "singletons": 2,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 58,
+        "correct": 58,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 19,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 29,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 11,
+        "correct": 7,
+        "ties": 0,
+        "ordering": 0.6363636363636364,
+        "singletons": 2,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 58,
+        "correct": 55,
+        "ties": 0,
+        "ordering": 0.9482758620689655,
+        "singletons": 19,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 29,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 11,
+        "correct": 9,
+        "ties": 0,
+        "ordering": 0.8181818181818182,
+        "singletons": 2,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 58,
+        "correct": 58,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 19,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 30,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 15,
+        "correct": 13,
+        "ties": 0,
+        "ordering": 0.8666666666666667,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 54,
+        "correct": 53,
+        "ties": 0,
+        "ordering": 0.9814814814814815,
+        "singletons": 18,
+        "singleton_ordering": 0.9444444444444444
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 30,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 15,
+        "correct": 14,
+        "ties": 0,
+        "ordering": 0.9333333333333333,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 54,
+        "correct": 54,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 18,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 30,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 15,
+        "correct": 10,
+        "ties": 0,
+        "ordering": 0.6666666666666666,
+        "singletons": 3,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 54,
+        "correct": 51,
+        "ties": 0,
+        "ordering": 0.9444444444444444,
+        "singletons": 18,
+        "singleton_ordering": 0.8888888888888888
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 30,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 15,
+        "correct": 14,
+        "ties": 0,
+        "ordering": 0.9333333333333333,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 54,
+        "correct": 54,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 18,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 30,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 15,
+        "correct": 11,
+        "ties": 0,
+        "ordering": 0.7333333333333333,
+        "singletons": 3,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 54,
+        "correct": 51,
+        "ties": 0,
+        "ordering": 0.9444444444444444,
+        "singletons": 18,
+        "singleton_ordering": 0.8333333333333334
+      }
+    },
+    {
+      "cohort": "expanded_balanced69",
+      "exam": 30,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 15,
+        "correct": 8,
+        "ties": 0,
+        "ordering": 0.5333333333333333,
+        "singletons": 3,
+        "singleton_ordering": 0.0
+      },
+      "training": {
+        "pairs": 54,
+        "correct": 54,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 18,
+        "singleton_ordering": 1.0
+      }
+    }
+  ],
+  "contrasts": {
+    "data_classification": {
+      "paired": [
+        {
+          "exam": 23,
+          "seed": 17,
+          "ordering_difference": 0.13043478260869562,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 23,
+          "seed": 29,
+          "ordering_difference": 0.0434782608695653,
+          "singleton_difference": 0.19999999999999996
+        },
+        {
+          "exam": 23,
+          "seed": 43,
+          "ordering_difference": 0.043478260869565244,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 25,
+          "seed": 17,
+          "ordering_difference": 0.15000000000000002,
+          "singleton_difference": 0.33333333333333337
+        },
+        {
+          "exam": 25,
+          "seed": 29,
+          "ordering_difference": 0.0,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 25,
+          "seed": 43,
+          "ordering_difference": -0.25,
+          "singleton_difference": -0.33333333333333337
+        },
+        {
+          "exam": 29,
+          "seed": 17,
+          "ordering_difference": 0.0,
+          "singleton_difference": -1.0
+        },
+        {
+          "exam": 29,
+          "seed": 29,
+          "ordering_difference": -0.27272727272727276,
+          "singleton_difference": -1.0
+        },
+        {
+          "exam": 29,
+          "seed": 43,
+          "ordering_difference": 0.0,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 30,
+          "seed": 17,
+          "ordering_difference": 0.20000000000000007,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 30,
+          "seed": 29,
+          "ordering_difference": -0.13333333333333341,
+          "singleton_difference": -0.33333333333333337
+        },
+        {
+          "exam": 30,
+          "seed": 43,
+          "ordering_difference": 0.0,
+          "singleton_difference": 0.0
+        }
+      ],
+      "mean_ordering_difference": -0.007389108476064994,
+      "seed_macro_differences": [
+        0.12010869565217393,
+        -0.09064558629776022,
+        -0.05163043478260869
+      ],
+      "seed_sd": 0.1121263263247291,
+      "per_exam_seed_mean_difference": {
+        "23": 0.07246376811594206,
+        "25": -0.033333333333333326,
+        "29": -0.09090909090909093,
+        "30": 0.022222222222222216
+      },
+      "singleton_macro_difference": -0.1777777777777778,
+      "consistency_passed": false,
+      "leave_one_exam_out_effect_range": [
+        -0.03400673400673401,
+        0.02045088566827698
+      ]
+    },
+    "data_local_ranking": {
+      "paired": [
+        {
+          "exam": 23,
+          "seed": 17,
+          "ordering_difference": 0.13043478260869568,
+          "singleton_difference": -0.09999999999999998
+        },
+        {
+          "exam": 23,
+          "seed": 29,
+          "ordering_difference": 0.13043478260869562,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 23,
+          "seed": 43,
+          "ordering_difference": -0.08695652173913038,
+          "singleton_difference": -0.09999999999999998
+        },
+        {
+          "exam": 25,
+          "seed": 17,
+          "ordering_difference": 0.0,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 25,
+          "seed": 29,
+          "ordering_difference": 0.19999999999999996,
+          "singleton_difference": 0.33333333333333337
+        },
+        {
+          "exam": 25,
+          "seed": 43,
+          "ordering_difference": 0.15000000000000002,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 29,
+          "seed": 17,
+          "ordering_difference": 0.18181818181818188,
+          "singleton_difference": -0.5
+        },
+        {
+          "exam": 29,
+          "seed": 29,
+          "ordering_difference": 0.0,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 29,
+          "seed": 43,
+          "ordering_difference": 0.09090909090909094,
+          "singleton_difference": -0.5
+        },
+        {
+          "exam": 30,
+          "seed": 17,
+          "ordering_difference": 0.2666666666666667,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 30,
+          "seed": 29,
+          "ordering_difference": 0.1333333333333333,
+          "singleton_difference": 0.33333333333333337
+        },
+        {
+          "exam": 30,
+          "seed": 43,
+          "ordering_difference": -0.19999999999999996,
+          "singleton_difference": -0.6666666666666666
+        }
+      ],
+      "mean_ordering_difference": 0.08305335968379447,
+      "seed_macro_differences": [
+        0.14472990777338607,
+        0.11594202898550722,
+        -0.011511857707509843
+      ],
+      "seed_sd": 0.08315119209292725,
+      "per_exam_seed_mean_difference": {
+        "23": 0.05797101449275364,
+        "25": 0.11666666666666665,
+        "29": 0.09090909090909094,
+        "30": 0.0666666666666667
+      },
+      "singleton_macro_difference": -0.09999999999999998,
+      "consistency_passed": false,
+      "leave_one_exam_out_effect_range": [
+        0.07184892402283709,
+        0.09141414141414143
+      ]
+    },
+    "ranking_legacy32": {
+      "paired": [
+        {
+          "exam": 23,
+          "seed": 17,
+          "ordering_difference": 0.08695652173913043,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 23,
+          "seed": 29,
+          "ordering_difference": -0.13043478260869562,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 23,
+          "seed": 43,
+          "ordering_difference": 0.13043478260869562,
+          "singleton_difference": 0.2
+        },
+        {
+          "exam": 25,
+          "seed": 17,
+          "ordering_difference": 0.0,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 25,
+          "seed": 29,
+          "ordering_difference": 0.050000000000000044,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 25,
+          "seed": 43,
+          "ordering_difference": -0.19999999999999996,
+          "singleton_difference": -0.16666666666666674
+        },
+        {
+          "exam": 29,
+          "seed": 17,
+          "ordering_difference": -0.09090909090909094,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 29,
+          "seed": 29,
+          "ordering_difference": 0.0,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 29,
+          "seed": 43,
+          "ordering_difference": 0.09090909090909094,
+          "singleton_difference": 0.5
+        },
+        {
+          "exam": 30,
+          "seed": 17,
+          "ordering_difference": 0.0,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 30,
+          "seed": 29,
+          "ordering_difference": 0.0,
+          "singleton_difference": -0.33333333333333337
+        },
+        {
+          "exam": 30,
+          "seed": 43,
+          "ordering_difference": 0.0,
+          "singleton_difference": 0.0
+        }
+      ],
+      "mean_ordering_difference": -0.00525362318840579,
+      "seed_macro_differences": [
+        -0.0009881422924901268,
+        -0.020108695652173894,
+        0.005335968379446651
+      ],
+      "seed_sd": 0.013247772543925156,
+      "per_exam_seed_mean_difference": {
+        "23": 0.028985507246376812,
+        "25": -0.04999999999999997,
+        "29": 0.0,
+        "30": 0.0
+      },
+      "singleton_macro_difference": 0.016666666666666653,
+      "consistency_passed": false,
+      "leave_one_exam_out_effect_range": [
+        -0.016666666666666656,
+        0.00966183574879227
+      ]
+    },
+    "ranking_expanded_balanced69": {
+      "paired": [
+        {
+          "exam": 23,
+          "seed": 17,
+          "ordering_difference": 0.08695652173913049,
+          "singleton_difference": -0.09999999999999998
+        },
+        {
+          "exam": 23,
+          "seed": 29,
+          "ordering_difference": -0.0434782608695653,
+          "singleton_difference": -0.19999999999999996
+        },
+        {
+          "exam": 23,
+          "seed": 43,
+          "ordering_difference": 0.0,
+          "singleton_difference": 0.10000000000000003
+        },
+        {
+          "exam": 25,
+          "seed": 17,
+          "ordering_difference": -0.15000000000000002,
+          "singleton_difference": -0.33333333333333337
+        },
+        {
+          "exam": 25,
+          "seed": 29,
+          "ordering_difference": 0.25,
+          "singleton_difference": 0.33333333333333337
+        },
+        {
+          "exam": 25,
+          "seed": 43,
+          "ordering_difference": 0.20000000000000007,
+          "singleton_difference": 0.16666666666666663
+        },
+        {
+          "exam": 29,
+          "seed": 17,
+          "ordering_difference": 0.09090909090909094,
+          "singleton_difference": 0.5
+        },
+        {
+          "exam": 29,
+          "seed": 29,
+          "ordering_difference": 0.27272727272727276,
+          "singleton_difference": 1.0
+        },
+        {
+          "exam": 29,
+          "seed": 43,
+          "ordering_difference": 0.18181818181818188,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 30,
+          "seed": 17,
+          "ordering_difference": 0.06666666666666665,
+          "singleton_difference": 0.0
+        },
+        {
+          "exam": 30,
+          "seed": 29,
+          "ordering_difference": 0.2666666666666667,
+          "singleton_difference": 0.33333333333333337
+        },
+        {
+          "exam": 30,
+          "seed": 43,
+          "ordering_difference": -0.19999999999999996,
+          "singleton_difference": -0.6666666666666666
+        }
+      ],
+      "mean_ordering_difference": 0.08518884497145368,
+      "seed_macro_differences": [
+        0.023633069828722014,
+        0.18647891963109353,
+        0.0454545454545455
+      ],
+      "seed_sd": 0.08839572171795795,
+      "per_exam_seed_mean_difference": {
+        "23": 0.014492753623188396,
+        "25": 0.10000000000000002,
+        "29": 0.18181818181818188,
+        "30": 0.044444444444444474
+      },
+      "singleton_macro_difference": 0.09444444444444448,
+      "consistency_passed": true,
+      "leave_one_exam_out_effect_range": [
+        0.0529790660225443,
+        0.10875420875420878
+      ]
+    }
+  },
+  "macro_ordering": {
+    "legacy32": {
+      "classification": 0.645108695652174,
+      "local_ranking": 0.6398550724637682
+    },
+    "expanded_balanced69": {
+      "classification": 0.6377195871761091,
+      "local_ranking": 0.7229084321475626
+    }
+  },
+  "distinct_heldout_runs": 69,
+  "supported_examinations": 4,
+  "patient_independence_verified": false,
+  "clinical_model_promoted": false,
+  "intervention": "joint increased run support and equal examination exposure;not a sample-count-only causal estimate",
+  "downstream_10pct_endpoint_unchanged": true,
+  "benchmark_eligibility": {
+    "classification": false,
+    "local_ranking": false
+  },
+  "data_audit": {
+    "retained_originals_before": 10144,
+    "retained_distinct_short_runs": 32,
+    "additional_retained_runs_without_publisher_transfer": 0,
+    "permitted_source_short_runs_with_boundary": 142,
+    "ancillary_reproduction_packages_checked": 24,
+    "new_original_images": 159,
+    "new_original_image_bytes": 46128770,
+    "new_distinct_runs": 38,
+    "new_singletons": 15,
+    "all_recoverable_distinct_runs": 70,
+    "all_recoverable_source_exam_counts": {
+      "21": 1,
+      "23": 23,
+      "25": 20,
+      "29": 11,
+      "30": 15
+    },
+    "complete_two_sided_context_runs": 43,
+    "new_boundary_edges_after": 113,
+    "meaningful_10_run_exams_before": 2,
+    "meaningful_10_run_exams_after": 4,
+    "publisher_bytes": 7014787752,
+    "publisher_cap": 7200000000,
+    "source_pieces_privately_readback_verified": 71,
+    "full_publisher_archive_retained": false
+  },
+  "source_options": {
+    "prior50_run_plan_minimal_originals": 35,
+    "prior50_run_plan_source_bytes": 18006872916,
+    "prior_plan_all_eligible_run_yield": 73,
+    "prior_plan_context_originals": 215,
+    "prior_plan_context_original_bytes": 72022062,
+    "prior_plan_complete_context_runs": 45,
+    "selected_option_all_run_yield": 70,
+    "selected_option_complete_context_runs": 43,
+    "selected_option_source_bytes": 7014787752,
+    "selected_option_source_saving_bytes": 10992085164,
+    "selected_option_adds_no_new_source_examination_ids": true
+  },
+  "margin_summary": {
+    "legacy32": {
+      "classification": {
+        "mean_heldout_logit_margin": 0.47827640442120595,
+        "mean_training_logit_margin": 5.506779712670802
+      },
+      "local_ranking": {
+        "mean_heldout_logit_margin": 0.6195972867369968,
+        "mean_training_logit_margin": 6.472174339065921
+      }
+    },
+    "expanded_balanced69": {
+      "classification": {
+        "mean_heldout_logit_margin": 0.7952354263233697,
+        "mean_training_logit_margin": 3.4129567375236975
+      },
+      "local_ranking": {
+        "mean_heldout_logit_margin": 1.076812904124624,
+        "mean_training_logit_margin": 5.114556789751787
+      }
+    }
+  },
+  "independent_verification": {
+    "metric_cells_independently_verified": 96,
+    "models_independently_reconstructed": 48,
+    "logit_values_verified": 13344,
+    "maximum_logit_difference": 0,
+    "paired_contrast_records_verified": 48,
+    "all_match": true
+  }
+}

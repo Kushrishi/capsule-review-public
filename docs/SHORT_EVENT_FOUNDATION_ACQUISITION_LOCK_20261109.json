@@ -1,0 +1,45 @@
+{
+  "base_commit": "bf0783d4dae60b3ad2f5def9d8884fde88d0fc66",
+  "private_contract_sha256": "ec907c0dae85594a27ea0053eb58cd3a0e0ba02a23da34e99d8b5d11ac4987ae",
+  "code_sha256": "be8a5de110f9f0c42bfb6895dbc294f50cddf8bb70f60f8c3658d2f2a1e98211",
+  "source_id": 45258019,
+  "blocks": [
+    {
+      "source": 45258019,
+      "block": 1,
+      "start": 3474498124,
+      "bytes": 3475743781,
+      "sha256": "b5086f018b7e88c57db7562af624c468796a7b1e812101d07236c184131b08f6"
+    },
+    {
+      "source": 45258019,
+      "block": 3,
+      "start": 10420312311,
+      "bytes": 3539043971,
+      "sha256": "bac9b407b67f3a50314c696a4639df68265fb398b1977a60ed61eb10648f79f5"
+    }
+  ],
+  "incremental_publisher_bytes": 7014787752,
+  "charged_cap": 7200000000,
+  "new_originals": 159,
+  "new_original_bytes": 46128770,
+  "retained_short_runs_before": 32,
+  "short_runs_after": 70,
+  "runs_by_exam": {
+    "21": 1,
+    "23": 23,
+    "25": 20,
+    "29": 11,
+    "30": 15
+  },
+  "complete_local_context_runs_after": 43,
+  "new_singleton_runs": 15,
+  "meaningful_10_run_folds_before": 2,
+  "meaningful_10_run_folds_after": 4,
+  "additional_recoverable_without_publisher_transfer": 0,
+  "no_exact_fitting_blocks_found_in_verified_retained_inventories": true,
+  "prior18GB_all_run_yield": 73,
+  "rights": "Galar v2, Le Floch et al., CC BY4.0;live catalogue verified",
+  "minimum_free_bytes": 36000000000,
+  "grouping": "examination-separated development only;patient linkage unverified"
+}
