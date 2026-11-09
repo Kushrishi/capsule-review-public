@@ -1,0 +1,847 @@
+{
+  "cells": [
+    {
+      "exam": 21,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 1,
+        "correct": 0,
+        "ties": 0,
+        "ordering": 0.0,
+        "singletons": 0,
+        "singleton_ordering": null
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 21,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 1,
+        "correct": 0,
+        "ties": 0,
+        "ordering": 0.0,
+        "singletons": 0,
+        "singleton_ordering": null
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 21,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 1,
+        "correct": 1,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 0,
+        "singleton_ordering": null
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 21,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 1,
+        "correct": 0,
+        "ties": 0,
+        "ordering": 0.0,
+        "singletons": 0,
+        "singleton_ordering": null
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 21,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 1,
+        "correct": 0,
+        "ties": 0,
+        "ordering": 0.0,
+        "singletons": 0,
+        "singleton_ordering": null
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 21,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 1,
+        "correct": 0,
+        "ties": 0,
+        "ordering": 0.0,
+        "singletons": 0,
+        "singleton_ordering": null
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 23,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 4,
+        "correct": 0,
+        "ties": 0,
+        "ordering": 0.0,
+        "singletons": 1,
+        "singleton_ordering": 0.0
+      },
+      "training": {
+        "pairs": 28,
+        "correct": 28,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 5,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 23,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 4,
+        "correct": 1,
+        "ties": 0,
+        "ordering": 0.25,
+        "singletons": 1,
+        "singleton_ordering": 0.0
+      },
+      "training": {
+        "pairs": 28,
+        "correct": 28,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 5,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 23,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 4,
+        "correct": 3,
+        "ties": 0,
+        "ordering": 0.75,
+        "singletons": 1,
+        "singleton_ordering": 0.0
+      },
+      "training": {
+        "pairs": 28,
+        "correct": 28,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 5,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 23,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 4,
+        "correct": 0,
+        "ties": 0,
+        "ordering": 0.0,
+        "singletons": 1,
+        "singleton_ordering": 0.0
+      },
+      "training": {
+        "pairs": 28,
+        "correct": 28,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 5,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 23,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 4,
+        "correct": 2,
+        "ties": 0,
+        "ordering": 0.5,
+        "singletons": 1,
+        "singleton_ordering": 0.0
+      },
+      "training": {
+        "pairs": 28,
+        "correct": 28,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 5,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 23,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 4,
+        "correct": 2,
+        "ties": 0,
+        "ordering": 0.5,
+        "singletons": 1,
+        "singleton_ordering": 0.0
+      },
+      "training": {
+        "pairs": 28,
+        "correct": 28,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 5,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 25,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 1,
+        "correct": 0,
+        "ties": 0,
+        "ordering": 0.0,
+        "singletons": 0,
+        "singleton_ordering": null
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 25,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 1,
+        "correct": 0,
+        "ties": 0,
+        "ordering": 0.0,
+        "singletons": 0,
+        "singleton_ordering": null
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 25,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 1,
+        "correct": 1,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 0,
+        "singleton_ordering": null
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 25,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 1,
+        "correct": 0,
+        "ties": 0,
+        "ordering": 0.0,
+        "singletons": 0,
+        "singleton_ordering": null
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 25,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 1,
+        "correct": 1,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 0,
+        "singleton_ordering": null
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 25,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 1,
+        "correct": 1,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 0,
+        "singleton_ordering": null
+      },
+      "training": {
+        "pairs": 31,
+        "correct": 31,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 6,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 29,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 11,
+        "correct": 7,
+        "ties": 0,
+        "ordering": 0.6363636363636364,
+        "singletons": 2,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 21,
+        "correct": 21,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 4,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 29,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 11,
+        "correct": 6,
+        "ties": 0,
+        "ordering": 0.5454545454545454,
+        "singletons": 2,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 21,
+        "correct": 21,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 4,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 29,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 11,
+        "correct": 8,
+        "ties": 0,
+        "ordering": 0.7272727272727273,
+        "singletons": 2,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 21,
+        "correct": 21,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 4,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 29,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 11,
+        "correct": 8,
+        "ties": 0,
+        "ordering": 0.7272727272727273,
+        "singletons": 2,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 21,
+        "correct": 21,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 4,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 29,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 11,
+        "correct": 7,
+        "ties": 0,
+        "ordering": 0.6363636363636364,
+        "singletons": 2,
+        "singleton_ordering": 0.5
+      },
+      "training": {
+        "pairs": 21,
+        "correct": 21,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 4,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 29,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 11,
+        "correct": 8,
+        "ties": 0,
+        "ordering": 0.7272727272727273,
+        "singletons": 2,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 21,
+        "correct": 21,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 4,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 30,
+      "seed": 17,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 15,
+        "correct": 10,
+        "ties": 0,
+        "ordering": 0.6666666666666666,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 17,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 30,
+      "seed": 17,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 15,
+        "correct": 10,
+        "ties": 0,
+        "ordering": 0.6666666666666666,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 17,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 30,
+      "seed": 29,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 15,
+        "correct": 12,
+        "ties": 0,
+        "ordering": 0.8,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      },
+      "training": {
+        "pairs": 17,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 30,
+      "seed": 29,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 15,
+        "correct": 12,
+        "ties": 0,
+        "ordering": 0.8,
+        "singletons": 3,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 17,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 30,
+      "seed": 43,
+      "arm": "classification",
+      "held_out": {
+        "pairs": 15,
+        "correct": 11,
+        "ties": 0,
+        "ordering": 0.7333333333333333,
+        "singletons": 3,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 17,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      }
+    },
+    {
+      "exam": 30,
+      "seed": 43,
+      "arm": "local_ranking",
+      "held_out": {
+        "pairs": 15,
+        "correct": 11,
+        "ties": 0,
+        "ordering": 0.7333333333333333,
+        "singletons": 3,
+        "singleton_ordering": 0.6666666666666666
+      },
+      "training": {
+        "pairs": 17,
+        "correct": 17,
+        "ties": 0,
+        "ordering": 1.0,
+        "singletons": 3,
+        "singleton_ordering": 1.0
+      }
+    }
+  ],
+  "paired": [
+    {
+      "exam": 21,
+      "seed": 17,
+      "ordering_difference": 0.0
+    },
+    {
+      "exam": 21,
+      "seed": 29,
+      "ordering_difference": -1.0
+    },
+    {
+      "exam": 21,
+      "seed": 43,
+      "ordering_difference": 0.0
+    },
+    {
+      "exam": 23,
+      "seed": 17,
+      "ordering_difference": 0.25
+    },
+    {
+      "exam": 23,
+      "seed": 29,
+      "ordering_difference": -0.75
+    },
+    {
+      "exam": 23,
+      "seed": 43,
+      "ordering_difference": 0.0
+    },
+    {
+      "exam": 25,
+      "seed": 17,
+      "ordering_difference": 0.0
+    },
+    {
+      "exam": 25,
+      "seed": 29,
+      "ordering_difference": -1.0
+    },
+    {
+      "exam": 25,
+      "seed": 43,
+      "ordering_difference": 0.0
+    },
+    {
+      "exam": 29,
+      "seed": 17,
+      "ordering_difference": -0.09090909090909094
+    },
+    {
+      "exam": 29,
+      "seed": 29,
+      "ordering_difference": 0.0
+    },
+    {
+      "exam": 29,
+      "seed": 43,
+      "ordering_difference": 0.09090909090909094
+    },
+    {
+      "exam": 30,
+      "seed": 17,
+      "ordering_difference": 0.0
+    },
+    {
+      "exam": 30,
+      "seed": 29,
+      "ordering_difference": 0.0
+    },
+    {
+      "exam": 30,
+      "seed": 43,
+      "ordering_difference": 0.0
+    }
+  ],
+  "per_exam": [
+    {
+      "exam": 21,
+      "mean_ordering_difference": -0.3333333333333333
+    },
+    {
+      "exam": 23,
+      "mean_ordering_difference": -0.16666666666666666
+    },
+    {
+      "exam": 25,
+      "mean_ordering_difference": -0.3333333333333333
+    },
+    {
+      "exam": 29,
+      "mean_ordering_difference": 0.0
+    },
+    {
+      "exam": 30,
+      "mean_ordering_difference": 0.0
+    }
+  ],
+  "primary_macro_ordering": {
+    "classification": 0.5633333333333334,
+    "local_ranking": 0.39666666666666667
+  },
+  "primary_mean_paired_difference": -0.16666666666666666,
+  "seed_macro_differences": [
+    0.031818181818181815,
+    -0.55,
+    0.018181818181818188
+  ],
+  "seed_difference_sd": 0.3320464138289091,
+  "higher_support_29_30_sensitivity": {
+    "classification": 0.7000000000000001,
+    "local_ranking": 0.7000000000000001
+  },
+  "leave_one_exam_out_effect_range": [
+    -0.20833333333333331,
+    -0.125
+  ],
+  "consistency_passed": false,
+  "promotion": false,
+  "unit": "five examinations;32 annotation runs;seeds are repeated algorithmic fits, not patients",
+  "patient_independence_verified": false,
+  "margin_summary": {
+    "classification": {
+      "repeated_seed_run_opportunities": 96,
+      "logit_margin_histogram": [
+        11,
+        14,
+        8,
+        11,
+        26,
+        26
+      ],
+      "macro_heldout_mean_logit_margin": 0.017955092545034305,
+      "macro_training_mean_logit_margin": 5.357163463381422
+    },
+    "local_ranking": {
+      "repeated_seed_run_opportunities": 96,
+      "logit_margin_histogram": [
+        10,
+        24,
+        3,
+        2,
+        20,
+        37
+      ],
+      "macro_heldout_mean_logit_margin": 0.03848833926285454,
+      "macro_training_mean_logit_margin": 6.332696309845464
+    },
+    "histogram_edges": [
+      "-infinity",
+      -1,
+      -0.25,
+      0,
+      0.25,
+      1,
+      "infinity"
+    ]
+  },
+  "private_low_support_margins_redacted": true,
+  "source_support": [
+    {
+      "held_out_exam": 21,
+      "pairs": 1,
+      "runs": 1,
+      "singletons": 0,
+      "unique_pair_images": 2,
+      "training_pairs": 31,
+      "training_core": 3820,
+      "training_core_positive": 238
+    },
+    {
+      "held_out_exam": 23,
+      "pairs": 4,
+      "runs": 4,
+      "singletons": 1,
+      "unique_pair_images": 8,
+      "training_pairs": 28,
+      "training_core": 3817,
+      "training_core_positive": 235
+    },
+    {
+      "held_out_exam": 25,
+      "pairs": 1,
+      "runs": 1,
+      "singletons": 0,
+      "unique_pair_images": 2,
+      "training_pairs": 31,
+      "training_core": 3807,
+      "training_core_positive": 225
+    },
+    {
+      "held_out_exam": 29,
+      "pairs": 11,
+      "runs": 11,
+      "singletons": 2,
+      "unique_pair_images": 22,
+      "training_pairs": 21,
+      "training_core": 3767,
+      "training_core_positive": 185
+    },
+    {
+      "held_out_exam": 30,
+      "pairs": 15,
+      "runs": 15,
+      "singletons": 3,
+      "unique_pair_images": 29,
+      "training_pairs": 17,
+      "training_core": 3767,
+      "training_core_positive": 185
+    }
+  ],
+  "frozen_public_commit": "837eb2cc407168dc4168ea8153b5b9ba60f0cc7e"
+}
