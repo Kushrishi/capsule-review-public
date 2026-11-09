@@ -1,7 +1,8 @@
 import sys
 from pathlib import Path
 import pytest
-import torch
+
+torch = pytest.importorskip('torch')
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 from exam_heldout_pair_transfer import fold_indices, shuffled_cycles
