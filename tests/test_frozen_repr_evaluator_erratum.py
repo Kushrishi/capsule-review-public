@@ -9,6 +9,7 @@ import pytest
 
 pytest.importorskip("numpy", reason="requires optional ML dependencies")
 pytest.importorskip("torch", reason="requires optional ML dependencies")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from frozen_representation_comparison import evaluate, sha_file
 
 
