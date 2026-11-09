@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "base_commit": "d7bcdc5d0473450312141ab18e865fdd4e9668fc",
+  "frozen_utc": "2026-11-09T16:17:54.071873+00:00",
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "exams": [
+    21,
+    23,
+    25,
+    29,
+    30
+  ],
+  "updates": 1024,
+  "ranking_weight": 0.5,
+  "manifest_sha256": "5b4d2d9e501445eeac4445093221640c038e31dd2fe37e4e78db9f2d56022d6c",
+  "bank_sha256": "ab80763638c4e13187c03e50203de2f1e0af3c50c932f75d09213ab50c340401",
+  "training_code_sha256": "61e1e92cc1b4ccf9f9f235fccb3907fcd565db92c11a2fb78b11f822fb39b10f",
+  "original_objective_code_sha256": "742d5cc83fdeafab0de9f3ae815f23b21044a27c87db738d232e66e94cfc17f9",
+  "architecture_code_sha256": "377241dd05adb15cfafb7ff8b480380d4c5289b7392be7a091adbf37b10f6501",
+  "evaluation_code_sha256": "ee9f0688c9d31f53e799b6ff78cef3b8a79666f15ecce962052c5fafc8eef438",
+  "independent_code_sha256": "376857a47b1a824a77ffba57cbca4112b429ff75015132e39a686875c46f8e56",
+  "design_sha256": "4e9d3d2356b6ddd8f37eae9eec07e0e26951b37eb19e20b1107c2d40021df554",
+  "source_check_sha256": "0d96463da84f0c8b76edac2b6dade6123a6f5a6aeabda2795630bef092d4ff86",
+  "similarity_check_sha256": "88bd80a0355a51f17f3b6370d5d6990208fc0bd5978c4606bfba369e92546ffb",
+  "folds": [
+    {
+      "held_out_exam": 21,
+      "pairs": 1,
+      "runs": 1,
+      "singletons": 0,
+      "unique_pair_images": 2,
+      "training_pairs": 31,
+      "training_core": 3820,
+      "training_core_positive": 238
+    },
+    {
+      "held_out_exam": 23,
+      "pairs": 4,
+      "runs": 4,
+      "singletons": 1,
+      "unique_pair_images": 8,
+      "training_pairs": 28,
+      "training_core": 3817,
+      "training_core_positive": 235
+    },
+    {
+      "held_out_exam": 25,
+      "pairs": 1,
+      "runs": 1,
+      "singletons": 0,
+      "unique_pair_images": 2,
+      "training_pairs": 31,
+      "training_core": 3807,
+      "training_core_positive": 225
+    },
+    {
+      "held_out_exam": 29,
+      "pairs": 11,
+      "runs": 11,
+      "singletons": 2,
+      "unique_pair_images": 22,
+      "training_pairs": 21,
+      "training_core": 3767,
+      "training_core_positive": 185
+    },
+    {
+      "held_out_exam": 30,
+      "pairs": 15,
+      "runs": 15,
+      "singletons": 3,
+      "unique_pair_images": 29,
+      "training_pairs": 17,
+      "training_core": 3767,
+      "training_core_positive": 185
+    }
+  ],
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "torch": "2.15.0+cpu",
+    "numpy": "2.3.5",
+    "pillow": "12.3.0"
+  },
+  "primary": "equal examination/seed held-out pair ordering contrast; ranking minus classification",
+  "patient_independence_verified": false,
+  "new_acquisition": false,
+  "historical_benchmark_used": false
+}
