@@ -1,113 +1,40 @@
-# Capsule Review — adaptive scientific and product roadmap
+# Capsule Review — active research plan
 
-**Decision date: November 9, 2026 UTC.** This is the **current plan**, not a preregistered clinical study, a promised schedule, or a substitute for the dated protocols in the research archive. Review it when a dependency changes or an experiment produces new evidence; preserve historical protocols/results.
+**10 November 2026 UTC.** This document is the current decision record, not a preregistered study or a chronology of every experiment. The complete retrospective history is preserved in dated reports under `docs/` and `experiments/`. The scientific question and primary negative result are summarized in [the research synthesis](RESEARCH_COLLABORATION_BRIEF.md).
 
-**Latest decision (after the frozen representation test):** [the completed ImageNet MobileNetV3-Small representation comparison](FROZEN_REPRESENTATION_SHORT_EVENT_RESULTS_20261109.md) recovered the exact pinned backbone, verified three historical canaries, generated the 180 missing embeddings and completed 24 fixed 69-run examination-held-out fits, but **failed every advancement gate**. Pair ordering was 50.94% classification and 49.08% ranking, below the matched compact CNN 63.77% and 72.29%; singleton recall also regressed. **No new model/policy promotion or full-source 10% test.** Preserve the immutable prefit lock and original training code in PR76, the private sealed prediction archive, and the evaluation-only erratum. The next investment is defensible independent patient/group qualification and assessment of genuinely domain-relevant features or data support. Do not tune the failed ImageNet frozen head or rerun seeds on these already-inspected examinations.
+## North star
 
-## Mission and definition of success
+Can a human-in-the-loop review policy preserve **more distinct expert-adjudicated capsule-endoscopy events** at an **equal, prespecified review-image budget**, without concealing omissions? Frame AUC, model classification, and saved-image count are diagnostics, not substitutes for distinct event retrieval or measured reader time.
 
-Build a **research-grade, auditable, human-in-the-loop capsule-endoscopy review system** that (a) helps prioritize meaningful evidence without hiding skipped frames, (b) preserves distinct expert-annotated events at a measurable review workload, and (c) generalizes to truly independent examinations and, ultimately, supports a properly designed human reader study.
+**Starting evidence:** the prespecified Galar 11–20 **10% primary** was negative (score-bin **49.35%** vs uniform **50.62%** across six positive-run examinations). Its **25% secondary** contrast was favorable but heterogeneous. No clinical model was promoted. Do not reinterpret examined 11–20 as untouched or open the authors' reserved 61–80 without a separate ethical, provenance and study decision.
 
-**Research north star:** higher *expert-adjudicated distinct-event retrieval under equal, prespecified review effort*, with transparent misses and patient/exam-level uncertainty. Frame/image ROC-AUC and recall@K are supporting diagnostics; a reduction in images selected is **not** measured clinician time savings. No clinical effectiveness claim until appropriate independent and reader evidence exists.
+## Stage A — make existing research independently understandable (current)
 
-**Current reality:** a working viewer and completed negative 10% Galar run-recall primary, plus mixed/negative development CNN and pretrained-representation tests. [Current evidence](PROJECT_STATUS.md) is the canonical human guide; `python scripts/project_status.py` checks the numerical record.
+- Present a readable README, one scientific synthesis, a concise status, stable run instructions and a small set of authoritative links. Avoid a growing lab notebook on the front page.
+- Keep all frozen protocols, source receipts, independent checks, unsuccessful results and their original dates unchanged. Preserve code/scripts required to replay them; use Git history and archival context for older mutable plans.
+- Separate *core application* from *historical research utilities* in navigation. Review legacy manual GitHub Actions and optional dependencies separately before retiring anything; do not delete workflows until their dependencies and data-access safeguards are verified.
+- Exit: an unaffiliated engineer can understand the software and negative evidence quickly and reproduce synthetic behavior without any private medical source data. Documentation and architecture cleanups must not weaken privacy gates or tests.
 
-## What the field has already demonstrated, and what we can borrow
+## Stage B — improve clinical interpretation evidence (next scientific dependency)
 
-| Comparable, primary source | Demonstrated approach | Appropriate Capsule Review adoption / difference |
-| --- | --- | --- |
-| [CapsuleAudit, MICCAI 2026](https://papers.miccai.org/miccai-2026/0188-Paper0867.html) | Endoscopy-pretrained CNN features + temporal transformer for anatomy and anomaly monitoring; reports ~90% anatomy macro F1 and ~67% binary anomaly macro recall on Galar | **Test a simple temporal baseline and, conditionally, an endoscopy-domain encoder** once dense eligible source sequences exist. Match tasks and splits before any numerical comparison; these are not our event-retrieval metrics |
-| [SEE-AI, 2026 multicentre reader study](https://pmc.ncbi.nlm.nih.gov/articles/PMC13177839/) | 249 examinations, six hospitals, crossover readers, lesion/patient sensitivity and actual reading time | **Design toward clinician-adjudicated event and time endpoints** later. Our local prototype, image-count budgets and run labels are not equivalent evidence |
-| [Kvasir-Capsule, Scientific Data 2021](https://www.nature.com/articles/s41597-021-00920-z) and [official splits](https://github.com/simula/kvasir-capsule/tree/master/official_splits) | 117 videos, 47,238 labelled images, many unlabelled frames; public reference splits and video-to-frame identities | **Reuse the idea of official source/group splits and explicit unknown labels**, not the assumption that unlabelled video frames are blood-negative. Candidate for temporal software engineering and a custodian inquiry, **not yet qualified for full-run replication** |
-| [Galar, Scientific Data 2025](https://www.nature.com/articles/s41597-025-05112-7) | 80 selected pathological examinations, 3,513,539 annotated frames, multiple capsule systems and anatomical/pathological labels | Preserve native source indexing, study/device heterogeneity, label provenance and independent patient grouping. Dataset selection is pathology-enriched; original authors' 61–80 remain closed |
-| [MONAI model bundle format](https://monai.readthedocs.io/en/1.6.1/bundle_intro.html) | Models tied to versioned architecture, preprocessing, inference/postprocessing and provenance metadata | Adopt **private model-card/experiment-contract metadata and hashes** without distributing our pathology weights or claiming MONAI compatibility |
-| [CLAIM 2024 update](https://pmc.ncbi.nlm.nih.gov/articles/PMC11304031/) and [TRIPOD+AI 2024](https://www.bmj.com/content/385/bmj-2023-078378) | Reporting guidance for source populations, reference standards, splits, metrics, caveats and external testing | Use them as an **audit checklist**, not as proof of clinical quality or a requirement to invent missing data |
+- The **11,147 original selected images / 16-examination** audit showed severe positive-event concentration. Source bytes are verified, but patient linkage, certain device IDs and complete original-video annotation coverage are not. [Group/source readiness](GALAR_GROUP_AND_FOLD_READINESS_20261105.md).
+- A [private, blinded 137-image, 69-boundary-pair pilot](BLINDED_SHORT_EVENT_CLINICAL_REVIEW_PILOT_20261110.md) is prepared. First confirm local browser usability, source rights and ethics/institutional permissions. With user authorization, seek two qualified capsule-endoscopy reviewers and blinded, independent classification of fresh blood, hematin, visual lookalikes, quality and need for temporal context. Keep unblinding information separate; expert disagreement requires adjudication.
+- Seek authenticated source/exam/patient grouping where practicable, but time-box metadata requests. If patient linkage cannot be established, use **examination-separated exploratory** language only and seek other qualified external material.
+- Exit: a validated label ontology and adjudication plan, with concrete group/rights evidence. **No synthetic review or retrospective label agreement can replace actual clinician input.**
 
-We are not copying code, weights, dataset licences or claims from these projects. Any external reuse requires independent licence/provenance review.
+## Stage C — one scientifically justified model/selection experiment (conditional)
 
-## Workstreams, gates and deliverables
+- Only start if Stage B identifies adequate original-image support and a new, defensible target and outcome protocol. **No repeat seed/architecture sweeps** on the same inspected 69 runs, no tuning against Galar 11–20 outcomes.
+- Compare deterministic uniform, original compact CNN, an appropriate simple non-ML baseline and *one* qualified, independently pretrained endoscopy-domain representation if licences, preprocessing, and no training-label overlap can be verified. CapsuleAudit anomaly weights trained on overlapping Galar studies are **not** an independent comparator on those cases.
+- Lock data identity, group separation, masks for `unknown` annotations, preprocessing, exact-*K* budgets, short/singleton run metrics, seeds and advancement/stopping gates **before** outcome inspection. Require event-preservation improvements, not AUC alone. Report per-case failures and abstentions.
+- Exit: a replicated improvement on qualified development data or an informative negative result; **neither implies clinical efficacy**.
 
-### Stage 0 — One comprehensible, verifiable starting point
+## Stage D — independent medical evidence (long-term)
 
-**Deliverables:** short README, canonical [status and technical map](PROJECT_STATUS.md), this roadmap, machine-derived public `project_status.py`, and an external-cohort structural gate with synthetic tests. Historical results stay immutable.
+- Obtain an external or separately adjudicated set with complete source chronology, relevant target-event coverage, permitted retention, patient/case grouping and a formal provenance lock. Published sparse label subsets cannot be treated as exhaustive negative frames. [External qualification requirements](EXTERNAL_COHORT_QUALIFICATION_20261104.md).
+- Prespecify the external 10% primary and 25% secondary workload comparison, report omission harm and confidence at the true independent group level, then consider a clinician-reader study measuring actual time and lesions/events missed. Independent expert review and any required ethics/data-use approval precede clinical interpretation.
+- Stop and publish negative evidence honestly if the target does not generalize. Never convert an image-budget percentage directly into a claim of physician time savings.
 
-**Exit:** new contributor can run synthetic demo, read the completed negative primary and identify the next scientific blocker without browsing dozens of dated documents. All CI and public-source privacy checks pass. This makes later scientific work easier; it is **not** itself an AI-performance milestone.
+## Decision discipline
 
-### Stage 1 — Qualify development material and eliminate split ambiguity (**next scientific priority**)
-
-**November 5 checkpoint:** byte verification is complete for all **11,147** retained selected originals. See [source audit](GALAR_DEVELOPMENT_SOURCE_AUDIT_20261105.md). The [November 5 group/fold feasibility follow-up](GALAR_GROUP_AND_FOLD_READINESS_20261105.md) found that **90.5% of uniform-reference positive images** occur in four source examinations, and only **8/16** selected source examinations have documented capsule system metadata. Source authors' published split script groups by **video**, not an authenticated patient ID. Build/train only under explicit **examination-separated exploratory** language until independent patient linkage is verified.
-
-The next gate is **NOT passed**: no verified independent patient grouping, no exhaustive visual-near-duplicate adjudication and no complete event-label coverage. The [second-stage coarse-collision triage](GALAR_VISUAL_SIMILARITY_TRIAGE_20261105.md) found no strict pixel-aligned close copies among 5,293 candidates, but this does not establish group independence. Use [the offline verified-source preflight](../scripts/check_development_cohort.py) when a new private manifest is available. This is a measurable step toward better AI, not an accuracy result.
-
-**Build:** one private, checked inventory of available fitting/development examinations and image/video identities; label coverage states *positive / negative / unknown*, patient/exam grouping where available, device/source domain, positive-run distribution, partial/truncated sequence flags, consent/licence, deduplication and retention. The already described **11,147-image 16-examination fitting inventory** is not automatically eligible for any proposed task: recheck source grouping and what is actually labeled. Keep source pixels and patient groups private.
-
-**Acceptance:** a fixed **development-only cohort manifest** plus an executable leakage/annotation preflight; failures and small positive-run support explicitly counted; training/selection/evaluation group identities checked. First choose independent-group units where defensible; if patient grouping is unverified, say examination-separated only.
-
-**If blocked:** stop new training comparisons and prioritize authoritative source metadata or adjudication. Do **not** relabel unknown as blood-negative to increase sample size.
-
-**November 5 source-leakage update:** a [broader cross-examination neighbour screen](GALAR_CROSS_EXAM_NEIGHBOR_AUDIT_20261105.md) found no strict close copies among 551 original-image-verified top embedding pairs, but verified patient linkage and additional independent positive examinations remain unavailable. This does **not** lift the Stage 1 independence gate.
-
-### Stage 2 — Build a *fair, hard-to-game* AI benchmark
-
-**November 5 development finding:** the [matched 16-exam class-weighting comparison](GALAR_EXAM_TEMPERED_CNN_RESULTS_20261105.md) trained eight real CNN checkpoints and found **no benefit on its predefined 10% mean examination-positive-image recall endpoint**. That eliminates a simple examination-tempered loss fix on the current, already inspected pool. Further training-exponent/epoch sweeps on the same cases would be posthoc; prioritize **new positive-examination diversity and authentic source/patient grouping** instead.
-
-
-**Build:** one standardized training/evaluation harness, with frozen task semantics, splits, source hashes, model identity, preprocessing, budgets, seeds, exact-K tie policy, and a model card/receipt per candidate. No repeated tuning against the already inspected Galar 11–20 or original authors' 61–80.
-
-**Minimum comparison:** uniform / existing original CNN / a simple transparent colour or linear baseline / an endoscopy-relevant pretrained encoder **only if rights and input compatibility are established**. A compact temporal smoothing or 1-D sequence model is warranted **only on verified consecutive sequences**; sparse 512-frame references must not masquerade as dense temporal videos. Use a simple temporal baseline before a transformer. No automatic increase in architectures just because a prior model failed.
-
-**Metrics and gate:** report **per examination**, not just pooled: ROC-AUC, average precision, positive-image hits at prespecified 5%/10%/25% image budgets, distinct annotated-run recall **only where exhaustive event truth actually exists**, longest skipped source-position span and uncertainty conditioned on real independent groups. Note zero-positive and missing-label cases separately. A model whose AUC rises but AP or early retrieval collapses is **not automatically better**. Freeze the candidate choice using development folds before external outcome access.
-
-**If blocked or mixed:** run error-taxonomy/shortcut analysis (colour, device, anatomy, long versus short events, domain shift) on *training/development* data, or improve labels/group diversity. Do **not** promote the best of many retries as independent evidence.
-
-### Stage 3 — Improve evidence-aware selection and review ergonomics
-
-**Build:** use uncertainty/context and temporally aware candidate scores when supported by data; compare against fixed-K uniform and the four historical policies. Keep the fifth gap-guarded candidate **experimental** until real benefit is measured. Surface source-coverage warnings, original frame identity, missing/unknown regions, selected-run rationale and the ability to inspect all omitted frames. Preserve human notes separate from suggestions; never auto-label or hide omitted images.
-
-**Engineering gate:** exact-K, deterministic replay, no label leakage, safe receipt/export verification, complete browser/API synthetic tests, credible performance with longer source sequences. **Scientific gate:** no event-level claim from ordinal gaps or sparse image references.
-
-### Stage 4 — Independently qualify and lock an external study
-
-**Dependency:** written permission, demonstrably independent source/grouping, complete chronological frame identities, **exhaustive clinically meaningful target-event annotations or adjudicated event boundaries**, ontology mapping, native event-run definition, enough positive-group support, durable private originals and audit receipts.
-
-Run the local metadata-only `python scripts/check_cohort_gate.py /private/worksheet.json`. It **blocks** absent evidence; even all ten structural gates returning pass means **human review required**, not data rights or study approval. Then finalize a separately dated, independently timestamped study protocol and power/precision plan **before outcome access**. Use the existing [dataset screen](EXTERNAL_COHORT_QUALIFICATION_20261104.md) and [conditional draft](EXTERNAL_REPLICATION_DESIGN_DRAFT_20261104.md), not a new unreviewed 10% post-hoc benchmark.
-
-**If Kvasir remains sparsely labelled:** use its video sequences only for permitted engineering/pretraining tasks; request full annotation coverage, fund a feasible blinded annotation study or select a different source. Do not call the sparse subset exhaustive.
-
-### Stage 5 — Clinical collaboration and reader-centric testing (**long-term, contingent**)
-
-With appropriately approved data and expert participation: define real lesion/event reference standards, reader randomization/crossover design, expected patient/case distribution, omissions, sensitivity, inter-reader variation, actual reading time and adverse missed findings. Investigate whether AI adds value to the clinician's real workflow, not just an image-ranking metric.
-
-**If the external primary fails:** publish the negative result and reframe the scientific conclusion; the auditable viewer and methodology remain valuable. **If it succeeds:** replicate across device/site subgroups, measure uncertainty and perform a prospective reader study before any clinical claim. Neither outcome authorizes unattended diagnostic deployment.
-
-## Rules for selecting the next task
-
-Choose work in this order: **(1) validity blocker, (2) measurable AI or evidence-preservation gain, (3) reviewer usability/security, (4) packaging/documentation.** Every substantial PR must state its hypothesis, acceptance/failure criteria, verified source scope, protected-data boundary and what changed versus the current baseline.
-
-| New information | Change in plan |
-| --- | --- |
-| No group independence or exhaustive labels | **No-go** for external event-coverage test; qualify/adjudicate first |
-| Model improves AUC but loses AP or retrieval | **Do not promote**; run fixed error analysis and examine the training objective |
-| Strong model on one exam but collapses on others | Prioritize domain shift, data diversity, group-level robustness, not another favorable average |
-| Complete eligible sequences become available | Trial a simple temporal baseline, then compare a temporal encoder fairly |
-| Only sparse video frames available | Work on software, self-supervised features or *explicit sparse-label tasks*, not full-event recall |
-| Clinical reviewer collaboration becomes possible | Prioritize reference-standard/reader-protocol design over additional model experiments |
-| Original raw data/receipts cannot be retained | Treat the proposed evaluation as **blocked**, even if compute is available |
-
-## Research quality and repository controls
-
-All future studies should carry a privately retained immutable **experiment contract**: question, reference-standard definition, rights and data version, grouping/splits, preprocessing and model weight SHA, frozen code commit, candidate list, tuning boundary, exact-K rules, handling of missing outcomes, endpoints and uncertainty, irreversible-outcome access log, full source/checkpoint/selection/score receipts, and independent replay. Publish non-identifying aggregates and negative findings only.
-
-Keep `main` stable via required tests/privacy checks and reviewed changes. Before an ordinary open-source release, decide code ownership, a software licence and third-party weight/dataset licences. Do not weaken localhost-only security or host private patient data. Follow [AGENTS.md](../AGENTS.md) for technical/privacy boundaries.
-
-**Single next execution priority (updated November9):** resolve the bounded source cost for more balanced genuine short-run pairs, then freeze a matched support-expansion experiment. The local objective and held-out transfer tests are complete; do not repeat them or select a favourable seed. No outreach is authorized.
-
-## November6 mechanistic checkpoint
-
-[Geometry-matched frozen-score controls](SCORE_GEOMETRY_RESULTS_20261106.md)
-show local score value on Galar35/36 beyond one-per-bin coverage. This narrows
-the failure hypothesis: useful local ranking coexists with poor global transfer
-and missed short runs. Preserve that signal; prioritize qualified source/domain
-diversity and a broader fixed benchmark before a new fit or selector sweep.
-The same report screens all31–40 sources and costs a bounded34–37 extension;
-no new examination acquisition was justified or performed in that experiment.
+A new PR or experimental run must either (i) remove a documented reproducibility/security defect, (ii) unlock a verified data or clinical-reference-standard gate, or (iii) deliver a prespecified, interpretable performance result. Do not equate PR count, generated files, model fits, extra archives or synthetic test count with scientific progress. The codebase is a **research workbench**, not a clinical decision-support device.
