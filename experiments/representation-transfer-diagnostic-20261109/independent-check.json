@@ -1,0 +1,33 @@
+{
+  "distinct_short_runs": 69,
+  "new_training_or_evaluation": false,
+  "replayed_model_pair_cells": 48,
+  "results": {
+    "cnn_classification": {
+      "all_seeds_wrong": 9,
+      "heldout_pct": 63.28502415458937,
+      "macro_pct": 63.771958717610886,
+      "training_pct": 97.10144927536231
+    },
+    "cnn_ranking": {
+      "all_seeds_wrong": 6,
+      "heldout_pct": 70.53140096618357,
+      "macro_pct": 72.29084321475626,
+      "training_pct": 99.8389694041868
+    },
+    "mobilenet_classification": {
+      "all_seeds_wrong": 29,
+      "heldout_pct": 50.72463768115942,
+      "macro_pct": 50.94038208168643,
+      "training_pct": 100.0
+    },
+    "mobilenet_ranking": {
+      "all_seeds_wrong": 31,
+      "heldout_pct": 49.75845410628019,
+      "macro_pct": 49.08432147562583,
+      "training_pct": 100.0
+    }
+  },
+  "source_level_rows_written": false,
+  "verified": true
+}
