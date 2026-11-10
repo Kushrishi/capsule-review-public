@@ -1,6 +1,6 @@
 # Capsule Review — frozen-representation transfer and persistent-error diagnostic
 
-**Date:** November 9, 2026 UTC  
+**Date:** November 9, 2026 in Montréal (November 10, 2026 UTC)  
 **Status:** Complete, retrospective development-only analysis. **No new training, source acquisition, protected evaluation, parameter search or model promotion.**  
 **Parent evidence:** [PR #77 frozen-representation study](FROZEN_REPRESENTATION_SHORT_EVENT_RESULTS_20261109.md) and the already-sealed PR #72 expanded balanced-support CNN predictions.
 
