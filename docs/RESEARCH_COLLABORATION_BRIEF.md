@@ -1,44 +1,63 @@
-# Capsule Review | research collaboration brief
+# Capsule Review — scientific synthesis
 
-**Last reviewed: November 4, 2026.** Public research software and documented retrospective results; not a medical device or clinically validated AI system.
+**Retrospective research status, 10 November 2026 UTC.** This is an evidence summary, not a submitted manuscript, a clinical validation or a request for access to patient data. All numbers below refer to the linked, existing reports; the source data and model weights remain private.
 
-## Research question
+## Question and motivation
 
-Can AI-guided selection preserve more **distinct, clinically relevant annotated evidence intervals** than simple chronological sampling at the **same image-review workload**, while keeping omissions transparent and original evidence auditable?
+Video capsule endoscopy produces long image sequences. A review system that prioritizes the frames with the highest anomaly scores may concentrate its selections on a long, conspicuous finding while missing several brief abnormalities. Such a system could retrieve many blood-positive *images* without reaching many distinct positive *episodes*.
 
-The distinction matters: a model can retrieve many adjacent frames from one positive region while missing other positive regions entirely. Frame-level enrichment therefore does not by itself establish evidence diversity, lesion sensitivity or shorter physician reading time.
+We ask: **At the same number of frames reviewed within each examination, can AI-assisted selection cover a greater fraction of distinct blood-positive source-annotation runs than deterministic, outcome-blind chronological sampling?** A follow-on clinical question is whether this matters for expertly adjudicated lesions and clinician workflow; that question has not yet been studied.
 
-## Tangible research product
+The contribution being explored is a reproducible **evidence-retention and omission evaluation**, not a claim to have invented capsule-endoscopy classification. Temporal endoscopy modeling and AI-assisted reading have established prior art; substantive novelty remains to be demonstrated against appropriate task-matched methods.
 
-**[Capsule Review](https://github.com/Kushrishi/capsule-review-public)** is a localhost-only FastAPI/JavaScript research viewer with Python research utilities. It supports chronological image import, source-identity checks, human bookmarks/notes/interval marks, read-only score import, model-assisted navigation, and evidence receipts/ZIP export. Four deterministic **exact-K** selection policies can be compared at equal image counts: highest model score, score with ordinal separation, highest score in each chronological bin and uniform selection. The reviewer can inspect the longest omitted *imported-position* spans.
+## What was built
 
-**[Reproducible five-minute demonstration](SUPERVISOR_DEMO.md):** 24 clearly marked generated, nonmedical frames and a deterministic **non-AI** example-score stream; no medical image archives, trained checkpoint or GPU required. An independent [public results explorer](../src/capsule_review/static/locked-results.html) displays already completed aggregate outcomes. The synthetic demo is not a replay of the actual CNN.
+A local FastAPI/JavaScript research viewer imports and hashes images, preserves original ordering, supports human annotations and bookmarks, imports separately identified model scores, compares fixed-size review queues, inspects omitted spans and exports verifiable evidence. The viewer does not auto-create findings or conceal unselected images. A 24-frame generated demonstration is useful for software testing, but its scores are **not trained-model predictions**. [Reproduction guide](SUPERVISOR_DEMO.md); [core source](../src/capsule_review/app.py).
 
-## Completed scientific evidence
+The private research pipeline additionally trains models, verifies original-image identities and evaluation manifests, seals predicted scores before outcomes where specified, and independently replays key numerical analyses. Medical pixels, frame labels, patient records and weights are not shipped publicly.
 
-| Study stage | What was measured | Finding |
+## The principal locked experiment
+
+**Population and endpoint.** The [original Galar 11–20 evaluation](GALAR_UNSEEN_11_20_RESULTS.md) used **163,161 source-verified original images in ten examinations**. Six had at least one `blood=1` annotation run and four had none, for which positive-run recall is **undefined**. There were **1,742 blood-positive annotated images** and **154 contiguous positive source-annotation runs** at the dataset's native annotation stride. A run is a contiguous reference-label segment, *not* a separately adjudicated lesion or independent patient event.
+
+**Design.** The original compact blood CNN and four deterministic review policies were fixed before the corrected evaluation outcomes were inspected; pre-outcome commitments, examination eligibility amendment A1, original-source verification, and independent numerical replay are documented. The prespecified primary compared **score per chronological bin** with **uniform midpoint sampling**, selecting the same exact *K* positions at **10% of each examination's annotated images**. The paired mean used the **six examinations with positive runs**, not the pooled run count. The full record preserves 5%, 25%, 50% and 100% budgets and competing policies, but only the original locked endpoints carry their original status.
+
+**Primary result:** mean positive-run recall **49.35% score-bin vs 50.62% uniform**, paired difference **−1.2668765 percentage points**, with two positive, two negative and two tied examination-level contrasts. **The prespecified primary improvement was not demonstrated.** At the prespecified **25% secondary** workload the paired difference was **+9.5106442 percentage points**, with substantial examination heterogeneity. This is not confirmatory evidence of benefit.
+
+A mechanistically revealing secondary comparison is that **highest-score ranking at 10%** retrieved **305 blood-positive annotated images but only 28/154 positive runs**. Uniform selection retrieved **170 positive images across 63/154 runs**. The image-score signal enriched positive frames while clustering selections into relatively few positive episodes. Pooled run counts should not replace the prespecified equal-examination primary estimate. [Locked methods, per-exam results and reproducibility caveats](GALAR_UNSEEN_11_20_RESULTS.md).
+
+## Why later development did not rescue the result
+
+The team then tested broader fitting support, different local-ranking losses, source-examination-held-out comparisons, ensembles and a frozen ImageNet MobileNetV3-Small representation using **already inspected development examinations**. Positive pair-ordering results are not a new event-preservation endpoint. The relevant consolidated findings are:
+
+| Development analysis | Observed result | Inference limit |
 | --- | --- | --- |
-| Exploratory image ranking | Original compact blood CNN trained on sparse Galar fitting frames; historical development ranking | Pooled ROC-AUC **0.7262**, but the 239 positive fitting frames were concentrated in one examination (208/239). No independent generalization claim |
-| Transfer and fitting-only cross-validation | Fixed source-examination separations, different recipes and verified provenance | Very heterogeneous rankings; some source examinations failed badly. No candidate promoted |
-| **Locked Galar 11–20 evaluation, November 4** | **163,161** eligible original images across ten examinations, unchanged original CNN and four fixed policies, outcomes opened only after pre-outcome commitments | At the **prespecified 10% primary** workload, examination-weighted mean positive-annotation-run recall was **49.35% score-bin** versus **50.62% uniform**, paired difference **−1.2668765 percentage points** across six positive-run examinations. **No improvement demonstrated** |
-| Prespecified 25% secondary analysis | Same policy comparison at higher workload | Score-bin minus uniform **+9.5106442 percentage points**, heterogeneous and substantially influenced by examination 15; does **not** supersede the negative primary |
+| [Matched training diversity](MATCHED_DIVERSITY_ABLATION_RESULTS_20261107.md) | No mean 10%-workload run-recall improvement in the fixed paired six-model comparison | Previously inspected data; neither independent external replication nor clinician endpoint |
+| [Local short-run support](SHORT_EVENT_FOUNDATION_RESULTS_20261109.md) | 69 valid positive–negative native-source boundary pairs across four examinations, 21 singleton runs | Pair ordering is a diagnostic task, not whole-examination run recall |
+| [Compact CNN versus frozen MobileNet](FROZEN_REPRESENTATION_SHORT_EVENT_RESULTS_20261109.md) | Examination-held-out ranking: **72.29% compact CNN** versus **49.08% frozen MobileNet** on the matched 69-pair protocol | Different image preprocessing, capacities and training conditions; architecture is not isolated causally |
+| [Error persistence](REPRESENTATION_TRANSFER_ERROR_PERSISTENCE_20261109.md) | Frozen MobileNet heads correctly ordered **100%** of their in-sample training pairs but transferred near chance; 31/69 ranking pairs missed by all three seeds | Strong sign of poor transfer on this small development population, not an identified device or patient cause |
 
-At the 10% workload, highest-score selection retrieved **305 positive annotated frames** but only **28 of 154** distinct positive annotation runs; uniform retrieved **170 frames** across **63 runs**. The key observation is the divergence between image retrieval and source-annotation-run coverage. A positive *annotation run* is not necessarily an independent pathology/lesion. Four of ten examinations contained no positive annotation run and had **undefined** positive-run recall.
+The 11,147-image [selected-source audit](GALAR_DEVELOPMENT_SOURCE_AUDIT_20261105.md) across 16 examinations found that positive examples are concentrated in a few source examinations. Later original-image checks verified selected image dimensions, not exact capsule devices or patient identity. Consequently, another same-cohort parameter sweep would have weak inferential value.
 
-These results have source provenance, a frozen model/policy selection, an externally timestamped pre-outcome commitment, public nonidentifying aggregates and independent numerical reconciliation. The full original-image archive is **not durably retained**; the private handoff records verified retained prediction/checkpoint artifacts but missing original post-outcome execution receipts. [Read the locked results](GALAR_UNSEEN_11_20_RESULTS.md) and [project maturity audit](PROJECT_MATURITY_AUDIT_20261104.md).
+## Source, ethical and clinical limits
 
-## Research limitations and contribution
+- **Grouping:** dataset examination IDs are not authenticated unique patients. Device/site metadata and repeat-patient linkage are incomplete. Neither source-file hashes nor visual-similarity screens establish patient independence. [Grouping audit](GALAR_GROUP_AND_FOLD_READINESS_20261105.md).
+- **Reference standard:** a `blood=1` label is not a clinical diagnosis, active bleeding, or a unique lesion. Sparse uniformly selected frames are not complete original-video event ground truth. Unknown/absent labels must never be relabeled negative.
+- **Externality:** 11–20 is now evaluated and cannot be called untouched; the Galar authors' reserved **61–80** outcomes remain unopened. The available [external dataset screen](EXTERNAL_COHORT_QUALIFICATION_20261104.md) has not qualified a complete, patient-independent blood-run benchmark.
+- **Clinical applicability:** there are no prospective readers, measured physician minutes, lesion-level sensitivity, or clinical safety study. No pathology model is promoted, distributed or approved for clinical use.
+- **Privacy and rights:** real Galar input images and predictions are private. The repository has no explicit software licence. Public results do not authorize transfer of clinical materials or bypass institutional/data-use requirements.
 
-The method is transparent and falsifiable, **not demonstrated to outperform uniform sampling at its primary endpoint**. Patient independence, complete lesion adjudication, external generalization, calibrated probabilities, clinician reading-time effects and clinical safety are unverified. Labels, images, per-frame predictions and model weights are private; public software ships **no trained pathology model**.
+## Most defensible next evidence step
 
-A defensible contribution is an auditable **evaluation framework for evidence-interval preservation and omission** rather than a claim to have invented AI capsule-endoscopy diagnosis. The question of comparative novelty remains open pending methodologically aligned prior-art benchmarks.
+A [blinded original-image interpretation pilot](BLINDED_SHORT_EVENT_CLINICAL_REVIEW_PILOT_20261110.md) has been prepared for **137 images covering all 69 already-inspected boundary comparisons**, with an escrowed source identity and original-label key. It is selected by native-source eligibility rather than model misses. **No expert has reviewed it, and the packet has not been distributed.** Independent qualified reviewers and a clinician-led arbitration protocol would help distinguish visible fresh blood, hematin, lookalikes, image quality and genuine temporal ambiguity, subject to authorization and ethics/data-use review. This would improve *development label interpretation*, not independently validate a model.
 
-## One priority for future collaboration
+Only after defensible ground-truth semantics, provenance and cohort separation are established should we prespecify one task-aligned model comparison and then seek external evaluation. A successful result must improve **distinct event preservation at fixed workload**, including singleton omissions—not merely image AUC or a favorable retrospective example. A negative result remains publishable only if the design, data and analysis justify the scientific contribution; publication readiness is not yet established.
 
-An independently sourced, sufficiently sized capsule-endoscopy cohort with **complete chronological images and exhaustive expert-reviewed blood-positive event coverage**, patient/examination grouping and permission for private research processing is required before an unchanged-model external replication. Predefine the native source run unit, annotation ontology, 10% primary/25% secondary endpoints, durable storage and provenance **before** any outcome access.
+## Reproduction and evidence trail
 
-The currently [qualified-dataset screen](EXTERNAL_COHORT_QUALIFICATION_20261104.md) identifies Kvasir-Capsule as a candidate to **ask about**, not a confirmed valid replication corpus; its published labels cover selected segments. No new experiment has been launched and the Galar authors' reserved 61–80 outcomes remain unopened.
+- [Current decision and limitations](PROJECT_STATUS.md) · [active research plan](ROADMAP.md)
+- [Frozen 11–20 contract](GALAR_UNSEEN_11_20_EVALUATION_LOCK.json) · [complete primary report](GALAR_UNSEEN_11_20_RESULTS.md) · [public aggregate](../experiments/galar-unseen-11-20-20261104/aggregate.json)
+- [Later controlled representation result](FROZEN_REPRESENTATION_SHORT_EVENT_RESULTS_20261109.md) · [independent replay](REPRESENTATION_TRANSFER_ERROR_PERSISTENCE_20261109.md)
+- [Public source tests](../tests/test_priority.py) · [verification guide](VERIFICATION.md) · [`scripts/project_status.py`](../scripts/project_status.py)
 
-**Useful entry points:** [Demonstration](SUPERVISOR_DEMO.md) · [Complete locked report](GALAR_UNSEEN_11_20_RESULTS.md) · [Scientific maturity assessment](PROJECT_MATURITY_AUDIT_20261104.md) · [Source code](https://github.com/Kushrishi/capsule-review-public).
-
-*Public availability is not an open-source software licence: the repository currently has no software licence. No medical records, sensitive images, individual predictions or source annotations are included in this brief.*
+This synthesis is a map to the original, immutable experimental reports, not an invitation to modify historical outcomes or merge incompatible evaluation populations.
