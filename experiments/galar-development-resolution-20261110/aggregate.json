@@ -1,0 +1,164 @@
+{
+  "audit": "Galar selected-development original PNG IHDR dimension check",
+  "collection_site_authenticated_for_these_eight": false,
+  "date_utc": "2026-11-10",
+  "decision": "SOURCE_RESOLUTION_PASS__PATIENT_DEVICE_SITE_GROUP_GATE_UNRESOLVED",
+  "every_selected_image_identity_reconciled": true,
+  "exact_device_system_authenticated_for_these_eight": false,
+  "native_header_crc_verified": true,
+  "original_png_header_count": 7051,
+  "patient_group_id_authenticated_for_these_eight": false,
+  "per_exam": [
+    {
+      "exam": 21,
+      "native_dimensions": [
+        {
+          "count": 993,
+          "height": 512,
+          "width": 512
+        }
+      ],
+      "png_encodings": [
+        {
+          "bit_depth": 8,
+          "color_type": 2,
+          "count": 993
+        }
+      ],
+      "selected_image_count": 993
+    },
+    {
+      "exam": 22,
+      "native_dimensions": [
+        {
+          "count": 512,
+          "height": 512,
+          "width": 512
+        }
+      ],
+      "png_encodings": [
+        {
+          "bit_depth": 8,
+          "color_type": 2,
+          "count": 512
+        }
+      ],
+      "selected_image_count": 512
+    },
+    {
+      "exam": 23,
+      "native_dimensions": [
+        {
+          "count": 1001,
+          "height": 512,
+          "width": 512
+        }
+      ],
+      "png_encodings": [
+        {
+          "bit_depth": 8,
+          "color_type": 2,
+          "count": 1001
+        }
+      ],
+      "selected_image_count": 1001
+    },
+    {
+      "exam": 24,
+      "native_dimensions": [
+        {
+          "count": 512,
+          "height": 512,
+          "width": 512
+        }
+      ],
+      "png_encodings": [
+        {
+          "bit_depth": 8,
+          "color_type": 2,
+          "count": 512
+        }
+      ],
+      "selected_image_count": 512
+    },
+    {
+      "exam": 25,
+      "native_dimensions": [
+        {
+          "count": 1013,
+          "height": 512,
+          "width": 512
+        }
+      ],
+      "png_encodings": [
+        {
+          "bit_depth": 8,
+          "color_type": 2,
+          "count": 1013
+        }
+      ],
+      "selected_image_count": 1013
+    },
+    {
+      "exam": 27,
+      "native_dimensions": [
+        {
+          "count": 1005,
+          "height": 512,
+          "width": 512
+        }
+      ],
+      "png_encodings": [
+        {
+          "bit_depth": 8,
+          "color_type": 2,
+          "count": 1005
+        }
+      ],
+      "selected_image_count": 1005
+    },
+    {
+      "exam": 29,
+      "native_dimensions": [
+        {
+          "count": 1009,
+          "height": 512,
+          "width": 512
+        }
+      ],
+      "png_encodings": [
+        {
+          "bit_depth": 8,
+          "color_type": 2,
+          "count": 1009
+        }
+      ],
+      "selected_image_count": 1009
+    },
+    {
+      "exam": 30,
+      "native_dimensions": [
+        {
+          "count": 1006,
+          "height": 512,
+          "width": 512
+        }
+      ],
+      "png_encodings": [
+        {
+          "bit_depth": 8,
+          "color_type": 2,
+          "count": 1006
+        }
+      ],
+      "selected_image_count": 1006
+    }
+  ],
+  "pinned_private_archive_hashes_match": true,
+  "pinned_private_original_source_archive_count": 7,
+  "png_headers_only_not_full_image_redecode_this_audit": true,
+  "privacy": "aggregate-only; no per-image source ID, pixel, label, individual score or patient attribute",
+  "qualified_new_patient_independent_experiment": false,
+  "scope": "Eight previously device-unclassified, already-inspected source examinations; not full video",
+  "unknown_outside_selected_source_images_remains_unknown": true
+}

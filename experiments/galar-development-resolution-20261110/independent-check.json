@@ -1,0 +1,10 @@
+{
+  "audit": "independent standard-library PNG header replay",
+  "independent_source_members_replayed": 7051,
+  "individual_source_identity_values_published": false,
+  "matched_aggregate_exam_count": 8,
+  "patient_independence_established": false,
+  "private_source_sha_checked": true,
+  "published_aggregate_sha256": "80af2b43906fca5b4a6e07a948c8698c12be42b96032ad022a2ae9f33bd8a4b1",
+  "status": "PASS"
+}
