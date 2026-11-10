@@ -11,8 +11,8 @@ import json
 import math
 from pathlib import Path
 
-from capsule_review.models import ModelInfo, Prediction, PredictionImport
-from capsule_review.prediction_service import save_predictions
+from capsule_review.models import ModelInfo, PredictionImport
+from capsule_review.prediction_service import align_fixed_development_scores, save_predictions
 from capsule_review.store import Store
 from pretrained_blood_probe import MANIFEST_SHA256, SPEC_SHA256, WEIGHTS_SHA256, hash_file
 
@@ -47,21 +47,10 @@ def import_scores(data_dir:Path,study_id:str,exam:int,run_dir:Path)->dict:
             key=(frame,row['source_sha256'])
             if key in scores:raise ValueError('Repeated source frame.')
             scores[key]=score
-    store=Store(data_dir)
-    study=store.study(study_id)
-    if study is None or study.get('synthetic') or study['frame_count']!=512:
-        raise ValueError('Real previously imported Galar development study required.')
-    with store.connect() as db:
-        rows=list(db.execute('SELECT position,source_index,source_sha256 FROM frames WHERE study_id=? ORDER BY position',(study_id,)))
-    if len(rows)!=512 or len(scores)!=512:
+    if len(scores)!=512:
         raise ValueError('Missing or surplus original source frames.')
-    predictions=[]
-    for r in rows:
-        key=(r['source_index'],r['source_sha256'])
-        if key not in scores:
-            raise ValueError('Image SHA-256/frame number mismatch; refusing save.')
-        predictions.append(Prediction(position=r['position'],image_sha256=r['source_sha256'],
-                                      label=LABEL,score=scores[key]))
+    store=Store(data_dir)
+    predictions=align_fixed_development_scores(store,study_id,scores,LABEL)
     head_hash=provenance['head_sha256']
     model=ModelInfo(name='ImageNet MobileNet feature probe (exploratory)',
                     version='mobilenet-blood-probe-v1',

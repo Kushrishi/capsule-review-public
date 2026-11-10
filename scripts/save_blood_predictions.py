@@ -11,8 +11,8 @@ import json
 import math
 from pathlib import Path
 
-from capsule_review.models import ModelInfo, Prediction, PredictionImport
-from capsule_review.prediction_service import save_predictions
+from capsule_review.models import ModelInfo, PredictionImport
+from capsule_review.prediction_service import align_fixed_development_scores, save_predictions
 from capsule_review.store import Store
 
 LABEL = 'Blood visual cue (research only)'
@@ -40,21 +40,10 @@ def import_scores(data_dir: Path, study_id: str, exam: int, run_dir: Path) -> di
             if key in scores or not math.isfinite(p) or not 0<=p<=1:
                 raise ValueError('Duplicate frame or invalid model score.')
             scores[key]=p
-    store=Store(data_dir)
-    study=store.study(study_id)
-    if study is None or study.get('synthetic') or study.get('frame_count')!=512:
-        raise ValueError('Target must be an existing 512-frame real study.')
-    with store.connect() as db:
-        rows=list(db.execute('SELECT position,source_index,source_sha256 FROM frames WHERE study_id=? ORDER BY position',(study_id,)))
-    if len(rows)!=512 or len(scores)!=512:
+    if len(scores)!=512:
         raise ValueError('Expected exactly 512 predictions and 512 real study frames.')
-    predictions=[]
-    for row in rows:
-        key=(row['source_index'],row['source_sha256'])
-        if key not in scores:
-            raise ValueError('Saved image hashes/source indices differ from frozen predictions.')
-        predictions.append(Prediction(position=row['position'],image_sha256=row['source_sha256'],
-                                      label=LABEL,score=scores[key]))
+    store=Store(data_dir)
+    predictions=align_fixed_development_scores(store,study_id,scores,LABEL)
     model=ModelInfo(name='Galar sparse blood-visibility baseline (research)',
                     version='blood-sparse-v1',run_id=f'blood-sparse-{weights_sha[:24]}',
                     weights_sha256=weights_sha,
