@@ -12,8 +12,8 @@ import json
 import math
 from pathlib import Path
 
-from capsule_review.models import ModelInfo, Prediction, PredictionImport
-from capsule_review.prediction_service import save_predictions
+from capsule_review.models import ModelInfo, PredictionImport
+from capsule_review.prediction_service import align_fixed_development_scores, save_predictions
 from capsule_review.store import Store
 from train_domain_blood import MANIFEST_SHA256, SPEC_SHA256, WEIGHTS_SHA256,hash_file
 
@@ -48,20 +48,7 @@ def import_scores(data_dir:Path, study_id:str, exam:int, run_dir:Path)->dict:
             found[key]=score
     if len(found)!=1024:raise ValueError('Expected exact original 1,024 historical development predictions.')
     store=Store(data_dir)
-    study=store.study(study_id)
-    if study is None or study.get('synthetic') or study['frame_count']!=512:
-        raise ValueError('Previously imported real Galar 512-frame study required.')
-    with store.connect() as db:
-        rows=list(db.execute('SELECT position,source_index,source_sha256 FROM frames WHERE study_id=? ORDER BY position',(study_id,)))
-    if len(rows)!=512:
-        raise ValueError('Wrong source image count in real viewer.')
-    predictions=[]
-    for r in rows:
-        key=(exam,r['source_index'],r['source_sha256'])
-        if key not in found:
-            raise ValueError('Original source-frame index or SHA-256 mismatch; no predictions saved.')
-        predictions.append(Prediction(position=r['position'],image_sha256=r['source_sha256'],
-                                      label=LABEL,score=found[key]))
+    predictions=align_fixed_development_scores(store,study_id,found,LABEL,exam=exam)
     ckpt=provenance['fine_tuned_checkpoint_sha256']
     model=ModelInfo(name='Full-field MobileNet domain-adapted research candidate',
                     version='domain-blood-fixed-3epoch-v1',
