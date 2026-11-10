@@ -1,0 +1,356 @@
+{
+  "input_evidence": {
+    "feature_bank_sha256": "6a4495ce0c64e1fff9c66a26afed4fb24c1a81989e4ba5d913c291853f9dff69",
+    "historical_controls": "PR72 sealed predictions, SHA-verified",
+    "prefit_sha256": "812839a49a2e604863b6a8a79128c6e91a38c88ed34eeb78219928e2df798ced",
+    "sealed_prediction_receipt_sha256": "c21612b3a92a7caeaa67197715f3fbcca71e72851ab20e2ae4eddc4be83d4747",
+    "source_manifest_sha256": "338e55c9d4412975e79dff4f08ff70da8196f15f5e9b35bc8b6f0b59e61b36b1"
+  },
+  "limitations": [
+    "No verified patient linkage; training pair accuracy is in sample, not clinical transfer.",
+    "Same 69 development runs and three fixed seeds reused; no independent test or 10% exact-K evaluation.",
+    "CNN 96px and MobileNet 160px preprocessing and architecture differ; no causal encoder-only inference.",
+    "No claims about bleeding mechanism, diagnosis, site, device or clinical benefit."
+  ],
+  "matched_model_overlap": {
+    "classification": {
+      "both_correct": 65,
+      "both_wrong": 36,
+      "cnn_only_correct": 66,
+      "compared_decisions_not_independent": 207,
+      "mobilenet_only_correct": 40
+    },
+    "ranking": {
+      "both_correct": 74,
+      "both_wrong": 32,
+      "cnn_only_correct": 72,
+      "compared_decisions_not_independent": 207,
+      "mobilenet_only_correct": 29
+    }
+  },
+  "model_promotion": false,
+  "objective_decision_agreement": {
+    "cnn": {
+      "classification_only_correct": 19,
+      "decisions_compared": 207,
+      "identical_decisions": 154,
+      "ranking_only_correct": 34
+    },
+    "mobilenet": {
+      "classification_only_correct": 3,
+      "decisions_compared": 207,
+      "identical_decisions": 203,
+      "ranking_only_correct": 1
+    }
+  },
+  "objective_results": {
+    "cnn_classification": {
+      "by_exam": {
+        "23": {
+          "heldout_pairs_per_seed": 23,
+          "heldout_pct": 53.6231884057971,
+          "train_pairs_per_seed": 46,
+          "training_pct": 100.0
+        },
+        "25": {
+          "heldout_pairs_per_seed": 20,
+          "heldout_pct": 68.33333333333333,
+          "train_pairs_per_seed": 49,
+          "training_pct": 97.27891156462584
+        },
+        "29": {
+          "heldout_pairs_per_seed": 11,
+          "heldout_pct": 57.57575757575757,
+          "train_pairs_per_seed": 58,
+          "training_pct": 95.97701149425286
+        },
+        "30": {
+          "heldout_pairs_per_seed": 15,
+          "heldout_pct": 75.55555555555556,
+          "train_pairs_per_seed": 54,
+          "training_pct": 95.679012345679
+        }
+      },
+      "heldout_equal_exam_seed_macro_pct": 63.771958717610886,
+      "heldout_run_weighted_ordering_pct": 63.28502415458937,
+      "observations_heldout_across_seeds_not_independent": 207,
+      "observations_training_across_folds_seeds_not_independent": 621,
+      "training_in_sample_pair_ordering_pct": 97.10144927536231,
+      "training_minus_heldout_run_weighted_pp": 33.81642512077294
+    },
+    "cnn_ranking": {
+      "by_exam": {
+        "23": {
+          "heldout_pairs_per_seed": 23,
+          "heldout_pct": 55.07246376811594,
+          "train_pairs_per_seed": 46,
+          "training_pct": 100.0
+        },
+        "25": {
+          "heldout_pairs_per_seed": 20,
+          "heldout_pct": 78.33333333333333,
+          "train_pairs_per_seed": 49,
+          "training_pct": 100.0
+        },
+        "29": {
+          "heldout_pairs_per_seed": 11,
+          "heldout_pct": 75.75757575757576,
+          "train_pairs_per_seed": 58,
+          "training_pct": 99.42528735632185
+        },
+        "30": {
+          "heldout_pairs_per_seed": 15,
+          "heldout_pct": 80.0,
+          "train_pairs_per_seed": 54,
+          "training_pct": 100.0
+        }
+      },
+      "heldout_equal_exam_seed_macro_pct": 72.29084321475626,
+      "heldout_run_weighted_ordering_pct": 70.53140096618357,
+      "observations_heldout_across_seeds_not_independent": 207,
+      "observations_training_across_folds_seeds_not_independent": 621,
+      "training_in_sample_pair_ordering_pct": 99.8389694041868,
+      "training_minus_heldout_run_weighted_pp": 29.307568438003216
+    },
+    "mobilenet_classification": {
+      "by_exam": {
+        "23": {
+          "heldout_pairs_per_seed": 23,
+          "heldout_pct": 40.57971014492754,
+          "train_pairs_per_seed": 46,
+          "training_pct": 100.0
+        },
+        "25": {
+          "heldout_pairs_per_seed": 20,
+          "heldout_pct": 65.0,
+          "train_pairs_per_seed": 49,
+          "training_pct": 100.0
+        },
+        "29": {
+          "heldout_pairs_per_seed": 11,
+          "heldout_pct": 51.51515151515151,
+          "train_pairs_per_seed": 58,
+          "training_pct": 100.0
+        },
+        "30": {
+          "heldout_pairs_per_seed": 15,
+          "heldout_pct": 46.666666666666664,
+          "train_pairs_per_seed": 54,
+          "training_pct": 100.0
+        }
+      },
+      "heldout_equal_exam_seed_macro_pct": 50.94038208168643,
+      "heldout_run_weighted_ordering_pct": 50.72463768115942,
+      "observations_heldout_across_seeds_not_independent": 207,
+      "observations_training_across_folds_seeds_not_independent": 621,
+      "training_in_sample_pair_ordering_pct": 100.0,
+      "training_minus_heldout_run_weighted_pp": 49.27536231884058
+    },
+    "mobilenet_ranking": {
+      "by_exam": {
+        "23": {
+          "heldout_pairs_per_seed": 23,
+          "heldout_pct": 40.57971014492754,
+          "train_pairs_per_seed": 46,
+          "training_pct": 100.0
+        },
+        "25": {
+          "heldout_pairs_per_seed": 20,
+          "heldout_pct": 66.66666666666667,
+          "train_pairs_per_seed": 49,
+          "training_pct": 100.0
+        },
+        "29": {
+          "heldout_pairs_per_seed": 11,
+          "heldout_pct": 42.42424242424242,
+          "train_pairs_per_seed": 58,
+          "training_pct": 100.0
+        },
+        "30": {
+          "heldout_pairs_per_seed": 15,
+          "heldout_pct": 46.666666666666664,
+          "train_pairs_per_seed": 54,
+          "training_pct": 100.0
+        }
+      },
+      "heldout_equal_exam_seed_macro_pct": 49.08432147562583,
+      "heldout_run_weighted_ordering_pct": 49.75845410628019,
+      "observations_heldout_across_seeds_not_independent": 207,
+      "observations_training_across_folds_seeds_not_independent": 621,
+      "training_in_sample_pair_ordering_pct": 100.0,
+      "training_minus_heldout_run_weighted_pp": 50.24154589371981
+    }
+  },
+  "role": "Already-inspected examination-heldout development cohort; no fitting or model tuning",
+  "seed_consensus": {
+    "cnn_classification": {
+      "all_three_correct": 29,
+      "all_three_wrong": 9,
+      "by_exam": {
+        "23": {
+          "all_three_correct": 8,
+          "all_three_wrong": 5,
+          "mixed": 10,
+          "runs": 23,
+          "singleton_all_three_wrong": 3
+        },
+        "25": {
+          "all_three_correct": 7,
+          "all_three_wrong": 0,
+          "mixed": 13,
+          "runs": 20,
+          "singleton_all_three_wrong": 0
+        },
+        "29": {
+          "all_three_correct": 5,
+          "all_three_wrong": 3,
+          "mixed": 3,
+          "runs": 11,
+          "singleton_all_three_wrong": 1
+        },
+        "30": {
+          "all_three_correct": 9,
+          "all_three_wrong": 1,
+          "mixed": 5,
+          "runs": 15,
+          "singleton_all_three_wrong": 0
+        }
+      },
+      "mixed_seed_decisions": 31,
+      "runs": 69,
+      "singleton_all_three_wrong": 4,
+      "singleton_mixed_seed_decisions": 10,
+      "singleton_runs": 21
+    },
+    "cnn_ranking": {
+      "all_three_correct": 32,
+      "all_three_wrong": 6,
+      "by_exam": {
+        "23": {
+          "all_three_correct": 7,
+          "all_three_wrong": 5,
+          "mixed": 11,
+          "runs": 23,
+          "singleton_all_three_wrong": 4
+        },
+        "25": {
+          "all_three_correct": 10,
+          "all_three_wrong": 0,
+          "mixed": 10,
+          "runs": 20,
+          "singleton_all_three_wrong": 0
+        },
+        "29": {
+          "all_three_correct": 7,
+          "all_three_wrong": 1,
+          "mixed": 3,
+          "runs": 11,
+          "singleton_all_three_wrong": 0
+        },
+        "30": {
+          "all_three_correct": 8,
+          "all_three_wrong": 0,
+          "mixed": 7,
+          "runs": 15,
+          "singleton_all_three_wrong": 0
+        }
+      },
+      "mixed_seed_decisions": 31,
+      "runs": 69,
+      "singleton_all_three_wrong": 4,
+      "singleton_mixed_seed_decisions": 10,
+      "singleton_runs": 21
+    },
+    "mobilenet_classification": {
+      "all_three_correct": 30,
+      "all_three_wrong": 29,
+      "by_exam": {
+        "23": {
+          "all_three_correct": 6,
+          "all_three_wrong": 11,
+          "mixed": 6,
+          "runs": 23,
+          "singleton_all_three_wrong": 6
+        },
+        "25": {
+          "all_three_correct": 12,
+          "all_three_wrong": 6,
+          "mixed": 2,
+          "runs": 20,
+          "singleton_all_three_wrong": 0
+        },
+        "29": {
+          "all_three_correct": 5,
+          "all_three_wrong": 4,
+          "mixed": 2,
+          "runs": 11,
+          "singleton_all_three_wrong": 1
+        },
+        "30": {
+          "all_three_correct": 7,
+          "all_three_wrong": 8,
+          "mixed": 0,
+          "runs": 15,
+          "singleton_all_three_wrong": 3
+        }
+      },
+      "mixed_seed_decisions": 10,
+      "runs": 69,
+      "singleton_all_three_wrong": 10,
+      "singleton_mixed_seed_decisions": 4,
+      "singleton_runs": 21
+    },
+    "mobilenet_ranking": {
+      "all_three_correct": 29,
+      "all_three_wrong": 31,
+      "by_exam": {
+        "23": {
+          "all_three_correct": 6,
+          "all_three_wrong": 11,
+          "mixed": 6,
+          "runs": 23,
+          "singleton_all_three_wrong": 6
+        },
+        "25": {
+          "all_three_correct": 12,
+          "all_three_wrong": 6,
+          "mixed": 2,
+          "runs": 20,
+          "singleton_all_three_wrong": 0
+        },
+        "29": {
+          "all_three_correct": 4,
+          "all_three_wrong": 6,
+          "mixed": 1,
+          "runs": 11,
+          "singleton_all_three_wrong": 2
+        },
+        "30": {
+          "all_three_correct": 7,
+          "all_three_wrong": 8,
+          "mixed": 0,
+          "runs": 15,
+          "singleton_all_three_wrong": 3
+        }
+      },
+      "mixed_seed_decisions": 9,
+      "runs": 69,
+      "singleton_all_three_wrong": 11,
+      "singleton_mixed_seed_decisions": 3,
+      "singleton_runs": 21
+    }
+  },
+  "study": "Retrospective source-safe training/holdout transfer and error persistence audit",
+  "support": {
+    "distinct_short_runs": 69,
+    "exam_count": 4,
+    "fits_reused": 48,
+    "original_source_endpoints": 137,
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "singletons": 21
+  }
+}
