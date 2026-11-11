@@ -1,8 +1,8 @@
 # Capsule Review — reproducible research demonstration
 
-**November 4, 2026. Audience:** prospective biomedical-engineering collaborators, research supervisors, technical reviewers. **Runtime after installation:** about five minutes of guided interaction. **Data:** generated, nonmedical examples plus previously published, non-identifying Galar aggregate results. **No checkpoint, medical archive, clinical account, training, GPU or external service required.**
+Updated November 11, 2026. This five-minute walkthrough runs the local viewer with synthetic images and generated scores, then displays published Galar aggregate results. It requires no medical archive, model checkpoint or GPU.
 
-This is a demonstration of the **research software**, not a demo of clinically functioning pathology detection. A *real* original blood CNN was trained and retrospectively evaluated in private research experiments, but no pathology model weights or individual medical outputs are shipped in this repository. Generated sample numbers are **not produced by that CNN**.
+The demo exercises the research software. Its sample scores are not predictions from the blood CNN trained and retrospectively evaluated in the private experiments; those weights and individual medical outputs remain private.
 
 ## A. Run the complete synthetic workflow
 
@@ -54,13 +54,13 @@ If the button **Verify evidence** is unavailable, save at least one reviewer not
 >
 > **Approach.** Capsule Review is a local tool that preserves a human review workflow while comparing highest-score, separated-score, chronological-bin and uniform selection at *identical image counts*. It reports what was retrieved and which imported spans were omitted, and can verify saved review evidence.
 >
-> **Real research.** We trained and compared neural networks on real Galar capsule images and conducted one source-verified, locked study of **163,161 eligible images from ten examinations**. At the **prespecified 10% primary workload**, mean blood-positive annotation-run recall was **49.35% for score-bin** versus **50.62% for uniform** across six positive-run examinations: **−1.2668765 percentage points**, *no demonstrated improvement*. At 25%, score-bin exceeded uniform by **9.5106442 points**, a case-dependent **secondary** observation, not replacement of the failed primary.
+> **Real research.** We trained and compared neural networks on real Galar capsule images and conducted one source-verified, locked study of **163,161 eligible images from ten examinations**. At the **prespecified 10% primary workload**, mean blood-positive annotation-run recall was **49.35% for score-bin** versus **50.62% for uniform** across six positive-run examinations: **−1.27 percentage points**. At 25%, score-bin exceeded uniform by **9.51 points**, a case-dependent **secondary** result.
 >
 > **Insight.** At 10%, highest-score ranking retrieved **305** blood-positive labeled frames but only **28** distinct positive annotation runs; uniform found **170** frames across **63** runs. Frame-level image enrichment is therefore not a reliable substitute for preserving distinct annotated evidence intervals.
 >
 > **Next scientific gate.** Hold further model sweeps while qualifying expert reviewers, source rights and the clinical meaning of short annotation runs. A private, blinded 137-image interpretation pilot is prepared but has not been reviewed or distributed. Reviewer participation and image sharing require authorization and appropriate permissions. A later independent evaluation still needs a qualified cohort, defensible grouping and a frozen protocol. The original Galar 11–20 outcomes have been examined; the authors' 61–80 holdout remains unopened. See the [current research status](PROJECT_STATUS.md) for the active decision.
 
-The referenced **annotation run** is a consecutive run of corrected `blood=1` rows at Galar's native +5 source-frame annotation stride, **not** an independently diagnosed lesion. The study does **not** establish independent patients, patient-level sensitivity, adequate generalization, clinical use, physician time savings, or safety of unattended skipping. Four examinations had zero labeled blood-positive runs; their positive-run recall is **undefined**, not 0% or 100%. The original complete image archive was not durably retained, although the private handoff recovered key commitments, scores and checkpoint.
+The referenced **annotation run** is a consecutive run of corrected `blood=1` rows at Galar's native +5 source-frame annotation stride, **not** an independently diagnosed lesion. Patient independence was not verified. The study measured annotation retrieval, not lesion sensitivity or physician reading time. Four examinations had zero labeled blood-positive runs; their positive-run recall is **undefined**, not 0% or 100%. The original complete image archive was not durably retained, although the private handoff recovered key commitments, scores and checkpoint.
 
 Source evidence:
 - [Completed locked Galar 11–20 study](GALAR_UNSEEN_11_20_RESULTS.md) and [nonidentifying aggregate](../experiments/galar-unseen-11-20-20261104/aggregate.json).
