@@ -1,8 +1,8 @@
 # Capsule Review
 
-**An auditable capsule-endoscopy research viewer and an investigation of evidence preservation under limited image-review workloads.**
+Local capsule-endoscopy research software and experiments on frame selection at fixed review budgets.
 
-The question is narrower than automated diagnosis: **at the same number of frames reviewed, can model-guided selection reach more *distinct* clinically important findings than transparent chronological sampling?** A model that retrieves many images from one long positive region may still miss several short events.
+At the same number of frames reviewed, can model-guided selection reach more distinct blood-positive annotation runs than uniform sampling? A model that retrieves many images from one long positive region may still miss several short events. Whether these runs represent clinically distinct findings requires expert review.
 
 ## What we found
 
