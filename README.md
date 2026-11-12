@@ -4,11 +4,11 @@ Local capsule-endoscopy research software and experiments on frame selection at 
 
 At the same number of frames reviewed, can model-guided selection reach more distinct blood-positive annotation runs than uniform sampling? A model that retrieves many images from one long positive region may still miss several short events. Whether these runs represent clinically distinct findings requires expert review.
 
-## What we found
+## Results
 
-Our strongest completed comparison is a locked retrospective study of **163,161 source-verified Galar images from ten examinations**. At a prespecified **10% image-review budget**, the score-per-chronological-bin policy reached **49.35%** of blood-positive annotation runs on average across the six positive-run examinations, versus **50.62%** for uniform selection (**−1.27 percentage points**). The primary result is negative. The positive 25% secondary contrast was heterogeneous and does not overturn it.
+A locked retrospective study used **163,161 source-verified Galar images from ten examinations**. At a prespecified **10% image-review budget**, the score-per-chronological-bin policy reached **49.35%** of blood-positive annotation runs on average across the six positive-run examinations, versus **50.62%** for uniform selection (**−1.27 percentage points**). Uniform performed better at the primary budget. At the secondary 25% budget, score-per-bin was 9.51 percentage points higher, with results varying by examination.
 
-A useful failure mode emerged: at 10%, unrestricted highest-score ranking retrieved **305 blood-positive images but only 28 of 154 distinct positive annotation runs**; uniform sampling retrieved **170 positive images across 63 runs**. More positive *frames* did not mean more distinct positive *runs*. These runs are dataset annotations, **not independently adjudicated lesions**.
+At 10%, unrestricted highest-score ranking retrieved **305 blood-positive images but only 28 of 154 distinct positive annotation runs**; uniform sampling retrieved **170 positive images across 63 runs**. More positive *frames* did not mean more distinct positive *runs*. These runs are dataset annotations, **not independently adjudicated lesions**.
 
 Read the [short scientific synthesis](docs/RESEARCH_COLLABORATION_BRIEF.md), [locked evaluation report](docs/GALAR_UNSEEN_11_20_RESULTS.md), and [current research status](docs/PROJECT_STATUS.md). The [research plan](docs/ROADMAP.md) distinguishes active work from historical experiments.
 
@@ -16,7 +16,7 @@ Read the [short scientific synthesis](docs/RESEARCH_COLLABORATION_BRIEF.md), [lo
 
 Capsule Review is a **localhost-only FastAPI/JavaScript viewer** for image-sequence navigation, human notes/bookmarks/intervals, imported model-score inspection, deterministic exact-*K* review queues, omission inspection, and verifiable evidence exports. Scores never automatically become human findings. The viewer retains access to images not selected by a queue.
 
-The public demonstration uses **24 synthetic images and generated, non-AI scores**. It is a functional software demonstration, **not** a medical-model demonstration. No trained pathology checkpoint or clinical imagery is distributed in this repository.
+The public demonstration uses **24 synthetic images and generated scores**, not predictions from the privately evaluated blood CNN. No medical images or trained pathology weights are distributed.
 
 ```bash
 python3 -m venv .venv

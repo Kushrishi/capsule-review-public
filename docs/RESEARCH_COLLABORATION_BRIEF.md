@@ -28,7 +28,7 @@ A mechanistically revealing secondary comparison is that **highest-score ranking
 
 ## Why later development did not rescue the result
 
-The team then tested broader fitting support, different local-ranking losses, source-examination-held-out comparisons, ensembles and a frozen ImageNet MobileNetV3-Small representation using **already inspected development examinations**. Positive pair-ordering results are not a new event-preservation endpoint. The relevant consolidated findings are:
+Subsequent experiments tested broader fitting support, different local-ranking losses, source-examination-held-out comparisons, ensembles and a frozen ImageNet MobileNetV3-Small representation using **already inspected development examinations**. Positive pair-ordering results are not a new event-preservation endpoint. The relevant consolidated findings are:
 
 | Development analysis | Observed result | Inference limit |
 | --- | --- | --- |
