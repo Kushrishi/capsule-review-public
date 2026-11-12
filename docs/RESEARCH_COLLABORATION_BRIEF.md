@@ -10,6 +10,12 @@ We ask: **At the same number of frames reviewed within each examination, can AI-
 
 The contribution being explored is a reproducible **evidence-retention and omission evaluation**, not a claim to have invented capsule-endoscopy classification. Temporal endoscopy modeling and AI-assisted reading have established prior art; substantive novelty remains to be demonstrated against appropriate task-matched methods.
 
+## Relation to existing capsule-video research
+
+Frame selection, redundancy reduction and event-focused capsule-video review are established research problems. [FIAS3 (Xie et al., 2023)](https://doi.org/10.1109/ACCESS.2023.3240999) combines frame importance with sparse, similarity-aware selection; [SUM UP (Houdeville et al., 2025)](https://doi.org/10.1016/j.clinre.2024.102509) selects representative vascular-lesion images after detection. [CE Reporter (Zheng et al., 2026)](https://doi.org/10.1038/s41746-026-03079-2) investigates video-to-report generation with temporal keyframe evidence, while [DiCE (Liu et al., 2026 preprint)](https://arxiv.org/abs/2604.21814) studies diagnosis-driven summaries that preserve lesion context. Their populations, methods and endpoints differ from the Galar annotation-run recall used here; their performance numbers cannot be compared directly.
+
+Capsule Review's present contribution is a locked, fixed-budget comparison and an explicit analysis of missed annotated runs, **not** a new summarization architecture or demonstrated clinical benefit. This literature positioning was reviewed on 12 November 2026; no experimental protocol or result changed.
+
 ## What was built
 
 A local FastAPI/JavaScript research viewer imports and hashes images, preserves original ordering, supports human annotations and bookmarks, imports separately identified model scores, compares fixed-size review queues, inspects omitted spans and exports verifiable evidence. The viewer does not auto-create findings or conceal unselected images. A 24-frame generated demonstration is useful for software testing, but its scores are **not trained-model predictions**. [Reproduction guide](SUPERVISOR_DEMO.md); [core source](../src/capsule_review/app.py).
