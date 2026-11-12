@@ -1,10 +1,12 @@
 # Capsule Review — current research status
 
-**As of 10 November 2026 (UTC).** This is a concise guide to the active evidence, not an additional experiment or a replacement for the dated source reports. See the [research synthesis](RESEARCH_COLLABORATION_BRIEF.md) for methods and interpretation; use [`scripts/project_status.py`](../scripts/project_status.py) to independently check a selected subset of frozen public aggregates.
+**As of 12 November 2026 (UTC).** The outreach wording below has been clarified; the scientific evidence and clinical-review requirements are unchanged. See the [research synthesis](RESEARCH_COLLABORATION_BRIEF.md) for methods and interpretation; use [`scripts/project_status.py`](../scripts/project_status.py) to independently check a selected subset of frozen public aggregates.
 
 ## Decision
 
-**Keep the project as research software; do not promote a pathology model or claim reduced clinical reading time.** We have a working viewer and a credible *negative* prespecified primary comparison. Further refinements on already inspected Galar runs would not constitute new independent evidence. **External outreach and clinician packet distribution are paused** pending a focused scientific presentation, verified data-use requirements, and an authorized reviewer plan.
+**The viewer works, and the locked 10% comparison favored uniform sampling.** Further refinements on already inspected Galar runs would not constitute new independent evidence. No pathology model is promoted, and clinical reading-time savings have not been measured.
+
+**Clinical-review recruitment and packet distribution remain paused** pending verified data-use requirements and an authorized reviewer plan. Academic inquiries based on public code and aggregate results are a separate owner decision; they do not authorize private-image sharing or clinical review.
 
 ## Current evidence
 
