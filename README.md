@@ -1,10 +1,12 @@
 # Capsule Review
 
-Local capsule-endoscopy research software and experiments on frame selection at fixed review budgets.
+A local research viewer for images recorded by a swallowed camera, with experiments on which images to select when only a fixed number can be reviewed.
 
-At the same number of frames reviewed, can model-guided selection reach more distinct blood-positive annotation runs than uniform sampling? A model that retrieves many images from one long positive region may still miss several short events. Whether these runs represent clinically distinct findings requires expert review.
+An **annotation run** is a sequence of consecutive blood-positive labels at the dataset’s sampled image intervals. Run recall measures the fraction of those sequences reached by at least one selected image. At the same number of images reviewed, can model-guided selection reach more runs than evenly spaced (uniform) sampling? A model that retrieves many images from one long positive region may still miss several short events. Whether these runs represent clinically distinct findings requires expert review.
 
 ## Results
+
+Score-per-bin selection chooses the highest-scoring image in each chronological segment. Uniform selection chooses evenly spaced images; both use the same image count.
 
 A locked retrospective study used **163,161 source-verified Galar images from ten examinations**. At a prespecified **10% image-review budget**, the score-per-chronological-bin policy reached **49.35%** of blood-positive annotation runs on average across the six positive-run examinations, versus **50.62%** for uniform selection (**−1.27 percentage points**). Uniform performed better at the primary budget. At the secondary 25% budget, score-per-bin was 9.51 percentage points higher, with results varying by examination.
 
