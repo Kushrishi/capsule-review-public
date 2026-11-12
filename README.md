@@ -6,7 +6,7 @@ At the same number of frames reviewed, can model-guided selection reach more dis
 
 ## Results
 
-A locked retrospective study used **163,161 source-verified Galar images from ten examinations**. At a prespecified **10% image-review budget**, the score-per-chronological-bin policy reached **49.35%** of blood-positive annotation runs on average across the six positive-run examinations, versus **50.62%** for uniform selection (**−1.27 percentage points**). At the secondary 25% budget, the score-per-bin policy was 9.51 percentage points higher than uniform, with substantial variation between examinations.
+A locked retrospective study used **163,161 source-verified Galar images from ten examinations**. At a prespecified **10% image-review budget**, the score-per-chronological-bin policy reached **49.35%** of blood-positive annotation runs on average across the six positive-run examinations, versus **50.62%** for uniform selection (**−1.27 percentage points**). Uniform performed better at the primary budget. At the secondary 25% budget, score-per-bin was 9.51 percentage points higher, with results varying by examination.
 
 At 10%, unrestricted highest-score ranking retrieved **305 blood-positive images but only 28 of 154 distinct positive annotation runs**; uniform sampling retrieved **170 positive images across 63 runs**. More positive *frames* did not mean more distinct positive *runs*. These runs are dataset annotations, **not independently adjudicated lesions**.
 
