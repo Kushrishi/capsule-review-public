@@ -20,7 +20,7 @@ from threading import Thread
 from zipfile import ZipFile
 
 from PIL import Image
-from playwright.sync_api import Error as PlaywrightError, expect, sync_playwright
+from playwright.sync_api import expect, sync_playwright
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from build_blinded_short_event_review import build_packet
@@ -146,19 +146,14 @@ def _exercise(browser, origin: str, mode: str, packet_id: str, directory: Path) 
         page.locator("#note").fill(note)
 
         # First-image edits must be protected before Next or Export has saved them.
-        dialogs: list[str] = []
-
-        def keep_work(dialog):
-            dialogs.append(dialog.type)
-            dialog.dismiss()
-
-        page.on("dialog", keep_work)
-        try:
-            page.reload(wait_until="load")
-        except PlaywrightError as error:
-            assert "ERR_ABORTED" in str(error), str(error)
-        assert dialogs == ["beforeunload"], dialogs
-        page.remove_listener("dialog", keep_work)
+        # run_before_unload returns without waiting for a close that the reader
+        # can cancel. A cancelled reload may instead wait until navigation times out.
+        with page.expect_event("dialog") as dialog_event:
+            page.close(run_before_unload=True)
+        dialog = dialog_event.value
+        assert dialog.type == "beforeunload"
+        dialog.dismiss()
+        assert not page.is_closed()
         expect(page.locator("#note")).to_have_value(note)
 
         response = _export(page, directory / f"{mode}-partial.json")
