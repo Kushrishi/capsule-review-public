@@ -142,10 +142,10 @@ def fetch_verified_sources(records: dict[int,dict], archive_paths: list[Path], a
 
 
 def pixel_identical_deidentified_png(raw: bytes) -> tuple[bytes,str]:
-    # PNG text / EXIF chunks are intentionally stripped, but every RGB pixel is retained.
+    # Rebuild from pixels: convert() alone can retain ancillary data such as ICC.
     with Image.open(BytesIO(raw)) as im:
         pix=im.convert('RGB').tobytes()
-        image=im.convert('RGB')
+        image=Image.frombytes('RGB',im.size,pix)
     output=BytesIO();image.save(output,format='PNG',optimize=False)
     data=output.getvalue()
     with Image.open(BytesIO(data)) as reread:
@@ -222,7 +222,7 @@ def make_review_html(packet_id:str)->str:
 <title>Capsule Review · Blinded Image Adjudication</title><style>
 :root{font-family:system-ui,sans-serif;color-scheme:light}body{margin:auto;max-width:1000px;padding:18px;color:#192536;background:#f4f6f9}header,.panel{background:white;border-radius:12px;padding:20px;margin-bottom:15px;border:1px solid #e0e5ec}h1{font-size:1.5rem;margin:0 0 10px}label,legend{font-weight:600}button{border:1px solid #bbc7d4;border-radius:8px;padding:12px;background:#fff;cursor:pointer}button:focus,input:focus,select:focus{outline:3px solid #487ad0}button.primary{background:#164785;color:white}.imageWrap{text-align:center}img{max-width:min(95%,512px);width:auto;height:auto;border:1px solid #d1dce7}fieldset{border:1px solid #dae2ea;border-radius:8px;margin:14px 0;padding:12px}.choices{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}.choices label{font-weight:400;white-space:nowrap}textarea{width:100%;min-height:60px;box-sizing:border-box}footer{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.muted{color:#53657b;font-size:.92rem}#status{font-weight:600}#viewer{display:none}.visually-hidden{position:absolute;left:-9999px}
 </style></head><body><header><h1>Capsule Review · Blinded image review</h1><p class="muted">Research pilot only. No model predictions, source IDs or original labels are shown. No clinical diagnosis or validated ground truth is implied. Offline only; do not upload clinical images.</p><p class="muted">Packet: '''+packet_id+'''</p></header>
-<section class="panel"><label for="reviewer">Pseudonymous reviewer code</label> <input id="reviewer" maxlength="40" placeholder="e.g. reviewer-A"><p class="muted">No names or patient identifiers. Responses are never transmitted. Export often.</p><button id="export" class="primary">Export reviewed JSON</button> <label for="restore" class="muted">Restore saved JSON:</label> <input id="restore" type="file" accept=".json,application/json"><p id="status" aria-live="polite"></p></section>
+<section class="panel"><label for="reviewer">Pseudonymous reviewer code</label> <input id="reviewer" maxlength="40" placeholder="e.g. reviewer-A" aria-describedby="reviewerHelp"><p id="reviewerHelp" class="muted">Enter a code before answering. It locks when you begin. Each reviewer must start in a separate tab without another reviewer's answers. No names or patient identifiers. Export often.</p><button id="export" class="primary">Export reviewed JSON</button> <label for="restore" class="muted">Restore saved JSON:</label> <input id="restore" type="file" accept=".json,application/json"><p id="status" aria-live="polite"></p></section>
 <main id="viewer" class="panel"><h2 id="progress"></h2><div class="imageWrap"><img id="scan" alt="Unlabelled capsule endoscopy research image" width="512" height="512"></div><form id="answers">
 <fieldset><legend>Visible fresh blood in this image?</legend><div class="choices" data-field="fresh_blood"></div></fieldset>
 <fieldset><legend>Hematin / old blood appearance?</legend><div class="choices" data-field="hematin"></div></fieldset>
@@ -239,9 +239,26 @@ def make_review_javascript()->str:
     return r'''"use strict";
 const SETS={fresh_blood:["yes","no","uncertain"],hematin:["yes","no","uncertain"],artifact:["yes","no","uncertain"],image_quality:["adequate","limited","uninterpretable"],needs_context:["yes","no","uncertain"]};
 const fieldNames=Object.keys(SETS);
-let data=null,at=0,responses={};
+let data=null,at=0,responses={},boundReviewer=null,dirty=false;
 const $=(id)=>document.getElementById(id);
 const fail=(message)=>{$("status").textContent=message;};
+const validCode=(code)=>typeof code==="string"&&/^[A-Za-z0-9_-]{2,40}$/.test(code);
+const isRecord=(value)=>value!==null&&typeof value==="object"&&!Array.isArray(value);
+function updateEditor(){
+  const enabled=boundReviewer!==null||validCode($("reviewer").value.trim());
+  document.querySelectorAll("#answers input, #note").forEach(input=>input.disabled=!enabled);
+}
+function bindReviewer(code){
+  boundReviewer=code;$("reviewer").value=code;$("reviewer").readOnly=true;updateEditor();
+}
+function recordEdit(){
+  if(boundReviewer===null){
+    const code=$("reviewer").value.trim();
+    if(!validCode(code))return;
+    bindReviewer(code);
+  }
+  dirty=true;
+}
 async function init(){
   // No network call: JSON is included as an adjacent local script below instead of fetched.
   if(!window.REVIEW_PACKET||!Array.isArray(window.REVIEW_PACKET.items)) {fail("Missing packet script. Extract the entire ZIP and open index.html locally.");return;}
@@ -249,13 +266,15 @@ async function init(){
   if(data.number_of_images!==data.items.length||new Set(data.items.map(x=>x.item_id)).size!==data.items.length){fail("Invalid research packet.");return;}
   for(const field of fieldNames){const root=document.querySelector('[data-field="'+field+'"]');
     for(const opt of SETS[field]){let label=document.createElement("label"),input=document.createElement("input");input.type="radio";input.name=field;input.value=opt;label.append(input,document.createTextNode(" "+opt));root.append(label);}}
-  $("viewer").style.display="block";render();
+  $("viewer").style.display="block";updateEditor();render();
 }
 function saveCurrent(){
   if(!data)return;
   const item=data.items[at];let ans={};
   for(const field of fieldNames){const selected=document.querySelector('input[name="'+field+'"]:checked');ans[field]=selected?selected.value:null;}
-  ans.note=$("note").value.slice(0,240);if(fieldNames.some(f=>ans[f]!==null)||ans.note)responses[item.item_id]=ans;
+  ans.note=$("note").value.slice(0,240);
+  if(fieldNames.some(f=>ans[f]!==null)||ans.note)responses[item.item_id]=ans;
+  else delete responses[item.item_id];
 }
 function render(){
   const item=data.items[at];$("progress").textContent="Image "+(at+1)+" / "+data.items.length;
@@ -267,29 +286,39 @@ function render(){
   fail(Object.keys(responses).length+" image(s) have saved responses in this browser session. Export JSON to preserve them.");
 }
 function download(){
-  saveCurrent();let reviewer=$("reviewer").value.trim();
-  if(!/^[A-Za-z0-9_-]{2,40}$/.test(reviewer)){fail("Enter a pseudonymous reviewer code (2–40 letters, numbers, _ or -).");return;}
+  if(!data)return;
+  const reviewer=boundReviewer||$("reviewer").value.trim();
+  if(!validCode(reviewer)){fail("Enter a pseudonymous reviewer code (2–40 letters, numbers, _ or -).");return;}
+  bindReviewer(reviewer);saveCurrent();
   let out={schema_version:"capsule-review-blinded-response-v1",packet_id:data.packet_id,reviewer_code:reviewer,responses,exported_at:new Date().toISOString()};
   let blob=new Blob([JSON.stringify(out,null,2)+"\n"],{type:"application/json"});let url=URL.createObjectURL(blob);
   let anchor=document.createElement("a");anchor.href=url;anchor.download="capsule-review-"+data.packet_id+"-"+reviewer+".json";document.body.append(anchor);anchor.click();anchor.remove();URL.revokeObjectURL(url);
+  dirty=false;
   fail("Local JSON exported; " + Object.keys(responses).length + " of " + data.number_of_images + " images recorded. Keep it private.");
 }
-function restore(file){if(!file)return;let reader=new FileReader();reader.onload=()=>{
- try{const obj=JSON.parse(reader.result),ids=new Set(data.items.map(x=>x.item_id));
-   if(obj.schema_version!=="capsule-review-blinded-response-v1"||obj.packet_id!==data.packet_id||typeof obj.responses!=="object"||!obj.responses)throw new Error("Wrong packet or response schema.");
+function restore(file){if(!file||!data)return;fail("Reading saved JSON...");let reader=new FileReader();reader.onload=()=>{
+ try{
+   // Restore only into an untouched session. Never replace or merge a reader's work.
+   if(boundReviewer!==null||dirty||Object.keys(responses).length)throw new Error("Open a new tab to restore JSON; this session already has a review.");
+   const obj=JSON.parse(reader.result),ids=new Set(data.items.map(x=>x.item_id));
+   if(!isRecord(obj)||obj.schema_version!=="capsule-review-blinded-response-v1"||obj.packet_id!==data.packet_id||!isRecord(obj.responses))throw new Error("Wrong packet or response schema.");
+   if(!validCode(obj.reviewer_code))throw new Error("Invalid reviewer code.");
    for(const [id,answer] of Object.entries(obj.responses)){
-     if(!ids.has(id)||typeof answer!=="object"||!answer||Object.keys(answer).some(k=>![...fieldNames,"note"].includes(k)))throw new Error("Unexpected response key.");
-     for(const field of fieldNames)if(answer[field]!==null&&answer[field]!==undefined&&!SETS[field].includes(answer[field]))throw new Error("Invalid response value.");
+     if(!ids.has(id)||!isRecord(answer)||Object.keys(answer).length!==fieldNames.length+1||Object.keys(answer).some(k=>![...fieldNames,"note"].includes(k)))throw new Error("Unexpected response key.");
+     for(const field of fieldNames)if(answer[field]!==null&&!SETS[field].includes(answer[field]))throw new Error("Invalid response value.");
      if(typeof answer.note!=="string"||answer.note.length>240)throw new Error("Invalid note.");
    }
-   responses=obj.responses;$("reviewer").value=obj.reviewer_code||"";render();
+   responses=obj.responses;bindReviewer(obj.reviewer_code);at=0;dirty=false;render();
  }catch(error){fail("Cannot restore: "+error.message);}
- };reader.readAsText(file);}
+ };reader.onerror=()=>fail("Cannot restore: file could not be read.");reader.readAsText(file);}
+$("reviewer").addEventListener("input",updateEditor);
+$("answers").addEventListener("input",recordEdit);
+$("answers").addEventListener("submit",event=>event.preventDefault());
 $("previous").addEventListener("click",()=>{saveCurrent();if(at>0)--at;render();});
 $("next").addEventListener("click",()=>{saveCurrent();if(at<data.items.length-1)++at;render();});
 $("export").addEventListener("click",download);
-$("restore").addEventListener("change",(event)=>restore(event.target.files[0]));
-window.addEventListener("beforeunload",(event)=>{if(Object.keys(responses).length>0){event.preventDefault();event.returnValue="";}});
+$("restore").addEventListener("change",(event)=>{restore(event.target.files[0]);event.target.value="";});
+window.addEventListener("beforeunload",(event)=>{if(dirty){event.preventDefault();event.returnValue="";}});
 // packet-data.js is loaded as a local static script, never fetched.
 init();'''
 
