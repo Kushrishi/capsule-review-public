@@ -29,6 +29,7 @@ jobs:
       - run: python -m pytest -q
       - run: python -m playwright install --with-deps chromium
       - run: python tests/browser_smoke.py --with-test-model
+      - run: python tests/browser_blinded_review_smoke.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: synthetic-viewer-screenshots

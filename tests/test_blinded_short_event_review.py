@@ -7,7 +7,7 @@ import zipfile
 
 import pytest
 PIL = pytest.importorskip('PIL')
-from PIL import Image
+from PIL import Image, PngImagePlugin
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from build_blinded_short_event_review import (verify_cohort, fetch_verified_sources,
     build_packet, pixel_identical_deidentified_png, sha)
@@ -73,6 +73,25 @@ def test_managed_and_original_pixels_identical(tmp_path):
     with Image.open(BytesIO(raw)) as a, Image.open(BytesIO(out)) as b:
         assert a.tobytes()==b.tobytes()
         assert pix_sha==sha(a.tobytes())
+
+
+def test_metadata_removed_without_changing_rgb_pixels():
+    image=Image.new('RGB',(512,512),(32,64,90))
+    metadata=PngImagePlugin.PngInfo()
+    metadata.add_text('source','SYNTHETIC_SOURCE_IDENTIFIER')
+    exif=Image.Exif();exif[0x010E]='SYNTHETIC_EXIF_IDENTIFIER'
+    original=BytesIO()
+    image.save(original,format='PNG',pnginfo=metadata,exif=exif,
+               icc_profile=b'SYNTHETIC_ICC_IDENTIFIER')
+    with Image.open(BytesIO(original.getvalue())) as source:
+        assert source.info['icc_profile']==b'SYNTHETIC_ICC_IDENTIFIER'
+        assert source.info['source']=='SYNTHETIC_SOURCE_IDENTIFIER'
+    output,pixel_sha=pixel_identical_deidentified_png(original.getvalue())
+    with Image.open(BytesIO(output)) as stripped:
+        assert stripped.info=={}
+        assert not stripped.getexif()
+        assert stripped.tobytes()==image.tobytes()
+        assert pixel_sha==sha(image.tobytes())
 
 
 def test_tampered_original_rejected(tmp_path):
