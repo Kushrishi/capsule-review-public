@@ -36,4 +36,5 @@ jobs:
             test-results/browser/viewer-desktop.png
             test-results/browser/viewer-mobile.png
             test-results/browser/synthetic-queue-demo.png
+            test-results/browser/synthetic-policy-comparison.png
           if-no-files-found: error
