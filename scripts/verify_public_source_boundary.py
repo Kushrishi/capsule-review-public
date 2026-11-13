@@ -7,10 +7,19 @@ It never reads medical input directories or downloads research material.
 from __future__ import annotations
 
 import os
+import hashlib
 from pathlib import Path, PurePosixPath
 import subprocess
 
 MAX_TRACKED_FILE_BYTES = 2 * 1024 * 1024
+
+# Manually inspected synthetic UI captures from browser smoke run 43461132951.
+# Desktop is cropped to its first 1180 pixels; the comparison is unaltered.
+# A path alone never permits a replacement image: exact bytes must match.
+REVIEWED_SYNTHETIC_SCREENSHOTS = {
+    "docs/images/viewer-desktop.png": "cbda5fa7c0154a2c8c8f9eda319264ea1a4f59deab072185950f0297f080516b",
+    "docs/images/synthetic-policy-comparison.png": "d80f5c298e9dc52a35177c644c1f408cdcf6e8bc0c37351480deaf7ccac9b462",
+}
 
 PRIVATE_SUFFIXES = frozenset({
     ".7z", ".bmp", ".bz2", ".ckpt", ".csv", ".db", ".dcm", ".dicom",
@@ -63,6 +72,11 @@ def check_tracked_file(root: Path, relative_path: str) -> list[str]:
     if path.stat().st_size > MAX_TRACKED_FILE_BYTES:
         reasons.append("oversized tracked file requires separate privacy review")
         return reasons
+
+    if relative_path in REVIEWED_SYNTHETIC_SCREENSHOTS:
+        if hashlib.sha256(path.read_bytes()).hexdigest() == REVIEWED_SYNTHETIC_SCREENSHOTS[relative_path]:
+            return []
+        return ["reviewed synthetic screenshot hash mismatch"]
 
     with path.open("rb") as source:
         first_bytes = source.read(4096)

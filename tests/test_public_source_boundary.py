@@ -8,6 +8,7 @@ import pytest
 from scripts.verify_public_source_boundary import (
     MAX_TRACKED_FILE_BYTES, PublicSourceBoundaryError,
     check_repository, check_tracked_file, git_tracked_paths,
+    REVIEWED_SYNTHETIC_SCREENSHOTS,
 )
 
 
@@ -16,6 +17,20 @@ def test_normal_public_source_allowed(tmp_path: Path):
     path.parent.mkdir()
     path.write_text("print('synthetic example')\n", encoding="utf-8")
     assert check_tracked_file(tmp_path, "src/model.py") == []
+
+
+@pytest.mark.parametrize("relative", REVIEWED_SYNTHETIC_SCREENSHOTS)
+def test_reviewed_screenshots_require_exact_bytes_and_path(tmp_path: Path, relative: str):
+    root = Path(__file__).resolve().parents[1]
+    target = tmp_path / relative
+    target.parent.mkdir(parents=True)
+    target.write_bytes((root / relative).read_bytes())
+    assert check_tracked_file(tmp_path, relative) == []
+    renamed = target.with_name("unreviewed.png")
+    renamed.write_bytes(target.read_bytes())
+    assert check_tracked_file(tmp_path, renamed.relative_to(tmp_path).as_posix())
+    target.write_bytes(target.read_bytes() + b"changed")
+    assert check_tracked_file(tmp_path, relative) == ["reviewed synthetic screenshot hash mismatch"]
 
 
 @pytest.mark.parametrize("relative,reason", [

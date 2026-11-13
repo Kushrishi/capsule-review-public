@@ -136,6 +136,11 @@ with sync_playwright() as p:
     assert page.locator('#reviewNote').input_value() == ''
     assert not page.locator('#bookmark').is_checked()
     page.screenshot(path=str(out/'synthetic-queue-demo.png'),full_page=True)
+    # At this supported width the review panel sits below the viewer, so the
+    # complete comparison table fits without horizontal scrolling.
+    page.set_viewport_size({'width':850,'height':1050})
+    page.locator('#priorityComparison').screenshot(path=str(out/'synthetic-policy-comparison.png'))
+    page.set_viewport_size({'width':1440,'height':1050})
     checks.append('Generated nonmedical scores enable five exact-K policies without an AI model')
     page.locator('#reviewLabel').fill('Navigation check')
     page.locator('#reviewNote').fill('Software test: verify this frame, save the note, and reopen the review.')
