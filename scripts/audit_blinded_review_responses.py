@@ -1,8 +1,9 @@
 """Private-only two-reader consistency analysis for blinded Capsule Review packets.
 
-Requires complete independently produced reviewer responses. Outputs a private
-opaque-ID disagreement register for clinician arbitration; never infers patient
-independence, diagnoses, clinical truth or model sensitivity. No web requests.
+Requires complete responses with distinct reviewer codes. Outputs private
+opaque-ID disagreement and review-required registers. Codes cannot establish
+reviewer independence or qualifications. No clinical truth, diagnoses, patient
+independence or model sensitivity is inferred. No web requests.
 """
 from __future__ import annotations
 from collections import Counter
@@ -47,16 +48,26 @@ def compare(packet:dict,a:object,b:object)->dict:
     a=validate_response(a,packet);b=validate_response(b,packet)
     if a['reviewer_code']==b['reviewer_code']:
         raise ValueError('Two independently coded reviewers are required.')
-    stats={f:Counter() for f in FIELDS};disagreements=[]
+    stats={f:Counter() for f in FIELDS};disagreements=[];review_required=[]
     both_uncertain={f:0 for f in FIELDS}
     for item in packet['items']:
         itemid=item['item_id'];one=a['responses'][itemid];two=b['responses'][itemid]
-        diff={}
+        diff={};flagged_fields={}
         for f in FIELDS:
             stats[f]['agree' if one[f]==two[f] else 'disagree']+=1
             if f in ('fresh_blood','hematin','artifact','needs_context') and one[f]=='uncertain' and two[f]=='uncertain':both_uncertain[f]+=1
             if one[f]!=two[f]:diff[f]=[one[f],two[f]]
+            answers=[one[f],two[f]]
+            reasons=[]
+            if one[f]!=two[f]:reasons.append('disagreement')
+            if 'uncertain' in answers:reasons.append('uncertain')
+            if f=='image_quality' and any(value!='adequate' for value in answers):
+                reasons.append('quality_not_adequate')
+            if f=='needs_context' and 'yes' in answers:
+                reasons.append('context_requested')
+            if reasons:flagged_fields[f]={'answers':answers,'reasons':reasons}
         if diff:disagreements.append({'item_id':itemid,'disputed_fields':diff})
+        if flagged_fields:review_required.append({'item_id':itemid,'fields':flagged_fields})
     return {'schema_version':'capsule-review-blinded-dual-review-v1','packet_id':packet['packet_id'],
             'status':'DUAL_REVIEW_AGREEMENT_ONLY_NO_CLINICAL_REFERENCE_STANDARD',
             'n_source_selected_images':len(packet['items']),
@@ -66,9 +77,13 @@ def compare(packet:dict,a:object,b:object)->dict:
             'images_with_any_disagreement':len(disagreements),
             'arbitration_required':True,
             'disagreement_items_private':disagreements,
+            'images_requiring_review':len(review_required),
+            'review_required_items_private':review_required,
             'constraints':['Preselected, previously labelled source-neighbour comparison images: not a prevalence sample.',
                            'Reviewer agreement and unresolved ambiguity are not a validated clinical truth standard.',
-                           'Disagreements and uncertainty require qualified, independent human adjudication.',
+                           'Distinct reviewer codes do not verify independent review or clinical qualifications.',
+                           'Flagged disagreements, uncertainty, quality limits and context requests require qualified human review; no answer is resolved automatically.',
+                           'An empty review-required register does not establish clinical truth or distinct event identity.',
                            'No medical model outcome, patient-independence or event-detection claim is generated.']}
 
 
@@ -83,7 +98,7 @@ def main()->None:
     with zipfile.ZipFile(a.reviewer_zip) as z:packet=json.loads(z.read('manifest.json'))
     result=compare(packet,json.loads(a.reader_a.read_text()),json.loads(a.reader_b.read_text()))
     a.output_private.write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
-    print('Complete dual-reader response comparison generated locally; masked image disagreements require clinician arbitration. No event/clinical accuracy computed.')
+    print('Complete dual-reader comparison and review-required register generated locally. No clinical answers resolved or event/clinical accuracy computed.')
 
 
 if __name__=='__main__':main()
