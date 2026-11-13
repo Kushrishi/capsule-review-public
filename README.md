@@ -2,6 +2,10 @@
 
 A local research viewer for images recorded by a swallowed camera, with experiments on which images to select when only a fixed number can be reviewed.
 
+![Capsule Review desktop viewer showing a synthetic frame, sequence navigation and human review controls.](docs/images/viewer-desktop.png)
+
+*The working local viewer with synthetic demonstration images. Generated scores are software examples, not predictions from the evaluated blood CNN.*
+
 An **annotation run** is a sequence of consecutive blood-positive labels at the dataset’s sampled image intervals. Run recall measures the fraction of those sequences reached by at least one selected image. At the same number of images reviewed, can model-guided selection reach more runs than evenly spaced (uniform) sampling? A model that retrieves many images from one long positive region may still miss several short events. Whether these runs represent clinically distinct findings requires expert review.
 
 ## Results
@@ -19,6 +23,10 @@ Read the [short scientific synthesis](docs/RESEARCH_COLLABORATION_BRIEF.md), [lo
 Capsule Review is a **localhost-only FastAPI/JavaScript viewer** for image-sequence navigation, human notes/bookmarks/intervals, imported model-score inspection, deterministic exact-*K* review queues, omission inspection, and verifiable evidence exports. Scores never automatically become human findings. The viewer retains access to images not selected by a queue.
 
 The public demonstration uses **24 synthetic images and generated scores**, not predictions from the privately evaluated blood CNN. No medical images or trained pathology weights are distributed.
+
+![Synthetic demonstration comparing frame-selection policies at the same six-image budget.](docs/images/synthetic-policy-comparison.png)
+
+*Frame-selection comparison using deterministic generated scores on the synthetic sequence. These queue examples are separate from the Galar research results above. Open either screenshot at full size to inspect the controls.*
 
 ```bash
 python3 -m venv .venv
