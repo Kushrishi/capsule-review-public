@@ -16,6 +16,7 @@ dependencies = [
 
 [project.optional-dependencies]
 ml = ["torch>=2.6,<3", "numpy>=2,<3"]
+spatial = ["torch>=2.6,<3", "torchvision>=0.21,<1", "numpy>=2,<3"]
 dev = ["pytest>=8,<10", "httpx>=0.28,<1", "playwright>=1.50,<2"]
 
 [project.scripts]
