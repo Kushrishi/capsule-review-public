@@ -60,6 +60,12 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch>=2.6,<3' 'torchvision>=0.21,<1'
       - run: python -m pip install -e '.[dev,ml,spatial]'
+      - name: Install executor isolation dependency
+        run: sudo apt-get update && sudo apt-get install -y bubblewrap
+      - name: Required executor security canaries and isolated generated smoke
+        env:
+          CAPSULE_REQUIRE_ISOLATION: '1'
+        run: python -m pytest -q tests/test_spatial_executor_security.py
       - run: python -m pytest -q
       - run: python -m playwright install --with-deps chromium
       - run: python tests/browser_smoke.py --with-test-model

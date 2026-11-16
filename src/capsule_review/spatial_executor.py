@@ -16,11 +16,9 @@ def isolation_command(command, read_paths, output, forbidden_paths, *, devices=(
     user_packages = Path(site.getusersitepackages()).resolve()
     if user_packages.exists():
         system.append(user_packages)
-    if not forbidden_paths:
+    forbidden_roots = [Path(path).resolve() for path in forbidden_paths]
+    if not forbidden_roots:
         raise ValueError("Explicit external evaluation paths are required")
-    for forbidden in map(lambda p: Path(p).resolve(), forbidden_paths):
-        if any(forbidden.is_relative_to(p) for p in [output, *roots, *system]):
-            raise ValueError("An input/output mount exposes external evaluation")
     if any(p == Path("/") or p == Path("/workspace") for p in roots):
         raise ValueError("Broad workspace mounts are prohibited")
     gpu_nodes = []
@@ -31,10 +29,17 @@ def isolation_command(command, read_paths, output, forbidden_paths, *, devices=(
         if not allowed_name or not stat.S_ISCHR(path.stat().st_mode):
             raise ValueError("Only NVIDIA character devices may be mounted")
         gpu_nodes.append(path)
+    # Compare every host-backed mount in both directions after resolving aliases.
+    # Fresh /tmp, /dev and /proc namespaces do not expose their host counterparts.
+    for mount in [output, *roots, *system, *gpu_nodes]:
+        resolved = mount.resolve()
+        for forbidden in forbidden_roots:
+            if resolved.is_relative_to(forbidden) or forbidden.is_relative_to(resolved):
+                raise ValueError("A mount overlaps and exposes external evaluation")
     if not executable:
         raise RuntimeError("bubblewrap is required for executor isolation")
     args = [executable, "--die-with-parent", "--new-session",
-            "--unshare-user", "--unshare-pid", "--unshare-ipc", "--unshare-uts",
+            "--unshare-net", "--unshare-user", "--unshare-pid", "--unshare-ipc", "--unshare-uts",
             "--proc", "/proc", "--dev", "/dev", "--tmpfs", "/tmp"]
     for path in [*system, *roots]:
         args += ["--ro-bind", str(path), str(path)]
@@ -47,8 +52,8 @@ def isolation_command(command, read_paths, output, forbidden_paths, *, devices=(
 def execute_isolated(command, read_paths, output, forbidden_paths, *, timeout=60, devices=()):
     """Fail closed on namespace/mount errors. External paths are never mounted."""
     output = Path(output).resolve()
-    output.mkdir(parents=True, exist_ok=True)
     args = isolation_command(command, read_paths, output, forbidden_paths, devices=devices)
+    output.mkdir(parents=True, exist_ok=True)
     dependency_roots = (Path("/opt"), Path("/usr"),
                         Path(site.getusersitepackages()).resolve())
     runtime_paths = []
@@ -57,6 +62,8 @@ def execute_isolated(command, read_paths, output, forbidden_paths, *, timeout=60
             runtime_paths.append(str(Path(entry).resolve()))
     environment = {"PATH": os.defpath, "PYTHONNOUSERSITE": "1",
                    "PYTHONPATH": os.pathsep.join(runtime_paths),
-                   "OMP_NUM_THREADS": "2", "MKL_NUM_THREADS": "2"}
-    return subprocess.run(args, close_fds=True, capture_output=True, text=True,
+                   "OMP_NUM_THREADS": "2", "MKL_NUM_THREADS": "2",
+                   "CUBLAS_WORKSPACE_CONFIG": ":4096:8"}
+    return subprocess.run(args, stdin=subprocess.DEVNULL, close_fds=True,
+                          capture_output=True, text=True,
                           timeout=timeout, env=environment, check=True)
