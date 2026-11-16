@@ -1,0 +1,81 @@
+name: Generated-only Apple Silicon MPS compatibility
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/macos-mps.yml'
+      - 'src/capsule_review/mps_diagnostic.py'
+      - 'src/capsule_review/spatial_comparison.py'
+      - 'tests/test_mps_diagnostic.py'
+      - 'pyproject.toml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: macos-generated-mps-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  generated-mps:
+    runs-on: macos-15
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+          architecture: arm64
+      - name: Confirm Apple Silicon and pinned scientific diagnostic wheels
+        run: |
+          sw_vers
+          uname -m
+          python -c "import platform; assert platform.system() == 'Darwin' and platform.machine() == 'arm64'"
+          python -m pip install torch==2.14.1 torchvision==0.29.1
+          python -m pip install -e '.[spatial]'
+          python -m pip check
+          python - <<'PY'
+          import os
+          import torch
+          import torchvision
+          print("torch:", torch.__version__, "torchvision:", torchvision.__version__)
+          print("MPS built:", torch.backends.mps.is_built(), "available:", torch.backends.mps.is_available())
+          assert torch.backends.mps.is_built() and torch.backends.mps.is_available(), "MPS unavailable on this runner"
+          PY
+      - name: Existing generated-only classifier and detector diagnostic
+        timeout-minutes: 17
+        env:
+          PYTORCH_ENABLE_MPS_FALLBACK: '0'
+        run: |
+          python -m capsule_review.mps_diagnostic --device mps --output /tmp/capsule-mps-generated-ci --timeout 420
+      - name: Print diagnostic status and worker failures
+        if: always()
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          root = Path('/tmp/capsule-mps-generated-ci')
+          if not root.is_dir():
+              print("No diagnostic reports produced (preflight or installation may have failed).")
+          for path in sorted(root.glob('*.json')) if root.is_dir() else []:
+              try:
+                  data = json.loads(path.read_text())
+                  if path.name == 'report.json':
+                      print(path.name, 'status=', data.get('status'), 'device=', data.get('device'))
+                  else:
+                      print(path.name, 'status=', data.get('status'), 'stage=', data.get('stage'),
+                            'error=', data.get('error', ''), 'exit_code=', data.get('exit_code', ''))
+                      print('operator probes:', data.get('operator_probes', {}))
+              except Exception as exc:
+                  print('Cannot decode report', path.name, type(exc).__name__)
+          for path in sorted(root.glob('*.log')) if root.is_dir() else []:
+              print('----', path.name, '----')
+              print(path.read_text(errors='replace')[-12000:])
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: generated-only-mps-diagnostic
+          path: /tmp/capsule-mps-generated-ci/
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Public source privacy gate
+        if: always()
+        run: python scripts/verify_public_source_boundary.py
