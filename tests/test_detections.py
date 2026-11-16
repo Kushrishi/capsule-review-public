@@ -6,7 +6,7 @@ import pytest
 from PIL import Image
 from pydantic import ValidationError
 
-from capsule_review.detections import DetectionImport, unletterbox_xyxy
+from capsule_review.detections import DetectionImport, unletterbox_xyxy, detection_frames
 from capsule_review.importer import import_sources
 from detection_fixture import fixture
 
@@ -101,3 +101,80 @@ def test_nonfinite_coordinates_fail(prepared):
     _, payload = prepared
     payload['frames'][0]['boxes'][0]['xyxy'][0] = float('nan')
     with pytest.raises(ValidationError): DetectionImport.model_validate(payload)
+
+
+def test_large_recording_navigation_decodes_only_requested_page(app, client, headers, prepared, monkeypatch):
+    """50,000 stored rows, sparse hits: keyset/limit must precede JSON decoding."""
+    import json
+    from contextlib import contextmanager
+    study, payload = prepared
+    base = f'/api/studies/{study}/detections'
+    assert client.post(base, headers=headers, json=payload).status_code == 201
+    store = app.state.store
+    with store.connect() as db:
+        run = db.execute('SELECT id FROM detection_runs WHERE study_id=?', (study,)).fetchone()[0]
+        db.execute('DELETE FROM detection_frames WHERE run_id=?', (run,))
+        template = payload['frames'][0]
+        records = []
+        for position in range(50000):
+            frame = {**template, 'position': position,
+                     'boxes': template['boxes'] if position in (48000,49000) else []}
+            records.append((run, position, json.dumps(frame)))
+        db.executemany('INSERT INTO detection_frames VALUES(?,?,?)', records)
+        db.executemany('INSERT INTO detection_category_frames VALUES(?,?,?)',
+                       [(run,c,p) for p in (48000,49000) for c in (-1,7)])
+    decoded = []
+    original_loads = json.loads
+    def counted(raw, *args, **kwargs):
+        decoded.append(raw)
+        return original_loads(raw, *args, **kwargs)
+    original_connect = store.connect
+    @contextmanager
+    def bounded_query():
+        with original_connect() as db:
+            # A full recording scan exceeds this budget; indexed lookup does not.
+            calls = [0]
+            def progress():
+                calls[0] += 1
+                return int(calls[0] > 100)
+            db.set_progress_handler(progress, 100)
+            yield db
+    with monkeypatch.context() as patch:
+        patch.setattr(json, 'loads', counted)
+        patch.setattr(store, 'connect', bounded_query)
+        result = detection_frames(store, study, 'generated-boxes', category=7, after=48000, limit=1)
+        assert [f['position'] for f in result] == [49000]
+        assert len(decoded) == 1
+        decoded.clear()
+        assert detection_frames(store, study, 'generated-boxes', category=0, after=0, limit=1) == []
+        assert decoded == []
+    response = client.get(base+'/generated-boxes?category=7&after=48000&limit=1').json()
+    assert [f['position'] for f in response['frames']] == [49000]
+    assert client.get(base+'/generated-boxes?limit=201').status_code == 422
+
+
+def test_existing_runs_receive_one_time_navigation_index(app, client, headers, prepared):
+    from capsule_review.store import Store
+    study, payload = prepared
+    assert client.post(f'/api/studies/{study}/detections', headers=headers,json=payload).status_code == 201
+    with app.state.store.connect() as db:
+        db.execute('DELETE FROM detection_category_frames')
+        db.execute('DELETE FROM detection_indexed_runs')
+    reopened = Store(app.state.store.root)
+    assert [r['position'] for r in detection_frames(reopened,study,'generated-boxes',category=0)] == [2]
+    assert [r['position'] for r in detection_frames(reopened,study,'generated-boxes',after=0,limit=1)] == [2]
+    with reopened.connect() as db:
+        assert db.execute('SELECT COUNT(*) FROM detection_indexed_runs').fetchone()[0] == 1
+        original = db.execute('SELECT record FROM detection_frames ORDER BY position').fetchall()
+    twice = Store(app.state.store.root)
+    with twice.connect() as db:
+        assert db.execute('SELECT record FROM detection_frames ORDER BY position').fetchall() == original
+
+
+def test_provenance_remains_an_unverified_producer_claim(client, headers, prepared):
+    study, payload = prepared
+    base = f'/api/studies/{study}/detections'
+    assert client.post(base,headers=headers,json=payload).status_code == 201
+    run = client.get(base).json()['runs'][0]
+    assert run['execution_verification'] == 'IMPORTED_CLAIMS_NOT_INDEPENDENTLY_VERIFIED'
+    assert run['provenance'] == payload['provenance']

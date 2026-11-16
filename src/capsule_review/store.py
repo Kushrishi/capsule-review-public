@@ -23,6 +23,16 @@ CREATE TABLE IF NOT EXISTS detection_frames (
     record TEXT NOT NULL,
     PRIMARY KEY(run_id,position)
 );
+CREATE TABLE IF NOT EXISTS detection_category_frames (
+    run_id INTEGER NOT NULL,
+    category INTEGER NOT NULL CHECK(category BETWEEN -1 AND 11),
+    position INTEGER NOT NULL,
+    PRIMARY KEY(run_id,category,position),
+    FOREIGN KEY(run_id,position) REFERENCES detection_frames(run_id,position) ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS detection_indexed_runs (
+    run_id INTEGER PRIMARY KEY REFERENCES detection_runs(id) ON DELETE CASCADE
+);
 CREATE TABLE IF NOT EXISTS studies (
     id TEXT PRIMARY KEY,
     title TEXT NOT NULL,
@@ -119,6 +129,18 @@ class Store:
         with self.connect() as db:
             db.execute("PRAGMA journal_mode=WAL")
             db.executescript(SCHEMA)
+            # One-time upgrade of pre-index detection runs, in one transaction.
+            # -1 indexes any box; 0..11 index retained categories, never raw scores.
+            for row in db.execute('SELECT id FROM detection_runs WHERE id NOT IN '
+                                  '(SELECT run_id FROM detection_indexed_runs)').fetchall():
+                run_id = row['id']
+                db.execute("INSERT OR IGNORE INTO detection_category_frames "
+                           "SELECT f.run_id,CAST(json_extract(b.value,'$.category') AS INTEGER),f.position "
+                           "FROM detection_frames f,json_each(f.record,'$.boxes') b WHERE f.run_id=?",
+                           (run_id,))
+                db.execute('INSERT OR IGNORE INTO detection_category_frames '
+                           'SELECT run_id,-1,position FROM detection_category_frames WHERE run_id=?', (run_id,))
+                db.execute('INSERT OR IGNORE INTO detection_indexed_runs VALUES(?)', (run_id,))
 
     @contextmanager
     def connect(self) -> Iterator[sqlite3.Connection]:

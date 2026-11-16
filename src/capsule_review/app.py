@@ -118,11 +118,12 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
     def get_detections(study_id: str, run_id: str,
                        category: int | None = Query(None, ge=0, lt=12),
                        position: int | None = Query(None, ge=0),
-                       after: int = Query(-1, ge=-1)):
+                       after: int = Query(-1, ge=-1),
+                       limit: int = Query(200, ge=1, le=200)):
         require_study(study_id)
         try:
-            records = detection_frames(store, study_id, run_id, category, position)
-            return {'frames': [r for r in records if r['position'] > after][:200]}
+            records = detection_frames(store, study_id, run_id, category, position, after=after, limit=limit)
+            return {'frames': records}
         except ValueError as exc:
             raise HTTPException(404, str(exc)) from exc
 

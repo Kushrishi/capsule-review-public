@@ -773,7 +773,7 @@ $('nextDetection').addEventListener('click', async () => {
   if (!state.frame || state.busy || state.switching || state.modelBusy) return;
   stopPlayback();
   const study = state.study.id, run = $('detectionRun').value, category = $('detectionCategory').value;
-  const query = `${base()}/detections/${encodeURIComponent(run)}?${category === '' ? '' : `category=${category}&`}`;
+  const query = `${base()}/detections/${encodeURIComponent(run)}?limit=1&${category === '' ? '' : `category=${category}&`}`;
   try {
     let result = await api(query+`after=${state.frame.position}`);
     if (!result.frames.length) result = await api(query+'after=-1');

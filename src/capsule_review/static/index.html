@@ -69,7 +69,8 @@
         <button id="nextDetection" class="outline full" disabled>Next frame with a detection</button>
         <p class="panel-hint">Model suggestions only. Boxes and category scores do not confirm findings or change your notes. No boxes does not mean normal.</p>
         <p id="detectionStatus" class="panel-hint" role="status">No detection run imported.</p>
-        <div id="detectionBoxes"></div><details><summary>Detection provenance</summary><pre id="detectionProvenance"></pre></details>
+        <p id="detectionTrust" class="panel-hint">Imported provenance is a claim from the file producer. This viewer checks frame identity and record structure; it does not independently verify model execution.</p>
+        <div id="detectionBoxes"></div><details><summary>Imported provenance claims</summary><pre id="detectionProvenance"></pre></details>
       </section>
       <details id="referencePanel"><summary>Dataset reference labels</summary><p class="panel-hint">Source annotations, not model predictions. Hidden until you open this section.</p><div id="referenceLabels">No frame selected.</div></details>
       <section class="priority-section" aria-label="Model-assisted research review queue">

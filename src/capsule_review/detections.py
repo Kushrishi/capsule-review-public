@@ -142,27 +142,38 @@ def save_detections(store, study_id, payload: DetectionImport):
             raise ValueError('Detection run already exists; use a new run ID.') from exc
         db.executemany('INSERT INTO detection_frames(run_id,position,record) VALUES(?,?,?)',
                        [(cursor.lastrowid, f.position, f.model_dump_json()) for f in payload.frames])
+        db.executemany('INSERT INTO detection_category_frames VALUES(?,?,?)',
+                       [(cursor.lastrowid, category, f.position) for f in payload.frames
+                        for category in ({-1} | {b.category for b in f.boxes} if f.boxes else set())])
+        db.execute('INSERT INTO detection_indexed_runs VALUES(?)', (cursor.lastrowid,))
     return {'run_id': payload.run_id, 'frames': len(payload.frames), 'status': 'MODEL_SUGGESTIONS_ONLY'}
 
 
 def detection_runs(store, study_id):
     with store.connect() as db:
-        return [{**dict(row), 'provenance': json.loads(row['provenance'])} for row in db.execute(
+        return [{**dict(row), 'provenance': json.loads(row['provenance']),
+                 'execution_verification': 'IMPORTED_CLAIMS_NOT_INDEPENDENTLY_VERIFIED'} for row in db.execute(
             'SELECT run_id,provenance,created_at,payload_sha256 FROM detection_runs WHERE study_id=? ORDER BY id DESC', (study_id,))]
 
 
-def detection_frames(store, study_id, run_id, category=None, position=None):
+def detection_frames(store, study_id, run_id, category=None, position=None, *, after=-1, limit=200):
+    """Keyset lookup; decode only the requested page, never the full recording."""
+    if not 1 <= limit <= 200:
+        raise ValueError('Detection page size must be in 1..200.')
     with store.connect() as db:
         run = db.execute('SELECT id FROM detection_runs WHERE study_id=? AND run_id=?', (study_id, run_id)).fetchone()
         if not run:
             raise ValueError('Detection run not found.')
-        sql = 'SELECT record FROM detection_frames WHERE run_id=?'
-        args = [run['id']]
         if position is not None:
-            sql += ' AND position=?'
-            args.append(position)
+            sql = 'SELECT record FROM detection_frames WHERE run_id=? AND position=? AND position>? LIMIT ?'
+            args = [run['id'], position, after, limit]
+        else:
+            sql = ('SELECT f.record FROM detection_category_frames i JOIN detection_frames f '
+                   'ON f.run_id=i.run_id AND f.position=i.position '
+                   'WHERE i.run_id=? AND i.category=? AND i.position>? ORDER BY i.position LIMIT ?')
+            args = [run['id'], -1 if category is None else category, after, limit]
         result = []
-        for row in db.execute(sql + ' ORDER BY position', args):
+        for row in db.execute(sql, args):
             frame = json.loads(row['record'])
             if category is not None:
                 frame['boxes'] = [b for b in frame['boxes'] if b['category'] == category]

@@ -191,3 +191,90 @@ Sources: [publisher paper](https://doi.org/10.1038/s41597-021-00920-z),
 [publisher terms](https://datasets.simula.no/kvasir-capsule/),
 [source catalogues](https://github.com/simula/kvasir-capsule/tree/553601dc316fef82f39c952e28f60aaad66039e2/official_splits),
 [ImageNet weight definition](https://github.com/pytorch/vision/blob/main/torchvision/models/mobilenetv3.py).
+
+## PR #96 qualification update — 16 November 2026
+
+Navigation now uses a persistent category/position index of retained boxes.
+The SQL query applies category, exclusive `after`, ordering and a bounded page
+limit before reading JSON. Next-detection requests ask for one result. Existing
+runs receive a one-time transactional index backfill; original records are not
+rewritten. A 50,000-record regression limits SQLite work and verifies one JSON
+decode for a one-result request and none for an absent category.
+
+The visible provenance notice distinguishes producer-supplied claims from
+independent verification. Import checks source/display correspondence and record
+structure; it cannot establish that a claimed model was actually executed. API
+run metadata carries `IMPORTED_CLAIMS_NOT_INDEPENDENTLY_VERIFIED`; imported hashes
+or a familiar profile name never promote a run to independently verified status.
+
+The preserved CR-MA-01 catalogue is reused unchanged, not regenerated. Source
+qualification uses the publisher-linked Google Drive mirror of the three labelled
+class archives and both CSV/JSON metadata exports. Exact filenames in those
+archives are JPEG `.jpg`, despite the publication/landing-page PNG description.
+A source key maps through explicit CSV `video_id`/`frame_number`/`filename` fields
+to a unique archive member. Source identities and individual audit records stay
+private. No video archive or reserved Galar data is required.
+
+The two-arm protocol is a bounded **systems comparison**: scratch AnatomyCNN
+versus ImageNet-initialized MobileNetV3-Small. Architecture, capacity, normalization
+layers, dropout and fixed learning rates differ alongside initialization. Equal
+512-step budgets match sampled-image exposure, not FLOPs or optimal convergence.
+The comparison cannot isolate pretraining. Use the same source split, sampled
+frame sequence and batch order for both arms; only training RNG streams for
+model initialization/dropout differ. Retain both best validation checkpoints
+and all four scheduled validation measurements. No arm-specific extra updates,
+augmented data, retries or test-based selection are permitted. An arm exceeding
+the fixed resource cap is a technical failure, not a shortened comparable fit.
+Results remain descriptive on this small selected-frame, video-grouped task.
+
+### Image-backed CR-MA-01 qualification result
+
+**GO for the specified two-fit private, noncommercial, video-grouped feasibility
+experiment; no fitting started.** This supersedes the initial metadata-only
+CONDITIONAL decision for that narrow experiment. It does not authorize medical
+use, a competition, commercial use, or claim institutional ethics clearance.
+
+All 5,560 retained catalogue rows map exactly through the authoritative CSV
+video/frame/filename fields to unique members of the publisher-linked Angiectasia,
+Erosion and Normal-clean-mucosa archives. No extension substitution or index
+correction was needed: all selected files are 336×336 JPEGs. The CSV has 47,248
+rows representing 47,238 unique filename/class pairs; repeated bounding-box
+annotations explain the ten extra rows. One selected Erosion image has two
+same-class box rows; both are retained as source annotations on one image.
+All selected lesion identities also match the publisher's JSON findings.
+
+| Source class archive | Selected authenticated images | Archive bytes | Archive SHA-256 |
+| --- | ---: | ---: | --- |
+| angiectasia.tar.gz | 342 | 9,521,122 | `0019d659dfc7c2b97e218a13de3d4855dfc8e4b517bbd37f9d52c4fee26a1b89` |
+| erosion.tar.gz | 482 | 6,574,862 | `6f0db92ce2ff6769d1ba87077c9903ec9f4e902ce86ab246fca05119a18e670a` |
+| normal_clean_mucosa.tar.gz | 4,736 | 390,319,693 | `4dc2b91b1b128e28eb47e13d34d0f106a0976d381838e8e7e30b7a9f2b9ca533` |
+
+The original catalogue SHA remains
+`4bcef12ae285dadbff0570676b12808fc332ebead022ede08c9e0f0ca182e9d8`.
+All selected source bytes and oriented RGB identities were checked, gzip CRCs
+passed, and a separate pass replayed the catalogue and image-byte commitments.
+No byte-identical or decoded-RGB duplicate groups were found, within or across
+splits. The 39 source videos remain disjoint: 34 train, 2 validation, 3 test.
+
+The predeclared cross-split perceptual screen considered 4,363,292 pairs, using
+64-bit DCT pHash distance ≤6 OR dHash distance ≤4 for candidate retrieval. The
+205 candidates were checked using normalized 32×32 RGB MAE and grayscale SSIM
+averaged over 8×8 windows. A pair is flagged if SSIM ≥.98, or both hash distances
+are ≤4 and MAE ≤.025. None met that flag (maximum candidate SSIM .81628; minimum
+candidate MAE .03286). This bounded screen does not prove absence of every near
+duplicate or authenticate independent patients. No test model outcomes were read.
+
+The existing private ImageNet checkpoint was recovered and matched its full
+pinned SHA-256 without deserialization or execution. Research/education use is
+permitted by the publisher terms; attribution is required, and competition or
+commercial permission is not inferred. No new patient/reviewer data is collected.
+No institutional approval or exemption is asserted; institutional adoption must
+follow the responsible institution's requirements.
+
+The private, exclusively created commitment binds the unchanged catalogue,
+image-backed split, exact byte/RGB/perceptual hashes, complete source metadata,
+duplicate report, fixed protocol and shared PCG64(37) training batch sequence.
+Its SHA-256 is
+`ac9b6615c69d7f31a9f26ea8d114188fbc681885e0c74e7495ffec138f8e8a18`.
+The private files are read-only; hashes and retention provide the audit boundary,
+not a claim of WORM storage, a digital signature or completed fitting.

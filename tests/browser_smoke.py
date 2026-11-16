@@ -150,6 +150,8 @@ with sync_playwright() as p:
     wait_for_js(page, "document.getElementById('detectionStatus').textContent.includes('1 model suggestion')")
     assert page.locator('#detectionOverlay rect').count() == 1
     assert 'Generated fixture' in page.locator('#detectionStatus').inner_text()
+    assert 'does not independently verify model execution' in page.locator('#detectionTrust').inner_text()
+    assert page.get_by_text('Imported provenance claims', exact=True).count() == 1
     page.locator('#detectionCategory').select_option('0')
     wait_for_js(page, "document.getElementById('detectionOverlay').children.length === 0")
     page.locator('#nextDetection').click()
