@@ -122,6 +122,7 @@ async function selectStudy(id) {
   $('intervalNote').value = ''; renderIntervalDraft();
   state.thumbsData = []; state.sourceCoverage = await api(`${base()}/source-coverage`);
   renderSourceContinuity();
+  await loadReviewActivity();
   $('emptyState').hidden = true; $('examination').hidden = false;
   $('studyTitle').textContent = state.study.title; $('sourceText').textContent = state.study.source;
   $('syntheticBanner').hidden = !state.study.synthetic;
@@ -134,7 +135,7 @@ async function selectStudy(id) {
   $('scrubber').max = state.study.frame_count - 1; $('jumpInput').max = state.study.frame_count;
   $('predictionImportBtn').disabled = false; $('referencePanel').open = false;
   for (const id of ['bookmark', 'reviewLabel', 'reviewNote']) $(id).disabled = false;
-  await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadReviewActivity(); await loadIntervals(); await refreshModels(); await loadPriorityRuns();
+  await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadIntervals(); await refreshModels(); await loadPriorityRuns();
   } finally { state.switching = false; syncControls(); }
 }
 function markDirty() { if (!state.frame) return; clearEvidenceAudit(); state.dirty = true;
