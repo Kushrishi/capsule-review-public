@@ -60,6 +60,11 @@
       <label class="field-label" for="reviewNote">Notes</label><textarea id="reviewNote" maxlength="8000" rows="5" placeholder="Record what you want to revisit." disabled></textarea>
       <button id="saveBtn" class="primary full" disabled>Save review</button>
       <p class="panel-hint">Saved locally. Navigation saves your draft first.</p>
+      <section class="review-activity" aria-label="Saved manual review entries">
+        <div class="section-title small"><h2>Review record coverage</h2></div>
+        <p id="reviewActivity" class="panel-hint" role="status" aria-live="polite">Open an examination to see saved-entry counts.</p>
+        <p class="panel-hint">Playing, navigating, or selecting a model queue does not record a human review. Saved entries do not establish medical assessment or normality.</p>
+      </section>
       <section class="predictions"><div class="section-title small"><h2>Model suggestions</h2><button id="predictionImportBtn" class="quiet compact" disabled>Import</button></div><div id="localModelControls" hidden><label class="field-label" for="localModel">Local anatomy model</label><select id="localModel"></select><button id="runModelBtn" class="outline full" disabled>Run local model</button><p class="panel-hint">Region classification only—not lesion detection.</p></div><div id="predictions"><p class="muted">No model connected. No predictions are being generated.</p></div></section>
       <details id="referencePanel"><summary>Dataset reference labels</summary><p class="panel-hint">Source annotations, not model predictions. Hidden until you open this section.</p><div id="referenceLabels">No frame selected.</div></details>
       <section class="priority-section" aria-label="Model-assisted research review queue">

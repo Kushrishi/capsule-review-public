@@ -119,6 +119,50 @@ def test_save_then_clear(client, headers, study):
     assert client.get(route(study, '/saved')).json() == []
 
 
+def test_review_activity_counts_only_saved_entries(client, headers, study, app):
+    path = route(study, '/review-activity')
+    assert client.get(path).json() == {
+        'schema_version': 1, 'frame_count': 3,
+        'saved_entry_positions': 0, 'annotated_positions': 0, 'no_entry_positions': 3,
+    }
+
+    # Navigation is not a saved review or a medical assessment.
+    assert client.put(route(study, '/position'), headers=headers, json={'position': 2}).status_code == 200
+    assert client.get(path).json()['saved_entry_positions'] == 0
+
+    # Blank entry records an action but is not a bookmark, note, label or diagnosis.
+    blank = client.put(route(study, '/frames/0/review'), headers=headers,
+                       json={'revision': 0, 'bookmarked': False})
+    assert blank.status_code == 200
+    assert client.get(path).json() == {
+        'schema_version': 1, 'frame_count': 3,
+        'saved_entry_positions': 1, 'annotated_positions': 0, 'no_entry_positions': 2,
+    }
+    assert client.put(route(study, '/frames/0/review'), headers=headers,
+                      json={'revision': 1, 'bookmarked': True, 'note': 'Revisit'}).status_code == 200
+    assert client.put(route(study, '/frames/2/review'), headers=headers,
+                      json={'revision': 0, 'bookmarked': False, 'label': 'Research note'}).status_code == 200
+    assert client.get(path).json() == {
+        'schema_version': 1, 'frame_count': 3,
+        'saved_entry_positions': 2, 'annotated_positions': 2, 'no_entry_positions': 1,
+    }
+    # Stale edits cannot corrupt activity counters.
+    assert client.put(route(study, '/frames/0/review'), headers=headers,
+                      json={'revision': 1, 'bookmarked': False}).status_code == 409
+    assert client.get(path).json()['annotated_positions'] == 2
+    # Clearing a note preserves the existing record without pretending it is annotated.
+    assert client.put(route(study, '/frames/0/review'), headers=headers,
+                      json={'revision': 2, 'bookmarked': False}).status_code == 200
+    assert client.get(path).json()['annotated_positions'] == 1
+
+    reopened = create_app(app.state.store.root)
+    with TestClient(reopened, base_url='http://127.0.0.1:8765') as other:
+        assert other.get(path).json() == {
+            'schema_version': 1, 'frame_count': 3,
+            'saved_entry_positions': 2, 'annotated_positions': 1, 'no_entry_positions': 1,
+        }
+
+
 def test_position_persists(client, headers, study):
     assert client.put(route(study, '/position'), headers=headers, json={'position':2}).status_code == 200
     assert client.get(route(study)).json()['last_position'] == 2

@@ -134,7 +134,7 @@ async function selectStudy(id) {
   $('scrubber').max = state.study.frame_count - 1; $('jumpInput').max = state.study.frame_count;
   $('predictionImportBtn').disabled = false; $('referencePanel').open = false;
   for (const id of ['bookmark', 'reviewLabel', 'reviewNote']) $(id).disabled = false;
-  await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadIntervals(); await refreshModels(); await loadPriorityRuns();
+  await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadReviewActivity(); await loadIntervals(); await refreshModels(); await loadPriorityRuns();
   } finally { state.switching = false; syncControls(); }
 }
 function markDirty() { if (!state.frame) return; clearEvidenceAudit(); state.dirty = true;
@@ -149,7 +149,7 @@ async function saveReview() {
       method: 'PUT', body: JSON.stringify({revision: state.frame.review.revision,
         bookmarked: $('bookmark').checked, note: $('reviewNote').value, label: $('reviewLabel').value})});
     state.frame.review = review; state.dirty = false; clearEvidenceAudit(); $('saveStatus').textContent = 'Saved';
-    await loadSaved(); await refreshLibrary(); return true;
+    await loadSaved(); await loadReviewActivity(); await refreshLibrary(); return true;
   } catch (e) { fail(e); $('saveStatus').textContent = 'Not saved'; $('saveBtn').disabled = false;
     stopPlayback(); return false;
   } finally { state.saving = false; syncControls(); }
@@ -258,6 +258,13 @@ function renderExportEvidence() {
   message += ' Selected images are not proof of viewing or medical findings.';
   if (selected.size > 250) message += ' This selection exceeds the 250-image export limit.';
   $('exportEvidenceSummary').textContent = message;
+}
+async function loadReviewActivity() {
+  const activity = await api(`${base()}/review-activity`);
+  $('reviewActivity').textContent =
+    `${activity.saved_entry_positions.toLocaleString()} of ${activity.frame_count.toLocaleString()} imported frames have saved manual entries; ` +
+    `${activity.no_entry_positions.toLocaleString()} have no entry. ` +
+    `${activity.annotated_positions.toLocaleString()} entries contain a bookmark, note, or label.`;
 }
 async function loadSaved() {
   const saved = await api(`${base()}/saved`); clearEvidenceAudit(); state.savedFrameCount = saved.length;
