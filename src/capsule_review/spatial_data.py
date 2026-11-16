@@ -180,4 +180,6 @@ def launch_authenticated(contract_path, commitment, encoder_path, output):
     return execute_isolated([sys.executable, "-c", code, str(paths[0]),
         str(contract_path), commitment, str(Path(encoder_path).resolve()),
         str(Path(output).resolve() / "fits")], paths, output,
-        contract["external_evaluation_paths"], timeout=48*3600+60)
+        contract["external_evaluation_paths"], timeout=48*3600+60,
+        devices=[p for p in Path("/dev").glob("nvidia*") if p.is_char_device()] +
+                [p for p in Path("/dev/nvidia-caps").glob("*") if p.is_char_device()])

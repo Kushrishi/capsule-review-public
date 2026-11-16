@@ -5,9 +5,10 @@ import shutil
 import subprocess
 import sys
 import site
+import stat
 
 
-def isolation_command(command, read_paths, output, forbidden_paths):
+def isolation_command(command, read_paths, output, forbidden_paths, *, devices=()):
     executable = shutil.which("bwrap")
     output = Path(output).resolve()
     roots = [Path(p).resolve() for p in read_paths]
@@ -22,6 +23,14 @@ def isolation_command(command, read_paths, output, forbidden_paths):
             raise ValueError("An input/output mount exposes external evaluation")
     if any(p == Path("/") or p == Path("/workspace") for p in roots):
         raise ValueError("Broad workspace mounts are prohibited")
+    gpu_nodes = []
+    for device in devices:
+        path = Path(device).resolve()
+        allowed_name = ((path.parent == Path("/dev") and path.name.startswith("nvidia")) or
+                        path.parent == Path("/dev/nvidia-caps"))
+        if not allowed_name or not stat.S_ISCHR(path.stat().st_mode):
+            raise ValueError("Only NVIDIA character devices may be mounted")
+        gpu_nodes.append(path)
     if not executable:
         raise RuntimeError("bubblewrap is required for executor isolation")
     args = [executable, "--die-with-parent", "--new-session",
@@ -29,15 +38,17 @@ def isolation_command(command, read_paths, output, forbidden_paths):
             "--proc", "/proc", "--dev", "/dev", "--tmpfs", "/tmp"]
     for path in [*system, *roots]:
         args += ["--ro-bind", str(path), str(path)]
+    for path in gpu_nodes:
+        args += ["--dev-bind", str(path), str(path)]
     args += ["--bind", str(output), str(output), "--chdir", str(output), "--"]
     return args + list(command)
 
 
-def execute_isolated(command, read_paths, output, forbidden_paths, *, timeout=60):
+def execute_isolated(command, read_paths, output, forbidden_paths, *, timeout=60, devices=()):
     """Fail closed on namespace/mount errors. External paths are never mounted."""
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=True)
-    args = isolation_command(command, read_paths, output, forbidden_paths)
+    args = isolation_command(command, read_paths, output, forbidden_paths, devices=devices)
     dependency_roots = (Path("/opt"), Path("/usr"),
                         Path(site.getusersitepackages()).resolve())
     runtime_paths = []

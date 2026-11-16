@@ -159,3 +159,11 @@ def test_only_subpixel_source_edge_rounding_is_clipped(tmp_path):
             loader.batch([(0,0,False,1.,1.)])
     finally:
         loader.close()
+
+
+def test_executor_rejects_regular_file_as_gpu_device(tmp_path):
+    source = tmp_path/"image-data"
+    source.write_text("generated")
+    with pytest.raises(ValueError,match="character devices"):
+        isolation_command(["true"],[source],tmp_path/"output",[tmp_path/"labels"],
+                          devices=[source])
