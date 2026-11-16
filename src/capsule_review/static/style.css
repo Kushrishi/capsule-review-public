@@ -54,3 +54,5 @@
 .synthetic-guide p{font-size:11px;line-height:1.65;color:var(--muted);margin:5px 0 0}
 .synthetic-guide button{flex:0 0 auto;white-space:nowrap}
 @media(max-width:650px){.synthetic-guide{flex-direction:column;align-items:stretch}.synthetic-guide button{align-self:flex-start}}
+
+#detectionOverlay{position:absolute;pointer-events:none;overflow:visible}#detectionOverlay rect{fill:none;stroke:#ffd458;stroke-width:2;vector-effect:non-scaling-stroke}.detections{border-top:1px solid var(--line);margin-top:20px;padding-top:18px}.detections select{width:100%}.detections pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px}#detectionBoxes{font-size:12px}

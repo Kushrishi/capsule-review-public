@@ -28,6 +28,7 @@ from .interval_evidence import read_review_export
 from .importer import MAX_FILE_BYTES, import_sources, natural_key, now, validate_filename
 from .models import ImportMeta, IntervalCreate, LocalPredictionRequest, PositionUpdate, PredictionImport, ReviewUpdate
 from .store import Store
+from .detections import DetectionImport, save_detections, detection_runs, detection_frames, CLASSES
 from .source_coverage import summarize_source_spacing
 from .prediction_service import DuplicateRunError, save_predictions
 from .priority import compare_priority_methods, list_prioritizable_runs, priority_queue
@@ -99,6 +100,32 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
     def config():
         return {'version': __version__, 'token': token, 'model_bundled': False,
                 'max_upload_files': 1000, 'max_upload_bytes': MAX_UPLOAD_BYTES}
+
+    @app.post('/api/studies/{study_id}/detections', status_code=201)
+    def import_detections(study_id: str, payload: DetectionImport):
+        require_study(study_id)
+        try:
+            return save_detections(store, study_id, payload)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+
+    @app.get('/api/studies/{study_id}/detections')
+    def list_detections(study_id: str):
+        require_study(study_id)
+        return {'classes': CLASSES, 'runs': detection_runs(store, study_id)}
+
+    @app.get('/api/studies/{study_id}/detections/{run_id}')
+    def get_detections(study_id: str, run_id: str,
+                       category: int | None = Query(None, ge=0, lt=12),
+                       position: int | None = Query(None, ge=0),
+                       after: int = Query(-1, ge=-1),
+                       limit: int = Query(200, ge=1, le=200)):
+        require_study(study_id)
+        try:
+            records = detection_frames(store, study_id, run_id, category, position, after=after, limit=limit)
+            return {'frames': records}
+        except ValueError as exc:
+            raise HTTPException(404, str(exc)) from exc
 
     @app.get('/api/studies')
     def studies():
@@ -230,6 +257,26 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
             return [dict(r) for r in db.execute(
                 "SELECT position,label,note,bookmarked,revision,updated_at FROM reviews WHERE study_id=? "
                 "AND (bookmarked=1 OR note<>'' OR label<>'') ORDER BY position", (study_id,))]
+
+    @app.get('/api/studies/{study_id}/review-activity')
+    def review_activity(study_id: str):
+        """Count saved manual entries, without inferring clinical review."""
+        study = require_study(study_id)
+        with store.connect() as db:
+            row = db.execute(
+                "SELECT COUNT(*) AS saved_entries, "
+                "COALESCE(SUM(CASE WHEN bookmarked=1 OR note<>'' OR label<>'' "
+                "THEN 1 ELSE 0 END),0) AS annotated_entries "
+                "FROM reviews WHERE study_id=?", (study_id,)
+            ).fetchone()
+        recorded = row['saved_entries']
+        return {
+            'schema_version': 1,
+            'frame_count': study['frame_count'],
+            'saved_entry_positions': recorded,
+            'annotated_positions': row['annotated_entries'],
+            'no_entry_positions': study['frame_count'] - recorded,
+        }
 
     def interval_rows(study_id: str) -> list[dict]:
         with store.connect() as db:
