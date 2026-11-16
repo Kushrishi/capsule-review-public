@@ -117,6 +117,7 @@ with sync_playwright() as p:
     wait_for_js(page, "document.getElementById('studyCount').textContent === '1'")
     wait_for_js(page, "document.getElementById('frameImage').complete && document.getElementById('frameImage').naturalWidth > 0")
     assert '24' in page.locator('#frameCounter').inner_text()
+    wait_for_js(page, "document.getElementById('reviewActivity').textContent.includes('0 of 24 imported frames')")
     assert 'Generated ranking example (not AI)' in page.locator('#predictions').inner_text()
     assert page.locator('#syntheticGuide').is_visible()
     assert page.get_by_role('button', name='Use as reviewer label').count() == 0
@@ -132,6 +133,7 @@ with sync_playwright() as p:
     wait_for_js(page, "document.getElementById('priorityComparison').textContent.includes('uniform-gap guarded')")
     assert page.locator('#priorityItems button').count() == 6
     assert not page.locator('#bookmark').is_checked()
+    assert '0 of 24 imported frames' in page.locator('#reviewActivity').inner_text()
     checks.append('Browser executes exploratory guarded policy without changing reviewer labels')
     assert page.locator('#reviewNote').input_value() == ''
     assert not page.locator('#bookmark').is_checked()
@@ -180,11 +182,13 @@ with sync_playwright() as p:
     page.locator('#reviewNote').fill('Software test: verify this frame, save the note, and reopen the review.')
     page.get_by_role('button',name='Save review',exact=True).click()
     wait_for_js(page, "document.getElementById('saveStatus').textContent === 'Saved' && document.getElementById('savedCount').textContent === '1'")
+    wait_for_js(page, "document.getElementById('reviewActivity').textContent.includes('1 of 24 imported frames')")
     page.get_by_label('Next frame',exact=True).click()
     wait_for_js(page, "document.getElementById('jumpInput').value === '2'")
     page.get_by_label('Bookmark this frame').check()
     wait_for_js(page, "document.getElementById('saveStatus').textContent === 'Saved' && document.getElementById('savedCount').textContent === '2'")
     assert '2 of 24 imported images' in page.locator('#exportEvidenceSummary').inner_text()
+    wait_for_js(page, "document.getElementById('reviewActivity').textContent.includes('2 of 24 imported frames')")
     checks.append('Reviewer note and bookmark saved separately')
     page.locator('#reviewNote').fill('Draft saved automatically when navigating.')
     page.get_by_label('Next frame',exact=True).click()

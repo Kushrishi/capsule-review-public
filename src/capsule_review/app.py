@@ -258,6 +258,26 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
                 "SELECT position,label,note,bookmarked,revision,updated_at FROM reviews WHERE study_id=? "
                 "AND (bookmarked=1 OR note<>'' OR label<>'') ORDER BY position", (study_id,))]
 
+    @app.get('/api/studies/{study_id}/review-activity')
+    def review_activity(study_id: str):
+        """Count saved manual entries, without inferring clinical review."""
+        study = require_study(study_id)
+        with store.connect() as db:
+            row = db.execute(
+                "SELECT COUNT(*) AS saved_entries, "
+                "COALESCE(SUM(CASE WHEN bookmarked=1 OR note<>'' OR label<>'' "
+                "THEN 1 ELSE 0 END),0) AS annotated_entries "
+                "FROM reviews WHERE study_id=?", (study_id,)
+            ).fetchone()
+        recorded = row['saved_entries']
+        return {
+            'schema_version': 1,
+            'frame_count': study['frame_count'],
+            'saved_entry_positions': recorded,
+            'annotated_positions': row['annotated_entries'],
+            'no_entry_positions': study['frame_count'] - recorded,
+        }
+
     def interval_rows(study_id: str) -> list[dict]:
         with store.connect() as db:
             return [dict(row) for row in db.execute(
