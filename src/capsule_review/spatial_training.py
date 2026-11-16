@@ -95,11 +95,11 @@ def run_arm(model, *, detector, seed, pools, population_size, load_batch,
     started = time.monotonic()
     updates_per_epoch = math.ceil(population_size / 16)
     updates = 20 * updates_per_epoch
-    model.to(device)
-    optimizer = make_optimizer(model, detector=detector)
     plan = iter(matched_draws(pools, seed, updates * 16))
     measurements = []
     try:
+        model.to(device)
+        optimizer = make_optimizer(model, detector=detector)
         torch.use_deterministic_algorithms(True)
         with torch.random.fork_rng(devices=list(range(torch.cuda.device_count()))):
             torch.manual_seed(seed)
@@ -124,6 +124,8 @@ def run_arm(model, *, detector, seed, pools, population_size, load_batch,
                         with torch.random.fork_rng(devices=list(range(torch.cuda.device_count()))):
                             evidence = evaluate_development(model, detector)
                         result = development_metrics(evidence["scores"], evidence["records"])
+                        if time.monotonic() - started > maximum_seconds:
+                            raise RuntimeError("Arm compute limit exceeded during validation")
                         checkpoint = output / f"epoch-{epoch}.pt"
                         with checkpoint.open("xb") as handle:
                             torch.save(model.state_dict(), handle)
