@@ -2,7 +2,7 @@
 const $ = (id) => document.getElementById(id);
 const SYNTHETIC_DEMO_RUN_ID = 'capsule-review-synthetic-demo-v1';
 const state = {token: '', studies: [], study: null, frame: null, dirty: false, busy: false,
-  saving: false, switching: false, modelBusy: false, auditBusy: false, models: [], playing: false, timer: null, files: [], thumbsStart: -1, thumbsData: [], sourceCoverage: null,
+  desktopImportBusy: false, saving: false, switching: false, modelBusy: false, auditBusy: false, models: [], playing: false, timer: null, files: [], thumbsStart: -1, thumbsData: [], sourceCoverage: null,
   intervals: [], intervalStart: null, savedFrameCount: 0, savedPositions: [],
   prioritySources: [], priorityQuery: null, priorityData: null, priorityBusy: false};
 let toastTimer;
@@ -12,7 +12,7 @@ let detectionRuns = [];
 function syncControls() {
   const running = state.busy || state.switching || state.saving || state.modelBusy || state.auditBusy;
   const blocked = running || !state.frame;
-  for (const id of ['importBtn','emptyImportBtn','demoBtn']) $(id).disabled = running;
+  for (const id of ['importBtn','emptyImportBtn','demoBtn']) $(id).disabled = running || state.desktopImportBusy;
   for (const button of document.querySelectorAll('.study-button')) button.disabled = running;
   for (const id of ['bookmark','reviewLabel','reviewNote','jumpInput','scrubber','playBtn','zoomBtn','predictionImportBtn']) $(id).disabled = blocked;
   for (const id of ['detectionImportBtn','detectionRun','detectionCategory','nextDetection']) $(id).disabled = blocked || (id !== 'detectionImportBtn' && !detectionRuns.length);
@@ -392,7 +392,7 @@ function selectFiles(input) {
   $('fileSelection').textContent = `${state.files.length} images · ${(size / 1024 / 1024).toFixed(1)} MiB${skipped ? ` · ${skipped} unsupported files omitted` : ''}`;
   if (!$('importTitle').value && state.files[0]) $('importTitle').value = state.files[0].webkitRelativePath?.split('/')[0] || 'Image sequence';
   $('submitImport').disabled = !state.files.length || state.files.length > 1000 || size > 512 * 1024 * 1024;
-  $('importError').textContent = state.files.length > 1000 || size > 512 * 1024 * 1024 ? 'Use the CLI importer for more than 1,000 frames or 512 MiB.' : '';
+  $('importError').textContent = state.files.length > 1000 || size > 512 * 1024 * 1024 ? 'Browser upload is limited to 1,000 frames / 512 MiB. Use desktop full-examination folder import for larger sequences.' : '';
 }
 for (const id of ['fileInput','folderInput']) $(id).addEventListener('change', () => selectFiles($(id)));
 $('importForm').addEventListener('submit', async (event) => {
@@ -406,6 +406,108 @@ $('importForm').addEventListener('submit', async (event) => {
   } catch (e) {$('importError').textContent = e.message;}
   finally {$('submitImport').textContent = 'Import locally'; $('submitImport').disabled = !state.files.length;}
 });
+// No folder paths are accepted by the HTTP API. The native picker returns a
+// one-use grant; only the authenticated desktop backend registers these routes.
+let desktopSelection = null;
+let desktopJob = null;
+let desktopPolling = false;
+let desktopReady = false;
+let desktopPickerBusy = false;
+function displayDesktopImport(job) {
+  desktopJob = job;
+  const active = ['running', 'cancelling'].includes(job.state);
+  state.desktopImportBusy = active;
+  $('desktopImportProgress').hidden = job.state === 'idle';
+  desktopPickerBusy = job.picker_state === 'pending';
+  if (job.picker_state === 'selected') {
+    desktopSelection = job.selection;
+    $('desktopFolderSelection').textContent = job.folder_name;
+  }
+  if (['cancelled', 'failed'].includes(job.picker_state)) {
+    desktopSelection = null; $('desktopFolderSelection').textContent = 'No local folder selected.';
+  }
+  if (job.picker_error) $('importError').textContent = job.picker_error;
+  $('desktopChooseFolder').disabled = active || desktopPickerBusy;
+  $('desktopStartImport').disabled = active || !desktopSelection;
+  $('desktopImportCancel').hidden = !active;
+  $('desktopImportCancel').disabled = !job.cancel_allowed || job.state === 'cancelling';
+  $('desktopImportOpen').hidden = job.state !== 'completed';
+  const bar = $('desktopImportBar');
+  if (job.total) {bar.max = job.total; bar.value = job.completed;}
+  else bar.removeAttribute('value');
+  const phases = {scanning: 'Scanning selected folder', importing: 'Copying examination frames',
+    committing: 'Saving examination', completed: 'Examination imported',
+    cancelled: 'Import cancelled', failed: 'Import stopped'};
+  $('desktopImportHeading').textContent = job.state === 'cancelling' ? 'Cancelling import…' : (phases[job.phase] || 'Folder import');
+  const format = n => Number(n || 0).toLocaleString();
+  let message = job.phase === 'scanning' ? `${format(job.scanned_entries)} folder entries scanned.` :
+    `${format(job.completed)}${job.total ? ' / ' + format(job.total) : ''} images processed.`;
+  if (job.output_bytes) message += ` ${(job.output_bytes / 1024 ** 2).toFixed(1)} MiB written.`;
+  if (job.elapsed_seconds !== undefined) message += ` ${Math.round(job.elapsed_seconds)} s elapsed.`;
+  if (job.ignored_files) message += ` ${format(job.ignored_files)} unsupported entries skipped.`;
+  if (job.filename && active) message += ` Current frame: ${job.filename}.`;
+  if (job.phase === 'committing') message += ' Finishing the atomic save; cancellation is no longer available.';
+  if (job.state === 'completed') message += ' Ready to review all imported frames.';
+  if (job.error) message += ' ' + job.error;
+  $('desktopImportStatus').textContent = message;
+  syncControls();
+}
+async function pollDesktopImport() {
+  if (desktopPolling) return;
+  desktopPolling = true;
+  try {
+    const previous = desktopJob?.state;
+    const job = await api('/api/desktop-import');
+    displayDesktopImport(job);
+    if (previous === undefined && job.recovered_imports) announce(`Cleaned up ${job.recovered_imports} interrupted import(s). Choose the source folder again to restart.`);
+    if (job.state === 'completed' && previous !== 'completed') await refreshLibrary();
+  } catch (error) {
+    $('desktopImportStatus').textContent = 'Import status could not be read. Reopen the application to recover saved work.';
+    $('desktopImportProgress').hidden = false;
+  } finally {
+    desktopPolling = false;
+    if (desktopReady) setTimeout(pollDesktopImport, state.desktopImportBusy ? 350 : 1500);
+  }
+}
+function enableDesktopImport() {
+  if (desktopReady) return;
+  desktopReady = true;
+  $('desktopFolderImport').hidden = false;
+  pollDesktopImport();
+}
+// Enabled only by the desktop backend's authenticated configuration response.
+$('desktopChooseFolder').addEventListener('click', async () => {
+  desktopPickerBusy = true;
+  $('desktopChooseFolder').disabled = true;
+  try {
+    desktopSelection = null;
+    $('desktopFolderSelection').textContent = 'Selecting folder…';
+    displayDesktopImport(await api('/api/desktop-import/choose', {method: 'POST'}));
+  } catch (error) { $('importError').textContent = error.message || String(error); }
+  finally { $('desktopChooseFolder').disabled = state.desktopImportBusy || desktopPickerBusy; }
+});
+$('desktopStartImport').addEventListener('click', async () => {
+  if (!desktopSelection || !$('importTitle').reportValidity()) return;
+  $('desktopStartImport').disabled = true;
+  try {
+    const job = await api('/api/desktop-import', {method: 'POST', body: JSON.stringify({
+      selection: desktopSelection, title: $('importTitle').value,
+      source: $('importSource').value || 'Local research images'
+    })});
+    desktopSelection = null;
+    $('desktopFolderSelection').textContent = 'No local folder selected.';
+    $('importDialog').close(); displayDesktopImport(job);
+  } catch (error) { $('importError').textContent = error.message; }
+  finally { $('desktopStartImport').disabled = state.desktopImportBusy || !desktopSelection; }
+});
+$('desktopImportCancel').addEventListener('click', async () => {
+  try { displayDesktopImport(await api('/api/desktop-import/cancel', {method: 'POST'})); }
+  catch (error) { fail(error); }
+});
+$('desktopImportOpen').addEventListener('click', async () => {
+  if (desktopJob?.study_id) await selectStudy(desktopJob.study_id);
+});
+
 $('demoBtn').addEventListener('click', async () => {
   stopPlayback(); $('demoBtn').disabled = true;
   try {const existing = state.studies.find(s => s.synthetic && s.title === 'Test sequence' &&
@@ -706,7 +808,7 @@ $('runModelBtn').addEventListener('click', async () => {
 });
 
 (async () => {
-  try {const config = await api('/api/config'); state.token = config.token; $('version').textContent = `v${config.version}`;
+  try {const config = await api('/api/config'); state.token = config.token; if (config.desktop_folder_import) enableDesktopImport(); $('version').textContent = `v${config.version}`;
     await refreshLibrary(); if (state.studies.length) await selectStudy(state.studies[0].id);
   } catch (e) {fail(e);}
 })();

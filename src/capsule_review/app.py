@@ -99,6 +99,7 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
     @app.get('/api/config')
     def config():
         return {'version': __version__, 'token': token, 'model_bundled': False,
+                'desktop_folder_import': getattr(app.state, 'desktop_folder_import', False),
                 'max_upload_files': 1000, 'max_upload_bytes': MAX_UPLOAD_BYTES}
 
     @app.post('/api/studies/{study_id}/detections', status_code=201)

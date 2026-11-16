@@ -13,7 +13,7 @@ import socket
 import sys
 import threading
 import time
-from urllib.parse import parse_qs
+from urllib.parse import parse_qs, urlsplit
 
 from starlette.requests import Request
 from starlette.responses import JSONResponse, RedirectResponse
@@ -69,12 +69,23 @@ def _serve(connection, root, ticket):
     from filelock import FileLock, Timeout
     from .app import create_app
 
+    from .desktop_import import DesktopImports, register_desktop_imports
+
+    send_lock = threading.Lock()
+    def send(message):
+        with send_lock:
+            connection.send(message)
+
     server = None
+    imports = None
     try:
         root = Path(root)
         root.mkdir(parents=True, exist_ok=True, mode=0o700)
         with FileLock(root / '.desktop.lock', timeout=0):
             app = create_app(root)
+            imports = DesktopImports(app.state.store)
+            imports.notify_picker = lambda request_id: send(('pick', request_id))
+            register_desktop_imports(app, imports)
             # Keep the socket reserved through server startup: no free-port race.
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
                 sock.bind(('127.0.0.1', 0))
@@ -96,17 +107,35 @@ def _serve(connection, root, ticket):
                             return
                     if not server.should_exit:
                         try:
-                            connection.send(('ready', port))
-                            connection.recv()
+                            send(('ready', port))
+                            while True:
+                                command = connection.recv()
+                                if isinstance(command, tuple) and command[0] == 'picked':
+                                    imports.selected(*command[1:])
+                                    continue
+                                if not isinstance(command, tuple) or command[0] != 'folder':
+                                    break
+                                try:
+                                    value = imports.grant(command[1])
+                                    send(('selection', value))
+                                except ValueError as exc:
+                                    send(('error', str(exc)))
                         except (EOFError, BrokenPipeError, OSError):
                             pass
+                    # Arm the watchdog before waiting for cancellation/cleanup.
+                    threading.Timer(6, lambda: os._exit(0)).start()
+                    imports.shutdown()
                     server.should_exit = True
                     # Sync import/inference work may ignore graceful cancellation.
                     # SQLite rolls back incomplete transactions on the next open.
-                    threading.Timer(6, lambda: os._exit(0)).start()
 
                 threading.Thread(target=supervise, daemon=True).start()
-                server.run(sockets=[sock])
+                try:
+                    server.run(sockets=[sock])
+                finally:
+                    # Do not release the workspace lock while an import can still write.
+                    if not imports.shutdown():
+                        os._exit(0)
     except Timeout:
         connection.send(('error', 'This workspace is already open in another desktop window.'))
     except Exception:
@@ -116,6 +145,8 @@ def _serve(connection, root, ticket):
         except (OSError, EOFError):
             pass
     finally:
+        if imports:
+            imports.shutdown()
         connection.close()
 
 
@@ -126,6 +157,7 @@ class Backend:
         self.root, self.timeout = Path(root).expanduser().resolve(), timeout
         self.process = self.connection = None
         self.url = None
+        self.ipc_lock = threading.Lock()
 
     def start(self):
         context = mp.get_context('spawn')
@@ -153,6 +185,20 @@ class Backend:
             child.close()
             self.stop()
             raise
+
+    def select_folder(self, folder):
+        with self.ipc_lock:
+            self.connection.send(('folder', str(folder)))
+            if not self.connection.poll(5):
+                raise RuntimeError('The backend did not confirm the folder selection. Reopen the application.')
+            kind, result = self.connection.recv()
+            if kind != 'selection':
+                raise RuntimeError(result)
+            return result
+
+    def picker_result(self, request_id, folder, error=None):
+        with self.ipc_lock:
+            self.connection.send(('picked', request_id, folder, error))
 
     def stop(self):
         if self.connection:
@@ -201,6 +247,34 @@ def configure_qt_downloads():
     qt.BrowserView.on_download_requested = download_requested
 
 
+class FolderPicker:
+    """Native picker service. No Python API is exposed to JavaScript."""
+    def __init__(self, backend):
+        self._backend = backend
+        self._window = None
+        self._lock = threading.Lock()
+
+    def _trusted(self):
+        current = urlsplit(self._window.get_current_url() or '')
+        expected = urlsplit(self._backend.url)
+        if (current.scheme, current.netloc, current.path) != (expected.scheme, expected.netloc, '/'):
+            raise RuntimeError('Folder selection is available only in the local viewer.')
+
+    def choose_import_folder(self):
+        import webview
+        if not self._lock.acquire(blocking=False):
+            raise RuntimeError('A folder picker is already open.')
+        try:
+            self._trusted()
+            folders = self._window.create_file_dialog(webview.FileDialog.FOLDER, allow_multiple=False)
+            self._trusted()
+            if not folders:
+                return None
+            return str(folders[0])
+        finally:
+            self._lock.release()
+
+
 def run_window(root):
     try:
         import webview
@@ -213,11 +287,22 @@ def run_window(root):
         configure_qt_downloads()
         gui = 'qt'
     with Backend(root) as backend:
+        picker = FolderPicker(backend)
         window = webview.create_window('Capsule Review — Desktop v0.1', backend.url,
                                       width=1280, height=900, min_size=(800, 600), confirm_close=True)
+        picker._window = window
         closed = threading.Event()
         failed = threading.Event()
         window.events.closed += lambda: closed.set()
+
+        def choose_folder(request_id):
+            try:
+                backend.picker_result(request_id, picker.choose_import_folder())
+            except Exception:
+                try:
+                    backend.picker_result(request_id, None, 'Folder selection failed. Try choosing the folder again.')
+                except (OSError, AttributeError):
+                    pass
 
         def watch_backend():
             while not closed.wait(0.25):
@@ -226,6 +311,13 @@ def run_window(root):
                     window.confirm_close = False
                     window.destroy()
                     return
+                if backend.connection and backend.connection.poll():
+                    try:
+                        kind, value = backend.connection.recv()
+                    except (EOFError, OSError):
+                        continue
+                    if kind == 'pick':
+                        threading.Thread(target=choose_folder, args=(value,), daemon=True).start()
 
         def interrupted(signum, frame):
             window.confirm_close = False
@@ -233,7 +325,7 @@ def run_window(root):
 
         previous = {sig: signal.signal(sig, interrupted) for sig in (signal.SIGTERM, signal.SIGINT)}
         try:
-            # No persistent browser profile or exposed filesystem/Python API.
+            # Temporary profile; folder selection uses IPC, with no JS/Python bridge.
             webview.start(watch_backend, gui=gui, private_mode=True, debug=False)
         finally:
             closed.set()

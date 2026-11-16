@@ -15,6 +15,13 @@
     <div class="header-actions"><span class="local-badge"><i></i>Local workspace</span><a class="research-link" href="/static/locked-results.html">Study results</a><button id="helpBtn" class="quiet">Help</button><button id="importBtn" class="primary">Import frames</button></div>
   </header>
   <div id="notice" class="notice" role="alert" hidden></div>
+  <section id="desktopImportProgress" class="desktop-import-progress" aria-label="Folder import" hidden>
+    <strong id="desktopImportHeading">Importing examination</strong>
+    <progress id="desktopImportBar" aria-label="Import progress"></progress>
+    <p id="desktopImportStatus" role="status" aria-live="polite"></p>
+    <button id="desktopImportCancel" type="button" class="outline">Cancel import</button>
+    <button id="desktopImportOpen" type="button" class="primary" hidden>Open imported examination</button>
+  </section>
   <div class="workspace">
     <aside class="library" aria-label="Examinations">
       <div class="section-title"><h2>Examinations</h2><span id="studyCount">0</span></div>
@@ -123,10 +130,17 @@
     <p class="muted">Images are copied to your local workspace. Use de-identified data you are permitted to process.</p>
     <label class="field-label" for="importTitle">Examination title</label><input id="importTitle" name="title" maxlength="120" required placeholder="For example: Galar 001 — development sample">
     <label class="field-label" for="importSource">Source / attribution</label><input id="importSource" name="source" maxlength="300" placeholder="Dataset, version and attribution">
+    <section id="desktopFolderImport" class="desktop-folder-import" hidden>
+      <h3>Full examination folder</h3>
+      <p>Copy images directly from a local folder, with progress and cancellation. Subfolders are not traversed.</p>
+      <button type="button" id="desktopChooseFolder" class="outline">Choose local folder</button>
+      <p id="desktopFolderSelection">No local folder selected.</p>
+      <button type="button" id="desktopStartImport" class="primary" disabled>Import full examination</button>
+    </section>
     <div class="file-buttons"><button type="button" id="chooseFilesBtn" class="outline">Choose images</button><button type="button" id="chooseFolderBtn" class="outline">Choose folder</button></div>
     <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" multiple hidden><input id="folderInput" type="file" webkitdirectory multiple hidden>
     <p id="fileSelection" class="selection-note">No images selected.</p>
-    <p class="panel-hint">Natural filename order. Browser import: up to 1,000 images / 512 MiB. For larger sequences or Galar annotation CSVs, use the command-line importer.</p>
+    <p class="panel-hint">Natural filename order. Browser import: up to 1,000 images / 512 MiB. Use the desktop full-examination folder importer for larger sequences. Galar annotation CSVs remain a CLI option.</p>
     <div class="dialog-actions"><button type="button" class="quiet" data-close="importDialog">Cancel</button><button id="submitImport" type="submit" class="primary" disabled>Import locally</button></div>
     <p id="importError" class="error-text" role="alert"></p>
   </form></dialog>
