@@ -101,9 +101,9 @@ def test_failures_leave_no_partial_study(tmp_path, image_bytes, monkeypatch, fau
     elif fault == 'unreadable':
         monkeypatch.setattr(importer, '_read_folder_image', lambda *a: (_ for _ in ()).throw(PermissionError('unreadable')))
     elif fault == 'duplicate-name':
-        if os.name == 'nt':
-            pytest.skip('Case-insensitive filesystem cannot create the fixture')
-        (path / 'FRAME_0.PNG').write_bytes(image_bytes)
+        # Case-insensitive volumes cannot contain case-only filename pairs.
+        # Exercise the shared source guard without assuming filesystem behavior.
+        pass
     elif fault == 'duplicate-index':
         (path / 'image-00000.png').write_bytes(image_bytes)
     elif fault == 'changed':
@@ -113,7 +113,11 @@ def test_failures_leave_no_partial_study(tmp_path, image_bytes, monkeypatch, fau
     else:
         (path / 'frame_9.png').symlink_to(path / 'frame_0.png')
     with pytest.raises((ValueError, OSError)) as caught:
-        import_folder(store, path, title='Must not appear', source='Generated', progress=progress)
+        if fault == 'duplicate-name':
+            import_sources(store, [('frame_0.png', image_bytes), ('FRAME_0.PNG', image_bytes)],
+                           title='Must not appear', source='Generated')
+        else:
+            import_folder(store, path, title='Must not appear', source='Generated', progress=progress)
     if fault == 'decode':
         assert 'frame_4.png' in str(caught.value)
     with store.connect() as db:
