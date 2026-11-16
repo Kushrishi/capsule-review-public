@@ -132,7 +132,7 @@ async function selectStudy(id) {
     state.study.runs.some(run => run.model.run_id === SYNTHETIC_DEMO_RUN_ID);
   $('syntheticGuide').hidden = !hasDemoScores;
   $('syntheticBanner').textContent = hasDemoScores
-    ? 'Generated synthetic frames AND example scores · not AI inference or clinical evidence'
+    ? 'Generated frames and ranking example scores · software test sequence'
     : 'Synthetic test sequence · not clinical data';
   $('scrubber').max = state.study.frame_count - 1; $('jumpInput').max = state.study.frame_count;
   $('predictionImportBtn').disabled = false; $('referencePanel').open = false;
