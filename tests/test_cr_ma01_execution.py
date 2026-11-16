@@ -72,3 +72,12 @@ def test_preprocessing_full_field_padding_and_byte_guard(tmp_path):
     assert out[1,112,112].item()==pytest.approx(-.456/.224)
     rows[0]['source_sha256']='0'*64
     with pytest.raises(ValueError,match='Source mismatch'):Images(tmp_path,rows).get(0)
+
+
+def test_independent_verifier_rejects_optimized_python():
+    import subprocess
+    verifier = Path(__file__).resolve().parents[1] / 'scripts' / 'verify_cr_ma01.py'
+    result = subprocess.run([sys.executable, '-O', str(verifier), '--help'],
+                            capture_output=True, text=True)
+    assert result.returncode != 0
+    assert 'verification requires assertions' in result.stderr

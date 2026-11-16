@@ -3,6 +3,10 @@
 Does not import the execution implementation, torch or numpy. Never fits or
 runs a model. Inputs remain private; output contains private video identities.
 """
+# Assertions are integrity checks here, not optional diagnostics.
+if not __debug__:
+    raise RuntimeError('CR-MA-01 verification requires assertions; disable Python optimization.')
+
 import argparse
 from collections import defaultdict
 from fractions import Fraction
