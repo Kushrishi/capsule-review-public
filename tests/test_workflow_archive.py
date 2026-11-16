@@ -9,7 +9,7 @@ from pathlib import Path
 import hashlib
 
 ROOT = Path(__file__).resolve().parents[1]
-ACTIVE = frozenset({"tests.yml", "public-source-privacy.yml",
+ACTIVE = frozenset({"tests.yml", "public-source-privacy.yml", "macos-desktop.yml",
                     "galar-frozen-mobilenet.yml", "galar-negative-expansion-cv.yml"})
 ORIGINAL_ARCHIVE_BLOBS = {
     "galar-21-29-index.yml": "9ca3b6648153a8f55251ceebf8ab478fa88e335a",

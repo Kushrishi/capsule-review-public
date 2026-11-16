@@ -332,3 +332,12 @@ Final physical-Mac check (generated images only):
 
 Automated window creation/DOM checks do not establish human picker usability,
 visual presentation, TCC permission behavior or Finder/shortcut restart behavior.
+
+Qualification result (16 November 2026): [Apple Silicon CI run](https://github.com/Kushrishi/capsule-review-public/actions/runs/43955403141)
+passed on macOS 15.8.2 / arm64 with Python 3.12.10: **114 process/API tests**, real
+Cocoa/WKWebView window/import/review/blob and authenticated-span downloads, normal
+shutdown and forced-backend failure. Picker/save choices and confirmation were
+automated as described above. No production-code defect was found. A case-sensitive
+filesystem assumption in a duplicate-name fixture was corrected; the active-workflow
+allowlist also includes this intentional new CI job, with archived workflow hashes
+unchanged.
