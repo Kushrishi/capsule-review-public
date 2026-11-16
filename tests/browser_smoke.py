@@ -142,6 +142,40 @@ with sync_playwright() as p:
     page.locator('#priorityComparison').screenshot(path=str(out/'synthetic-policy-comparison.png'))
     page.set_viewport_size({'width':1440,'height':1050})
     checks.append('Generated nonmedical scores enable five exact-K policies without an AI model')
+    # Import a complete synthetic detector run through the actual file control.
+    from detection_fixture import fixture
+    demo_study = client.get('/api/studies').json()[0]
+    generated = fixture(app.state.store, demo_study['id'])
+    page.locator('#detectionFile').set_input_files({'name':'generated-detections.json', 'mimeType':'application/json', 'buffer':json.dumps(generated).encode()})
+    wait_for_js(page, "document.getElementById('detectionStatus').textContent.includes('1 model suggestion')")
+    assert page.locator('#detectionOverlay rect').count() == 1
+    assert 'Generated fixture' in page.locator('#detectionStatus').inner_text()
+    assert 'does not independently verify model execution' in page.locator('#detectionTrust').inner_text()
+    assert page.get_by_text('Imported provenance claims', exact=True).count() == 1
+    page.locator('#detectionCategory').select_option('0')
+    wait_for_js(page, "document.getElementById('detectionOverlay').children.length === 0")
+    page.locator('#nextDetection').click()
+    wait_for_js(page, "document.getElementById('jumpInput').value === '3'")
+    wait_for_js(page, "document.getElementById('detectionOverlay').children.length === 1")
+    assert 'angiodysplasia' in page.locator('#detectionBoxes').inner_text()
+    geometry = page.evaluate("""() => {
+      const image=document.getElementById('frameImage').getBoundingClientRect();
+      const box=document.querySelector('#detectionOverlay rect').getBoundingClientRect();
+      return {x:(box.left-image.left)/image.width,y:(box.top-image.top)/image.height,w:box.width/image.width,h:box.height/image.height};
+    }""")
+    assert abs(geometry['x']-.1)<.005 and abs(geometry['y']-.2)<.005
+    assert abs(geometry['w']-.6)<.005 and abs(geometry['h']-.6)<.005
+    page.locator('#zoomBtn').click()
+    wait_for_js(page, "document.getElementById('imageStage').classList.contains('zoomed')")
+    page.locator('#zoomBtn').click()
+    page.locator('#detectionCategory').select_option('7')
+    page.locator('#nextDetection').click()
+    wait_for_js(page, "document.getElementById('jumpInput').value === '1'")
+    wait_for_js(page, "document.getElementById('detectionBoxes').textContent.includes('bleeding')")
+    page.locator('#detectionCategory').select_option('')
+    assert page.locator('#reviewNote').input_value() == ''
+    assert not page.locator('#bookmark').is_checked()
+    checks.append('Detector import, class filtering, aligned boxes and navigation preserve human review')
     page.locator('#reviewLabel').fill('Navigation check')
     page.locator('#reviewNote').fill('Software test: verify this frame, save the note, and reopen the review.')
     page.get_by_role('button',name='Save review',exact=True).click()
