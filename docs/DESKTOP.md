@@ -288,3 +288,56 @@ shutdown during import. GUI results above are actual offscreen Qt execution with
 only picker choices stubbed. Existing browser smoke remains subject to the v0.1
 environment restriction described above; no new interactive macOS/Windows claim
 is made.
+
+## Apple Silicon macOS qualification
+
+The dedicated [macOS workflow](../.github/workflows/macos-desktop.yml) uses the
+standard `macos-15` runner, verifies a genuine `Darwin` / `arm64` Python process,
+and installs `.[desktop,dev]` with Python 3.12. It does not install model extras,
+train models, use MPS or run the large performance benchmark. Existing Linux jobs
+remain unchanged. It can also be started with **Run workflow** in GitHub Actions.
+
+Process/API tests cover package/entrypoint startup, authenticated loopback access,
+workspace locking, persistence, folder jobs, cancellation, process-kill recovery,
+annotations and exports. The separate `tests/macos_desktop_smoke.py` invokes the
+production launcher with real AppKit/WKWebView: a visible native window, session
+bootstrap, 64 generated frames, native selection IPC, last-frame navigation,
+notes, blob review download, authenticated full-span download and window shutdown.
+Its second invocation kills the backend and verifies native failure handling.
+Folder and save-dialog choices and confirmation responses are automated; network
+requests, WebKit rendering, import, ZIP bytes and persistence are not replaced.
+A timeout fails the native test, rather than reporting process-only coverage as GUI
+success. No screenshots or generated examinations are published as CI artifacts.
+
+To repeat the native test on a Mac after installing the desktop/test extras:
+
+```sh
+python tests/macos_desktop_smoke.py
+python tests/macos_desktop_smoke.py --kill-backend
+```
+
+Final physical-Mac check (generated images only):
+
+1. Launch the existing `.command` shortcut by double-clicking it. Check window
+   layout, Retina scaling, keyboard navigation/focus and close confirmation.
+2. Use the real folder picker: cancel once, then choose a test folder with spaces
+   or Unicode in its name. Check macOS access prompts for Desktop/Documents/
+   Downloads; denying permission must show an error and permit a later retry.
+3. Cancel a folder import, retry, then close during another import. Reopen through
+   the shortcut and confirm completed studies/notes persist without a partial study.
+   Also check the second-window workspace-lock message.
+4. Cancel a native save dialog, then export review and full spans to a chosen
+   folder. Open both ZIPs in Finder. Quit/relaunch and confirm the saved annotation,
+   last reviewed frame and any generated detection fixture remain available.
+
+Automated window creation/DOM checks do not establish human picker usability,
+visual presentation, TCC permission behavior or Finder/shortcut restart behavior.
+
+Qualification result (16 November 2026): [Apple Silicon CI run](https://github.com/Kushrishi/capsule-review-public/actions/runs/43955403141)
+passed on macOS 15.8.2 / arm64 with Python 3.12.10: **114 process/API tests**, real
+Cocoa/WKWebView window/import/review/blob and authenticated-span downloads, normal
+shutdown and forced-backend failure. Picker/save choices and confirmation were
+automated as described above. No production-code defect was found. A case-sensitive
+filesystem assumption in a duplicate-name fixture was corrected; the active-workflow
+allowlist also includes this intentional new CI job, with archived workflow hashes
+unchanged.
