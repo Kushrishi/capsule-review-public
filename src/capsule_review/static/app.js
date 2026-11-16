@@ -6,6 +6,8 @@ const state = {token: '', studies: [], study: null, frame: null, dirty: false, b
   intervals: [], intervalStart: null, savedFrameCount: 0, savedPositions: [],
   prioritySources: [], priorityQuery: null, priorityData: null, priorityBusy: false};
 let toastTimer;
+let detectionData = null;
+let detectionRuns = [];
 
 function syncControls() {
   const running = state.busy || state.switching || state.saving || state.modelBusy || state.auditBusy;
@@ -13,6 +15,7 @@ function syncControls() {
   for (const id of ['importBtn','emptyImportBtn','demoBtn']) $(id).disabled = running;
   for (const button of document.querySelectorAll('.study-button')) button.disabled = running;
   for (const id of ['bookmark','reviewLabel','reviewNote','jumpInput','scrubber','playBtn','zoomBtn','predictionImportBtn']) $(id).disabled = blocked;
+  for (const id of ['detectionImportBtn','detectionRun','detectionCategory','nextDetection']) $(id).disabled = blocked || (id !== 'detectionImportBtn' && !detectionRuns.length);
   $('runModelBtn').disabled = blocked || !$('localModel').value;
   $('localModel').disabled = blocked;
   $('saveBtn').disabled = blocked || !state.dirty;
@@ -116,7 +119,7 @@ async function selectStudy(id) {
   state.switching = true; syncControls();
   try {
   stopPlayback(); if (state.dirty && !(await saveReview())) return;
-  clearError(); clearEvidenceAudit(); state.study = await api(`/api/studies/${id}`); state.frame = null; state.thumbsStart = -1;
+  clearError(); clearEvidenceAudit(); detectionData = null; detectionRuns = []; $('detectionOverlay').replaceChildren(); state.study = await api(`/api/studies/${id}`); state.frame = null; state.thumbsStart = -1;
   state.intervalStart = null; state.intervals = []; state.savedFrameCount = 0; state.savedPositions = [];
   state.prioritySources = []; state.priorityQuery = null; state.priorityData = null; resetPriorityDisplay();
   $('intervalNote').value = ''; renderIntervalDraft();
@@ -134,7 +137,7 @@ async function selectStudy(id) {
   $('scrubber').max = state.study.frame_count - 1; $('jumpInput').max = state.study.frame_count;
   $('predictionImportBtn').disabled = false; $('referencePanel').open = false;
   for (const id of ['bookmark', 'reviewLabel', 'reviewNote']) $(id).disabled = false;
-  await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadIntervals(); await refreshModels(); await loadPriorityRuns();
+  await loadDetectionRuns(); await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadIntervals(); await refreshModels(); await loadPriorityRuns();
   } finally { state.switching = false; syncControls(); }
 }
 function markDirty() { if (!state.frame) return; clearEvidenceAudit(); state.dirty = true;
@@ -172,7 +175,7 @@ async function navigate(position, force = false) {
     $('prevBtn').disabled = position === 0; $('nextBtn').disabled = position === state.study.frame_count - 1;
     $('bookmark').checked = frame.review.bookmarked; $('reviewLabel').value = frame.review.label;
     $('reviewNote').value = frame.review.note; $('saveStatus').textContent = frame.review.revision ? 'Saved' : 'No notes';
-    $('saveBtn').disabled = true; state.dirty = false; renderReference(); renderPredictions();
+    $('saveBtn').disabled = true; state.dirty = false; renderReference(); renderPredictions(); await renderDetections();
     await renderFilmstrip(position); renderSourceStep(position); renderIntervalDraft();
     await api(`${base()}/position`, {method: 'PUT', body: JSON.stringify({position})});
     return true;
@@ -699,3 +702,85 @@ $('runModelBtn').addEventListener('click', async () => {
     await refreshLibrary(); if (state.studies.length) await selectStudy(state.studies[0].id);
   } catch (e) {fail(e);}
 })();
+
+async function loadDetectionRuns() {
+  const data = await api(`${base()}/detections`);
+  detectionRuns = data.runs;
+  $('detectionRun').replaceChildren(); $('detectionCategory').replaceChildren();
+  for (const run of data.runs) {
+    const option = textElement('option', run.run_id); option.value = run.run_id;
+    $('detectionRun').append(option);
+  }
+  const all = textElement('option', 'All categories'); all.value = '';
+  $('detectionCategory').append(all);
+  data.classes.forEach((name, index) => {
+    const option = textElement('option', name); option.value = index;
+    $('detectionCategory').append(option);
+  });
+  $('detectionStatus').textContent = data.runs.length ? 'Select a run and category.' : 'No detection run imported.';
+  $('detectionProvenance').textContent = '';
+}
+function drawDetectionOverlay() {
+  const svg = $('detectionOverlay'), img = $('frameImage'), stage = $('imageStage');
+  svg.replaceChildren();
+  if (!detectionData || !img.complete || !img.naturalWidth) return;
+  const rect = img.getBoundingClientRect(), parent = stage.getBoundingClientRect();
+  svg.style.left = `${rect.left-parent.left+stage.scrollLeft-stage.clientLeft}px`;
+  svg.style.top = `${rect.top-parent.top+stage.scrollTop-stage.clientTop}px`;
+  svg.style.width = `${rect.width}px`; svg.style.height = `${rect.height}px`;
+  svg.setAttribute('viewBox', `0 0 ${detectionData.width} ${detectionData.height}`);
+  svg.setAttribute('preserveAspectRatio', 'none');
+  for (const box of detectionData.boxes) {
+    const element = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    const [x1,y1,x2,y2] = box.xyxy;
+    for (const [key,value] of Object.entries({x:x1,y:y1,width:x2-x1,height:y2-y1})) element.setAttribute(key,value);
+    svg.append(element);
+  }
+}
+async function renderDetections() {
+  detectionData = null; $('detectionOverlay').replaceChildren(); $('detectionBoxes').replaceChildren();
+  if (!detectionRuns.length) return;
+  const study = state.study.id, position = state.frame.position, run = $('detectionRun').value;
+  const category = $('detectionCategory').value;
+  const data = await api(`${base()}/detections/${encodeURIComponent(run)}?position=${position}${category === '' ? '' : `&category=${category}`}`);
+  if (state.study.id !== study || state.frame.position !== position || $('detectionRun').value !== run || $('detectionCategory').value !== category) return;
+  detectionData = data.frames[0];
+  const provenance = detectionRuns.find(item => item.run_id === run);
+  $('detectionProvenance').textContent = JSON.stringify(provenance, null, 2);
+  $('detectionStatus').textContent = `${provenance.provenance.profile === 'synthetic-fixture-v1' ? 'Generated fixture · ' : ''}${detectionData.boxes.length} model suggestion(s) on this frame.`;
+  for (const box of detectionData.boxes) {
+    const name = $('detectionCategory').options[box.category+1].textContent;
+    $('detectionBoxes').append(textElement('p', `${name} · detector score ${box.score.toFixed(3)}`));
+  }
+  if (category !== '') $('detectionBoxes').append(textElement('p', `Pre-NMS category maximum: ${detectionData.category_scores[Number(category)].toFixed(3)}`));
+  drawDetectionOverlay();
+}
+$('detectionImportBtn').addEventListener('click', () => $('detectionFile').click());
+$('detectionFile').addEventListener('change', async event => {
+  const file = event.target.files[0]; event.target.value = '';
+  if (!file || !state.study || state.busy || state.switching || state.saving || state.modelBusy) return;
+  stopPlayback(); state.modelBusy = true; syncControls();
+  try {
+    if (file.size > 64*1024*1024) throw new Error('Detection JSON exceeds 64 MiB.');
+    const payload = JSON.parse(await file.text());
+    await api(`${base()}/detections`, {method:'POST',body:JSON.stringify(payload)});
+    await loadDetectionRuns(); await renderDetections(); announce('Detection suggestions imported.');
+  } catch(error) { fail(error); }
+  finally { state.modelBusy = false; syncControls(); }
+});
+for (const id of ['detectionRun','detectionCategory']) $(id).addEventListener('change', () => renderDetections().catch(fail));
+$('nextDetection').addEventListener('click', async () => {
+  if (!state.frame || state.busy || state.switching || state.modelBusy) return;
+  stopPlayback();
+  const study = state.study.id, run = $('detectionRun').value, category = $('detectionCategory').value;
+  const query = `${base()}/detections/${encodeURIComponent(run)}?${category === '' ? '' : `category=${category}&`}`;
+  try {
+    let result = await api(query+`after=${state.frame.position}`);
+    if (!result.frames.length) result = await api(query+'after=-1');
+    if (state.study.id !== study || $('detectionRun').value !== run || $('detectionCategory').value !== category) return;
+    if (result.frames.length) await navigate(result.frames[0].position);
+    else announce('No boxes for this category in this run. Unassessed findings remain unknown.');
+  } catch(error) { fail(error); }
+});
+$('frameImage').addEventListener('load', drawDetectionOverlay);
+new ResizeObserver(drawDetectionOverlay).observe($('frameImage'));

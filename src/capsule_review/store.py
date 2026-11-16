@@ -8,6 +8,21 @@ from typing import Iterator
 
 SCHEMA = """
 PRAGMA foreign_keys=ON;
+CREATE TABLE IF NOT EXISTS detection_runs (
+    id INTEGER PRIMARY KEY,
+    study_id TEXT NOT NULL REFERENCES studies(id) ON DELETE CASCADE,
+    run_id TEXT NOT NULL,
+    provenance TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    payload_sha256 TEXT NOT NULL,
+    UNIQUE(study_id,run_id)
+);
+CREATE TABLE IF NOT EXISTS detection_frames (
+    run_id INTEGER NOT NULL REFERENCES detection_runs(id) ON DELETE CASCADE,
+    position INTEGER NOT NULL,
+    record TEXT NOT NULL,
+    PRIMARY KEY(run_id,position)
+);
 CREATE TABLE IF NOT EXISTS studies (
     id TEXT PRIMARY KEY,
     title TEXT NOT NULL,

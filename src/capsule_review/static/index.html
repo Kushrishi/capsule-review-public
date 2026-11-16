@@ -40,7 +40,7 @@
           <button id="syntheticQueueBtn" class="outline compact" type="button">Compare six-image queues</button>
         </section>
         <div class="viewer-meta"><span id="frameCounter"></span><span id="sourceIndex"></span><button class="quiet compact" id="zoomBtn" aria-pressed="false">Fit / 2×</button></div>
-        <div class="image-stage" id="imageStage"><img id="frameImage" alt="Current examination frame"><span class="image-loading" id="imageLoading" hidden>Loading frame…</span></div>
+        <div class="image-stage" id="imageStage"><img id="frameImage" alt="Current examination frame"><svg id="detectionOverlay" aria-hidden="true"></svg><span class="image-loading" id="imageLoading" hidden>Loading frame…</span></div>
         <div class="playback">
           <div class="play-controls"><button id="prevBtn" class="icon-button" aria-label="Previous frame">←</button><button id="playBtn" class="play-button" aria-label="Play frames">Play</button><button id="nextBtn" class="icon-button" aria-label="Next frame">→</button><label class="speed-label">Preview speed <select id="speed"><option value="1">1 frame/s</option><option value="3" selected>3 frames/s</option><option value="6">6 frames/s</option></select></label></div>
           <label class="jump-label">Go to <input id="jumpInput" type="number" min="1" value="1" aria-label="Go to frame"></label>
@@ -61,6 +61,16 @@
       <button id="saveBtn" class="primary full" disabled>Save review</button>
       <p class="panel-hint">Saved locally. Navigation saves your draft first.</p>
       <section class="predictions"><div class="section-title small"><h2>Model suggestions</h2><button id="predictionImportBtn" class="quiet compact" disabled>Import</button></div><div id="localModelControls" hidden><label class="field-label" for="localModel">Local anatomy model</label><select id="localModel"></select><button id="runModelBtn" class="outline full" disabled>Run local model</button><p class="panel-hint">Region classification only—not lesion detection.</p></div><div id="predictions"><p class="muted">No model connected. No predictions are being generated.</p></div></section>
+      <section class="detections" aria-label="Detector suggestions">
+        <div class="section-title small"><h2>Detector suggestions</h2><button id="detectionImportBtn" class="quiet compact" disabled>Import detections</button></div>
+        <input id="detectionFile" type="file" accept=".json,application/json" hidden>
+        <label class="field-label" for="detectionRun">Detection run</label><select id="detectionRun" disabled></select>
+        <label class="field-label" for="detectionCategory">Category</label><select id="detectionCategory" disabled></select>
+        <button id="nextDetection" class="outline full" disabled>Next frame with a detection</button>
+        <p class="panel-hint">Model suggestions only. Boxes and category scores do not confirm findings or change your notes. No boxes does not mean normal.</p>
+        <p id="detectionStatus" class="panel-hint" role="status">No detection run imported.</p>
+        <div id="detectionBoxes"></div><details><summary>Detection provenance</summary><pre id="detectionProvenance"></pre></details>
+      </section>
       <details id="referencePanel"><summary>Dataset reference labels</summary><p class="panel-hint">Source annotations, not model predictions. Hidden until you open this section.</p><div id="referenceLabels">No frame selected.</div></details>
       <section class="priority-section" aria-label="Model-assisted research review queue">
         <div class="section-title small"><h2>Research review queue</h2><span id="prioritySelected">No queue</span></div>
