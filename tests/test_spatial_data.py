@@ -142,3 +142,20 @@ def test_unknown_empty_records_and_fractional_labels_rejected(tmp_path):
         assert tuple(targets[0]["boxes"].shape) == (0,4)
     finally:
         loader.close()
+
+
+def test_only_subpixel_source_edge_rounding_is_clipped(tmp_path):
+    pytest.importorskip("torch")
+    pytest.importorskip("torchvision")
+    path, commitment, archives = generated_manifest(tmp_path)
+    loader = ImageLoader(path,commitment,archives,role="train")
+    try:
+        loader.records[0]["boxes"][0][0] = -5e-7
+        _, targets = loader.batch([(0,0,False,1.,1.)])
+        assert targets[0]["boxes"][0,0].item() == 0
+        assert loader.records[0]["boxes"][0][0] == -5e-7
+        loader.records[0]["boxes"][0][0] = -1e-3
+        with pytest.raises(ValueError,match="coordinates"):
+            loader.batch([(0,0,False,1.,1.)])
+    finally:
+        loader.close()

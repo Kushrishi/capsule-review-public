@@ -86,8 +86,11 @@ class ImageLoader:
                 raise ValueError("Invalid target membership")
             if self.role == "train" and not len(labels) and record["source_status"] != "source_documented_normal":
                 raise ValueError("Unknown images cannot supply negative targets")
-            if not torch.isfinite(boxes).all() or not ((boxes >= 0) & (boxes <= 1)).all():
+            if not torch.isfinite(boxes).all() or not ((boxes >= -1e-6) & (boxes <= 1 + 1e-6)).all():
                 raise ValueError("Invalid normalized coordinates")
+            # Six-decimal source YOLO rounding can exceed an image edge by 5e-7.
+            # Preserve raw manifest coordinates and clip only this subpixel excess.
+            boxes = boxes.clamp(0, 1)
             if not (boxes[:, 2:] > boxes[:, :2]).all():
                 raise ValueError("Degenerate source box")
             boxes = boxes * boxes.new_tensor([width, height, width, height])
