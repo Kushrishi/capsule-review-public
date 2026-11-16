@@ -135,8 +135,8 @@ async function selectStudy(id) {
     ? 'Generated frames and ranking example scores · software test sequence'
     : 'Synthetic test sequence · not clinical data';
   $('scrubber').max = state.study.frame_count - 1; $('jumpInput').max = state.study.frame_count;
-  $('predictionImportBtn').disabled = false; $('referencePanel').open = false;
-  for (const id of ['bookmark', 'reviewLabel', 'reviewNote']) $(id).disabled = false;
+  // Keep editors disabled until the new frame and study controls finish loading.
+  $('referencePanel').open = false;
   await loadDetectionRuns(); await navigate(state.study.last_position, true); await refreshLibrary(); await loadSaved(); await loadIntervals(); await refreshModels(); await loadPriorityRuns();
   } finally { state.switching = false; syncControls(); }
 }
