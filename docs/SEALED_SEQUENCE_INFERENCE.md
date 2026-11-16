@@ -59,7 +59,8 @@ runtime = {
 For a Torch adapter, include its exact `torch` and other inference dependency
 versions. Copy the previously qualified thread count and batch size; the example
 above does not redefine a frozen model's numerical execution. The adapter must
-set the declared Torch thread count and enable deterministic algorithms. A batch
+set the declared Torch thread count and enable deterministic algorithms with
+warning-only mode disabled. A batch
 change needs a separate synthetic compatibility check before it can be frozen.
 
 Every asset path is relative to the asset root. Include model weights, preserved
@@ -67,14 +68,39 @@ configuration, the adapter source named `adapter`, and its transitive inference
 source dependencies. Hashes are checked before adapter import and again before
 sealing. The pipeline code and existing selection implementation are also bound
 to the method manifest. Hashes authenticate reviewed code; they do not make
-untrusted Python safe to execute.
+untrusted Python safe to execute. The adapter runs as trusted Python without a
+sandbox. Sealed hashes establish retained-byte integrity, not whether the adapter
+faithfully implements the declared preprocessing and score. Independent synthetic
+agreement with the preserved reference implementation is a separate requirement.
+Approved execution must also pin the reviewed runner/entry-point and adapter
+source provenance: the callable API assumes trusted, reviewed caller code.
 
 The adapter exposes `create_scorer(method, files)`, returning a callable that
-accepts a list of `FrameInput` objects and returns one finite Python `float` or
-`int` per frame. Each object contains `position`, `source_frame`, `path`,
-`source_sha256` and `raw` image bytes. Use those already-authenticated bytes for
-the frozen preprocessing. Do not reopen paths, update model state, read labels
-or transform the preserved score. Load tensor-only weights with safe loaders.
+accepts an immutable `Sequence[FrameInput]` (passed as a tuple) and returns one
+finite Python `float` or `int` per frame. Each object contains `position`,
+`source_frame`, `path`, `source_sha256` and `raw` image bytes. Use those
+already-authenticated bytes for the frozen preprocessing. Do not reopen paths,
+update model state, read labels or transform the preserved score. Load tensor-only
+weights with safe loaders.
+
+## Transition to an approved external study
+
+Version 1 accepts and emits only `roster_status: "provisional"`. It cannot
+represent an approved external roster. Before an authorized study, the approved
+contract must bind the exact method manifests and model membership, preserved
+preprocessing and scores, 10%/25% selection policies, source population and
+coordinate mapping, qualified runtime and batch size, and independent evaluator.
+The organizer's reference-annotation semantics must be settled before defining
+and freezing a clinical event-coverage evaluator and its denominator.
+
+Representing that approval requires a separately reviewed, versioned change to
+the method, selection and receipt schemas and their verifier. Bind the approved
+study-contract SHA-256 and roster consistently in those artifacts, and retain
+verification of existing version-1 bundles. Changing the status string alone
+does not establish approval or freeze a study. That transition must include
+synthetic tests for contract/roster mismatches and reference compatibility; it
+does not authorize changing any historical model, score or advancement decision.
+No final model membership or clinical event definition is selected here.
 
 ## Execute and verify
 

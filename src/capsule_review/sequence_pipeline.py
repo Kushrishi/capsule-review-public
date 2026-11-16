@@ -7,6 +7,7 @@ A seal is a byte commitment; the evaluator must receive its digest separately.
 """
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass
 from datetime import datetime, timezone
 import hashlib
@@ -336,6 +337,21 @@ def _fsync_directory(path: Path) -> None:
         os.close(descriptor)
 
 
+def _observed_torch_settings(runtime: dict) -> dict | None:
+    if "torch" not in runtime["packages"]:
+        return None
+    import torch
+    settings = {
+        "threads": torch.get_num_threads(),
+        "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),
+    }
+    if (settings["threads"] != runtime["threads"]
+            or not settings["deterministic_algorithms"]
+            or torch.is_deterministic_algorithms_warn_only_enabled()):
+        raise ValueError("Frozen CPU scorer must use declared threads and deterministic algorithms.")
+    return settings
+
+
 def _inside_git_worktree(path: Path) -> bool:
     """Use Git's real discovery, including its normal filesystem boundary.
 
@@ -368,7 +384,7 @@ def run_sequence(source_manifest: Path, method_manifest: Path, source_root: Path
                  asset_root: Path, output: Path, *, expected_source_sha256: str,
                  expected_method_sha256: str,
                  scorer_factory: Callable[[dict, Mapping[str, Path]],
-                                          Callable[[list[FrameInput]], Sequence[float]]]
+                                          Callable[[Sequence[FrameInput]], Sequence[float]]]
                  ) -> dict:
     """Execute one provisional frozen method; errors leave no success seal.
 
@@ -409,19 +425,20 @@ def run_sequence(source_manifest: Path, method_manifest: Path, source_root: Path
             duplicate_content += row["sha256"] in content_hashes
             content_hashes.add(row["sha256"])
         del seen_inodes, content_hashes
-        scorer = scorer_factory(method, files)
+        # Keep the authenticated contract separate from adapter-owned objects.
+        # Reviewed Python is trusted, but accidental contract changes must fail.
+        adapter_method, adapter_files = deepcopy(method), dict(files)
+        contract = _canonical(method)
+
+        def check_adapter_contract() -> None:
+            if _canonical(adapter_method) != contract or adapter_files != files:
+                raise ValueError("Frozen adapter changed its authenticated method or file mapping.")
+
+        scorer = scorer_factory(adapter_method, adapter_files)
+        check_adapter_contract()
         if not callable(scorer):
             raise ValueError("Frozen scorer factory did not return a callable.")
-        torch_settings = None
-        if "torch" in method["runtime"]["packages"]:
-            import torch
-            torch_settings = {
-                "threads": torch.get_num_threads(),
-                "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),
-            }
-            if (torch_settings["threads"] != method["runtime"]["threads"]
-                    or not torch_settings["deterministic_algorithms"]):
-                raise ValueError("Frozen CPU scorer must use declared threads and deterministic algorithms.")
+        torch_settings = _observed_torch_settings(method["runtime"])
         selections = _Selections(header["frame_count"])
         batch_size = method["runtime"]["batch_size"]
         pending: list[FrameInput] = []
@@ -430,10 +447,15 @@ def run_sequence(source_manifest: Path, method_manifest: Path, source_root: Path
         with (output / "scores.jsonl").open("xb") as score_file:
             def flush() -> None:
                 nonlocal scored, batches, maximum_batch
-                values = list(scorer(pending))
-                if len(values) != len(pending):
+                check_adapter_contract()
+                _observed_torch_settings(method["runtime"])
+                batch = tuple(pending)
+                values = list(scorer(batch))
+                check_adapter_contract()
+                _observed_torch_settings(method["runtime"])
+                if len(values) != len(batch):
                     raise ValueError("Frozen scorer returned an incomplete batch.")
-                for frame, value in zip(pending, values):
+                for frame, value in zip(batch, values):
                     selections.add(frame.position, value)
                     score_file.write(_canonical({
                         "position": frame.position, "source_frame": frame.source_frame,
@@ -469,6 +491,8 @@ def run_sequence(source_manifest: Path, method_manifest: Path, source_root: Path
         authenticate_method(output / "method_manifest.json", method_sha, asset_root)
         if file_sha256(source) != source_sha:
             raise ValueError("Source manifest changed during execution.")
+        check_adapter_contract()
+        torch_settings = _observed_torch_settings(method["runtime"])
         elapsed = time.perf_counter() - wall_start
         receipt = {
             "schema_version": 1, "status": "complete", "method_id": method["method_id"],
@@ -566,14 +590,20 @@ def verify_seal(bundle: Path, expected_seal_sha256: str) -> dict:
     if _json((bundle / "selections.json").read_bytes()) != expected:
         raise ValueError("Sealed selections differ from the exact frozen policies.")
     receipt = _json((bundle / "receipt.json").read_bytes())
+    expected_torch = ({"threads": method["runtime"]["threads"],
+                       "deterministic_algorithms": True}
+                      if "torch" in method["runtime"]["packages"] else None)
     for key, value in {
-        "status": "complete", "method_id": method["method_id"],
+        "schema_version": 1, "status": "complete", "method_id": method["method_id"],
+        "roster_status": "provisional", "sequence_id": header["sequence_id"],
         "source_manifest_sha256": source_sha, "method_manifest_sha256": method_sha,
         "frame_count": header["frame_count"], "scored_frames": header["frame_count"],
+        "source_files_authenticated": header["frame_count"],
         "runtime": method["runtime"], "implementation": method["implementation"],
+        "observed_torch_settings": expected_torch,
         "authenticated_files": method["files"],
     }.items():
-        if receipt.get(key) != value:
+        if key not in receipt or _canonical(receipt[key]) != _canonical(value):
             raise ValueError("Inference receipt does not match sealed inputs.")
     return {"seal_sha256": expected_seal_sha256, "method_id": method["method_id"],
             "frame_count": header["frame_count"], "budgets": expected["budgets"]}

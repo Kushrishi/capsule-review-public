@@ -5,6 +5,7 @@ No medical inputs, learned-model fitting, or reference outcomes are used.
 from __future__ import annotations
 
 from copy import deepcopy
+from dataclasses import replace
 from decimal import Decimal, ROUND_HALF_UP
 import hashlib
 from importlib.metadata import version
@@ -14,6 +15,7 @@ from pathlib import Path
 import platform
 import subprocess
 import sys
+from types import SimpleNamespace
 
 from PIL import Image
 import pytest
@@ -236,7 +238,9 @@ def test_rewritten_envelope_cannot_pass_original_digest(tmp_path):
         pipeline.verify_seal(output, result["seal_sha256"])
 
 
-@pytest.mark.parametrize("defect", ["policy", "score_index", "receipt_count"])
+@pytest.mark.parametrize("defect", ["policy", "score_index", "receipt_count",
+                                   "receipt_schema", "receipt_roster", "receipt_sequence",
+                                   "receipt_authenticated", "receipt_torch"])
 def test_semantically_invalid_bundle_fails_even_with_matching_envelope(tmp_path, defect):
     data = fixture(tmp_path, n=15)
     output = tmp_path / "bundle"
@@ -254,7 +258,15 @@ def test_semantically_invalid_bundle_fails_even_with_matching_envelope(tmp_path,
     else:
         path = output / "receipt.json"
         receipt = json.loads(path.read_text())
-        receipt["scored_frames"] -= 1
+        receipt.update({
+            "receipt_count": {"scored_frames": receipt["scored_frames"] - 1},
+            "receipt_schema": {"schema_version": True},
+            "receipt_roster": {"roster_status": "approved"},
+            "receipt_sequence": {"sequence_id": "different-sequence"},
+            "receipt_authenticated": {"source_files_authenticated": 0},
+            "receipt_torch": {"observed_torch_settings": {
+                "threads": 1, "deterministic_algorithms": True}},
+        }[defect])
         write_json(path, receipt)
     new_digest = reseal_for_semantic_test(output)
     with pytest.raises(ValueError):
@@ -294,6 +306,7 @@ def test_each_frame_is_scored_once_in_a_bounded_batch(tmp_path):
     seen = []
     def factory(*args):
         def scorer(frames):
+            assert isinstance(frames, tuple)
             seen.append([f.position for f in frames])
             return [float(f.position) for f in frames]
         return scorer
@@ -301,6 +314,101 @@ def test_each_frame_is_scored_once_in_a_bounded_batch(tmp_path):
     assert seen == [[0, 1, 2, 3], [4, 5, 6, 7], [8]]
     assert result["receipt"]["batches"] == 3
     assert result["receipt"]["maximum_batch_frames"] == 4
+
+
+@pytest.mark.parametrize("stage", ["factory", "scoring"])
+@pytest.mark.parametrize("target", ["scoring", "preprocessing", "files"])
+def test_adapter_cannot_change_authenticated_contract(tmp_path, stage, target):
+    data = fixture(tmp_path, n=5)
+    original = data["method_manifest"].read_bytes()
+
+    def factory(method, verified_files):
+        def mutate():
+            if target == "files":
+                verified_files["fixture"] = tmp_path / "unverified-asset.txt"
+            else:
+                method[target]["definition"] = "Changed synthetic contract"
+        if stage == "factory":
+            mutate()
+        def scorer(frames):
+            if stage == "scoring":
+                mutate()
+            return [float(frame.position) for frame in frames]
+        return scorer
+
+    output = tmp_path / "rejected"
+    with pytest.raises(ValueError, match="authenticated method or file mapping"):
+        execute(data, output, factory=factory)
+    assert data["method_manifest"].read_bytes() == original
+    assert not (output / "seal.json").exists()
+    assert json.loads((output / "failure.json").read_text())["scored_frames"] == 0
+
+
+@pytest.mark.parametrize("mutation", ["replace", "reorder"])
+def test_adapter_cannot_mutate_source_batch(tmp_path, mutation):
+    data = fixture(tmp_path, n=5)
+    def factory(*args):
+        def scorer(frames):
+            if mutation == "replace":
+                frames[0] = replace(frames[0], raw=b"Unrelated replacement bytes")
+            else:
+                frames.reverse()
+            return [float(frame.position) for frame in frames]
+        return scorer
+    output = tmp_path / "rejected"
+    with pytest.raises((TypeError, AttributeError)):
+        execute(data, output, factory=factory)
+    assert not (output / "seal.json").exists()
+
+
+def mocked_torch_runtime(data, monkeypatch):
+    """Exercise runtime guards without importing Torch or executing a model."""
+    state = {"threads": 1, "deterministic_algorithms": True, "warn_only": False}
+    stub = SimpleNamespace(
+        get_num_threads=lambda: state["threads"],
+        are_deterministic_algorithms_enabled=lambda: state["deterministic_algorithms"],
+        is_deterministic_algorithms_warn_only_enabled=lambda: state["warn_only"],
+    )
+    real_version = pipeline.importlib.metadata.version
+    monkeypatch.setitem(sys.modules, "torch", stub)
+    monkeypatch.setattr(pipeline.importlib.metadata, "version", lambda name:
+                        "synthetic-runtime" if name == "torch" else real_version(name))
+    data["method"]["runtime"]["packages"]["torch"] = "synthetic-runtime"
+    write_json(data["method_manifest"], data["method"])
+    return state
+
+
+@pytest.mark.parametrize("field,value", [
+    ("threads", 2), ("deterministic_algorithms", False), ("warn_only", True),
+])
+def test_torch_runtime_drift_during_scoring_prevents_sealing(tmp_path, monkeypatch, field, value):
+    data = fixture(tmp_path, n=5)
+    state = mocked_torch_runtime(data, monkeypatch)
+    def factory(*args):
+        def scorer(frames):
+            state[field] = value
+            return [float(frame.position) for frame in frames]
+        return scorer
+    output = tmp_path / "rejected"
+    with pytest.raises(ValueError, match="declared threads and deterministic algorithms"):
+        execute(data, output, factory=factory)
+    assert not (output / "seal.json").exists()
+    assert json.loads((output / "failure.json").read_text())["scored_frames"] == 0
+
+
+def test_verifier_rejects_wrong_observed_torch_settings(tmp_path, monkeypatch):
+    data = fixture(tmp_path, n=5)
+    mocked_torch_runtime(data, monkeypatch)
+    output = tmp_path / "bundle"
+    result = execute(data, output)
+    assert pipeline.verify_seal(output, result["seal_sha256"])["frame_count"] == 5
+    path = output / "receipt.json"
+    receipt = json.loads(path.read_text())
+    receipt["observed_torch_settings"]["deterministic_algorithms"] = False
+    write_json(path, receipt)
+    new_digest = reseal_for_semantic_test(output)
+    with pytest.raises(ValueError, match="receipt does not match"):
+        pipeline.verify_seal(output, new_digest)
 
 
 def test_asset_mutation_during_inference_prevents_sealing(tmp_path):
