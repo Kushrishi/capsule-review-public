@@ -336,7 +336,8 @@ def test_nonfinite_json_scores_rejected(value):
     assert run(b)["verdict"] == "INCONCLUSIVE"
 
 
-@pytest.mark.parametrize("case", ["score", "threshold", "tie", "equivalent-tie"])
+@pytest.mark.parametrize("case", ["score", "threshold", "tie", "equivalent-tie",
+                                 "positive-above-zero", "ordered-extremes"])
 def test_extreme_decimal_comparisons_are_resource_bounded(case):
     import subprocess
     import sys
@@ -347,9 +348,11 @@ def test_extreme_decimal_comparisons_are_resource_bounded(case):
     args = list(packed(controls()))
     tiny = b"1e-1000000000"
     if case != "threshold":
-        args[3] = args[3].replace(b'"scores":[0.5,0.5]', b'"scores":[' + tiny + b',0.5]', 1)
+        score = b"2e-1000000000" if case == "ordered-extremes" else tiny
+        args[3] = args[3].replace(b'"scores":[0.5,0.5]', b'"scores":[' + score + b',0.5]', 1)
     if case != "score":
-        threshold = b"10e-1000000001" if case == "equivalent-tie" else tiny
+        threshold = (b"0" if case == "positive-above-zero" else
+                     b"10e-1000000001" if case == "equivalent-tie" else tiny)
         args[3] = args[3].replace(b'"thresholds":[0.5,0.5]',
                                 b'"thresholds":[' + threshold + b',0.5]', 1)
     contract = json.loads(args[0])
@@ -378,9 +381,10 @@ print(json.dumps(evaluate(*args), sort_keys=True))
     assert result.returncode == 0, (result.returncode, result.stderr)
     report = json.loads(result.stdout)
     # Independent strict Decimal ordering: 0.5 > tiny; tiny == 10e-(N+1).
-    expected_rate = {"score": "0", "threshold": "1", "tie": "1/2", "equivalent-tie": "1/2"}[case]
+    expected_rate = {"score": "0", "threshold": "1", "tie": "1/2", "equivalent-tie": "1/2",
+                     "positive-above-zero": "1", "ordered-extremes": "1"}[case]
     assert report["primary"]["models"]["19-classifier"]["vascular"]["rate"] == expected_rate
-    assert report["verdict"] == ("NOT MET" if case == "threshold" else "MET")
+    assert report["verdict"] == ("NOT MET" if expected_rate == "1" else "MET")
     print(f"bounded generated {case}: {elapsed:.3f}s, exit 0, {report['verdict']}")
 
 
