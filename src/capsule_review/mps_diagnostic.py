@@ -1,4 +1,4 @@
-"""Generated-only device diagnostic; never a real-data training executor.
+"""Generated-only MPS/CPU/CUDA device diagnostic; never a real-data training executor.
 
 The parent imports no torch and launches a fresh, bounded worker per arm with
 CPU fallback disabled before torch initialization. No source-image input exists.
@@ -44,7 +44,7 @@ def worker_environment():
     env = dict(os.environ)
     # Override hostile/inherited values, before importing torch in a new process.
     env.update(PYTORCH_ENABLE_MPS_FALLBACK='0', PYTORCH_MPS_FAST_MATH='0',
-               OMP_NUM_THREADS='4', MKL_NUM_THREADS='4')
+               OMP_NUM_THREADS='4', MKL_NUM_THREADS='4', CUBLAS_WORKSPACE_CONFIG=':4096:8')
     # Do not inherit a disabled allocator limit from another experiment.
     env.pop('PYTORCH_MPS_HIGH_WATERMARK_RATIO', None)
     env.pop('PYTORCH_MPS_LOW_WATERMARK_RATIO', None)
@@ -54,6 +54,11 @@ def worker_environment():
 def require_device(torch, device):
     if os.environ.get('PYTORCH_ENABLE_MPS_FALLBACK') != '0':
         raise RuntimeError('CPU fallback must be disabled before importing torch')
+    if device == 'cuda':
+        if os.environ.get('CUBLAS_WORKSPACE_CONFIG') != ':4096:8':
+            raise RuntimeError('CUBLAS_WORKSPACE_CONFIG must be :4096:8 before CUDA initialization')
+        if platform.system() != 'Linux' or not torch.version.cuda or not torch.cuda.is_available():
+            raise RuntimeError('A genuine available Linux NVIDIA CUDA device/build is required')
     if device == 'mps':
         if platform.system() != 'Darwin' or platform.machine() != 'arm64':
             raise RuntimeError('MPS qualification requires native Apple Silicon macOS Python')
@@ -112,6 +117,16 @@ def operator_probes(torch, device):
     return results
 
 
+def state_digest(torch, state):
+    """Canonical tensor bytes, excluding pickle/storage IDs and temp filenames."""
+    digest = hashlib.sha256()
+    for name, value in sorted(state.items()):
+        value = value.detach().cpu().contiguous()
+        digest.update(json.dumps([name, str(value.dtype), list(value.shape)]).encode())
+        digest.update(value.numpy().tobytes())
+    return digest.hexdigest()
+
+
 class MemorySampler:
     """Sampled allocator peaks, NOT an exact transient Metal allocation peak."""
     def __init__(self, torch, device, report):
@@ -146,11 +161,18 @@ class MemorySampler:
         self.report_target["memory"] = self.report()
 
     def report(self):
+        cuda_peak = None
+        if self.device == 'cuda':
+            cuda_peak = {'allocated_bytes': self.torch.cuda.max_memory_allocated(),
+                         'reserved_bytes': self.torch.cuda.max_memory_reserved()}
         rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        return {'sampled_mps_peak': self.peak if self.device == 'mps' else None,
+        return {'cuda_allocator_peak': cuda_peak,
+                'sampled_mps_peak': self.peak if self.device == 'mps' else None,
                 'sample_period_seconds': .02, 'sampler_errors': self.errors,
                 'process_peak_rss_bytes': int(rss if platform.system() == 'Darwin' else rss * 1024),
-                'note': 'RSS and Metal allocations overlap in unified memory; do not add them. Transient peaks may be missed.'}
+                'note': ('CUDA peaks cover Torch allocator only; exclude driver and non-Torch allocations.'
+                         if self.device == 'cuda' else
+                         'RSS and Metal allocations overlap in unified memory; do not add them. Transient peaks may be missed.')}
 
 
 def run_worker(args, report):
@@ -178,7 +200,21 @@ def run_worker(args, report):
     if args.device == 'mps':
         torch.mps.manual_seed(19)
         report['recommended_max_memory_bytes'] = torch.mps.recommended_max_memory()
-    sync = torch.mps.synchronize if args.device == 'mps' else lambda: None
+    if args.device == 'cuda':
+        torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.allow_tf32 = False
+        torch.backends.cuda.matmul.allow_tf32 = False
+        properties = torch.cuda.get_device_properties(0)
+        report['cuda'] = {'build': torch.version.cuda, 'cudnn': torch.backends.cudnn.version(),
+            'name': properties.name, 'capability': list(torch.cuda.get_device_capability(0)),
+            'total_memory_bytes': properties.total_memory, 'visible_devices': torch.cuda.device_count(),
+            'device': str(torch.cuda.current_device()), 'cublas_workspace_config': os.environ['CUBLAS_WORKSPACE_CONFIG'],
+            'cudnn_benchmark': False, 'cudnn_deterministic': True, 'tf32': False}
+        free, total = torch.cuda.mem_get_info()
+        report['cuda_memory_at_start'] = {'free_bytes': free, 'total_bytes': total}
+        torch.cuda.reset_peak_memory_stats()
+    sync = {'mps': torch.mps.synchronize, 'cuda': torch.cuda.synchronize}.get(args.device, lambda: None)
     report['stage'] = 'operator_probes'
     report['operator_probes'] = operator_probes(torch, args.device) if args.arm == 'detector' else {}
     report['stage'] = 'build_authentic_pair'
@@ -287,6 +323,7 @@ def run_worker(args, report):
         torch.testing.assert_close(expected, repeated, rtol=1e-4, atol=1e-5)
         if any(layer.training for layer in model.modules() if isinstance(layer, torch.nn.BatchNorm2d)):
             raise RuntimeError('BatchNorm not in evaluation mode')
+        report['trained_state_sha256'] = state_digest(torch, model.state_dict())
         report['stage'] = 'checkpoint_save'
         with tempfile.TemporaryDirectory(prefix='capsule-generated-') as folder:
             path = Path(folder) / 'generated.pt'
@@ -299,8 +336,8 @@ def run_worker(args, report):
             report['checkpoint_sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
             # Release the trained model and optimizer before a fresh construction.
             del optimizer, encoder, representatives, model
-            if args.device == 'mps':
-                torch.mps.empty_cache()
+            if args.device in ('mps', 'cuda'):
+                getattr(torch, args.device).empty_cache()
             report['stage'] = 'checkpoint_reload'
             started = time.perf_counter()
             pair = build()
@@ -334,7 +371,7 @@ def run_worker(args, report):
 
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--device', choices=['mps', 'cpu'], default='mps')
+    p.add_argument('--device', choices=['mps', 'cpu', 'cuda'], default='mps')
     p.add_argument('--arm', choices=['both', 'classifier', 'detector'], default='both')
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--encoder', type=Path, help='Optional official SHA-pinned ImageNet V2 checkpoint; no download')
