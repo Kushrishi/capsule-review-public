@@ -35,7 +35,7 @@ change; this does not run the scientific experiment.
 
 CUDA workers require `CUBLAS_WORKSPACE_CONFIG=:4096:8` before initialization,
 strict deterministic algorithms, cuDNN benchmarking off, and TF32 off. They record
-GPU name, capability, visible count, VRAM, driver inventory, Torch/CUDA/cuDNN/
+GPU name, capability, visible count, total/free starting VRAM, driver inventory, Torch/CUDA/cuDNN/
 Torchvision versions, model-source hash, losses, timings and allocator peak
 allocated/reserved bytes. CUDA synchronization bounds timing. Reported memory
 excludes allocations outside Torch's allocator; driver inventory and process RSS
@@ -104,7 +104,10 @@ No free GPU endpoint is connected to this session. Colab offers contingent free
 GPUs but no guaranteed device/quota or verified matching namespace environment.
 ZeroGPU offers free quota (currently48GB large slices), but its Gradio/shared
 allocation model is not a verified replacement for this Linux executor, and no
-eligible authenticated account is connected. GitHub GPU larger runners are paid,
+eligible authenticated account is connected. The inspected Torchvision0.29.2 ROIAlign
+path uses lazy `torch.compile` for deterministic CUDA, while ZeroGPU documents
+no `torch.compile` support: an additional unexecuted compatibility concern, not
+a reason to disable determinism. GitHub GPU larger runners are paid,
 not free for public repositories, and require eligible organization plans. No
 free-service deployment, new account, paid runner or credit purchase was initiated.
 

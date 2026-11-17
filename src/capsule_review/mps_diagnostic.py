@@ -211,6 +211,8 @@ def run_worker(args, report):
             'total_memory_bytes': properties.total_memory, 'visible_devices': torch.cuda.device_count(),
             'device': str(torch.cuda.current_device()), 'cublas_workspace_config': os.environ['CUBLAS_WORKSPACE_CONFIG'],
             'cudnn_benchmark': False, 'cudnn_deterministic': True, 'tf32': False}
+        free, total = torch.cuda.mem_get_info()
+        report['cuda_memory_at_start'] = {'free_bytes': free, 'total_bytes': total}
         torch.cuda.reset_peak_memory_stats()
     sync = {'mps': torch.mps.synchronize, 'cuda': torch.cuda.synchronize}.get(args.device, lambda: None)
     report['stage'] = 'operator_probes'
