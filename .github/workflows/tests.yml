@@ -65,7 +65,7 @@ jobs:
       - name: Required executor security canaries and isolated generated smoke
         env:
           CAPSULE_REQUIRE_ISOLATION: '1'
-        run: python -m pytest -q tests/test_spatial_executor_security.py
+        run: python -m pytest -q tests/test_spatial_executor_security.py tests/test_cuda_qualification.py
       - run: python -m pytest -q
       - name: Generated CR-SP-01 device harness (CPU, no data downloads)
         run: python -m capsule_review.mps_diagnostic --device cpu --output /tmp/capsule-generated-device --timeout 900
