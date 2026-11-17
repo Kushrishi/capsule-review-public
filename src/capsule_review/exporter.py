@@ -2,6 +2,7 @@
 
 import base64
 import html
+import hashlib
 import io
 import json
 import zipfile
@@ -9,6 +10,7 @@ import zipfile
 from . import __version__
 from .importer import now
 from .store import Store
+from .suggestion_evidence import snapshot_suggestions
 
 MAX_EXPORT_FRAMES = 250
 MAX_EXPORT_BYTES = 128 * 1024 * 1024
@@ -16,6 +18,7 @@ MAX_EXPORT_BYTES = 128 * 1024 * 1024
 
 def export_review(store: Store, study_id: str) -> bytes:
     with store.connect() as db:
+        db.execute('BEGIN')
         study = db.execute("SELECT * FROM studies WHERE id=?", (study_id,)).fetchone()
         if study is None:
             raise KeyError("Examination not found.")
@@ -62,12 +65,17 @@ def export_review(store: Store, study_id: str) -> bytes:
             "FROM review_interval_events WHERE study_id=? ORDER BY id",
             (study_id,)
         )]
+        suggestions = snapshot_suggestions(db, study_id, {row['position'] for row in rows})
     images, items, cards = [], [], []
     endpoint_set = set(endpoints)
     byte_total = 0
     for row in rows:
         image = store.images / study_id / f"{row['position']}.png"
+        if image.stat().st_size > MAX_EXPORT_BYTES:
+            raise ValueError('Selected image exceeds the export image-size limit.')
         raw = image.read_bytes()
+        if hashlib.sha256(raw).hexdigest() != row['display_sha256']:
+            raise ValueError('Local normalized display image SHA-256 does not match its import identity.')
         byte_total += len(raw)
         if byte_total > MAX_EXPORT_BYTES:
             raise ValueError("Selected images exceed the 128-MiB export limit.")
@@ -133,21 +141,24 @@ h1{{font-size:36px;line-height:1.15}}h2{{font-size:20px;margin:8px 0}}article{{d
 <p class="small">Source: {html.escape(study['source'])}<br>Exported: {html.escape(date)}</p>
 {interval_section}
 {''.join(cards)}
-<footer>Notes and labels are reviewer entries. Dataset annotations and model predictions are not automatically promoted into findings. No diagnostic model is bundled with Capsule Review {__version__}. Frame numbers indicate sequence positions, not measured timestamps.</footer></body></html>'''
+<footer>Notes and labels are reviewer entries. Imported model suggestions and their provenance are retained separately in review.json. Dataset annotations and model predictions are not automatically promoted into findings. No diagnostic model is bundled with Capsule Review {__version__}. Frame numbers indicate sequence positions, not measured timestamps.</footer></body></html>'''
     manifest = {
         "schema_version": 1, "application": "capsule-review", "application_version": __version__,
         "exported_at": date, "synthetic": synthetic,
         "study": {k: study[k] for k in ('id', 'title', 'source', 'frame_count', 'manifest_sha256')},
         "selection": "Bookmarked/noted frames plus interval boundary images only",
-        "frames": items,
+        "frames": items, "model_suggestions": suggestions,
         "intervals": intervals,
         "review_history": [{**e, "content": json.loads(e['content'])} for e in events],
         "interval_history": interval_events,
     }
+    metadata = json.dumps(manifest, indent=2, ensure_ascii=False)
+    if len(metadata.encode('utf-8')) > 32 * 1024**2:
+        raise ValueError('Review metadata exceeds the 32-MiB verification limit.')
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
         archive.writestr('review.html', document)
-        archive.writestr('review.json', json.dumps(manifest, indent=2, ensure_ascii=False))
+        archive.writestr('review.json', metadata)
         for relative, raw in images:
             archive.writestr(relative, raw)
     return buffer.getvalue()

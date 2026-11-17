@@ -341,3 +341,42 @@ automated as described above. No production-code defect was found. A case-sensit
 filesystem assumption in a duplicate-name fixture was corrected; the active-workflow
 allowlist also includes this intentional new CI job, with archived workflow hashes
 unchanged.
+
+## Suggestions through review and export
+
+Standard and full-span JSON exports retain `model_suggestions` separately from
+human `review` entries. They include the prediction/detection run identifiers,
+imported model/provenance metadata and suggestion records for exported frames only.
+Suggestions on omitted frames are not silently included. The original detection
+payload SHA-256 identifies the **complete imported run**, not the exported subset;
+its scope is labeled explicitly. Imported provenance remains an unverified claim
+about model execution. Existing image/reviewer evidence audits do not turn these
+claims into authenticated model execution or clinical findings.
+
+Both exports fail if a retained display image differs from its imported SHA-256.
+Suggestion metadata has an 8-MiB accumulation bound; normal/full-span manifests
+also retain their 32-/64-MiB verification limits. An export over a bound fails
+explicitly rather than silently dropping model provenance. AI suggestions alone
+do not select images for export or create reviewer findings.
+
+Hosted verification uses the existing nonmedical synthetic study and generated
+suggestion fixture, through real Chromium and native macOS WebKit controls. These
+fixtures test the workflow; they do not demonstrate a medically trained model.
+Normal folder imports remain ineligible for synthetic detection fixtures.
+
+A zero-install **synthetic workflow demonstration is feasible as a separate static
+browser build** with generated frames, fixed example scores and in-browser review
+state. It should have no clinical-image upload, native folder bridge, arbitrary
+filesystem access or connection to the desktop backend. The existing standalone
+HTML export already supports zero-install viewing of an illustrated review, but
+is not an interactive viewer demonstration. The current desktop application still
+requires its local Python/backend environment. No static demo or public deployment
+is created by this qualification; forwarding the real desktop service is not the
+recommended route to a demonstration.
+
+Remote integration evidence: the generated-data [macOS run](https://github.com/Kushrishi/capsule-review-public/actions/runs/44003308341)
+passed **120 tests** and both native WebKit flows, including category filtering,
+abnormality navigation, selected/unselected access, unchanged human notes and
+suggestion provenance in the actual downloaded review ZIP. Sealed-inference
+regressions separately passed **78 generated-data tests**. This validates fixture
+transport and review/export behavior, not execution of a medically trained detector.

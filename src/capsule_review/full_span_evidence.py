@@ -23,6 +23,7 @@ from .evidence_receipt import (
 from .interval_evidence import _integer, _sha, _validate_intervals
 from .importer import now
 from .store import Store
+from .suggestion_evidence import snapshot_suggestions
 
 # These are operational safety limits for a localhost ZIP operation, NOT
 # restrictions on review budgets or research policy.
@@ -76,8 +77,9 @@ def _summary(imported: list[dict], selected: set[int], saved: set[int],
     }
 
 
-def _local_snapshot(store: Store, study_id: str) -> tuple[dict, list[dict], list[dict], list[dict], list[dict]]:
+def _local_snapshot(store: Store, study_id: str) -> tuple[dict, list[dict], list[dict], list[dict], list[dict], dict]:
     with store.connect() as db:
+        db.execute('BEGIN')
         study_row = db.execute("SELECT * FROM studies WHERE id=?", (study_id,)).fetchone()
         if study_row is None:
             raise ValueError("Examination does not exist.")
@@ -105,8 +107,11 @@ def _local_snapshot(store: Store, study_id: str) -> tuple[dict, list[dict], list
             "SELECT interval_id,action,start_position,end_position,note,created_at "
             "FROM review_interval_events WHERE study_id=? ORDER BY id", (study_id,)
         )]
+        saved = {row['position'] for row in rows if row['bookmarked'] or row['note'] or row['label']}
+        chosen, _, _ = _plan(intervals, saved)
+        suggestions = snapshot_suggestions(db, study_id, chosen)
     events = [{**event, "content": json.loads(event["content"])} for event in events]
-    return study, rows, intervals, events, interval_history
+    return study, rows, intervals, events, interval_history, suggestions
 
 
 def _source_manifest(study: dict, rows: list[dict]) -> dict:
@@ -127,7 +132,7 @@ def export_full_span_evidence(store: Store, study_id: str, output: Path) -> dict
     """Create a **new** opt-in ZIP on local disk; fail closed and never overwrite."""
     if output.exists():
         raise FileExistsError("Refusing to overwrite an existing full-span archive.")
-    study, rows, intervals, events, interval_history = _local_snapshot(store, study_id)
+    study, rows, intervals, events, interval_history, suggestions = _local_snapshot(store, study_id)
     saved = {row["position"] for row in rows
              if row["bookmarked"] or row["note"] or row["label"]}
     chosen, span, endpoints = _plan(intervals, saved)
@@ -147,7 +152,7 @@ def export_full_span_evidence(store: Store, study_id: str, output: Path) -> dict
         "study": {key: study[key] for key in (
             "id", "title", "source", "frame_count", "manifest_sha256"
         )},
-        "frames": [],
+        "frames": [], "model_suggestions": suggestions,
         "intervals": intervals,
         "review_history": events,
         "interval_history": interval_history,
@@ -224,12 +229,15 @@ def export_full_span_evidence(store: Store, study_id: str, output: Path) -> dict
                 f'{len(intervals)} marked intervals; '
                 f'{study["frame_count"]} images in the local study.</p>'
                 '<p><small>Source frame IDs are not capture timestamps. '
-                'Review notes and local source identifiers are stored in evidence.json. '
+                'Review notes, source identifiers and separate imported model suggestions/provenance are stored in evidence.json. '
                 'Do not publish this private archive.</small></p>'
                 '<ol>' + "".join(cards) + '</ol></body></html>'
             )
             archive.writestr("index.html", html_page)
-            archive.writestr("evidence.json", json.dumps(record, indent=2, ensure_ascii=False))
+            metadata = json.dumps(record, indent=2, ensure_ascii=False)
+            if len(metadata.encode('utf-8')) > MAX_MANIFEST_BYTES:
+                raise ValueError('Full-span metadata exceeds its verification limit.')
+            archive.writestr("evidence.json", metadata)
         # Independently reopen and checksum the *actual ZIP bytes* before serving.
         return verify_full_span_evidence(output, complete)
     except Exception:

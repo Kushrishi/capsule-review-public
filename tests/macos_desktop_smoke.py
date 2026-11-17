@@ -4,6 +4,7 @@ No Qt, browser transport replacement, screenshots, real data or model dependenci
 Run separately: AppKit owns the main thread. A timeout fails, rather than skips, CI.
 """
 import argparse
+import base64
 import io
 import json
 import multiprocessing as mp
@@ -43,7 +44,7 @@ def main():
         for n in reversed(range(64)):
             (source / f'frame_{n}.png').write_bytes(data.getvalue())
         workspace = root / 'workspace'
-        downloads = [root / 'native-review.zip', root / 'native-spans.zip']
+        downloads = [root / 'native-review.zip', root / 'native-spans.zip', root / 'native-suggestions.zip']
         chosen_saves = []
         original_panel = cocoa.AppKit.NSSavePanel
         original_window = webview.create_window
@@ -148,6 +149,45 @@ def main():
                     spans = download(downloads[1], 'evidence.json')
                     assert [frame['position'] for frame in spans['frames']] == [0, 1, 2, 63]
                     passed('authenticated native full-span download retains interval interiors and saved frames')
+                    # The existing demo imports an explicitly synthetic examination;
+                    # normal local-folder studies remain ineligible for generated detections.
+                    window.run_js("document.getElementById('demoBtn').click()")
+                    wait("document.getElementById('jumpInput').max === '24' && !document.getElementById('jumpInput').disabled")
+                    window.run_js("document.getElementById('reviewNote').value='Generated suggestion-review note'; document.getElementById('reviewNote').dispatchEvent(new Event('input')); document.getElementById('saveBtn').click()")
+                    wait("document.getElementById('saveStatus').textContent === 'Saved' && document.getElementById('savedCount').textContent === '1' && !document.getElementById('jumpInput').disabled")
+                    from detection_fixture import fixture
+                    with Store(workspace).connect() as db:
+                        demo_id = db.execute('SELECT id FROM studies WHERE synthetic=1').fetchone()[0]
+                    suggestions = fixture(Store(workspace), demo_id)
+                    encoded = base64.b64encode(json.dumps(suggestions).encode()).decode()
+                    window.run_js("{ const file = new File([atob('" + encoded + "')], 'generated-detections.json', {type:'application/json'}); const transfer = new DataTransfer(); transfer.items.add(file); const input = document.getElementById('detectionFile'); input.files = transfer.files; input.dispatchEvent(new Event('change')); }")
+                    wait("document.querySelectorAll('#detectionOverlay rect').length === 1 && document.getElementById('detectionStatus').textContent.includes('1 model suggestion')")
+                    window.run_js("document.getElementById('detectionCategory').value='0'; document.getElementById('detectionCategory').dispatchEvent(new Event('change'))")
+                    wait("document.querySelectorAll('#detectionOverlay rect').length === 0")
+                    window.run_js("document.getElementById('nextDetection').click()")
+                    wait("document.getElementById('jumpInput').value === '3' && !document.getElementById('jumpInput').disabled && document.getElementById('detectionBoxes').textContent.includes('angiodysplasia')")
+                    assert js("document.getElementById('reviewNote').value") == ''
+                    assert js("document.getElementById('reviewLabel').value") == ''
+                    assert js("document.getElementById('bookmark').checked") is False
+                    passed('native category filtering and abnormality navigation never create human findings')
+                    window.run_js("document.getElementById('priorityCount').value='6'; document.getElementById('priorityMethod').value='score'; document.getElementById('priorityBuild').click()")
+                    wait("document.getElementById('prioritySelected').textContent === '6 selected' && !document.getElementById('priorityBuild').disabled")
+                    missing = js("Array.from({length:24}, (_,i)=>i).find(i=>!state.priorityData.items.some(x=>x.position===i) && i!==0)")
+                    assert missing is not None
+                    window.run_js("document.getElementById('jumpInput').value='" + str(missing + 1) + "'; document.getElementById('jumpInput').dispatchEvent(new Event('change'))")
+                    wait("document.getElementById('jumpInput').value === '" + str(missing + 1) + "' && !document.getElementById('jumpInput').disabled")
+                    assert js("document.getElementById('frameImage').naturalWidth") == 640
+                    window.run_js("document.getElementById('jumpInput').value='1'; document.getElementById('jumpInput').dispatchEvent(new Event('change'))")
+                    wait("document.getElementById('reviewNote').value === 'Generated suggestion-review note' && !document.getElementById('jumpInput').disabled")
+                    assert js("document.getElementById('savedCount').textContent") == '1'
+                    window.run_js("document.getElementById('exportBtn').click()")
+                    evidence = download(downloads[2], 'review.json')
+                    retained = evidence['model_suggestions']['detection_runs'][0]
+                    assert retained['provenance'] == suggestions['provenance']
+                    assert retained['frames'] == [suggestions['frames'][0]]
+                    assert evidence['frames'][0]['review']['note'] == 'Generated suggestion-review note'
+                    passed('native selected/unselected access and export preserve human notes and imported suggestion provenance')
+
                 except BaseException as exc:
                     errors.append(repr(exc))
                 finally:
@@ -173,10 +213,10 @@ def main():
             cocoa.AppKit.NSSavePanel = original_panel
         if errors:
             raise AssertionError('; '.join(errors))
-        assert len(checks) == 4, checks
+        assert len(checks) == 6, checks
         store = Store(workspace)
         with store.connect() as db:
-            study_id = db.execute('SELECT id FROM studies').fetchone()[0]
+            study_id = db.execute("SELECT id FROM studies WHERE title='Generated macOS qualification'").fetchone()[0]
         assert store.frame(study_id, 63)['review']['note'] == 'Generated macOS note'
         assert store.study(study_id)['frame_count'] == 64
         assert not mp.active_children(), 'Backend survived window closure'
