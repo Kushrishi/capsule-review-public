@@ -117,13 +117,15 @@ def main(argv=None):
     root = args.output.resolve()
     root.mkdir(parents=True, exist_ok=False)
     started = time.monotonic()
-    devices = nvidia_devices()
     summary = {'hardware': hardware(), 'status': 'failed', 'cuda_qualified': False,
-               'training_authorized': False, 'device_nodes': [str(p) for p in devices],
+               'training_authorized': False, 'device_nodes': [],
                'scope': 'generated only; no provisioning, medical data or external test',
-               'maximum_seconds': args.timeout, 'stage': 'isolation_canary'}
+               'maximum_seconds': args.timeout, 'stage': 'device_inventory'}
     # A separate, generated forbidden tree must never overlap writable output.
     try:
+        devices = nvidia_devices()
+        summary['device_nodes'] = [str(p) for p in devices]
+        summary['stage'] = 'isolation_canary'
         with tempfile.TemporaryDirectory(prefix='capsule-forbidden-') as tmp:
             forbidden = Path(tmp)
             summary['isolation'] = isolation_canary(root, forbidden, devices=devices,

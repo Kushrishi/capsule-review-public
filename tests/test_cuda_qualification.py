@@ -139,3 +139,15 @@ def test_actual_generated_isolation_canary_without_gpu(tmp_path):
             raise
         pytest.skip(message)
     assert report == {'paths': 'blocked', 'network': 'blocked', 'stdin': 'EOF', 'cublas': ':4096:8'}
+
+
+def test_device_inventory_failure_is_recorded(tmp_path, monkeypatch):
+    def denied():
+        raise PermissionError('generated device inventory denial')
+    monkeypatch.setattr(qualification, 'nvidia_devices', denied)
+    root = tmp_path / 'output'
+    assert qualification.main(['--output', str(root)]) == 1
+    report = json.loads((root / 'qualification.json').read_text())
+    assert report['stage'] == 'device_inventory'
+    assert report['error_type'] == 'PermissionError'
+    assert report['cuda_qualified'] is False
