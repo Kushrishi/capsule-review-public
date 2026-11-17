@@ -209,6 +209,11 @@ with sync_playwright() as p:
     with zipfile.ZipFile(export) as archive:
         manifest=json.loads(archive.read('review.json'))
         assert manifest['synthetic'] is True and len(manifest['frames'])==2
+        suggestions = manifest['model_suggestions']
+        assert suggestions['status'] == 'MODEL_SUGGESTIONS_ONLY'
+        assert suggestions['detection_runs'][0]['provenance'] == generated['provenance']
+        assert [x['position'] for x in suggestions['detection_runs'][0]['frames']] == [0, 1]
+        assert suggestions['prediction_runs'][0]['model']['name'] == 'Generated ranking example (not AI)'
         assert 'SYNTHETIC TEST SEQUENCE' in archive.read('review.html').decode()
         archive.extractall(out/'sample-review')
     checks.append('Export download contains two selected frames, illustrated HTML and JSON')
@@ -254,6 +259,9 @@ with sync_playwright() as p:
         full_span_record = json.loads(full_span_zip.read('evidence.json'))
         assert full_span_record['kind'] == 'full-imported-span-evidence'
         assert [item['position'] for item in full_span_record['frames']] == [0, 1, 2, 3]
+        retained = full_span_record['model_suggestions']['detection_runs'][0]
+        assert retained['provenance'] == generated['provenance']
+        assert [item['position'] for item in retained['frames']] == [0, 1, 2, 3]
         assert full_span_record['frames'][2]['reason']['marked_span_interior']
         assert 'images/frame_000002.png' in full_span_zip.namelist()
     checks.append('Browser offers distinct complete imported-span ZIP with its interior image')

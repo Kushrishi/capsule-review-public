@@ -7,11 +7,15 @@ on:
       - 'src/capsule_review/app.py'
       - 'src/capsule_review/importer.py'
       - 'src/capsule_review/store.py'
+      - 'src/capsule_review/exporter.py'
+      - 'src/capsule_review/full_span_evidence.py'
+      - 'src/capsule_review/suggestion_evidence.py'
       - 'src/capsule_review/static/**'
       - 'tests/*desktop*'
       - 'tests/test_importer.py'
       - 'tests/test_api.py'
       - 'tests/test_detections.py'
+      - 'tests/test_ai_review_export.py'
       - 'pyproject.toml'
   pull_request:
     paths:
@@ -20,11 +24,15 @@ on:
       - 'src/capsule_review/app.py'
       - 'src/capsule_review/importer.py'
       - 'src/capsule_review/store.py'
+      - 'src/capsule_review/exporter.py'
+      - 'src/capsule_review/full_span_evidence.py'
+      - 'src/capsule_review/suggestion_evidence.py'
       - 'src/capsule_review/static/**'
       - 'tests/*desktop*'
       - 'tests/test_importer.py'
       - 'tests/test_api.py'
       - 'tests/test_detections.py'
+      - 'tests/test_ai_review_export.py'
       - 'pyproject.toml'
   workflow_dispatch:
 permissions:
@@ -58,7 +66,7 @@ jobs:
         run: >-
           python -m pytest -q -ra
           tests/test_desktop.py tests/test_desktop_folder_import.py
-          tests/test_importer.py tests/test_api.py tests/test_detections.py
+          tests/test_importer.py tests/test_api.py tests/test_detections.py tests/test_ai_review_export.py
       - name: Native Cocoa window and WebKit workflow (automated picker choices)
         timeout-minutes: 4
         run: python tests/macos_desktop_smoke.py
