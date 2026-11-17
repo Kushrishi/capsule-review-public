@@ -336,6 +336,69 @@ def test_nonfinite_json_scores_rejected(value):
     assert run(b)["verdict"] == "INCONCLUSIVE"
 
 
+@pytest.mark.parametrize("case", ["score", "threshold", "tie", "equivalent-tie"])
+def test_extreme_decimal_comparisons_are_resource_bounded(case):
+    import subprocess
+    import sys
+    import time
+    if sys.platform != "linux":
+        pytest.skip("Linux RLIMIT_AS/CPU regression; never run hostile conversion unbounded")
+    pytest.importorskip("resource")
+    args = list(packed(controls()))
+    tiny = b"1e-1000000000"
+    if case != "threshold":
+        args[3] = args[3].replace(b'"scores":[0.5,0.5]', b'"scores":[' + tiny + b',0.5]', 1)
+    if case != "score":
+        threshold = b"10e-1000000001" if case == "equivalent-tie" else tiny
+        args[3] = args[3].replace(b'"thresholds":[0.5,0.5]',
+                                b'"thresholds":[' + threshold + b',0.5]', 1)
+    contract = json.loads(args[0])
+    contract["predictions_sha256"] = sha256(args[3]).hexdigest()
+    args[0] = raw(contract)
+    if case != "score":
+        args[0] = args[0].replace(b'"thresholds":[0.5,0.5]',
+                                b'"thresholds":[' + threshold + b',0.5]', 1)
+    args[1] = sha256(args[0]).hexdigest()
+    # Inner JSON remains bytes encoded as outer strings: no float underflow in
+    # the fixture builder. Import/evaluation both run behind hard Linux limits.
+    child = """
+import json, resource, sys
+resource.setrlimit(resource.RLIMIT_AS, (128 * 1024 * 1024,) * 2)
+resource.setrlimit(resource.RLIMIT_CPU, (2, 2))
+from capsule_review.spatial_external import evaluate
+args = [v if i == 1 else v.encode() for i, v in enumerate(json.load(sys.stdin))]
+print(json.dumps(evaluate(*args), sort_keys=True))
+"""
+    payload = json.dumps([a.decode() if type(a) is bytes else a for a in args])
+    started = time.monotonic()
+    command = [sys.executable, "-I"] + (["-O"] if sys.flags.optimize else [])
+    result = subprocess.run(command + ["-c", child], input=payload,
+                            capture_output=True, text=True, timeout=5)
+    elapsed = time.monotonic() - started
+    assert result.returncode == 0, (result.returncode, result.stderr)
+    report = json.loads(result.stdout)
+    # Independent strict Decimal ordering: 0.5 > tiny; tiny == 10e-(N+1).
+    expected_rate = {"score": "0", "threshold": "1", "tie": "1/2", "equivalent-tie": "1/2"}[case]
+    assert report["primary"]["models"]["19-classifier"]["vascular"]["rate"] == expected_rate
+    assert report["verdict"] == ("NOT MET" if case == "threshold" else "MET")
+    print(f"bounded generated {case}: {elapsed:.3f}s, exit 0, {report['verdict']}")
+
+
+def test_equivalent_decimal_spellings_preserve_exact_results():
+    b = controls()
+    for model in b[2]["models"]:
+        model["rows"][0]["scores"][0] = 0.5
+    args = list(packed(b))
+    args[3] = args[3].replace(b'"scores":[0.5,', b'"scores":[5e-1,', 1)
+    c = json.loads(args[0]); c["predictions_sha256"] = sha256(args[3]).hexdigest()
+    args[0] = raw(c).replace(b'"thresholds":[0.5,0.5]', b'"thresholds":[0.5000,0.50]', 1)
+    args[1] = sha256(args[0]).hexdigest()
+    report = evaluate(*args)
+    baseline = run(b)
+    assert {k: v for k, v in report.items() if k != "contract_sha256"} == {
+        k: v for k, v in baseline.items() if k != "contract_sha256"}
+
+
 @pytest.mark.parametrize("index", [0, 2, 3, 4])
 def test_exact_byte_hashes_are_not_self_repaired(index):
     args = list(packed(controls())); args[index] += b" "

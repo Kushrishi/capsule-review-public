@@ -81,7 +81,9 @@ def _id(value):
 
 def _prob(value):
     require(type(value) in (int, Decimal) and 0 <= value <= 1, "Invalid probability")
-    return Fraction(value)
+    # Comparisons are exact without expanding compact Decimal exponents into
+    # huge integer denominators. Fractions are only needed for metric counts.
+    return value
 
 
 def _scores(value):

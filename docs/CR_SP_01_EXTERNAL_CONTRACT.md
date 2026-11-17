@@ -19,7 +19,11 @@ UTF-8 JSON documents use exact field sets; unknown/duplicate fields, invalid
 versions and NaN/Infinity are rejected. SHA-256 values are full lowercase hex.
 All hashes cover original bytes, not a canonicalized or repaired document.
 JSON numeric score/threshold values are compared exactly as parsed decimals;
-booleans and strings are not numbers. Reordering input rows is safe only when
+validated Decimal/integer probabilities stay in that representation, without
+Fraction denominator expansion or float rounding. Fractions are reserved for
+counts, group weights and metric arithmetic. Compact extreme negative exponents
+therefore remain exact without materializing enormous denominators. Booleans
+and strings are not numbers. Reordering input rows is safe only when
 the independent contract binds those exact new bytes; joins never use position,
 basename matching, case folding or guessed extensions.
 
@@ -126,7 +130,10 @@ python -m pytest -q tests/test_spatial_external.py
 Existing ordinary CI runs these generated tests; no new workflow, training-host
 entry point or dependency is added. Tests check independent direct-count
 arithmetic, hostile schemas/digests/joins, incomplete studies, verdict precedence
-and input ordering. Evaluation works with file/network operations disabled;
+and input ordering. Linux extreme-decimal score/threshold regressions run in
+fresh subprocesses with 128 MiB address-space, 2-second CPU and 5-second wall
+limits; unsupported platforms explicitly skip those bounded regressions.
+Evaluation works with file/network operations disabled;
 fresh import does not load Torch or training. This establishes code separation,
 **not actual-host isolation**. The frozen Linux executor/loader protections and
 intended-host canaries remain separate prerequisites. No references belong on
