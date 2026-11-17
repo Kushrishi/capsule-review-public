@@ -373,3 +373,10 @@ is not an interactive viewer demonstration. The current desktop application stil
 requires its local Python/backend environment. No static demo or public deployment
 is created by this qualification; forwarding the real desktop service is not the
 recommended route to a demonstration.
+
+Remote integration evidence: the generated-data [macOS run](https://github.com/Kushrishi/capsule-review-public/actions/runs/44003308341)
+passed **120 tests** and both native WebKit flows, including category filtering,
+abnormality navigation, selected/unselected access, unchanged human notes and
+suggestion provenance in the actual downloaded review ZIP. Sealed-inference
+regressions separately passed **78 generated-data tests**. This validates fixture
+transport and review/export behavior, not execution of a medically trained detector.

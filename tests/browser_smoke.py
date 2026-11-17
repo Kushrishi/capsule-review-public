@@ -217,6 +217,14 @@ with sync_playwright() as p:
         assert 'SYNTHETIC TEST SEQUENCE' in archive.read('review.html').decode()
         archive.extractall(out/'sample-review')
     checks.append('Export download contains two selected frames, illustrated HTML and JSON')
+    offline = browser.new_context(offline=True)
+    report = offline.new_page()
+    report.goto((out / 'sample-review' / 'review.html').as_uri())
+    wait_for_js(report, "Array.from(document.images).length === 2 && Array.from(document.images).every(image => image.complete && image.naturalWidth > 0)")
+    assert 'SYNTHETIC TEST SEQUENCE' in report.locator('body').inner_text()
+    assert 'Draft saved automatically when navigating.' in report.locator('body').inner_text()
+    offline.close()
+    checks.append('Generated illustrated export opens offline without a backend; it is not the interactive viewer')
     # The same 24-frame synthetic examination now supports a separate
     # reviewer-defined image interval with no automatic interior frame export.
     page.get_by_role('button', name='Mark start', exact=True).click()
