@@ -20,7 +20,7 @@ def main():
     from capsule_review.desktop import run_window
 
     result = {'generated_only': True, 'status': 'RUNNING', 'queue_size': 2,
-              'scope': 'Native Qt layout/decode; not a human exposure or reading-time study'}
+              'scope': 'Native Qt decoding and HTTP availability only; no visibility or human exposure measurement'}
     original = webview.create_window
     with tempfile.TemporaryDirectory(prefix='capsule-exposure-') as temporary:
         def create(*a, **kw):
@@ -50,25 +50,35 @@ def main():
                     result['selected_positions'] = selected
                     result['selection_count_control'] = 'PASS'
                     window.run_js("document.getElementById('filmstrip').scrollIntoView({block:'center'})")
-                    visible = """Array.from(document.querySelectorAll('#filmstrip button')).filter(b=>{
-                        const i=b.querySelector('img'),r=i.getBoundingClientRect();
-                        return i.complete&&i.naturalWidth>0&&r.width>0&&r.height>0&&
-                            r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth;
+                    decoded = """Array.from(document.querySelectorAll('#filmstrip button')).filter(b=>{
+                        const i=b.querySelector('img');
+                        return i.complete&&i.naturalWidth>0&&i.naturalHeight>0;
                     }).map(b=>Number(b.dataset.position))"""
-                    wait('(' + visible + ').length>2')
-                    thumbnails = js(visible)
-                    result['rendered_thumbnail_positions'] = thumbnails
-                    result['omitted_thumbnail_positions'] = [p for p in thumbnails if p not in selected]
-                    assert result['omitted_thumbnail_positions']
-                    # Exact negative control: thumbnails/context count as pixels.
-                    # Deliberately reject calling this an enforced K-image session.
+                    wait('(' + decoded + ').length>2')
+                    thumbnails = js(decoded)
+                    result['decoded_thumbnail_positions'] = thumbnails
+                    result['omitted_decoded_thumbnail_positions'] = [p for p in thumbnails if p not in selected]
+                    assert result['omitted_decoded_thumbnail_positions']
+                    # A hidden filmstrip still contains decoded images. This
+                    # observer deliberately measures availability, not visibility.
+                    window.run_js("document.getElementById('filmstrip').hidden=true")
+                    wait("getComputedStyle(document.getElementById('filmstrip')).display==='none'")
+                    hidden_decoded = js(decoded)
+                    assert set(thumbnails) <= set(hidden_decoded)
+                    result['hidden_filmstrip_control'] = {'display': 'none',
+                        'previous_decoded_positions_retained': True,
+                        'decoded_positions_while_hidden': hidden_decoded,
+                        'not_a_visibility_measurement': True}
+                    window.run_js("document.getElementById('filmstrip').hidden=false")
+                    # No claim of rendered pixels or human exposure follows
+                    # from decoding/availability, even outside the selected set.
                     try:
-                        assert set(thumbnails) <= set(selected), 'Omitted thumbnail pixels are exposed'
+                        assert set(thumbnails) <= set(selected), 'Omitted thumbnails are decoded; visibility is unmeasured'
                     except AssertionError as exc:
-                        result['locked_exposure_negative_control'] = 'FAIL_AS_EXPECTED'
+                        result['locked_image_access_negative_control'] = 'FAIL_AS_EXPECTED'
                         result['negative_control_reason'] = str(exc)
                     else:
-                        raise AssertionError('The intended unrestricted negative control did not expose omissions')
+                        raise AssertionError('The unrestricted access control did not decode omitted images')
                     expected = js('state.priorityData.largest_unselected_span.inspect_position')
                     window.run_js("document.querySelector('#priorityComparison tr.comparison-active button').click()")
                     wait('state.frame.position===' + str(expected) +
@@ -76,7 +86,7 @@ def main():
                     inspected = js('state.frame.position')
                     assert inspected not in selected
                     assert js("document.getElementById('frameImage').naturalWidth") == 640
-                    result['omitted_full_resolution_position'] = inspected
+                    result['omitted_full_resolution_loaded_position'] = inspected
                     # Direct authenticated image access is unrestricted too.
                     omitted = next(p for p in range(24) if p not in selected)
                     window.run_js('window.__access=null;fetch(imageURL(' + str(omitted) +

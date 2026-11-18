@@ -159,7 +159,7 @@ with sync_playwright() as p:
     assert not page.locator('#bookmark').is_checked()
     page.locator('#jumpInput').fill('1'); page.locator('#jumpInput').press('Tab')
     wait_for_js(page, "state.frame.position === 0 && !document.getElementById('jumpInput').disabled")
-    checks.append('Exploratory mode exposes omitted thumbnails and images; exact-K is a queue size, not a locked exposure budget')
+    checks.append('Exploratory mode labels unrestricted access; omitted images decode without creating findings')
     # Import a complete synthetic detector run through the actual file control.
     from detection_fixture import fixture
     demo_study = client.get('/api/studies').json()[0]
