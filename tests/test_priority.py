@@ -81,6 +81,27 @@ def _fixture(app, client, headers, *, n=24, incomplete=False):
     return study, imported.json()["run_id"], base
 
 
+def test_exploratory_exact_k_queue_does_not_authorize_only_k_images(client, app, headers):
+    """A selected set is not an enforced human image-exposure session."""
+    _, run, base = _fixture(app, client, headers)
+    params = {'run': run, 'label': 'test-pattern', 'selected_count': 2,
+              'method': 'score_bin', 'page_size': 20}
+    queue = client.get(base + '/priority', params=params).json()
+    selected = {item['position'] for item in queue['items']}
+    assert selected == {6, 12} and queue['selected_images'] == 2
+    # The intended exploratory routes return original pixels and thumbnails
+    # outside that set. HTTP availability is not a measured human exposure.
+    for position in (0, 1, 23):
+        assert position not in selected
+        for suffix in ('', '?thumbnail=true'):
+            image = client.get(base + f'/frames/{position}/image' + suffix)
+            assert image.status_code == 200
+            with Image.open(io.BytesIO(image.content)) as decoded:
+                assert decoded.width > 0 and decoded.height > 0
+    assert client.get(base + '/saved').json() == []
+    assert client.get(base + '/priority', params=params).json()['items'] == queue['items']
+
+
 def test_real_api_readonly_queue_multiple_methods_paging_and_labels(client, app, headers):
     study, run, base = _fixture(app, client, headers, n=24)
     review = client.put(

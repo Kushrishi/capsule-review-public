@@ -627,7 +627,7 @@ function renderPriorityComparison(report, expectedStudyId) {
   const table = document.createElement('table');
   table.className = 'priority-comparison-table';
   const caption = textElement('caption',
-    'Each policy reviews exactly ' + report.selected_images_per_method.toLocaleString() +
+    'Each policy selects exactly ' + report.selected_images_per_method.toLocaleString() +
     ' of ' + report.imported_images.toLocaleString() + ' imported images.');
   table.append(caption);
   const head = document.createElement('thead');
