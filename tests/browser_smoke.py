@@ -144,6 +144,22 @@ with sync_playwright() as p:
     page.locator('#priorityComparison').screenshot(path=str(out/'synthetic-policy-comparison.png'))
     page.set_viewport_size({'width':1440,'height':1050})
     checks.append('Generated nonmedical scores enable five exact-K policies without an AI model')
+    assert page.locator('#reviewMode').is_visible()
+    assert 'unrestricted image access' in page.locator('#reviewMode').inner_text()
+    assert 'not a locked image-exposure session' in page.locator('#reviewMode').inner_text()
+    assert page.get_by_label('Queue size (1–all imported images)', exact=True).count() == 1
+    selected = page.evaluate('state.priorityData.items.map(item => item.position)')
+    page.locator('#filmstrip').scroll_into_view_if_needed()
+    wait_for_js(page, "Array.from(document.querySelectorAll('#filmstrip button')).some(b => !state.priorityData.items.some(x => x.position === Number(b.dataset.position)) && b.querySelector('img').complete && b.querySelector('img').naturalWidth > 0)")
+    omitted = page.evaluate('state.priorityData.largest_unselected_span.inspect_position')
+    assert omitted not in selected
+    page.locator('#priorityComparison tr.comparison-active button').click()
+    wait_for_js(page, f"state.frame.position === {omitted} && !document.getElementById('jumpInput').disabled && document.getElementById('frameImage').complete")
+    assert page.locator('#reviewNote').input_value() == ''
+    assert not page.locator('#bookmark').is_checked()
+    page.locator('#jumpInput').fill('1'); page.locator('#jumpInput').press('Tab')
+    wait_for_js(page, "state.frame.position === 0 && !document.getElementById('jumpInput').disabled")
+    checks.append('Exploratory mode exposes omitted thumbnails and images; exact-K is a queue size, not a locked exposure budget')
     # Import a complete synthetic detector run through the actual file control.
     from detection_fixture import fixture
     demo_study = client.get('/api/studies').json()[0]
