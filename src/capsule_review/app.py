@@ -505,6 +505,8 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
             data = await run_in_threadpool(export_review, store, study_id)
         except ValueError as exc:
             raise HTTPException(422, str(exc)) from exc
+        except OSError as exc:
+            raise HTTPException(422, 'The selected local images could not be archived. Check workspace files and permissions.') from exc
         return Response(data, media_type='application/zip', headers={
             'Content-Disposition': f'attachment; filename="review-{study_id[:8]}.zip"'})
 

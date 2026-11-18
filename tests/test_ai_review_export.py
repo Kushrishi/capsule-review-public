@@ -3,6 +3,9 @@ import io
 import json
 import zipfile
 from hashlib import sha256
+from pathlib import Path
+
+import pytest
 
 from detection_fixture import fixture
 
@@ -62,6 +65,34 @@ def test_standard_export_rejects_changed_display_bytes(client, headers, app):
     response = client.get(base + '/export')
     assert response.status_code == 422
     assert 'SHA-256' in response.json()['detail']
+
+
+@pytest.mark.parametrize('failure', ['missing', 'unreadable'])
+def test_standard_export_reports_unavailable_image_without_losing_review(
+        client, headers, app, monkeypatch, failure):
+    study, base, _ = prepared(client, headers, app)
+    image = app.state.store.images / study['id'] / '0.png'
+    original = image.read_bytes()
+    before = client.get(base + '/frames/0').json()['review']
+    with monkeypatch.context() as patch:
+        if failure == 'missing':
+            image.unlink()
+        else:
+            read_bytes = Path.read_bytes
+
+            def denied(path):
+                if path == image:
+                    raise PermissionError(13, 'Permission denied', str(image))
+                return read_bytes(path)
+
+            patch.setattr(Path, 'read_bytes', denied)
+        response = client.get(base + '/export')
+        assert response.status_code == 422
+        assert response.json()['detail'] == 'The selected local images could not be archived. Check workspace files and permissions.'
+        assert str(app.state.store.root) not in response.text
+        assert client.get(base + '/frames/0').json()['review'] == before
+    image.write_bytes(original)
+    assert client.get(base + '/export').status_code == 200
 
 
 def test_models_alone_never_create_exportable_human_findings(client, headers, app):
