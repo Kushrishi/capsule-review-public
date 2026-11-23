@@ -225,7 +225,7 @@ def main():
             cocoa.AppKit.NSSavePanel = original_panel
         if errors:
             raise AssertionError('; '.join(errors))
-        assert len(checks) == 6, checks
+        assert len(checks) == 7, checks
         store = Store(workspace)
         with store.connect() as db:
             study_id = db.execute("SELECT id FROM studies WHERE title='Generated macOS qualification'").fetchone()[0]
