@@ -38,12 +38,13 @@ STATIC = Path(__file__).parent / 'static'
 MAX_UPLOAD_BYTES = 512 * 1024 * 1024
 
 
-def create_app(data_dir: Path | str | None = None) -> FastAPI:
+def create_app(data_dir: Path | str | None = None, *, restricted_generated: bool = False) -> FastAPI:
     root = Path(data_dir or os.getenv('CAPSULE_REVIEW_DATA', Path.home() / '.capsule-review'))
     store = Store(root)
     token = secrets.token_urlsafe(32)
     inference_lock = threading.Lock()
-    app = FastAPI(title='Capsule Review', version=__version__, docs_url=None, redoc_url=None)
+    app = FastAPI(title='Capsule Review', version=__version__, docs_url=None, redoc_url=None,
+                  openapi_url=None if restricted_generated else '/openapi.json')
     app.state.store = store
     app.state.csrf_token = token
 
@@ -101,6 +102,11 @@ def create_app(data_dir: Path | str | None = None) -> FastAPI:
         return {'version': __version__, 'token': token, 'model_bundled': False,
                 'desktop_folder_import': getattr(app.state, 'desktop_folder_import', False),
                 'max_upload_files': 1000, 'max_upload_bytes': MAX_UPLOAD_BYTES}
+
+    if restricted_generated:
+        from .restricted_demo import configure
+        configure(app, store)
+        return app
 
     @app.post('/api/studies/{study_id}/detections', status_code=201)
     def import_detections(study_id: str, payload: DetectionImport):

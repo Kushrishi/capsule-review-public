@@ -63,7 +63,7 @@ def default_data_dir():
     return user_data_path('Capsule Review', appauthor=False)
 
 
-def _serve(connection, root, ticket):
+def _serve(connection, root, ticket, restricted_generated=False):
     """Spawn target. EOF on the private parent pipe also stops an orphaned backend."""
     import uvicorn
     from filelock import FileLock, Timeout
@@ -82,10 +82,11 @@ def _serve(connection, root, ticket):
         root = Path(root)
         root.mkdir(parents=True, exist_ok=True, mode=0o700)
         with FileLock(root / '.desktop.lock', timeout=0):
-            app = create_app(root)
-            imports = DesktopImports(app.state.store)
-            imports.notify_picker = lambda request_id: send(('pick', request_id))
-            register_desktop_imports(app, imports)
+            app = create_app(root, restricted_generated=restricted_generated)
+            if not restricted_generated:
+                imports = DesktopImports(app.state.store)
+                imports.notify_picker = lambda request_id: send(('pick', request_id))
+                register_desktop_imports(app, imports)
             # Keep the socket reserved through server startup: no free-port race.
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
                 sock.bind(('127.0.0.1', 0))
@@ -110,10 +111,10 @@ def _serve(connection, root, ticket):
                             send(('ready', port))
                             while True:
                                 command = connection.recv()
-                                if isinstance(command, tuple) and command[0] == 'picked':
+                                if imports and isinstance(command, tuple) and command[0] == 'picked':
                                     imports.selected(*command[1:])
                                     continue
-                                if not isinstance(command, tuple) or command[0] != 'folder':
+                                if not imports or not isinstance(command, tuple) or command[0] != 'folder':
                                     break
                                 try:
                                     value = imports.grant(command[1])
@@ -124,7 +125,8 @@ def _serve(connection, root, ticket):
                             pass
                     # Arm the watchdog before waiting for cancellation/cleanup.
                     threading.Timer(6, lambda: os._exit(0)).start()
-                    imports.shutdown()
+                    if imports:
+                        imports.shutdown()
                     server.should_exit = True
                     # Sync import/inference work may ignore graceful cancellation.
                     # SQLite rolls back incomplete transactions on the next open.
@@ -134,7 +136,7 @@ def _serve(connection, root, ticket):
                     server.run(sockets=[sock])
                 finally:
                     # Do not release the workspace lock while an import can still write.
-                    if not imports.shutdown():
+                    if imports and not imports.shutdown():
                         os._exit(0)
     except Timeout:
         connection.send(('error', 'This workspace is already open in another desktop window.'))
@@ -153,7 +155,8 @@ def _serve(connection, root, ticket):
 class Backend:
     """Bounded lifecycle usable without importing or initializing a GUI toolkit."""
 
-    def __init__(self, root, timeout=20):
+    def __init__(self, root, timeout=20, *, restricted_generated=False):
+        self.restricted_generated = restricted_generated
         self.root, self.timeout = Path(root).expanduser().resolve(), timeout
         self.process = self.connection = None
         self.url = None
@@ -163,7 +166,7 @@ class Backend:
         context = mp.get_context('spawn')
         self.connection, child = context.Pipe()
         ticket = secrets.token_urlsafe(32)
-        self.process = context.Process(target=_serve, args=(child, str(self.root), ticket), daemon=True)
+        self.process = context.Process(target=_serve, args=(child, str(self.root), ticket, self.restricted_generated), daemon=True)
         try:
             self.process.start()
             child.close()
@@ -275,7 +278,7 @@ class FolderPicker:
             self._lock.release()
 
 
-def run_window(root):
+def run_window(root, *, restricted_generated=False):
     try:
         import webview
     except ImportError as exc:
@@ -286,7 +289,7 @@ def run_window(root):
         os.environ.setdefault('QT_API', 'pyqt6')
         configure_qt_downloads()
         gui = 'qt'
-    with Backend(root) as backend:
+    with Backend(root, restricted_generated=restricted_generated) as backend:
         picker = FolderPicker(backend)
         window = webview.create_window('Capsule Review — Desktop v0.1', backend.url,
                                       width=1280, height=900, min_size=(800, 600), confirm_close=True)
@@ -392,12 +395,21 @@ def main():
     parser.add_argument('--data-dir', type=Path, default=None,
                         help='Existing or new workspace; default: OS application-data directory')
     parser.add_argument('--create-shortcut', action='store_true', help='Create a launch shortcut on your Desktop, then exit')
+    parser.add_argument('--restricted-generated', action='store_true',
+                        help='Opt-in K=2 generated-only pixel restriction prototype; temporary workspace')
     args = parser.parse_args()
+    if args.restricted_generated and (args.data_dir or args.create_shortcut):
+        parser.error('Generated restriction uses a fresh temporary workspace; no existing workspace or shortcut.')
     try:
         if args.create_shortcut:
             create_shortcut(args.data_dir)
             return 0
-        run_window(args.data_dir or default_data_dir())
+        if args.restricted_generated:
+            import tempfile
+            with tempfile.TemporaryDirectory(prefix='capsule-restricted-generated-') as root:
+                run_window(root, restricted_generated=True)
+        else:
+            run_window(args.data_dir or default_data_dir())
     except Exception as exc:
         message = str(exc) if isinstance(exc, RuntimeError) else 'The desktop window could not open. Check the native webview dependencies.'
         show_error(message)
