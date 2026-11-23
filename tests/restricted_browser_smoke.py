@@ -5,7 +5,7 @@ from pathlib import Path
 import tempfile
 import zipfile
 
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import expect, sync_playwright
 from capsule_review.desktop import Backend
 
 
@@ -24,12 +24,13 @@ def main():
             page.on('response', lambda response: pixel_responses.append((response.url, response.status))
                     if '/api/restricted/images/' in response.url else None)
             page.goto(backend.url)
-            page.wait_for_function("() => document.querySelector('#image').naturalWidth===640")
+            expect(page.locator('#image')).to_have_js_property('naturalWidth', 640)
             assert 'RESTRICTED GENERATED SESSION' in page.locator('#mode').inner_text()
             assert page.locator('#frames button').count() == 2
             assert page.locator('#frames button').evaluate_all('(nodes)=>nodes.map(n=>Number(n.dataset.position))') == [6, 12]
             page.locator('#frames button').nth(1).click()
-            page.wait_for_function("() => document.querySelector('#image').src.endsWith('/12') && document.querySelector('#image').naturalWidth===640")
+            expect(page.locator('#image')).to_have_attribute('src', '/api/restricted/images/12')
+            expect(page.locator('#image')).to_have_js_property('naturalWidth', 640)
             # Same-source thumbnails allowed; every other source denied, even
             # when bypassing controls or requesting browser decode directly.
             control = page.evaluate('''async () => {
@@ -50,11 +51,11 @@ def main():
                 receipt = json.loads(archive.read('receipt.json'))
                 assert receipt['restricted_claim_valid']
             page.locator('#exit').click()
-            page.wait_for_function("() => document.querySelector('#mode').textContent.startsWith('RESTRICTED CLAIM INVALID')")
+            expect(page.locator('#mode')).to_contain_text('RESTRICTED CLAIM INVALID')
             assert page.locator('#frames button').count() == 0
             assert page.locator('#image').get_attribute('src') is None
             page.reload()
-            page.wait_for_function("() => document.querySelector('#mode').textContent.startsWith('RESTRICTED CLAIM INVALID')")
+            expect(page.locator('#mode')).to_contain_text('RESTRICTED CLAIM INVALID')
             assert page.locator('#frames button').count() == 0
             assert all(url.split('/images/')[1].split('?')[0] in ('6', '12') for url, status in pixel_responses if status == 200)
             assert not errors, errors
