@@ -35,7 +35,7 @@ class DraftClose:
         )
         if command == 'abort':
             script = ('(() => { const answer = ' + script + '; '
-                      'if (!answer && location.origin === ' + json.dumps(self.origin) +
+                      "if (answer === 'null' && location.origin === " + json.dumps(self.origin) +
                       " && location.pathname === '/') { const notice = document.getElementById('notice'); "
                       "if (notice) { notice.textContent = 'Close confirmation is unavailable. The window remains open; preserve your draft before restarting.'; notice.hidden = false; }} return answer; })()")
         def evaluate():
