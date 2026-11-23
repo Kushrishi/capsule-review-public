@@ -33,7 +33,7 @@ MAX_TOTAL_IMAGE_BYTES = 8 * 1024 * 1024 * 1024
 MAX_MANIFEST_BYTES = 64 * 1024 * 1024
 
 
-def _plan(intervals: list[dict], saved: set[int]) -> tuple[set[int], set[int], set[int]]:
+def _plan(intervals: list[dict], saved: set[int], *, saved_only: bool = False) -> tuple[set[int], set[int], set[int]]:
     """Union imported image positions; overlapping intervals never duplicate."""
     span: set[int] = set()
     boundaries: set[int] = set()
@@ -41,24 +41,26 @@ def _plan(intervals: list[dict], saved: set[int]) -> tuple[set[int], set[int], s
         start, end = interval["start_position"], interval["end_position"]
         span.update(range(start, end + 1))
         boundaries.update((start, end))
-    return saved | span, span, boundaries
+    return (saved if saved_only else saved | span), span, boundaries
 
 
 def _summary(imported: list[dict], selected: set[int], saved: set[int],
              span: set[int], boundaries: set[int], intervals: list[dict],
-             review_events: list[dict]) -> dict:
+             review_events: list[dict], *, saved_only: bool = False) -> dict:
     return {
-        "kind": "capsule-review-full-span-evidence-receipt-v1",
+        "kind": ("capsule-review-saved-image-evidence-receipt-v1" if saved_only else
+                 "capsule-review-full-span-evidence-receipt-v1"),
         "audit_passed": True,
         "imported_images": len(imported),
         "exported_images": len(selected),
         "explicit_saved_images": len(saved),
         "marked_intervals": len(intervals),
-        "retained_images_in_marked_spans": len(span),
-        "interval_interior_images_retained": len(span - boundaries),
-        "interval_boundaries_retained": len(boundaries),
+        "retained_images_in_marked_spans": len(selected & span),
+        "interval_interior_images_retained": len(selected & (span - boundaries)),
+        "interval_boundaries_retained": len(selected & boundaries),
         "additional_images_beyond_boundary_only_export": len(selected - (saved | boundaries)),
-        "imported_images_not_in_full_span_export": len(imported) - len(selected),
+        ("imported_images_not_in_saved_export" if saved_only else
+         "imported_images_not_in_full_span_export"): len(imported) - len(selected),
         "review_event_revisions_replayed": len(review_events),
         "image_bytes_in_export_rehashed": len(selected),
         "all_original_source_png_bytes_rehashed": False,
@@ -66,6 +68,10 @@ def _summary(imported: list[dict], selected: set[int], saved: set[int],
         "human_review_of_every_retained_image_verified": False,
         "pathology_labels_or_clinical_sensitivity_evaluated": False,
         "interpretation": (
+            "Only explicitly saved images are retained. Marked intervals are context, "
+            "not an instruction to include boundaries or interiors. This is not a workspace "
+            "backup or evidence of human viewing, pathology or source-video completeness."
+        ) if saved_only else (
             "Every retained *imported* image within active reviewer-marked spans is "
             "present in the ZIP, plus all explicitly saved images. These are not "
             "necessarily all frames from the original recorded examination. "
@@ -77,7 +83,7 @@ def _summary(imported: list[dict], selected: set[int], saved: set[int],
     }
 
 
-def _local_snapshot(store: Store, study_id: str) -> tuple[dict, list[dict], list[dict], list[dict], list[dict], dict]:
+def _local_snapshot(store: Store, study_id: str, *, saved_only: bool = False) -> tuple[dict, list[dict], list[dict], list[dict], list[dict], dict]:
     with store.connect() as db:
         db.execute('BEGIN')
         study_row = db.execute("SELECT * FROM studies WHERE id=?", (study_id,)).fetchone()
@@ -108,7 +114,7 @@ def _local_snapshot(store: Store, study_id: str) -> tuple[dict, list[dict], list
             "FROM review_interval_events WHERE study_id=? ORDER BY id", (study_id,)
         )]
         saved = {row['position'] for row in rows if row['bookmarked'] or row['note'] or row['label']}
-        chosen, _, _ = _plan(intervals, saved)
+        chosen, _, _ = _plan(intervals, saved, saved_only=saved_only)
         suggestions = snapshot_suggestions(db, study_id, chosen)
     events = [{**event, "content": json.loads(event["content"])} for event in events]
     return study, rows, intervals, events, interval_history, suggestions
@@ -129,24 +135,37 @@ def _source_manifest(study: dict, rows: list[dict]) -> dict:
 
 
 def export_full_span_evidence(store: Store, study_id: str, output: Path) -> dict:
+    return _export_evidence(store, study_id, output, saved_only=False)
+
+
+def export_saved_evidence(store: Store, study_id: str, output: Path) -> dict:
+    """Stream only explicitly saved images; intervals remain unexpanded context."""
+    return _export_evidence(store, study_id, output, saved_only=True)
+
+
+def _export_evidence(store: Store, study_id: str, output: Path, *, saved_only: bool) -> dict:
     """Create a **new** opt-in ZIP on local disk; fail closed and never overwrite."""
+    label = "Saved-image" if saved_only else "Full-span"
     if output.exists():
         raise FileExistsError("Refusing to overwrite an existing full-span archive.")
-    study, rows, intervals, events, interval_history, suggestions = _local_snapshot(store, study_id)
+    study, rows, intervals, events, interval_history, suggestions = _local_snapshot(store, study_id, saved_only=saved_only)
     saved = {row["position"] for row in rows
              if row["bookmarked"] or row["note"] or row["label"]}
-    chosen, span, endpoints = _plan(intervals, saved)
-    if not intervals:
+    chosen, span, endpoints = _plan(intervals, saved, saved_only=saved_only)
+    if not saved_only and not intervals:
         raise ValueError("Mark at least one image interval to export full spans.")
-    if not chosen or len(chosen) > MAX_FULL_IMAGES:
-        raise ValueError("Full-span selection exceeds the local 50,000-image safety bound.")
+    if not chosen:
+        raise ValueError("Save at least one image to export saved evidence.")
+    if len(chosen) > MAX_FULL_IMAGES:
+        raise ValueError(f"{label} selection exceeds the local 50,000-image safety bound.")
 
     complete = _source_manifest(study, rows)
     record = {
         "schema_version": 1,
         "application": "capsule-review",
-        "kind": "full-imported-span-evidence",
-        "selection": "all imported images in active marked intervals plus explicitly saved images",
+        "kind": "saved-image-evidence" if saved_only else "full-imported-span-evidence",
+        "selection": ("explicitly saved images only; intervals are context, not expanded" if saved_only else
+                      "all imported images in active marked intervals plus explicitly saved images"),
         "exported_at": now(),
         "synthetic": bool(study["synthetic"]),
         "study": {key: study[key] for key in (
@@ -156,7 +175,8 @@ def export_full_span_evidence(store: Store, study_id: str, output: Path) -> dict
         "intervals": intervals,
         "review_history": events,
         "interval_history": interval_history,
-        "caveat": ("Full imported image spans are retained, not necessarily all original video "
+        "caveat": ("Saved imported images only; not a workspace backup, clinical finding or "
+                   "proof of human viewing.") if saved_only else ("Full imported image spans are retained, not necessarily all original video "
                    "frames; no human viewing, pathology detection or time savings inferred."),
     }
     # The compact HTML is a navigator for the unpacked ZIP; it intentionally
@@ -190,7 +210,7 @@ def export_full_span_evidence(store: Store, study_id: str, output: Path) -> dict
                 path = store.images / study_id / f"{position}.png"
                 size = path.stat().st_size
                 if size > MAX_IMAGE_BYTES or size <= 0 or count_bytes + size > MAX_TOTAL_IMAGE_BYTES:
-                    raise ValueError("Full-span image exceeds the local per-image or 8-GiB safety limit.")
+                    raise ValueError(f"{label} image exceeds the local per-image or 8-GiB safety limit.")
                 digest = hashlib.sha256()
                 with path.open("rb") as source, archive.open(relative, "w", force_zip64=True) as destination:
                     while chunk := source.read(1024 * 1024):
@@ -210,19 +230,21 @@ def export_full_span_evidence(store: Store, study_id: str, output: Path) -> dict
                 )
             if len(record["frames"]) != len(chosen):
                 raise ValueError("Local study image positions changed during full-span export.")
+            heading = "Explicitly saved-image evidence" if saved_only else "Full marked-image-span evidence"
+            retention = ("Only explicitly saved images are included; marked intervals are context, not expanded. "
+                         if saved_only else "Every imported image in marked intervals is included, plus saved images outside them. ")
             html_page = (
                 '<!doctype html><html lang="en"><head><meta charset="utf-8">'
                 '<meta http-equiv="Content-Security-Policy" content="default-src '
                 "&apos;none&apos;; style-src &apos;unsafe-inline&apos;; img-src &apos;self&apos;; "
                 'base-uri &apos;none&apos;; form-action &apos;none&apos;">'
-                '<title>Capsule Review full-span evidence</title>'
+                f'<title>Capsule Review {label.lower()} evidence</title>'
                 '<style>body{font:15px/1.6 system-ui,sans-serif;max-width:900px;'
                 'margin:35px auto;padding:0 24px;color:#16353c}li{margin:6px 0}'
                 'a{color:#075f65}small{color:#516970}</style></head><body>'
-                '<h1>Full marked-image-span evidence</h1>'
+                f'<h1>{heading}</h1>'
                 '<p><strong>Extract the entire ZIP before opening this index.</strong> '
-                'Unlike the normal illustrated review, this package retains every <em>imported</em> '
-                'image in active reviewer-marked spans, plus saved images outside them. '
+                f'{retention}'
                 'Images were not necessarily viewed by a person. This is NOT a complete original '
                 'video, diagnosis or measurement of sensitivity.</p>'
                 f'<p>{len(record["frames"])} exported images in '
@@ -236,44 +258,55 @@ def export_full_span_evidence(store: Store, study_id: str, output: Path) -> dict
             archive.writestr("index.html", html_page)
             metadata = json.dumps(record, indent=2, ensure_ascii=False)
             if len(metadata.encode('utf-8')) > MAX_MANIFEST_BYTES:
-                raise ValueError('Full-span metadata exceeds its verification limit.')
+                raise ValueError(f'{label} metadata exceeds its verification limit.')
             archive.writestr("evidence.json", metadata)
         # Independently reopen and checksum the *actual ZIP bytes* before serving.
-        return verify_full_span_evidence(output, complete)
+        verifier = verify_saved_evidence if saved_only else verify_full_span_evidence
+        return verifier(output, complete)
     except Exception:
         output.unlink(missing_ok=True)
         raise
 
 
 def verify_full_span_evidence(path: Path, source_manifest: dict) -> dict:
+    return _verify_evidence(path, source_manifest, saved_only=False)
+
+
+def verify_saved_evidence(path: Path, source_manifest: dict) -> dict:
+    return _verify_evidence(path, source_manifest, saved_only=True)
+
+
+def _verify_evidence(path: Path, source_manifest: dict, *, saved_only: bool) -> dict:
     """Independently validate the archive and a trusted local complete manifest."""
+    label = "Saved-image" if saved_only else "Full-span"
     if not path.is_file():
         raise ValueError("Missing full-span evidence archive.")
     with zipfile.ZipFile(path) as archive:
         members = archive.infolist()
         names = [item.filename for item in members]
         if len(names) != len(set(names)) or not {"evidence.json", "index.html"} <= set(names):
-            raise ValueError("Full-span evidence ZIP members are missing or repeated.")
+            raise ValueError(f"{label} evidence ZIP members are missing or repeated.")
         metadata = archive.getinfo("evidence.json")
         page = archive.getinfo("index.html")
         if metadata.file_size > MAX_MANIFEST_BYTES or page.file_size > MAX_MANIFEST_BYTES:
-            raise ValueError("Full-span evidence metadata is oversized.")
+            raise ValueError(f"{label} evidence metadata is oversized.")
         record = json.loads(archive.read("evidence.json"))
-        if not isinstance(record, dict) or record.get("kind") != "full-imported-span-evidence":
-            raise ValueError("Not a Capsule Review full-span evidence archive.")
-        if record.get("selection") != "all imported images in active marked intervals plus explicitly saved images":
-            raise ValueError("Full-span retention policy does not match the verified format.")
+        if not isinstance(record, dict) or record.get("kind") != ("saved-image-evidence" if saved_only else "full-imported-span-evidence"):
+            raise ValueError(f"Not a Capsule Review {label.lower()} evidence archive.")
+        if record.get("selection") != ("explicitly saved images only; intervals are context, not expanded" if saved_only else
+                                       "all imported images in active marked intervals plus explicitly saved images"):
+            raise ValueError(f"{label} retention policy does not match the verified format.")
         imported = _verify_complete_import_manifest(record, source_manifest)
         intervals, endpoints = _validate_intervals(record, imported)
         latest = _replay_reviewer_events(record, len(imported))
         saved = {position for position, review in latest.items()
                  if review["bookmarked"] or review["note"] or review["label"]}
-        chosen, span, boundaries = _plan(intervals, saved)
+        chosen, span, boundaries = _plan(intervals, saved, saved_only=saved_only)
         if boundaries != endpoints or len(chosen) > MAX_FULL_IMAGES:
-            raise ValueError("Full-span evidence selection is inconsistent.")
+            raise ValueError(f"{label} evidence selection is inconsistent.")
         frames = record.get("frames")
         if not isinstance(frames, list) or len(frames) != len(chosen):
-            raise ValueError("Full-span archive omitted one or more required imported images.")
+            raise ValueError(f"{label} archive omitted one or more required imported images.")
         if len(frames) > len(imported):
             raise ValueError("Exported selection cannot exceed imported frame count.")
         expected = {"index.html", "evidence.json"}
@@ -297,7 +330,7 @@ def verify_full_span_evidence(path: Path, source_manifest: dict) -> dict:
                 "interval_boundary": position in boundaries,
                 "marked_span_interior": position in span - boundaries,
             }:
-                raise ValueError("Full-span retention reason has been altered.")
+                raise ValueError(f"{label} retention reason has been altered.")
             default = {"revision": 0, "bookmarked": False, "note": "",
                        "label": "", "updated_at": None}
             if frame.get("review") != latest.get(position, default):
@@ -314,12 +347,12 @@ def verify_full_span_evidence(path: Path, source_manifest: dict) -> dict:
                 while chunk := source.read(1024 * 1024):
                     accumulated += len(chunk)
                     if accumulated > MAX_TOTAL_IMAGE_BYTES:
-                        raise ValueError("Full-span archive exceeds local image size limit.")
+                        raise ValueError(f"{label} archive exceeds local image size limit.")
                     digest.update(chunk)
             if digest.hexdigest() != _sha(frame.get("display_sha256"), "verified exported display image"):
-                raise ValueError("Full-span exported PNG hash mismatch.")
+                raise ValueError(f"{label} exported PNG hash mismatch.")
         if set(names) != expected:
             raise ValueError("Extra or missing members in full-span evidence ZIP.")
         if len(chosen) != len(frames) or {frame["position"] for frame in frames} != chosen:
             raise ValueError("Archive contains only a subset of marked imported span images.")
-    return _summary(imported, chosen, saved, span, boundaries, intervals, record["review_history"])
+    return _summary(imported, chosen, saved, span, boundaries, intervals, record["review_history"], saved_only=saved_only)

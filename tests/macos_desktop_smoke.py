@@ -44,7 +44,7 @@ def main():
         for n in reversed(range(64)):
             (source / f'frame_{n}.png').write_bytes(data.getvalue())
         workspace = root / 'workspace'
-        downloads = [root / 'native-review.zip', root / 'native-spans.zip', root / 'native-suggestions.zip']
+        downloads = [root / 'native-review.zip', root / 'native-spans.zip', root / 'native-suggestions.zip', root / 'native-saved.zip']
         chosen_saves = []
         original_panel = cocoa.AppKit.NSSavePanel
         original_window = webview.create_window
@@ -187,6 +187,18 @@ def main():
                     assert retained['frames'] == [suggestions['frames'][0]]
                     assert evidence['frames'][0]['review']['note'] == 'Generated suggestion-review note'
                     passed('native selected/unselected access and export preserve human notes and imported suggestion provenance')
+                    window.run_js("document.getElementById('savedEvidenceBtn').click()")
+                    saved = download(downloads[3], 'evidence.json')
+                    from capsule_review.full_span_evidence import verify_saved_evidence
+                    from capsule_review.full_span_evidence import _source_manifest
+                    store = Store(workspace)
+                    with store.connect() as db:
+                        study = dict(db.execute('SELECT * FROM studies WHERE id=?', (demo_id,)).fetchone())
+                        rows = [dict(row) for row in db.execute('SELECT * FROM frames WHERE study_id=? ORDER BY position', (demo_id,))]
+                    assert verify_saved_evidence(downloads[3], _source_manifest(study, rows))['exported_images'] == 1
+                    assert saved['frames'][0]['review']['note'] == 'Generated suggestion-review note'
+                    assert saved['model_suggestions']['detection_runs'][0]['provenance'] == suggestions['provenance']
+                    passed('native streamed saved-image download verifies source identities and suggestion provenance')
 
                 except BaseException as exc:
                     errors.append(repr(exc))
@@ -213,7 +225,7 @@ def main():
             cocoa.AppKit.NSSavePanel = original_panel
         if errors:
             raise AssertionError('; '.join(errors))
-        assert len(checks) == 6, checks
+        assert len(checks) == 7, checks
         store = Store(workspace)
         with store.connect() as db:
             study_id = db.execute("SELECT id FROM studies WHERE title='Generated macOS qualification'").fetchone()[0]
