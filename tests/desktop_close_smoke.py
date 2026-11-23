@@ -38,12 +38,14 @@ def main():
                     if js(expression): return
                     time.sleep(.05)
                 raise AssertionError('Native condition timed out: '+expression)
-            def close_request():
+            def native_request():
                 if platform.system() == 'Darwin':
                     from webview.platforms import cocoa
                     cocoa.AppHelper.callAfter(cocoa.BrowserView.instances[window.uid].window.performClose_, None)
                 else:
                     window.destroy()  # Qt closeEvent; cancelled by production handler.
+            def close_request():
+                native_request()
                 wait("document.getElementById('draftCloseDialog').open")
             def cancel():
                 window.run_js("document.getElementById('draftCloseCancel').click()")
@@ -59,6 +61,13 @@ def main():
                     wait("document.getElementById('version').textContent.startsWith('v')")
                     window.run_js("document.getElementById('demoBtn').click()")
                     wait("state.frame !== null && !state.busy && !state.switching")
+                    if not args.discard:
+                        window.run_js('window.originalClose=window.capsuleDesktopClose; window.capsuleDesktopClose=undefined')
+                        native_request()
+                        wait("!document.getElementById('notice').hidden && document.getElementById('notice').textContent.includes('Close confirmation is unavailable')")
+                        window.run_js('window.capsuleDesktopClose=window.originalClose')
+                        time.sleep(.3)
+                        passed('missing close handshake fails closed with visible error')
                     if args.discard:
                         window.run_js("document.getElementById('reviewNote').value='Saved original'; document.getElementById('reviewNote').dispatchEvent(new Event('input')); document.getElementById('saveBtn').click()")
                         wait("state.frame.review.revision === 1 && !state.saving")
