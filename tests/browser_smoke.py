@@ -322,6 +322,31 @@ with sync_playwright() as p:
     page.keyboard.press('ArrowRight')
     wait_for_js(page, "document.getElementById('jumpInput').value === '3'")
     checks.append('Keyboard frame navigation works')
+    # Genuine browser input: no synthetic dispatchEvent KeyboardEvent proof.
+    page.locator('#helpBtn').focus(); page.keyboard.press('Space')
+    wait_for_js(page, "document.getElementById('helpDialog').open")
+    assert page.evaluate('state.playing') is False
+    assert page.locator('#jumpInput').input_value() == '3'
+    page.get_by_label('Close help').focus(); page.keyboard.press('Enter')
+    wait_for_js(page, "!document.getElementById('helpDialog').open")
+    page.locator('#nextBtn').focus(); page.keyboard.press('Enter')
+    wait_for_js(page, "document.getElementById('jumpInput').value === '4' && !state.busy")
+    page.locator('a.research-link').focus(); page.keyboard.press('Space')
+    assert page.evaluate('state.playing') is False
+    page.keyboard.press('Enter')
+    page.wait_for_url('**/static/locked-results.html')
+    page.go_back()
+    wait_for_js(page, "state.frame && state.frame.position === 3 && !state.busy")
+    page.locator('#reviewNote').fill('Keyboard save fixture')
+    page.keyboard.press('Control+s')
+    wait_for_js(page, "!state.dirty && !state.saving && document.getElementById('saveStatus').textContent === 'Saved'")
+    page.locator('#imageStage').focus(); page.keyboard.press('b')
+    wait_for_js(page, "document.getElementById('bookmark').checked && !state.saving")
+    page.locator('#imageStage').focus(); page.keyboard.press('Space')
+    wait_for_js(page, "state.playing && !state.busy")
+    page.keyboard.press('Space')
+    assert page.evaluate('state.playing') is False
+    checks.append('Real Chromium keys preserve button/link/dialog activation, viewer keys and Ctrl+S')
     page.locator('#jumpInput').fill('24');page.locator('#jumpInput').press('Tab')
     wait_for_js(page, "document.getElementById('frameCounter').textContent.startsWith('Frame 24')")
     assert page.locator('#nextBtn').is_disabled();checks.append('End of sequence disables next-frame control')

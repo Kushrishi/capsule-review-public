@@ -435,13 +435,24 @@ $('draftCloseSave').addEventListener('click', async () => {
 });
 
 document.addEventListener('keydown', (event) => {
-  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {event.preventDefault(); saveReview(); return;}
-  if (document.querySelector('dialog[open]') || ['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName) || !state.frame) return;
+  if (event.defaultPrevented || event.isComposing) return;
+  const dialogOpen = Boolean(document.querySelector('dialog[open]'));
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
+    event.preventDefault(); if (!dialogOpen) saveReview(); return;
+  }
+  if (dialogOpen || event.ctrlKey || event.metaKey || event.altKey || !state.frame) return;
+  const target = event.target;
+  // Preserve native activation/editing, including nested content within controls.
+  if (!(target instanceof Element) || target.isContentEditable || target.closest(
+    'button,a[href],input,textarea,select,summary,[role="button"],[role="link"],[role="textbox"],[role="slider"],[role="combobox"]'
+  )) return;
+  if (target !== document.body && !$('viewer').contains(target)) return;
   if (event.key === 'ArrowLeft') {event.preventDefault(); $('prevBtn').click();}
   if (event.key === 'ArrowRight') {event.preventDefault(); $('nextBtn').click();}
   if (event.key.toLowerCase() === 'b') {event.preventDefault(); $('bookmark').click();}
-  if (event.code === 'Space') {event.preventDefault(); $('playBtn').click();}
+  if (event.key === ' ' || event.code === 'Space') {event.preventDefault(); $('playBtn').click();}
 });
+
 function openImport() {stopPlayback(); $('importDialog').showModal();}
 $('importBtn').addEventListener('click', openImport); $('emptyImportBtn').addEventListener('click', openImport);
 $('helpBtn').addEventListener('click', () => {$('helpDialog').showModal();});
