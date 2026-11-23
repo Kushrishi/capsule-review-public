@@ -7,7 +7,7 @@ async function refresh() {
   const valid = state.restricted_claim_valid;
   document.getElementById('mode').textContent = valid
     ? `RESTRICTED GENERATED SESSION · K=${state.commitment.selection.k} · frozen selection ${state.commitment_sha256}`
-    : 'RESTRICTED CLAIM INVALID — unmode exit or source-integrity failure. Earlier restriction cannot be restored.';
+    : 'RESTRICTED CLAIM INVALID — mode exit or source-integrity failure. Earlier restriction cannot be restored.';
   document.getElementById('exit').disabled = !valid;
   const nav = document.getElementById('frames');
   nav.replaceChildren();

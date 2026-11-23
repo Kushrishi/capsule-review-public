@@ -37,6 +37,10 @@ def test_selected_only_every_representation_and_export(restricted):
     app, client = restricted
     initial = client.get('/api/restricted/state').json()
     chosen = initial['commitment']['selection']['positions']
+    scores = initial['commitment']['selection']['score_stream']
+    assert [s['position'] for s in scores] == list(range(24))
+    independently_selected = [min(range(start, start + 12), key=lambda p: (-scores[p]['score'], p)) for start in (0, 12)]
+    assert set(independently_selected) == set(chosen)
     assert chosen == [6, 12]
     assert initial['commitment']['generated_only'] and initial['restricted_claim_valid']
     delivered = set()

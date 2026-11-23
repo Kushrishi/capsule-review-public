@@ -34,8 +34,12 @@ def configure(app, store):
             raise ValueError('Restricted generated prototype requires an empty workspace.')
     study = open_or_create_demo(store)
     with store.connect() as db:
-        run = db.execute('SELECT id FROM prediction_runs WHERE study_id=? AND run_id=?',
-                         (study['id'], DEMO_RUN_ID)).fetchone()[0]
+        run_record = db.execute('SELECT id,model_json FROM prediction_runs WHERE study_id=? AND run_id=?',
+                                (study['id'], DEMO_RUN_ID)).fetchone()
+        run = run_record['id']
+        score_stream = [dict(r) for r in db.execute(
+            'SELECT position,score FROM predictions WHERE study_id=? AND run_id=? AND label=? ORDER BY position',
+            (study['id'], run, DEMO_LABEL))]
         frames = [dict(r) for r in db.execute(
             'SELECT position,filename,source_index,source_sha256,display_sha256 FROM frames '
             'WHERE study_id=? ORDER BY position', (study['id'],))]
@@ -47,7 +51,8 @@ def configure(app, store):
         'schema_version': 1, 'generated_only': True, 'session_id': secrets.token_hex(16),
         'study_id': study['id'], 'source_manifest_sha256': study['manifest_sha256'],
         'selection': {'method': 'score_bin', 'k': 2, 'positions': list(selected),
-                      'run_id': DEMO_RUN_ID, 'label': DEMO_LABEL},
+                      'run_id': DEMO_RUN_ID, 'label': DEMO_LABEL,
+                      'model': json.loads(run_record['model_json']), 'score_stream': score_stream},
         'frames': frames,
         'scope': 'Unique source identities permitted for pixel delivery; not human seeing or dwell time',
     }
