@@ -39,6 +39,7 @@
       </section>
       <section id="examination" hidden>
         <div class="exam-heading"><div><p class="eyebrow" id="sourceText"></p><h1 id="studyTitle"></h1></div><div class="evidence-actions"><button id="auditBtn" class="outline" disabled>Verify evidence</button><button id="fullSpanBtn" class="outline" disabled>Export full spans</button><button id="exportBtn" class="outline">Export review</button></div></div>
+        <p id="reviewMode" class="panel-hint" role="note">Exploratory review · unrestricted image access. Queue size counts selected images, not every image displayed. This is not a locked image-exposure session.</p>
         <p id="exportEvidenceSummary" class="panel-hint" role="status" aria-live="polite">Nothing selected for export.</p>
         <p id="auditReport" class="evidence-audit" role="status" aria-live="polite" hidden></p>
         <div id="syntheticBanner" class="synthetic-banner" hidden>Synthetic test sequence · not clinical data</div>
@@ -87,10 +88,10 @@
       <details id="referencePanel"><summary>Dataset reference labels</summary><p class="panel-hint">Source annotations, not model predictions. Hidden until you open this section.</p><div id="referenceLabels">No frame selected.</div></details>
       <section class="priority-section" aria-label="Model-assisted research review queue">
         <div class="section-title small"><h2>Research review queue</h2><span id="prioritySelected">No queue</span></div>
-        <p class="panel-hint">Choose a complete model score stream and any review workload, up to every imported image. These are model suggestions, never clinical findings.</p>
+        <p class="panel-hint">Choose a complete model score stream and a queue size, up to every imported image. These are model suggestions, never clinical findings.</p>
         <label class="field-label" for="prioritySource">Model run · score label</label>
         <select id="prioritySource" disabled></select>
-        <label class="field-label" for="priorityCount">Images to review (1–all imported images)</label>
+        <label class="field-label" for="priorityCount">Queue size (1–all imported images)</label>
         <input id="priorityCount" type="number" min="1" step="1" value="1" disabled>
         <label class="field-label" for="priorityMethod">Selection policy</label>
         <select id="priorityMethod" disabled>
