@@ -27,6 +27,7 @@ function syncControls() {
   $('intervalCancelBtn').disabled = running || state.intervalStart === null;
   $('intervalNote').disabled = running || state.intervalStart === null;
   $('auditBtn').disabled = running || !state.study || (state.savedFrameCount === 0 && state.intervals.length === 0);
+  $('savedEvidenceBtn').disabled = running || !state.study || state.savedFrameCount === 0;
   $('fullSpanBtn').disabled = running || !state.study || state.intervals.length === 0;
   const priorityBlocked = running || state.priorityBusy || !state.prioritySources.length;
   for (const id of ['prioritySource', 'priorityCount', 'priorityMethod', 'priorityBuild']) $(id).disabled = priorityBlocked;
@@ -557,6 +558,15 @@ $('fullSpanBtn').addEventListener('click', async () => {
   link.download = 'full-span-evidence.zip';
   link.click();
   announce('Full-span evidence download requested. The local server verifies the ZIP before delivery.');
+});
+$('savedEvidenceBtn').addEventListener('click', async () => {
+  stopPlayback();
+  if (!state.study || !(await saveReview())) return;
+  const link = document.createElement('a');
+  link.href = `${base()}/saved-evidence-export`;
+  link.download = 'saved-image-evidence.zip';
+  link.click();
+  announce('Saved-image evidence requested. Only explicitly saved images are included; this is not a workspace backup.');
 });
 $('exportBtn').addEventListener('click', async () => {
   stopPlayback(); if (!(await saveReview())) return;

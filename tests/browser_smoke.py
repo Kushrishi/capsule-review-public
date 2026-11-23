@@ -289,6 +289,18 @@ with sync_playwright() as p:
         assert full_span_record['frames'][2]['reason']['marked_span_interior']
         assert 'images/frame_000002.png' in full_span_zip.namelist()
     checks.append('Browser offers distinct complete imported-span ZIP with its interior image')
+    with page.expect_download() as saved_download:
+        page.get_by_role('button', name='Export saved images', exact=True).click()
+    saved_path = out/'saved-image-evidence.zip'
+    saved_download.value.save_as(str(saved_path))
+    from capsule_review.full_span_evidence import verify_saved_evidence
+    assert verify_saved_evidence(saved_path, client.get('/api/studies/' + page.evaluate('state.study.id') + '/manifest').json())['exported_images'] == 2
+    with zipfile.ZipFile(saved_path) as archive:
+        record = json.loads(archive.read('evidence.json'))
+        assert [f['position'] for f in record['frames']] == [0, 1]
+        assert len(record['intervals']) == 1
+        assert record['model_suggestions']['detection_runs'][0]['provenance'] == generated['provenance']
+    checks.append('Browser downloads only saved images with verified provenance, without interval expansion')
     page.close();page=open_app()
     wait_for_js(page, "document.getElementById('intervalCount').textContent === '1'")
     page.once('dialog', lambda dialog: dialog.accept())

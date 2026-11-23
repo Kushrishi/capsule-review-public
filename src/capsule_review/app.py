@@ -22,7 +22,7 @@ from starlette.background import BackgroundTask
 from . import __version__
 from .demo_scores import open_or_create_demo
 from .exporter import export_review
-from .full_span_evidence import export_full_span_evidence
+from .full_span_evidence import export_full_span_evidence, export_saved_evidence
 from .evidence_receipt import account_review_evidence
 from .interval_evidence import read_review_export
 from .importer import MAX_FILE_BYTES, import_sources, natural_key, now, validate_filename
@@ -484,15 +484,24 @@ def create_app(data_dir: Path | str | None = None, *, restricted_generated: bool
     @app.get('/api/studies/{study_id}/full-span-export')
     async def full_span_export(study_id: str):
         """Opt-in, locally streamed evidence ZIP; standard review export unchanged."""
+        return await streamed_evidence(study_id, saved_only=False)
+
+    @app.get('/api/studies/{study_id}/saved-evidence-export')
+    async def saved_evidence_export(study_id: str):
+        return await streamed_evidence(study_id, saved_only=True)
+
+    async def streamed_evidence(study_id: str, *, saved_only: bool):
         require_study(study_id)
-        folder = Path(tempfile.mkdtemp(prefix='.full-span-evidence-', dir=store.root))
-        archive = folder / 'full-span-evidence.zip'
+        name = "saved-image-evidence" if saved_only else "full-span-evidence"
+        folder = Path(tempfile.mkdtemp(prefix=f'.{name}-', dir=store.root))
+        archive = folder / f'{name}.zip'
         try:
             # Export and independently verify the written ZIP before serving it.
-            await run_in_threadpool(export_full_span_evidence, store, study_id, archive)
+            exporter = export_saved_evidence if saved_only else export_full_span_evidence
+            await run_in_threadpool(exporter, store, study_id, archive)
             return FileResponse(
                 archive, media_type='application/zip',
-                headers={'Content-Disposition': 'attachment; filename="full-span-evidence.zip"'},
+                headers={'Content-Disposition': f'attachment; filename="{name}.zip"'},
                 background=BackgroundTask(shutil.rmtree, folder, ignore_errors=True),
             )
         except (ValueError, FileNotFoundError) as exc:
