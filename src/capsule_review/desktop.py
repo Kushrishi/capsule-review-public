@@ -297,6 +297,11 @@ def run_window(root, *, restricted_generated=False):
         closed = threading.Event()
         failed = threading.Event()
         window.events.closed += lambda: closed.set()
+        if not restricted_generated:
+            from .desktop_close import DraftClose
+            draft_close = DraftClose(window, backend.url)
+            window.events.closing += draft_close.request
+            window.events.closed += lambda: draft_close.closed.set()
 
         def choose_folder(request_id):
             try:

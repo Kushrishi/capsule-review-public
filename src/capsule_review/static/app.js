@@ -144,14 +144,14 @@ async function selectStudy(id) {
 }
 function markDirty() { if (!state.frame) return; clearEvidenceAudit(); state.dirty = true;
   $('saveStatus').textContent = 'Unsaved'; $('saveBtn').disabled = false; }
-async function saveReview() {
+async function saveReview(options = {}) {
   if (!state.frame || !state.dirty) return true;
   if (state.saving) return false;
   state.saving = true; $('saveStatus').textContent = 'Saving…'; $('saveBtn').disabled = true;
   const inputIds = ['bookmark', 'reviewLabel', 'reviewNote']; inputIds.forEach(id => $(id).disabled = true);
   try {
     const review = await api(`${base()}/frames/${state.frame.position}/review`, {
-      method: 'PUT', body: JSON.stringify({revision: state.frame.review.revision,
+      method: 'PUT', signal: options.signal, body: JSON.stringify({revision: state.frame.review.revision,
         bookmarked: $('bookmark').checked, note: $('reviewNote').value, label: $('reviewLabel').value})});
     state.frame.review = review; state.dirty = false; clearEvidenceAudit(); $('saveStatus').textContent = 'Saved';
     await loadSaved(); await loadReviewActivity(); await refreshLibrary(); return true;
@@ -373,6 +373,67 @@ $('saveBtn').addEventListener('click', () => saveReview());
 $('bookmark').addEventListener('change', async () => {stopPlayback(); markDirty(); await saveReview();});
 for (const id of ['reviewLabel','reviewNote']) $(id).addEventListener('input', () => {stopPlayback(); markDirty();});
 window.addEventListener('beforeunload', (event) => {if (state.dirty) {event.preventDefault(); event.returnValue = '';}});
+// Native shell reads this narrow state machine; it exposes no filesystem/Python API.
+let nativeClose = null;
+function closeButtons(disabled) {
+  for (const id of ['draftCloseSave', 'draftCloseDiscard', 'draftCloseCancel']) $(id).disabled = disabled;
+}
+window.capsuleDesktopClose = (command, nonce) => {
+  if (command === 'request') {
+    stopPlayback();
+    if (nativeClose || state.saving || state.busy || state.switching || state.modelBusy || state.auditBusy || document.querySelector('dialog[open]')) {
+      fail(new Error('Finish the current action or close its dialog before closing the application.'));
+      return 'cancel';
+    }
+    nativeClose = {nonce, answer: state.dirty ? 'pending' : 'close', decision: 'clean'};
+    if (state.dirty) {
+      $('draftCloseStatus').textContent = 'This frame has an unsaved draft.';
+      closeButtons(false); $('draftCloseDialog').showModal();
+    }
+  }
+  if (!nativeClose || nativeClose.nonce !== nonce) return 'cancel';
+  if (command === 'abort') {
+    nativeClose.controller?.abort();
+    $('draftCloseDialog').close(); nativeClose = null;
+    fail(new Error('Close confirmation timed out or failed. The window is still open; check your draft before trying again.'));
+    return 'cancel';
+  }
+  if (command === 'consume') {
+    const accepted = nativeClose.answer === 'close' && !state.saving &&
+      (nativeClose.decision === 'discard' || !state.dirty);
+    if (accepted && nativeClose.decision === 'discard') state.dirty = false;
+    $('draftCloseDialog').close(); nativeClose = null;
+    return accepted ? 'close' : 'cancel';
+  }
+  const answer = nativeClose.answer;
+  if (answer === 'cancel') nativeClose = null;
+  return answer;
+};
+function cancelNativeClose() {
+  if (nativeClose && !state.saving) {nativeClose.answer = 'cancel'; $('draftCloseDialog').close();}
+}
+$('draftCloseCancel').addEventListener('click', cancelNativeClose);
+$('draftCloseDialog').addEventListener('cancel', (event) => {event.preventDefault(); cancelNativeClose();});
+$('draftCloseDiscard').addEventListener('click', () => {
+  if (!nativeClose || state.saving) return;
+  nativeClose.decision = 'discard'; nativeClose.answer = 'close'; closeButtons(true);
+});
+$('draftCloseSave').addEventListener('click', async () => {
+  if (!nativeClose || state.saving) return;
+  const request = nativeClose;
+  request.controller = new AbortController(); closeButtons(true);
+  $('draftCloseStatus').textContent = 'Saving this frame before closing…';
+  const timer = setTimeout(() => request.controller.abort(), 8000);
+  const saved = await saveReview({signal: request.controller.signal});
+  clearTimeout(timer);
+  if (nativeClose !== request) return;
+  if (saved && !state.dirty) {request.decision = 'saved'; request.answer = 'close';}
+  else {
+    $('draftCloseStatus').textContent = 'Save was not confirmed. The window remains open. Check the error and your draft; cancel to continue editing.';
+    closeButtons(false);
+  }
+});
+
 document.addEventListener('keydown', (event) => {
   if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {event.preventDefault(); saveReview(); return;}
   if (document.querySelector('dialog[open]') || ['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName) || !state.frame) return;
