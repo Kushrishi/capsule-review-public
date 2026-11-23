@@ -145,6 +145,15 @@
     <div class="dialog-actions"><button type="button" class="quiet" data-close="importDialog">Cancel</button><button id="submitImport" type="submit" class="primary" disabled>Import locally</button></div>
     <p id="importError" class="error-text" role="alert"></p>
   </form></dialog>
+  <dialog id="draftCloseDialog" aria-labelledby="draftCloseHeading" aria-describedby="draftCloseStatus">
+    <h2 id="draftCloseHeading">Save your review before closing?</h2>
+    <p id="draftCloseStatus" role="status">This frame has an unsaved draft.</p>
+    <div class="dialog-actions">
+      <button id="draftCloseCancel" type="button" class="quiet" autofocus>Cancel</button>
+      <button id="draftCloseDiscard" type="button" class="outline">Discard</button>
+      <button id="draftCloseSave" type="button" class="primary">Save and close</button>
+    </div>
+  </dialog>
   <dialog id="helpDialog"><div class="dialog-heading"><h2>Using Capsule Review</h2><button class="quiet" data-close="helpDialog" aria-label="Close help">×</button></div>
     <p>Import PNG, JPEG or WebP frames. Numbered filenames such as <code>frame_000001.PNG</code> keep their source index. Other filenames use natural sorting.</p>
     <dl class="shortcut-list"><dt>← / →</dt><dd>Previous / next frame</dd><dt>B</dt><dd>Toggle bookmark</dd><dt>Space</dt><dd>Play / pause preview</dd><dt>Ctrl / ⌘ + S</dt><dd>Save current review</dd></dl>

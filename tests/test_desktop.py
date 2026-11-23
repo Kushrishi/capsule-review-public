@@ -186,7 +186,7 @@ def test_window_initialization_error_stops_backend(tmp_path, monkeypatch):
     class Event:
         def __iadd__(self, callback):
             return self
-    fake_window = SimpleNamespace(events=SimpleNamespace(closed=Event()))
+    fake_window = SimpleNamespace(events=SimpleNamespace(closed=Event(), closing=Event()))
     def unavailable(*args, **kwargs):
         raise RuntimeError('Native GUI unavailable')
     fake = SimpleNamespace(settings={}, create_window=lambda *a, **kw: fake_window, start=unavailable)

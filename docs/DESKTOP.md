@@ -380,3 +380,12 @@ abnormality navigation, selected/unselected access, unchanged human notes and
 suggestion provenance in the actual downloaded review ZIP. Sealed-inference
 regressions separately passed **78 generated-data tests**. This validates fixture
 transport and review/export behavior, not execution of a medically trained detector.
+
+
+## Closing a draft
+
+Closing the ordinary desktop window with an unsaved frame draft offers **Save and close**, **Discard**, and **Cancel**. Save uses the existing revision-checked API while the backend is alive. A conflict, failed save or unconfirmed eight-second save keeps the window open with the draft and an error. Cancel returns to editing. Discard closes without writing that draft; earlier saved entries remain intact. Browser tabs retain their existing unload warning.
+
+Close negotiation uses native-to-page calls, with no JavaScript/Python bridge or filesystem API. Native replies are bounded to two seconds; a choice expires after two minutes and leaves the window open. If the web engine stops replying, close is rejected rather than silently discarding the draft. A permanently stalled engine may require an operating-system force quit; unsaved text cannot be recovered after a force quit, process kill, power loss or backend failure. Signals/backend failure still use the existing forced shutdown and import recovery. This protects ordinary native close, not crash recovery of unsaved drafts.
+
+`python tests/desktop_close_smoke.py` and `python tests/desktop_close_smoke.py --discard` exercise genuine native close events, generated draft choices, revision conflict, save failure/timeout, persistence and workspace reopening. They use Qt on Linux or Cocoa/WKWebView on macOS. Automated choices are not a physical-user usability test.
