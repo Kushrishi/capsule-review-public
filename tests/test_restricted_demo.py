@@ -1,0 +1,158 @@
+"""Generated restriction and bypass controls. No medical inputs or models."""
+import hashlib
+import io
+import json
+import zipfile
+
+import pytest
+from fastapi.testclient import TestClient
+from PIL import Image
+
+from capsule_review.app import create_app
+from capsule_review.desktop import Backend, DesktopSession
+from capsule_review.restricted_demo import canonical
+
+
+@pytest.fixture
+def restricted(tmp_path):
+    app = create_app(tmp_path, restricted_generated=True)
+    wrapped = DesktopSession(app, '127.0.0.1:8765', 'generated-ticket')
+    with TestClient(wrapped, base_url='http://127.0.0.1:8765') as client:
+        assert client.get('/desktop-session?ticket=generated-ticket').status_code == 200
+        yield app, client
+
+
+def check_chain(receipt):
+    previous = hashlib.sha256(canonical(receipt['commitment'])).hexdigest()
+    assert previous == receipt['commitment_sha256']
+    for n, event in enumerate(receipt['events']):
+        event = event.copy()
+        digest = event.pop('sha256')
+        assert event['sequence'] == n and event['previous_sha256'] == previous
+        assert hashlib.sha256(canonical(event)).hexdigest() == digest
+        previous = digest
+
+
+def test_selected_only_every_representation_and_export(restricted):
+    app, client = restricted
+    initial = client.get('/api/restricted/state').json()
+    chosen = initial['commitment']['selection']['positions']
+    scores = initial['commitment']['selection']['score_stream']
+    assert [s['position'] for s in scores] == list(range(24))
+    independently_selected = [min(range(start, start + 12), key=lambda p: (-scores[p]['score'], p)) for start in (0, 12)]
+    assert set(independently_selected) == set(chosen)
+    assert chosen == [6, 12]
+    assert initial['commitment']['generated_only'] and initial['restricted_claim_valid']
+    delivered = set()
+    for position in range(24):
+        for suffix in ('', '?thumbnail=true'):
+            response = client.get(f'/api/restricted/images/{position}{suffix}')
+            assert response.status_code == (200 if position in chosen else 403)
+            if response.status_code == 200:
+                image = Image.open(io.BytesIO(response.content)); image.load()
+                delivered.add(position)
+    assert delivered == set(chosen)
+    for query in ('', '?full_spans=true&position=0&k=24'):
+        response = client.get('/api/restricted/export' + query)
+        with zipfile.ZipFile(io.BytesIO(response.content)) as archive:
+            assert set(archive.namelist()) == {'selected/6.png', 'selected/12.png', 'receipt.json'}
+            receipt = json.loads(archive.read('receipt.json'))
+            check_chain(receipt)
+            for p in chosen:
+                data = archive.read(f'selected/{p}.png')
+                assert hashlib.sha256(data).hexdigest() == receipt['commitment']['frames'][p]['display_sha256']
+    receipt = client.get('/api/restricted/state').json()
+    assert all(e['position'] in chosen for e in receipt['events'] if e['action'] == 'authorize_pixels')
+    assert len([e for e in receipt['events'] if e['action'] == 'deny']) == 44
+    assert receipt['actual_human_exposure'] == 'UNMEASURED'
+    check_chain(receipt)
+    stored = [json.loads(line) for line in (app.state.store.root / 'restricted-session.jsonl').read_text().splitlines()]
+    assert stored == receipt['events']
+
+
+@pytest.mark.parametrize('path', [
+    '/static/app.js', '/static/index.html', '/api/studies', '/api/demo',
+    '/api/studies/anything/frames/0/image', '/api/studies/anything/export',
+    '/api/studies/anything/full-span-evidence', '/api/studies/import',
+    '/api/desktop/imports', '/openapi.json', '/api/restricted/images/../0',
+])
+def test_alternate_routes_cannot_deliver_pixels(restricted, path):
+    _, client = restricted
+    for method in ('get', 'post'):
+        response = getattr(client, method)(path, headers={'X-Review-Token': client.get('/api/config').json()['token']})
+        assert response.status_code in (403, 405)
+        assert not response.headers.get('content-type', '').startswith('image/')
+
+
+def test_exit_is_irreversible_and_never_reveals_omitted_pixels(restricted):
+    _, client = restricted
+    assert client.post('/api/restricted/exit').status_code == 403
+    assert client.get('/api/restricted/state').json()['restricted']
+    token = client.get('/api/config').json()['token']
+    receipt = client.post('/api/restricted/exit', headers={'X-Review-Token': token}).json()
+    assert not receipt['restricted_claim_valid'] and not receipt['restricted']
+    assert client.get('/api/restricted/images/0').status_code == 403
+    assert client.post('/api/restricted/start', headers={'X-Review-Token': token}).status_code == 403
+    assert not client.get('/api/restricted/state').json()['restricted_claim_valid']
+
+
+def test_source_tampering_fails_closed_for_both_forms(restricted):
+    app, client = restricted
+    state = client.get('/api/restricted/state').json()
+    p = app.state.store.images / state['commitment']['study_id'] / '6.jpg'
+    p.write_bytes(b'altered generated bytes')
+    assert client.get('/api/restricted/images/6?thumbnail=true').status_code == 409
+    assert not client.get('/api/restricted/state').json()['restricted_claim_valid']
+    assert client.get('/api/restricted/images/12').status_code == 409
+    assert client.get('/api/restricted/export').status_code == 409
+
+
+def test_ledger_failure_blocks_delivery(restricted):
+    app, client = restricted
+    ledger = app.state.store.root / 'restricted-session.jsonl'
+    ledger.unlink(); ledger.mkdir()
+    assert client.get('/api/restricted/images/6').status_code == 503
+    assert not client.get('/api/restricted/state').json()['restricted_claim_valid']
+
+
+def test_no_workspace_reuse_or_unauthenticated_access(tmp_path):
+    app = create_app(tmp_path, restricted_generated=True)
+    with pytest.raises(ValueError, match='empty workspace'):
+        create_app(tmp_path, restricted_generated=True)
+    with TestClient(DesktopSession(app, '127.0.0.1:8765', 'ticket'), base_url='http://127.0.0.1:8765') as client:
+        for path in ('/', '/api/config', '/api/restricted/state', '/api/restricted/images/6', '/api/restricted/export'):
+            assert client.get(path).status_code == 403
+
+
+def test_actual_backend_authenticated_restriction_and_shutdown(tmp_path):
+    import httpx
+    with Backend(tmp_path, restricted_generated=True) as backend:
+        origin = backend.url.split('/desktop-session')[0]
+        assert httpx.get(origin + '/api/restricted/images/6', trust_env=False).status_code == 403
+        with httpx.Client(follow_redirects=True, trust_env=False) as client:
+            assert client.get(backend.url).status_code == 200
+            assert client.get(origin + '/api/restricted/images/6').status_code == 200
+            assert client.get(origin + '/api/restricted/images/0').status_code == 403
+            assert client.post(origin + '/api/desktop/imports').status_code == 403
+    assert not backend.process.is_alive()
+    with pytest.raises(httpx.TransportError):
+        httpx.get(origin + '/', timeout=.5, trust_env=False)
+
+
+def test_exploratory_negative_control_is_not_a_restricted_session(tmp_path):
+    from capsule_review.demo_scores import open_or_create_demo, DEMO_LABEL
+    from capsule_review.priority import priority_queue
+    app = create_app(tmp_path)
+    study = open_or_create_demo(app.state.store)
+    with app.state.store.connect() as db:
+        run = db.execute('SELECT id FROM prediction_runs').fetchone()[0]
+    selected = [item['position'] for item in priority_queue(
+        app.state.store, study['id'], run, DEMO_LABEL, 2, 'score_bin')['items']]
+    assert selected == [6, 12] and 0 not in selected
+    with TestClient(app, base_url='http://127.0.0.1:8765') as client:
+        response = client.get(f"/api/studies/{study['id']}/frames/0/image")
+        assert response.status_code == 200
+        image = Image.open(io.BytesIO(response.content)); image.load()
+        assert image.size == (640, 480)
+    # The K-only delivery invariant is FALSE on the ordinary backend.
+    # This is the genuine negative control, not a claim it promised a lock.

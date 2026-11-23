@@ -5,6 +5,8 @@ on:
       - '.github/workflows/macos-desktop.yml'
       - 'src/capsule_review/desktop*.py'
       - 'src/capsule_review/app.py'
+      - 'src/capsule_review/restricted_demo.py'
+      - 'tests/test_restricted_demo.py'
       - 'src/capsule_review/importer.py'
       - 'src/capsule_review/store.py'
       - 'src/capsule_review/exporter.py'
@@ -22,6 +24,8 @@ on:
       - '.github/workflows/macos-desktop.yml'
       - 'src/capsule_review/desktop*.py'
       - 'src/capsule_review/app.py'
+      - 'src/capsule_review/restricted_demo.py'
+      - 'tests/test_restricted_demo.py'
       - 'src/capsule_review/importer.py'
       - 'src/capsule_review/store.py'
       - 'src/capsule_review/exporter.py'
@@ -65,11 +69,14 @@ jobs:
         timeout-minutes: 5
         run: >-
           python -m pytest -q -ra
-          tests/test_desktop.py tests/test_desktop_folder_import.py
+          tests/test_desktop.py tests/test_desktop_folder_import.py tests/test_restricted_demo.py
           tests/test_importer.py tests/test_api.py tests/test_detections.py tests/test_ai_review_export.py
       - name: Native Cocoa window and WebKit workflow (automated picker choices)
         timeout-minutes: 4
         run: python tests/macos_desktop_smoke.py
+      - name: Native generated restricted pixel control
+        timeout-minutes: 2
+        run: python tests/desktop_restricted_smoke.py
       - name: Native backend-failure shutdown
         timeout-minutes: 4
         run: python tests/macos_desktop_smoke.py --kill-backend
